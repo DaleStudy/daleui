@@ -20,3 +20,10 @@ export const Basic: Story = {
     children: "Click",
   },
 };
+
+export const Submit: Story = {
+  args: {
+    type: "submit",
+    children: "Submit",
+  },
+};
