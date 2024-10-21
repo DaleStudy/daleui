@@ -35,7 +35,7 @@ export const Button = ({
           "0 4px 6px -1px rgba(0, 0, 0, 0.1),\n    0 2px 4px -1px rgba(0, 0, 0, 0.06)",
         cursor: "pointer",
         transition: "0.5s",
-        "&:active,\n  &:hover,\n  &:focus": {
+        "&:active, &:hover, &:focus": {
           background: "var(--button-hover-bg-color)",
           outline: "0",
         },
