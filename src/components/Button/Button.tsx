@@ -1,5 +1,4 @@
-import "./Button.css";
-
+import { button } from "./Button.css.ts";
 export interface ButtonProps {
   children: React.ReactNode;
   type?: "button" | "submit";
@@ -13,7 +12,7 @@ export const Button = ({
   ...rest
 }: ButtonProps) => {
   return (
-    <button type={type} onClick={onClick} {...rest}>
+    <button className={button} type={type} onClick={onClick} {...rest}>
       {children}
     </button>
   );

@@ -13,6 +13,8 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@vanilla-extract/css": "^1.16.0",
+    "@vanilla-extract/vite-plugin": "^4.0.16",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
