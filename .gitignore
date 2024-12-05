@@ -24,3 +24,11 @@ dist-ssr
 *.sw?
 
 *storybook.log
+
+# Vite
+tsconfig.app.tsbuildinfo
+tsconfig.node.tsbuildinfo
+
+## Panda
+styled-system
+styled-system-studio
