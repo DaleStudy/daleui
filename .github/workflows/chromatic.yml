@@ -1,0 +1,19 @@
+name: "Chromatic 🎨"
+
+on: push
+
+jobs:
+  chromatic:
+    environment:
+      name: chromatic
+      url: https://${{ github.ref_name }}--675790d317ba346348aa3490.chromatic.com
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install
+      - uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
