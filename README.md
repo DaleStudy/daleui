@@ -1,4 +1,5 @@
 [![Chromatic 🎨](https://github.com/DaleStudy/dale-ui/actions/workflows/chromatic.yml/badge.svg)](https://github.com/DaleStudy/dale-ui/actions/workflows/chromatic.yml)
+[![Integration 🔀](https://github.com/DaleStudy/dale-ui/actions/workflows/integration.yml/badge.svg)](https://github.com/DaleStudy/dale-ui/actions/workflows/integration.yml)
 
 # 달레 UI
 
