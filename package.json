@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "test": "vitest",
     "preview": "vite preview",
+    "sb": "storybook dev -p 6006",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepare": "panda codegen"
