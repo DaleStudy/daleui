@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
+import { expect, fn, userEvent } from "@storybook/test";
 import { Button } from "./Button";
 
 const meta = {
@@ -18,6 +18,18 @@ export const Basic: Story = {
   args: {
     type: "button",
     children: "Click",
+  },
+  play: async ({ args: { onClick }, canvas, step }) => {
+    const button = canvas.getByRole("button");
+
+    await step("renders a button with text", async () => {
+      expect(button).toHaveTextContent("Click");
+    });
+
+    await step("calls onClick handler when clicked", async () => {
+      await userEvent.click(button);
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
   },
 };
 
