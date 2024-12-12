@@ -23,7 +23,7 @@ export const Button = ({
         padding: "0.5rem 1rem",
         background: "var(--button-bg-color)",
         color: "var(--button-color)",
-        fontSize: "1rem",
+        fontSize: "2rem",
         fontWeight: 400,
         textAlign: "center",
         textDecoration: "none",
