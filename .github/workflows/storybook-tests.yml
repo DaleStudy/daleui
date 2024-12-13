@@ -1,0 +1,17 @@
+name: Storybook Tests
+
+on: deployment_status
+
+jobs:
+  test-storybook:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    if: github.event.deployment_status.environment == 'chromatic' && github.event.deployment_status.state == 'success'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install
+      - run: bunx playwright install --with-deps
+      - run: bun run test-storybook
+        env:
+          TARGET_URL: "${{ github.event.deployment_status.environment_url }}"
