@@ -1,35 +1,62 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import logo from "/logo.svg";
+import { css } from "../styled-system/css";
 import { Button } from "./components/Button";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
+    <div
+      className={css({
+        maxW: "prose",
+        mx: "auto",
+      })}
+    >
+      <header>
+        <a
+          href="/"
+          className={css({
+            display: "flex",
+            gap: "4",
+          })}
+        >
+          <img src={logo} className="logo" alt="logo" />
+          달레 UI
         </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <Button>Dale</Button>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      </header>
+      <main>
+        <h1>Welcome Dale UI!</h1>
+        <section>
+          <h2>유용한 링크</h2>
+          <ul>
+            <li>
+              <a href="https://main--675790d317ba346348aa3490.chromatic.com/">
+                스토리북
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/DaleStudy/dale-ui">깃허브</a>
+            </li>
+            <li>
+              <a href="https://github.com/DaleStudy/dale-ui/wiki">위키</a>
+            </li>
+            <li>
+              <a href="https://github.com/DaleStudy/dale-ui/discussions">
+                게시판
+              </a>
+            </li>
+            <li>
+              <a href="https://discord.com/channels/775115965964222492/1280152682044063837">
+                채팅방
+              </a>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>섹션 2</h2>
+          <Button>클릭</Button>
+        </section>
+      </main>
+      <footer>© 2024 Dale UI. All rights reserved.</footer>
+    </div>
   );
 }
 
