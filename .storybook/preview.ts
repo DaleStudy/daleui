@@ -10,7 +10,11 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    docs: {
+      toc: true, // 👈 Enables the table of contents
+    },
   },
+  tags: ["autodocs"],
 };
 
 export default preview;

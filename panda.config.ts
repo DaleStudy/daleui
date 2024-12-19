@@ -1,40 +1,5 @@
-import { defineConfig, defineGlobalStyles } from "@pandacss/dev";
-
-const globalCss = defineGlobalStyles({
-  ":root": {
-    "--global-font-body": "var(--fonts-sans)",
-  },
-  h1: {
-    fontSize: "var(--font-sizes-4xl)",
-    lineHeight: "var(--line-heights-loose)",
-    fontWeight: "var(--font-weights-bold)",
-  },
-  h2: {
-    fontSize: "var(--font-sizes-3xl)",
-    lineHeight: "var(--line-heights-relaxed)",
-    fontWeight: "var(--font-weights-medium)",
-  },
-  h3: {
-    fontSize: "var(--font-sizes-2xl)",
-    lineHeight: "var(--line-heights-relaxed)",
-    fontWeight: "var(--font-weights-medium)",
-  },
-  h4: {
-    fontSize: "var(--font-sizes-xl)",
-    lineHeight: "var(--line-heights-relaxed)",
-    fontWeight: "var(--font-weights-medium)",
-  },
-  h5: {
-    fontSize: "var(--font-sizes-lg)",
-    lineHeight: "var(--line-heights-relaxed)",
-    fontWeight: "var(--font-weights-medium)",
-  },
-  p: {
-    fontSize: "var(--font-sizes-md)",
-    lineHeight: "var(--line-heights-normal)",
-    fontWeight: "var(--font-weights-normal)",
-  },
-});
+import { defineConfig } from "@pandacss/dev";
+import { globalCss } from "./src/styles/globalCss";
 
 export default defineConfig({
   // Whether to use css reset
