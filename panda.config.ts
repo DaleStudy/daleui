@@ -1,4 +1,13 @@
 import { defineConfig } from "@pandacss/dev";
+import { globalCss } from "./src/styles/globalCss";
+import {
+  textStyles,
+  fonts,
+  fontWeights,
+  fontSizes,
+  letterSpacings,
+  lineHeights,
+} from "./src/tokens/typography";
 
 export default defineConfig({
   // Whether to use css reset
@@ -10,9 +19,24 @@ export default defineConfig({
   // Files to exclude
   exclude: [],
 
+  globalCss,
+
+  globalVars: {
+    "--font-spoqa": "Spoqa Han Sans Neo",
+  },
+
   // Useful for theme customization
   theme: {
-    extend: {},
+    extend: {
+      textStyles,
+      tokens: {
+        fonts,
+        fontWeights,
+        fontSizes,
+        letterSpacings,
+        lineHeights,
+      },
+    },
   },
 
   // The output directory for your css system
