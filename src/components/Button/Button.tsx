@@ -1,11 +1,15 @@
 import { css } from "../../../styled-system/css";
 
 export interface ButtonProps {
+  /** 버튼 텍스트 */
   children: React.ReactNode;
   type?: "button" | "submit";
   onClick?: () => void;
 }
 
+/**
+ * 버튼 컴포넌트입니다.
+ */
 export const Button = ({
   children,
   type = "button",

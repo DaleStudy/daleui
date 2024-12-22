@@ -1,0 +1,38 @@
+import { Typeset } from "@storybook/blocks";
+import { fonts, fontWeights, fontSizes } from "./typography.ts";
+
+# Typography
+
+> 달레 UI는 [스포카 한 산스 네오(Spoqa Han Sans Neo)](https://spoqa.github.io/spoqa-han-sans/) 웹폰트를 사용하고 있습니다.
+
+## 글꼴 크기
+
+<p>
+  {Object.entries(fontSizes)
+    .map(([name, { value }]) => `${name}(${value})`)
+    .join(", ")}
+</p>
+
+<Typeset
+  fontSizes={Object.values(fontSizes).map(({ value }) => value)}
+  fontWeight={fontWeights.normal.value}
+  sampleText="달레 UI 디자인 System"
+  fontFamily={fonts.sans.value}
+/>
+
+## 글꼴 굵기
+
+{Object.entries(fontWeights).map(([name, {value}]) => (
+
+<>
+  <h3>
+    {name}({value})
+  </h3>
+  <Typeset
+    fontSizes={[fontSizes.md.value]}
+    fontWeight={value}
+    sampleText="달레 UI 디자인 System"
+    fontFamily={fonts.sans.value}
+  />
+</>
+))}

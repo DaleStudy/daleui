@@ -1,5 +1,13 @@
 import { defineConfig } from "@pandacss/dev";
 import { globalCss } from "./src/styles/globalCss";
+import {
+  textStyles,
+  fonts,
+  fontWeights,
+  fontSizes,
+  letterSpacings,
+  lineHeights,
+} from "./src/tokens/typography";
 
 export default defineConfig({
   // Whether to use css reset
@@ -20,17 +28,13 @@ export default defineConfig({
   // Useful for theme customization
   theme: {
     extend: {
+      textStyles,
       tokens: {
-        fonts: {
-          sans: { value: "var(--font-spoqa), Noto Sans KR, sans-serif" },
-        },
-        fontWeights: {
-          thin: { value: "100" },
-          light: { value: "300" },
-          normal: { value: "400" },
-          medium: { value: "500" },
-          bold: { value: "700" },
-        },
+        fonts,
+        fontWeights,
+        fontSizes,
+        letterSpacings,
+        lineHeights,
       },
     },
   },
