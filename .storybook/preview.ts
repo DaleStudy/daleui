@@ -1,6 +1,6 @@
 import "../src/index.css";
-
-import type { Preview } from "@storybook/react";
+import { withThemeByClassName } from "@storybook/addon-themes";
+import type { Preview, ReactRenderer } from "@storybook/react";
 
 const preview: Preview = {
   parameters: {
@@ -14,6 +14,15 @@ const preview: Preview = {
       toc: true,
     },
   },
+  decorators: [
+    withThemeByClassName<ReactRenderer>({
+      themes: {
+        light: "",
+        dark: "dark",
+      },
+      defaultTheme: "light",
+    }),
+  ],
   tags: ["autodocs"],
 };
 
