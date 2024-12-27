@@ -1,3 +1,4 @@
+import r2wc from "@r2wc/react-to-web-component";
 import { css } from "../../../styled-system/css";
 
 export interface ButtonProps {
@@ -46,10 +47,21 @@ export const Button = ({
         "&:disabled": { opacity: 0.5 },
       })}
       type={type}
-      onClick={onClick}
+      onClick={() => {
+        console.log("Button clicked!");
+        onClick?.();
+      }}
       {...rest}
     >
       {children}
     </button>
   );
 };
+
+const WcButton = r2wc(Button, {
+  props: {
+    children: "string",
+  },
+});
+
+customElements.define("wc-button", WcButton);

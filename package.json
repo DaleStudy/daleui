@@ -16,6 +16,7 @@
     "prepare": "panda codegen"
   },
   "dependencies": {
+    "@r2wc/react-to-web-component": "^2.0.4",
     "axe-playwright": "^2.0.3",
     "chromatic": "^11.20.2",
     "react": "^18.3.1",
