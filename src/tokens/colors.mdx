@@ -3,76 +3,21 @@ import { colors, semanticColors } from "./colors.ts";
 
 # Colors
 
-## 시멘틱 색상
-
-달레 UI의 개성을 나타내는 색상입니다
+달레 UI의 근간이 되는 색상 팔레트입니다.
 
 <ColorPalette>
   <ColorItem
-    title="주요색"
-    subtitle="semanticColors.primary"
-    colors={{
-      primary: semanticColors.primary.value,
-    }}
-  />
-  <ColorItem
-    title="보조색"
-    subtitle="semanticColors.secondary"
-    colors={{
-      secondary: semanticColors.secondary.value,
-    }}
-  />
-  <ColorItem
-    title="배경색"
-    subtitle="semanticColors.bg"
+    title="초록"
+    subtitle="colors.teal"
     colors={Object.fromEntries(
-      Object.entries(semanticColors.bg).map(([name, { value }]) => [
-        name,
-        value,
-      ])
+      Object.entries(colors.teal).map(([name, { value }]) => [name, value])
     )}
   />
   <ColorItem
-    title="글자색"
-    subtitle="semanticColors.text"
-    colors={{
-      light: semanticColors.text.value.base,
-      dark: semanticColors.text.value._dark,
-    }}
-  />
-</ColorPalette>
-
-## 색상 팔레트
-
-TailwindCSS의 색상 팔레트를 그대로 차용합니다.
-
-<ColorPalette>
-  <ColorItem
-    title="로즈"
-    subtitle="colors.rose"
+    title="초록 (dark)"
+    subtitle="colors.tealDark"
     colors={Object.fromEntries(
-      Object.entries(colors.rose).map(([name, { value }]) => [name, value])
-    )}
-  />
-  <ColorItem
-    title="핑크"
-    subtitle="colors.pink"
-    colors={Object.fromEntries(
-      Object.entries(colors.pink).map(([name, { value }]) => [name, value])
-    )}
-  />
-  <ColorItem
-    title="푸크시아"
-    subtitle="colors.fuchsia"
-    colors={Object.fromEntries(
-      Object.entries(colors.fuchsia).map(([name, { value }]) => [name, value])
-    )}
-  />
-  <ColorItem
-    title="퍼플"
-    subtitle="colors.purple"
-    colors={Object.fromEntries(
-      Object.entries(colors.purple).map(([name, { value }]) => [name, value])
+      Object.entries(colors.tealDark).map(([name, { value }]) => [name, value])
     )}
   />
   <ColorItem
@@ -83,122 +28,73 @@ TailwindCSS의 색상 팔레트를 그대로 차용합니다.
     )}
   />
   <ColorItem
-    title="인디고"
-    subtitle="colors.indigo"
+    title="보라 (dark)"
+    subtitle="colors.violetDark"
     colors={Object.fromEntries(
-      Object.entries(colors.indigo).map(([name, { value }]) => [name, value])
+      Object.entries(colors.violetDark).map(([name, { value }]) => [
+        name,
+        value,
+      ])
     )}
   />
   <ColorItem
-    title="블루"
-    subtitle="colors.blue"
-    colors={Object.fromEntries(
-      Object.entries(colors.blue).map(([name, { value }]) => [name, value])
-    )}
-  />
-  <ColorItem
-    title="스카이"
-    subtitle="colors.sky"
-    colors={Object.fromEntries(
-      Object.entries(colors.sky).map(([name, { value }]) => [name, value])
-    )}
-  />
-  <ColorItem
-    title="싸이언"
-    subtitle="colors.cyan"
-    colors={Object.fromEntries(
-      Object.entries(colors.cyan).map(([name, { value }]) => [name, value])
-    )}
-  />
-  <ColorItem
-    title="틸"
-    subtitle="colors.teal"
-    colors={Object.fromEntries(
-      Object.entries(colors.teal).map(([name, { value }]) => [name, value])
-    )}
-  />
-  <ColorItem
-    title="에머랄드"
-    subtitle="colors.emerald"
-    colors={Object.fromEntries(
-      Object.entries(colors.emerald).map(([name, { value }]) => [name, value])
-    )}
-  />
-  <ColorItem
-    title="그린"
-    subtitle="colors.green"
-    colors={Object.fromEntries(
-      Object.entries(colors.green).map(([name, { value }]) => [name, value])
-    )}
-  />
-  <ColorItem
-    title="라임"
-    subtitle="colors.lime"
-    colors={Object.fromEntries(
-      Object.entries(colors.lime).map(([name, { value }]) => [name, value])
-    )}
-  />
-  <ColorItem
-    title="옐로우"
-    subtitle="colors.yellow"
-    colors={Object.fromEntries(
-      Object.entries(colors.yellow).map(([name, { value }]) => [name, value])
-    )}
-  />
-  <ColorItem
-    title="앰버"
-    subtitle="colors.amber"
-    colors={Object.fromEntries(
-      Object.entries(colors.amber).map(([name, { value }]) => [name, value])
-    )}
-  />
-  <ColorItem
-    title="오렌지"
-    subtitle="colors.orange"
-    colors={Object.fromEntries(
-      Object.entries(colors.orange).map(([name, { value }]) => [name, value])
-    )}
-  />
-  <ColorItem
-    title="레드"
+    title="빨강"
     subtitle="colors.red"
     colors={Object.fromEntries(
       Object.entries(colors.red).map(([name, { value }]) => [name, value])
     )}
   />
   <ColorItem
-    title="네츄럴"
-    subtitle="colors.neutral"
+    title="빨강 (dark)"
+    subtitle="colors.redDark"
     colors={Object.fromEntries(
-      Object.entries(colors.neutral).map(([name, { value }]) => [name, value])
+      Object.entries(colors.redDark).map(([name, { value }]) => [name, value])
     )}
   />
   <ColorItem
-    title="스톤"
-    subtitle="colors.stone"
+    title="노랑"
+    subtitle="colors.yellow"
     colors={Object.fromEntries(
-      Object.entries(colors.stone).map(([name, { value }]) => [name, value])
+      Object.entries(colors.yellow).map(([name, { value }]) => [name, value])
     )}
   />
   <ColorItem
-    title="징크"
-    subtitle="colors.zinc"
+    title="노랑 (dark)"
+    subtitle="colors.yellowDark"
     colors={Object.fromEntries(
-      Object.entries(colors.zinc).map(([name, { value }]) => [name, value])
+      Object.entries(colors.yellowDark).map(([name, { value }]) => [
+        name,
+        value,
+      ])
     )}
   />
   <ColorItem
-    title="그레이"
+    title="회색"
     subtitle="colors.gray"
     colors={Object.fromEntries(
       Object.entries(colors.gray).map(([name, { value }]) => [name, value])
     )}
   />
   <ColorItem
-    title="슬레이트"
-    subtitle="colors.slate"
+    title="회색 (dark)"
+    subtitle="colors.grayDark"
     colors={Object.fromEntries(
-      Object.entries(colors.slate).map(([name, { value }]) => [name, value])
+      Object.entries(colors.grayDark).map(([name, { value }]) => [name, value])
     )}
   />
 </ColorPalette>
+
+용도에 따라서 각 색상은 12가지 스케일로 분리됩니다.
+
+- Scale 1: 페이지 배경
+- Scale 2: 예비
+- Scale 3: 컴포넌트 배경
+- Scale 4: 컴포넌트 배경 (hover)
+- Scale 5: 컴포넌트 배경 (active)
+- Scale 6: 예비
+- Scale 7: 경계
+- Scale 8: 경계 (hover)
+- Scale 9: 솔리드 배경
+- Scale 10: 솔리드 배경 (hover)
+- Scale 11: 글자 (low contrast)
+- Scale 12: 글자 (high contrast)
