@@ -1,5 +1,6 @@
 import { defineConfig } from "@pandacss/dev";
 import { globalCss } from "./src/styles/globalCss";
+import { colors, semanticColors } from "./src/tokens/colors";
 import {
   textStyles,
   fonts,
@@ -30,11 +31,15 @@ export default defineConfig({
     extend: {
       textStyles,
       tokens: {
+        colors,
         fonts,
         fontWeights,
         fontSizes,
         letterSpacings,
         lineHeights,
+      },
+      semanticTokens: {
+        colors: semanticColors,
       },
     },
   },
