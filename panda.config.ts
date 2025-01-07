@@ -26,15 +26,33 @@ export default defineConfig({
     "--font-spoqa": "Spoqa Han Sans Neo",
   },
 
+  staticCss: {
+    css: [
+      {
+        properties: {
+          textStyle: Object.keys(textStyles),
+          fontSize: Object.keys(fontSizes),
+          fontWeight: Object.keys(fontWeights),
+        },
+      },
+    ],
+  },
+
   // Useful for theme customization
   theme: {
     extend: {
-      textStyles,
+      textStyles: Object.fromEntries(
+        Object.entries(textStyles).map(([key, value]) => [key, { value }])
+      ),
       tokens: {
         colors,
         fonts,
-        fontWeights,
-        fontSizes,
+        fontWeights: Object.fromEntries(
+          Object.entries(fontWeights).map(([key, value]) => [key, { value }])
+        ),
+        fontSizes: Object.fromEntries(
+          Object.entries(fontSizes).map(([key, value]) => [key, { value }])
+        ),
         letterSpacings,
         lineHeights,
       },

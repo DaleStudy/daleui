@@ -1,115 +1,95 @@
-import type { TextStyles, Tokens } from "@pandacss/types";
+import type { Tokens } from "@pandacss/types";
 
-export const textStyles: TextStyles = {
+export const textStyles = {
   xs: {
-    value: {
-      fontSize: "0.75rem",
-      lineHeight: "1rem",
-    },
+    fontSize: "0.75rem",
+    lineHeight: "1rem",
   },
   sm: {
-    value: {
-      fontSize: "0.875rem",
-      lineHeight: "1.25rem",
-    },
+    fontSize: "0.875rem",
+    lineHeight: "1.25rem",
   },
   md: {
-    value: {
-      fontSize: "1rem",
-      lineHeight: "1.5rem",
-    },
+    fontSize: "1rem",
+    lineHeight: "1.5rem",
   },
   lg: {
-    value: {
-      fontSize: "1.125rem",
-      lineHeight: "1.75rem",
-    },
+    fontSize: "1.125rem",
+    lineHeight: "1.75rem",
   },
   xl: {
-    value: {
-      fontSize: "1.25rem",
-      lineHeight: "1.75rem",
-    },
+    fontSize: "1.25rem",
+    lineHeight: "1.75rem",
   },
   "2xl": {
-    value: {
-      fontSize: "1.5rem",
-      lineHeight: "2rem",
-    },
+    fontSize: "1.5rem",
+    lineHeight: "2rem",
   },
   "3xl": {
-    value: {
-      fontSize: "1.875rem",
-      lineHeight: "2.25rem",
-    },
+    fontSize: "1.875rem",
+    lineHeight: "2.25rem",
   },
   "4xl": {
-    value: {
-      fontSize: "2.25rem",
-      lineHeight: "2.5rem",
-    },
+    fontSize: "2.25rem",
+    lineHeight: "2.5rem",
   },
   "5xl": {
-    value: {
-      fontSize: "3rem",
-      lineHeight: "1",
-    },
+    fontSize: "3rem",
+    lineHeight: "1",
   },
   "6xl": {
-    value: {
-      fontSize: "3.75rem",
-      lineHeight: "1",
-    },
+    fontSize: "3.75rem",
+    lineHeight: "1",
   },
   "7xl": {
-    value: {
-      fontSize: "4.5rem",
-      lineHeight: "1",
-    },
+    fontSize: "4.5rem",
+    lineHeight: "1",
   },
   "8xl": {
-    value: {
-      fontSize: "6rem",
-      lineHeight: "1",
-    },
+    fontSize: "6rem",
+    lineHeight: "1",
   },
   "9xl": {
-    value: {
-      fontSize: "8rem",
-      lineHeight: "1",
-    },
+    fontSize: "8rem",
+    lineHeight: "1",
   },
 };
+
+export type TextStyle = keyof typeof textStyles;
 
 export const fonts: Tokens["fonts"] = {
   sans: { value: '"Spoqa Han Sans Neo", "Noto Sans KR", sans-serif' },
   // TODO customize serif and mono font styles when needed
 };
 
-export const fontWeights: Tokens["fontWeights"] = {
-  thin: { value: "100" },
-  light: { value: "300" },
-  normal: { value: "400" },
-  medium: { value: "500" },
-  bold: { value: "700" },
+export const fontWeights = {
+  thin: "100",
+  light: "300",
+  normal: "400",
+  medium: "500",
+  bold: "700",
 };
 
-export const fontSizes: Tokens["fontSizes"] = {
-  "2xs": { value: "0.5rem" },
-  xs: { value: "0.75rem" },
-  sm: { value: "0.875rem" },
-  md: { value: "1rem" },
-  lg: { value: "1.125rem" },
-  xl: { value: "1.25rem" },
-  "2xl": { value: "1.5rem" },
-  "3xl": { value: "1.875rem" },
-  "4xl": { value: "2.25rem" },
-  "5xl": { value: "3rem" },
-  "6xl": { value: "3.75rem" },
-  "7xl": { value: "4.5rem" },
-  "8xl": { value: "6rem" },
-  "9xl": { value: "8rem" },
+export type FontWeight = keyof typeof fontWeights;
+
+export const fontSizes = {
+  "2xs": "0.5rem",
+  xs: "0.75rem",
+  sm: "0.875rem",
+  md: "1rem",
+  lg: "1.125rem",
+  xl: "1.25rem",
+  "2xl": "1.5rem",
+  "3xl": "1.875rem",
+  "4xl": "2.25rem",
+  "5xl": "3rem",
+  "6xl": "3.75rem",
+  "7xl": "4.5rem",
+  "8xl": "6rem",
+  "9xl": "8rem",
 };
+
+export type FontSize = keyof typeof fontSizes;
 
 export const letterSpacings: Tokens["letterSpacings"] = {
   tighter: { value: "-0.05em" },
