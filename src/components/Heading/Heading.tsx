@@ -1,29 +1,21 @@
-import { css } from "../../../styled-system/css";
-import type { TextStyle, FontSize, FontWeight } from "../../tokens/typography";
+import type { ReactNode, HTMLAttributes } from "react";
+import { css, cva } from "../../../styled-system/css";
+import type { FontSize, FontWeight } from "../../tokens/typography";
 
 type Level = 1 | 2 | 3 | 4 | 5 | 6;
 
-export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   /** 텍스트 */
-  children: React.ReactNode | string;
+  children: ReactNode;
   /** 단계 */
-  level?: Level;
+  level: Level;
   /** 크기 */
   size?: FontSize;
   /** 굵기 */
   weight?: FontWeight;
   /** 명암비 */
-  // contrast?: "low" | "high";
+  contrast?: "low" | "high";
 }
-
-const textStyles: Record<Level, TextStyle> = {
-  1: "4xl",
-  2: "3xl",
-  3: "2xl",
-  4: "xl",
-  5: "lg",
-  6: "md",
-};
 
 /**
  * - `level` 속성을 통해서 `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, `<h6>` 요소 중 하나를 선택할 수 있습니다.
@@ -35,7 +27,7 @@ export const Heading = ({
   level,
   size,
   weight,
-  // contrast = "low",
+  contrast = "low",
   ...rest
 }: HeadingProps) => {
   if (!level) {
@@ -48,14 +40,33 @@ export const Heading = ({
 
   return (
     <Tag
-      className={css({
-        textStyle: textStyles[level],
-        fontSize: size,
-        fontWeight: weight,
-      })}
+      className={css(
+        styles.raw({ level, contrast }),
+        css.raw({
+          fontSize: size,
+          fontWeight: weight,
+        })
+      )}
       {...rest}
     >
       {children}
     </Tag>
   );
 };
+
+const styles = cva({
+  variants: {
+    level: {
+      1: { textStyle: "4xl" },
+      2: { textStyle: "3xl" },
+      3: { textStyle: "2xl" },
+      4: { textStyle: "xl" },
+      5: { textStyle: "lg" },
+      6: { textStyle: "md" },
+    },
+    contrast: {
+      low: { color: "text" },
+      high: { color: "text.contrast" },
+    },
+  },
+});

@@ -9,7 +9,7 @@ const meta = {
   },
   args: {
     children: "제목",
-    level: 2,
+    level: 1,
   },
 } satisfies Meta<typeof Heading>;
 
@@ -42,7 +42,35 @@ export const Levels: StoryObj<typeof meta> = {
       </div>
     );
   },
-  parameters: {
-    controls: { disable: true },
+  argTypes: {
+    children: {
+      control: false,
+    },
+    level: {
+      control: false,
+    },
+  },
+};
+
+export const Contrasts: StoryObj<typeof meta> = {
+  render: (args) => {
+    return (
+      <div className={vstack({ gap: "6" })}>
+        <Heading {...args} contrast="low">
+          낮은 명암비
+        </Heading>
+        <Heading {...args} contrast="high">
+          높은 명암비
+        </Heading>
+      </div>
+    );
+  },
+  argTypes: {
+    children: {
+      control: false,
+    },
+    contrast: {
+      control: false,
+    },
   },
 };
