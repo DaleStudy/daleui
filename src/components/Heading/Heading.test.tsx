@@ -46,10 +46,10 @@ test("applies the correct color for low and high contrast", () => {
   render(<Contrasts />);
 
   expect(screen.getByRole("heading", { name: "낮은 명암비" })).toHaveClass(
-    "c_text"
+    "c_text.muted"
   );
 
   expect(screen.getByRole("heading", { name: "높은 명암비" })).toHaveClass(
-    "c_text.contrast"
+    "c_text"
   );
 });

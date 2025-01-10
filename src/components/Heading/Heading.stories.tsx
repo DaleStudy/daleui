@@ -56,12 +56,10 @@ export const Contrasts: StoryObj<typeof meta> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "6" })}>
-        <Heading {...args} contrast="low">
+        <Heading {...args} muted>
           낮은 명암비
         </Heading>
-        <Heading {...args} contrast="high">
-          높은 명암비
-        </Heading>
+        <Heading {...args}>높은 명암비</Heading>
       </div>
     );
   },
@@ -69,7 +67,7 @@ export const Contrasts: StoryObj<typeof meta> = {
     children: {
       control: false,
     },
-    contrast: {
+    muted: {
       control: false,
     },
   },
