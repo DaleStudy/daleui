@@ -9,7 +9,7 @@ import { fonts, fontWeights, fontSizes } from "./typography.ts";
 
 <p>
   {Object.entries(fontSizes)
-    .map(([name, value]) => `${name}(${value})`)
+    .map(([name, { value }]) => `${name}(${value})`)
     .join(", ")}
 </p>
 
@@ -22,7 +22,7 @@ import { fonts, fontWeights, fontSizes } from "./typography.ts";
 
 ## 글꼴 굵기
 
-{Object.entries(fontWeights).map(([name, value]) => (
+{Object.entries(fontWeights).map(([name, {value}]) => (
 
 <>
   <h3>

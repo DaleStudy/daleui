@@ -41,18 +41,12 @@ export default defineConfig({
   // Useful for theme customization
   theme: {
     extend: {
-      textStyles: Object.fromEntries(
-        Object.entries(textStyles).map(([key, value]) => [key, { value }])
-      ),
+      textStyles,
       tokens: {
         colors,
         fonts,
-        fontWeights: Object.fromEntries(
-          Object.entries(fontWeights).map(([key, value]) => [key, { value }])
-        ),
-        fontSizes: Object.fromEntries(
-          Object.entries(fontSizes).map(([key, value]) => [key, { value }])
-        ),
+        fontWeights,
+        fontSizes,
         letterSpacings,
         lineHeights,
       },
