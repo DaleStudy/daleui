@@ -1,6 +1,7 @@
 import logo from "/logo.svg";
 import { css } from "../styled-system/css";
 import { Button } from "./components/Button";
+import { Heading } from "./components/Heading";
 
 function App() {
   return (
@@ -23,9 +24,9 @@ function App() {
         </a>
       </header>
       <main>
-        <h1>Welcome Dale UI!</h1>
+        <Heading level={1}>Welcome Dale UI!</Heading>
         <section>
-          <h2>유용한 링크</h2>
+          <Heading level={2}>유용한 링크</Heading>
           <ul>
             <li>
               <a href="https://main--675790d317ba346348aa3490.chromatic.com/">
@@ -51,7 +52,7 @@ function App() {
           </ul>
         </section>
         <section>
-          <h2>섹션 2</h2>
+          <Heading level={2}>섹션 2</Heading>
           <Button>클릭</Button>
         </section>
       </main>

@@ -9,4 +9,7 @@ export default defineConfig({
     environment: "happy-dom",
     setupFiles: ["./src/setupTests.tsx"],
   },
+  optimizeDeps: {
+    exclude: ["node_modules/.cache/storybook"],
+  },
 });

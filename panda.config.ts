@@ -26,6 +26,18 @@ export default defineConfig({
     "--font-spoqa": "Spoqa Han Sans Neo",
   },
 
+  staticCss: {
+    css: [
+      {
+        properties: {
+          textStyle: Object.keys(textStyles),
+          fontSize: Object.keys(fontSizes),
+          fontWeight: Object.keys(fontWeights),
+        },
+      },
+    ],
+  },
+
   // Useful for theme customization
   theme: {
     extend: {
