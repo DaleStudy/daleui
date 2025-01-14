@@ -1,6 +1,4 @@
-import type { TextStyles, Tokens } from "@pandacss/types";
-
-export const textStyles: TextStyles = {
+export const textStyles = {
   xs: {
     value: {
       fontSize: "0.75rem",
@@ -81,12 +79,12 @@ export const textStyles: TextStyles = {
   },
 };
 
-export const fonts: Tokens["fonts"] = {
+export const fonts = {
   sans: { value: '"Spoqa Han Sans Neo", "Noto Sans KR", sans-serif' },
   // TODO customize serif and mono font styles when needed
 };
 
-export const fontWeights: Tokens["fontWeights"] = {
+export const fontWeights = {
   thin: { value: "100" },
   light: { value: "300" },
   normal: { value: "400" },
@@ -94,7 +92,9 @@ export const fontWeights: Tokens["fontWeights"] = {
   bold: { value: "700" },
 };
 
-export const fontSizes: Tokens["fontSizes"] = {
+export type FontWeight = keyof typeof fontWeights;
+
+export const fontSizes = {
   "2xs": { value: "0.5rem" },
   xs: { value: "0.75rem" },
   sm: { value: "0.875rem" },
@@ -111,7 +111,9 @@ export const fontSizes: Tokens["fontSizes"] = {
   "9xl": { value: "8rem" },
 };
 
-export const letterSpacings: Tokens["letterSpacings"] = {
+export type FontSize = keyof typeof fontSizes;
+
+export const letterSpacings = {
   tighter: { value: "-0.05em" },
   tight: { value: "-0.025em" },
   normal: { value: "0em" },
@@ -120,7 +122,7 @@ export const letterSpacings: Tokens["letterSpacings"] = {
   widest: { value: "0.1em" },
 };
 
-export const lineHeights: Tokens["lineHeights"] = {
+export const lineHeights = {
   none: { value: "1" },
   tight: { value: "1.25" },
   snug: { value: "1.375" },

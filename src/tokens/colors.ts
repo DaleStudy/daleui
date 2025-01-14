@@ -111,7 +111,7 @@ export const semanticColors: SemanticTokens["colors"] = {
     },
   },
   text: {
-    DEFAULT: {
+    muted: {
       DEFAULT: {
         value: { base: "{colors.gray.11}", _dark: "{colors.grayDark.11}" },
       },
@@ -125,7 +125,7 @@ export const semanticColors: SemanticTokens["colors"] = {
         value: { base: "{colors.yellow.11}", _dark: "{colors.yellowDark.11}" },
       },
     },
-    contrast: {
+    DEFAULT: {
       DEFAULT: {
         value: { base: "{colors.gray.12}", _dark: "{colors.grayDark.12}" },
       },
