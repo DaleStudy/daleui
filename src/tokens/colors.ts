@@ -9,10 +9,10 @@ export const semanticColors: SemanticTokens["colors"] = {
   bg: {
     DEFAULT: {
       DEFAULT: {
-        value: { base: "{colors.gray.3}", _dark: "{colors.grayDark.3}" },
+        value: { base: "{colors.grayDark.3}", _dark: "{colors.gray.3}" },
       },
       accent: {
-        value: { base: "{colors.teal.3}", _dark: "{colors.violetDark.3}" },
+        value: { base: "{colors.teal.5}", _dark: "{colors.tealDark.8}" },
       },
       danger: {
         value: { base: "{colors.red.3}", _dark: "{colors.redDark.3}" },
@@ -20,10 +20,19 @@ export const semanticColors: SemanticTokens["colors"] = {
       warning: {
         value: { base: "{colors.yellow.3}", _dark: "{colors.yellowDark.3}" },
       },
+      solid: {
+        value: { base: "{colors.violet.10}", _dark: "{colors.violet.1}" },
+      },
+      outline: {
+        value: { base: "{colors.violet.2}", _dark: "{colors.violetDark.8}" },
+      },
+      "outline-gradient": {
+        value: { base: "{colors.violet.2}", _dark: "{colors.violetDark.8}" },
+      },
     },
     hover: {
       DEFAULT: {
-        value: { base: "{colors.gray.4}", _dark: "{colors.grayDark.4}" },
+        value: { base: "{colors.grayDark.8}", _dark: "{colors.gray.6}" },
       },
       accent: {
         value: { base: "{colors.teal.4}", _dark: "{colors.violetDark.4}" },
@@ -33,6 +42,12 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
       warning: {
         value: { base: "{colors.yellow.4}", _dark: "{colors.yellowDark.4}" },
+      },
+      solid: {
+        value: { base: "{colors.violet.8}", _dark: "{colors.violet.3}" },
+      },
+      outline: {
+        value: { base: "{colors.violet.4}", _dark: "{colors.violetDark.10}" },
       },
     },
     active: {
@@ -63,6 +78,9 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
       warning: {
         value: { base: "{colors.yellow.7}", _dark: "{colors.yellowDark.7}" },
+      },
+      outline: {
+        value: { base: "{colors.violetDark.10}", _dark: "{colors.violet.7}" },
       },
     },
     hover: {
@@ -116,7 +134,7 @@ export const semanticColors: SemanticTokens["colors"] = {
         value: { base: "{colors.gray.11}", _dark: "{colors.grayDark.11}" },
       },
       accent: {
-        value: { base: "{colors.teal.11}", _dark: "{colors.violetDark.11}" },
+        value: { base: "{colors.teal.11}", _dark: "{colors.tealDark.11}" },
       },
       danger: {
         value: { base: "{colors.red.11}", _dark: "{colors.redDark.11}" },
@@ -127,7 +145,7 @@ export const semanticColors: SemanticTokens["colors"] = {
     },
     DEFAULT: {
       DEFAULT: {
-        value: { base: "{colors.gray.12}", _dark: "{colors.grayDark.12}" },
+        value: { base: "{colors.grayDark.12}", _dark: "{colors.gray.12}" },
       },
       accent: {
         value: { base: "{colors.teal.12}", _dark: "{colors.violetDark.12}" },
@@ -137,6 +155,22 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
       warning: {
         value: { base: "{colors.yellow.12}", _dark: "{colors.yellowDark.12}" },
+      },
+      solid: {
+        value: { base: "{colors.violet.1}", _dark: "{colors.violet.10}" },
+      },
+      outline: {
+        value: {
+          base: "{colors.violetDark.1}",
+          _dark: "{colors.violet.1}",
+        },
+      },
+    },
+  },
+  focus: {
+    DEFAULT: {
+      DEFAULT: {
+        value: { base: "{colors.violet.10}", _dark: "{colors.violet.10}" },
       },
     },
   },

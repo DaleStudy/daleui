@@ -1,125 +1,40 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect, fn, userEvent } from "@storybook/test";
 import { Button } from "./Button";
 
-const meta: Meta<typeof Button> = {
-  title: "Components/Button",
+const meta = {
   component: Button,
-  tags: ["autodocs"],
-  argTypes: {
-    variant: {
-      control: "select",
-      options: [
-        "default",
-        "solid",
-        "outline",
-        "outlineGradient",
-        "accent",
-        "danger",
-        "warning",
-      ],
-    },
-    size: { control: "select", options: ["small", "medium", "large"] },
-    disabled: { control: "boolean" },
-    loading: { control: "boolean" },
+  parameters: {
+    layout: "centered",
   },
-};
+  args: { onClick: fn() },
+} satisfies Meta<typeof Button>;
 
 export default meta;
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Basic: Story = {
   args: {
-    children: "Default Button",
+    type: "button",
+    children: "시작하기",
+  },
+  play: async ({ args: { onClick }, canvas, step }) => {
+    const button = canvas.getByRole("button");
+
+    await step("renders a button with text", async () => {
+      expect(button).toHaveTextContent("시작하기");
+    });
+
+    await step("calls onClick handler when clicked", async () => {
+      await userEvent.click(button);
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
   },
 };
 
-export const Solid: Story = {
-  args: {
-    variant: "solid",
-    children: "Solid Button",
-  },
-};
-
-export const Outline: Story = {
-  args: {
-    variant: "outline",
-    children: "Outline Button",
-  },
-};
-
-export const OutlineGradient: Story = {
-  args: {
-    variant: "outlineGradient",
-    children: "Outline Gradient Button",
-  },
-};
-
-export const Accent: Story = {
-  args: {
-    variant: "accent",
-    children: "Accent Button",
-  },
-};
-
-export const Danger: Story = {
-  args: {
-    variant: "danger",
-    children: "Danger Button",
-  },
-};
-
-export const Warning: Story = {
-  args: {
-    variant: "warning",
-    children: "Warning Button",
-  },
-};
-
-export const Small: Story = {
-  args: {
-    size: "small",
-    children: "Small Button",
-  },
-};
-
-export const Medium: Story = {
-  args: {
-    size: "medium",
-    children: "Medium Button",
-  },
-};
-
-export const Large: Story = {
-  args: {
-    size: "large",
-    children: "Large Button",
-  },
-};
-
-// export const WithIcon: Story = {
-// args: {
-// children: "Button with Icon",
-// icon: <ArrowRightIcon />,
-// },
+// export const Submit: Story = {
+//   args: {
+//     type: "submit",
+//     children: "Submit",
+//   },
 // };
-
-export const Disabled: Story = {
-  args: {
-    children: "Disabled Button",
-    disabled: true,
-  },
-};
-
-export const Loading: Story = {
-  args: {
-    children: "Loading Button",
-    loading: true,
-  },
-};
-
-export const CustomStyled: Story = {
-  args: {
-    children: "Custom Styled Button",
-    customStyle: { backgroundColor: "red", color: "white", padding: "1rem" },
-  },
-};
