@@ -20,15 +20,6 @@ export const semanticColors: SemanticTokens["colors"] = {
       warning: {
         value: { base: "{colors.yellow.3}", _dark: "{colors.yellowDark.3}" },
       },
-      solid: {
-        value: { base: "{colors.violet.10}", _dark: "{colors.violet.1}" },
-      },
-      outline: {
-        value: { base: "{colors.violet.2}", _dark: "{colors.violetDark.8}" },
-      },
-      "outline-gradient": {
-        value: { base: "{colors.violet.2}", _dark: "{colors.violetDark.8}" },
-      },
     },
     hover: {
       DEFAULT: {
@@ -42,12 +33,6 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
       warning: {
         value: { base: "{colors.yellow.4}", _dark: "{colors.yellowDark.4}" },
-      },
-      solid: {
-        value: { base: "{colors.violet.8}", _dark: "{colors.violet.3}" },
-      },
-      outline: {
-        value: { base: "{colors.violet.4}", _dark: "{colors.violetDark.10}" },
       },
     },
     active: {
@@ -78,9 +63,6 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
       warning: {
         value: { base: "{colors.yellow.7}", _dark: "{colors.yellowDark.7}" },
-      },
-      outline: {
-        value: { base: "{colors.violetDark.10}", _dark: "{colors.violet.7}" },
       },
     },
     hover: {
@@ -155,22 +137,6 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
       warning: {
         value: { base: "{colors.yellow.12}", _dark: "{colors.yellowDark.12}" },
-      },
-      solid: {
-        value: { base: "{colors.violet.1}", _dark: "{colors.violet.10}" },
-      },
-      outline: {
-        value: {
-          base: "{colors.violetDark.1}",
-          _dark: "{colors.violet.1}",
-        },
-      },
-    },
-  },
-  focus: {
-    DEFAULT: {
-      DEFAULT: {
-        value: { base: "{colors.violet.10}", _dark: "{colors.violet.10}" },
       },
     },
   },

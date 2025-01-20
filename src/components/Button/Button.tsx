@@ -66,10 +66,9 @@ const baseStyles = {
   lineHeight: "1",
   outline: "0",
   "&:focus": {
-    outlineColor: "focus",
+    outlineColor: { base: "{colors.violet.10}", _dark: "{colors.violet.7}" },
     outline: "3px solid",
     outlineOffset: "2px",
-    borderRadius: "10px",
   },
   "&:disabled": { opacity: 0.5 },
 };
@@ -82,7 +81,6 @@ const styles = cva({
         color: "text",
         "&:active, &:hover": {
           background: "bg.hover",
-          outline: "0",
         },
       },
       accent: {
@@ -90,7 +88,6 @@ const styles = cva({
         color: "text.accent",
         "&:active, &:hover": {
           background: "bg.hover.accent",
-          outline: "0",
         },
       },
       danger: {
@@ -98,7 +95,6 @@ const styles = cva({
         color: "text.danger",
         "&:active, &:hover": {
           background: "bg.hover.danger",
-          outline: "0",
         },
       },
       warning: {
@@ -106,40 +102,55 @@ const styles = cva({
         color: "text.warning",
         "&:active, &:hover": {
           background: "bg.hover.warning",
-          outline: "0",
         },
       },
       solid: {
-        background: "bg.solid",
-        color: "text.solid",
+        background: { base: "{colors.violet.9}", _dark: "{colors.violet.9}" },
+        color: { base: "{colors.violet.1}", _dark: "{colors.violet.1}" },
         "&:active, &:hover": {
-          background: "bg.hover.solid",
-          outline: "0",
+          background: {
+            base: "{colors.violet.8}",
+            _dark: "{colors.violetDark.10}",
+          },
         },
       },
       outline: {
-        background: "bg.outline",
-        color: "text.outline",
+        background: {
+          base: "{colors.violet.2}",
+          _dark: "{colors.violetDark.8}",
+        },
+        color: {
+          base: "{colors.violetDark.1}",
+          _dark: "{colors.violet.1}",
+        },
         border: "4px solid",
-        borderColor: "border.outline",
+        borderColor: {
+          base: "{colors.violetDark.10}",
+          _dark: "{colors.violet.7}",
+        },
         "&:active, &:hover": {
-          background: "bg.hover.outline",
-          outline: "0",
+          background: {
+            base: "{colors.violet.4}",
+            _dark: "{colors.violetDark.10}",
+          },
         },
       },
       "outline-gradient": {
-        "--gradient-color": "linear-gradient(135deg, #24eaca, #846de9)",
+        "--gradient-color":
+          "linear-gradient(90deg,{colors.teal.9},{colors.violet.10})",
         background: "transparent",
-        color: "text.outline",
+        color: {
+          base: "{colors.violetDark.1}",
+          _dark: "{colors.violet.1}",
+        },
         border: "4px solid transparent",
+        borderRadius: "10px",
         backgroundClip: "padding-box, border-box",
         backgroundOrigin: "padding-box, border-box",
         borderImage: "var(--gradient-color)",
         borderImageSlice: "1",
         borderImageOutset: "0",
-        "&:active, &:hover": {
-          outline: "0",
-        },
+        "&:active, &:hover": {},
       },
     },
   },
