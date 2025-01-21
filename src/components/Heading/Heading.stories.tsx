@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { vstack } from "../../../styled-system/patterns";
 import { Heading } from "./Heading";
 
-const meta = {
+export default {
   component: Heading,
   parameters: {
     layout: "centered",
@@ -13,11 +13,9 @@ const meta = {
   },
 } satisfies Meta<typeof Heading>;
 
-export default meta;
+export const Basic: StoryObj<typeof Heading> = {};
 
-export const Basic: StoryObj<typeof meta> = {};
-
-export const Levels: StoryObj<typeof meta> = {
+export const Levels: StoryObj<typeof Heading> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "6" })}>
@@ -52,7 +50,7 @@ export const Levels: StoryObj<typeof meta> = {
   },
 };
 
-export const Contrasts: StoryObj<typeof meta> = {
+export const Contrasts: StoryObj<typeof Heading> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "6" })}>

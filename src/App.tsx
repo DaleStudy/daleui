@@ -2,6 +2,7 @@ import logo from "/logo.svg";
 import { css } from "../styled-system/css";
 import { Button } from "./components/Button";
 import { Heading } from "./components/Heading";
+import { Text } from "./components/Text";
 
 function App() {
   return (
@@ -56,7 +57,9 @@ function App() {
           <Button>클릭</Button>
         </section>
       </main>
-      <footer>© 2024 Dale UI. All rights reserved.</footer>
+      <footer>
+        <Text muted>© 2024 Dale UI. All rights reserved.</Text>
+      </footer>
     </div>
   );
 }
