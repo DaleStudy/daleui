@@ -1,23 +1,23 @@
-import React from "react";
+import React, { type HTMLAttributes } from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { SystemStyleObject } from "@pandacss/types";
-// import { colors } from "../../tokens/colors";
 
-type ButtonVariant =
-  | "solid"
-  | "outline"
-  | "outline-gradient"
-  | "default"
-  | "accent"
-  | "danger"
-  | "warning";
+type ButtonVariant = "solid" | "outline" | "transparent";
 
-export interface ButtonProps {
-  /** 버튼 텍스트 */
+type ButtonTone = "primary" | "neutral" | "accent" | "danger" | "warning";
+
+export interface ButtonProps
+  extends Omit<HTMLAttributes<HTMLElement>, "style"> {
+  /** 텍스트 */
   children: React.ReactNode;
+  /** 타입 */
   type?: "button" | "submit";
   onClick?: () => void;
-  variant?: ButtonVariant;
+  /** 종류 */
+  variant: ButtonVariant;
+  /** 색조 */
+  tone?: ButtonTone;
+  /** 추가 스타일 */
   style?: SystemStyleObject; // Add style prop for custom inline styles
 }
 
@@ -28,14 +28,15 @@ export const Button = ({
   children,
   type = "button",
   onClick,
-  variant = "default",
+  variant = "solid",
+  tone = "primary",
   style, // destructure the style prop
   ...rest
 }: ButtonProps) => {
   return (
     <button
       className={css(
-        styles.raw({ variant }),
+        styles.raw({ tone, variant }),
         baseStyles,
         ...(Array.isArray(style) ? style : [style]) // Ensure style is an array
       )}
@@ -74,84 +75,72 @@ const baseStyles = {
 };
 
 const styles = cva({
-  variants: {
-    variant: {
-      default: {
+  compoundVariants: [
+    {
+      variant: "solid",
+      tone: "primary",
+      css: {
+        background: "primary",
+        color: "{colors.violet.1}",
+        "&:active, &:hover": {
+          background: "{colors.violetDark.10}",
+        },
+      },
+    },
+    {
+      variant: "solid",
+      tone: "neutral",
+      css: {
         background: "bg",
         color: "text",
         "&:active, &:hover": {
           background: "bg.hover",
         },
       },
-      accent: {
+    },
+    {
+      variant: "solid",
+      tone: "neutral",
+      css: {
+        background: "bg",
+        color: "text",
+        "&:active, &:hover": {
+          background: "bg.hover",
+        },
+      },
+    },
+    {
+      variant: "solid",
+      tone: "accent",
+      css: {
         background: "bg.accent",
         color: "text.accent",
         "&:active, &:hover": {
           background: "bg.hover.accent",
         },
       },
-      danger: {
+    },
+    {
+      variant: "solid",
+      tone: "danger",
+      css: {
         background: "bg.danger",
         color: "text.danger",
         "&:active, &:hover": {
           background: "bg.hover.danger",
         },
       },
-      warning: {
+    },
+    {
+      variant: "solid",
+      tone: "warning",
+      css: {
         background: "bg.warning",
         color: "text.warning",
         "&:active, &:hover": {
           background: "bg.hover.warning",
         },
       },
-      solid: {
-        background: { base: "{colors.violet.9}", _dark: "{colors.violet.9}" },
-        color: { base: "{colors.violet.1}", _dark: "{colors.violet.1}" },
-        "&:active, &:hover": {
-          background: {
-            base: "{colors.violet.8}",
-            _dark: "{colors.violetDark.10}",
-          },
-        },
-      },
-      outline: {
-        background: {
-          base: "{colors.violet.2}",
-          _dark: "{colors.violetDark.8}",
-        },
-        color: {
-          base: "{colors.violetDark.1}",
-          _dark: "{colors.violet.1}",
-        },
-        border: "4px solid",
-        borderColor: {
-          base: "{colors.violetDark.10}",
-          _dark: "{colors.violet.7}",
-        },
-        "&:active, &:hover": {
-          background: {
-            base: "{colors.violet.4}",
-            _dark: "{colors.violetDark.10}",
-          },
-        },
-      },
-      "outline-gradient": {
-        "--gradient-color":
-          "linear-gradient(90deg,{colors.teal.9},{colors.violet.10})",
-        background: "transparent",
-        color: {
-          base: "{colors.violetDark.1}",
-          _dark: "{colors.violet.1}",
-        },
-        border: "4px solid transparent",
-        borderRadius: "10px",
-        backgroundClip: "padding-box, border-box",
-        backgroundOrigin: "padding-box, border-box",
-        borderImage: "var(--gradient-color)",
-        borderImageSlice: "1",
-        borderImageOutset: "0",
-        "&:active, &:hover": {},
-      },
     },
-  },
+  ],
 });

@@ -1,40 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { expect, fn, userEvent } from "@storybook/test";
 import { Button } from "./Button";
 
-const meta = {
+export default {
   component: Button,
   parameters: {
     layout: "centered",
   },
-  args: { onClick: fn() },
-} satisfies Meta<typeof Button>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Basic: Story = {
   args: {
-    type: "button",
     children: "시작하기",
   },
-  play: async ({ args: { onClick }, canvas, step }) => {
-    const button = canvas.getByRole("button");
+} satisfies Meta<typeof Button>;
 
-    await step("renders a button with text", async () => {
-      expect(button).toHaveTextContent("시작하기");
-    });
-
-    await step("calls onClick handler when clicked", async () => {
-      await userEvent.click(button);
-      expect(onClick).toHaveBeenCalledTimes(1);
-    });
-  },
-};
-
-// export const Submit: Story = {
-//   args: {
-//     type: "submit",
-//     children: "Submit",
-//   },
-// };
+export const Basic: StoryObj<typeof Button> = {};

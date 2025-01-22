@@ -8,6 +8,8 @@ export const semanticColors: SemanticTokens["colors"] = {
   base: {
     value: { base: "{colors.gray.1}", _dark: "{colors.grayDark.1}" },
   },
+  primary: { value: "{colors.violet.9}" },
+  secondary: { value: "{colors.teal.9}" },
   bg: {
     DEFAULT: {
       DEFAULT: {
