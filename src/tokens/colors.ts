@@ -1,5 +1,7 @@
 import type { Tokens, SemanticTokens } from "@pandacss/types";
 
+export type Tone = "neutral" | "accent" | "danger" | "warning";
+
 export const semanticColors: SemanticTokens["colors"] = {
   current: { value: "currentColor" },
   transparent: { value: "rgb(0 0 0 / 0)" },

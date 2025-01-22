@@ -13,7 +13,7 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   size?: FontSize;
   /** 굵기 */
   weight?: FontWeight;
-  /** 명암비 */
+  /** 명암비 낮출지 */
   muted?: boolean;
 }
 
