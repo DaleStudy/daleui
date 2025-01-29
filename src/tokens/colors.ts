@@ -8,15 +8,13 @@ export const semanticColors: SemanticTokens["colors"] = {
   base: {
     value: { base: "{colors.gray.1}", _dark: "{colors.grayDark.1}" },
   },
-  primary: { value: "{colors.violet.9}" },
-  secondary: { value: "{colors.teal.9}" },
   bg: {
     DEFAULT: {
       DEFAULT: {
-        value: { base: "{colors.grayDark.3}", _dark: "{colors.gray.3}" },
+        value: { base: "{colors.gray.3}", _dark: "{colors.grayDark.3}" },
       },
       accent: {
-        value: { base: "{colors.teal.5}", _dark: "{colors.tealDark.8}" },
+        value: { base: "{colors.teal.3}", _dark: "{colors.violetDark.3}" },
       },
       danger: {
         value: { base: "{colors.red.3}", _dark: "{colors.redDark.3}" },
@@ -27,7 +25,7 @@ export const semanticColors: SemanticTokens["colors"] = {
     },
     hover: {
       DEFAULT: {
-        value: { base: "{colors.grayDark.8}", _dark: "{colors.gray.6}" },
+        value: { base: "{colors.gray.4}", _dark: "{colors.grayDark.4}" },
       },
       accent: {
         value: { base: "{colors.teal.4}", _dark: "{colors.violetDark.4}" },
@@ -120,7 +118,7 @@ export const semanticColors: SemanticTokens["colors"] = {
         value: { base: "{colors.gray.11}", _dark: "{colors.grayDark.11}" },
       },
       accent: {
-        value: { base: "{colors.teal.11}", _dark: "{colors.tealDark.11}" },
+        value: { base: "{colors.teal.11}", _dark: "{colors.violetDark.11}" },
       },
       danger: {
         value: { base: "{colors.red.11}", _dark: "{colors.redDark.11}" },
@@ -131,7 +129,7 @@ export const semanticColors: SemanticTokens["colors"] = {
     },
     DEFAULT: {
       DEFAULT: {
-        value: { base: "{colors.grayDark.12}", _dark: "{colors.gray.12}" },
+        value: { base: "{colors.gray.12}", _dark: "{colors.grayDark.12}" },
       },
       accent: {
         value: { base: "{colors.teal.12}", _dark: "{colors.violetDark.12}" },

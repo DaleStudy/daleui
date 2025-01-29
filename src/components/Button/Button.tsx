@@ -2,9 +2,9 @@ import React, { type HTMLAttributes } from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { SystemStyleObject } from "@pandacss/types";
 
-type ButtonVariant = "solid" | "outline" | "transparent";
+type ButtonVariant = "solid" | "outline";
 
-type ButtonTone = "primary" | "neutral" | "accent" | "danger" | "warning";
+type ButtonTone = "neutral" | "accent" | "danger" | "warning";
 
 export interface ButtonProps
   extends Omit<HTMLAttributes<HTMLElement>, "style"> {
@@ -29,7 +29,7 @@ export const Button = ({
   type = "button",
   onClick,
   variant = "solid",
-  tone = "primary",
+  tone = "neutral",
   style, // destructure the style prop
   ...rest
 }: ButtonProps) => {
@@ -66,11 +66,6 @@ const baseStyles = {
   transition: "0.2s",
   lineHeight: "1",
   outline: "0",
-  "&:focus": {
-    outlineColor: { base: "{colors.violet.10}", _dark: "{colors.violet.7}" },
-    outline: "3px solid",
-    outlineOffset: "2px",
-  },
   "&:disabled": { opacity: 0.5 },
 };
 
@@ -78,17 +73,6 @@ const styles = cva({
   compoundVariants: [
     {
       variant: "solid",
-      tone: "primary",
-      css: {
-        background: "primary",
-        color: "{colors.violet.1}",
-        "&:active, &:hover": {
-          background: "{colors.violetDark.10}",
-        },
-      },
-    },
-    {
-      variant: "solid",
       tone: "neutral",
       css: {
         background: "bg",
@@ -96,16 +80,10 @@ const styles = cva({
         "&:active, &:hover": {
           background: "bg.hover",
         },
-      },
-    },
-    {
-      variant: "solid",
-      tone: "neutral",
-      css: {
-        background: "bg",
-        color: "text",
-        "&:active, &:hover": {
-          background: "bg.hover",
+        "&:focus": {
+          outlineColor: "border.neutral",
+          outline: "3px solid",
+          outlineOffset: "2px",
         },
       },
     },
@@ -118,6 +96,11 @@ const styles = cva({
         "&:active, &:hover": {
           background: "bg.hover.accent",
         },
+        "&:focus": {
+          outlineColor: "border.accent",
+          outline: "3px solid",
+          outlineOffset: "2px",
+        },
       },
     },
     {
@@ -129,6 +112,11 @@ const styles = cva({
         "&:active, &:hover": {
           background: "bg.hover.danger",
         },
+        "&:focus": {
+          outlineColor: "border.danger",
+          outline: "3px solid",
+          outlineOffset: "2px",
+        },
       },
     },
     {
@@ -139,6 +127,83 @@ const styles = cva({
         color: "text.warning",
         "&:active, &:hover": {
           background: "bg.hover.warning",
+        },
+        "&:focus": {
+          outlineColor: "border.warning",
+          outline: "3px solid",
+          outlineOffset: "2px",
+        },
+      },
+    },
+    {
+      variant: "outline",
+      tone: "neutral",
+      css: {
+        border: "3px solid",
+        borderColor: "border",
+        color: "text.DEFAULT.base",
+        "&:active, &:hover": {
+          background: "bg.hover",
+          color: "text.muted",
+        },
+        "&:focus": {
+          outlineColor: "border.neutral",
+          outline: "3px solid",
+          outlineOffset: "2px",
+        },
+      },
+    },
+    {
+      variant: "outline",
+      tone: "accent",
+      css: {
+        border: "3px solid",
+        borderColor: "border.accent",
+        color: "text.accent.base",
+        "&:active, &:hover": {
+          background: "bg.hover.accent",
+          color: "text.muted.accent",
+        },
+        "&:focus": {
+          outlineColor: "border.accent",
+          outline: "3px solid",
+          outlineOffset: "2px",
+        },
+      },
+    },
+    {
+      variant: "outline",
+      tone: "danger",
+      css: {
+        border: "3px solid",
+        borderColor: "border.danger",
+        color: "text.danger.base",
+        "&:active, &:hover": {
+          background: "bg.hover.danger",
+          color: "text.muted.danger",
+        },
+        "&:focus": {
+          outlineColor: "border.danger",
+          outline: "3px solid",
+          outlineOffset: "2px",
+        },
+      },
+    },
+    {
+      variant: "outline",
+      tone: "warning",
+      css: {
+        border: "3px solid",
+        borderColor: "border.warning",
+        color: "text.warning.base",
+        "&:active, &:hover": {
+          background: "bg.hover.warning",
+          color: "text.muted.warning",
+        },
+        "&:focus": {
+          outlineColor: "border.warning",
+          outline: "3px solid",
+          outlineOffset: "2px",
         },
       },
     },
