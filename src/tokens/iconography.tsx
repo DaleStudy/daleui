@@ -1,4 +1,9 @@
 import {
+  Check,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  CircleAlert,
   Clock,
   Info,
   MessageCircle,
@@ -6,14 +11,15 @@ import {
   Moon,
   Search,
   Sun,
+  Star,
   User,
+  X,
 } from "lucide-react";
 import type { FunctionComponent, ComponentProps, SVGProps } from "react";
 import Discord from "../assets/Discord.svg?react";
 import GitHub from "../assets/GitHub.svg?react";
 import LinkedIn from "../assets/LinkedIn.svg?react";
 import Medium from "../assets/Medium.svg?react";
-import X from "../assets/X.svg?react";
 import YouTube from "../assets/YouTube.svg?react";
 
 function createBrandIcon(Icon: FunctionComponent<SVGProps<SVGSVGElement>>) {
@@ -23,6 +29,11 @@ function createBrandIcon(Icon: FunctionComponent<SVGProps<SVGSVGElement>>) {
 }
 
 export const icons = {
+  check: Check,
+  chevronDown: ChevronDown,
+  chevronLeft: ChevronLeft,
+  chevronRight: ChevronRight,
+  circleAlert: CircleAlert,
   clock: Clock,
   info: Info,
   chat: MessageCircle,
@@ -30,12 +41,13 @@ export const icons = {
   moon: Moon,
   search: Search,
   sun: Sun,
+  star: Star,
   user: User,
+  x: X,
   Discord: createBrandIcon(Discord),
   GitHub: createBrandIcon(GitHub),
   LinkedIn: createBrandIcon(LinkedIn),
   Medium: createBrandIcon(Medium),
-  X: createBrandIcon(X),
   YouTube: createBrandIcon(YouTube),
 };
 
