@@ -1,0 +1,15 @@
+import { IconGallery, IconItem } from "@storybook/blocks";
+import { icons } from "./iconography";
+
+# Iconography
+
+> 달레 UI는 [Lucide](https://lucide.dev/)와 [Simple Icons](https://simpleicons.org/)의 아이콘을 선별적으로 사용하고 있습니다.
+> 번들 크기를 최적화하기 위해서 아이콘은 필요할 때 마다 요청을 받아서 추가됩니다.
+
+<IconGallery>
+  {Object.entries(icons).map(([name, Icon]) => (
+    <IconItem name={name}>
+      <Icon />
+    </IconItem>
+  ))}
+</IconGallery>
