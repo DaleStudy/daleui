@@ -3,8 +3,8 @@ import { css, cva } from "../../../styled-system/css";
 import type { SystemStyleObject } from "@pandacss/types";
 
 type ButtonVariant = "solid" | "outline";
-
 type ButtonTone = "neutral" | "accent" | "danger" | "warning";
+type ButtonSize = "small" | "medium" | "large";
 
 export interface ButtonProps
   extends Omit<HTMLAttributes<HTMLElement>, "style"> {
@@ -12,17 +12,26 @@ export interface ButtonProps
   children: React.ReactNode;
   /** 타입 */
   type?: "button" | "submit";
+  /** 클릭 시 실행함수 */
   onClick?: () => void;
   /** 종류 */
   variant: ButtonVariant;
   /** 색조 */
   tone?: ButtonTone;
+  /** 버튼의 크기 */
+  size?: ButtonSize;
   /** 추가 스타일 */
-  style?: SystemStyleObject; // Add style prop for custom inline styles
+  style?: SystemStyleObject;
+  /** 버튼 비활성화 여부 */
+  disabled?: boolean;
 }
 
 /**
- * 버튼 컴포넌트입니다.
+ * - `variant` 속성으로 버튼의 스타일 종류를 지정할 수 있습니다. (solid, outline)
+ * - `tone` 속성으로 버튼의 색상 강조를 지정할 수 있습니다. (neutral, accent, danger, warning)
+ * - `size` 속성으로 버튼의 크기를 지정할 수 있습니다. (small, medium, large)
+ * - `type` 속성으로 버튼의 타입을 지정할 수 있습니다. (button, submit)
+ * - `disabled` 속성을 사용하여 버튼을 비활성화할 수 있습니다.
  */
 export const Button = ({
   children,
@@ -30,18 +39,21 @@ export const Button = ({
   onClick,
   variant = "solid",
   tone = "neutral",
-  style, // destructure the style prop
+  style,
+  size = "medium",
+  disabled,
   ...rest
 }: ButtonProps) => {
   return (
     <button
       className={css(
-        styles.raw({ tone, variant }),
+        styles.raw({ tone, variant, size }),
         baseStyles,
-        ...(Array.isArray(style) ? style : [style]) // Ensure style is an array
+        ...(Array.isArray(style) ? style : [style])
       )}
       type={type}
       onClick={onClick}
+      disabled={disabled}
       {...rest}
     >
       {children}
@@ -52,8 +64,6 @@ export const Button = ({
 const baseStyles = {
   appearance: "none",
   margin: "0",
-  padding: "0.7rem 3rem",
-  fontSize: "1.5rem",
   fontWeight: 500,
   textAlign: "center",
   textDecoration: "none",
@@ -66,10 +76,42 @@ const baseStyles = {
   transition: "0.2s",
   lineHeight: "1",
   outline: "0",
-  "&:disabled": { opacity: 0.5 },
+  "&:disabled": {
+    opacity: 0.5,
+    cursor: "not-allowed",
+  },
 };
 
 const styles = cva({
+  base: {
+    padding: "0.7rem 3rem",
+  },
+  variants: {
+    size: {
+      small: {
+        padding: "0.5rem 1.5rem",
+        fontSize: "sm",
+      },
+      medium: {
+        padding: "0.7rem 2rem",
+        fontSize: "md",
+      },
+      large: {
+        padding: "1rem 2.5rem",
+        fontSize: "lg",
+      },
+    },
+    variant: {
+      solid: {},
+      outline: {},
+    },
+    tone: {
+      neutral: {},
+      accent: {},
+      danger: {},
+      warning: {},
+    },
+  },
   compoundVariants: [
     {
       variant: "solid",
