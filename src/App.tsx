@@ -54,7 +54,7 @@ function App() {
         </section>
         <section>
           <Heading level={2}>섹션 2</Heading>
-          <Button>클릭</Button>
+          <Button variant={"solid"}>클릭</Button>
         </section>
       </main>
       <footer>
