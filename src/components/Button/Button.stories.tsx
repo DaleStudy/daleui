@@ -33,8 +33,7 @@ export const Variants: StoryObj<typeof Button> = {
       control: false,
     },
     variant: {
-      control: "radio",
-      options: ["solid", "outline"],
+      control: false,
     },
   },
 };
@@ -63,8 +62,7 @@ export const Tones: StoryObj<typeof Button> = {
       control: false,
     },
     tone: {
-      control: "radio",
-      options: ["neutral", "accent", "danger", "warning"],
+      control: false,
     },
   },
 };
@@ -73,13 +71,13 @@ export const Sizes: StoryObj<typeof Button> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "4" })}>
-        <Button {...args} size="small">
+        <Button {...args} size="sm">
           작은 버튼
         </Button>
-        <Button {...args} size="medium">
+        <Button {...args} size="md">
           중간 버튼
         </Button>
-        <Button {...args} size="large">
+        <Button {...args} size="lg">
           큰 버튼
         </Button>
       </div>
@@ -90,8 +88,7 @@ export const Sizes: StoryObj<typeof Button> = {
       control: false,
     },
     size: {
-      control: "radio",
-      options: ["small", "medium", "large"],
+      control: false,
     },
   },
 };
@@ -112,7 +109,7 @@ export const Disabled: StoryObj<typeof Button> = {
       control: false,
     },
     disabled: {
-      control: "boolean",
+      control: false,
     },
   },
 };

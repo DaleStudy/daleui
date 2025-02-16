@@ -1,10 +1,9 @@
 import React, { type HTMLAttributes } from "react";
 import { css, cva } from "../../../styled-system/css";
-import type { SystemStyleObject } from "@pandacss/types";
+import type { Tone } from "../../tokens/colors";
 
 type ButtonVariant = "solid" | "outline";
-type ButtonTone = "neutral" | "accent" | "danger" | "warning";
-type ButtonSize = "small" | "medium" | "large";
+type ButtonSize = "sm" | "md" | "lg";
 
 export interface ButtonProps
   extends Omit<HTMLAttributes<HTMLElement>, "style"> {
@@ -17,20 +16,18 @@ export interface ButtonProps
   /** 종류 */
   variant: ButtonVariant;
   /** 색조 */
-  tone?: ButtonTone;
+  tone?: Tone;
   /** 버튼의 크기 */
   size?: ButtonSize;
-  /** 추가 스타일 */
-  style?: SystemStyleObject;
   /** 버튼 비활성화 여부 */
   disabled?: boolean;
 }
 
 /**
- * - `variant` 속성으로 버튼의 스타일 종류를 지정할 수 있습니다. (solid, outline)
- * - `tone` 속성으로 버튼의 색상 강조를 지정할 수 있습니다. (neutral, accent, danger, warning)
- * - `size` 속성으로 버튼의 크기를 지정할 수 있습니다. (small, medium, large)
- * - `type` 속성으로 버튼의 타입을 지정할 수 있습니다. (button, submit)
+ * - `variant` 속성으로 버튼의 스타일 종류를 지정할 수 있습니다.
+ * - `tone` 속성으로 버튼의 색상 강조를 지정할 수 있습니다.
+ * - `size` 속성으로 버튼의 크기를 지정할 수 있습니다.
+ * - `type` 속성으로 버튼의 타입을 지정할 수 있습니다.
  * - `disabled` 속성을 사용하여 버튼을 비활성화할 수 있습니다.
  */
 export const Button = ({
@@ -39,18 +36,13 @@ export const Button = ({
   onClick,
   variant = "solid",
   tone = "neutral",
-  style,
-  size = "medium",
+  size = "md",
   disabled,
   ...rest
 }: ButtonProps) => {
   return (
     <button
-      className={css(
-        styles.raw({ tone, variant, size }),
-        baseStyles,
-        ...(Array.isArray(style) ? style : [style])
-      )}
+      className={css(styles.raw({ tone, variant, size }), baseStyles)}
       type={type}
       onClick={onClick}
       disabled={disabled}
@@ -88,15 +80,15 @@ const styles = cva({
   },
   variants: {
     size: {
-      small: {
+      sm: {
         padding: "0.5rem 1.5rem",
         fontSize: "sm",
       },
-      medium: {
+      md: {
         padding: "0.7rem 2rem",
         fontSize: "md",
       },
-      large: {
+      lg: {
         padding: "1rem 2.5rem",
         fontSize: "lg",
       },
@@ -183,7 +175,7 @@ const styles = cva({
       css: {
         border: "3px solid",
         borderColor: "border",
-        color: "text.DEFAULT.base",
+        color: "text",
         "&:active, &:hover": {
           background: "bg.hover",
           color: "text.muted",
@@ -201,7 +193,7 @@ const styles = cva({
       css: {
         border: "3px solid",
         borderColor: "border.accent",
-        color: "text.accent.base",
+        color: "text.accent",
         "&:active, &:hover": {
           background: "bg.hover.accent",
           color: "text.muted.accent",
@@ -219,7 +211,7 @@ const styles = cva({
       css: {
         border: "3px solid",
         borderColor: "border.danger",
-        color: "text.danger.base",
+        color: "text.danger",
         "&:active, &:hover": {
           background: "bg.hover.danger",
           color: "text.muted.danger",
@@ -237,7 +229,7 @@ const styles = cva({
       css: {
         border: "3px solid",
         borderColor: "border.warning",
-        color: "text.warning.base",
+        color: "text.warning",
         "&:active, &:hover": {
           background: "bg.hover.warning",
           color: "text.muted.warning",
