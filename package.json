@@ -1,6 +1,5 @@
 {
-  "name": "dale-ui",
-  "private": true,
+  "name": "daleui",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
