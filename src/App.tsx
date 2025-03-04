@@ -35,13 +35,13 @@ function App() {
               </a>
             </li>
             <li>
-              <a href="https://github.com/DaleStudy/dale-ui">깃허브</a>
+              <a href="https://github.com/DaleStudy/daleui">깃허브</a>
             </li>
             <li>
-              <a href="https://github.com/DaleStudy/dale-ui/wiki">위키</a>
+              <a href="https://github.com/DaleStudy/daleui/wiki">위키</a>
             </li>
             <li>
-              <a href="https://github.com/DaleStudy/dale-ui/discussions">
+              <a href="https://github.com/DaleStudy/daleui/discussions">
                 게시판
               </a>
             </li>
