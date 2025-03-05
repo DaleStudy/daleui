@@ -9,8 +9,6 @@ export interface CheckboxProps
     ButtonHTMLAttributes<HTMLButtonElement>,
     "type" | "onChange" | "checked" | "value" | "required"
   > {
-  /** 체크박스의 id (label 연결에 사용) */
-  id: string;
   /** 라벨 */
   label: React.ReactNode;
   /** 체크박스의 값 */
@@ -34,7 +32,6 @@ export interface CheckboxProps
  * - `required` 속성을 사용하여 필수 입력 항목으로 지정할 수 있습니다.
  */
 export const Checkbox = ({
-  id,
   label,
   value,
   tone = "neutral",
@@ -55,17 +52,24 @@ export const Checkbox = ({
       })}
     >
       <CheckboxPrimitive.Root
-        id={id}
         checked={checked}
         required={required}
         onCheckedChange={(checked) => {
           onChange?.(checked === true, value);
         }}
         disabled={disabled}
-        className={css(styles.raw({ tone }), baseStyles)}
+        className={styles({ tone })}
         {...rest}
       >
-        <CheckboxPrimitive.Indicator className={css(indicatorStyles)}>
+        <CheckboxPrimitive.Indicator
+          className={css({
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          })}
+        >
           <Check size={16} />
         </CheckboxPrimitive.Indicator>
       </CheckboxPrimitive.Root>
@@ -75,48 +79,37 @@ export const Checkbox = ({
   );
 };
 
-const baseStyles = {
-  appearance: "none",
-  margin: "0",
-  backgroundColor: "transparent",
-  border: "3px solid",
-  borderColor: "border",
-  borderRadius: "4px",
-  width: "1.5rem",
-  height: "1.5rem",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  cursor: "pointer",
-  transition: "0.2s",
-  outline: "none",
-  "&:hover": {
-    backgroundColor: "bg.hover",
-  },
-  "&:focus": {
-    outlineColor: "border.neutral",
-    outline: "3px solid",
-    outlineOffset: "2px",
-  },
-  "&:disabled": {
-    opacity: 0.5,
-    cursor: "not-allowed",
+const styles = cva({
+  base: {
+    appearance: "none",
+    margin: "0",
+    backgroundColor: "transparent",
+    border: "3px solid",
+    borderColor: "border",
+    borderRadius: "4px",
+    width: "1.5rem",
+    height: "1.5rem",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    transition: "0.2s",
+    outline: "none",
     "&:hover": {
-      backgroundColor: "transparent",
+      backgroundColor: "bg.hover",
+    },
+    "&:focus": {
+      outline: "3px solid",
+      outlineOffset: "2px",
+    },
+    "&:disabled": {
+      opacity: 0.5,
+      cursor: "not-allowed",
+      "&:hover": {
+        backgroundColor: "transparent",
+      },
     },
   },
-};
-
-const indicatorStyles = {
-  width: "100%",
-  height: "100%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-};
-
-const styles = cva({
-  base: {},
   variants: {
     tone: {
       neutral: {
@@ -128,6 +121,9 @@ const styles = cva({
         "&:disabled[data-state='checked']": {
           backgroundColor: "bg",
           borderColor: "border",
+        },
+        "&:focus": {
+          outlineColor: "border.neutral", // 추가
         },
       },
       accent: {
