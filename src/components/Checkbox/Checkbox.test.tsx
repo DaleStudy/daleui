@@ -76,7 +76,7 @@ test("displays required indicator correctly", () => {
   render(<Required />);
 
   const requiredLabel = screen.getByText("필수 체크박스").parentElement;
-  const optionalLabel = screen.getByText("선택 체크박스").parentElement;
+  const optionalLabel = screen.getByText("선택 체크박스");
 
   // Check for required indicator (asterisk)
   expect(requiredLabel).toContainHTML("*");

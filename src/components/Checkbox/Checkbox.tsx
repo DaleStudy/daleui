@@ -45,8 +45,14 @@ export const Checkbox = ({
   ...rest
 }: CheckboxProps) => {
   return (
-    <div
-      className={css({ display: "flex", alignItems: "center", gap: "0.5rem" })}
+    <label
+      className={css({
+        display: "flex",
+        alignItems: "center",
+        gap: "0.5rem",
+        cursor: "pointer",
+        color: "text",
+      })}
     >
       <CheckboxPrimitive.Root
         id={id}
@@ -63,13 +69,9 @@ export const Checkbox = ({
           <Check size={16} />
         </CheckboxPrimitive.Indicator>
       </CheckboxPrimitive.Root>
-      <label htmlFor={id} className={css({ cursor: "pointer", color: "text" })}>
-        {label}
-        {required && (
-          <span className={css({ color: "text.danger", ml: "1" })}>*</span>
-        )}
-      </label>
-    </div>
+      {label}
+      {required && <span className={css({ color: "text.danger" })}>*</span>}
+    </label>
   );
 };
 
