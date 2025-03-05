@@ -1,7 +1,6 @@
 {
-  "name": "dale-ui",
-  "private": true,
-  "version": "0.0.0",
+  "name": "daleui",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
