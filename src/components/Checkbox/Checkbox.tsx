@@ -123,7 +123,7 @@ const styles = cva({
           borderColor: "border",
         },
         "&:focus": {
-          outlineColor: "border.neutral", // 추가
+          outlineColor: "border",
         },
       },
       accent: {
