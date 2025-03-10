@@ -1,7 +1,17 @@
 {
   "name": "daleui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
+  "repository": "github:DaleStudy/daleui",
+  "license": "MIT",
+  "homepage": "https://www.daleui.com",
+  "keywords": [
+    "design-system",
+    "ui-components",
+    "components-library",
+    "react",
+    "storybook"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
