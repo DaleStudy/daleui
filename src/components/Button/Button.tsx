@@ -1,5 +1,5 @@
 import React, { type HTMLAttributes } from "react";
-import { css, cva } from "../../../styled-system/css";
+import { cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 
 type ButtonVariant = "solid" | "outline";
