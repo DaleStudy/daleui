@@ -42,7 +42,7 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={css(styles.raw({ tone, variant, size }), baseStyles)}
+      className={styles({ tone, variant, size })}
       type={type}
       onClick={onClick}
       disabled={disabled}
@@ -53,29 +53,26 @@ export const Button = ({
   );
 };
 
-const baseStyles = {
-  appearance: "none",
-  margin: "0",
-  fontWeight: 500,
-  textAlign: "center",
-  textDecoration: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  width: ["auto", "100%"],
-  borderRadius: "10px",
-  cursor: "pointer",
-  transition: "0.2s",
-  lineHeight: "1",
-  outline: "0",
-  "&:disabled": {
-    opacity: 0.5,
-    cursor: "not-allowed",
-  },
-};
-
 const styles = cva({
   base: {
+    appearance: "none",
+    margin: "0",
+    fontWeight: 500,
+    textAlign: "center",
+    textDecoration: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: ["auto", "100%"],
+    borderRadius: "10px",
+    cursor: "pointer",
+    transition: "0.2s",
+    lineHeight: "1",
+    outline: "0",
+    "&:disabled": {
+      opacity: 0.5,
+      cursor: "not-allowed",
+    },
     padding: "0.7rem 3rem",
   },
   variants: {
