@@ -77,18 +77,18 @@ const styles = cva({
   variants: {
     size: {
       sm: {
-        px: "sm.px",
-        py: "sm.py",
+        px: "px.sm",
+        py: "py.sm",
         fontSize: "sm",
       },
       md: {
-        px: "md.px",
-        py: "md.py",
+        px: "px.md",
+        py: "py.md",
         fontSize: "md",
       },
       lg: {
-        px: "lg.px",
-        py: "lg.py",
+        px: "px.lg",
+        py: "py.lg",
         fontSize: "lg",
       },
     },

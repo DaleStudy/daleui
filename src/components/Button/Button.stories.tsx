@@ -18,7 +18,7 @@ export const Basic: StoryObj<typeof Button> = {};
 export const Variants: StoryObj<typeof Button> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "sm.gap" })}>
+      <div className={vstack({ gap: "gap.sm" })}>
         <Button {...args} variant="solid">
           솔리드 버튼
         </Button>
@@ -41,7 +41,7 @@ export const Variants: StoryObj<typeof Button> = {
 export const Tones: StoryObj<typeof Button> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "sm.gap" })}>
+      <div className={vstack({ gap: "gap.sm" })}>
         <Button {...args} tone="neutral">
           중립 색조
         </Button>
@@ -70,7 +70,7 @@ export const Tones: StoryObj<typeof Button> = {
 export const Sizes: StoryObj<typeof Button> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "sm.gap" })}>
+      <div className={vstack({ gap: "gap.sm" })}>
         <Button {...args} size="sm">
           작은 버튼
         </Button>
@@ -96,7 +96,7 @@ export const Sizes: StoryObj<typeof Button> = {
 export const Disabled: StoryObj<typeof Button> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "sm.gap" })}>
+      <div className={vstack({ gap: "gap.sm" })}>
         <Button {...args} disabled>
           비활성화 버튼
         </Button>

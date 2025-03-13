@@ -25,7 +25,7 @@ export const Basic: StoryObj<typeof Icon> = {
 export const Sizes: StoryObj<typeof Icon> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "md.gap" })}>
+      <div className={vstack({ gap: "gap.md" })}>
         <Icon {...args} size="xs" />
         <Icon {...args} size="sm" />
         <Icon {...args} size="md" />
@@ -48,7 +48,7 @@ export const Sizes: StoryObj<typeof Icon> = {
 export const Tones: StoryObj<typeof Icon> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "md.gap" })}>
+      <div className={vstack({ gap: "gap.md" })}>
         <Icon {...args} tone="neutral" />
         <Icon {...args} tone="accent" />
         <Icon {...args} tone="danger" />
@@ -69,7 +69,7 @@ export const Tones: StoryObj<typeof Icon> = {
 export const Contrasts: StoryObj<typeof Icon> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "md.gap" })}>
+      <div className={vstack({ gap: "gap.md" })}>
         <Text {...args} muted>
           낮은 <Icon name="moon" /> 명암비
         </Text>

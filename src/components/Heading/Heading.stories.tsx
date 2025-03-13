@@ -18,7 +18,7 @@ export const Basic: StoryObj<typeof Heading> = {};
 export const Levels: StoryObj<typeof Heading> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "md.gap" })}>
+      <div className={vstack({ gap: "gap.md" })}>
         <Heading {...args} level={1}>
           1 단계
         </Heading>
@@ -53,7 +53,7 @@ export const Levels: StoryObj<typeof Heading> = {
 export const Contrasts: StoryObj<typeof Heading> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "md.gap" })}>
+      <div className={vstack({ gap: "gap.md" })}>
         <Heading {...args} muted>
           낮은 명암비
         </Heading>
