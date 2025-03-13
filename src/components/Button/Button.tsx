@@ -73,20 +73,22 @@ const styles = cva({
       opacity: 0.5,
       cursor: "not-allowed",
     },
-    padding: "0.7rem 3rem",
   },
   variants: {
     size: {
       sm: {
-        padding: "0.5rem 1.5rem",
+        px: "px.sm",
+        py: "py.sm",
         fontSize: "sm",
       },
       md: {
-        padding: "0.7rem 2rem",
+        px: "px.md",
+        py: "py.md",
         fontSize: "md",
       },
       lg: {
-        padding: "1rem 2.5rem",
+        px: "px.lg",
+        py: "py.lg",
         fontSize: "lg",
       },
     },

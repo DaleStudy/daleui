@@ -1,6 +1,7 @@
 import { defineConfig } from "@pandacss/dev";
 import { globalCss } from "./src/styles/globalCss";
 import { colors, semanticColors } from "./src/tokens/colors";
+import { spacing, semanticSpacing } from "./src/tokens/spacing";
 import {
   textStyles,
   fonts,
@@ -49,9 +50,11 @@ export default defineConfig({
         fontSizes,
         letterSpacings,
         lineHeights,
+        spacing,
       },
       semanticTokens: {
         colors: semanticColors,
+        spacing: semanticSpacing,
       },
     },
   },
