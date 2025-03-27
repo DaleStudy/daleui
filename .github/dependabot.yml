@@ -1,7 +1,7 @@
 version: 2
+enable-beta-ecosystems: true
 updates:
   - package-ecosystem: "bun"
-    enable-beta-ecosystems: true
     pull-request-branch-name:
       separator: "-"
     directory: "/"
