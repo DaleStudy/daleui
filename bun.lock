@@ -25,7 +25,7 @@
         "@storybook/react": "^8.5.2",
         "@storybook/react-vite": "^8.5.2",
         "@storybook/test": "^8.5.2",
-        "@storybook/test-runner": "^0.21.0",
+        "@storybook/test-runner": "^0.22.0",
         "@testing-library/jest-dom": "^6.6.3",
         "@testing-library/react": "^16.2.0",
         "@testing-library/user-event": "^14.6.1",
@@ -442,7 +442,7 @@
 
     "@storybook/test": ["@storybook/test@8.6.4", "", { "dependencies": { "@storybook/global": "^5.0.0", "@storybook/instrumenter": "8.6.4", "@testing-library/dom": "10.4.0", "@testing-library/jest-dom": "6.5.0", "@testing-library/user-event": "14.5.2", "@vitest/expect": "2.0.5", "@vitest/spy": "2.0.5" }, "peerDependencies": { "storybook": "^8.6.4" } }, "sha512-JPjfbaMMuCBT47pg3/MDD9vYFF5OGPAOWEB9nJWJ9IjYAb2Nd8OYJQIDoYJQNT+aLkTVLtvzGnVNwdxpouAJcQ=="],
 
-    "@storybook/test-runner": ["@storybook/test-runner@0.21.3", "", { "dependencies": { "@babel/core": "^7.22.5", "@babel/generator": "^7.22.5", "@babel/template": "^7.22.5", "@babel/types": "^7.22.5", "@jest/types": "^29.6.3", "@storybook/csf": "^0.1.11", "@swc/core": "^1.5.22", "@swc/jest": "^0.2.23", "expect-playwright": "^0.8.0", "jest": "^29.6.4", "jest-circus": "^29.6.4", "jest-environment-node": "^29.6.4", "jest-junit": "^16.0.0", "jest-playwright-preset": "^4.0.0", "jest-runner": "^29.6.4", "jest-serializer-html": "^7.1.0", "jest-watch-typeahead": "^2.0.0", "nyc": "^15.1.0", "playwright": "^1.14.0" }, "peerDependencies": { "storybook": "^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0" }, "bin": { "test-storybook": "dist/test-storybook.js" } }, "sha512-tsorR0IVYElcaTZrT/ZrH/8YDw7c+wrLDN0e3qj1WdbqU8l2IU4+a32HLXaakzdDpuTn+d8xCk4VZMlzMrmToA=="],
+    "@storybook/test-runner": ["@storybook/test-runner@0.22.0", "", { "dependencies": { "@babel/core": "^7.22.5", "@babel/generator": "^7.22.5", "@babel/template": "^7.22.5", "@babel/types": "^7.22.5", "@jest/types": "^29.6.3", "@storybook/csf": "^0.1.11", "@swc/core": "^1.5.22", "@swc/jest": "^0.2.23", "expect-playwright": "^0.8.0", "jest": "^29.6.4", "jest-circus": "^29.6.4", "jest-environment-node": "^29.6.4", "jest-junit": "^16.0.0", "jest-playwright-preset": "^4.0.0", "jest-runner": "^29.6.4", "jest-serializer-html": "^7.1.0", "jest-watch-typeahead": "^2.0.0", "nyc": "^15.1.0", "playwright": "^1.14.0" }, "peerDependencies": { "storybook": "^0.0.0-0 || ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0 || ^9.0.0-0" }, "bin": { "test-storybook": "dist/test-storybook.js" } }, "sha512-fKY6MTE/bcvMaulKXy+z0fPmRXJx1REkYMOMcGn8zn6uffyBigGgaVf/sZ+AZfibwvjzg/StWhJ9HvAM8pc14g=="],
 
     "@storybook/theming": ["@storybook/theming@8.6.4", "", { "peerDependencies": { "storybook": "^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0" } }, "sha512-g9Ns4uenC9oAWETaJ/tEKEIPMdS+CqjNWZz5Wbw1bLNhXwADZgKrVqawzZi64+bYYtQ+i8VCTjPoFa6s2eHiDQ=="],
 
