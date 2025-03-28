@@ -7,7 +7,7 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    group:
+    groups:
       storybook:
         patterns:
           - "storybook"
