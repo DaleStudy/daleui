@@ -6,7 +6,7 @@ updates:
       separator: "-"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     groups:
       storybook:
         patterns:
@@ -18,4 +18,4 @@ updates:
       separator: "-"
     directory: "/.github/workflows"
     schedule:
-      interval: "daily"
+      interval: "weekly"
