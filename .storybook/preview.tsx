@@ -1,6 +1,10 @@
 import "../src/index.css";
+import React from "react";
 import { withThemeByClassName } from "@storybook/addon-themes";
+import { DocsContainer } from "@storybook/blocks";
+import { themes } from "@storybook/theming";
 import type { Preview, ReactRenderer } from "@storybook/react";
+import type { DocsContainerProps } from "@storybook/blocks";
 
 const preview: Preview = {
   parameters: {
@@ -12,6 +16,14 @@ const preview: Preview = {
     },
     docs: {
       toc: true,
+      container: (props: DocsContainerProps<ReactRenderer>) => {
+        const { getStoryContext, storyById } = props.context;
+
+        const globals = getStoryContext(storyById()).globals;
+        const theme = globals.theme === "dark" ? themes.dark : themes.light;
+
+        return <DocsContainer {...props} theme={theme} />;
+      },
     },
   },
   decorators: [
