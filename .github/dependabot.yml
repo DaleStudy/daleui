@@ -6,16 +6,22 @@ updates:
       separator: "-"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     groups:
       storybook:
         patterns:
           - "storybook"
           - "@storybook/*"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
 
   - package-ecosystem: "github-actions"
     pull-request-branch-name:
       separator: "-"
     directory: "/.github/workflows"
     schedule:
-      interval: "daily"
+      interval: "weekly"
