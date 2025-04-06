@@ -15,4 +15,6 @@ interface LinkWithoutChildren extends AnchorHTMLAttributes<HTMLAnchorElement> {
   underline?: boolean;
 }
 
-export type LinkProps = PropsWithChildren<LinkWithoutChildren>;
+export const Link = ({ children }: PropsWithChildren<LinkWithoutChildren>) => {
+  return <>{children}</>;
+};
