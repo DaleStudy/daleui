@@ -6,7 +6,7 @@
       "dependencies": {
         "@radix-ui/react-checkbox": "^1.1.4",
         "axe-playwright": "^2.0.3",
-        "chromatic": "^11.25.1",
+        "chromatic": "^11.28.0",
         "lucide-react": "^0.486.0",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
@@ -696,7 +696,7 @@
 
     "chokidar": ["chokidar@4.0.3", "", { "dependencies": { "readdirp": "^4.0.1" } }, "sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA=="],
 
-    "chromatic": ["chromatic@11.27.0", "", { "peerDependencies": { "@chromatic-com/cypress": "^0.*.* || ^1.0.0", "@chromatic-com/playwright": "^0.*.* || ^1.0.0" }, "optionalPeers": ["@chromatic-com/cypress", "@chromatic-com/playwright"], "bin": { "chroma": "dist/bin.js", "chromatic": "dist/bin.js", "chromatic-cli": "dist/bin.js" } }, "sha512-jQ2ufjS+ePpg+NtcPI9B2eOi+pAzlRd2nhd1LgNMsVCC9Bzf5t8mJtyd8v2AUuJS0LdX0QVBgkOnlNv9xviHzA=="],
+    "chromatic": ["chromatic@11.28.0", "", { "peerDependencies": { "@chromatic-com/cypress": "^0.*.* || ^1.0.0", "@chromatic-com/playwright": "^0.*.* || ^1.0.0" }, "optionalPeers": ["@chromatic-com/cypress", "@chromatic-com/playwright"], "bin": { "chroma": "dist/bin.js", "chromatic": "dist/bin.js", "chromatic-cli": "dist/bin.js" } }, "sha512-Xy3907MXY5UP7LoMksmsT02xCUsoLZpcC6sRITjd+KiXBteOxPF7J+QsFqy/VzQCEN6fpt/R2bOIpE+PwPfcZA=="],
 
     "ci-info": ["ci-info@3.9.0", "", {}, "sha512-NIxF55hv4nSqQswkAeiOi1r83xy8JldOFDTWiug55KBu9Jnblncd2U6ViHmYgHf01TPZS77NJBhBMKdWj9HQMQ=="],
 
@@ -1623,6 +1623,8 @@
     "@babel/helper-compilation-targets/browserslist": ["browserslist@4.24.4", "", { "dependencies": { "caniuse-lite": "^1.0.30001688", "electron-to-chromium": "^1.5.73", "node-releases": "^2.0.19", "update-browserslist-db": "^1.1.1" }, "bin": { "browserslist": "cli.js" } }, "sha512-KDi1Ny1gSePi1vm0q4oxSF8b4DR44GF4BbmS2YdhPLOEqd8pDviZOGH/GsmRwoWJ2+5Lr085X7naowMwKHDG1A=="],
 
     "@babel/traverse/globals": ["globals@11.12.0", "", {}, "sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA=="],
+
+    "@chromatic-com/storybook/chromatic": ["chromatic@11.27.0", "", { "peerDependencies": { "@chromatic-com/cypress": "^0.*.* || ^1.0.0", "@chromatic-com/playwright": "^0.*.* || ^1.0.0" }, "optionalPeers": ["@chromatic-com/cypress", "@chromatic-com/playwright"], "bin": { "chroma": "dist/bin.js", "chromatic": "dist/bin.js", "chromatic-cli": "dist/bin.js" } }, "sha512-jQ2ufjS+ePpg+NtcPI9B2eOi+pAzlRd2nhd1LgNMsVCC9Bzf5t8mJtyd8v2AUuJS0LdX0QVBgkOnlNv9xviHzA=="],
 
     "@eslint-community/eslint-utils/eslint-visitor-keys": ["eslint-visitor-keys@3.4.3", "", {}, "sha512-wpc+LXeiyiisxPlEkUzU6svyS1frIO3Mgxj1fdy7Pm8Ygzguax2N3Fa/D/ag1WqbOprdI+uY6wMUl8/a2G+iag=="],
 

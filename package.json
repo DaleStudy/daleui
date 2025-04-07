@@ -27,7 +27,7 @@
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.1.4",
     "axe-playwright": "^2.0.3",
-    "chromatic": "^11.25.1",
+    "chromatic": "^11.28.0",
     "lucide-react": "^0.486.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
