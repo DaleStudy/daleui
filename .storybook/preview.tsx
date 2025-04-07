@@ -17,12 +17,15 @@ const preview: Preview = {
     docs: {
       toc: true,
       container: (props: DocsContainerProps<ReactRenderer>) => {
-        const { getStoryContext, storyById } = props.context;
+        try {
+          const { getStoryContext, storyById } = props.context;
 
-        const globals = getStoryContext(storyById()).globals;
-        const theme = globals.theme === "dark" ? themes.dark : themes.light;
-
-        return <DocsContainer {...props} theme={theme} />;
+          const globals = getStoryContext(storyById()).globals;
+          const theme = globals.theme === "dark" ? themes.dark : themes.light;
+          return <DocsContainer {...props} theme={theme} />;
+        } catch {
+          return <DocsContainer {...props} />;
+        }
       },
     },
   },
