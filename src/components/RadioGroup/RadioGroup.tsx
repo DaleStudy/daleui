@@ -62,7 +62,7 @@ export interface RadioGroupProps {
 }
 
 // eslint-disable-next-line no-empty-pattern
-export const RadioGroup = ({}: RadioGroupProps) => {
+export function RadioGroup({}: RadioGroupProps) {
   // TODO: RadioGroup 컴포넌트 구현
   return null;
-};
+}
