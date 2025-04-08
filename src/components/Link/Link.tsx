@@ -2,7 +2,7 @@ import type { AnchorHTMLAttributes, PropsWithChildren } from "react";
 import type { Tone } from "../../tokens/colors";
 import type { FontSize, FontWeight } from "../../tokens/typography";
 
-interface LinkWithoutChildren extends AnchorHTMLAttributes<HTMLAnchorElement> {
+interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /** 색조 */
   tone?: Tone;
   /** 크기 */
@@ -15,6 +15,6 @@ interface LinkWithoutChildren extends AnchorHTMLAttributes<HTMLAnchorElement> {
   underline?: boolean;
 }
 
-export const Link = ({ children }: PropsWithChildren<LinkWithoutChildren>) => {
+export function Link({ children }: PropsWithChildren<LinkProps>) {
   return <>{children}</>;
-};
+}
