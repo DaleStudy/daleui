@@ -1,8 +1,8 @@
 import logo from "/logo.svg";
 import { css } from "../styled-system/css";
-import { Button } from "./components/Button";
-import { Heading } from "./components/Heading";
-import { Text } from "./components/Text";
+import { Button } from "./components/Button/Button";
+import { Heading } from "./components/Heading/Heading";
+import { Text } from "./components/Text/Text";
 
 function App() {
   return (
