@@ -29,3 +29,5 @@ test.todo("orientation이 'horizontal'일 때 라디오 버튼이 가로로 배�
 test.todo("orientation이 'vertical'일 때 라디오 버튼이 세로로 배열됨");
 
 test.todo("키보드 방향키로 옵션 간 이동이 가능함");
+
+test.todo("tone prop에 따라 올바른 색상이 적용됨");

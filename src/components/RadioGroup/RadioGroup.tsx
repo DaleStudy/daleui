@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { Tone } from "../../tokens/colors";
 
 export interface RadioGroupProps {
   /**
@@ -55,6 +56,9 @@ export interface RadioGroupProps {
    * @default undefined
    */
   orientation?: "horizontal" | "vertical";
+
+  /** 색조 */
+  tone?: Tone;
 }
 
 // eslint-disable-next-line no-empty-pattern
