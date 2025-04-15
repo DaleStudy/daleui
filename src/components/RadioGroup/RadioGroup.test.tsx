@@ -4,7 +4,6 @@ test.todo("RadioGroup이 올바르게 자식 요소와 함께 렌더링됨");
 test.todo(
   "RadioGroup.Item이 RadioGroup.Root 외부에서 사용될 경우 에러가 발생함"
 );
-test.todo("최소 1개의 RadioGroup.Item이 필요함");
 test.todo("RadioGroup.Root의 name 속성이 올바르게 설정됨");
 
 test.todo("RadioGroup.Item의 value가 올바르게 동작함");
