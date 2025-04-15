@@ -15,9 +15,8 @@ interface RadioGroupProps {
 
   /**
    * 라디오 그룹의 레이블: 라디오 그룹에 대한 설명을 제공합니다.
-   * @default undefined
    */
-  label?: string;
+  label: string;
 
   /**
    * 기본 선택값: 컴포넌트 초기 렌더링 시 선택될 값을 지정합니다.
