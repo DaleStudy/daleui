@@ -10,6 +10,18 @@ import { css, cva } from "../../../styled-system/css";
 import { flex } from "../../../styled-system/patterns";
 import type { Tone } from "../../tokens/colors";
 
+const RadioGroupContext = createContext<{
+  name: string;
+  selectedValue?: string;
+  onChange: (value: string) => void;
+  disabled?: boolean;
+  tone?: Tone;
+  required?: boolean;
+}>({
+  name: "",
+  onChange: () => {},
+});
+
 interface RadioGroupProps {
   /**
    * RadioGroup의 자식 요소들
@@ -68,148 +80,6 @@ interface RadioGroupProps {
   tone?: Tone;
 }
 
-const RadioGroupContext = createContext<{
-  name: string;
-  selectedValue?: string;
-  onChange: (value: string) => void;
-  disabled?: boolean;
-  tone?: Tone;
-  required?: boolean;
-}>({
-  name: "",
-  onChange: () => {},
-});
-
-const radioGroupStyles = cva({
-  base: {
-    display: "flex",
-    gap: "var(--spacing-gap-sm)",
-  },
-  variants: {
-    orientation: {
-      horizontal: {
-        flexDirection: "row",
-      },
-      vertical: {
-        flexDirection: "column",
-      },
-    },
-  },
-  defaultVariants: {
-    orientation: "vertical",
-  },
-});
-
-const radioItemStyles = cva({
-  base: {
-    backgroundColor: "white",
-    width: "20px",
-    height: "20px",
-    borderRadius: "50%",
-    border: "2px solid",
-    borderColor: "gray",
-    position: "relative",
-    cursor: "pointer",
-    "&:hover": {
-      backgroundColor: "#f6f6f6",
-    },
-    "&:focus": {
-      outline: "none",
-      boxShadow: "0 0 0 2px rgba(0, 0, 0, 0.2)",
-    },
-    "&[data-state='checked']": {
-      borderColor: "black",
-    },
-    "&:disabled": {
-      opacity: 0.5,
-      cursor: "not-allowed",
-    },
-  },
-  variants: {
-    tone: {
-      neutral: {
-        borderColor: "border",
-        "&[data-state='checked']": {
-          borderColor: "border",
-        },
-        "&:focus": {
-          outlineColor: "border",
-        },
-      },
-      accent: {
-        borderColor: "border.accent",
-        "&[data-state='checked']": {
-          borderColor: "border.accent",
-        },
-        "&:focus": {
-          outlineColor: "border.accent",
-        },
-      },
-      danger: {
-        borderColor: "border.danger",
-        "&[data-state='checked']": {
-          borderColor: "border.danger",
-        },
-        "&:focus": {
-          outlineColor: "border.danger",
-        },
-      },
-      warning: {
-        borderColor: "border.warning",
-        "&[data-state='checked']": {
-          borderColor: "border.warning",
-        },
-        "&:focus": {
-          outlineColor: "border.warning",
-        },
-      },
-    },
-  },
-});
-
-const radioIndicatorStyles = cva({
-  base: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: "100%",
-    position: "relative",
-    "&::after": {
-      content: '""',
-      display: "block",
-      width: "10px",
-      height: "10px",
-      borderRadius: "50%",
-      backgroundColor: "text",
-    },
-  },
-  variants: {
-    tone: {
-      neutral: {
-        "&::after": {
-          backgroundColor: "text",
-        },
-      },
-      accent: {
-        "&::after": {
-          backgroundColor: "text.accent",
-        },
-      },
-      danger: {
-        "&::after": {
-          backgroundColor: "text.danger",
-        },
-      },
-      warning: {
-        "&::after": {
-          backgroundColor: "text.warning",
-        },
-      },
-    },
-  },
-});
-
 export function RadioGroup({
   children,
   name,
@@ -219,7 +89,7 @@ export function RadioGroup({
   onChange,
   disabled,
   required,
-  orientation = "vertical",
+  orientation,
   tone,
 }: RadioGroupProps) {
   // 내부 상태 관리 (controlled/uncontrolled 모두 지원)
@@ -259,8 +129,8 @@ export function RadioGroup({
       <div
         id={`${name}-label`}
         className={css({
-          fontWeight: "var(--font-weights-medium)",
-          marginBottom: "var(--spacing-2)",
+          fontWeight: "medium",
+          marginBottom: "0.5rem",
         })}
       >
         {label}
@@ -271,6 +141,26 @@ export function RadioGroup({
     </div>
   );
 }
+
+const radioGroupStyles = cva({
+  base: {
+    display: "flex",
+    gap: "0.5rem",
+  },
+  variants: {
+    orientation: {
+      horizontal: {
+        flexDirection: "row",
+      },
+      vertical: {
+        flexDirection: "column",
+      },
+    },
+  },
+  defaultVariants: {
+    orientation: "vertical",
+  },
+});
 
 interface RadioProps {
   /**
@@ -291,6 +181,12 @@ interface RadioProps {
 }
 
 export function Radio({ value, children, disabled }: RadioProps) {
+  const context = useContext(RadioGroupContext);
+
+  if (!context.name) {
+    throw new Error("Radio 컴포넌트는 RadioGroup 내부에서만 사용해야 합니다.");
+  }
+
   const {
     name,
     selectedValue,
@@ -298,25 +194,21 @@ export function Radio({ value, children, disabled }: RadioProps) {
     disabled: groupDisabled,
     tone,
     required,
-  } = useContext(RadioGroupContext);
+  } = context;
 
   const isDisabled = disabled || groupDisabled;
   const isChecked = selectedValue === value;
-
-  if (!name) {
-    throw new Error("Radio must be used within a RadioGroup");
-  }
 
   return (
     <label
       className={flex({
         alignItems: "center",
-        gap: "var(--spacing-2)",
+        gap: "0.5rem",
         cursor: isDisabled ? "not-allowed" : "pointer",
         opacity: isDisabled ? 0.5 : 1,
       })}
     >
-      <div className={radioItemStyles({ tone })}>
+      <div className={radioWrapperStyles}>
         <input
           type="radio"
           name={name}
@@ -324,21 +216,150 @@ export function Radio({ value, children, disabled }: RadioProps) {
           checked={isChecked}
           onChange={() => onChange(value)}
           disabled={isDisabled}
-          id={`${name}-${value}`}
           required={required}
           aria-required={required}
-          className={css({
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            opacity: 0,
-            margin: 0,
-            cursor: isDisabled ? "not-allowed" : "pointer",
-          })}
+          className={radioInputStyles}
         />
-        {isChecked && <div className={radioIndicatorStyles({ tone })} />}
+        <div className={radioCircleStyles({ tone })} />
+        {isChecked && <div className={radioDotStyles({ tone })} />}
       </div>
       {children && <span>{children}</span>}
     </label>
   );
 }
+
+const radioWrapperStyles = css({
+  position: "relative",
+  width: "1.25rem",
+  height: "1.25rem",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+});
+
+const radioInputStyles = css({
+  position: "absolute",
+  width: "100%",
+  height: "100%",
+  opacity: 0,
+  margin: 0,
+  zIndex: 1,
+  cursor: "inherit",
+
+  "&:focus-visible + div": {
+    outline: "2px solid",
+    outlineColor: "rgba(0, 0, 0, 0.2)",
+    outlineOffset: "2px",
+  },
+
+  "&:checked + div": {
+    borderColor: "border",
+  },
+
+  "&:disabled + div": {
+    opacity: 0.5,
+    cursor: "not-allowed",
+  },
+});
+
+const radioCircleStyles = cva({
+  base: {
+    backgroundColor: "bg",
+    width: "1.25rem",
+    height: "1.25rem",
+    borderRadius: "50%",
+    border: "2px solid",
+    borderColor: "border",
+    position: "absolute",
+    pointerEvents: "none",
+    transition: "0.2s",
+
+    "input:hover + &": {
+      backgroundColor: "bg.hover",
+    },
+  },
+  variants: {
+    tone: {
+      neutral: {
+        borderColor: "border",
+        "input:checked + &": {
+          borderColor: "border",
+        },
+        "input:focus-visible + &": {
+          outlineColor: "border",
+        },
+      },
+      accent: {
+        borderColor: "border.accent",
+        "input:checked + &": {
+          borderColor: "border.accent",
+        },
+        "input:focus-visible + &": {
+          outlineColor: "border.accent",
+        },
+      },
+      danger: {
+        borderColor: "border.danger",
+        "input:checked + &": {
+          borderColor: "border.danger",
+        },
+        "input:focus-visible + &": {
+          outlineColor: "border.danger",
+        },
+      },
+      warning: {
+        borderColor: "border.warning",
+        "input:checked + &": {
+          borderColor: "border.warning",
+        },
+        "input:focus-visible + &": {
+          outlineColor: "border.warning",
+        },
+      },
+    },
+  },
+});
+
+const radioDotStyles = cva({
+  base: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
+    position: "relative",
+    pointerEvents: "none",
+    "&::after": {
+      content: '""',
+      display: "block",
+      width: "0.625rem",
+      height: "0.625rem",
+      borderRadius: "50%",
+      backgroundColor: "text",
+    },
+  },
+  variants: {
+    tone: {
+      neutral: {
+        "&::after": {
+          backgroundColor: "text",
+        },
+      },
+      accent: {
+        "&::after": {
+          backgroundColor: "text.accent",
+        },
+      },
+      danger: {
+        "&::after": {
+          backgroundColor: "text.danger",
+        },
+      },
+      warning: {
+        "&::after": {
+          backgroundColor: "text.warning",
+        },
+      },
+    },
+  },
+});
