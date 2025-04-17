@@ -25,7 +25,7 @@
     "prepare": "panda codegen"
   },
   "dependencies": {
-    "@radix-ui/react-checkbox": "^1.1.4",
+    "@radix-ui/react-checkbox": "^1.1.5",
     "axe-playwright": "^2.0.3",
     "chromatic": "^11.28.0",
     "lucide-react": "^0.488.0",
