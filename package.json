@@ -38,6 +38,7 @@
     "@faker-js/faker": "^9.4.0",
     "@pandacss/dev": "^0.53.3",
     "@storybook/addon-a11y": "^8.6.12",
+    "@storybook/addon-designs": "^8.2.1",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-interactions": "^8.6.12",
     "@storybook/addon-links": "^8.6.12",
