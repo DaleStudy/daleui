@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { vstack } from "../../../styled-system/patterns";
 import { Link } from "./Link";
+import { Icon } from "../Icon/Icon";
+import { Text } from "../Text/Text";
 
 export default {
   component: Link,
@@ -9,7 +11,8 @@ export default {
   },
   args: {
     children: "링크",
-    href: "https://www.daleui.com",
+    href: "#",
+    onClick: (e: React.MouseEvent) => e.preventDefault(),
   },
 } satisfies Meta<typeof Link>;
 
@@ -166,5 +169,43 @@ export const Security: StoryObj<typeof Link> = {
     target: {
       control: false,
     },
+  },
+};
+
+export const Mismatch: StoryObj<typeof Link> = {
+  render: (args) => {
+    return (
+      <div className={vstack({ gap: "gap.md" })}>
+        <Link tone="accent" underline>
+          <Text tone="danger">나의 밑줄은 무슨 색일까? 🤔</Text>
+        </Link>
+        <Link size="sm" tone="accent" {...args}>
+          <Icon name="clock" size="xl" tone="danger" />
+          링크 아이콘
+        </Link>
+        <Link tone="danger"></Link>
+      </div>
+    );
+  },
+};
+
+export const WithIcon: StoryObj<typeof Link> = {
+  render: (args) => {
+    return (
+      <Link {...args} target="_blank">
+        <Icon name="chevronRight" />
+        링크 아이콘
+      </Link>
+    );
+  },
+};
+
+export const Inline: StoryObj<typeof Link> = {
+  render: (args) => {
+    return (
+      <p>
+        이 문장에는 <Link {...args}>링크</Link>가 포함되어 있습니다.
+      </p>
+    );
   },
 };

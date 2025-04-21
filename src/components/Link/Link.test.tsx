@@ -1,16 +1,15 @@
 import { faker } from "@faker-js/faker";
 import { composeStories } from "@storybook/react";
-import { render, screen } from "@testing-library/react";
-import { expect, test } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { expect, test, vi } from "vitest";
 import { fontSizes, fontWeights } from "../../tokens/typography";
 import * as stories from "./Link.stories";
-import { Icon } from "../Icon/Icon";
 
-const { Basic, Tones, Contrasts, Underlines, Security } =
+const { Basic, Tones, Contrasts, Underlines, Security, WithIcon } =
   composeStories(stories);
 
 test("renders the link with the correct text content", () => {
-  render(<Basic>링크</Basic>);
+  render(<Basic />);
   expect(screen.getByRole("link")).toHaveTextContent("링크");
 });
 
@@ -71,14 +70,10 @@ test("applies the correct underline styles", () => {
 });
 
 test("forwards additional anchor props like 'href' and 'target'", () => {
-  const href = "https://www.daleui.com";
+  const href = faker.internet.url({ appendSlash: true });
   const target = "_self";
 
-  render(
-    <Basic href={href} target={target}>
-      링크
-    </Basic>
-  );
+  render(<Basic href={href} target={target} />);
 
   const link = screen.getByRole("link");
   expect(link).toHaveAttribute("href", href);
@@ -98,14 +93,61 @@ test("adds rel='noopener noreferrer' when target is '_blank'", () => {
 });
 
 test("can be used with Icon component", () => {
-  render(
-    <Basic>
-      <Icon name="chevronRight" />
-      링크
-    </Basic>
-  );
+  render(<WithIcon />);
 
   const link = screen.getByRole("link");
   expect(link).toHaveTextContent("링크");
   expect(link.querySelector("svg")).toBeInTheDocument();
+});
+
+test("navigates to the correct URL when clicked", () => {
+  const href = faker.internet.url({ appendSlash: true });
+  render(<Basic href={href} onClick={undefined} />);
+
+  const link = screen.getByRole("link");
+  expect(link).toHaveAttribute("href", href);
+  fireEvent.click(link);
+
+  expect(window.location.href).toBe(href);
+});
+
+test("handles click events correctly", () => {
+  const handleClick = vi.fn();
+  render(<Basic href="#" onClick={handleClick} />);
+
+  const link = screen.getByRole("link");
+  fireEvent.click(link);
+
+  expect(handleClick).toHaveBeenCalledTimes(1);
+});
+
+test("link is keyboard focusable", () => {
+  const href = faker.internet.url({ appendSlash: true });
+  render(<Basic href={href} />);
+
+  const link = screen.getByRole("link");
+  link.focus();
+  expect(link).toHaveFocus();
+});
+
+test("navigates when link is clicked with keyboard", () => {
+  const href = faker.internet.url({ appendSlash: true });
+  render(<Basic href={href} onClick={undefined} />);
+
+  const link = screen.getByRole("link");
+  link.focus();
+  fireEvent.keyDown(link, { key: "Enter" });
+
+  expect(window.location.href).toBe(href);
+});
+
+test("handles click events correctly when link is clicked with keyboard", () => {
+  const handleClick = vi.fn();
+  render(<Basic href="#" onClick={handleClick} />);
+
+  const link = screen.getByRole("link");
+  link.focus();
+  fireEvent.keyDown(link, { key: "Enter" });
+
+  expect(handleClick).toHaveBeenCalledTimes(1);
 });

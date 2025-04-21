@@ -1,4 +1,4 @@
-import type { AnchorHTMLAttributes, PropsWithChildren } from "react";
+import { type AnchorHTMLAttributes, type PropsWithChildren } from "react";
 import type { Tone } from "../../tokens/colors";
 import { css, cva } from "../../../styled-system/css";
 import type { FontSize, FontWeight } from "../../tokens/typography";
@@ -17,23 +17,38 @@ interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 
 /**
- * - `underline` 속성으로 밑줄 표시 여부를 설정할 수 있습니다.
+ * - `underline` 속성으로 밑줄 표시 여부를 설정할 수 있습니다. 기본값은 `true`입니다.
  * - `target="_blank"`를 사용할 때는 자동으로 보안 속성이 추가됩니다.
- * - `tone` 속성을 통해서 링크의 색상을 변경할 수 있습니다.
+ * - `tone` 속성을 통해서 링크의 색상을 변경할 수 있습니다. 기본값은 `neutral`입니다.
  * - `size` 속성과 `weight` 속성을 통해서 텍스트 스타일을 변경할 수 있습니다.
- * - `muted` 속성을 주시면 글자색이 옅어집니다. 명암비가 낮아지므로 접근성 측면에서 주의해서 사용하세요.
+ * - `muted` 속성을 주시면 글자색이 옅어집니다. 명암비가 낮아지므로 접근성 측면에서 주의해서 사용하세요. 기본값은 `false`입니다.
  */
 export function Link({
   children,
-  tone,
+  tone = "neutral",
   size,
   weight,
-  muted,
-  underline,
+  muted = false,
+  underline = true,
   target,
   rel,
+  onClick,
   ...props
 }: PropsWithChildren<LinkProps>) {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>) => {
+    if (e.key === "Enter" && props.href) {
+      if (onClick) {
+        onClick({} as React.MouseEvent<HTMLAnchorElement>);
+      } else {
+        window.location.href = props.href;
+      }
+    }
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (onClick) onClick(e);
+  };
+
   return (
     <a
       className={css(
@@ -45,6 +60,8 @@ export function Link({
       )}
       target={target}
       rel={target === "_blank" ? "noopener noreferrer" : rel}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
       {...props}
     >
       {children}
