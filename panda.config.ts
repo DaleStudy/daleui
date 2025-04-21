@@ -24,7 +24,7 @@ export default defineConfig({
   globalCss,
 
   globalVars: {
-    "--font-spoqa": "Spoqa Han Sans Neo",
+    "--font-pretendard": "Pretendard Variable",
   },
 
   staticCss: {
