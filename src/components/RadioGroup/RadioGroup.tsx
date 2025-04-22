@@ -144,7 +144,7 @@ export function RadioGroup({
         id={`${name}-label`}
         className={css({
           fontWeight: "medium",
-          marginBottom: "0.5rem",
+          marginBottom: "2",
         })}
       >
         {label}
@@ -159,7 +159,7 @@ export function RadioGroup({
 const radioGroupStyles = cva({
   base: {
     display: "flex",
-    gap: "0.5rem",
+    gap: "2",
   },
   variants: {
     orientation: {
@@ -217,7 +217,7 @@ export function Radio({ value, children, disabled }: RadioProps) {
     <label
       className={flex({
         alignItems: "center",
-        gap: "0.5rem",
+        gap: "2",
         cursor: isDisabled ? "not-allowed" : "pointer",
         opacity: isDisabled ? 0.5 : 1,
       })}
@@ -244,8 +244,8 @@ export function Radio({ value, children, disabled }: RadioProps) {
 
 const radioWrapperStyles = css({
   position: "relative",
-  width: "1.25rem",
-  height: "1.25rem",
+  width: "5",
+  height: "5",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -275,8 +275,8 @@ const radioInputStyles = css({
 const radioCircleStyles = cva({
   base: {
     backgroundColor: "bg",
-    width: "1.25rem",
-    height: "1.25rem",
+    width: "5",
+    height: "5",
     borderRadius: "50%",
     border: "2px solid",
     borderColor: "border",
@@ -341,8 +341,8 @@ const radioDotStyles = cva({
     "&::after": {
       content: '""',
       display: "block",
-      width: "0.625rem",
-      height: "0.625rem",
+      width: "2.5",
+      height: "2.5",
       borderRadius: "50%",
       backgroundColor: "text",
     },
