@@ -15,10 +15,11 @@ const RadioGroupContext = createContext<{
   selectedValue?: string;
   onChange: (value: string) => void;
   disabled?: boolean;
-  tone?: Tone;
+  tone: Tone;
   required?: boolean;
 }>({
   name: "",
+  tone: "neutral",
   onChange: () => {},
 });
 
@@ -76,6 +77,7 @@ interface RadioGroupProps {
 
   /**
    * 색상 강조를 지정합니다.
+   * @default "neutral"
    */
   tone?: Tone;
 }
@@ -102,7 +104,7 @@ export function RadioGroup({
   disabled,
   required,
   orientation,
-  tone,
+  tone = "neutral",
 }: RadioGroupProps) {
   // 내부 상태 관리 (controlled/uncontrolled 모두 지원)
   const [internalValue, setInternalValue] = useState(defaultValue);
@@ -264,10 +266,6 @@ const radioInputStyles = css({
     outlineOffset: "2px",
   },
 
-  "&:checked + div": {
-    borderColor: "border",
-  },
-
   "&:disabled + div": {
     opacity: 0.5,
     cursor: "not-allowed",
@@ -293,7 +291,6 @@ const radioCircleStyles = cva({
   variants: {
     tone: {
       neutral: {
-        borderColor: "border",
         "input:checked + &": {
           borderColor: "border",
         },
