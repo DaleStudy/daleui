@@ -24,62 +24,74 @@ const RadioGroupContext = createContext<{
 
 interface RadioGroupProps {
   /**
-   * RadioGroup의 자식 요소들
-   * Radio 컴포넌트를 포함해야 함
+   * RadioGroup의 자식 요소로 Radio 컴포넌트만 허용됩니다.
    */
   children: ReactNode;
 
   /**
-   * 폼 입력 이름: 동일한 그룹의 라디오 버튼들이 공유하는 이름
+   * 동일 그룹의 라디오 버튼들이 공유하는 이름입니다.
    */
   name: string;
 
   /**
-   * 라디오 그룹의 레이블: 라디오 그룹에 대한 설명
+   * 라디오 그룹을 설명하는 텍스트입니다.
    */
   label: string;
 
   /**
-   * 기본 선택값: 컴포넌트 초기 렌더링 시 선택될 값
+   * 컴포넌트가 처음 렌더링될 때 선택되는 값입니다.
    * @default undefined
    */
   defaultValue?: string;
 
   /**
-   * 현재 선택된 값: 외부에서 값을 직접 관리할 때 사용
+   * 외부에서 선택 값을 직접 제어할 때 사용합니다.
    * @default undefined
    */
   value?: string;
 
   /**
-   * 값 변경 핸들러: 사용자가 선택을 변경할 때 호출되는 콜백 함수
+   * 사용자가 선택을 변경할 때 호출되는 콜백입니다.
    * @default undefined
    */
   onChange?: (value: string) => void;
 
   /**
-   * 비활성화 여부: true이면 모든 라디오 버튼이 비활성화되어 상호작용을 차단
+   * true이면 모든 라디오 버튼이 비활성화되어 상호작용이 불가합니다.
    * @default false
    */
   disabled?: boolean;
 
   /**
-   * 필수 여부: true일 경우 사용자가 하나의 옵션을 반드시 선택해야 함
+   * true이면 반드시 하나의 옵션을 선택해야 합니다.
    * @default undefined
    */
   required?: boolean;
 
   /**
-   * 라디오 그룹의 배치 방향
-   * 'horizontal'은 가로 배열, 'vertical'은 세로 배열을 의미
+   * 라디오 버튼의 배치 방향입니다. 'horizontal'은 가로, 'vertical'은 세로입니다.
    * @default undefined
    */
   orientation?: "horizontal" | "vertical";
 
-  /** 색조 */
+  /**
+   * 색상 강조를 지정합니다.
+   */
   tone?: Tone;
 }
 
+/**
+ * - `children`에는 `Radio` 컴포넌트만 포함해야 합니다.
+ * - `name` 속성으로 동일 그룹의 라디오 버튼 이름을 지정할 수 있습니다.
+ * - `label` 속성으로 라디오 그룹의 설명을 지정할 수 있습니다.
+ * - `defaultValue` 속성으로 초기 선택 값을 지정할 수 있습니다.
+ * - `value` 속성으로 선택 값을 제어할 수 있습니다.
+ * - `onChange` 속성으로 선택 변경 시 콜백을 지정할 수 있습니다.
+ * - `disabled` 속성을 사용하여 모든 라디오 버튼을 비활성화할 수 있습니다.
+ * - `required` 속성을 사용하여 반드시 하나를 선택하도록 할 수 있습니다.
+ * - `orientation` 속성으로 'horizontal' 또는 'vertical' 방향을 지정할 수 있습니다.
+ * - `tone` 속성으로 색상을 지정할 수 있습니다.
+ */
 export function RadioGroup({
   children,
   name,
@@ -164,17 +176,17 @@ const radioGroupStyles = cva({
 
 interface RadioProps {
   /**
-   * 라디오 버튼의 값
+   * 이 라디오 버튼의 값입니다.
    */
   value: string;
 
   /**
-   * 라디오 버튼의 자식 요소
+   * 라벨 등 자식 요소를 표시합니다.
    */
   children?: ReactNode;
 
   /**
-   * 비활성화 여부: true이면 이 라디오 버튼이 비활성화됨
+   * true이면 이 라디오 버튼이 비활성화됩니다.
    * @default false
    */
   disabled?: boolean;
