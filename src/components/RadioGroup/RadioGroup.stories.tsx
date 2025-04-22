@@ -2,19 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { Radio, RadioGroup } from "./RadioGroup";
 
-const meta: Meta<typeof RadioGroup> = {
-  title: "Components/RadioGroup",
+export default {
   component: RadioGroup,
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
-};
-
-export default meta;
-type Story = StoryObj<typeof RadioGroup>;
-
-export const Default: Story = {
   args: {
     name: "fruits",
     label: "좋아하는 과일을 선택하세요",
@@ -26,32 +18,32 @@ export const Default: Story = {
       </>
     ),
   },
-};
+} satisfies Meta<typeof RadioGroup>;
+
+type Story = StoryObj<typeof RadioGroup>;
+
+export const Basic: Story = {};
 
 export const WithDefaultValue: Story = {
   args: {
-    ...Default.args,
     defaultValue: "banana",
   },
 };
 
 export const Horizontal: Story = {
   args: {
-    ...Default.args,
     orientation: "horizontal",
   },
 };
 
 export const GroupDisabled: Story = {
   args: {
-    ...Default.args,
     disabled: true,
   },
 };
 
 export const ItemDisabled: Story = {
   args: {
-    ...Default.args,
     children: (
       <>
         <Radio value="apple">사과</Radio>
