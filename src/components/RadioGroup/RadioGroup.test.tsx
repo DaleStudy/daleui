@@ -5,9 +5,6 @@ import { describe, expect, test, vi } from "vitest";
 import { Radio, RadioGroup } from "./RadioGroup";
 
 describe("RadioGroup", () => {
-  test.todo("tone 속성이 올바르게 적용됨", () => {});
-  test.todo("direction 속성이 올바르게 적용됨", () => {});
-
   test("RadioGroup이 올바르게 자식 요소와 함께 렌더링됨", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group">
