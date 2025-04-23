@@ -1,27 +1,13 @@
-import {
-  type ReactNode,
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
+import * as RadixRadioGroup from "@radix-ui/react-radio-group";
+import { type ReactNode, createContext, useContext } from "react";
 import { css, cva } from "../../../styled-system/css";
 import { flex } from "../../../styled-system/patterns";
 import type { Tone } from "../../tokens/colors";
 
 const RadioGroupContext = createContext<{
   name: string;
-  selectedValue?: string;
-  onChange: (value: string) => void;
-  disabled?: boolean;
   tone: Tone;
-  required?: boolean;
-}>({
-  name: "",
-  tone: "neutral",
-  onChange: () => {},
-});
+} | null>(null);
 
 interface RadioGroupProps {
   /**
@@ -106,40 +92,8 @@ export function RadioGroup({
   orientation,
   tone = "neutral",
 }: RadioGroupProps) {
-  // 내부 상태 관리 (controlled/uncontrolled 모두 지원)
-  const [internalValue, setInternalValue] = useState(defaultValue);
-
-  // 현재 선택된 값 (외부 제공값 우선)
-  const currentValue = value !== undefined ? value : internalValue;
-
-  // 값 변경 핸들러
-  const handleChange = useCallback(
-    (newValue: string) => {
-      // 내부 상태 업데이트 (uncontrolled 모드인 경우)
-      if (value === undefined) {
-        setInternalValue(newValue);
-      }
-
-      // 외부 onChange 핸들러 호출
-      onChange?.(newValue);
-    },
-    [onChange, value]
-  );
-
-  const contextValue = useMemo(
-    () => ({
-      name,
-      selectedValue: currentValue,
-      onChange: handleChange,
-      disabled,
-      tone,
-      required,
-    }),
-    [name, currentValue, handleChange, disabled, tone, required]
-  );
-
   return (
-    <div role="radiogroup" aria-labelledby={`${name}-label`}>
+    <div>
       <div
         id={`${name}-label`}
         className={css({
@@ -149,8 +103,20 @@ export function RadioGroup({
       >
         {label}
       </div>
-      <RadioGroupContext.Provider value={contextValue}>
-        <div className={radioGroupStyles({ orientation })}>{children}</div>
+      <RadioGroupContext.Provider value={{ name, tone }}>
+        <RadixRadioGroup.Root
+          name={name}
+          defaultValue={defaultValue}
+          value={value}
+          onValueChange={onChange}
+          disabled={disabled}
+          required={required}
+          aria-required={required}
+          aria-labelledby={`${name}-label`}
+          className={radioGroupStyles({ orientation })}
+        >
+          {children}
+        </RadixRadioGroup.Root>
       </RadioGroupContext.Provider>
     </div>
   );
@@ -192,50 +158,42 @@ interface RadioProps {
    * @default false
    */
   disabled?: boolean;
+
+  /**
+   * DOM 요소에 대한 ref입니다.
+   */
+  ref?: React.Ref<HTMLButtonElement>;
 }
 
-export function Radio({ value, children, disabled }: RadioProps) {
+export function Radio({ value, children, disabled, ref }: RadioProps) {
   const context = useContext(RadioGroupContext);
 
-  if (!context.name) {
+  if (!context) {
     throw new Error("Radio 컴포넌트는 RadioGroup 내부에서만 사용해야 합니다.");
   }
 
-  const {
-    name,
-    selectedValue,
-    onChange,
-    disabled: groupDisabled,
-    tone,
-    required,
-  } = context;
-
-  const isDisabled = disabled || groupDisabled;
-  const isChecked = selectedValue === value;
+  const { tone } = context;
 
   return (
     <label
       className={flex({
         alignItems: "center",
         gap: "2",
-        cursor: isDisabled ? "not-allowed" : "pointer",
-        opacity: isDisabled ? 0.5 : 1,
+        cursor: disabled ? "not-allowed" : "pointer",
+        opacity: disabled ? 0.5 : 1,
       })}
     >
       <div className={radioWrapperStyles}>
-        <input
-          type="radio"
-          name={name}
+        <RadixRadioGroup.Item
+          ref={ref}
           value={value}
-          checked={isChecked}
-          onChange={() => onChange(value)}
-          disabled={isDisabled}
-          required={required}
-          aria-required={required}
+          disabled={disabled}
           className={radioInputStyles}
-        />
+          id={`radio-${value}`}
+        >
+          <RadixRadioGroup.Indicator className={radioDotStyles({ tone })} />
+        </RadixRadioGroup.Item>
         <div className={radioCircleStyles({ tone })} />
-        {isChecked && <div className={radioDotStyles({ tone })} />}
       </div>
       {children && <span>{children}</span>}
     </label>
@@ -252,10 +210,10 @@ const radioWrapperStyles = css({
 });
 
 const radioInputStyles = css({
+  all: "unset",
   position: "absolute",
   width: "100%",
   height: "100%",
-  opacity: 0,
   margin: 0,
   zIndex: 1,
   cursor: "inherit",
@@ -291,37 +249,37 @@ const radioCircleStyles = cva({
   variants: {
     tone: {
       neutral: {
-        "input:checked + &": {
+        "[data-state='checked'] + &": {
           borderColor: "border",
         },
-        "input:focus-visible + &": {
+        "[data-state='checked']:focus-visible + &": {
           outlineColor: "border",
         },
       },
       accent: {
         borderColor: "border.accent",
-        "input:checked + &": {
+        "[data-state='checked'] + &": {
           borderColor: "border.accent",
         },
-        "input:focus-visible + &": {
+        "[data-state='checked']:focus-visible + &": {
           outlineColor: "border.accent",
         },
       },
       danger: {
         borderColor: "border.danger",
-        "input:checked + &": {
+        "[data-state='checked'] + &": {
           borderColor: "border.danger",
         },
-        "input:focus-visible + &": {
+        "[data-state='checked']:focus-visible + &": {
           outlineColor: "border.danger",
         },
       },
       warning: {
         borderColor: "border.warning",
-        "input:checked + &": {
+        "[data-state='checked'] + &": {
           borderColor: "border.warning",
         },
-        "input:focus-visible + &": {
+        "[data-state='checked']:focus-visible + &": {
           outlineColor: "border.warning",
         },
       },

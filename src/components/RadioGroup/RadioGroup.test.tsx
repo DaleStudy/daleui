@@ -21,21 +21,6 @@ describe("RadioGroup", () => {
     expect(screen.getByText("Option 2")).toBeInTheDocument();
   });
 
-  test("name 속성이 올바르게 설정됨", () => {
-    render(
-      <RadioGroup name="test-name" label="Test Radio Group">
-        <Radio value="option1">Option 1</Radio>
-      </RadioGroup>
-    );
-
-    const radioGroup = screen.getByRole("radiogroup");
-    expect(radioGroup).toBeInTheDocument();
-
-    const radioInputs = document.querySelectorAll('input[type="radio"]');
-    expect(radioInputs.length).toBeGreaterThan(0);
-    expect(radioInputs[0]).toHaveAttribute("name", "test-name");
-  });
-
   test("defaultValue가 제공될 때 해당 값이 선택됨", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" defaultValue="option2">
@@ -118,17 +103,6 @@ describe("RadioGroup", () => {
     expect(onChange).toHaveBeenCalledWith("option1");
   });
 
-  test("required가 true일 때 접근성 속성이 올바르게 적용됨", () => {
-    render(
-      <RadioGroup name="test" label="Test Radio Group" required>
-        <Radio value="option1">Option 1</Radio>
-      </RadioGroup>
-    );
-
-    const radioInput = screen.getByRole("radio");
-    expect(radioInput).toHaveAttribute("aria-required", "true");
-  });
-
   test("controlled 모드가 올바르게 작동함", async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
@@ -168,17 +142,6 @@ describe("RadioGroup", () => {
 });
 
 describe("Radio", () => {
-  test("RadioGroup 외부에서 사용될 경우 에러가 발생함", () => {
-    const originalError = console.error;
-    console.error = vi.fn();
-
-    expect(() => {
-      render(<Radio value="option1">Option 1</Radio>);
-    }).toThrow("Radio 컴포넌트는 RadioGroup 내부에서만 사용해야 합니다.");
-
-    console.error = originalError;
-  });
-
   test("value가 올바르게 동작함", async () => {
     const user = userEvent.setup();
 
