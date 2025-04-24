@@ -45,10 +45,6 @@ export function Link({
     }
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (onClick) onClick(e);
-  };
-
   return (
     <a
       className={css(
@@ -60,7 +56,7 @@ export function Link({
       )}
       target={target}
       rel={target === "_blank" ? "noopener noreferrer" : rel}
-      onClick={handleClick}
+      onClick={onClick}
       onKeyDown={handleKeyDown}
       {...props}
     >
