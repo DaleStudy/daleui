@@ -12,7 +12,6 @@ export default {
   args: {
     children: "링크",
     href: "#",
-    onClick: (e: React.MouseEvent) => e.preventDefault(),
   },
 } satisfies Meta<typeof Link>;
 
