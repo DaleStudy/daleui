@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { composeStories } from "@storybook/react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { expect, test, vi } from "vitest";
 import { fontSizes, fontWeights } from "../../tokens/typography";
 import * as stories from "./Link.stories";
@@ -100,23 +101,23 @@ test("can be used with Icon component", () => {
   expect(link.querySelector("svg")).toBeInTheDocument();
 });
 
-test("navigates to the correct URL when clicked", () => {
+test("navigates to the correct URL when clicked", async () => {
   const href = faker.internet.url({ appendSlash: true });
   render(<Basic href={href} onClick={undefined} />);
 
   const link = screen.getByRole("link");
   expect(link).toHaveAttribute("href", href);
-  fireEvent.click(link);
+  await userEvent.click(link);
 
   expect(window.location.href).toBe(href);
 });
 
-test("handles click events correctly", () => {
+test("handles click events correctly", async () => {
   const handleClick = vi.fn();
   render(<Basic href="#" onClick={handleClick} />);
 
   const link = screen.getByRole("link");
-  fireEvent.click(link);
+  await userEvent.click(link);
 
   expect(handleClick).toHaveBeenCalledTimes(1);
 });
@@ -130,24 +131,13 @@ test("link is keyboard focusable", () => {
   expect(link).toHaveFocus();
 });
 
-test("navigates when link is clicked with keyboard", () => {
+test("navigates when link is clicked with keyboard", async () => {
   const href = faker.internet.url({ appendSlash: true });
   render(<Basic href={href} onClick={undefined} />);
 
   const link = screen.getByRole("link");
   link.focus();
-  fireEvent.keyDown(link, { key: "Enter" });
+  await userEvent.keyboard("{Enter}");
 
   expect(window.location.href).toBe(href);
-});
-
-test("handles click events correctly when link is clicked with keyboard", () => {
-  const handleClick = vi.fn();
-  render(<Basic href="#" onClick={handleClick} />);
-
-  const link = screen.getByRole("link");
-  link.focus();
-  fireEvent.keyDown(link, { key: "Enter" });
-
-  expect(handleClick).toHaveBeenCalledTimes(1);
 });

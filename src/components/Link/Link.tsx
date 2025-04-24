@@ -32,19 +32,8 @@ export function Link({
   underline = true,
   target,
   rel,
-  onClick,
   ...props
 }: PropsWithChildren<LinkProps>) {
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>) => {
-    if (e.key === "Enter" && props.href) {
-      if (onClick) {
-        onClick({} as React.MouseEvent<HTMLAnchorElement>);
-      } else {
-        window.location.href = props.href;
-      }
-    }
-  };
-
   return (
     <a
       className={css(
@@ -56,8 +45,6 @@ export function Link({
       )}
       target={target}
       rel={target === "_blank" ? "noopener noreferrer" : rel}
-      onClick={onClick}
-      onKeyDown={handleKeyDown}
       {...props}
     >
       {children}
