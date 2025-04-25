@@ -6,6 +6,11 @@ export default {
   component: Button,
   parameters: {
     layout: "centered",
+    design: {
+      type: "figma",
+      // TODO: 임시 url이므로 button 컴포넌트가 완성되면 교체해줄 것
+      url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/NoName-Design-System?node-id=11-343",
+    },
   },
   args: {
     children: "시작하기",
