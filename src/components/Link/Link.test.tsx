@@ -133,8 +133,9 @@ describe("behavior test", () => {
     const href = faker.internet.url({ appendSlash: true });
     render(<Basic href={href} />);
 
-    const link = screen.getByRole("link");
     await userEvent.tab();
+    const link = screen.getByRole("link");
+
     expect(link).toHaveFocus();
   });
 
