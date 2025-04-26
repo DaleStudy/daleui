@@ -2,7 +2,7 @@ import { defineGlobalStyles } from "@pandacss/dev";
 
 export const globalCss = defineGlobalStyles({
   ":root": {
-    "--global-font-body": "var(--fonts-pretendard)",
+    "--global-font-body": "var(--fonts-sans)",
     backgroundColor: "var(--colors-base)",
   },
   h1: {
