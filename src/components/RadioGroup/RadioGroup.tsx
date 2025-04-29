@@ -182,7 +182,6 @@ export function Radio({ value, children, disabled, ref }: RadioProps) {
         alignItems: "center",
         gap: "2",
         cursor: disabled ? "not-allowed" : "pointer",
-        opacity: disabled ? 0.5 : 1,
       })}
     >
       <div className={radioWrapperStyles}>
@@ -195,9 +194,11 @@ export function Radio({ value, children, disabled, ref }: RadioProps) {
         >
           <RadixRadioGroup.Indicator className={radioDotStyles({ tone })} />
         </RadixRadioGroup.Item>
-        <div className={radioCircleStyles({ tone })} />
+        <div className={radioCircleStyles({ tone, disabled })} />
       </div>
-      {children && <span>{children}</span>}
+      {children && (
+        <span className={labelTextStyles({ disabled })}>{children}</span>
+      )}
     </label>
   );
 }
@@ -227,7 +228,6 @@ const radioInputStyles = css({
   },
 
   "&:disabled + div": {
-    opacity: 0.5,
     cursor: "not-allowed",
   },
 });
@@ -284,6 +284,22 @@ const radioCircleStyles = cva({
         "[data-state='checked']:focus-visible + &": {
           outlineColor: "border.warning",
         },
+      },
+    },
+    disabled: {
+      true: {
+        opacity: 0.5,
+      },
+    },
+  },
+});
+
+const labelTextStyles = cva({
+  base: {},
+  variants: {
+    disabled: {
+      true: {
+        color: "text.muted",
       },
     },
   },
