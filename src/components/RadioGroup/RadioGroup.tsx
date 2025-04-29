@@ -68,16 +68,19 @@ interface RadioGroupProps {
 }
 
 /**
- * - `children`에는 `Radio` 컴포넌트만 포함해야 합니다.
- * - `name` 속성으로 동일 그룹의 라디오 버튼 이름을 지정할 수 있습니다.
- * - `label` 속성으로 라디오 그룹의 설명을 지정할 수 있습니다.
- * - `defaultValue` 속성으로 초기 선택 값을 지정할 수 있습니다.
- * - `value` 속성으로 선택 값을 제어할 수 있습니다.
- * - `onChange` 속성으로 선택 변경 시 콜백을 지정할 수 있습니다.
- * - `disabled` 속성을 사용하여 모든 라디오 버튼을 비활성화할 수 있습니다.
- * - `required` 속성을 사용하여 반드시 하나를 선택하도록 할 수 있습니다.
- * - `orientation` 속성으로 'horizontal' 또는 'vertical' 방향을 지정할 수 있습니다.
- * - `tone` 속성으로 색상을 지정할 수 있습니다.
+ * 라디오 버튼 그룹 컴포넌트입니다.
+ *
+ * 사용자가 제한된 선택지 중 하나만 선택해야 할 때 사용합니다.
+ * 특히 선택지가 2-5개로 적고 모든 옵션을 한눈에 보여주어야 할 때 적합합니다.
+ *
+ * 선택지가 많은 경우(6개 이상)에는 대신 `<Select/>` 컴포넌트 사용을 권장합니다.
+ *
+ * @example
+ * <RadioGroup name="fruits" label="좋아하는 과일을 선택하세요">
+ *   <Radio value="apple">사과</Radio>
+ *   <Radio value="banana">바나나</Radio>
+ *   <Radio value="orange">오렌지</Radio>
+ * </RadioGroup>
  */
 export function RadioGroup({
   children,
@@ -143,7 +146,7 @@ const radioGroupStyles = cva({
 
 interface RadioProps {
   /**
-   * 이 라디오 버튼의 값입니다.
+   * 라디오 버튼의 값입니다.
    */
   value: string;
 
