@@ -5,7 +5,6 @@ import { flex } from "../../../styled-system/patterns";
 import type { Tone } from "../../tokens/colors";
 
 const RadioGroupContext = createContext<{
-  name: string;
   tone: Tone;
 } | null>(null);
 
@@ -103,7 +102,7 @@ export function RadioGroup({
       >
         {label}
       </div>
-      <RadioGroupContext.Provider value={{ name, tone }}>
+      <RadioGroupContext.Provider value={{ tone }}>
         <RadixRadioGroup.Root
           name={name}
           defaultValue={defaultValue}
