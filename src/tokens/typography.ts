@@ -80,7 +80,7 @@ export const textStyles = {
 };
 
 export const fonts = {
-  sans: { value: '"Spoqa Han Sans Neo", "Noto Sans KR", sans-serif' },
+  sans: { value: '"Pretendard Variable", "Noto Sans KR", sans-serif' },
   // TODO customize serif and mono font styles when needed
 };
 
