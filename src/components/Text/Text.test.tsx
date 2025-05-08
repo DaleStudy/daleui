@@ -7,15 +7,15 @@ import * as stories from "./Text.stories";
 
 const { Basic, Tones, Contrasts } = composeStories(stories);
 
-test("renders the heading with the correct text content", () => {
+test("텍스트와 함께 heading이 올바르게 렌더링됨", () => {
   render(<Basic>테스트</Basic>);
 
   expect(screen.getByText("테스트"));
 });
 
-test("applies the correct font weight class based on the weight prop", () => {
+test("weight prop에 따라 font weight 클래스가 올바르게 적용됨", () => {
   const weight = faker.helpers.arrayElement(
-    Object.keys(fontWeights)
+    Object.keys(fontWeights),
   ) as keyof typeof fontWeights;
 
   render(<Basic weight={weight} />);
@@ -23,9 +23,9 @@ test("applies the correct font weight class based on the weight prop", () => {
   expect(screen.getByText("본문")).toHaveClass(`fw_${weight}`);
 });
 
-test("applies the correct font size class based on the size prop", () => {
+test("size prop에 따라 font size 클래스가 올바르게 적용됨", () => {
   const size = faker.helpers.arrayElement(
-    Object.keys(fontSizes)
+    Object.keys(fontSizes),
   ) as keyof typeof fontSizes;
 
   render(<Basic size={size} />);
@@ -33,7 +33,7 @@ test("applies the correct font size class based on the size prop", () => {
   expect(screen.getByText("본문")).toHaveClass(`fs_${size}`);
 });
 
-test("applies the correct color based on the tone", () => {
+test("tone에 따라 글자 색이 올바르게 적용됨", () => {
   render(<Tones />);
 
   expect(screen.getByText("중립 색조")).toHaveClass("c_text");
@@ -45,7 +45,7 @@ test("applies the correct color based on the tone", () => {
   expect(screen.getByText("경고 색조")).toHaveClass("c_text.warning");
 });
 
-test("applies the correct color for low and high contrast", () => {
+test("낮은 명암비와 높은 명암비에 따라 글자 색이 올바르게 적용됨", () => {
   render(<Contrasts />);
 
   expect(screen.getByText("낮은 명암비")).toHaveClass("c_text.muted");

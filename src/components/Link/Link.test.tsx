@@ -10,12 +10,12 @@ const { Basic, Tones, Contrasts, Underlines, Security, WithIcon } =
   composeStories(stories);
 
 describe("rendering test", () => {
-  test("renders the link with the correct text content", () => {
+  test("텍스트와 함께 링크가 올바르게 렌더링됨", () => {
     render(<Basic />);
     expect(screen.getByRole("link")).toHaveTextContent("링크");
   });
 
-  test("can be used with Icon component", () => {
+  test("Icon 컴포넌트와 함께 사용 가능함", () => {
     render(<WithIcon />);
 
     const link = screen.getByRole("link");
@@ -25,67 +25,67 @@ describe("rendering test", () => {
 });
 
 describe("style test", () => {
-  test("applies the correct tone based on the 'tone' prop", () => {
+  test("tone prop에 따라 tone이 올바르게 적용됨", () => {
     render(<Tones />);
 
     expect(screen.getByRole("link", { name: "중립 링크" })).toHaveClass(
-      "c_text"
+      "c_text",
     );
     expect(screen.getByRole("link", { name: "강조 링크" })).toHaveClass(
-      "c_text.accent"
+      "c_text.accent",
     );
     expect(screen.getByRole("link", { name: "위험 링크" })).toHaveClass(
-      "c_text.danger"
+      "c_text.danger",
     );
     expect(screen.getByRole("link", { name: "경고 링크" })).toHaveClass(
-      "c_text.warning"
+      "c_text.warning",
     );
   });
 
-  test("applies the correct font size based on the 'size' prop", () => {
+  test("size prop에 따라 font size가 올바르게 적용됨", () => {
     const size = faker.helpers.arrayElement(
-      Object.keys(fontSizes)
+      Object.keys(fontSizes),
     ) as keyof typeof fontSizes;
 
     render(<Basic size={size} />);
     expect(screen.getByRole("link")).toHaveStyle({ fontSize: size });
   });
 
-  test("applies the correct font weight based on the 'weight' prop", () => {
+  test("weight prop에 따라 font weight이 올바르게 적용됨", () => {
     const weight = faker.helpers.arrayElement(
-      Object.keys(fontWeights)
+      Object.keys(fontWeights),
     ) as keyof typeof fontWeights;
 
     render(<Basic weight={weight} />);
     expect(screen.getByRole("link")).toHaveClass(`fw_${weight}`);
   });
 
-  test("applies the correct styles for low and high contrast", () => {
+  test("낮은 명암비와 높은 명암비에 따라 스타일이 올바르게 적용됨", () => {
     render(<Contrasts />);
 
     expect(screen.getByRole("link", { name: "낮은 명암비" })).toHaveClass(
-      "c_text.muted"
+      "c_text.muted",
     );
 
     expect(screen.getByRole("link", { name: "높은 명암비" })).toHaveClass(
-      "c_text"
+      "c_text",
     );
   });
 
-  test("applies the correct underline styles", () => {
+  test("밑줄 스타일이 올바르게 적용됨", () => {
     render(<Underlines />);
 
     expect(screen.getByRole("link", { name: "밑줄 있음" })).toHaveClass(
-      "td_underline"
+      "td_underline",
     );
     expect(screen.getByRole("link", { name: "밑줄 없음" })).toHaveClass(
-      "td_none"
+      "td_none",
     );
   });
 });
 
 describe("behavior test", () => {
-  test("forwards additional anchor props like 'href' and 'target'", () => {
+  test("'href'와 'target'같은 추가 anchor 속성을 전달함", () => {
     const href = faker.internet.url({ appendSlash: true });
     const target = "_self";
 
@@ -96,19 +96,21 @@ describe("behavior test", () => {
     expect(link).toHaveAttribute("target", target);
   });
 
-  test("adds rel='noopener noreferrer' when target is '_blank'", () => {
+  test("target 속성이 '_blank'일 경우, rel='noopener noreferrer이 추가됨", () => {
     render(<Security />);
 
     expect(
-      screen.getByRole("link", { name: "새 탭에서 열기 (보안 속성 자동 추가)" })
+      screen.getByRole("link", {
+        name: "새 탭에서 열기 (보안 속성 자동 추가)",
+      }),
     ).toHaveAttribute("rel", "noopener noreferrer");
 
     expect(
-      screen.getByRole("link", { name: "같은 탭에서 열기" })
+      screen.getByRole("link", { name: "같은 탭에서 열기" }),
     ).not.toHaveAttribute("rel", "noopener noreferrer");
   });
 
-  test("navigates to the correct URL when clicked", async () => {
+  test("클릭 시, 해당 URL로 올바르게 이동함", async () => {
     const href = faker.internet.url({ appendSlash: true });
     render(<Basic href={href} />);
 
@@ -119,7 +121,7 @@ describe("behavior test", () => {
     expect(window.location.href).toBe(href);
   });
 
-  test("handles click events correctly", async () => {
+  test("click 이벤트를 올바르게 처리함", async () => {
     const handleClick = vi.fn();
     render(<Basic href="#" onClick={handleClick} />);
 
@@ -129,7 +131,7 @@ describe("behavior test", () => {
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  test("link is keyboard focusable", async () => {
+  test("키보드로 link의 포커스가 가능함", async () => {
     const href = faker.internet.url({ appendSlash: true });
     render(<Basic href={href} />);
 
@@ -139,7 +141,7 @@ describe("behavior test", () => {
     expect(link).toHaveFocus();
   });
 
-  test("navigates when link is clicked with keyboard", async () => {
+  test("키보드로 link를 클릭 시, 해당 href로 올바르게 이동함", async () => {
     const href = faker.internet.url({ appendSlash: true });
     render(<Basic href={href} />);
 
