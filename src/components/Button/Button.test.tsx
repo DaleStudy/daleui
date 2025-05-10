@@ -6,20 +6,20 @@ import { Button } from "./Button";
 
 const { Basic, Variants, Tones, Sizes, Disabled } = composeStories(stories);
 
-test("renders the button with the correct text content", () => {
+test("텍스트와 함께 버튼이 올바르게 렌더링됨", () => {
   render(<Basic>테스트</Basic>);
 
   expect(screen.getByText("테스트")).toBeInTheDocument();
 });
 
-test("applies the correct variant styles", () => {
+test("variant 속성이 올바르게 적용됨", () => {
   render(<Variants />);
 
   expect(screen.getByText("솔리드 버튼")).toHaveClass("bg_bg");
   expect(screen.getByText("아웃라인 버튼")).toHaveClass("bd_3px_solid");
 });
 
-test("applies the correct tone styles", () => {
+test("tone 속성이 올바르게 적용됨", () => {
   render(<Tones />);
 
   expect(screen.getByText("중립 색조")).toHaveClass("bg_bg");
@@ -28,7 +28,7 @@ test("applies the correct tone styles", () => {
   expect(screen.getByText("경고 색조")).toHaveClass("bg_bg.warning");
 });
 
-test("applies the correct font size based on the size prop", () => {
+test("size prop에 따라 font size가 올바르게 적용됨", () => {
   render(<Sizes />);
 
   expect(screen.getByText("작은 버튼")).toHaveClass("fs_sm");
@@ -36,7 +36,7 @@ test("applies the correct font size based on the size prop", () => {
   expect(screen.getByText("큰 버튼")).toHaveClass("fs_lg");
 });
 
-test("applies the correct disabled styles", () => {
+test("disabled 속성이 올바르게 적용됨", () => {
   render(<Disabled />);
 
   expect(screen.getByText("비활성화 버튼")).toBeDisabled();
@@ -44,48 +44,48 @@ test("applies the correct disabled styles", () => {
   expect(screen.getByText("비활성화 버튼")).toHaveClass("[&:disabled]:op_0.5");
 });
 
-test("renders a button with type='button' by default", () => {
+test("기본적으로 버튼이 type='button'으로 렌더링됨", () => {
   render(<Basic>Default Button</Basic>);
   const button = screen.getByText("Default Button");
   expect(button).toHaveAttribute("type", "button");
 });
 
-test("renders a button with type='button' by default", () => {
+test("기본적으로 버튼이 type='button'으로 렌더링됨", () => {
   render(<Basic variant="solid">Default Button</Basic>);
   const button = screen.getByText("Default Button");
   expect(button).toHaveAttribute("type", "button");
 });
 
-test("renders a button with type='button' when specified", () => {
+test("버튼이 type='button'으로 지정되었을 때 지정한대로 올바르게 렌더링됨", () => {
   render(
     <Button type="button" variant="solid">
       Button Type Button
-    </Button>
+    </Button>,
   );
   const button = screen.getByText("Button Type Button");
   expect(button).toHaveAttribute("type", "button");
 });
 
-test("renders a button with type='submit' when specified", () => {
+test("버튼이 type='submit'으로 지정되었을 때 지정한대로 올바르게 렌더링됨", () => {
   render(
     <form>
       <Button type="submit" variant="solid">
         Submit Type Button
       </Button>
-    </form>
+    </form>,
   );
   const button = screen.getByText("Submit Type Button");
   expect(button).toHaveAttribute("type", "submit");
 });
 
-test("submits the form when type='submit' button is clicked", () => {
+test("type='submit'으로 지정된 버튼 클릭 시, form이 제출됨", () => {
   const handleSubmit = vi.fn();
   render(
     <form onSubmit={handleSubmit}>
       <Button type="submit" variant="solid">
         Submit Button
       </Button>
-    </form>
+    </form>,
   );
 
   const submitButton = screen.getByText("Submit Button");
@@ -93,14 +93,14 @@ test("submits the form when type='submit' button is clicked", () => {
   expect(handleSubmit).toHaveBeenCalledTimes(1);
 });
 
-test("does not submit the form when type='button' button is clicked", () => {
+test("type='button'으로 지정된 버튼 클릭 시 form이 제출되지 않음", () => {
   const handleSubmit = vi.fn();
   render(
     <form onSubmit={handleSubmit}>
       <Button type="button" variant="solid">
         Button Type Button
       </Button>
-    </form>
+    </form>,
   );
   const buttonTypeButton = screen.getByText("Button Type Button");
   fireEvent.click(buttonTypeButton);
