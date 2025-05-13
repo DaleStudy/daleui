@@ -33,7 +33,7 @@ export const Heading = ({
 }: HeadingProps) => {
   if (!level) {
     throw new Error(
-      "The level prop is required and you can cause accessibility issues."
+      "The level prop is required and you can cause accessibility issues.",
     );
   }
 
@@ -46,7 +46,7 @@ export const Heading = ({
         css.raw({
           fontSize: size,
           fontWeight: weight,
-        })
+        }),
       )}
       {...rest}
     >

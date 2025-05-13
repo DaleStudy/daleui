@@ -10,7 +10,7 @@ describe("RadioGroup", () => {
       <RadioGroup name="test" label="Test Radio Group">
         <Radio value="option1">Option 1</Radio>
         <Radio value="option2">Option 2</Radio>
-      </RadioGroup>
+      </RadioGroup>,
     );
 
     expect(screen.getByText("Test Radio Group")).toBeInTheDocument();
@@ -23,7 +23,7 @@ describe("RadioGroup", () => {
       <RadioGroup name="test" label="Test Radio Group" defaultValue="option2">
         <Radio value="option1">Option 1</Radio>
         <Radio value="option2">Option 2</Radio>
-      </RadioGroup>
+      </RadioGroup>,
     );
 
     const option1 = screen.getByRole("radio", { name: "Option 1" });
@@ -38,7 +38,7 @@ describe("RadioGroup", () => {
       <RadioGroup name="test" label="Test Radio Group">
         <Radio value="option1">Option 1</Radio>
         <Radio value="option2">Option 2</Radio>
-      </RadioGroup>
+      </RadioGroup>,
     );
 
     const option1 = screen.getByRole("radio", { name: "Option 1" });
@@ -58,7 +58,7 @@ describe("RadioGroup", () => {
       >
         <Radio value="option1">Option 1</Radio>
         <Radio value="option2">Option 2</Radio>
-      </RadioGroup>
+      </RadioGroup>,
     );
 
     const option1 = screen.getByRole("radio", { name: "Option 1" });
@@ -73,7 +73,7 @@ describe("RadioGroup", () => {
       <RadioGroup name="test" label="Test Radio Group" disabled>
         <Radio value="option1">Option 1</Radio>
         <Radio value="option2">Option 2</Radio>
-      </RadioGroup>
+      </RadioGroup>,
     );
 
     const option1 = screen.getByRole("radio", { name: "Option 1" });
@@ -91,7 +91,7 @@ describe("RadioGroup", () => {
       <RadioGroup name="test" label="Test Radio Group" onChange={onChange}>
         <Radio value="option1">Option 1</Radio>
         <Radio value="option2">Option 2</Radio>
-      </RadioGroup>
+      </RadioGroup>,
     );
 
     const option1 = screen.getByRole("radio", { name: "Option 1" });
@@ -100,7 +100,7 @@ describe("RadioGroup", () => {
     expect(onChange).toHaveBeenCalledWith("option1");
   });
 
-  test("controlled 모드가 올바르게 작동함", async () => {
+  test("controlled 모드가 올바르게 작동되어짐", async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
 
@@ -139,14 +139,14 @@ describe("RadioGroup", () => {
 });
 
 describe("Radio", () => {
-  test("value가 올바르게 동작함", async () => {
+  test("value가 올바르게 동작됨", async () => {
     const user = userEvent.setup();
 
     render(
       <RadioGroup name="test" label="Test Radio Group">
         <Radio value="option1">Option 1</Radio>
         <Radio value="option2">Option 2</Radio>
-      </RadioGroup>
+      </RadioGroup>,
     );
 
     const option1 = screen.getByRole("radio", { name: "Option 1" });
@@ -168,7 +168,7 @@ describe("Radio", () => {
         <Radio value="option2" disabled>
           Option 2
         </Radio>
-      </RadioGroup>
+      </RadioGroup>,
     );
 
     const option1 = screen.getByRole("radio", { name: "Option 1" });

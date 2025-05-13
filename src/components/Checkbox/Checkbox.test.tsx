@@ -6,12 +6,12 @@ import { Checkbox } from "./Checkbox";
 
 const { Basic, Tones, States, Disabled, Required } = composeStories(stories);
 
-test("renders the checkbox with the correct label", () => {
+test("label과 함께 체크박스가 올바르게 렌더링됨", () => {
   render(<Basic />);
   expect(screen.getByText("기본 체크박스")).toBeInTheDocument();
 });
 
-test("applies the correct tone styles when checked", () => {
+test("체크박스에 체크 시, tone 속성이 올바르게 적용됨", () => {
   render(<Tones />);
 
   const neutralCheckbox = screen.getByLabelText("중립 색조");
@@ -34,17 +34,17 @@ test("applies the correct tone styles when checked", () => {
   // Check for correct background colors based on tone
   expect(neutralCheckbox).toHaveClass("[&[data-state='checked']]:bg-c_bg");
   expect(accentCheckbox).toHaveClass(
-    "[&[data-state='checked']]:bg-c_bg.accent"
+    "[&[data-state='checked']]:bg-c_bg.accent",
   );
   expect(dangerCheckbox).toHaveClass(
-    "[&[data-state='checked']]:bg-c_bg.danger"
+    "[&[data-state='checked']]:bg-c_bg.danger",
   );
   expect(warningCheckbox).toHaveClass(
-    "[&[data-state='checked']]:bg-c_bg.warning"
+    "[&[data-state='checked']]:bg-c_bg.warning",
   );
 });
 
-test("renders checked and unchecked states correctly", () => {
+test("체크된 상태와 체크되지않은 상태가 올바르게 렌더링됨", () => {
   render(<States />);
 
   const checkedCheckbox = screen.getByLabelText("체크된 상태");
@@ -54,7 +54,7 @@ test("renders checked and unchecked states correctly", () => {
   expect(uncheckedCheckbox).toHaveAttribute("data-state", "unchecked");
 });
 
-test("applies the correct disabled styles", () => {
+test("disabled 속성이 올바르게 적용됨", () => {
   render(<Disabled />);
 
   const disabledCheckedCheckbox =
@@ -72,7 +72,7 @@ test("applies the correct disabled styles", () => {
   expect(disabledUncheckedCheckbox).toHaveClass("[&:disabled]:op_0.5");
 });
 
-test("displays required indicator correctly", () => {
+test("필수 표시가 올바르게 표시됨", () => {
   render(<Required />);
 
   const requiredLabel = screen.getByText("필수 체크박스").parentElement;
@@ -83,7 +83,7 @@ test("displays required indicator correctly", () => {
   expect(optionalLabel).not.toContainHTML("*");
 });
 
-test("calls onChange handler when checkbox is clicked", () => {
+test("체크박스 클릭 시, onChange 핸들러가 호출됨", () => {
   const handleChange = vi.fn();
 
   render(
@@ -91,7 +91,7 @@ test("calls onChange handler when checkbox is clicked", () => {
       id="test-checkbox"
       label="테스트 체크박스"
       onChange={handleChange}
-    />
+    />,
   );
 
   const checkbox = screen.getByLabelText("테스트 체크박스");
@@ -110,7 +110,7 @@ test("calls onChange handler when checkbox is clicked", () => {
   expect(handleChange).toHaveBeenCalledWith(false, undefined);
 });
 
-test("passes value to onChange handler when provided", () => {
+test("value값이 있을 경우, 체크 시 value가 onChange 핸들러로 전달됨", () => {
   const handleChange = vi.fn();
 
   render(
@@ -119,7 +119,7 @@ test("passes value to onChange handler when provided", () => {
       label="값이 있는 체크박스"
       value="test-value"
       onChange={handleChange}
-    />
+    />,
   );
 
   const checkbox = screen.getByLabelText("값이 있는 체크박스");
@@ -129,9 +129,9 @@ test("passes value to onChange handler when provided", () => {
   expect(handleChange).toHaveBeenCalledWith(true, "test-value");
 });
 
-test("correctly handles required attribute", () => {
+test("required 속성이 올바르게 처리됨", () => {
   render(
-    <Checkbox id="required-checkbox" label="필수 체크박스" required={true} />
+    <Checkbox id="required-checkbox" label="필수 체크박스" required={true} />,
   );
 
   // 정규 표현식을 사용하여 라벨 찾기 (별표가 있어도 일치)
@@ -141,7 +141,7 @@ test("correctly handles required attribute", () => {
   expect(checkbox).toHaveAttribute("aria-required", "true");
 });
 
-test("toggles checked state when clicked", () => {
+test("체크박스가 클릭될 때 체크 상태가 전환됨", () => {
   render(<Basic />);
 
   const checkbox = screen.getByLabelText("기본 체크박스");
@@ -158,9 +158,9 @@ test("toggles checked state when clicked", () => {
   expect(checkbox).toHaveAttribute("data-state", "unchecked");
 });
 
-test("adds asterisk to label when required is true", () => {
+test("required 속성값이 true일 경우, label에 별표가 추가됨", () => {
   render(
-    <Checkbox id="required-checkbox" label="필수 체크박스" required={true} />
+    <Checkbox id="required-checkbox" label="필수 체크박스" required={true} />,
   );
 
   const requiredIndicator = screen.getByText("*");
