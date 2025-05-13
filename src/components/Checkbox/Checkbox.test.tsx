@@ -110,7 +110,7 @@ test("체크박스 클릭 시, onChange 핸들러가 호출됨", () => {
   expect(handleChange).toHaveBeenCalledWith(false, undefined);
 });
 
-test("value값이 있을 경우, 체크 시 value가 onChange 핸들러로 전달된다.", () => {
+test("value값이 있을 경우, 체크 시 value가 onChange 핸들러로 전달됨", () => {
   const handleChange = vi.fn();
 
   render(
@@ -129,7 +129,7 @@ test("value값이 있을 경우, 체크 시 value가 onChange 핸들러로 전�
   expect(handleChange).toHaveBeenCalledWith(true, "test-value");
 });
 
-test("required 속성을 올바르게 처리함", () => {
+test("required 속성이 올바르게 처리됨", () => {
   render(
     <Checkbox id="required-checkbox" label="필수 체크박스" required={true} />,
   );
@@ -141,7 +141,7 @@ test("required 속성을 올바르게 처리함", () => {
   expect(checkbox).toHaveAttribute("aria-required", "true");
 });
 
-test("체크박스가 클릭될 때 체크 상태를 전환함", () => {
+test("체크박스가 클릭될 때 체크 상태가 전환됨", () => {
   render(<Basic />);
 
   const checkbox = screen.getByLabelText("기본 체크박스");
@@ -158,7 +158,7 @@ test("체크박스가 클릭될 때 체크 상태를 전환함", () => {
   expect(checkbox).toHaveAttribute("data-state", "unchecked");
 });
 
-test("required 속성값이 true일 경우, label에 별표를 추가함", () => {
+test("required 속성값이 true일 경우, label에 별표가 추가됨", () => {
   render(
     <Checkbox id="required-checkbox" label="필수 체크박스" required={true} />,
   );

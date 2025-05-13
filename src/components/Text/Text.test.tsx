@@ -7,7 +7,7 @@ import * as stories from "./Text.stories";
 
 const { Basic, Tones, Contrasts } = composeStories(stories);
 
-test("텍스트와 함께 heading이 올바르게 렌더링됨", () => {
+test("텍스트가 올바르게 렌더링됨", () => {
   render(<Basic>테스트</Basic>);
 
   expect(screen.getByText("테스트"));

@@ -15,7 +15,7 @@ describe("rendering test", () => {
     expect(screen.getByRole("link")).toHaveTextContent("링크");
   });
 
-  test("Icon 컴포넌트와 함께 사용 가능함", () => {
+  test("Icon 컴포넌트와 함께 잘 사용 되어짐", () => {
     render(<WithIcon />);
 
     const link = screen.getByRole("link");
@@ -85,7 +85,7 @@ describe("style test", () => {
 });
 
 describe("behavior test", () => {
-  test("'href'와 'target'같은 추가 anchor 속성을 전달함", () => {
+  test("'href'와 'target'같은 추가 anchor 속성이 전달됨", () => {
     const href = faker.internet.url({ appendSlash: true });
     const target = "_self";
 
@@ -110,7 +110,7 @@ describe("behavior test", () => {
     ).not.toHaveAttribute("rel", "noopener noreferrer");
   });
 
-  test("클릭 시, 해당 URL로 올바르게 이동함", async () => {
+  test("클릭 시, 해당 URL로 올바르게 잘 이동됨", async () => {
     const href = faker.internet.url({ appendSlash: true });
     render(<Basic href={href} />);
 
@@ -121,7 +121,7 @@ describe("behavior test", () => {
     expect(window.location.href).toBe(href);
   });
 
-  test("click 이벤트를 올바르게 처리함", async () => {
+  test("click 이벤트가 올바르게 처리됨", async () => {
     const handleClick = vi.fn();
     render(<Basic href="#" onClick={handleClick} />);
 
@@ -131,7 +131,7 @@ describe("behavior test", () => {
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  test("키보드로 link의 포커스가 가능함", async () => {
+  test("키보드로 link에 포커스가 잘 됨", async () => {
     const href = faker.internet.url({ appendSlash: true });
     render(<Basic href={href} />);
 
@@ -141,7 +141,7 @@ describe("behavior test", () => {
     expect(link).toHaveFocus();
   });
 
-  test("키보드로 link를 클릭 시, 해당 href로 올바르게 이동함", async () => {
+  test("키보드로 link를 클릭 시, 해당 href로 올바르게 이동됨", async () => {
     const href = faker.internet.url({ appendSlash: true });
     render(<Basic href={href} />);
 

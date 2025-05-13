@@ -41,7 +41,7 @@ export function Link({
         css.raw({
           fontSize: size,
           fontWeight: weight,
-        })
+        }),
       )}
       target={target}
       rel={target === "_blank" ? "noopener noreferrer" : rel}
