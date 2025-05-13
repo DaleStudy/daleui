@@ -28,7 +28,7 @@ test.each([
   ["accent", "c_text.accent"],
   ["danger", "c_text.danger"],
   ["warning", "c_text.warning"],
-] as const)("tone 값에 따라 class가 올바르게 적용됨", (tone, className) => {
+] as const)('tone "%s"값에 따라 class가 올바르게 적용됨', (tone, className) => {
   const { container } = render(<Basic tone={tone} muted={false} />);
 
   expect(container.querySelector("svg")).toHaveClass(className);
