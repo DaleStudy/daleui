@@ -17,13 +17,37 @@ export const Default: StoryObj = {
   render: (args) => {
     const MENU_ITEMS = ["소개", "서비스", "스토리", "채용"];
     return (
-      <div className={styles.container} {...args}>
-        <header className={styles.header}>
-          <div className={styles.menuIcon}>
+      <div className={vstack({ minHeight: "100vh", gap: 0 })} {...args}>
+        <header
+          className={hstack({
+            width: "100%",
+            height: { base: "3rem", md: "4rem" },
+            justifyContent: "space-between",
+            padding: { base: "0 1rem", md: "0 1.5rem" },
+            borderBottom: "2px solid",
+            background: { base: "teal.1", _dark: "tealDark.1" },
+            borderColor: { base: "teal.7", _dark: "tealDark.7" },
+            color: { base: "teal.11", _dark: "tealDark.11" },
+          })}
+        >
+          <div className={css({ display: { base: "block", md: "none" } })}>
             <Icon name="menu" aria-label="메뉴" />
           </div>
-          <img src="/logo.svg" alt="DaleUI Logo" className={styles.logo} />
-          <nav className={styles.nav} aria-label="주요 메뉴">
+          <img
+            src="/logo.svg"
+            alt="DaleUI Logo"
+            className={css({
+              height: { base: "1.5rem", md: "2rem" },
+              objectFit: "contain",
+            })}
+          />
+          <nav
+            className={hstack({
+              gap: "gap.md",
+              display: { base: "none", md: "flex" },
+            })}
+            aria-label="주요 메뉴"
+          >
             {MENU_ITEMS.map((item) => (
               <Link key={item} underline={false}>
                 {item}
@@ -32,7 +56,16 @@ export const Default: StoryObj = {
           </nav>
           <Icon name="search" aria-label="검색" />
         </header>
-        <main className={styles.main}>
+        <main
+          className={vstack({
+            alignItems: "baseline",
+            justifyContent: "center",
+            flex: 1,
+            width: "100%",
+            paddingX: { base: "2rem", md: "12rem" },
+            gap: { base: "gap.md", md: "gap.lg" },
+          })}
+        >
           <Heading level={1}>달레 UI</Heading>
           <Text>한국어 친화적인 디자인시스템</Text>
           <div>
@@ -41,49 +74,19 @@ export const Default: StoryObj = {
             </Button>
           </div>
         </main>
-        <footer className={styles.footer}>
+        <footer
+          className={css({
+            textAlign: "center",
+            paddingY: { base: 1, md: 2 },
+            borderTop: "2px solid",
+            background: { base: "teal.1", _dark: "tealDark.1" },
+            borderColor: { base: "teal.7", _dark: "tealDark.7" },
+            width: "100%",
+          })}
+        >
           <Text>copyright DaleUI</Text>
         </footer>
       </div>
     );
   },
-};
-
-const styles = {
-  container: vstack({ minHeight: "100vh", gap: 0 }),
-  header: hstack({
-    width: "100%",
-    height: { base: "3rem", md: "4rem" },
-    justifyContent: "space-between",
-    padding: { base: "0 1rem", md: "0 1.5rem" },
-    borderBottom: "2px solid",
-    background: { base: "teal.1", _dark: "tealDark.1" },
-    borderColor: { base: "teal.7", _dark: "tealDark.7" },
-    color: { base: "teal.11", _dark: "tealDark.11" },
-  }),
-  menuIcon: css({ display: { base: "block", md: "none" } }),
-  logo: css({
-    height: { base: "1.5rem", md: "2rem" },
-    objectFit: "contain",
-  }),
-  nav: hstack({
-    gap: "gap.md",
-    display: { base: "none", md: "flex" },
-  }),
-  main: vstack({
-    alignItems: "baseline",
-    justifyContent: "center",
-    flex: 1,
-    width: "100%",
-    paddingX: { base: "2rem", md: "12rem" },
-    gap: { base: "gap.md", md: "gap.lg" },
-  }),
-  footer: css({
-    textAlign: "center",
-    paddingY: { base: 1, md: 2 },
-    borderTop: "2px solid",
-    background: { base: "teal.1", _dark: "tealDark.1" },
-    borderColor: { base: "teal.7", _dark: "tealDark.7" },
-    width: "100%",
-  }),
 };
