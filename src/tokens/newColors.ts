@@ -17,7 +17,7 @@ export const semanticColors: SemanticTokens["colors"] = {
         value: { base: "{colors.slate.10}", _dark: "{colors.darkSage.10}" },
       },
       disabled: {
-        value: { base: "{colors.slate.9}", _dark: "{colors.slate.9}" },
+        value: { base: "{colors.slate.9}", _dark: "{colors.darkSage.9}" },
       },
     },
     interactive: {
@@ -34,13 +34,13 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
       secondary: {
         default: {
-          value: { base: "{colors.slate.11}", _dark: "{colors.slate.2}" },
+          value: { base: "{colors.slate.11}", _dark: "{colors.darkSlate.2}" },
         },
         hover: {
-          value: { base: "{colors.slate.12}", _dark: "{colors.slate.3}" },
+          value: { base: "{colors.slate.12}", _dark: "{colors.darkSlate.3}" },
         },
         press: {
-          value: { base: "{colors.slate.12}", _dark: "{colors.slate.4}" },
+          value: { base: "{colors.slate.12}", _dark: "{colors.darkSlate.4}" },
         },
         inactive: {
           value: { base: "{colors.slate.7}", _dark: "{colors.darkSage.8}" },
@@ -64,12 +64,14 @@ export const semanticColors: SemanticTokens["colors"] = {
       success: {
         value: { base: "{colors.green.11}", _dark: "{colors.darkGreen.11}" },
       },
-      danger: { value: { base: "{colors.red.11}", _dark: "{colors.red.11}" } },
+      danger: {
+        value: { base: "{colors.red.11}", _dark: "{colors.darkRed.11}" },
+      },
       warning: {
-        value: { base: "{colors.amber.11}", _dark: "{colors.amber.11}" },
+        value: { base: "{colors.amber.11}", _dark: "{colors.darkAmber.11}" },
       },
       informative: {
-        value: { base: "{colors.blue.11}", _dark: "{colors.blue.11}" },
+        value: { base: "{colors.blue.11}", _dark: "{colors.darkBlue.11}" },
       },
     },
   },
@@ -101,36 +103,35 @@ export const semanticColors: SemanticTokens["colors"] = {
         },
       },
       focus: {
-        value: { base: "{colors.teal.10}", _dark: "{colors.darkTeal.11}" },
+        value: { base: "{colors.teal.10}", _dark: "{colors.darkViolet.10}" },
       },
     },
-    default_2: {
-      default_2: {
-        value: { base: "{colors.slate.1}", _dark: "{colors.slate.1}" },
-      },
+    default: {
       primary: {
-        value: { base: "{colors.slate.5}", _dark: "{colors.slate.5}" },
+        value: { base: "{colors.slate.5}", _dark: "{colors.darkSlate.5}" },
       },
       secondary: {
-        value: { base: "{colors.slate.6}", _dark: "{colors.slate.6}" },
+        value: { base: "{colors.slate.6}", _dark: "{colors.darkSlate.6}" },
       },
       tertiary: {
-        value: { base: "{colors.slate.8}", _dark: "{colors.slate.8}" },
+        value: { base: "{colors.slate.8}", _dark: "{colors.darkSlate.7}" },
       },
       disabled: {
-        value: { base: "{colors.slate.8}", _dark: "{colors.slate.8}" },
+        value: { base: "{colors.slate.8}", _dark: "{colors.darkSlate.8}" },
       },
     },
     system: {
       success: {
-        value: { base: "{colors.green.9}", _dark: "{colors.green.9}" },
+        value: { base: "{colors.green.9}", _dark: "{colors.darkGreen.9}" },
       },
-      danger: { value: { base: "{colors.red.10}", _dark: "{colors.red.10}" } },
+      danger: {
+        value: { base: "{colors.red.10}", _dark: "{colors.darkRed.10}" },
+      },
       warning: {
-        value: { base: "{colors.amber.10}", _dark: "{colors.amber.10}" },
+        value: { base: "{colors.amber.10}", _dark: "{colors.darkAmber.10}" },
       },
       informative: {
-        value: { base: "{colors.blue.8}", _dark: "{colors.blue.8}" },
+        value: { base: "{colors.blue.8}", _dark: "{colors.darkBlue.8}" },
       },
     },
   },
@@ -161,7 +162,7 @@ export const semanticColors: SemanticTokens["colors"] = {
           value: { base: "{colors.violet.12}", _dark: "{colors.darkTeal.12}" },
         },
         active: {
-          value: { base: "{colors.violet.5}", _dark: "{colors.violet.5}" },
+          value: { base: "{colors.violet.5}", _dark: "{colors.darkViolet.5}" },
         },
       },
       secondary: {
@@ -176,21 +177,29 @@ export const semanticColors: SemanticTokens["colors"] = {
         },
       },
       danger: {
-        default: { value: { base: "{colors.red.9}", _dark: "{colors.red.9}" } },
-        hover: { value: { base: "{colors.red.10}", _dark: "{colors.red.10}" } },
-        press: { value: { base: "{colors.red.11}", _dark: "{colors.red.11}" } },
+        default: {
+          value: { base: "{colors.red.9}", _dark: "{colors.darkRed.9}" },
+        },
+        hover: {
+          value: { base: "{colors.red.10}", _dark: "{colors.darkRed.10}" },
+        },
+        press: {
+          value: { base: "{colors.red.11}", _dark: "{colors.darkRed.11}" },
+        },
       },
     },
     system: {
       success: {
-        value: { base: "{colors.green.4}", _dark: "{colors.green.4}" },
+        value: { base: "{colors.green.4}", _dark: "{colors.darkGreen.4}" },
       },
-      danger: { value: { base: "{colors.red.3}", _dark: "{colors.red.3}" } },
+      danger: {
+        value: { base: "{colors.red.3}", _dark: "{colors.darkRed.4}" },
+      },
       warning: {
-        value: { base: "{colors.amber.3}", _dark: "{colors.amber.3}" },
+        value: { base: "{colors.amber.3}", _dark: "{colors.darkAmber.4}" },
       },
       informative: {
-        value: { base: "{colors.blue.4}", _dark: "{colors.blue.4}" },
+        value: { base: "{colors.blue.4}", _dark: "{colors.darkBlue.4}" },
       },
     },
     accent: {
@@ -200,7 +209,9 @@ export const semanticColors: SemanticTokens["colors"] = {
       secondary: {
         value: { base: "{colors.slate.11}", _dark: "{colors.darkSage.8}" },
       },
-      red: { value: { base: "{colors.red.11}", _dark: "{colors.darkRed.11}" } },
+      red: {
+        value: { base: "{colors.red.11}", _dark: "{colors.darkRed.11}" },
+      },
       violet: {
         value: { base: "{colors.violet.11}", _dark: "{colors.darkViolet.11}" },
       },
@@ -229,20 +240,6 @@ export const colors: Tokens["colors"] = {
     11: { value: "#AB6400" },
     12: { value: "#4F3422" },
   },
-  blue: {
-    1: { value: "#FBFDFF" },
-    2: { value: "#F4FAFF" },
-    3: { value: "#E6F4FE" },
-    4: { value: "#D5EFFF" },
-    5: { value: "#C2E5FF" },
-    6: { value: "#ACD8FC" },
-    7: { value: "#8EC8F6" },
-    8: { value: "#5EB1EF" },
-    9: { value: "#0090FF" },
-    10: { value: "#0588F0" },
-    11: { value: "#0D74CE" },
-    12: { value: "#113264" },
-  },
   darkAmber: {
     1: { value: "#16120C" },
     2: { value: "#1D180F" },
@@ -256,6 +253,20 @@ export const colors: Tokens["colors"] = {
     10: { value: "#FFD60A" },
     11: { value: "#FFCA16" },
     12: { value: "#FFE7B3" },
+  },
+  blue: {
+    1: { value: "#FBFDFF" },
+    2: { value: "#F4FAFF" },
+    3: { value: "#E6F4FE" },
+    4: { value: "#D5EFFF" },
+    5: { value: "#C2E5FF" },
+    6: { value: "#ACD8FC" },
+    7: { value: "#8EC8F6" },
+    8: { value: "#5EB1EF" },
+    9: { value: "#0090FF" },
+    10: { value: "#0588F0" },
+    11: { value: "#0D74CE" },
+    12: { value: "#113264" },
   },
   darkBlue: {
     1: { value: "#0D1520" },
