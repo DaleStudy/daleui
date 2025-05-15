@@ -1,0 +1,154 @@
+import { Typeset } from "@storybook/blocks";
+import { fontFamily, fontWeight, fontSize, textStyles } from "./newTypography";
+
+# Typography Tokens
+
+아래는 달레 UI에서 사용할 타이포그래피 시스템입니다.
+
+## Text Styles
+
+### Display
+
+**Display.1**
+<Typeset
+  fontSizes={[fontSize["8xl"]]}
+  fontWeight={fontWeight.bold}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fontFamily.heading}
+/>
+
+**Display.2**
+<Typeset
+  fontSizes={[fontSize["7xl"]]}
+  fontWeight={fontWeight.bold}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fontFamily.heading}
+/>
+
+**Display.3**
+<Typeset
+  fontSizes={[fontSize["5xl"]]}
+  fontWeight={fontWeight.bold}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fontFamily.heading}
+/>
+
+### Title
+
+**Title.1**
+<Typeset
+  fontSizes={[fontSize["4xl"]]}
+  fontWeight={fontWeight.semibold}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fontFamily.heading}
+/>
+
+**Title.2**
+<Typeset
+  fontSizes={[fontSize["3xl"]]}
+  fontWeight={fontWeight.semibold}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fontFamily.heading}
+/>
+
+**Title.3**
+<Typeset
+  fontSizes={[fontSize["2xl"]]}
+  fontWeight={fontWeight.medium}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fontFamily.heading}
+/>
+
+### Body
+
+**Body.default**
+<Typeset
+  fontSizes={[fontSize.md]}
+  fontWeight={fontWeight.normal}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fontFamily.body}
+/>
+
+**Body.small**
+<Typeset
+  fontSizes={[fontSize.sm]}
+  fontWeight={fontWeight.normal}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fontFamily.body}
+/>
+
+**Body.strong**
+<Typeset
+  fontSizes={[fontSize.md]}
+  fontWeight={fontWeight.semibold}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fontFamily.body}
+/>
+
+### Label
+
+**Label.1**
+<Typeset
+  fontSizes={[fontSize.sm]}
+  fontWeight={fontWeight.medium}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fontFamily.body}
+/>
+
+**Label.2**
+<Typeset
+  fontSizes={[fontSize.md]}
+  fontWeight={fontWeight.medium}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fontFamily.body}
+/>
+
+**Label.3**
+<Typeset
+  fontSizes={[fontSize.lg]}
+  fontWeight={fontWeight.medium}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fontFamily.body}
+/>
+
+### Caption
+
+**Caption.1**
+<Typeset
+  fontSizes={[fontSize.xs]}
+  fontWeight={fontWeight.medium}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fontFamily.body}
+/>
+
+## 글꼴 크기
+
+<p>
+  {Object.entries(fontSize)
+    .map(([name, value]) => `${name}(${value})`)
+    .join(", ")}
+</p>
+
+<Typeset
+  fontSizes={Object.values(fontSize)}
+  fontWeight={fontWeight.normal}
+  sampleText="달레 UI 디자인 System"
+  fontFamily={fontFamily.body}
+/>
+
+## 글꼴 굵기
+
+{Object.entries(fontWeight).map(([name, value]) => (
+
+<>
+  <h3>
+    {name}({value})
+  </h3>
+  <Typeset
+    fontSizes={[fontSize.md]}
+    fontWeight={value}
+    sampleText="달레 UI 디자인 System"
+    fontFamily={fontFamily.body}
+  />
+</>
+))} 
