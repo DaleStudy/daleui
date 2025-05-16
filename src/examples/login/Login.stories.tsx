@@ -1,9 +1,9 @@
 import { action } from "@storybook/addon-actions";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "../../src/components/Button/Button";
-import { Checkbox } from "../../src/components/Checkbox/Checkbox";
-import { Heading } from "../../src/components/Heading/Heading";
-import { Link } from "../../src/components/Link/Link";
+import { Button } from "../../components/Button/Button";
+import { Checkbox } from "../../components/Checkbox/Checkbox";
+import { Heading } from "../../components/Heading/Heading";
+import { Link } from "../../components/Link/Link";
 
 export default {
   parameters: {
@@ -41,8 +41,8 @@ export const Default: StoryObj = {
               height: 50,
             }}
             required
-            type="email"
-            placeholder="이메일 주소"
+            type='email'
+            placeholder='이메일 주소'
           />
           <input
             style={{
@@ -52,8 +52,8 @@ export const Default: StoryObj = {
               height: 50,
             }}
             required
-            type="password"
-            placeholder="비밀번호"
+            type='password'
+            placeholder='비밀번호'
           />
         </div>
 
@@ -65,7 +65,7 @@ export const Default: StoryObj = {
           }}
         >
           <Link>비밀번호 찾기</Link>
-          <Checkbox label="사용자 정보 기억하기" />
+          <Checkbox label='사용자 정보 기억하기' />
         </div>
 
         <div
@@ -75,7 +75,7 @@ export const Default: StoryObj = {
             marginBottom: "2rem",
           }}
         >
-          <Button variant="solid" type="submit" size="lg">
+          <Button variant='solid' type='submit' size='lg'>
             로그인
           </Button>
         </div>
