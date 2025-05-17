@@ -41,8 +41,8 @@ export const Default: StoryObj = {
               height: 50,
             }}
             required
-            type='email'
-            placeholder='이메일 주소'
+            type="email"
+            placeholder="이메일 주소"
           />
           <input
             style={{
@@ -52,8 +52,8 @@ export const Default: StoryObj = {
               height: 50,
             }}
             required
-            type='password'
-            placeholder='비밀번호'
+            type="password"
+            placeholder="비밀번호"
           />
         </div>
 
@@ -64,8 +64,8 @@ export const Default: StoryObj = {
             justifyContent: "space-between",
           }}
         >
-          <Link>비밀번호 찾기</Link>
-          <Checkbox label='사용자 정보 기억하기' />
+          <Link href="#">비밀번호 찾기</Link>
+          <Checkbox label="사용자 정보 기억하기" />
         </div>
 
         <div
@@ -75,7 +75,7 @@ export const Default: StoryObj = {
             marginBottom: "2rem",
           }}
         >
-          <Button variant='solid' type='submit' size='lg'>
+          <Button variant="solid" type="submit" size="lg">
             로그인
           </Button>
         </div>
