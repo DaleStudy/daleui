@@ -33,7 +33,7 @@ export const Icon = ({
         colorStyles.raw({ tone, muted }),
         css.raw({
           display: "inline-block",
-        })
+        }),
       )}
       {...rest}
     />

@@ -7,24 +7,24 @@ import * as stories from "./Heading.stories";
 
 const { Basic, Contrasts } = composeStories(stories);
 
-test("renders the heading with the correct text content", () => {
+test("텍스트와 함께 heading이 올바르게 렌더링됨", () => {
   render(<Basic>제목</Basic>);
 
   expect(screen.getByRole("heading")).toHaveTextContent("제목");
 });
 
 test.each([1, 2, 3, 4, 5, 6] as const)(
-  "renders the correct HTML heading element for level %i",
+  "level 값에 따라 HTML heading 요소가 올바르게 렌더링됨",
   (level) => {
     render(<Basic level={level} />);
 
     expect(screen.getByRole("heading", { level })).toBeInTheDocument();
-  }
+  },
 );
 
-test("applies the correct font weight class based on the weight prop", () => {
+test("weight prop에 따라 font weight 클래스가 올바르게 적용됨", () => {
   const weight = faker.helpers.arrayElement(
-    Object.keys(fontWeights)
+    Object.keys(fontWeights),
   ) as keyof typeof fontWeights;
 
   render(<Basic weight={weight} />);
@@ -32,9 +32,9 @@ test("applies the correct font weight class based on the weight prop", () => {
   expect(screen.getByRole("heading")).toHaveClass(`fw_${weight}`);
 });
 
-test("applies the correct font size class based on the size prop", () => {
+test("size prop에 따라 font size 클래스가 올바르게 적용됨", () => {
   const size = faker.helpers.arrayElement(
-    Object.keys(fontSizes)
+    Object.keys(fontSizes),
   ) as keyof typeof fontSizes;
 
   render(<Basic size={size} />);
@@ -42,14 +42,14 @@ test("applies the correct font size class based on the size prop", () => {
   expect(screen.getByRole("heading")).toHaveClass(`fs_${size}`);
 });
 
-test("applies the correct color for low and high contrast", () => {
+test("낮은 명암비와 높은 명암비에 따라 글자 색이 올바르게 적용됨", () => {
   render(<Contrasts />);
 
   expect(screen.getByRole("heading", { name: "낮은 명암비" })).toHaveClass(
-    "c_text.muted"
+    "c_text.muted",
   );
 
   expect(screen.getByRole("heading", { name: "높은 명암비" })).toHaveClass(
-    "c_text"
+    "c_text",
   );
 });
