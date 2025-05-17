@@ -17,7 +17,7 @@ export const Default: StoryObj = {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          action("on-submit")(event);
+          action("onSubmit")(event);
         }}
         style={{ width: 500 }}
       >
