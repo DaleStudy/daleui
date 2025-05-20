@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
-    "@eslint/js": "^9.26.0",
+    "@eslint/js": "^9.27.0",
     "@faker-js/faker": "^9.7.0",
     "@pandacss/dev": "^0.53.6",
     "@storybook/addon-a11y": "^8.6.14",
