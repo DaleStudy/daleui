@@ -1,5 +1,5 @@
 import { Meta, ColorPalette, ColorItem } from "@storybook/blocks";
-import { colors, semanticColors } from "./colors.ts";
+import { colors, semanticColors } from "./newColors.ts";
 
 # Colors
 
@@ -15,9 +15,9 @@ import { colors, semanticColors } from "./colors.ts";
   />
   <ColorItem
     title="초록 (dark)"
-    subtitle="colors.tealDark"
+    subtitle="colors.darkTeal"
     colors={Object.fromEntries(
-      Object.entries(colors.tealDark).map(([name, { value }]) => [name, value]),
+      Object.entries(colors.darkTeal).map(([name, { value }]) => [name, value]),
     )}
   />
   <ColorItem
@@ -29,9 +29,9 @@ import { colors, semanticColors } from "./colors.ts";
   />
   <ColorItem
     title="보라 (dark)"
-    subtitle="colors.violetDark"
+    subtitle="colors.darkViolet"
     colors={Object.fromEntries(
-      Object.entries(colors.violetDark).map(([name, { value }]) => [
+      Object.entries(colors.darkViolet).map(([name, { value }]) => [
         name,
         value,
       ]),
@@ -46,23 +46,24 @@ import { colors, semanticColors } from "./colors.ts";
   />
   <ColorItem
     title="빨강 (dark)"
-    subtitle="colors.redDark"
+    subtitle="colors.darkRed"
     colors={Object.fromEntries(
       Object.entries(colors.redDark).map(([name, { value }]) => [name, value]),
+      Object.entries(colors.darkRed).map(([name, { value }]) => [name, value]),
     )}
   />
   <ColorItem
     title="노랑"
-    subtitle="colors.yellow"
+    subtitle="colors.amber"
     colors={Object.fromEntries(
-      Object.entries(colors.yellow).map(([name, { value }]) => [name, value]),
+      Object.entries(colors.amber).map(([name, { value }]) => [name, value]),
     )}
   />
   <ColorItem
     title="노랑 (dark)"
-    subtitle="colors.yellowDark"
+    subtitle="colors.darkAmber"
     colors={Object.fromEntries(
-      Object.entries(colors.yellowDark).map(([name, { value }]) => [
+      Object.entries(colors.darkAmber).map(([name, { value }]) => [
         name,
         value,
       ]),
@@ -70,16 +71,64 @@ import { colors, semanticColors } from "./colors.ts";
   />
   <ColorItem
     title="회색"
-    subtitle="colors.gray"
+    subtitle="colors.slate"
     colors={Object.fromEntries(
-      Object.entries(colors.gray).map(([name, { value }]) => [name, value]),
+      Object.entries(colors.slate).map(([name, { value }]) => [name, value]),
     )}
   />
   <ColorItem
     title="회색 (dark)"
-    subtitle="colors.grayDark"
+    subtitle="colors.darkSlate"
     colors={Object.fromEntries(
-      Object.entries(colors.grayDark).map(([name, { value }]) => [name, value]),
+      Object.entries(colors.darkSlate).map(([name, { value }]) => [
+        name,
+        value,
+      ]),
+    )}
+  />
+  <ColorItem
+    title="세이지"
+    subtitle="colors.sage"
+    colors={Object.fromEntries(
+      Object.entries(colors.sage).map(([name, { value }]) => [name, value]),
+    )}
+  />
+  <ColorItem
+    title="세이지 (dark)"
+    subtitle="colors.darkSage"
+    colors={Object.fromEntries(
+      Object.entries(colors.darkSage).map(([name, { value }]) => [name, value]),
+    )}
+  />
+  <ColorItem
+    title="파랑"
+    subtitle="colors.blue"
+    colors={Object.fromEntries(
+      Object.entries(colors.blue).map(([name, { value }]) => [name, value]),
+    )}
+  />
+  <ColorItem
+    title="파랑 (dark)"
+    subtitle="colors.darkBlue"
+    colors={Object.fromEntries(
+      Object.entries(colors.darkBlue).map(([name, { value }]) => [name, value]),
+    )}
+  />
+  <ColorItem
+    title="초록"
+    subtitle="colors.green"
+    colors={Object.fromEntries(
+      Object.entries(colors.green).map(([name, { value }]) => [name, value]),
+    )}
+  />
+  <ColorItem
+    title="초록 (dark)"
+    subtitle="colors.darkGreen"
+    colors={Object.fromEntries(
+      Object.entries(colors.darkGreen).map(([name, { value }]) => [
+        name,
+        value,
+      ]),
     )}
   />
 </ColorPalette>
