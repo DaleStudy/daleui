@@ -1,5 +1,6 @@
 import { composeStories } from "@storybook/react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { expect, test, vi } from "vitest";
 import * as stories from "./Checkbox.stories";
 import { Checkbox } from "./Checkbox";
@@ -11,7 +12,8 @@ test("label과 함께 체크박스가 올바르게 렌더링됨", () => {
   expect(screen.getByText("기본 체크박스")).toBeInTheDocument();
 });
 
-test("체크박스에 체크 시, tone 속성이 올바르게 적용됨", () => {
+test("체크박스에 체크 시, tone 속성이 올바르게 적용됨", async () => {
+  const user = userEvent.setup();
   render(<Tones />);
 
   const neutralCheckbox = screen.getByLabelText("중립 색조");
@@ -20,10 +22,11 @@ test("체크박스에 체크 시, tone 속성이 올바르게 적용됨", () => 
   const warningCheckbox = screen.getByLabelText("경고 색조");
 
   // Simulate checking each checkbox
-  fireEvent.click(neutralCheckbox);
-  fireEvent.click(accentCheckbox);
-  fireEvent.click(dangerCheckbox);
-  fireEvent.click(warningCheckbox);
+
+  await user.click(neutralCheckbox);
+  await user.click(accentCheckbox);
+  await user.click(dangerCheckbox);
+  await user.click(warningCheckbox);
 
   // Check for data-state attribute which indicates checked state
   expect(neutralCheckbox).toHaveAttribute("data-state", "checked");
@@ -83,8 +86,9 @@ test("필수 표시가 올바르게 표시됨", () => {
   expect(optionalLabel).not.toContainHTML("*");
 });
 
-test("체크박스 클릭 시, onChange 핸들러가 호출됨", () => {
+test("체크박스 클릭 시, onChange 핸들러가 호출됨", async () => {
   const handleChange = vi.fn();
+  const user = userEvent.setup();
 
   render(
     <Checkbox
@@ -100,18 +104,19 @@ test("체크박스 클릭 시, onChange 핸들러가 호출됨", () => {
   expect(checkbox).toHaveAttribute("data-state", "unchecked");
 
   // Click to check
-  fireEvent.click(checkbox);
+  await user.click(checkbox);
   expect(handleChange).toHaveBeenCalledTimes(1);
   expect(handleChange).toHaveBeenCalledWith(true, undefined);
 
   // Click again to uncheck
-  fireEvent.click(checkbox);
+  await user.click(checkbox);
   expect(handleChange).toHaveBeenCalledTimes(2);
   expect(handleChange).toHaveBeenCalledWith(false, undefined);
 });
 
-test("value값이 있을 경우, 체크 시 value가 onChange 핸들러로 전달됨", () => {
+test("value값이 있을 경우, 체크 시 value가 onChange 핸들러로 전달됨", async () => {
   const handleChange = vi.fn();
+  const user = userEvent.setup();
 
   render(
     <Checkbox
@@ -125,7 +130,7 @@ test("value값이 있을 경우, 체크 시 value가 onChange 핸들러로 전�
   const checkbox = screen.getByLabelText("값이 있는 체크박스");
 
   // Click to check
-  fireEvent.click(checkbox);
+  await user.click(checkbox);
   expect(handleChange).toHaveBeenCalledWith(true, "test-value");
 });
 
@@ -141,7 +146,9 @@ test("required 속성이 올바르게 처리됨", () => {
   expect(checkbox).toHaveAttribute("aria-required", "true");
 });
 
-test("체크박스가 클릭될 때 체크 상태가 전환됨", () => {
+test("체크박스가 클릭될 때 체크 상태가 전환됨", async () => {
+  const user = userEvent.setup();
+
   render(<Basic />);
 
   const checkbox = screen.getByLabelText("기본 체크박스");
@@ -150,11 +157,11 @@ test("체크박스가 클릭될 때 체크 상태가 전환됨", () => {
   expect(checkbox).toHaveAttribute("data-state", "unchecked");
 
   // Click to check
-  fireEvent.click(checkbox);
+  await user.click(checkbox);
   expect(checkbox).toHaveAttribute("data-state", "checked");
 
   // Click again to uncheck
-  fireEvent.click(checkbox);
+  await user.click(checkbox);
   expect(checkbox).toHaveAttribute("data-state", "unchecked");
 });
 
