@@ -11,10 +11,12 @@ export interface TextInput
   tone?: Tone;
   /** 크기 */
   size?: TextInputSize;
+  /** 처음 렌더링될 때 입력되는 값*/
+  defaultValue?: string;
   /** 값 */
   value?: string;
   /** 변경 이벤트 핸들러 */
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /** 텍스트인풋 활성화 여부 */
   disabled?: boolean;
   /** 안내문구 */
