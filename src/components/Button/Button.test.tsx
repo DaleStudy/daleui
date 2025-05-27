@@ -1,5 +1,6 @@
 import { composeStories } from "@storybook/react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { expect, test, vi } from "vitest";
 import * as stories from "./Button.stories";
 import { Button } from "./Button";
@@ -78,8 +79,9 @@ test("버튼이 type='submit'으로 지정되었을 때 지정한대로 올바�
   expect(button).toHaveAttribute("type", "submit");
 });
 
-test("type='submit'으로 지정된 버튼 클릭 시, form이 제출됨", () => {
+test("type='submit'으로 지정된 버튼 클릭 시, form이 제출됨", async () => {
   const handleSubmit = vi.fn();
+  const user = userEvent.setup();
   render(
     <form onSubmit={handleSubmit}>
       <Button type="submit" variant="solid">
@@ -89,12 +91,14 @@ test("type='submit'으로 지정된 버튼 클릭 시, form이 제출됨", () =>
   );
 
   const submitButton = screen.getByText("Submit Button");
-  fireEvent.click(submitButton);
+  await user.click(submitButton);
   expect(handleSubmit).toHaveBeenCalledTimes(1);
 });
 
-test("type='button'으로 지정된 버튼 클릭 시 form이 제출되지 않음", () => {
+test("type='button'으로 지정된 버튼 클릭 시 form이 제출되지 않음", async () => {
   const handleSubmit = vi.fn();
+  const user = userEvent.setup();
+
   render(
     <form onSubmit={handleSubmit}>
       <Button type="button" variant="solid">
@@ -103,6 +107,6 @@ test("type='button'으로 지정된 버튼 클릭 시 form이 제출되지 않�
     </form>,
   );
   const buttonTypeButton = screen.getByText("Button Type Button");
-  fireEvent.click(buttonTypeButton);
+  await user.click(buttonTypeButton);
   expect(handleSubmit).toHaveBeenCalledTimes(0);
 });
