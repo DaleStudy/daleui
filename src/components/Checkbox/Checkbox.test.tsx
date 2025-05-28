@@ -35,15 +35,17 @@ test("체크박스에 체크 시, tone 속성이 올바르게 적용됨", async 
   expect(warningCheckbox).toHaveAttribute("data-state", "checked");
 
   // Check for correct background colors based on tone
-  expect(neutralCheckbox).toHaveClass("[&[data-state='checked']]:bg-c_bg");
+  expect(neutralCheckbox).toHaveClass(
+    "[&[data-state='checked']]:bg-c_background.interactive.neutral.default",
+  );
   expect(accentCheckbox).toHaveClass(
-    "[&[data-state='checked']]:bg-c_bg.accent",
+    "[&[data-state='checked']]:bg-c_background.interactive.brand.default",
   );
   expect(dangerCheckbox).toHaveClass(
-    "[&[data-state='checked']]:bg-c_bg.danger",
+    "[&[data-state='checked']]:bg-c_background.interactive.danger.default",
   );
   expect(warningCheckbox).toHaveClass(
-    "[&[data-state='checked']]:bg-c_bg.warning",
+    "[&[data-state='checked']]:bg-c_background.accent.amber",
   );
 });
 
@@ -172,5 +174,5 @@ test("required 속성값이 true일 경우, label에 별표가 추가됨", () =>
 
   const requiredIndicator = screen.getByText("*");
   expect(requiredIndicator).toBeInTheDocument();
-  expect(requiredIndicator).toHaveClass("c_text.danger");
+  expect(requiredIndicator).toHaveClass("c_foreground.system.danger");
 });

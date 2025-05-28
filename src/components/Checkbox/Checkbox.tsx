@@ -48,7 +48,7 @@ export const Checkbox = ({
         alignItems: "center",
         gap: "8",
         cursor: "pointer",
-        color: "text",
+        color: "foreground.default.primary",
       })}
     >
       <CheckboxPrimitive.Root
@@ -74,7 +74,9 @@ export const Checkbox = ({
         </CheckboxPrimitive.Indicator>
       </CheckboxPrimitive.Root>
       {label}
-      {required && <span className={css({ color: "text.danger" })}>*</span>}
+      {required && (
+        <span className={css({ color: "foreground.system.danger" })}>*</span>
+      )}
     </label>
   );
 };
@@ -96,7 +98,7 @@ const styles = cva({
     transition: "0.2s",
     outline: "none",
     "&:hover": {
-      backgroundColor: "bg.hover",
+      backgroundColor: "background.interactive.neutral.hover",
     },
     "&:focus": {
       outline: "3px solid",
@@ -114,49 +116,50 @@ const styles = cva({
     tone: {
       neutral: {
         "&[data-state='checked']": {
-          backgroundColor: "bg",
-          borderColor: "border",
-          color: "text",
+          backgroundColor: "background.interactive.neutral.default",
+          borderColor: "borders.interactive.neutral.default",
+          color: "foreground.default.primary",
         },
         "&:disabled[data-state='checked']": {
-          backgroundColor: "bg",
-          borderColor: "border",
+          backgroundColor: "background.interactive.neutral.default",
+          borderColor: "borders.interactive.neutral.default",
+          color: "foreground.default.primary",
         },
         "&:focus": {
-          outlineColor: "border",
+          outlineColor: "borders.interactive.focusRing",
         },
       },
       accent: {
         "&[data-state='checked']": {
-          backgroundColor: "bg.accent",
-          borderColor: "border.accent",
-          color: "text.accent",
+          backgroundColor: "background.interactive.brand.default",
+          borderColor: "borders.interactive.brand.default",
+          color: "foreground.Inverse.primary",
         },
         "&:disabled[data-state='checked']": {
-          backgroundColor: "bg.accent",
-          borderColor: "border.accent",
+          backgroundColor: "background.interactive.brand.default",
+          borderColor: "borders.interactive.brand.default",
         },
       },
       danger: {
         "&[data-state='checked']": {
-          backgroundColor: "bg.danger",
-          borderColor: "border.danger",
-          color: "text.danger",
+          backgroundColor: "background.interactive.danger.default",
+          borderColor: "borders.system.danger",
+          color: "foreground.Inverse.primary",
         },
         "&:disabled[data-state='checked']": {
-          backgroundColor: "bg.danger",
-          borderColor: "border.danger",
+          backgroundColor: "background.interactive.danger.default",
+          borderColor: "borders.system.danger",
         },
       },
       warning: {
         "&[data-state='checked']": {
-          backgroundColor: "bg.warning",
-          borderColor: "border.warning",
-          color: "text.warning",
+          backgroundColor: "background.accent.amber",
+          borderColor: "borders.system.warning",
+          color: "foreground.accent.amber",
         },
         "&:disabled[data-state='checked']": {
-          backgroundColor: "bg.warning",
-          borderColor: "border.warning",
+          backgroundColor: "background.accent.amber",
+          borderColor: "borders.system.warning",
         },
       },
     },
@@ -166,7 +169,7 @@ const styles = cva({
       tone: "accent",
       css: {
         "&:focus": {
-          outlineColor: "border.accent",
+          outlineColor: "borders.interactive.brand.focus",
         },
       },
     },
@@ -174,7 +177,7 @@ const styles = cva({
       tone: "danger",
       css: {
         "&:focus": {
-          outlineColor: "border.danger",
+          outlineColor: "borders.system.danger",
         },
       },
     },
@@ -182,7 +185,7 @@ const styles = cva({
       tone: "warning",
       css: {
         "&:focus": {
-          outlineColor: "border.warning",
+          outlineColor: "borders.system.warning",
         },
       },
     },
