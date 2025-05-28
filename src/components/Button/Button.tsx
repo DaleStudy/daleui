@@ -108,14 +108,18 @@ const styles = cva({
       variant: "solid",
       tone: "neutral",
       css: {
-        background: "bg",
-        color: "text",
-        "&:active, &:hover": {
-          background: "bg.hover",
+        background: "background.interactive.neutral.default",
+        color: "foreground.default.primary",
+        "&:hover": {
+          background: "background.interactive.neutral.hover",
         },
-        "&:focus": {
-          outlineColor: "border.neutral",
-          outline: "3px solid",
+        "&:active": {
+          background: "background.interactive.neutral.press",
+        },
+        "&:focus-visible": {
+          outlineColor: "borders.interactive.focusRing",
+          outlineWidth: "2px",
+          outlineStyle: "solid",
           outlineOffset: "2px",
         },
       },
@@ -124,14 +128,18 @@ const styles = cva({
       variant: "solid",
       tone: "accent",
       css: {
-        background: "bg.accent",
-        color: "text.accent",
-        "&:active, &:hover": {
-          background: "bg.hover.accent",
+        background: "background.interactive.brand.default",
+        color: "foreground.Inverse.primary",
+        "&:hover": {
+          background: "background.interactive.brand.hover",
         },
-        "&:focus": {
-          outlineColor: "border.accent",
-          outline: "3px solid",
+        "&:active": {
+          background: "background.interactive.brand.press",
+        },
+        "&:focus-visible": {
+          outlineColor: "borders.interactive.focusRing",
+          outlineWidth: "2px",
+          outlineStyle: "solid",
           outlineOffset: "2px",
         },
       },
@@ -140,14 +148,18 @@ const styles = cva({
       variant: "solid",
       tone: "danger",
       css: {
-        background: "bg.danger",
-        color: "text.danger",
-        "&:active, &:hover": {
-          background: "bg.hover.danger",
+        background: "background.interactive.danger.default",
+        color: "foreground.Inverse.primary",
+        "&:hover": {
+          background: "background.interactive.danger.hover",
         },
-        "&:focus": {
-          outlineColor: "border.danger",
-          outline: "3px solid",
+        "&:active": {
+          background: "background.interactive.danger.press",
+        },
+        "&:focus-visible": {
+          outlineColor: "borders.interactive.focusRing",
+          outlineWidth: "2px",
+          outlineStyle: "solid",
           outlineOffset: "2px",
         },
       },
@@ -156,14 +168,27 @@ const styles = cva({
       variant: "solid",
       tone: "warning",
       css: {
-        background: "bg.warning",
-        color: "text.warning",
-        "&:active, &:hover": {
-          background: "bg.hover.warning",
+        // background.interactive.warning이 없으므로 accent.amber 활용
+        // background.accent.amber는 밝은 색이므로, 텍스트는 어두운 색 사용
+        background: "background.accent.amber",
+        color: "foreground.accent.amber",
+        "&:hover": {
+          // background.accent.amber에 hover가 없으므로, 유사한 색이나 직접 지정
+          background: {
+            base: "{colors.amber.4}",
+            _dark: "{colors.darkAmber.6}",
+          },
         },
-        "&:focus": {
-          outlineColor: "border.warning",
-          outline: "3px solid",
+        "&:active": {
+          background: {
+            base: "{colors.amber.5}",
+            _dark: "{colors.darkAmber.7}",
+          },
+        },
+        "&:focus-visible": {
+          outlineColor: "borders.interactive.focusRing",
+          outlineWidth: "2px",
+          outlineStyle: "solid",
           outlineOffset: "2px",
         },
       },
@@ -173,14 +198,14 @@ const styles = cva({
       tone: "neutral",
       css: {
         border: "3px solid",
-        borderColor: "border",
-        color: "text",
+        borderColor: "borders.interactive.neutral.default",
+        color: "foreground.interactive.neutral.default",
         "&:active, &:hover": {
-          background: "bg.hover",
-          color: "text.muted",
+          background: "background.interactive.neutral.press",
+          color: "foreground.interactive.neutral.muted",
         },
         "&:focus": {
-          outlineColor: "border.neutral",
+          outlineColor: "borders.interactive.focusRing",
           outline: "3px solid",
           outlineOffset: "2px",
         },
@@ -191,14 +216,14 @@ const styles = cva({
       tone: "accent",
       css: {
         border: "3px solid",
-        borderColor: "border.accent",
-        color: "text.accent",
+        borderColor: "borders.interactive.brand.default",
+        color: "foreground.interactive.brand.default",
         "&:active, &:hover": {
-          background: "bg.hover.accent",
-          color: "text.muted.accent",
+          background: "background.interactive.brand.hover",
+          color: "foreground.Inverse.primary",
         },
         "&:focus": {
-          outlineColor: "border.accent",
+          outlineColor: "borders.interactive.focusRing",
           outline: "3px solid",
           outlineOffset: "2px",
         },
@@ -209,14 +234,14 @@ const styles = cva({
       tone: "danger",
       css: {
         border: "3px solid",
-        borderColor: "border.danger",
-        color: "text.danger",
+        borderColor: "borders.system.danger",
+        color: "foreground.system.danger",
         "&:active, &:hover": {
-          background: "bg.hover.danger",
-          color: "text.muted.danger",
+          background: "background.interactive.danger.hover",
+          color: "foreground.Inverse.primary",
         },
         "&:focus": {
-          outlineColor: "border.danger",
+          outlineColor: "borders.interactive.focusRing",
           outline: "3px solid",
           outlineOffset: "2px",
         },
@@ -227,11 +252,11 @@ const styles = cva({
       tone: "warning",
       css: {
         border: "3px solid",
-        borderColor: "border.warning",
-        color: "text.warning",
+        borderColor: "borders.system.warning",
+        color: "foreground.system.warning",
         "&:active, &:hover": {
-          background: "bg.hover.warning",
-          color: "text.muted.warning",
+          background: "background.accent.amber",
+          // color: "text.muted.warning",
         },
         "&:focus": {
           outlineColor: "border.warning",
