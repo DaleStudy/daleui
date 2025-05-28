@@ -16,17 +16,27 @@ test("텍스트와 함께 버튼이 올바르게 렌더링됨", () => {
 test("variant 속성이 올바르게 적용됨", () => {
   render(<Variants />);
 
-  expect(screen.getByText("솔리드 버튼")).toHaveClass("bg_bg");
+  expect(screen.getByText("솔리드 버튼")).toHaveClass(
+    "bg_background.interactive.neutral.default",
+  );
   expect(screen.getByText("아웃라인 버튼")).toHaveClass("bd_3px_solid");
 });
 
 test("tone 속성이 올바르게 적용됨", () => {
   render(<Tones />);
 
-  expect(screen.getByText("중립 색조")).toHaveClass("bg_bg");
-  expect(screen.getByText("강조 색조")).toHaveClass("bg_bg.accent");
-  expect(screen.getByText("위험 색조")).toHaveClass("bg_bg.danger");
-  expect(screen.getByText("경고 색조")).toHaveClass("bg_bg.warning");
+  expect(screen.getByText("중립 색조")).toHaveClass(
+    "bg_background.interactive.neutral.default",
+  );
+  expect(screen.getByText("강조 색조")).toHaveClass(
+    "bg_background.interactive.brand.default",
+  );
+  expect(screen.getByText("위험 색조")).toHaveClass(
+    "bg_background.interactive.danger.default",
+  );
+  expect(screen.getByText("경고 색조")).toHaveClass(
+    "bg_background.accent.amber",
+  );
 });
 
 test("size prop에 따라 font size가 올바르게 적용됨", () => {
