@@ -36,7 +36,7 @@ export const Default: StoryObj = {
           <input
             style={{
               border: "1px solid lightgray",
-              borderRadius: "md",
+              borderRadius: "0.5rem",
               paddingLeft: "0.5rem",
               height: 50,
             }}
@@ -47,7 +47,7 @@ export const Default: StoryObj = {
           <input
             style={{
               border: "1px solid lightgray",
-              borderRadius: "md",
+              borderRadius: "0.5rem",
               paddingLeft: "0.5rem",
               height: 50,
             }}
