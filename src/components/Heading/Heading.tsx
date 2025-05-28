@@ -65,8 +65,8 @@ const styles = cva({
       5: { fontSize: "md" },
     },
     muted: {
-      true: { color: "text.muted" },
-      false: { color: "text" },
+      true: { color: "foreground.default.secondary" },
+      false: { color: "foreground.default.primary" },
     },
   },
 });
