@@ -111,31 +111,34 @@ describe("behavior test", () => {
   });
 
   test("클릭 시, 해당 URL로 올바르게 잘 이동됨", async () => {
+    const user = userEvent.setup();
     const href = faker.internet.url({ appendSlash: true });
     render(<Basic href={href} />);
 
     const link = screen.getByRole("link");
     expect(link).toHaveAttribute("href", href);
-    await userEvent.click(link);
+    await user.click(link);
 
     expect(window.location.href).toBe(href);
   });
 
   test("click 이벤트가 올바르게 처리됨", async () => {
     const handleClick = vi.fn();
+    const user = userEvent.setup();
     render(<Basic href="#" onClick={handleClick} />);
 
     const link = screen.getByRole("link");
-    await userEvent.click(link);
+    await user.click(link);
 
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
   test("키보드로 link에 포커스가 잘 됨", async () => {
     const href = faker.internet.url({ appendSlash: true });
+    const user = userEvent.setup();
     render(<Basic href={href} />);
 
-    await userEvent.tab();
+    await user.tab();
     const link = screen.getByRole("link");
 
     expect(link).toHaveFocus();
@@ -143,10 +146,11 @@ describe("behavior test", () => {
 
   test("키보드로 link를 클릭 시, 해당 href로 올바르게 이동됨", async () => {
     const href = faker.internet.url({ appendSlash: true });
+    const user = userEvent.setup();
     render(<Basic href={href} />);
 
-    await userEvent.tab();
-    await userEvent.keyboard("{Enter}");
+    await user.tab();
+    await user.keyboard("{Enter}");
 
     expect(window.location.href).toBe(href);
   });
