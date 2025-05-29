@@ -125,7 +125,6 @@ Required.decorators = [
   },
 ];
 
-
 export const Tones: Story = {
   render: () => {
     return (
