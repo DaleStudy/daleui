@@ -4,6 +4,8 @@ import { css, cva } from "../../../styled-system/css";
 import type { FontSize, FontWeight } from "../../tokens/typography";
 
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  /** 링크 URL (필수) */
+  href: string;
   /** 색조 */
   tone?: Tone;
   /** 크기 */
@@ -25,6 +27,7 @@ interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
  */
 export function Link({
   children,
+  href,
   tone = "neutral",
   size,
   weight,
@@ -43,6 +46,7 @@ export function Link({
           fontWeight: weight,
         }),
       )}
+      href={href}
       target={target}
       rel={target === "_blank" ? "noopener noreferrer" : rel}
       {...props}
