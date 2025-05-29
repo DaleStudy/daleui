@@ -75,42 +75,42 @@ const colorStyles = cva({
     {
       muted: false,
       tone: "neutral",
-      css: { color: "text" },
+      css: { color: "black" },
     },
     {
       muted: false,
       tone: "accent",
-      css: { color: "text.accent" },
+      css: { color: "blue" },
     },
     {
       muted: false,
       tone: "danger",
-      css: { color: "text.danger" },
+      css: { color: "red" },
     },
     {
       muted: false,
       tone: "warning",
-      css: { color: "text.warning" },
+      css: { color: "yellow" },
     },
     {
       muted: true,
       tone: "neutral",
-      css: { color: "text.muted" },
+      css: { color: "gray" },
     },
     {
       muted: true,
       tone: "accent",
-      css: { color: "text.muted.accent" },
+      css: { color: "blue" },
     },
     {
       muted: true,
       tone: "danger",
-      css: { color: "text.muted.danger" },
+      css: { color: "red" },
     },
     {
       muted: true,
       tone: "warning",
-      css: { color: "text.muted.warning" },
+      css: { color: "yellow" },
     },
   ],
 });

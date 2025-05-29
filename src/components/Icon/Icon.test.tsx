@@ -24,10 +24,10 @@ test.each([
 });
 
 test.each([
-  ["neutral", "c_text"],
-  ["accent", "c_text.accent"],
-  ["danger", "c_text.danger"],
-  ["warning", "c_text.warning"],
+  ["neutral", "c_black"],
+  ["accent", "c_blue"],
+  ["danger", "c_red"],
+  ["warning", "c_yellow"],
 ] as const)('tone "%s"값에 따라 class가 올바르게 적용됨', (tone, className) => {
   const { container } = render(<Basic tone={tone} muted={false} />);
 
@@ -35,8 +35,8 @@ test.each([
 });
 
 test.each([
-  [false, "c_text"],
-  [true, "c_text.muted"],
+  [false, "c_black"],
+  [true, "c_gray"],
 ] as const)("muted 값에 따라 class가 올바르게 적용됨", (muted, className) => {
   const { container } = render(<Basic tone="neutral" muted={muted} />);
 

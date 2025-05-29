@@ -1,6 +1,6 @@
 import { type AnchorHTMLAttributes } from "react";
-import type { Tone } from "../../tokens/colors";
 import { css, cva } from "../../../styled-system/css";
+import type { Tone } from "../../tokens/colors";
 import type { FontSize, FontWeight } from "../../tokens/typography";
 
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -83,9 +83,9 @@ const styles = cva({
       tone: "neutral",
       muted: false,
       css: {
-        color: "text",
+        color: "foreground.default.tertiary",
         "&:active, &:hover": {
-          color: "text.muted",
+          color: "foreground.default.secondary",
         },
       },
     },
@@ -93,9 +93,9 @@ const styles = cva({
       tone: "accent",
       muted: false,
       css: {
-        color: "text.accent",
+        color: "accent.brand",
         "&:active, &:hover": {
-          color: "text.muted.accent",
+          color: "accent.brand",
         },
       },
     },
@@ -103,9 +103,9 @@ const styles = cva({
       tone: "danger",
       muted: false,
       css: {
-        color: "text.danger",
+        color: "system.danger",
         "&:active, &:hover": {
-          color: "text.muted.danger",
+          color: "system.danger",
         },
       },
     },
@@ -113,9 +113,9 @@ const styles = cva({
       tone: "warning",
       muted: false,
       css: {
-        color: "text.warning",
+        color: "system.warning",
         "&:active, &:hover": {
-          color: "text.muted.warning",
+          color: "system.warning",
         },
       },
     },
@@ -123,9 +123,9 @@ const styles = cva({
       tone: "neutral",
       muted: true,
       css: {
-        color: "text.muted",
+        color: "foreground.default.disabled",
         "&:active, &:hover": {
-          color: "text",
+          color: "foreground.default.tertiary",
         },
       },
     },
@@ -133,9 +133,9 @@ const styles = cva({
       tone: "accent",
       muted: true,
       css: {
-        color: "text.muted.accent",
+        color: "foreground.default.disabled",
         "&:active, &:hover": {
-          color: "text.accent",
+          color: "accent.brand",
         },
       },
     },
@@ -143,9 +143,9 @@ const styles = cva({
       tone: "danger",
       muted: true,
       css: {
-        color: "text.muted.danger",
+        color: "foreground.default.disabled",
         "&:active, &:hover": {
-          color: "text.danger",
+          color: "system.danger",
         },
       },
     },
@@ -153,9 +153,9 @@ const styles = cva({
       tone: "warning",
       muted: true,
       css: {
-        color: "text.muted.warning",
+        color: "foreground.default.disabled",
         "&:active, &:hover": {
-          color: "text.warning",
+          color: "system.warning",
         },
       },
     },
@@ -163,12 +163,14 @@ const styles = cva({
       underline: true,
       css: {
         textDecoration: "underline",
+        color: "foreground.default.tertiary",
       },
     },
     {
       underline: false,
       css: {
         textDecoration: "none",
+        color: "foreground.default.tertiary",
       },
     },
   ],
