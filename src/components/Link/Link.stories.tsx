@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { vstack } from "../../../styled-system/patterns";
-import { Link } from "./Link";
 import { Icon } from "../Icon/Icon";
+import { Link } from "./Link";
 
 const meta: Meta<typeof Link> = {
   component: Link,

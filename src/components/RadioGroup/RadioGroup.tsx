@@ -243,7 +243,6 @@ const radioCircleStyles = cva({
     position: "absolute",
     pointerEvents: "none",
     transition: "0.2s",
-
     "input:hover + &": {
       backgroundColor: "bg.hover",
     },
@@ -251,43 +250,45 @@ const radioCircleStyles = cva({
   variants: {
     tone: {
       neutral: {
+        borderColor: "foreground.default.primary",
         "[data-state='checked'] + &": {
-          borderColor: "border",
+          borderColor: "foreground.default.primary",
         },
         "[data-state='checked']:focus-visible + &": {
-          outlineColor: "border",
+          outlineColor: "foreground.default.primary",
         },
       },
       accent: {
-        borderColor: "border.accent",
+        borderColor: "accent.brand",
         "[data-state='checked'] + &": {
-          borderColor: "border.accent",
+          borderColor: "accent.brand",
         },
         "[data-state='checked']:focus-visible + &": {
-          outlineColor: "border.accent",
+          outlineColor: "accent.brand",
         },
       },
       danger: {
-        borderColor: "border.danger",
+        borderColor: "system.danger",
         "[data-state='checked'] + &": {
-          borderColor: "border.danger",
+          borderColor: "system.danger",
         },
         "[data-state='checked']:focus-visible + &": {
-          outlineColor: "border.danger",
+          outlineColor: "system.danger",
         },
       },
       warning: {
-        borderColor: "border.warning",
+        borderColor: "system.warning",
         "[data-state='checked'] + &": {
-          borderColor: "border.warning",
+          borderColor: "system.warning",
         },
         "[data-state='checked']:focus-visible + &": {
-          outlineColor: "border.warning",
+          outlineColor: "system.warning",
         },
       },
     },
     disabled: {
       true: {
+        borderColor: "foreground.default.disabled",
         opacity: 0.5,
       },
     },
@@ -320,30 +321,36 @@ const radioDotStyles = cva({
       width: "2.5",
       height: "2.5",
       borderRadius: "full",
-      backgroundColor: "text",
+      backgroundColor: "foreground.default.primary",
     },
   },
   variants: {
     tone: {
       neutral: {
         "&::after": {
-          backgroundColor: "text",
+          backgroundColor: "foreground.default.primary",
         },
       },
       accent: {
         "&::after": {
-          backgroundColor: "text.accent",
+          backgroundColor: "accent.brand",
         },
       },
       danger: {
         "&::after": {
-          backgroundColor: "text.danger",
+          backgroundColor: "system.danger",
         },
       },
       warning: {
         "&::after": {
-          backgroundColor: "text.warning",
+          backgroundColor: "system.warning",
         },
+      },
+    },
+    disabled: {
+      true: {
+        backgroundColor: "foreground.default.disabled",
+        opacity: 0.5,
       },
     },
   },
