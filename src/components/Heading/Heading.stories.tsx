@@ -11,6 +11,27 @@ export default {
     children: "제목",
     level: 1,
   },
+  argTypes: {
+    level: {
+      control: { type: "select" },
+      options: [1, 2, 3, 4, 5],
+      description: "헤딩 레벨",
+    },
+    size: {
+      control: { type: "select" },
+      options: ["xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl", "8xl"],
+      description: "글꼴 크기",
+    },
+    weight: {
+      control: { type: "radio" },
+      options: ["normal", "medium", "semibold", "bold"],
+      description: "글꼴 굵기",
+    },
+    muted: {
+      control: { type: "boolean" },
+      description: "명암비 낮출지",
+    },
+  },
 } satisfies Meta<typeof Heading>;
 
 export const Basic: StoryObj<typeof Heading> = {};
@@ -33,9 +54,6 @@ export const Levels: StoryObj<typeof Heading> = {
         </Heading>
         <Heading {...args} level={5}>
           5 단계
-        </Heading>
-        <Heading {...args} level={6}>
-          6 단계
         </Heading>
       </div>
     );
