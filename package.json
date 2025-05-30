@@ -15,7 +15,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "prettier": "prettier --check .",
+    "format": "prettier --check .",
     "lint": "eslint .",
     "test": "vitest",
     "preview": "vite preview",
