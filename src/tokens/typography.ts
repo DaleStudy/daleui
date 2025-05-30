@@ -80,22 +80,20 @@ export const textStyles = {
 };
 
 export const fonts = {
-  sans: { value: '"Pretendard Variable", "Noto Sans KR", sans-serif' },
-  // TODO customize serif and mono font styles when needed
+  sans: { value: "Pretendard Variable" },
+  mono: { value: "JetBrains Mono" },
 };
 
 export const fontWeights = {
-  thin: { value: "100" },
-  light: { value: "300" },
   normal: { value: "400" },
   medium: { value: "500" },
+  semibold: { value: "600" },
   bold: { value: "700" },
 };
 
 export type FontWeight = keyof typeof fontWeights;
 
 export const fontSizes = {
-  "2xs": { value: "0.5rem" },
   xs: { value: "0.75rem" },
   sm: { value: "0.875rem" },
   md: { value: "1rem" },
@@ -104,29 +102,69 @@ export const fontSizes = {
   "2xl": { value: "1.5rem" },
   "3xl": { value: "1.875rem" },
   "4xl": { value: "2.25rem" },
-  "5xl": { value: "3rem" },
-  "6xl": { value: "3.75rem" },
-  "7xl": { value: "4.5rem" },
-  "8xl": { value: "6rem" },
-  "9xl": { value: "8rem" },
+  "5xl": { value: "2.75rem" },
+  "6xl": { value: "3.25rem" },
+  "7xl": { value: "3.75rem" },
+  "8xl": { value: "4.5rem" },
 };
 
 export type FontSize = keyof typeof fontSizes;
 
 export const letterSpacings = {
-  tighter: { value: "-0.05em" },
-  tight: { value: "-0.025em" },
-  normal: { value: "0em" },
-  wide: { value: "0.025em" },
-  wider: { value: "0.05em" },
-  widest: { value: "0.1em" },
+  tight: { value: "-0.1" },
+  balanced: { value: "0" },
 };
 
 export const lineHeights = {
-  none: { value: "1" },
-  tight: { value: "1.25" },
-  snug: { value: "1.375" },
-  normal: { value: "1.5" },
-  relaxed: { value: "1.625" },
-  loose: { value: "2" },
+  tight: { value: "1.2" },
+  balanced: { value: "1.5" },
+  relaxed: { value: "1.75" },
 };
+
+export const headingStyles = {
+  "h1": {
+    value: {
+      fontFamily: "sans",
+      fontSize: "3xl",    
+      fontWeight: "bold",
+      lineHeight: "tight",
+      letterSpacing: "tight",
+    },
+  },
+  "h2": {
+    value: {
+      fontFamily: "sans", 
+      fontSize: "2xl", 
+      fontWeight: "bold",
+      lineHeight: "tight",
+      letterSpacing: "tight",
+    },
+  },
+  "h3": {
+    value: {
+      fontFamily: "sans",
+      fontSize: "xl", 
+      fontWeight: "bold",
+      lineHeight: "tight",
+      letterSpacing: "tight",
+    },
+  },
+  "h4": {
+    value: {
+      fontFamily: "sans",
+      fontSize: "lg", 
+      fontWeight: "bold", 
+      lineHeight: "tight",
+      letterSpacing: "tight",
+    },
+  },
+  "h5": {
+    value: {
+      fontFamily: "sans",
+      fontSize: "md", 
+      fontWeight: "bold",
+      lineHeight: "tight", 
+      letterSpacing: "tight",
+    },
+  },
+}; 
