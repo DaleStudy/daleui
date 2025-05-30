@@ -10,7 +10,7 @@ export default {
   },
   args: {
     children: "링크",
-    href: "#",
+    href: undefined,
   },
 } satisfies Meta<typeof Link>;
 
@@ -154,9 +154,7 @@ export const Security: StoryObj<typeof Link> = {
         <Link {...args} target="_blank">
           새 탭에서 열기 (보안 속성 자동 추가)
         </Link>
-        <Link {...args} target="_self">
-          같은 탭에서 열기
-        </Link>
+        <Link {...args}>같은 탭에서 열기</Link>
       </div>
     );
   },
