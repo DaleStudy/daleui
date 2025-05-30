@@ -1,110 +1,114 @@
-export const textStyles = {
+export const textStyle = {
   display: {
-    1: {
-      fontFamily: "heading",
+    lg: {
+      fontFamily: "sans",
       fontSize: "8xl",
       fontWeight: "bold",
-      lineHeight: "short",
+      lineHeight: "tight",
       letterSpacing: "tight",
     },
-    2: {
-      fontFamily: "heading",
+    md: {
+      fontFamily: "sans",
       fontSize: "7xl",
       fontWeight: "bold",
-      lineHeight: "short",
+      lineHeight: "tight",
       letterSpacing: "tight",
     },
-    3: {
-      fontFamily: "heading",
+    sm: {
+      fontFamily: "sans",
       fontSize: "5xl",
       fontWeight: "bold",
-      lineHeight: "short",
+      lineHeight: "tight",
       letterSpacing: "tight",
     },
   },
   title: {
-    1: {
-      fontFamily: "heading",
+    lg: {
+      fontFamily: "sans",
       fontSize: "4xl",
       fontWeight: "semibold",
-      lineHeight: "short",
-      letterSpacing: "normal",
+      lineHeight: "tight",
+      letterSpacing: "balanced",
     },
-    2: {
-      fontFamily: "heading",
+    md: {
+      fontFamily: "sans",
       fontSize: "3xl",
       fontWeight: "semibold",
-      lineHeight: "short",
-      letterSpacing: "normal",
+      lineHeight: "tight",
+      letterSpacing: "balanced",
     },
-    3: {
-      fontFamily: "heading",
+    sm: {
+      fontFamily: "sans",
       fontSize: "2xl",
       fontWeight: "medium",
-      lineHeight: "short",
-      letterSpacing: "normal",
+      lineHeight: "tight",
+      letterSpacing: "balanced",
     },
   },
   body: {
-    default: {
-      fontFamily: "body",
+    lg: {
+      fontFamily: "sans",
+      fontSize: "lg",
+      fontWeight: "normal",
+      lineHeight: "balanced",
+      letterSpacing: "balanced",
+    },
+    md: {
+      fontFamily: "sans",
       fontSize: "md",
       fontWeight: "normal",
-      lineHeight: "normal",
-      letterSpacing: "normal",
+      lineHeight: "balanced",
+      letterSpacing: "balanced",
     },
-    small: {
-      fontFamily: "body",
+    sm: {
+      fontFamily: "sans",
       fontSize: "sm",
-      fontWeight: "normal",
-      lineHeight: "normal",
-      letterSpacing: "normal",
-    },
-    strong: {
-      fontFamily: "body",
-      fontSize: "md",
       fontWeight: "semibold",
-      lineHeight: "normal",
-      letterSpacing: "normal",
+      lineHeight: "balanced",
+      letterSpacing: "balanced",
     },
   },
   label: {
-    1: {
-      fontFamily: "body",
-      fontSize: "sm",
-      fontWeight: "medium",
-      lineHeight: "short",
-      letterSpacing: "normal",
-    },
-    2: {
-      fontFamily: "body",
-      fontSize: "md",
-      fontWeight: "medium",
-      lineHeight: "short",
-      letterSpacing: "normal",
-    },
-    3: {
-      fontFamily: "body",
+    lg: {
+      fontFamily: "sans",
       fontSize: "lg",
       fontWeight: "medium",
-      lineHeight: "short",
-      letterSpacing: "normal",
+      lineHeight: "tight",
+      letterSpacing: "balanced",
+    },
+    md: {
+      fontFamily: "sans",
+      fontSize: "md",
+      fontWeight: "medium",
+      lineHeight: "tight",
+      letterSpacing: "balanced",
+    },
+    sm: {
+      fontFamily: "sans",
+      fontSize: "sm",
+      fontWeight: "medium",
+      lineHeight: "tight",
+      letterSpacing: "balanced",
     },
   },
   caption: {
-    1: {
-      fontFamily: "body",
-      fontSize: "xs",
-      fontWeight: "medium",
-      lineHeight: "short",
-      letterSpacing: "normal",
-    },
+    fontFamily: "sans",
+    fontSize: "xs",
+    fontWeight: "medium",
+    lineHeight: "tight",
+    letterSpacing: "balanced",
+  },
+  code: {
+    fontFamily: "mono",
+    fontSize: "sm",
+    fontWeight: "medium",
+    lineHeight: "balanced",
+    letterSpacing: "balanced",
   },
 };
 
 export const fontFamily = {
-  heading: "Pretendard Variable",
-  body: "Pretendard Variable",
+  sans: "Pretendard Variable",
   mono: "JetBrains Mono",
 };
 
@@ -132,13 +136,57 @@ export const fontSize = {
 
 export const letterSpacing = {
   tight: "-0.1",
-  normal: "0",
-  wide: "0.5",
+  balanced: "0",
 };
 
 export const lineHeight = {
-  short: "1.2",
-  normal: "1.5",
-  tall: "1.75",
-  loose: "2",
+  tight: "1.2",
+  balanced: "1.5",
+  relaxed: "1.75",
+};
+
+// Heading styles for semantic usage
+export const headingStyle = {
+  h1: {
+    fontFamily: "sans",
+    fontSize: "3xl",
+    fontWeight: "bold",
+    lineHeight: "tight",
+    letterSpacing: "tight",
+  },
+  h2: {
+    fontFamily: "sans",
+    fontSize: "2xl",
+    fontWeight: "bold",
+    lineHeight: "tight",
+    letterSpacing: "tight",
+  },
+  h3: {
+    fontFamily: "sans",
+    fontSize: "xl",
+    fontWeight: "bold",
+    lineHeight: "tight",
+    letterSpacing: "tight",
+  },
+  h4: {
+    fontFamily: "sans",
+    fontSize: "lg",
+    fontWeight: "bold",
+    lineHeight: "tight",
+    letterSpacing: "tight",
+  },
+  h5: {
+    fontFamily: "sans",
+    fontSize: "md",
+    fontWeight: "bold",
+    lineHeight: "tight",
+    letterSpacing: "tight",
+  },
+  h6: {
+    fontFamily: "sans",
+    fontSize: "sm",
+    fontWeight: "bold",
+    lineHeight: "tight",
+    letterSpacing: "tight",
+  },
 }; 
