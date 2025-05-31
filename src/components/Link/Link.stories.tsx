@@ -119,17 +119,14 @@ export const Weights: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "gap.md" })}>
-        <Link {...args} weight="thin">
-          얇은 굵기
-        </Link>
-        <Link {...args} weight="light">
-          가벼운 굵기
-        </Link>
         <Link {...args} weight="normal">
           일반 굵기
         </Link>
         <Link {...args} weight="medium">
           중간 굵기
+        </Link>
+        <Link {...args} weight="semibold">
+          세미볼드 굵기
         </Link>
         <Link {...args} weight="bold">
           굵은 굵기
