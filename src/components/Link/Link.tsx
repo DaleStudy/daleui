@@ -1,9 +1,13 @@
-import { type AnchorHTMLAttributes, type PropsWithChildren } from "react";
+import { type AnchorHTMLAttributes } from "react";
 import type { Tone } from "../../tokens/colors";
 import { css, cva } from "../../../styled-system/css";
 import type { FontSize, FontWeight } from "../../tokens/typography";
 
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  /** 링크 URL (필수) */
+  href: string;
+  /** 링크 내용 (필수) */
+  children: React.ReactNode;
   /** 색조 */
   tone?: Tone;
   /** 크기 */
@@ -25,6 +29,7 @@ interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
  */
 export function Link({
   children,
+  href,
   tone = "neutral",
   size,
   weight,
@@ -33,7 +38,7 @@ export function Link({
   target,
   rel,
   ...props
-}: PropsWithChildren<LinkProps>) {
+}: LinkProps) {
   return (
     <a
       className={css(
@@ -43,6 +48,7 @@ export function Link({
           fontWeight: weight,
         }),
       )}
+      href={href}
       target={target}
       rel={target === "_blank" ? "noopener noreferrer" : rel}
       {...props}
