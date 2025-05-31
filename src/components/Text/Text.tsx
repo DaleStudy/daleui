@@ -38,7 +38,7 @@ export const Text = ({
         css.raw({
           fontSize: size,
           fontWeight: weight,
-        })
+        }),
       )}
       {...rest}
     >
