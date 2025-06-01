@@ -49,7 +49,7 @@ export const Default: StoryObj = {
             aria-label="주요 메뉴"
           >
             {MENU_ITEMS.map((item) => (
-              <Link key={item} underline={false}>
+              <Link key={item} underline={false} href={"#"}>
                 {item}
               </Link>
             ))}

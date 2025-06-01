@@ -64,7 +64,7 @@ const styles = cva({
     alignItems: "center",
     justifyContent: "center",
     width: ["auto", "100%"],
-    borderRadius: "10px",
+    borderRadius: "md",
     cursor: "pointer",
     transition: "0.2s",
     lineHeight: "1",

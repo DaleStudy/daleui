@@ -86,7 +86,7 @@ const styles = cva({
     backgroundColor: "transparent",
     border: "3px solid",
     borderColor: "border",
-    borderRadius: "4px",
+    borderRadius: "sm",
     width: "1.5rem",
     height: "1.5rem",
     display: "flex",
