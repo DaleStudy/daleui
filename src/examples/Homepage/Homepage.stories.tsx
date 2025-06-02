@@ -23,7 +23,7 @@ export const Default: StoryObj = {
             width: "100%",
             height: { base: "3rem", md: "4rem" },
             justifyContent: "space-between",
-            padding: { base: "0 1rem", md: "0 1.5rem" },
+            paddingX: { base: "16", md: "24" },
             borderBottom: "2px solid",
             background: { base: "teal.1", _dark: "tealDark.1" },
             borderColor: { base: "teal.7", _dark: "tealDark.7" },
@@ -43,7 +43,7 @@ export const Default: StoryObj = {
           />
           <nav
             className={hstack({
-              gap: "gap.md",
+              gap: "24",
               display: { base: "none", md: "flex" },
             })}
             aria-label="주요 메뉴"
@@ -62,8 +62,8 @@ export const Default: StoryObj = {
             justifyContent: "center",
             flex: 1,
             width: "100%",
-            paddingX: { base: "2rem", md: "12rem" },
-            gap: { base: "gap.md", md: "gap.lg" },
+            paddingX: { base: "32", md: "12rem" },
+            gap: { base: "24", md: "32" },
           })}
         >
           <Heading level={1}>달레 UI</Heading>
@@ -77,7 +77,7 @@ export const Default: StoryObj = {
         <footer
           className={css({
             textAlign: "center",
-            paddingY: { base: 1, md: 2 },
+            paddingY: { base: "4", md: "8" },
             borderTop: "2px solid",
             background: { base: "teal.1", _dark: "tealDark.1" },
             borderColor: { base: "teal.7", _dark: "tealDark.7" },

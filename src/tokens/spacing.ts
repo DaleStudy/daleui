@@ -1,40 +1,4 @@
-import type { Tokens, SemanticTokens } from "@pandacss/types";
-
-export const semanticSpacing: SemanticTokens["spacing"] = {
-  px: {
-    sm: {
-      value: "{spacing.24}", // 1.5rem
-    },
-    md: {
-      value: "{spacing.32}", // 2rem
-    },
-    lg: {
-      value: "{spacing.40}", // 2.5rem
-    },
-  },
-  py: {
-    sm: {
-      value: "{spacing.8}", // 0.5rem
-    },
-    md: {
-      value: "{spacing.12}", // 0.75rem
-    },
-    lg: {
-      value: "{spacing.16}", // 1rem
-    },
-  },
-  gap: {
-    sm: {
-      value: "{spacing.16}", // 1rem
-    },
-    md: {
-      value: "{spacing.24}", // 1.5rem
-    },
-    lg: {
-      value: "{spacing.32}", // 2rem
-    },
-  },
-};
+import type { Tokens } from "@pandacss/types";
 
 export const spacing: Tokens["spacing"] = {
   0: { value: "0rem" },

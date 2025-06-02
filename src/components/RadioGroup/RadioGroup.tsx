@@ -100,7 +100,7 @@ export function RadioGroup({
         id={`${name}-label`}
         className={css({
           fontWeight: "medium",
-          marginBottom: "2",
+          marginBottom: "8",
         })}
       >
         {label}
@@ -127,7 +127,7 @@ export function RadioGroup({
 const radioGroupStyles = cva({
   base: {
     display: "flex",
-    gap: "2",
+    gap: "8",
   },
   variants: {
     orientation: {
@@ -180,7 +180,7 @@ export function Radio({ value, children, disabled, ref }: RadioProps) {
     <label
       className={flex({
         alignItems: "center",
-        gap: "2",
+        gap: "8",
         cursor: disabled ? "not-allowed" : "pointer",
       })}
     >

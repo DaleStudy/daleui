@@ -46,7 +46,7 @@ export const Checkbox = ({
       className={css({
         display: "flex",
         alignItems: "center",
-        gap: "0.5rem",
+        gap: "8",
         cursor: "pointer",
         color: "text",
       })}
