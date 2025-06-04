@@ -20,7 +20,7 @@ export const Default: StoryObj = {
           event.preventDefault();
           action("onSubmit")(event);
         }}
-        style={{ width: 500 }}
+        className={css({ width: "500px" })}
       >
         <div className={css({ marginBottom: "32" })}>
           <Heading level={1}>안녕하세요, 회원이신가요?</Heading>
@@ -37,23 +37,25 @@ export const Default: StoryObj = {
           <input
             className={css({
               border: "1px solid lightgray",
-              borderRadius: "0.5rem",
+              borderRadius: "md",
               paddingLeft: "8",
               height: 50,
             })}
             required
             type="email"
+            name="user_email"
             placeholder="이메일 주소"
           />
           <input
             className={css({
               border: "1px solid lightgray",
-              borderRadius: "0.5rem",
+              borderRadius: "md",
               paddingLeft: "8",
               height: 50,
             })}
             required
             type="password"
+            name="user_password"
             placeholder="비밀번호"
           />
         </div>

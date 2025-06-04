@@ -87,7 +87,7 @@ Required.decorators = [
     };
 
     return (
-      <div style={{ minWidth: "300px" }}>
+      <div className={css({ minWidth: "300px" })}>
         <form onSubmit={handleSubmit} noValidate>
           <StoryFn />
           <div className={css({ marginTop: "20" })}>
@@ -99,7 +99,7 @@ Required.decorators = [
                 backgroundColor: "#2E7D32",
                 color: "white",
                 border: "none",
-                borderRadius: "4px",
+                borderRadius: "sm",
                 cursor: "pointer",
               })}
             >
@@ -113,7 +113,7 @@ Required.decorators = [
                 padding: "8",
                 backgroundColor: formValid ? "#E8F5E9" : "#FFEBEE",
                 color: formValid ? "#2E7D32" : "#C62828",
-                borderRadius: "4px",
+                borderRadius: "sm",
               })}
             >
               {formValid
