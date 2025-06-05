@@ -1,87 +1,143 @@
 export const textStyles = {
-  xs: {
-    value: {
-      fontSize: "0.75rem",
-      lineHeight: "1rem",
+  display: {
+    lg: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "8xl", 
+        fontWeight: "bold",
+        lineHeight: "tight",
+        letterSpacing: "tight",
+      },
+    },
+    md: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "7xl",
+        fontWeight: "bold",
+        lineHeight: "tight",
+        letterSpacing: "tight",
+      },
+    },
+    sm: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "5xl", 
+        fontWeight: "bold",
+        lineHeight: "tight",
+        letterSpacing: "tight",
+      },
     },
   },
-  sm: {
-    value: {
-      fontSize: "0.875rem",
-      lineHeight: "1.25rem",
+  title: {
+    lg: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "4xl", 
+        fontWeight: "semibold",
+        lineHeight: "tight",
+        letterSpacing: "balanced",
+      },
+    },
+    md: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "3xl", 
+        fontWeight: "semibold",
+        lineHeight: "tight",
+        letterSpacing: "balanced",
+      },
+    },
+    sm: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "2xl", 
+        fontWeight: "medium",
+        lineHeight: "tight",
+        letterSpacing: "balanced",
+      },
     },
   },
-  md: {
-    value: {
-      fontSize: "1rem",
-      lineHeight: "1.5rem",
+  body: {
+    lg: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "lg", 
+        fontWeight: "normal",
+        lineHeight: "balanced",
+        letterSpacing: "balanced",
+      },
+    },
+    md: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "md", 
+        fontWeight: "normal",
+        lineHeight: "balanced",
+        letterSpacing: "balanced",
+      },
+    },
+    sm: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "sm", 
+        fontWeight: "semibold",
+        lineHeight: "balanced",
+        letterSpacing: "balanced",
+      },
     },
   },
-  lg: {
-    value: {
-      fontSize: "1.125rem",
-      lineHeight: "1.75rem",
+  label: {
+    lg: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "lg", 
+        fontWeight: "medium",
+        lineHeight: "tight",
+        letterSpacing: "balanced",
+      },
+    },
+    md: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "md", 
+        fontWeight: "medium",
+        lineHeight: "tight",
+        letterSpacing: "balanced",
+      },
+    },
+    sm: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "sm", 
+        fontWeight: "medium",
+        lineHeight: "tight",
+        letterSpacing: "balanced",
+      },
     },
   },
-  xl: {
+  caption: {
     value: {
-      fontSize: "1.25rem",
-      lineHeight: "1.75rem",
+      fontFamily: "sans",
+      fontSize: "xs", 
+      fontWeight: "medium",
+      lineHeight: "tight",
+      letterSpacing: "balanced",
     },
   },
-  "2xl": {
+  code: {
     value: {
-      fontSize: "1.5rem",
-      lineHeight: "2rem",
-    },
-  },
-  "3xl": {
-    value: {
-      fontSize: "1.875rem",
-      lineHeight: "2.25rem",
-    },
-  },
-  "4xl": {
-    value: {
-      fontSize: "2.25rem",
-      lineHeight: "2.5rem",
-    },
-  },
-  "5xl": {
-    value: {
-      fontSize: "3rem",
-      lineHeight: "1",
-    },
-  },
-  "6xl": {
-    value: {
-      fontSize: "3.75rem",
-      lineHeight: "1",
-    },
-  },
-  "7xl": {
-    value: {
-      fontSize: "4.5rem",
-      lineHeight: "1",
-    },
-  },
-  "8xl": {
-    value: {
-      fontSize: "6rem",
-      lineHeight: "1",
-    },
-  },
-  "9xl": {
-    value: {
-      fontSize: "8rem",
-      lineHeight: "1",
+      fontFamily: "mono",
+      fontSize: "sm", 
+      fontWeight: "medium",
+      lineHeight: "balanced",
+      letterSpacing: "balanced",
     },
   },
 };
 
 export const fonts = {
-  sans: { value: "Pretendard Variable" },
-  mono: { value: "JetBrains Mono" },
+  sans: { value: '"Pretendard Variable", sans-serif' },
+  mono: { value: '"JetBrains Mono", monospace' },
 };
 
 export const fontWeights = {
@@ -118,7 +174,6 @@ export const letterSpacings = {
 export const lineHeights = {
   tight: { value: "1.2" },
   balanced: { value: "1.5" },
-  relaxed: { value: "1.75" },
 };
 
 export const headingStyles = {
