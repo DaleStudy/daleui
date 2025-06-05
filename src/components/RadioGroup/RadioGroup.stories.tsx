@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { Radio, RadioGroup } from "./RadioGroup";
+import { css } from "../../../styled-system/css";
 
 export default {
   component: RadioGroup,
@@ -86,33 +87,34 @@ Required.decorators = [
     };
 
     return (
-      <div style={{ minWidth: "300px" }}>
+      <div className={css({ minWidth: "300px" })}>
         <form onSubmit={handleSubmit} noValidate>
           <StoryFn />
-          <div style={{ marginTop: "20px" }}>
+          <div className={css({ marginTop: "20" })}>
             <button
               type="submit"
-              style={{
-                padding: "8px 16px",
+              className={css({
+                paddingX: "16",
+                paddingY: "8",
                 backgroundColor: "#2E7D32",
                 color: "white",
                 border: "none",
-                borderRadius: "4px",
+                borderRadius: "sm",
                 cursor: "pointer",
-              }}
+              })}
             >
               제출하기
             </button>
           </div>
           {submitted && (
             <div
-              style={{
-                marginTop: "20px",
-                padding: "10px",
+              className={css({
+                marginTop: "20",
+                padding: "8",
                 backgroundColor: formValid ? "#E8F5E9" : "#FFEBEE",
                 color: formValid ? "#2E7D32" : "#C62828",
-                borderRadius: "4px",
-              }}
+                borderRadius: "sm",
+              })}
             >
               {formValid
                 ? "✅ 폼이 성공적으로 제출되었습니다."
@@ -128,7 +130,9 @@ Required.decorators = [
 export const Tones: Story = {
   render: () => {
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+      <div
+        className={css({ display: "flex", flexDirection: "column", gap: "32" })}
+      >
         <RadioGroup
           name="neutral-tone"
           label="중립 색조 (Neutral)"
@@ -191,7 +195,7 @@ export const Controlled = () => {
         <Radio value="banana">바나나</Radio>
         <Radio value="orange">오렌지</Radio>
       </RadioGroup>
-      <div style={{ marginTop: 20 }}>
+      <div className={css({ marginTop: "20" })}>
         <p>현재 선택된 값: {value}</p>
         <button onClick={() => setValue("banana")}>바나나 선택</button>
         <button onClick={() => setValue("orange")}>오렌지 선택</button>

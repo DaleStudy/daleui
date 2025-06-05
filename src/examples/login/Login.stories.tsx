@@ -4,6 +4,7 @@ import { Button } from "../../components/Button/Button";
 import { Checkbox } from "../../components/Checkbox/Checkbox";
 import { Heading } from "../../components/Heading/Heading";
 import { Link } from "../../components/Link/Link";
+import { css } from "../../../styled-system/css";
 
 export default {
   parameters: {
@@ -19,61 +20,63 @@ export const Default: StoryObj = {
           event.preventDefault();
           action("onSubmit")(event);
         }}
-        style={{ width: 500 }}
+        className={css({ width: "500px" })}
       >
-        <div style={{ marginBottom: "2rem" }}>
+        <div className={css({ marginBottom: "32" })}>
           <Heading level={1}>안녕하세요, 회원이신가요?</Heading>
         </div>
 
         <div
-          style={{
+          className={css({
             display: "flex",
             flexDirection: "column",
-            gap: "0.5rem",
-            marginBottom: "1rem",
-          }}
+            gap: "8",
+            marginBottom: "16",
+          })}
         >
           <input
-            style={{
+            className={css({
               border: "1px solid lightgray",
-              borderRadius: "0.5rem",
-              paddingLeft: "0.5rem",
+              borderRadius: "md",
+              paddingLeft: "8",
               height: 50,
-            }}
+            })}
             required
             type="email"
+            name="user_email"
             placeholder="이메일 주소"
           />
           <input
-            style={{
+            className={css({
               border: "1px solid lightgray",
-              borderRadius: "0.5rem",
-              paddingLeft: "0.5rem",
+              borderRadius: "md",
+              paddingLeft: "8",
               height: 50,
-            }}
+            })}
             required
             type="password"
+            name="user_password"
             placeholder="비밀번호"
           />
         </div>
 
         <div
-          style={{
-            marginBottom: "1rem",
+          className={css({
+            marginBottom: "16",
             display: "flex",
             justifyContent: "space-between",
-          }}
+          })}
         >
           <Link href="#">비밀번호 찾기</Link>
           <Checkbox label="사용자 정보 기억하기" />
         </div>
 
         <div
-          style={{
+          className={css({
             display: "flex",
             justifyContent: "center",
-            marginBottom: "2rem",
-          }}
+            marginBottom: "32",
+          })}
         >
           <Button variant="solid" type="submit" size="lg">
             로그인
