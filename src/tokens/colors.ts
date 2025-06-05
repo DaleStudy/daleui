@@ -3,547 +3,236 @@ import type { SemanticTokens, Tokens } from "@pandacss/types";
 export type Tone = "neutral" | "accent" | "danger" | "warning";
 
 export const semanticColors: SemanticTokens["colors"] = {
-  current: { value: "currentColor" },
-  transparent: { value: "rgb(0 0 0 / 0)" },
-  foreground: {
-    default: {
-      primary: {
-        value: {
-          base: "{colors.slate.12}",
-          _dark: "{colors.darkSage.12}",
-        },
-      },
-      secondary: {
-        value: {
-          base: "{colors.slate.11}",
-          _dark: "{colors.darkSage.11}",
-        },
-      },
-      tertiary: {
-        value: {
-          base: "{colors.slate.10}",
-          _dark: "{colors.darkSage.10}",
-        },
-      },
-      disabled: {
-        value: {
-          base: "{colors.slate.9}",
-          _dark: "{colors.darkSage.9}",
-        },
-      },
+  fg: {
+    brand: {
+      default: { value: { base: "{colors.violet.9}" } },
+      hover: { value: { base: "{colors.violet.10}" } },
+      active: { value: { base: "{colors.violet.11}" } },
     },
-    interactive: {
-      brand: {
-        default: {
-          value: {
-            base: "{colors.violet.9}",
-            _dark: "{colors.darkTeal.9}",
-          },
-        },
-        hover: {
-          value: {
-            base: "{colors.violet.10}",
-            _dark: "{colors.darkTeal.10}",
-          },
-        },
-        press: {
-          value: {
-            base: "{colors.violet.11}",
-            _dark: "{colors.darkTeal.11}",
-          },
-        },
-        active: {
-          value: {
-            base: "{colors.violet.9}",
-            _dark: "{colors.darkTeal.9}",
-          },
-        },
-      },
-      neutral: {
-        default: {
-          value: {
-            base: "{colors.slate.11}",
-            _dark: "{colors.darkSage.6}",
-          },
-        },
-        hover: {
-          value: {
-            base: "{colors.slate.12}",
-            _dark: "{colors.darkSlate.7}",
-          },
-        },
-        press: {
-          value: {
-            base: "{colors.slate.12}",
-            _dark: "{colors.darkSlate.8}",
-          },
-        },
-        muted: {
-          value: {
-            base: "{colors.slate.7}",
-            _dark: "{colors.darkSage.8}",
-          },
-        },
-      },
+    neutral: {
+      default: { value: { base: "{colors.slate.11}" } },
+      hover: { value: { base: "{colors.slate.11}" } },
+      active: { value: { base: "{colors.slate.12}" } },
+      placeholder: { value: { base: "{colors.slate.8}" } },
+      disabled: { value: { base: "{colors.slate.8}" } },
     },
-    Inverse: {
-      primary: {
-        value: {
-          base: "{colors.white}",
-          _dark: "{colors.darkSage.2}",
-        },
-      },
-      secondary: {
-        value: {
-          base: "{colors.slate.3}",
-          _dark: "{colors.darkSage.4}",
-        },
-      },
-      tertiary: {
-        value: {
-          base: "{colors.slate.5}",
-          _dark: "{colors.darkSage.7}",
-        },
-      },
-      brand: {
-        value: {
-          base: "{colors.violet.11}",
-          _dark: "{colors.darkViolet.11}",
-        },
-      },
-    },
-    accent: {
-      brand: {
-        value: {
-          base: "{colors.violet.11}",
-          _dark: "{colors.darkTeal.11}",
-        },
-      },
-      neutral: {
-        value: {
-          base: "{colors.slate.11}",
-          _dark: "{colors.darkSage.11}",
-        },
-      },
-      red: {
-        value: {
-          base: "{colors.red.11}",
-          _dark: "{colors.darkRed.11}",
-        },
-      },
-      amber: {
-        value: {
-          base: "{colors.amber.12}",
-          _dark: "{colors.darkAmber.11}",
-        },
-      },
-      green: {
-        value: {
-          base: "{colors.green.12}",
-          _dark: "{colors.darkGreen.11}",
-        },
-      },
-      teal: {
-        value: {
-          base: "{colors.teal.12}",
-          _dark: "{colors.darkTeal.11}",
-        },
-      },
-      blue: {
-        value: {
-          base: "{colors.blue.12}",
-          _dark: "{colors.darkBlue.11}",
-        },
-      },
-      violet: {
-        value: {
-          base: "{colors.violet.10}",
-          _dark: "{colors.darkViolet.11}",
-        },
-      },
-    },
-    system: {
-      success: {
-        value: {
-          base: "{colors.green.11}",
-          _dark: "{colors.darkGreen.11}",
-        },
-      },
-      danger: {
-        value: {
-          base: "{colors.red.11}",
-          _dark: "{colors.darkRed.11}",
-        },
-      },
-      warning: {
-        value: {
-          base: "{colors.amber.12}",
-          _dark: "{colors.darkAmber.11}",
-        },
-      },
-      info: {
-        value: {
-          base: "{colors.blue.11}",
-          _dark: "{colors.darkBlue.11}",
-        },
-      },
-    },
+    success: { default: { value: { base: "{colors.green.11}" } } },
+    warning: { default: { value: { base: "{colors.amber.11}" } } },
+    danger: { default: { value: { base: "{colors.red.11}" } } },
+    info: { default: { value: { base: "{colors.blue.11}" } } },
   },
-
-  borders: {
-    default: {
-      primary: {
-        value: {
-          base: "{colors.slate.5}",
-          _dark: "{colors.darkSlate.5}",
-        },
-      },
-      secondary: {
-        value: {
-          base: "{colors.slate.6}",
-          _dark: "{colors.darkSlate.6}",
-        },
-      },
-      tertiary: {
-        value: {
-          base: "{colors.slate.8}",
-          _dark: "{colors.darkSlate.7}",
-        },
-      },
-      disabled: {
-        value: {
-          base: "{colors.slate.8}",
-          _dark: "{colors.darkSlate.8}",
-        },
-      },
-    },
-    interactive: {
-      brand: {
-        default: {
-          value: {
-            base: "{colors.violet.9}",
-            _dark: "{colors.darkTeal.9}",
-          },
-        },
-        hover: {
-          value: {
-            base: "{colors.violet.10}",
-            _dark: "{colors.darkTeal.10}",
-          },
-        },
-        focus: {
-          value: {
-            base: "{colors.violet.10}",
-            _dark: "{colors.darkTeal.11}",
-          },
-        },
-        press: {
-          value: {
-            base: "{colors.violet.12}",
-            _dark: "{colors.darkTeal.11}",
-          },
-        },
-      },
-      neutral: {
-        default: {
-          value: {
-            base: "{colors.slate.8}",
-            _dark: "{colors.darkSage.6}",
-          },
-        },
-        hover: {
-          value: {
-            base: "{colors.slate.9}",
-            _dark: "{colors.darkSlate.7}",
-          },
-        },
-        press: {
-          value: {
-            base: "{colors.slate.10}",
-            _dark: "{colors.darkSlate.8}",
-          },
-        },
-      },
-      focusRing: {
-        value: {
-          base: "{colors.violet.9}",
-          _dark: "{colors.darkTeal.10}",
-        },
-      },
-    },
-    system: {
-      success: {
-        value: {
-          base: "{colors.green.9}",
-          _dark: "{colors.darkGreen.9}",
-        },
-      },
-      danger: {
-        value: {
-          base: "{colors.red.10}",
-          _dark: "{colors.darkRed.10}",
-        },
-      },
-      warning: {
-        value: {
-          base: "{colors.amber.10}",
-          _dark: "{colors.darkAmber.10}",
-        },
-      },
-      info: {
-        value: {
-          base: "{colors.blue.8}",
-          _dark: "{colors.darkBlue.8}",
-        },
-      },
-    },
-    accent: {
-      brand: {
-        value: {
-          base: "{colors.violet.8}",
-          _dark: "{colors.darkTeal.8}",
-        },
-      },
-      neutral: {
-        value: {
-          base: "{colors.slate.8}",
-          _dark: "{colors.darkSage.8}",
-        },
-      },
-      red: {
-        value: {
-          base: "{colors.red.9}",
-          _dark: "{colors.darkRed.9}",
-        },
-      },
-      amber: {
-        value: {
-          base: "{colors.amber.9}",
-          _dark: "{colors.darkAmber.9}",
-        },
-      },
-      green: {
-        value: {
-          base: "{colors.green.9}",
-          _dark: "{colors.darkGreen.9}",
-        },
-      },
-      teal: {
-        value: {
-          base: "{colors.teal.8}",
-          _dark: "{colors.darkTeal.8}",
-        },
-      },
-      blue: {
-        value: {
-          base: "{colors.blue.9}",
-          _dark: "{colors.darkBlue.9}",
-        },
-      },
-      violet: {
-        value: {
-          base: "{colors.violet.8}",
-          _dark: "{colors.darkViolet.8}",
-        },
-      },
-    },
+  fgSolid: {
+    brand: { value: { base: "{colors.violet.1}" } },
+    neutral: { value: { base: "{colors.slate.1}" } },
+    success: { value: { base: "{colors.green.1}" } },
+    warning: { value: { base: "{colors.amber.12}" } },
+    danger: { value: { base: "{colors.red.1}" } },
+    info: { value: { base: "{colors.blue.1}" } },
   },
-
-  background: {
-    default: {
-      primary: {
-        value: {
-          base: "{colors.slate.1}",
-          _dark: "{colors.darkSage.2}",
-        },
-      },
-      secondary: {
-        value: {
-          base: "{colors.slate.3}",
-          _dark: "{colors.darkSlate.4}",
-        },
-      },
-      tertiary: {
-        value: {
-          base: "{colors.slate.5}",
-          _dark: "{colors.darkSlate.5}",
-        },
-      },
-      disabled: {
-        value: {
-          base: "{colors.slate.6}",
-          _dark: "{colors.darkSlate.8}",
-        },
-      },
+  bg: {
+    brand: {
+      default: { value: { base: "{colors.violet.2}" } },
+      hover: { value: { base: "{colors.violet.3}" } },
+      active: { value: { base: "{colors.violet.4}" } },
     },
-    interactive: {
-      brand: {
-        default: {
-          value: {
-            base: "{colors.violet.9}",
-            _dark: "{colors.darkTeal.10}",
-          },
-        },
-        hover: {
-          value: {
-            base: "{colors.violet.10}",
-            _dark: "{colors.darkTeal.11}",
-          },
-        },
-        press: {
-          value: {
-            base: "{colors.violet.12}",
-            _dark: "{colors.darkTeal.12}",
-          },
-        },
-        active: {
-          value: {
-            base: "{colors.violet.5}",
-            _dark: "{colors.darkViolet.5}",
-          },
-        },
-      },
-      neutral: {
-        default: {
-          value: {
-            base: "{colors.slate.2}",
-            _dark: "{colors.darkSage.2}",
-          },
-        },
-        hover: {
-          value: {
-            base: "{colors.slate.4}",
-            _dark: "{colors.darkSage.5}",
-          },
-        },
-        press: {
-          value: {
-            base: "{colors.slate.6}",
-            _dark: "{colors.darkSage.6}",
-          },
-        },
-      },
-      danger: {
-        default: {
-          value: {
-            base: "{colors.red.9}",
-            _dark: "{colors.darkRed.9}",
-          },
-        },
-        hover: {
-          value: {
-            base: "{colors.red.10}",
-            _dark: "{colors.darkRed.10}",
-          },
-        },
-        press: {
-          value: {
-            base: "{colors.red.11}",
-            _dark: "{colors.darkRed.11}",
-          },
-        },
-      },
+    neutral: {
+      default: { value: { base: "{colors.slate.1}" } },
+      hover: { value: { base: "{colors.slate.3}" } },
+      active: { value: { base: "{colors.slate.4}" } },
+      disabled: { value: { base: "{colors.slate.6}" } },
     },
-    Inverse: {
-      primary: {
-        value: {
-          base: "{colors.slate.2}",
-          _dark: "{colors.darkSage.12}",
-        },
-      },
-      secondary: {
-        value: {
-          base: "{colors.slate.4}",
-          _dark: "{colors.darkSage.11}",
-        },
-      },
-      tertiary: {
-        value: {
-          base: "{colors.slate.5}",
-          _dark: "{colors.darkSage.10}",
-        },
-      },
+    danger: {
+      default: { value: { base: "{colors.red.1}" } },
+      hover: { value: { base: "{colors.red.2}" } },
+      active: { value: { base: "{colors.red.3}" } },
     },
-    system: {
-      success: {
-        value: {
-          base: "{colors.green.4}",
-          _dark: "{colors.darkGreen.7}",
-        },
-      },
-      danger: {
-        value: {
-          base: "{colors.red.3}",
-          _dark: "{colors.darkRed.7}",
-        },
-      },
-      warning: {
-        value: {
-          base: "{colors.amber.3}",
-          _dark: "{colors.darkAmber.6}",
-        },
-      },
-      info: {
-        value: {
-          base: "{colors.blue.4}",
-          _dark: "{colors.darkBlue.7}",
-        },
-      },
+    success: { default: { value: { base: "{colors.green.1}" } } },
+    warning: { default: { value: { base: "{colors.amber.1}" } } },
+    info: { default: { value: { base: "{colors.blue.2}" } } },
+  },
+  bgSolid: {
+    brand: {
+      default: { value: { base: "{colors.violet.9}" } },
+      hover: { value: { base: "{colors.violet.10}" } },
+      active: { value: { base: "{colors.violet.11}" } },
     },
-    accent: {
-      brand: {
-        value: {
-          base: "{colors.violet.5}",
-          _dark: "{colors.darkTeal.4}",
-        },
-      },
-      neutral: {
-        value: {
-          base: "{colors.slate.4}",
-          _dark: "{colors.darkSage.4}",
-        },
-      },
-      red: {
-        value: {
-          base: "{colors.red.3}",
-          _dark: "{colors.darkRed.5}",
-        },
-      },
-      amber: {
-        value: {
-          base: "{colors.amber.3}",
-          _dark: "{colors.darkAmber.5}",
-        },
-      },
-      green: {
-        value: {
-          base: "{colors.green.4}",
-          _dark: "{colors.darkGreen.4}",
-        },
-      },
-      teal: {
-        value: {
-          base: "{colors.teal.4}",
-          _dark: "{colors.darkTeal.5}",
-        },
-      },
-      blue: {
-        value: {
-          base: "{colors.blue.4}",
-          _dark: "{colors.darkBlue.4}",
-        },
-      },
-      violet: {
-        value: {
-          base: "{colors.violet.4}",
-          _dark: "{colors.darkViolet.3}",
-        },
-      },
+    neutral: {
+      default: { value: { base: "{colors.slate.10}" } },
+      hover: { value: { base: "{colors.slate.11}" } },
+      active: { value: { base: "{colors.slate.12}" } },
+      disabled: { value: { base: "{colors.slate.6}" } },
     },
+    success: { default: { value: { base: "{colors.green.11}" } } },
+    warning: { default: { value: { base: "{colors.amber.9}" } } },
+    danger: {
+      default: { value: { base: "{colors.red.10}" } },
+      hover: { value: { base: "{colors.red.11}" } },
+      active: { value: { base: "{colors.red.12}" } },
+    },
+    info: { default: { value: { base: "{colors.blue.11}" } } },
+  },
+  border: {
+    brand: {
+      default: { value: { base: "{colors.violet.8}" } },
+      active: { value: { base: "{colors.violet.9}" } },
+      focus: { value: { base: "{colors.violet.10}" } },
+    },
+    neutral: {
+      default: { value: { base: "{colors.slate.8}" } },
+      hover: { value: { base: "{colors.slate.9}" } },
+      active: { value: { base: "{colors.slate.10}" } },
+      disabled: { value: { base: "{colors.slate.6}" } },
+    },
+    success: { value: { base: "{colors.green.8}" } },
+    warning: { value: { base: "{colors.amber.7}" } },
+    danger: { value: { base: "{colors.red.9}" } },
+    info: { value: { base: "{colors.blue.9}" } },
   },
 };
 
 export const colors: Tokens["colors"] = {
+  white: { value: "#FFFFFF" },
+  black: { value: "#000000" },
+  slate: {
+    1: { value: "#FCFCFD" },
+    2: { value: "#F9F9FB" },
+    3: { value: "#F0F0F3" },
+    4: { value: "#E8E8EC" },
+    5: { value: "#E0E1E6" },
+    6: { value: "#D9D9E0" },
+    7: { value: "#CDCED6" },
+    8: { value: "#B9BBC6" },
+    9: { value: "#8B8D98" },
+    10: { value: "#60646C" },
+    11: { value: "#383A3F" },
+    12: { value: "#1C2024" },
+  },
+  darkSlate: {
+    1: { value: "#111113" },
+    2: { value: "#18191B" },
+    3: { value: "#212225" },
+    4: { value: "#272A2D" },
+    5: { value: "#2E3135" },
+    6: { value: "#363A3F" },
+    7: { value: "#43484E" },
+    8: { value: "#5A6169" },
+    9: { value: "#696E77" },
+    10: { value: "#777B84" },
+    11: { value: "#B0B4BA" },
+    12: { value: "#EDEEF0" },
+  },
+  sage: {
+    1: { value: "#FBFDFC" },
+    2: { value: "#F7F9F8" },
+    3: { value: "#EEF1F0" },
+    4: { value: "#E6E9E8" },
+    5: { value: "#DFE2E0" },
+    6: { value: "#D7DAD9" },
+    7: { value: "#CBCFCD" },
+    8: { value: "#B8BCBA" },
+    9: { value: "#868E8B" },
+    10: { value: "#7C8481" },
+    11: { value: "#5F6563" },
+    12: { value: "#1A211E" },
+  },
+  darkSage: {
+    1: { value: "#101211" },
+    2: { value: "#171918" },
+    3: { value: "#202221" },
+    4: { value: "#272A29" },
+    5: { value: "#2E3130" },
+    6: { value: "#373B39" },
+    7: { value: "#444947" },
+    8: { value: "#5B625F" },
+    9: { value: "#63706B" },
+    10: { value: "#717D79" },
+    11: { value: "#ADB5B2" },
+    12: { value: "#ECEEED" },
+  },
+  violet: {
+    1: { value: "#FDFDFF" },
+    2: { value: "#F7F8FF" },
+    3: { value: "#EFF1FF" },
+    4: { value: "#E3E7FF" },
+    5: { value: "#D6DBFF" },
+    6: { value: "#C7CCFF" },
+    7: { value: "#B3B8FF" },
+    8: { value: "#979AFF" },
+    9: { value: "#5333E1" },
+    10: { value: "#481ACF" },
+    11: { value: "#32228D" },
+    12: { value: "#2A2270" },
+  },
+  darkViolet: {
+    1: { value: "#14121F" },
+    2: { value: "#1B1525" },
+    3: { value: "#291F43" },
+    4: { value: "#33255B" },
+    5: { value: "#3C2E69" },
+    6: { value: "#473876" },
+    7: { value: "#56468B" },
+    8: { value: "#6958AD" },
+    9: { value: "#6E56CF" },
+    10: { value: "#7D66D9" },
+    11: { value: "#BAA7FF" },
+    12: { value: "#E2DDFE" },
+  },
+  teal: {
+    1: { value: "#FAFEFD" },
+    2: { value: "#F3FBF9" },
+    3: { value: "#E0F8F3" },
+    4: { value: "#CCF3EA" },
+    5: { value: "#B8EAE0" },
+    6: { value: "#A1DED2" },
+    7: { value: "#83CDC1" },
+    8: { value: "#53B9AB" },
+    9: { value: "#12A594" },
+    10: { value: "#0D9B8A" },
+    11: { value: "#008573" },
+    12: { value: "#0D3D38" },
+  },
+  darkTeal: {
+    1: { value: "#0D1514" },
+    2: { value: "#111C1B" },
+    3: { value: "#0D2D2A" },
+    4: { value: "#023B37" },
+    5: { value: "#084843" },
+    6: { value: "#145750" },
+    7: { value: "#1C6961" },
+    8: { value: "#207E73" },
+    9: { value: "#12A594" },
+    10: { value: "#0EB39E" },
+    11: { value: "#0BD8B6" },
+    12: { value: "#ADF0DD" },
+  },
+  red: {
+    1: { value: "#FFFCFC" },
+    2: { value: "#FFF7F7" },
+    3: { value: "#FEEBEC" },
+    4: { value: "#FFDBDC" },
+    5: { value: "#FFCDCE" },
+    6: { value: "#FDBDBE" },
+    7: { value: "#F4A9AA" },
+    8: { value: "#EB8E90" },
+    9: { value: "#E43F44" },
+    10: { value: "#D7292E" },
+    11: { value: "#CB2328" },
+    12: { value: "#641723" },
+  },
+  darkRed: {
+    1: { value: "#191111" },
+    2: { value: "#201314" },
+    3: { value: "#3B1219" },
+    4: { value: "#500F1C" },
+    5: { value: "#611623" },
+    6: { value: "#72232D" },
+    7: { value: "#8C333A" },
+    8: { value: "#B54548" },
+    9: { value: "#E5484D" },
+    10: { value: "#EC5D5E" },
+    11: { value: "#FF9592" },
+    12: { value: "#FFD1D9" },
+  },
   amber: {
     1: { value: "#FEFDFB" },
     2: { value: "#FEFBE9" },
@@ -627,145 +316,5 @@ export const colors: Tokens["colors"] = {
     10: { value: "#33B074" },
     11: { value: "#3DD68C" },
     12: { value: "#B1F1CB" },
-  },
-  red: {
-    1: { value: "#FFFCFC" },
-    2: { value: "#FFF7F7" },
-    3: { value: "#FEEBEC" },
-    4: { value: "#FFDBDC" },
-    5: { value: "#FFCDCE" },
-    6: { value: "#FDBDBE" },
-    7: { value: "#F4A9AA" },
-    8: { value: "#EB8E90" },
-    9: { value: "#E5484D" },
-    10: { value: "#DC3E42" },
-    11: { value: "#CE2C31" },
-    12: { value: "#641723" },
-  },
-  darkRed: {
-    1: { value: "#191111" },
-    2: { value: "#201314" },
-    3: { value: "#3B1219" },
-    4: { value: "#500F1C" },
-    5: { value: "#611623" },
-    6: { value: "#72232D" },
-    7: { value: "#8C333A" },
-    8: { value: "#B54548" },
-    9: { value: "#E5484D" },
-    10: { value: "#EC5D5E" },
-    11: { value: "#FF9592" },
-    12: { value: "#FFD1D9" },
-  },
-  sage: {
-    1: { value: "#FBFDFC" },
-    2: { value: "#F7F9F8" },
-    3: { value: "#EEF1F0" },
-    4: { value: "#E6E9E8" },
-    5: { value: "#DFE2E0" },
-    6: { value: "#D7DAD9" },
-    7: { value: "#CBCFCD" },
-    8: { value: "#B8BCBA" },
-    9: { value: "#868E8B" },
-    10: { value: "#7C8481" },
-    11: { value: "#5F6563" },
-    12: { value: "#1A211E" },
-  },
-  darkSage: {
-    1: { value: "#101211" },
-    2: { value: "#171918" },
-    3: { value: "#202221" },
-    4: { value: "#272A29" },
-    5: { value: "#2E3130" },
-    6: { value: "#373B39" },
-    7: { value: "#444947" },
-    8: { value: "#5B625F" },
-    9: { value: "#63706B" },
-    10: { value: "#717D79" },
-    11: { value: "#ADB5B2" },
-    12: { value: "#ECEEED" },
-  },
-  slate: {
-    1: { value: "#FCFCFD" },
-    2: { value: "#F9F9FB" },
-    3: { value: "#F0F0F3" },
-    4: { value: "#E8E8EC" },
-    5: { value: "#E0E1E6" },
-    6: { value: "#D9D9E0" },
-    7: { value: "#CDCED6" },
-    8: { value: "#B9BBC6" },
-    9: { value: "#8B8D98" },
-    10: { value: "#60646C" },
-    11: { value: "#383A3F" },
-    12: { value: "#1C2024" },
-  },
-  darkSlate: {
-    1: { value: "#111113" },
-    2: { value: "#18191B" },
-    3: { value: "#212225" },
-    4: { value: "#272A2D" },
-    5: { value: "#2E3135" },
-    6: { value: "#363A3F" },
-    7: { value: "#43484E" },
-    8: { value: "#5A6169" },
-    9: { value: "#696E77" },
-    10: { value: "#777B84" },
-    11: { value: "#B0B4BA" },
-    12: { value: "#EDEEF0" },
-  },
-  teal: {
-    1: { value: "#FAFEFD" },
-    2: { value: "#F3FBF9" },
-    3: { value: "#E0F8F3" },
-    4: { value: "#CCF3EA" },
-    5: { value: "#B8EAE0" },
-    6: { value: "#A1DED2" },
-    7: { value: "#83CDC1" },
-    8: { value: "#53B9AB" },
-    9: { value: "#12A594" },
-    10: { value: "#0D9B8A" },
-    11: { value: "#008573" },
-    12: { value: "#0D3D38" },
-  },
-  darkTeal: {
-    1: { value: "#0D1514" },
-    2: { value: "#111C1B" },
-    3: { value: "#0D2D2A" },
-    4: { value: "#023B37" },
-    5: { value: "#084843" },
-    6: { value: "#145750" },
-    7: { value: "#1C6961" },
-    8: { value: "#207E73" },
-    9: { value: "#12A594" },
-    10: { value: "#0EB39E" },
-    11: { value: "#0BD8B6" },
-    12: { value: "#ADF0DD" },
-  },
-  violet: {
-    1: { value: "#FDFDFF" },
-    2: { value: "#F7F8FF" },
-    3: { value: "#EFF1FF" },
-    4: { value: "#E3E7FF" },
-    5: { value: "#D6DBFF" },
-    6: { value: "#C7CCFF" },
-    7: { value: "#B3B8FF" },
-    8: { value: "#979AFF" },
-    9: { value: "#5333E1" },
-    10: { value: "#481ACF" },
-    11: { value: "#32228D" },
-    12: { value: "#2A2270" },
-  },
-  darkViolet: {
-    1: { value: "#14121F" },
-    2: { value: "#1B1525" },
-    3: { value: "#291F43" },
-    4: { value: "#33255B" },
-    5: { value: "#3C2E69" },
-    6: { value: "#473876" },
-    7: { value: "#56468B" },
-    8: { value: "#6958AD" },
-    9: { value: "#6E56CF" },
-    10: { value: "#7D66D9" },
-    11: { value: "#BAA7FF" },
-    12: { value: "#E2DDFE" },
   },
 };
