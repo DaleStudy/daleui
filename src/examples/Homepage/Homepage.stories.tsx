@@ -25,7 +25,7 @@ export const Default: StoryObj = {
             justifyContent: "space-between",
             paddingX: { base: "16", md: "24" },
             borderBottom: "2px solid",
-            background: { base: "teal.1", _dark: "tealDark.1" },
+            background: { base: "white", _dark: "tealDark.1" },
             borderColor: { base: "teal.7", _dark: "tealDark.7" },
             color: { base: "teal.11", _dark: "tealDark.11" },
           })}
