@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { vstack } from "../../../styled-system/patterns";
 import { Heading } from "./Heading";
-import { fontSizes, fontWeights, headingStyles } from "../../tokens/typography";
+import { fontSizes, fontWeights, textStyles } from "../../tokens/typography";
 
 export default {
   component: Heading,
@@ -15,7 +15,7 @@ export default {
   argTypes: {
     level: {
       control: { type: "select" },
-      options: Object.keys(headingStyles).map(key => parseInt(key.replace('h', ''))),
+      options: Object.keys(textStyles.heading).map(key => parseInt(key.replace('h', ''))),
       description: "헤딩 레벨",
     },
     size: {
