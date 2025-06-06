@@ -134,7 +134,7 @@ export const textStyles = {
     },
   },
   heading: {
-    h1: {
+    "1": {
       value: {
         fontFamily: "sans",
         fontSize: "3xl",    
@@ -143,7 +143,7 @@ export const textStyles = {
         letterSpacing: "tight",
       },
     },
-    h2: {
+    "2": {
       value: {
         fontFamily: "sans", 
         fontSize: "2xl", 
@@ -152,7 +152,7 @@ export const textStyles = {
         letterSpacing: "tight",
       },
     },
-    h3: {
+    "3": {
       value: {
         fontFamily: "sans",
         fontSize: "xl", 
@@ -161,7 +161,7 @@ export const textStyles = {
         letterSpacing: "tight",
       },
     },
-    h4: {
+    "4": {
       value: {
         fontFamily: "sans",
         fontSize: "lg", 
@@ -170,7 +170,7 @@ export const textStyles = {
         letterSpacing: "tight",
       },
     },
-    h5: {
+    "5": {
       value: {
         fontFamily: "sans",
         fontSize: "md", 

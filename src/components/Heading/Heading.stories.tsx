@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { vstack } from "../../../styled-system/patterns";
 import { Heading } from "./Heading";
-import { fontSizes, fontWeights, textStyles } from "../../tokens/typography";
 
 export default {
   component: Heading,
@@ -11,27 +10,6 @@ export default {
   args: {
     children: "제목",
     level: 1,
-  },
-  argTypes: {
-    level: {
-      control: { type: "select" },
-      options: Object.keys(textStyles.heading).map(key => parseInt(key.replace('h', ''))),
-      description: "헤딩 레벨",
-    },
-    size: {
-      control: { type: "select" },
-      options: Object.keys(fontSizes),
-      description: "글꼴 크기",
-    },
-    weight: {
-      control: { type: "radio" },
-      options: Object.keys(fontWeights),
-      description: "글꼴 굵기",
-    },
-    muted: {
-      control: { type: "boolean" },
-      description: "명암비 낮출지",
-    },
   },
 } satisfies Meta<typeof Heading>;
 
