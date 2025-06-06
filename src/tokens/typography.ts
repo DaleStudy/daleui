@@ -133,6 +133,53 @@ export const textStyles = {
       letterSpacing: "balanced",
     },
   },
+  heading: {
+    h1: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "3xl",    
+        fontWeight: "bold",
+        lineHeight: "tight",
+        letterSpacing: "tight",
+      },
+    },
+    h2: {
+      value: {
+        fontFamily: "sans", 
+        fontSize: "2xl", 
+        fontWeight: "bold",
+        lineHeight: "tight",
+        letterSpacing: "tight",
+      },
+    },
+    h3: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "xl", 
+        fontWeight: "bold",
+        lineHeight: "tight",
+        letterSpacing: "tight",
+      },
+    },
+    h4: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "lg", 
+        fontWeight: "bold", 
+        lineHeight: "tight",
+        letterSpacing: "tight",
+      },
+    },
+    h5: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "md", 
+        fontWeight: "bold",
+        lineHeight: "tight", 
+        letterSpacing: "tight",
+      },
+    },
+  },
 };
 
 export const fonts = {
@@ -176,50 +223,4 @@ export const lineHeights = {
   balanced: { value: "1.5" },
 };
 
-export const headingStyles = {
-  "h1": {
-    value: {
-      fontFamily: "sans",
-      fontSize: "3xl",    
-      fontWeight: "bold",
-      lineHeight: "tight",
-      letterSpacing: "tight",
-    },
-  },
-  "h2": {
-    value: {
-      fontFamily: "sans", 
-      fontSize: "2xl", 
-      fontWeight: "bold",
-      lineHeight: "tight",
-      letterSpacing: "tight",
-    },
-  },
-  "h3": {
-    value: {
-      fontFamily: "sans",
-      fontSize: "xl", 
-      fontWeight: "bold",
-      lineHeight: "tight",
-      letterSpacing: "tight",
-    },
-  },
-  "h4": {
-    value: {
-      fontFamily: "sans",
-      fontSize: "lg", 
-      fontWeight: "bold", 
-      lineHeight: "tight",
-      letterSpacing: "tight",
-    },
-  },
-  "h5": {
-    value: {
-      fontFamily: "sans",
-      fontSize: "md", 
-      fontWeight: "bold",
-      lineHeight: "tight", 
-      letterSpacing: "tight",
-    },
-  },
-}; 
+ 
