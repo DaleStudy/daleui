@@ -20,7 +20,6 @@ export default {
     layout: "centered",
   },
   args: { children: "링크", href: undefined },
-  argTypes: { href: { type: "string" } },
   decorators: [withRuntimeHrefDecorator],
 } satisfies Meta<typeof Link>;
 
