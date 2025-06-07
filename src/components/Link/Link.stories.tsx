@@ -1,7 +1,18 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj, Decorator } from "@storybook/react";
 import { vstack } from "../../../styled-system/patterns";
 import { Link } from "./Link";
 import { Icon } from "../Icon/Icon";
+
+const withRuntimeHrefDecorator: Decorator = (Story, context) => {
+  return (
+    <Story
+      args={{
+        ...context.args,
+        href: context.args.href || window.parent.location.href,
+      }}
+    />
+  );
+};
 
 export default {
   component: Link,
@@ -10,16 +21,7 @@ export default {
   },
   args: { children: "링크", href: undefined },
   argTypes: { href: { type: "string" } },
-  decorators: [
-    (Story, context) => (
-      <Story
-        args={{
-          ...context.args,
-          href: context.args.href || window.parent.location.href,
-        }}
-      />
-    ),
-  ],
+  decorators: [withRuntimeHrefDecorator],
 } satisfies Meta<typeof Link>;
 
 export const Basic: StoryObj<typeof Link> = {};
