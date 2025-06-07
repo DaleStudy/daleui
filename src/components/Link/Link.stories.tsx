@@ -8,10 +8,18 @@ export default {
   parameters: {
     layout: "centered",
   },
-  args: {
-    children: "링크",
-    href: undefined,
-  },
+  args: { children: "링크", href: undefined },
+  argTypes: { href: { type: "string" } },
+  decorators: [
+    (Story, context) => (
+      <Story
+        args={{
+          ...context.args,
+          href: context.args.href || window.parent.location.href,
+        }}
+      />
+    ),
+  ],
 } satisfies Meta<typeof Link>;
 
 export const Basic: StoryObj<typeof Link> = {};
