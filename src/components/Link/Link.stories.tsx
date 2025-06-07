@@ -1,17 +1,26 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj, Decorator } from "@storybook/react";
 import { vstack } from "../../../styled-system/patterns";
 import { Link } from "./Link";
 import { Icon } from "../Icon/Icon";
+
+const withRuntimeHrefDecorator: Decorator = (Story, context) => {
+  return (
+    <Story
+      args={{
+        ...context.args,
+        href: context.args.href || window.parent.location.href,
+      }}
+    />
+  );
+};
 
 export default {
   component: Link,
   parameters: {
     layout: "centered",
   },
-  args: {
-    children: "링크",
-    href: "#",
-  },
+  args: { children: "링크", href: undefined },
+  decorators: [withRuntimeHrefDecorator],
 } satisfies Meta<typeof Link>;
 
 export const Basic: StoryObj<typeof Link> = {};
@@ -154,9 +163,7 @@ export const Security: StoryObj<typeof Link> = {
         <Link {...args} target="_blank">
           새 탭에서 열기 (보안 속성 자동 추가)
         </Link>
-        <Link {...args} target="_self">
-          같은 탭에서 열기
-        </Link>
+        <Link {...args}>같은 탭에서 열기</Link>
       </div>
     );
   },
