@@ -1,5 +1,8 @@
 import type { Tokens } from "@pandacss/types";
 
+/**
+ * border, outline
+ */
 export const borders: Tokens["borders"] = {
   neutral: {
     value: {
@@ -55,6 +58,9 @@ export const borders: Tokens["borders"] = {
   },
 };
 
+/**
+ * borderWidth, outlineWidth
+ */
 export const borderWidths: Tokens["borderWidths"] = {
   sm: { value: "1px" },
   md: { value: "1.5px" },
