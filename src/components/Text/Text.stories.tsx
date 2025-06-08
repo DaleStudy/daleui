@@ -17,7 +17,7 @@ export const Basic: StoryObj<typeof Text> = {};
 export const Tones: StoryObj<typeof Text> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "gap.md" })}>
+      <div className={vstack({ gap: "24" })}>
         <Text {...args} tone="neutral">
           중립 색조
         </Text>
@@ -46,7 +46,7 @@ export const Tones: StoryObj<typeof Text> = {
 export const Contrasts: StoryObj<typeof Text> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "gap.md" })}>
+      <div className={vstack({ gap: "24" })}>
         <Text {...args} muted>
           낮은 명암비
         </Text>

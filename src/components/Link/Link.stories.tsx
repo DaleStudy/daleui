@@ -28,7 +28,7 @@ export const Basic: StoryObj<typeof Link> = {};
 export const Tones: StoryObj<typeof Link> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "gap.md" })}>
+      <div className={vstack({ gap: "24" })}>
         <Link {...args} tone="neutral">
           중립 링크
         </Link>
@@ -57,7 +57,7 @@ export const Tones: StoryObj<typeof Link> = {
 export const Contrasts: StoryObj<typeof Link> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "gap.md" })}>
+      <div className={vstack({ gap: "24" })}>
         <Link {...args} muted>
           낮은 명암비
         </Link>
@@ -78,7 +78,7 @@ export const Contrasts: StoryObj<typeof Link> = {
 export const Underlines: StoryObj<typeof Link> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "gap.md" })}>
+      <div className={vstack({ gap: "24" })}>
         <Link {...args} underline>
           밑줄 있음
         </Link>
@@ -101,7 +101,7 @@ export const Underlines: StoryObj<typeof Link> = {
 export const Sizes: StoryObj<typeof Link> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "gap.md" })}>
+      <div className={vstack({ gap: "24" })}>
         <Link {...args} size="sm">
           작은 링크
         </Link>
@@ -127,7 +127,7 @@ export const Sizes: StoryObj<typeof Link> = {
 export const Weights: StoryObj<typeof Link> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "gap.md" })}>
+      <div className={vstack({ gap: "24" })}>
         <Link {...args} weight="thin">
           얇은 굵기
         </Link>
@@ -159,7 +159,7 @@ export const Weights: StoryObj<typeof Link> = {
 export const Security: StoryObj<typeof Link> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "gap.md" })}>
+      <div className={vstack({ gap: "24" })}>
         <Link {...args} target="_blank">
           새 탭에서 열기 (보안 속성 자동 추가)
         </Link>

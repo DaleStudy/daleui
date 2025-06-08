@@ -18,7 +18,7 @@ export const Basic: StoryObj<typeof Checkbox> = {};
 export const Tones: StoryObj<typeof Checkbox> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "gap.sm" })}>
+      <div className={vstack({ gap: "16" })}>
         <Checkbox {...args} id="neutral" label="중립 색조" tone="neutral" />
         <Checkbox {...args} id="accent" label="강조 색조" tone="accent" />
         <Checkbox {...args} id="danger" label="위험 색조" tone="danger" />
@@ -39,7 +39,7 @@ export const Tones: StoryObj<typeof Checkbox> = {
 export const States: StoryObj<typeof Checkbox> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "gap.sm" })}>
+      <div className={vstack({ gap: "16" })}>
         <Checkbox {...args} id="checked" label="체크된 상태" checked={true} />
         <Checkbox
           {...args}
@@ -63,7 +63,7 @@ export const States: StoryObj<typeof Checkbox> = {
 export const Disabled: StoryObj<typeof Checkbox> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "gap.sm" })}>
+      <div className={vstack({ gap: "16" })}>
         <Checkbox
           {...args}
           id="disabled-checked"
@@ -94,7 +94,7 @@ export const Disabled: StoryObj<typeof Checkbox> = {
 export const Required: StoryObj<typeof Checkbox> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "gap.sm" })}>
+      <div className={vstack({ gap: "16" })}>
         <Checkbox {...args} id="required" label="필수 체크박스" required />
         <Checkbox {...args} id="optional" label="선택 체크박스" />
       </div>
@@ -113,7 +113,7 @@ export const Required: StoryObj<typeof Checkbox> = {
 export const WithValue: StoryObj<typeof Checkbox> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "gap.sm" })}>
+      <div className={vstack({ gap: "16" })}>
         <Checkbox
           {...args}
           id="value-example"
