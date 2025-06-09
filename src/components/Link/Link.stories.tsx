@@ -118,7 +118,7 @@ export const Sizes: StoryObj<typeof Link> = {
 export const Weights: StoryObj<typeof Link> = {
   render: (args) => {
     return (
-      <div className={vstack({ gap: "gap.md" })}>
+      <div className={vstack({ gap: "24" })}>
         <Link {...args} weight="normal">
           일반 굵기
         </Link>
