@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Radio, RadioGroup } from "./RadioGroup";
 import { css } from "../../../styled-system/css";
+import { Radio, RadioGroup } from "./RadioGroup";
 
 export default {
   component: RadioGroup,
@@ -145,10 +145,10 @@ export const Tones: Story = {
         </RadioGroup>
 
         <RadioGroup
-          name="accent-tone"
-          label="강조 색조 (Accent)"
+          name="brand-tone"
+          label="브랜드 색조 (Brand)"
           defaultValue="apple"
-          tone="accent"
+          tone="brand"
         >
           <Radio value="apple">사과</Radio>
           <Radio value="banana">바나나</Radio>
@@ -171,6 +171,28 @@ export const Tones: Story = {
           label="경고 색조 (Warning)"
           defaultValue="apple"
           tone="warning"
+        >
+          <Radio value="apple">사과</Radio>
+          <Radio value="banana">바나나</Radio>
+          <Radio value="orange">오렌지</Radio>
+        </RadioGroup>
+
+        <RadioGroup
+          name="success-tone"
+          label="성공 색조 (Success)"
+          defaultValue="apple"
+          tone="success"
+        >
+          <Radio value="apple">사과</Radio>
+          <Radio value="banana">바나나</Radio>
+          <Radio value="orange">오렌지</Radio>
+        </RadioGroup>
+
+        <RadioGroup
+          name="info-tone"
+          label="정보 색조 (Info)"
+          defaultValue="apple"
+          tone="info"
         >
           <Radio value="apple">사과</Radio>
           <Radio value="banana">바나나</Radio>
