@@ -5,7 +5,7 @@ import { describe, expect, test, vi } from "vitest";
 import { Radio, RadioGroup } from "./RadioGroup";
 
 describe("RadioGroup", () => {
-  test("라벨과 자식 요소들이 렌더링된다", () => {
+  test("라벨과 자식 요소들을 렌더링한다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group">
         <Radio value="option1">Option 1</Radio>
@@ -18,7 +18,7 @@ describe("RadioGroup", () => {
     expect(screen.getByText("Option 2")).toBeInTheDocument();
   });
 
-  test("defaultValue가 제공되면 해당 값이 선택된다", () => {
+  test("defaultValue가 제공되면 해당 값을 선택한다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" defaultValue="option2">
         <Radio value="option1">Option 1</Radio>
@@ -33,7 +33,7 @@ describe("RadioGroup", () => {
     expect(option2).toBeChecked();
   });
 
-  test("defaultValue가 제공되지 않으면 아무것도 선택되지 않는다", () => {
+  test("defaultValue가 제공되지 않으면 아무것도 선택하지 않는다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group">
         <Radio value="option1">Option 1</Radio>
@@ -48,7 +48,7 @@ describe("RadioGroup", () => {
     expect(option2).not.toBeChecked();
   });
 
-  test("value가 defaultValue보다 우선된다", () => {
+  test("value가 defaultValue보다 우선한다", () => {
     render(
       <RadioGroup
         name="test"
@@ -68,7 +68,7 @@ describe("RadioGroup", () => {
     expect(option2).toBeChecked();
   });
 
-  test("disabled가 true일 때 모든 라디오가 비활성화된다", () => {
+  test("disabled가 true일 때 모든 라디오를 비활성화한다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" disabled>
         <Radio value="option1">Option 1</Radio>
@@ -83,7 +83,7 @@ describe("RadioGroup", () => {
     expect(option2).toBeDisabled();
   });
 
-  test("라디오 선택 시 onChange가 호출된다", async () => {
+  test("라디오 선택 시 onChange를 호출한다", async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
 
@@ -165,7 +165,7 @@ describe("Radio", () => {
     ["Option 1", false],
     ["Option 2", true],
   ] as const)(
-    "%s의 disabled 속성이 %s로 올바르게 적용된다",
+    "%s의 disabled 속성을 %s로 올바르게 적용한다",
     (optionName, isDisabled) => {
       render(
         <RadioGroup name="test" label="Test Radio Group">
@@ -193,7 +193,7 @@ describe("Radio", () => {
     ["warning"],
     ["success"],
     ["info"],
-  ] as const)("%s 톤이 올바르게 렌더링된다", (tone) => {
+  ] as const)("%s 톤을 올바르게 렌더링한다", (tone) => {
     render(
       <RadioGroup name="test" label="Test Radio Group" tone={tone}>
         <Radio value="option1">Option 1</Radio>
