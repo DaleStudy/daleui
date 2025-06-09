@@ -29,16 +29,22 @@ describe("style test", () => {
     render(<Tones />);
 
     expect(screen.getByRole("link", { name: "중립 링크" })).toHaveClass(
-      "c_foreground.default.tertiary [&:active,_&:hover]:c_foreground.default.secondary",
+      "c_light.fg.neutral.default",
     );
-    expect(screen.getByRole("link", { name: "강조 링크" })).toHaveClass(
-      "c_foreground.default.tertiary [&:active,_&:hover]:c_accent.brand",
+    expect(screen.getByRole("link", { name: "브랜드 링크" })).toHaveClass(
+      "c_light.fg.brand.default",
     );
     expect(screen.getByRole("link", { name: "위험 링크" })).toHaveClass(
-      "c_foreground.default.tertiary [&:active,_&:hover]:c_system.danger",
+      "c_light.fg.danger",
     );
     expect(screen.getByRole("link", { name: "경고 링크" })).toHaveClass(
-      "c_foreground.default.tertiary [&:active,_&:hover]:c_system.warning",
+      "c_light.fg.warning",
+    );
+    expect(screen.getByRole("link", { name: "성공 링크" })).toHaveClass(
+      "c_light.fg.success",
+    );
+    expect(screen.getByRole("link", { name: "정보 링크" })).toHaveClass(
+      "c_light.fg.info",
     );
   });
 
@@ -64,11 +70,11 @@ describe("style test", () => {
     render(<Contrasts />);
 
     expect(screen.getByRole("link", { name: "낮은 명암비" })).toHaveClass(
-      "c_foreground.default.tertiary [&:active,_&:hover]:c_foreground.default.tertiary",
+      "c_light.fg.neutral.placeholder",
     );
 
     expect(screen.getByRole("link", { name: "높은 명암비" })).toHaveClass(
-      "c_foreground.default.tertiary [&:active,_&:hover]:c_foreground.default.secondary",
+      "c_light.fg.neutral.default",
     );
   });
 

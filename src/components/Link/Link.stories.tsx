@@ -34,14 +34,20 @@ export const Tones: StoryObj<typeof Link> = {
         <Link {...args} tone="neutral">
           중립 링크
         </Link>
-        <Link {...args} tone="accent">
-          강조 링크
+        <Link {...args} tone="brand">
+          브랜드 링크
         </Link>
         <Link {...args} tone="danger">
           위험 링크
         </Link>
         <Link {...args} tone="warning">
           경고 링크
+        </Link>
+        <Link {...args} tone="success">
+          성공 링크
+        </Link>
+        <Link {...args} tone="info">
+          정보 링크
         </Link>
       </div>
     );
