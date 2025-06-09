@@ -5,7 +5,7 @@ import * as stories from "./Icon.stories";
 
 const { Basic } = composeStories(stories);
 
-test("SVG 요소가 렌더링된다", () => {
+test("SVG 요소를 렌더링한다", () => {
   const { container } = render(<Basic />);
 
   expect(container.querySelector("svg")).toBeInTheDocument();
@@ -17,7 +17,7 @@ test.each([
   ["md", "w_1.5em h_1.5em"],
   ["lg", "w_1.875em h_1.875em"],
   ["xl", "w_2.25em h_2.25em"],
-] as const)("%s 크기에 대해 올바른 클래스를 적용한다", (size, className) => {
+] as const)("%s 크기에 올바른 클래스를 적용한다", (size, className) => {
   const { container } = render(<Basic size={size} />);
 
   expect(container.querySelector("svg")).toHaveClass(className);
@@ -30,7 +30,7 @@ test.each([
   ["warning", "c_light.fg.warning"],
   ["success", "c_light.fg.success"],
   ["info", "c_light.fg.info"],
-] as const)("%s 톤에 대해 올바른 색상 클래스를 적용한다", (tone, className) => {
+] as const)("%s 톤에 올바른 색상 클래스를 적용한다", (tone, className) => {
   const { container } = render(<Basic tone={tone} muted={false} />);
 
   expect(container.querySelector("svg")).toHaveClass(className);
@@ -58,12 +58,15 @@ test.each([
   ["success", true],
   ["info", false],
   ["info", true],
-] as const)("%s 톤과 muted=%s 조합이 SVG 요소를 렌더링한다", (tone, muted) => {
-  const { container } = render(<Basic tone={tone} muted={muted} />);
-  const svg = container.querySelector("svg");
+] as const)(
+  "%s 톤과 muted=%s 조합으로 SVG 요소를 렌더링한다",
+  (tone, muted) => {
+    const { container } = render(<Basic tone={tone} muted={muted} />);
+    const svg = container.querySelector("svg");
 
-  expect(svg).toBeInTheDocument();
-});
+    expect(svg).toBeInTheDocument();
+  },
+);
 
 test.each([
   ["neutral", false],
@@ -78,7 +81,7 @@ test.each([
   ["success", true],
   ["info", false],
   ["info", true],
-] as const)("%s 톤과 muted=%s 조합이 class 속성을 가진다", (tone, muted) => {
+] as const)("%s 톤과 muted=%s 조합으로 class 속성을 가진다", (tone, muted) => {
   const { container } = render(<Basic tone={tone} muted={muted} />);
   const svg = container.querySelector("svg");
 
@@ -98,14 +101,17 @@ test.each([
   ["success", true],
   ["info", false],
   ["info", true],
-] as const)("%s 톤과 muted=%s 조합이 색상 클래스를 포함한다", (tone, muted) => {
-  const { container } = render(<Basic tone={tone} muted={muted} />);
-  const svg = container.querySelector("svg");
+] as const)(
+  "%s 톤과 muted=%s 조합으로 색상 클래스를 포함한다",
+  (tone, muted) => {
+    const { container } = render(<Basic tone={tone} muted={muted} />);
+    const svg = container.querySelector("svg");
 
-  const hasColorClass = Array.from(svg?.classList || []).some(
-    (className) =>
-      className.startsWith("c_light.fg.") ||
-      className.startsWith("dark:c_dark.fg."),
-  );
-  expect(hasColorClass).toBe(true);
-});
+    const hasColorClass = Array.from(svg?.classList || []).some(
+      (className) =>
+        className.startsWith("c_light.fg.") ||
+        className.startsWith("dark:c_dark.fg."),
+    );
+    expect(hasColorClass).toBe(true);
+  },
+);

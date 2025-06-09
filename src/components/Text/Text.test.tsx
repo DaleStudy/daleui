@@ -7,13 +7,13 @@ import * as stories from "./Text.stories";
 
 const { Basic, Tones, Contrasts } = composeStories(stories);
 
-test("텍스트가 올바르게 렌더링된다", () => {
+test("텍스트를 렌더링한다", () => {
   render(<Basic>테스트</Basic>);
 
   expect(screen.getByText("테스트")).toBeInTheDocument();
 });
 
-test("weight prop에 따라 font weight 클래스가 올바르게 적용된다", () => {
+test("weight prop에 따라 font weight 클래스를 적용한다", () => {
   const weight = faker.helpers.arrayElement(
     Object.keys(fontWeights),
   ) as keyof typeof fontWeights;
@@ -23,7 +23,7 @@ test("weight prop에 따라 font weight 클래스가 올바르게 적용된다",
   expect(screen.getByText("본문")).toHaveClass(`fw_${weight}`);
 });
 
-test("size prop에 따라 font size 클래스가 올바르게 적용된다", () => {
+test("size prop에 따라 font size 클래스를 적용한다", () => {
   const size = faker.helpers.arrayElement(
     Object.keys(fontSizes),
   ) as keyof typeof fontSizes;
@@ -40,7 +40,7 @@ test.each([
   ["경고 색조", "c_light.fg.warning"],
   ["성공 색조", "c_light.fg.success"],
   ["정보 색조", "c_light.fg.info"],
-] as const)("%s에 대해 올바른 톤 클래스가 적용된다", (textName, className) => {
+] as const)("%s에 올바른 톤 클래스를 적용한다", (textName, className) => {
   render(<Tones />);
 
   expect(screen.getByText(textName)).toHaveClass(className);
@@ -49,7 +49,7 @@ test.each([
 test.each([
   ["낮은 명암비", "c_light.fg.neutral.placeholder"],
   ["높은 명암비", "c_light.fg.neutral.default"],
-] as const)("%s에 대해 올바른 클래스가 적용된다", (textName, className) => {
+] as const)("%s에 올바른 클래스를 적용한다", (textName, className) => {
   render(<Contrasts />);
 
   expect(screen.getByText(textName)).toHaveClass(className);
