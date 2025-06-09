@@ -24,10 +24,12 @@ test.each([
 });
 
 test.each([
-  ["neutral", "c_black"],
-  ["accent", "c_blue"],
-  ["danger", "c_red"],
-  ["warning", "c_yellow"],
+  ["neutral", "c_light.fg.neutral.default"],
+  ["brand", "c_light.fg.brand.default"],
+  ["danger", "c_light.fg.danger"],
+  ["warning", "c_light.fg.warning"],
+  ["success", "c_light.fg.success"],
+  ["info", "c_light.fg.info"],
 ] as const)('tone "%s"값에 따라 class가 올바르게 적용됨', (tone, className) => {
   const { container } = render(<Basic tone={tone} muted={false} />);
 
@@ -35,10 +37,39 @@ test.each([
 });
 
 test.each([
-  [false, "c_black"],
-  [true, "c_gray"],
+  [false, "c_light.fg.neutral.default"],
+  [true, "c_light.fg.neutral.placeholder"],
 ] as const)("muted 값에 따라 class가 올바르게 적용됨", (muted, className) => {
   const { container } = render(<Basic tone="neutral" muted={muted} />);
 
   expect(container.querySelector("svg")).toHaveClass(className);
+});
+
+test("모든 tone과 muted 조합이 올바르게 작동함", () => {
+  const tones = [
+    "neutral",
+    "brand",
+    "danger",
+    "warning",
+    "success",
+    "info",
+  ] as const;
+  const mutedValues = [true, false] as const;
+
+  tones.forEach((tone) => {
+    mutedValues.forEach((muted) => {
+      const { container } = render(<Basic tone={tone} muted={muted} />);
+      const svg = container.querySelector("svg");
+
+      expect(svg).toBeInTheDocument();
+      expect(svg).toHaveAttribute("class");
+
+      const hasColorClass = Array.from(svg?.classList || []).some(
+        (className) =>
+          className.startsWith("c_light.fg.") ||
+          className.startsWith("dark:c_dark.fg."),
+      );
+      expect(hasColorClass).toBe(true);
+    });
+  });
 });

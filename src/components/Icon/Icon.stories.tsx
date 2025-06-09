@@ -16,7 +16,7 @@ export default {
 
 export const Basic: StoryObj<typeof Icon> = {
   args: {
-    tone: "accent",
+    tone: "brand",
     muted: true,
     size: "xl",
   },
@@ -40,7 +40,7 @@ export const Sizes: StoryObj<typeof Icon> = {
     },
   },
   args: {
-    tone: "accent",
+    tone: "brand",
     muted: true,
   },
 };
@@ -50,9 +50,11 @@ export const Tones: StoryObj<typeof Icon> = {
     return (
       <div className={vstack({ gap: "24" })}>
         <Icon {...args} tone="neutral" />
-        <Icon {...args} tone="accent" />
+        <Icon {...args} tone="brand" />
         <Icon {...args} tone="danger" />
         <Icon {...args} tone="warning" />
+        <Icon {...args} tone="success" />
+        <Icon {...args} tone="info" />
       </div>
     );
   },
