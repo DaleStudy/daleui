@@ -1,92 +1,187 @@
 import type { SemanticTokens, Tokens } from "@pandacss/types";
 
-export type Tone = "neutral" | "accent" | "danger" | "warning";
+export type Tone =
+  | "brand"
+  | "neutral"
+  | "danger"
+  | "success"
+  | "warning"
+  | "info";
 
 export const semanticColors: SemanticTokens["colors"] = {
-  fg: {
-    brand: {
-      default: { value: { base: "{colors.violet.9}" } },
-      hover: { value: { base: "{colors.violet.10}" } },
-      active: { value: { base: "{colors.violet.11}" } },
+  light: {
+    fgSolid: {
+      brand: { value: { base: "{colors.violet.1}" } },
+      neutral: { value: { base: "{colors.slate.1}" } },
+      success: { value: { base: "{colors.green.1}" } },
+      warning: { value: { base: "{colors.amber.12}" } },
+      danger: { value: { base: "{colors.red.1}" } },
+      info: { value: { base: "{colors.blue.1}" } },
     },
-    neutral: {
-      default: { value: { base: "{colors.slate.11}" } },
-      hover: { value: { base: "{colors.slate.11}" } },
-      active: { value: { base: "{colors.slate.12}" } },
-      placeholder: { value: { base: "{colors.slate.8}" } },
-      disabled: { value: { base: "{colors.slate.8}" } },
+    bg: {
+      brand: {
+        default: { value: { base: "{colors.violet.2}" } },
+        hover: { value: { base: "{colors.violet.3}" } },
+        active: { value: { base: "{colors.violet.4}" } },
+      },
+      neutral: {
+        default: { value: { base: "{colors.slate.1}" } },
+        hover: { value: { base: "{colors.slate.3}" } },
+        active: { value: { base: "{colors.slate.4}" } },
+        disabled: { value: { base: "{colors.slate.6}" } },
+      },
+      danger: {
+        default: { value: { base: "{colors.red.1}" } },
+        hover: { value: { base: "{colors.red.2}" } },
+        active: { value: { base: "{colors.red.3}" } },
+      },
+      success: { value: { base: "{colors.green.1}" } },
+      warning: { value: { base: "{colors.amber.1}" } },
+      info: { value: { base: "{colors.blue.2}" } },
     },
-    success: { default: { value: { base: "{colors.green.11}" } } },
-    warning: { default: { value: { base: "{colors.amber.11}" } } },
-    danger: { default: { value: { base: "{colors.red.11}" } } },
-    info: { default: { value: { base: "{colors.blue.11}" } } },
+    border: {
+      brand: {
+        default: { value: { base: "{colors.violet.8}" } },
+        active: { value: { base: "{colors.violet.9}" } },
+        focus: { value: { base: "{colors.violet.10}" } },
+      },
+      neutral: {
+        default: { value: { base: "{colors.slate.8}" } },
+        hover: { value: { base: "{colors.slate.9}" } },
+        active: { value: { base: "{colors.slate.10}" } },
+        disabled: { value: { base: "{colors.slate.6}" } },
+      },
+      success: { value: { base: "{colors.green.8}" } },
+      warning: { value: { base: "{colors.amber.7}" } },
+      danger: { value: { base: "{colors.red.9}" } },
+      info: { value: { base: "{colors.blue.9}" } },
+    },
+    bgSolid: {
+      brand: {
+        default: { value: { base: "{colors.violet.9}" } },
+        hover: { value: { base: "{colors.violet.10}" } },
+        active: { value: { base: "{colors.violet.11}" } },
+      },
+      neutral: {
+        default: { value: { base: "{colors.slate.10}" } },
+        hover: { value: { base: "{colors.slate.11}" } },
+        active: { value: { base: "{colors.slate.12}" } },
+        disabled: { value: { base: "{colors.slate.6}" } },
+      },
+      success: { value: { base: "{colors.green.11}" } },
+      warning: { value: { base: "{colors.amber.9}" } },
+      danger: {
+        default: { value: { base: "{colors.red.10}" } },
+        hover: { value: { base: "{colors.red.11}" } },
+        active: { value: { base: "{colors.red.12}" } },
+      },
+      info: { value: { base: "{colors.blue.11}" } },
+    },
+    fg: {
+      brand: {
+        default: { value: { base: "{colors.violet.9}" } },
+        hover: { value: { base: "{colors.violet.10}" } },
+        active: { value: { base: "{colors.violet.11}" } },
+      },
+      neutral: {
+        default: { value: { base: "{colors.slate.11}" } },
+        hover: { value: { base: "{colors.slate.12}" } },
+        active: { value: { base: "{colors.black}" } },
+        placeholder: { value: { base: "{colors.slate.7}" } },
+        disabled: { value: { base: "{colors.slate.8}" } },
+      },
+      success: { value: { base: "{colors.green.11}" } },
+      warning: { value: { base: "{colors.amber.11}" } },
+      danger: { value: { base: "{colors.red.11}" } },
+      info: { value: { base: "{colors.blue.11}" } },
+    },
   },
-  fgSolid: {
-    brand: { value: { base: "{colors.violet.1}" } },
-    neutral: { value: { base: "{colors.slate.1}" } },
-    success: { value: { base: "{colors.green.1}" } },
-    warning: { value: { base: "{colors.amber.12}" } },
-    danger: { value: { base: "{colors.red.1}" } },
-    info: { value: { base: "{colors.blue.1}" } },
-  },
-  bg: {
-    brand: {
-      default: { value: { base: "{colors.violet.2}" } },
-      hover: { value: { base: "{colors.violet.3}" } },
-      active: { value: { base: "{colors.violet.4}" } },
+  dark: {
+    fgSolid: {
+      brand: { value: { base: "{colors.darkTeal.1}" } },
+      neutral: { value: { base: "{colors.darkSage.1}" } },
+      success: { value: { base: "{colors.darkGreen.1}" } },
+      warning: { value: { base: "{colors.darkAmber.2}" } },
+      danger: { value: { base: "{colors.darkRed.2}" } },
+      info: { value: { base: "{colors.darkBlue.2}" } },
     },
-    neutral: {
-      default: { value: { base: "{colors.slate.1}" } },
-      hover: { value: { base: "{colors.slate.3}" } },
-      active: { value: { base: "{colors.slate.4}" } },
-      disabled: { value: { base: "{colors.slate.6}" } },
+    bg: {
+      brand: {
+        default: { value: { base: "{colors.darkTeal.2}" } },
+        hover: { value: { base: "{colors.darkTeal.3}" } },
+        active: { value: { base: "{colors.darkTeal.4}" } },
+      },
+      neutral: {
+        default: { value: { base: "{colors.darkSage.1}" } },
+        hover: { value: { base: "{colors.darkSage.2}" } },
+        active: { value: { base: "{colors.darkSage.3}" } },
+        disabled: { value: { base: "{colors.darkSage.6}" } },
+      },
+      danger: {
+        default: { value: { base: "{colors.darkRed.1}" } },
+        hover: { value: { base: "{colors.darkRed.2}" } },
+        active: { value: { base: "{colors.darkRed.3}" } },
+      },
+      success: { value: { base: "{colors.darkGreen.1}" } },
+      warning: { value: { base: "{colors.darkAmber.1}" } },
+      info: { value: { base: "{colors.darkBlue.3}" } },
     },
-    danger: {
-      default: { value: { base: "{colors.red.1}" } },
-      hover: { value: { base: "{colors.red.2}" } },
-      active: { value: { base: "{colors.red.3}" } },
+    border: {
+      brand: {
+        default: { value: { base: "{colors.darkTeal.8}" } },
+        active: { value: { base: "{colors.darkTeal.9}" } },
+        focus: { value: { base: "{colors.darkTeal.10}" } },
+      },
+      neutral: {
+        default: { value: { base: "{colors.darkSage.8}" } },
+        hover: { value: { base: "{colors.darkSage.9}" } },
+        active: { value: { base: "{colors.darkSage.10}" } },
+        disabled: { value: { base: "{colors.darkSage.7}" } },
+      },
+      success: { value: { base: "{colors.darkGreen.8}" } },
+      warning: { value: { base: "{colors.darkAmber.7}" } },
+      danger: { value: { base: "{colors.darkRed.8}" } },
+      info: { value: { base: "{colors.darkBlue.9}" } },
     },
-    success: { default: { value: { base: "{colors.green.1}" } } },
-    warning: { default: { value: { base: "{colors.amber.1}" } } },
-    info: { default: { value: { base: "{colors.blue.2}" } } },
-  },
-  bgSolid: {
-    brand: {
-      default: { value: { base: "{colors.violet.9}" } },
-      hover: { value: { base: "{colors.violet.10}" } },
-      active: { value: { base: "{colors.violet.11}" } },
+    bgSolid: {
+      brand: {
+        default: { value: { base: "{colors.darkTeal.9}" } },
+        hover: { value: { base: "{colors.darkTeal.10}" } },
+        active: { value: { base: "{colors.darkTeal.11}" } },
+      },
+      neutral: {
+        default: { value: { base: "{colors.darkSage.11}" } },
+        hover: { value: { base: "{colors.darkSage.12}" } },
+        active: { value: { base: "{colors.white}" } },
+        disabled: { value: { base: "{colors.darkSlate.6}" } },
+      },
+      success: { value: { base: "{colors.darkGreen.11}" } },
+      warning: { value: { base: "{colors.darkAmber.9}" } },
+      danger: {
+        default: { value: { base: "{colors.darkRed.10}" } },
+        hover: { value: { base: "{colors.darkRed.11}" } },
+        active: { value: { base: "{colors.darkRed.12}" } },
+      },
+      info: { value: { base: "{colors.darkBlue.11}" } },
     },
-    neutral: {
-      default: { value: { base: "{colors.slate.10}" } },
-      hover: { value: { base: "{colors.slate.11}" } },
-      active: { value: { base: "{colors.slate.12}" } },
-      disabled: { value: { base: "{colors.slate.6}" } },
+    fg: {
+      brand: {
+        default: { value: { base: "{colors.darkTeal.9}" } },
+        hover: { value: { base: "{colors.darkTeal.10}" } },
+        active: { value: { base: "{colors.darkTeal.11}" } },
+      },
+      neutral: {
+        default: { value: { base: "{colors.darkSage.11}" } },
+        hover: { value: { base: "{colors.darkSage.12}" } },
+        active: { value: { base: "{colors.white}" } },
+        placeholder: { value: { base: "{colors.darkSage.7}" } },
+        disabled: { value: { base: "{colors.darkSage.8}" } },
+      },
+      success: { value: { base: "{colors.darkGreen.11}" } },
+      warning: { value: { base: "{colors.darkAmber.11}" } },
+      danger: { value: { base: "{colors.darkRed.11}" } },
+      info: { value: { base: "{colors.darkBlue.11}" } },
     },
-    success: { default: { value: { base: "{colors.green.11}" } } },
-    warning: { default: { value: { base: "{colors.amber.9}" } } },
-    danger: {
-      default: { value: { base: "{colors.red.10}" } },
-      hover: { value: { base: "{colors.red.11}" } },
-      active: { value: { base: "{colors.red.12}" } },
-    },
-    info: { default: { value: { base: "{colors.blue.11}" } } },
-  },
-  border: {
-    brand: {
-      default: { value: { base: "{colors.violet.8}" } },
-      active: { value: { base: "{colors.violet.9}" } },
-      focus: { value: { base: "{colors.violet.10}" } },
-    },
-    neutral: {
-      default: { value: { base: "{colors.slate.8}" } },
-      hover: { value: { base: "{colors.slate.9}" } },
-      active: { value: { base: "{colors.slate.10}" } },
-      disabled: { value: { base: "{colors.slate.6}" } },
-    },
-    success: { value: { base: "{colors.green.8}" } },
-    warning: { value: { base: "{colors.amber.7}" } },
-    danger: { value: { base: "{colors.red.9}" } },
-    info: { value: { base: "{colors.blue.9}" } },
   },
 };
 
