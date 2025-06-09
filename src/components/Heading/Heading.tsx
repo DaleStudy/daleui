@@ -58,11 +58,11 @@ export const Heading = ({
 const styles = cva({
   variants: {
     level: {
-      1: { fontSize: "3xl" }, 
-      2: { fontSize: "2xl" }, 
-      3: { fontSize: "xl" }, 
-      4: { fontSize: "lg" }, 
-      5: { fontSize: "md" }, 
+      1: { fontSize: "3xl" },
+      2: { fontSize: "2xl" },
+      3: { fontSize: "xl" },
+      4: { fontSize: "lg" },
+      5: { fontSize: "md" },
     },
     muted: {
       true: { color: "text.muted" },

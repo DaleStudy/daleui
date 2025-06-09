@@ -3,7 +3,7 @@ export const textStyles = {
     lg: {
       value: {
         fontFamily: "sans",
-        fontSize: "8xl", 
+        fontSize: "8xl",
         fontWeight: "bold",
         lineHeight: "tight",
         letterSpacing: "tight",
@@ -21,7 +21,7 @@ export const textStyles = {
     sm: {
       value: {
         fontFamily: "sans",
-        fontSize: "5xl", 
+        fontSize: "5xl",
         fontWeight: "bold",
         lineHeight: "tight",
         letterSpacing: "tight",
@@ -32,7 +32,7 @@ export const textStyles = {
     lg: {
       value: {
         fontFamily: "sans",
-        fontSize: "4xl", 
+        fontSize: "4xl",
         fontWeight: "semibold",
         lineHeight: "tight",
         letterSpacing: "balanced",
@@ -41,7 +41,7 @@ export const textStyles = {
     md: {
       value: {
         fontFamily: "sans",
-        fontSize: "3xl", 
+        fontSize: "3xl",
         fontWeight: "semibold",
         lineHeight: "tight",
         letterSpacing: "balanced",
@@ -50,7 +50,7 @@ export const textStyles = {
     sm: {
       value: {
         fontFamily: "sans",
-        fontSize: "2xl", 
+        fontSize: "2xl",
         fontWeight: "medium",
         lineHeight: "tight",
         letterSpacing: "balanced",
@@ -61,7 +61,7 @@ export const textStyles = {
     lg: {
       value: {
         fontFamily: "sans",
-        fontSize: "lg", 
+        fontSize: "lg",
         fontWeight: "normal",
         lineHeight: "balanced",
         letterSpacing: "balanced",
@@ -70,7 +70,7 @@ export const textStyles = {
     md: {
       value: {
         fontFamily: "sans",
-        fontSize: "md", 
+        fontSize: "md",
         fontWeight: "normal",
         lineHeight: "balanced",
         letterSpacing: "balanced",
@@ -79,7 +79,7 @@ export const textStyles = {
     sm: {
       value: {
         fontFamily: "sans",
-        fontSize: "sm", 
+        fontSize: "sm",
         fontWeight: "semibold",
         lineHeight: "balanced",
         letterSpacing: "balanced",
@@ -90,7 +90,7 @@ export const textStyles = {
     lg: {
       value: {
         fontFamily: "sans",
-        fontSize: "lg", 
+        fontSize: "lg",
         fontWeight: "medium",
         lineHeight: "tight",
         letterSpacing: "balanced",
@@ -99,7 +99,7 @@ export const textStyles = {
     md: {
       value: {
         fontFamily: "sans",
-        fontSize: "md", 
+        fontSize: "md",
         fontWeight: "medium",
         lineHeight: "tight",
         letterSpacing: "balanced",
@@ -108,7 +108,7 @@ export const textStyles = {
     sm: {
       value: {
         fontFamily: "sans",
-        fontSize: "sm", 
+        fontSize: "sm",
         fontWeight: "medium",
         lineHeight: "tight",
         letterSpacing: "balanced",
@@ -118,7 +118,7 @@ export const textStyles = {
   caption: {
     value: {
       fontFamily: "sans",
-      fontSize: "xs", 
+      fontSize: "xs",
       fontWeight: "medium",
       lineHeight: "tight",
       letterSpacing: "balanced",
@@ -127,7 +127,7 @@ export const textStyles = {
   code: {
     value: {
       fontFamily: "mono",
-      fontSize: "sm", 
+      fontSize: "sm",
       fontWeight: "medium",
       lineHeight: "balanced",
       letterSpacing: "balanced",
@@ -137,7 +137,7 @@ export const textStyles = {
     "1": {
       value: {
         fontFamily: "sans",
-        fontSize: "3xl",    
+        fontSize: "3xl",
         fontWeight: "bold",
         lineHeight: "tight",
         letterSpacing: "tight",
@@ -145,8 +145,8 @@ export const textStyles = {
     },
     "2": {
       value: {
-        fontFamily: "sans", 
-        fontSize: "2xl", 
+        fontFamily: "sans",
+        fontSize: "2xl",
         fontWeight: "bold",
         lineHeight: "tight",
         letterSpacing: "tight",
@@ -155,7 +155,7 @@ export const textStyles = {
     "3": {
       value: {
         fontFamily: "sans",
-        fontSize: "xl", 
+        fontSize: "xl",
         fontWeight: "bold",
         lineHeight: "tight",
         letterSpacing: "tight",
@@ -164,8 +164,8 @@ export const textStyles = {
     "4": {
       value: {
         fontFamily: "sans",
-        fontSize: "lg", 
-        fontWeight: "bold", 
+        fontSize: "lg",
+        fontWeight: "bold",
         lineHeight: "tight",
         letterSpacing: "tight",
       },
@@ -173,9 +173,9 @@ export const textStyles = {
     "5": {
       value: {
         fontFamily: "sans",
-        fontSize: "md", 
+        fontSize: "md",
         fontWeight: "bold",
-        lineHeight: "tight", 
+        lineHeight: "tight",
         letterSpacing: "tight",
       },
     },
@@ -222,5 +222,3 @@ export const lineHeights = {
   tight: { value: "1.2" },
   balanced: { value: "1.5" },
 };
-
- 
