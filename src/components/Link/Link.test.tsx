@@ -9,7 +9,7 @@ import * as stories from "./Link.stories";
 const { Basic, Tones, Contrasts, Underlines, Security, WithIcon } =
   composeStories(stories);
 
-describe("rendering test", () => {
+describe("렌더링 테스트", () => {
   test("텍스트와 함께 링크가 올바르게 렌더링됨", () => {
     render(<Basic />);
     expect(screen.getByRole("link")).toHaveTextContent("링크");
@@ -24,29 +24,24 @@ describe("rendering test", () => {
   });
 });
 
-describe("style test", () => {
-  test("tone prop에 따라 tone이 올바르게 적용됨", () => {
-    render(<Tones />);
+describe("스타일 테스트", () => {
+  test.each([
+    ["중립 링크", "c_light.fg.neutral.default"],
+    ["브랜드 링크", "c_light.fg.brand.default"],
+    ["위험 링크", "c_light.fg.danger"],
+    ["경고 링크", "c_light.fg.warning"],
+    ["성공 링크", "c_light.fg.success"],
+    ["정보 링크", "c_light.fg.info"],
+  ] as const)(
+    "%s에 대해 올바른 톤 클래스가 적용된다",
+    (linkName, className) => {
+      render(<Tones />);
 
-    expect(screen.getByRole("link", { name: "중립 링크" })).toHaveClass(
-      "c_light.fg.neutral.default",
-    );
-    expect(screen.getByRole("link", { name: "브랜드 링크" })).toHaveClass(
-      "c_light.fg.brand.default",
-    );
-    expect(screen.getByRole("link", { name: "위험 링크" })).toHaveClass(
-      "c_light.fg.danger",
-    );
-    expect(screen.getByRole("link", { name: "경고 링크" })).toHaveClass(
-      "c_light.fg.warning",
-    );
-    expect(screen.getByRole("link", { name: "성공 링크" })).toHaveClass(
-      "c_light.fg.success",
-    );
-    expect(screen.getByRole("link", { name: "정보 링크" })).toHaveClass(
-      "c_light.fg.info",
-    );
-  });
+      expect(screen.getByRole("link", { name: linkName })).toHaveClass(
+        className,
+      );
+    },
+  );
 
   test("size prop에 따라 font size가 올바르게 적용됨", () => {
     const size = faker.helpers.arrayElement(
@@ -66,55 +61,58 @@ describe("style test", () => {
     expect(screen.getByRole("link")).toHaveClass(`fw_${weight}`);
   });
 
-  test("낮은 명암비와 높은 명암비에 따라 스타일이 올바르게 적용됨", () => {
+  test.each([
+    ["낮은 명암비", "c_light.fg.neutral.placeholder"],
+    ["높은 명암비", "c_light.fg.neutral.default"],
+  ] as const)("%s에 대해 올바른 클래스가 적용된다", (linkName, className) => {
     render(<Contrasts />);
 
-    expect(screen.getByRole("link", { name: "낮은 명암비" })).toHaveClass(
-      "c_light.fg.neutral.placeholder",
-    );
-
-    expect(screen.getByRole("link", { name: "높은 명암비" })).toHaveClass(
-      "c_light.fg.neutral.default",
-    );
+    expect(screen.getByRole("link", { name: linkName })).toHaveClass(className);
   });
 
-  test("밑줄 스타일이 올바르게 적용됨", () => {
-    render(<Underlines />);
+  test.each([
+    ["밑줄 있음", "td_underline"],
+    ["밑줄 없음", "td_none"],
+  ] as const)(
+    "%s에 대해 올바른 밑줄 스타일이 적용된다",
+    (linkName, className) => {
+      render(<Underlines />);
 
-    expect(screen.getByRole("link", { name: "밑줄 있음" })).toHaveClass(
-      "td_underline",
-    );
-    expect(screen.getByRole("link", { name: "밑줄 없음" })).toHaveClass(
-      "td_none",
-    );
-  });
+      expect(screen.getByRole("link", { name: linkName })).toHaveClass(
+        className,
+      );
+    },
+  );
 });
 
-describe("behavior test", () => {
-  test("'href'와 'target'같은 추가 anchor 속성이 전달됨", () => {
-    const href = faker.internet.url({ appendSlash: true });
-    const target = "_self";
-
-    render(<Basic href={href} target={target} />);
+describe("동작 테스트", () => {
+  test.each([
+    ["href", faker.internet.url({ appendSlash: true })],
+    ["target", "_self"],
+  ] as const)("%s 속성이 올바르게 전달된다", (attribute, value) => {
+    const props = { [attribute]: value };
+    render(<Basic {...props} />);
 
     const link = screen.getByRole("link");
-    expect(link).toHaveAttribute("href", href);
-    expect(link).toHaveAttribute("target", target);
+    expect(link).toHaveAttribute(attribute, value);
   });
 
-  test("target 속성이 '_blank'일 경우, rel='noopener noreferrer이 추가됨", () => {
-    render(<Security />);
+  test.each([
+    ["새 탭에서 열기 (보안 속성 자동 추가)", "noopener noreferrer"],
+    ["같은 탭에서 열기", null],
+  ] as const)(
+    "%s 링크의 rel 속성이 올바르게 설정된다",
+    (linkName, expectedRel) => {
+      render(<Security />);
 
-    expect(
-      screen.getByRole("link", {
-        name: "새 탭에서 열기 (보안 속성 자동 추가)",
-      }),
-    ).toHaveAttribute("rel", "noopener noreferrer");
-
-    expect(
-      screen.getByRole("link", { name: "같은 탭에서 열기" }),
-    ).not.toHaveAttribute("rel", "noopener noreferrer");
-  });
+      const link = screen.getByRole("link", { name: linkName });
+      if (expectedRel) {
+        expect(link).toHaveAttribute("rel", expectedRel);
+      } else {
+        expect(link).not.toHaveAttribute("rel", "noopener noreferrer");
+      }
+    },
+  );
 
   test("클릭 시, 해당 URL로 올바르게 잘 이동됨", async () => {
     const user = userEvent.setup();
