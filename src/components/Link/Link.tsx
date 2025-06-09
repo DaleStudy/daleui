@@ -65,9 +65,11 @@ const styles = cva({
   variants: {
     tone: {
       neutral: {},
-      accent: {},
+      brand: {},
       danger: {},
       warning: {},
+      success: {},
+      info: {},
     },
     muted: {
       true: {},
@@ -83,19 +85,31 @@ const styles = cva({
       tone: "neutral",
       muted: false,
       css: {
-        color: "foreground.default.tertiary",
+        color: {
+          base: "light.fg.neutral.default",
+          _dark: "dark.fg.neutral.default",
+        },
         "&:active, &:hover": {
-          color: "foreground.default.secondary",
+          color: {
+            base: "light.fg.neutral.hover",
+            _dark: "dark.fg.neutral.hover",
+          },
         },
       },
     },
     {
-      tone: "accent",
+      tone: "brand",
       muted: false,
       css: {
-        color: "accent.brand",
+        color: {
+          base: "light.fg.brand.default",
+          _dark: "dark.fg.brand.default",
+        },
         "&:active, &:hover": {
-          color: "accent.brand",
+          color: {
+            base: "light.fg.brand.hover",
+            _dark: "dark.fg.brand.hover",
+          },
         },
       },
     },
@@ -103,9 +117,15 @@ const styles = cva({
       tone: "danger",
       muted: false,
       css: {
-        color: "system.danger",
+        color: {
+          base: "light.fg.danger",
+          _dark: "dark.fg.danger",
+        },
         "&:active, &:hover": {
-          color: "system.danger",
+          color: {
+            base: "light.fg.danger",
+            _dark: "dark.fg.danger",
+          },
         },
       },
     },
@@ -113,9 +133,47 @@ const styles = cva({
       tone: "warning",
       muted: false,
       css: {
-        color: "system.warning",
+        color: {
+          base: "light.fg.warning",
+          _dark: "dark.fg.warning",
+        },
         "&:active, &:hover": {
-          color: "system.warning",
+          color: {
+            base: "light.fg.warning",
+            _dark: "dark.fg.warning",
+          },
+        },
+      },
+    },
+    {
+      tone: "success",
+      muted: false,
+      css: {
+        color: {
+          base: "light.fg.success",
+          _dark: "dark.fg.success",
+        },
+        "&:active, &:hover": {
+          color: {
+            base: "light.fg.success",
+            _dark: "dark.fg.success",
+          },
+        },
+      },
+    },
+    {
+      tone: "info",
+      muted: false,
+      css: {
+        color: {
+          base: "light.fg.info",
+          _dark: "dark.fg.info",
+        },
+        "&:active, &:hover": {
+          color: {
+            base: "light.fg.info",
+            _dark: "dark.fg.info",
+          },
         },
       },
     },
@@ -123,19 +181,31 @@ const styles = cva({
       tone: "neutral",
       muted: true,
       css: {
-        color: "foreground.default.disabled",
+        color: {
+          base: "light.fg.neutral.placeholder",
+          _dark: "dark.fg.neutral.placeholder",
+        },
         "&:active, &:hover": {
-          color: "foreground.default.tertiary",
+          color: {
+            base: "light.fg.neutral.default",
+            _dark: "dark.fg.neutral.default",
+          },
         },
       },
     },
     {
-      tone: "accent",
+      tone: "brand",
       muted: true,
       css: {
-        color: "foreground.default.disabled",
+        color: {
+          base: "light.fg.neutral.placeholder",
+          _dark: "dark.fg.neutral.placeholder",
+        },
         "&:active, &:hover": {
-          color: "accent.brand",
+          color: {
+            base: "light.fg.brand.default",
+            _dark: "dark.fg.brand.default",
+          },
         },
       },
     },
@@ -143,9 +213,15 @@ const styles = cva({
       tone: "danger",
       muted: true,
       css: {
-        color: "foreground.default.disabled",
+        color: {
+          base: "light.fg.neutral.placeholder",
+          _dark: "dark.fg.neutral.placeholder",
+        },
         "&:active, &:hover": {
-          color: "system.danger",
+          color: {
+            base: "light.fg.danger",
+            _dark: "dark.fg.danger",
+          },
         },
       },
     },
@@ -153,9 +229,47 @@ const styles = cva({
       tone: "warning",
       muted: true,
       css: {
-        color: "foreground.default.disabled",
+        color: {
+          base: "light.fg.neutral.placeholder",
+          _dark: "dark.fg.neutral.placeholder",
+        },
         "&:active, &:hover": {
-          color: "system.warning",
+          color: {
+            base: "light.fg.warning",
+            _dark: "dark.fg.warning",
+          },
+        },
+      },
+    },
+    {
+      tone: "success",
+      muted: true,
+      css: {
+        color: {
+          base: "light.fg.neutral.placeholder",
+          _dark: "dark.fg.neutral.placeholder",
+        },
+        "&:active, &:hover": {
+          color: {
+            base: "light.fg.success",
+            _dark: "dark.fg.success",
+          },
+        },
+      },
+    },
+    {
+      tone: "info",
+      muted: true,
+      css: {
+        color: {
+          base: "light.fg.neutral.placeholder",
+          _dark: "dark.fg.neutral.placeholder",
+        },
+        "&:active, &:hover": {
+          color: {
+            base: "light.fg.info",
+            _dark: "dark.fg.info",
+          },
         },
       },
     },
@@ -163,14 +277,12 @@ const styles = cva({
       underline: true,
       css: {
         textDecoration: "underline",
-        color: "foreground.default.tertiary",
       },
     },
     {
       underline: false,
       css: {
         textDecoration: "none",
-        color: "foreground.default.tertiary",
       },
     },
   ],
