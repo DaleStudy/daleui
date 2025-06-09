@@ -48,7 +48,17 @@ export const Checkbox = ({
         alignItems: "center",
         gap: "8",
         cursor: "pointer",
-        color: "foreground.default.primary",
+        color: {
+          base: "light.fg.neutral.default",
+          _dark: "dark.fg.neutral.default",
+        },
+        _disabled: {
+          cursor: "not-allowed",
+          color: {
+            base: "light.fg.neutral.disabled",
+            _dark: "dark.fg.neutral.disabled",
+          },
+        },
       })}
     >
       <CheckboxPrimitive.Root
@@ -58,7 +68,7 @@ export const Checkbox = ({
           onChange?.(checked === true, value);
         }}
         disabled={disabled}
-        className={styles({ tone })}
+        className={styles({ tone, disabled })}
         {...rest}
       >
         <CheckboxPrimitive.Indicator
@@ -75,7 +85,13 @@ export const Checkbox = ({
       </CheckboxPrimitive.Root>
       {label}
       {required && (
-        <span className={css({ color: "foreground.system.danger" })}>*</span>
+        <span
+          className={css({
+            color: { base: "light.fg.danger", _dark: "dark.fg.danger" },
+          })}
+        >
+          *
+        </span>
       )}
     </label>
   );
@@ -87,7 +103,10 @@ const styles = cva({
     margin: "0",
     backgroundColor: "transparent",
     border: "3px solid",
-    borderColor: "border",
+    borderColor: {
+      base: "light.border.neutral.default",
+      _dark: "dark.border.neutral.default",
+    },
     borderRadius: "sm",
     width: "1.5rem",
     height: "1.5rem",
@@ -97,97 +116,128 @@ const styles = cva({
     cursor: "pointer",
     transition: "0.2s",
     outline: "none",
-    "&:hover": {
-      backgroundColor: "background.interactive.neutral.hover",
-    },
-    "&:focus": {
-      outline: "3px solid",
-      outlineOffset: "2px",
-    },
-    "&:disabled": {
-      opacity: 0.5,
-      cursor: "not-allowed",
-      "&:hover": {
-        backgroundColor: "transparent",
+    _hover: {
+      bg: { base: "light.bg.neutral.hover", _dark: "dark.bg.neutral.hover" },
+      color: {
+        base: "light.fg.neutral.hover",
+        _dark: "dark.fg.neutral.hover",
       },
+    },
+    _focusVisible: {
+      outline: "2px solid",
+      outlineOffset: "2px",
+      outlineColor: {
+        base: "light.border.brand.focus",
+        _dark: "dark.border.brand.focus",
+      },
+    },
+    _disabled: {
+      borderColor: {
+        base: "light.border.neutral.disabled",
+        _dark: "dark.border.neutral.disabled",
+      },
+      bg: "transparent!",
+      cursor: "not-allowed",
     },
   },
   variants: {
     tone: {
-      neutral: {
-        "&[data-state='checked']": {
-          backgroundColor: "background.interactive.neutral.default",
-          borderColor: "borders.interactive.neutral.default",
-          color: "foreground.default.primary",
-        },
-        "&:disabled[data-state='checked']": {
-          backgroundColor: "background.interactive.neutral.default",
-          borderColor: "borders.interactive.neutral.default",
-          color: "foreground.default.primary",
-        },
-        "&:focus": {
-          outlineColor: "borders.interactive.focusRing",
+      brand: {
+        _checked: {
+          bg: {
+            base: "light.bgSolid.brand.default",
+            _dark: "dark.bgSolid.brand.default",
+          },
+          borderColor: {
+            base: "light.bgSolid.brand.default",
+            _dark: "dark.bgSolid.brand.default",
+          },
+          color: { base: "light.fgSolid.brand", _dark: "dark.fgSolid.brand" },
         },
       },
-      accent: {
-        "&[data-state='checked']": {
-          backgroundColor: "background.interactive.brand.default",
-          borderColor: "borders.interactive.brand.default",
-          color: "foreground.Inverse.primary",
-        },
-        "&:disabled[data-state='checked']": {
-          backgroundColor: "background.interactive.brand.default",
-          borderColor: "borders.interactive.brand.default",
+      neutral: {
+        _checked: {
+          bg: {
+            base: "light.bgSolid.neutral.default",
+            _dark: "dark.bgSolid.neutral.default",
+          },
+          borderColor: {
+            base: "light.bgSolid.neutral.default",
+            _dark: "dark.bgSolid.neutral.default",
+          },
+          color: {
+            base: "light.fgSolid.neutral",
+            _dark: "dark.fgSolid.neutral",
+          },
         },
       },
       danger: {
-        "&[data-state='checked']": {
-          backgroundColor: "background.interactive.danger.default",
-          borderColor: "borders.system.danger",
-          color: "foreground.Inverse.primary",
-        },
-        "&:disabled[data-state='checked']": {
-          backgroundColor: "background.interactive.danger.default",
-          borderColor: "borders.system.danger",
+        _checked: {
+          bg: {
+            base: "light.bgSolid.danger.default",
+            _dark: "dark.bgSolid.danger.default",
+          },
+          borderColor: {
+            base: "light.bgSolid.danger.default",
+            _dark: "dark.bgSolid.danger.default",
+          },
+          color: { base: "light.fgSolid.danger", _dark: "dark.fgSolid.danger" },
         },
       },
       warning: {
-        "&[data-state='checked']": {
-          backgroundColor: "background.accent.amber",
-          borderColor: "borders.system.warning",
-          color: "foreground.accent.amber",
+        _checked: {
+          bg: { base: "light.bgSolid.warning", _dark: "dark.bgSolid.warning" },
+          borderColor: {
+            base: "light.bgSolid.warning",
+            _dark: "dark.bgSolid.warning",
+          },
+          color: {
+            base: "light.fgSolid.warning",
+            _dark: "dark.fgSolid.warning",
+          },
         },
-        "&:disabled[data-state='checked']": {
-          backgroundColor: "background.accent.amber",
-          borderColor: "borders.system.warning",
+      },
+      success: {
+        _checked: {
+          bg: { base: "light.bgSolid.success", _dark: "dark.bgSolid.success" },
+          borderColor: {
+            base: "light.bgSolid.success",
+            _dark: "dark.bgSolid.success",
+          },
+          color: {
+            base: "light.fgSolid.success",
+            _dark: "dark.fgSolid.success",
+          },
+        },
+      },
+      info: {
+        _checked: {
+          bg: { base: "light.bgSolid.info", _dark: "dark.bgSolid.info" },
+          borderColor: {
+            base: "light.bgSolid.info",
+            _dark: "dark.bgSolid.info",
+          },
+          color: { base: "light.fgSolid.info", _dark: "dark.fgSolid.info" },
+        },
+      },
+    },
+    disabled: {
+      true: {
+        _checked: {
+          bg: {
+            base: "light.bg.neutral.disabled!",
+            _dark: "dark.bg.neutral.disabled!",
+          },
+          borderColor: {
+            base: "light.bg.neutral.disabled!",
+            _dark: "dark.bg.neutral.disabled!",
+          },
+          color: {
+            base: "light.fg.neutral.disabled!",
+            _dark: "dark.fg.neutral.disabled!",
+          },
         },
       },
     },
   },
-  compoundVariants: [
-    {
-      tone: "accent",
-      css: {
-        "&:focus": {
-          outlineColor: "borders.interactive.brand.focus",
-        },
-      },
-    },
-    {
-      tone: "danger",
-      css: {
-        "&:focus": {
-          outlineColor: "borders.system.danger",
-        },
-      },
-    },
-    {
-      tone: "warning",
-      css: {
-        "&:focus": {
-          outlineColor: "borders.system.warning",
-        },
-      },
-    },
-  ],
 });

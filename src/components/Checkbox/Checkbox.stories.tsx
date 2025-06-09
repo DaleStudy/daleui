@@ -19,10 +19,12 @@ export const Tones: StoryObj<typeof Checkbox> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
+        <Checkbox {...args} id="brand" label="브랜드 색조" tone="brand" />
         <Checkbox {...args} id="neutral" label="중립 색조" tone="neutral" />
-        <Checkbox {...args} id="accent" label="강조 색조" tone="accent" />
         <Checkbox {...args} id="danger" label="위험 색조" tone="danger" />
+        <Checkbox {...args} id="success" label="성공 색조" tone="success" />
         <Checkbox {...args} id="warning" label="경고 색조" tone="warning" />
+        <Checkbox {...args} id="info" label="정보 색조" tone="info" />
       </div>
     );
   },

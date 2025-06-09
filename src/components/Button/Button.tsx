@@ -72,6 +72,14 @@ const styles = cva({
     _disabled: {
       cursor: "not-allowed",
     },
+    _focusVisible: {
+      outline: "2px solid",
+      outlineOffset: "2px",
+      outlineColor: {
+        base: "light.border.brand.focus",
+        _dark: "dark.border.brand.focus",
+      },
+    },
   },
   variants: {
     size: {
@@ -134,12 +142,6 @@ const styles = cva({
             _dark: "dark.bgSolid.brand.active",
           },
         },
-        _focusVisible: {
-          outlineColor: {
-            base: "light.border.brand.focus",
-            _dark: "dark.border.brand.focus",
-          },
-        },
       },
     },
     {
@@ -164,12 +166,6 @@ const styles = cva({
           bg: {
             base: "light.bgSolid.neutral.active",
             _dark: "dark.bgSolid.neutral.active",
-          },
-        },
-        _focusVisible: {
-          outlineColor: {
-            base: "light.border.neutral.focus",
-            _dark: "dark.border.neutral.focus",
           },
         },
       },
@@ -198,12 +194,6 @@ const styles = cva({
             _dark: "dark.bgSolid.danger.active",
           },
         },
-        _focusVisible: {
-          outlineColor: {
-            base: "light.border.danger",
-            _dark: "dark.border.danger",
-          },
-        },
       },
     },
     {
@@ -217,12 +207,6 @@ const styles = cva({
         color: {
           base: "light.fgSolid.success",
           _dark: "dark.fgSolid.success",
-        },
-        _focusVisible: {
-          outlineColor: {
-            base: "light.border.success",
-            _dark: "dark.border.success",
-          },
         },
       },
     },
@@ -238,12 +222,6 @@ const styles = cva({
           base: "light.fgSolid.warning",
           _dark: "dark.fgSolid.warning",
         },
-        _focusVisible: {
-          outlineColor: {
-            base: "light.border.warning",
-            _dark: "dark.border.warning",
-          },
-        },
       },
     },
     {
@@ -257,12 +235,6 @@ const styles = cva({
         color: {
           base: "light.fgSolid.info",
           _dark: "dark.fgSolid.info",
-        },
-        _focusVisible: {
-          outlineColor: {
-            base: "light.border.info",
-            _dark: "dark.border.info",
-          },
         },
       },
     },
@@ -298,12 +270,6 @@ const styles = cva({
           color: {
             base: "light.fg.brand.active",
             _dark: "dark.fg.brand.active",
-          },
-        },
-        _focusVisible: {
-          outlineColor: {
-            base: "light.border.brand.focus",
-            _dark: "dark.border.brand.focus",
           },
         },
       },
@@ -349,12 +315,6 @@ const styles = cva({
             _dark: "dark.border.neutral.active",
           },
         },
-        _focusVisible: {
-          outlineColor: {
-            base: "light.border.neutral.focus",
-            _dark: "dark.border.neutral.focus",
-          },
-        },
       },
     },
     {
@@ -382,12 +342,6 @@ const styles = cva({
             _dark: "dark.bg.danger.active",
           },
         },
-        _focusVisible: {
-          outlineColor: {
-            base: "light.border.danger",
-            _dark: "dark.border.danger",
-          },
-        },
       },
     },
     {
@@ -402,12 +356,6 @@ const styles = cva({
         color: {
           base: "light.fg.success",
           _dark: "dark.fg.success",
-        },
-        _focusVisible: {
-          outlineColor: {
-            base: "light.border.success",
-            _dark: "dark.border.success",
-          },
         },
       },
     },
@@ -424,12 +372,6 @@ const styles = cva({
           base: "light.fg.warning",
           _dark: "dark.fg.warning",
         },
-        _focusVisible: {
-          outlineColor: {
-            base: "light.border.warning",
-            _dark: "dark.border.warning",
-          },
-        },
       },
     },
     {
@@ -444,12 +386,6 @@ const styles = cva({
         color: {
           base: "light.fg.info",
           _dark: "dark.fg.info",
-        },
-        _focusVisible: {
-          outlineColor: {
-            base: "light.border.info",
-            _dark: "dark.border.info",
-          },
         },
       },
     },
