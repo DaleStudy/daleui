@@ -14,6 +14,8 @@ export default {
   args: {
     children: "시작하기",
     variant: "solid",
+    size: "md",
+    disabled: false,
   },
 } satisfies Meta<typeof Button>;
 
@@ -46,17 +48,23 @@ export const Tones: StoryObj<typeof Button> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
-        <Button {...args} tone="neutral">
+        <Button {...args} variant="solid" tone="brand">
+          브랜드 색조
+        </Button>
+        <Button {...args} variant="solid" tone="neutral">
           중립 색조
         </Button>
-        <Button {...args} tone="accent">
-          강조 색조
-        </Button>
-        <Button {...args} tone="danger">
+        <Button {...args} variant="solid" tone="danger">
           위험 색조
         </Button>
-        <Button {...args} tone="warning">
+        <Button {...args} variant="solid" tone="success">
+          성공 색조
+        </Button>
+        <Button {...args} variant="solid" tone="warning">
           경고 색조
+        </Button>
+        <Button {...args} variant="solid" tone="info">
+          정보 색조
         </Button>
       </div>
     );
