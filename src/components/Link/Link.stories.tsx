@@ -3,24 +3,24 @@ import { vstack } from "../../../styled-system/patterns";
 import { Link } from "./Link";
 import { Icon } from "../Icon/Icon";
 
-const withRuntimeHrefDecorator: Decorator = (Story, context) => {
-  return (
-    <Story
-      args={{
-        ...context.args,
-        href: context.args.href || window.parent.location.href,
-      }}
-    />
-  );
-};
-
 export default {
   component: Link,
   parameters: {
     layout: "centered",
   },
   args: { children: "링크", href: undefined },
-  decorators: [withRuntimeHrefDecorator],
+  decorators: [
+    ((Story, context) => {
+      return (
+        <Story
+          args={{
+            ...context.args,
+            href: context.args.href || window.parent.location.href,
+          }}
+        />
+      );
+    }) as Decorator,
+  ],
 } satisfies Meta<typeof Link>;
 
 export const Basic: StoryObj<typeof Link> = {};
