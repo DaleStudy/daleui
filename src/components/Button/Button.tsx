@@ -35,14 +35,14 @@ export const Button = ({
   type = "button",
   onClick,
   variant = "solid",
-  tone = "neutral",
+  tone = "brand",
   size = "md",
   disabled,
   ...rest
 }: ButtonProps) => {
   return (
     <button
-      className={styles({ tone, variant, size })}
+      className={styles({ tone, variant, size, disabled })}
       type={type}
       onClick={onClick}
       disabled={disabled}
@@ -69,8 +69,7 @@ const styles = cva({
     transition: "0.2s",
     lineHeight: "1",
     outline: "0",
-    "&:disabled": {
-      opacity: 0.5,
+    _disabled: {
       cursor: "not-allowed",
     },
   },
@@ -97,50 +96,81 @@ const styles = cva({
       outline: {},
     },
     tone: {
+      brand: {},
       neutral: {},
-      accent: {},
       danger: {},
+      success: {},
       warning: {},
+      info: {},
+    },
+    disabled: {
+      true: {},
+      false: {},
     },
   },
   compoundVariants: [
+    // Solid Variants
     {
       variant: "solid",
-      tone: "neutral",
+      tone: "brand",
       css: {
-        background: "background.interactive.neutral.default",
-        color: "foreground.default.primary",
-        "&:hover": {
-          background: "background.interactive.neutral.hover",
+        bg: {
+          base: "light.bgSolid.brand.default",
+          _dark: "dark.bgSolid.brand.default",
         },
-        "&:active": {
-          background: "background.interactive.neutral.press",
+        color: {
+          base: "light.fgSolid.brand",
+          _dark: "dark.fgSolid.brand",
         },
-        "&:focus-visible": {
-          outlineColor: "borders.interactive.focusRing",
-          outlineWidth: "2px",
-          outlineStyle: "solid",
-          outlineOffset: "2px",
+        _hover: {
+          bg: {
+            base: "light.bgSolid.brand.hover",
+            _dark: "dark.bgSolid.brand.hover",
+          },
+        },
+        _active: {
+          bg: {
+            base: "light.bgSolid.brand.active",
+            _dark: "dark.bgSolid.brand.active",
+          },
+        },
+        _focusVisible: {
+          outlineColor: {
+            base: "light.border.brand.focus",
+            _dark: "dark.border.brand.focus",
+          },
         },
       },
     },
     {
       variant: "solid",
-      tone: "accent",
+      tone: "neutral",
       css: {
-        background: "background.interactive.brand.default",
-        color: "foreground.Inverse.primary",
-        "&:hover": {
-          background: "background.interactive.brand.hover",
+        bg: {
+          base: "light.bgSolid.neutral.default",
+          _dark: "dark.bgSolid.neutral.default",
         },
-        "&:active": {
-          background: "background.interactive.brand.press",
+        color: {
+          base: "light.fgSolid.neutral",
+          _dark: "dark.fgSolid.neutral",
         },
-        "&:focus-visible": {
-          outlineColor: "borders.interactive.focusRing",
-          outlineWidth: "2px",
-          outlineStyle: "solid",
-          outlineOffset: "2px",
+        _hover: {
+          bg: {
+            base: "light.bgSolid.neutral.hover",
+            _dark: "dark.bgSolid.neutral.hover",
+          },
+        },
+        _active: {
+          bg: {
+            base: "light.bgSolid.neutral.active",
+            _dark: "dark.bgSolid.neutral.active",
+          },
+        },
+        _focusVisible: {
+          outlineColor: {
+            base: "light.border.neutral.focus",
+            _dark: "dark.border.neutral.focus",
+          },
         },
       },
     },
@@ -148,19 +178,51 @@ const styles = cva({
       variant: "solid",
       tone: "danger",
       css: {
-        background: "background.interactive.danger.default",
-        color: "foreground.Inverse.primary",
-        "&:hover": {
-          background: "background.interactive.danger.hover",
+        bg: {
+          base: "light.bgSolid.danger.default",
+          _dark: "dark.bgSolid.danger.default",
         },
-        "&:active": {
-          background: "background.interactive.danger.press",
+        color: {
+          base: "light.fgSolid.danger",
+          _dark: "dark.fgSolid.danger",
         },
-        "&:focus-visible": {
-          outlineColor: "borders.interactive.focusRing",
-          outlineWidth: "2px",
-          outlineStyle: "solid",
-          outlineOffset: "2px",
+        _hover: {
+          bg: {
+            base: "light.bgSolid.danger.hover",
+            _dark: "dark.bgSolid.danger.hover",
+          },
+        },
+        _active: {
+          bg: {
+            base: "light.bgSolid.danger.active",
+            _dark: "dark.bgSolid.danger.active",
+          },
+        },
+        _focusVisible: {
+          outlineColor: {
+            base: "light.border.danger",
+            _dark: "dark.border.danger",
+          },
+        },
+      },
+    },
+    {
+      variant: "solid",
+      tone: "success",
+      css: {
+        bg: {
+          base: "light.bgSolid.success",
+          _dark: "dark.bgSolid.success",
+        },
+        color: {
+          base: "light.fgSolid.success",
+          _dark: "dark.fgSolid.success",
+        },
+        _focusVisible: {
+          outlineColor: {
+            base: "light.border.success",
+            _dark: "dark.border.success",
+          },
         },
       },
     },
@@ -168,28 +230,81 @@ const styles = cva({
       variant: "solid",
       tone: "warning",
       css: {
-        // background.interactive.warning이 없으므로 accent.amber 활용
-        // background.accent.amber는 밝은 색이므로, 텍스트는 어두운 색 사용
-        background: "background.accent.amber",
-        color: "foreground.accent.amber",
-        "&:hover": {
-          // background.accent.amber에 hover가 없으므로, 유사한 색이나 직접 지정
-          background: {
-            base: "{colors.amber.4}",
-            _dark: "{colors.darkAmber.6}",
+        bg: {
+          base: "light.bgSolid.warning",
+          _dark: "dark.bgSolid.warning",
+        },
+        color: {
+          base: "light.fgSolid.warning",
+          _dark: "dark.fgSolid.warning",
+        },
+        _focusVisible: {
+          outlineColor: {
+            base: "light.border.warning",
+            _dark: "dark.border.warning",
           },
         },
-        "&:active": {
-          background: {
-            base: "{colors.amber.5}",
-            _dark: "{colors.darkAmber.7}",
+      },
+    },
+    {
+      variant: "solid",
+      tone: "info",
+      css: {
+        bg: {
+          base: "light.bgSolid.info",
+          _dark: "dark.bgSolid.info",
+        },
+        color: {
+          base: "light.fgSolid.info",
+          _dark: "dark.fgSolid.info",
+        },
+        _focusVisible: {
+          outlineColor: {
+            base: "light.border.info",
+            _dark: "dark.border.info",
           },
         },
-        "&:focus-visible": {
-          outlineColor: "borders.interactive.focusRing",
-          outlineWidth: "2px",
-          outlineStyle: "solid",
-          outlineOffset: "2px",
+      },
+    },
+    // Outline Variants
+    {
+      variant: "outline",
+      tone: "brand",
+      css: {
+        border: "1px solid",
+        borderColor: {
+          base: "light.border.brand.default",
+          _dark: "dark.border.brand.default",
+        },
+        color: {
+          base: "light.fg.brand.default",
+          _dark: "dark.fg.brand.default",
+        },
+        _hover: {
+          bg: {
+            base: "light.bg.brand.hover",
+            _dark: "dark.bg.brand.hover",
+          },
+          color: {
+            base: "light.fg.brand.hover",
+            _dark: "dark.fg.brand.hover",
+          },
+        },
+        _active: {
+          bg: {
+            base: "light.bg.brand.active",
+            _dark: "dark.bg.brand.active",
+          },
+          color: {
+            base: "light.fg.brand.active",
+            _dark: "dark.fg.brand.active",
+          },
+        },
+        _focusVisible: {
+          outlineColor: {
+            base: "light.border.brand.focus",
+            _dark: "dark.border.brand.focus",
+          },
         },
       },
     },
@@ -197,35 +312,48 @@ const styles = cva({
       variant: "outline",
       tone: "neutral",
       css: {
-        border: "3px solid",
-        borderColor: "borders.interactive.neutral.default",
-        color: "foreground.interactive.neutral.default",
-        "&:active, &:hover": {
-          background: "background.interactive.neutral.press",
-          color: "foreground.interactive.neutral.muted",
+        border: "1px solid",
+        borderColor: {
+          base: "light.border.neutral.default",
+          _dark: "dark.border.neutral.default",
         },
-        "&:focus": {
-          outlineColor: "borders.interactive.focusRing",
-          outline: "3px solid",
-          outlineOffset: "2px",
+        color: {
+          base: "light.fg.neutral.default",
+          _dark: "dark.fg.neutral.default",
         },
-      },
-    },
-    {
-      variant: "outline",
-      tone: "accent",
-      css: {
-        border: "3px solid",
-        borderColor: "borders.interactive.brand.default",
-        color: "foreground.interactive.brand.default",
-        "&:active, &:hover": {
-          background: "background.interactive.brand.hover",
-          color: "foreground.Inverse.primary",
+        _hover: {
+          bg: {
+            base: "light.bg.neutral.hover",
+            _dark: "dark.bg.neutral.hover",
+          },
+          color: {
+            base: "light.fg.neutral.hover",
+            _dark: "dark.fg.neutral.hover",
+          },
+          borderColor: {
+            base: "light.border.neutral.hover",
+            _dark: "dark.border.neutral.hover",
+          },
         },
-        "&:focus": {
-          outlineColor: "borders.interactive.focusRing",
-          outline: "3px solid",
-          outlineOffset: "2px",
+        _active: {
+          bg: {
+            base: "light.bg.neutral.active",
+            _dark: "dark.bg.neutral.active",
+          },
+          color: {
+            base: "light.fg.neutral.active",
+            _dark: "dark.fg.neutral.active",
+          },
+          borderColor: {
+            base: "light.border.neutral.active",
+            _dark: "dark.border.neutral.active",
+          },
+        },
+        _focusVisible: {
+          outlineColor: {
+            base: "light.border.neutral.focus",
+            _dark: "dark.border.neutral.focus",
+          },
         },
       },
     },
@@ -233,17 +361,53 @@ const styles = cva({
       variant: "outline",
       tone: "danger",
       css: {
-        border: "3px solid",
-        borderColor: "borders.system.danger",
-        color: "foreground.system.danger",
-        "&:active, &:hover": {
-          background: "background.interactive.danger.hover",
-          color: "foreground.Inverse.primary",
+        border: "1px solid",
+        borderColor: {
+          base: "light.border.danger",
+          _dark: "dark.border.danger",
         },
-        "&:focus": {
-          outlineColor: "borders.interactive.focusRing",
-          outline: "3px solid",
-          outlineOffset: "2px",
+        color: {
+          base: "light.fg.danger",
+          _dark: "dark.fg.danger",
+        },
+        _hover: {
+          bg: {
+            base: "light.bg.danger.hover",
+            _dark: "dark.bg.danger.hover",
+          },
+        },
+        _active: {
+          bg: {
+            base: "light.bg.danger.active",
+            _dark: "dark.bg.danger.active",
+          },
+        },
+        _focusVisible: {
+          outlineColor: {
+            base: "light.border.danger",
+            _dark: "dark.border.danger",
+          },
+        },
+      },
+    },
+    {
+      variant: "outline",
+      tone: "success",
+      css: {
+        border: "1px solid",
+        borderColor: {
+          base: "light.border.success",
+          _dark: "dark.border.success",
+        },
+        color: {
+          base: "light.fg.success",
+          _dark: "dark.fg.success",
+        },
+        _focusVisible: {
+          outlineColor: {
+            base: "light.border.success",
+            _dark: "dark.border.success",
+          },
         },
       },
     },
@@ -251,17 +415,71 @@ const styles = cva({
       variant: "outline",
       tone: "warning",
       css: {
-        border: "3px solid",
-        borderColor: "borders.system.warning",
-        color: "foreground.system.warning",
-        "&:active, &:hover": {
-          background: "background.accent.amber",
-          // color: "text.muted.warning",
+        border: "1px solid",
+        borderColor: {
+          base: "light.border.warning",
+          _dark: "dark.border.warning",
         },
-        "&:focus": {
-          outlineColor: "border.warning",
-          outline: "3px solid",
-          outlineOffset: "2px",
+        color: {
+          base: "light.fg.warning",
+          _dark: "dark.fg.warning",
+        },
+        _focusVisible: {
+          outlineColor: {
+            base: "light.border.warning",
+            _dark: "dark.border.warning",
+          },
+        },
+      },
+    },
+    {
+      variant: "outline",
+      tone: "info",
+      css: {
+        border: "1px solid",
+        borderColor: {
+          base: "light.border.info",
+          _dark: "dark.border.info",
+        },
+        color: {
+          base: "light.fg.info",
+          _dark: "dark.fg.info",
+        },
+        _focusVisible: {
+          outlineColor: {
+            base: "light.border.info",
+            _dark: "dark.border.info",
+          },
+        },
+      },
+    },
+    // Disabled States
+    {
+      variant: "solid",
+      disabled: true,
+      css: {
+        bg: {
+          base: "light.bg.neutral.disabled!",
+          _dark: "dark.bg.neutral.disabled!",
+        },
+        color: {
+          base: "light.fg.neutral.disabled!",
+          _dark: "dark.fg.neutral.disabled!",
+        },
+      },
+    },
+    {
+      variant: "outline",
+      disabled: true,
+      css: {
+        bg: "transparent!",
+        color: {
+          base: "light.fg.neutral.disabled!",
+          _dark: "dark.fg.neutral.disabled!",
+        },
+        borderColor: {
+          base: "light.border.neutral.disabled!",
+          _dark: "dark.border.neutral.disabled!",
         },
       },
     },
