@@ -3,6 +3,89 @@ import { colors, semanticColors } from "./colors";
 
 # Colors
 
+## Semantic Colors
+
+semanticColors 객체는 디자인 시스템에서 의미 기반(semantic)으로 사용하는 색상 그룹입니다. 각 그룹(fg, bg, border 등)과 그 하위 항목을 시각적으로 확인할 수 있습니다.
+
+<ColorPalette>
+  {Object.entries(semanticColors).map(([category, categoryColors]) => (
+    <div key={category}>
+      <h3>{category}</h3>
+      {Object.entries(categoryColors).map(([semantic, colorStates]) => {
+        // fgSolid 등: { value: { base: ... } }
+        if (
+          colorStates &&
+          "value" in colorStates &&
+          colorStates.value &&
+          typeof colorStates.value.base === "string"
+        ) {
+          let base = colorStates.value.base;
+          let resolved = base;
+          const ref = base.match(/^\{colors\.([a-zA-Z]+)\.(\d+)\}$/);
+          if (ref) {
+            const colorName = ref[1];
+            const scale = ref[2];
+            resolved = colors[colorName]?.[scale]?.value ?? base;
+          } else {
+            const single = base.match(/^\{colors\.([a-zA-Z]+)\}$/);
+            if (single) {
+              const colorName = single[1];
+              resolved = colors[colorName]?.value ?? base;
+            }
+          }
+          return (
+            <ColorItem
+              key={semantic}
+              title={`${category}.${semantic}`}
+              colors={{ base: resolved }}
+            />
+          );
+        }
+        // bg, fg, border 등: { default: { value: { base: ... } }, ... }
+        if (colorStates && typeof colorStates === "object") {
+          const resolvedColors = Object.entries(colorStates).reduce(
+            (colorMap, [state, stateValue]) => {
+              if (
+                stateValue &&
+                stateValue.value &&
+                typeof stateValue.value.base === "string"
+              ) {
+                let base = stateValue.value.base;
+                let resolved = base;
+                const ref = base.match(/^\{colors\.([a-zA-Z]+)\.(\d+)\}$/);
+                if (ref) {
+                  const colorName = ref[1];
+                  const scale = ref[2];
+                  resolved = colors[colorName]?.[scale]?.value ?? base;
+                } else {
+                  const single = base.match(/^\{colors\.([a-zA-Z]+)\}$/);
+                  if (single) {
+                    const colorName = single[1];
+                    resolved = colors[colorName]?.value ?? base;
+                  }
+                }
+                colorMap[state] = resolved;
+              }
+              return colorMap;
+            },
+            {},
+          );
+          return (
+            <ColorItem
+              key={semantic}
+              title={`${category}.${semantic}`}
+              colors={resolvedColors}
+            />
+          );
+        }
+        return null;
+      })}
+    </div>
+  ))}
+</ColorPalette>
+
+---
+
 ## Primitive Colors
 
 달레 UI의 근간이 되는 색상 팔레트입니다.
@@ -148,86 +231,3 @@ import { colors, semanticColors } from "./colors";
 - Scale 10: 솔리드 배경 (hover)
 - Scale 11: 글자 (low contrast)
 - Scale 12: 글자 (high contrast)
-
----
-
-## Semantic Colors
-
-semanticColors 객체는 디자인 시스템에서 의미 기반(semantic)으로 사용하는 색상 그룹입니다. 각 그룹(fg, bg, border 등)과 그 하위 항목을 시각적으로 확인할 수 있습니다.
-
-<ColorPalette>
-  {Object.entries(semanticColors).map(([category, categoryColors]) => (
-    <div key={category}>
-      <h3>{category}</h3>
-      {Object.entries(categoryColors).map(([semantic, colorStates]) => {
-        // fgSolid 등: { value: { base: ... } }
-        if (
-          colorStates &&
-          "value" in colorStates &&
-          colorStates.value &&
-          typeof colorStates.value.base === "string"
-        ) {
-          let base = colorStates.value.base;
-          let resolved = base;
-          const ref = base.match(/^\{colors\.([a-zA-Z]+)\.(\d+)\}$/);
-          if (ref) {
-            const colorName = ref[1];
-            const scale = ref[2];
-            resolved = colors[colorName]?.[scale]?.value ?? base;
-          } else {
-            const single = base.match(/^\{colors\.([a-zA-Z]+)\}$/);
-            if (single) {
-              const colorName = single[1];
-              resolved = colors[colorName]?.value ?? base;
-            }
-          }
-          return (
-            <ColorItem
-              key={semantic}
-              title={`${category}.${semantic}`}
-              colors={{ base: resolved }}
-            />
-          );
-        }
-        // bg, fg, border 등: { default: { value: { base: ... } }, ... }
-        if (colorStates && typeof colorStates === "object") {
-          const resolvedColors = Object.entries(colorStates).reduce(
-            (colorMap, [state, stateValue]) => {
-              if (
-                stateValue &&
-                stateValue.value &&
-                typeof stateValue.value.base === "string"
-              ) {
-                let base = stateValue.value.base;
-                let resolved = base;
-                const ref = base.match(/^\{colors\.([a-zA-Z]+)\.(\d+)\}$/);
-                if (ref) {
-                  const colorName = ref[1];
-                  const scale = ref[2];
-                  resolved = colors[colorName]?.[scale]?.value ?? base;
-                } else {
-                  const single = base.match(/^\{colors\.([a-zA-Z]+)\}$/);
-                  if (single) {
-                    const colorName = single[1];
-                    resolved = colors[colorName]?.value ?? base;
-                  }
-                }
-                colorMap[state] = resolved;
-              }
-              return colorMap;
-            },
-            {},
-          );
-          return (
-            <ColorItem
-              key={semantic}
-              title={`${category}.${semantic}`}
-              colors={resolvedColors}
-            />
-          );
-        }
-        return null;
-      })}
-    </div>
-  ))}
-</ColorPalette>
