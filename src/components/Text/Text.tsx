@@ -53,120 +53,84 @@ const styles = cva({
       muted: false,
       tone: "neutral",
       css: {
-        color: {
-          base: "light.fg.neutral.default",
-          _dark: "dark.fg.neutral.default",
-        },
+        color: "fg.neutral.default",
       },
     },
     {
       muted: false,
       tone: "brand",
       css: {
-        color: {
-          base: "light.fg.brand.default",
-          _dark: "dark.fg.brand.default",
-        },
+        color: "fg.brand.default",
       },
     },
     {
       muted: false,
       tone: "danger",
       css: {
-        color: {
-          base: "light.fg.danger",
-          _dark: "dark.fg.danger",
-        },
+        color: "fg.danger",
       },
     },
     {
       muted: false,
       tone: "warning",
       css: {
-        color: {
-          base: "light.fg.warning",
-          _dark: "dark.fg.warning",
-        },
+        color: "fg.warning",
       },
     },
     {
       muted: false,
       tone: "success",
       css: {
-        color: {
-          base: "light.fg.success",
-          _dark: "dark.fg.success",
-        },
+        color: "fg.success",
       },
     },
     {
       muted: false,
       tone: "info",
       css: {
-        color: {
-          base: "light.fg.info",
-          _dark: "dark.fg.info",
-        },
+        color: "fg.info",
       },
     },
     {
       muted: true,
       tone: "neutral",
       css: {
-        color: {
-          base: "light.fg.neutral.placeholder",
-          _dark: "dark.fg.neutral.placeholder",
-        },
+        color: "fg.neutral.placeholder",
       },
     },
     {
       muted: true,
       tone: "brand",
       css: {
-        color: {
-          base: "light.fg.brand.hover",
-          _dark: "dark.fg.brand.hover",
-        },
+        color: "fg.brand.hover",
       },
     },
     {
       muted: true,
       tone: "danger",
       css: {
-        color: {
-          base: "light.fg.danger",
-          _dark: "dark.fg.danger",
-        },
+        color: "fg.danger",
       },
     },
     {
       muted: true,
       tone: "warning",
       css: {
-        color: {
-          base: "light.fg.warning",
-          _dark: "dark.fg.warning",
-        },
+        color: "fg.warning",
       },
     },
     {
       muted: true,
       tone: "success",
       css: {
-        color: {
-          base: "light.fg.success",
-          _dark: "dark.fg.success",
-        },
+        color: "fg.success",
       },
     },
     {
       muted: true,
       tone: "info",
       css: {
-        color: {
-          base: "light.fg.info",
-          _dark: "dark.fg.info",
-        },
+        color: "fg.info",
       },
     },
   ],

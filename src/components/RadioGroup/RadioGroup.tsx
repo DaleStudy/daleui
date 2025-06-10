@@ -234,145 +234,79 @@ const radioInputStyles = css({
 
 const radioCircleStyles = cva({
   base: {
-    backgroundColor: {
-      base: "light.bg.neutral.default",
-      _dark: "dark.bg.neutral.default",
-    },
+    backgroundColor: "bg.neutral.default",
     width: "5",
     height: "5",
     borderRadius: "full",
     border: "2px solid",
-    borderColor: {
-      base: "light.border.neutral.default",
-      _dark: "dark.border.neutral.default",
-    },
+    borderColor: "border.neutral.default",
     position: "absolute",
     pointerEvents: "none",
     transition: "0.2s",
     "input:hover + &": {
-      backgroundColor: {
-        base: "light.bg.neutral.hover",
-        _dark: "dark.bg.neutral.hover",
-      },
+      backgroundColor: "bg.neutral.hover",
     },
   },
   variants: {
     tone: {
       neutral: {
-        borderColor: {
-          base: "light.border.neutral.default",
-          _dark: "dark.border.neutral.default",
-        },
+        borderColor: "border.neutral.default",
         "[data-state='checked'] + &": {
-          borderColor: {
-            base: "light.border.neutral.active",
-            _dark: "dark.border.neutral.active",
-          },
+          borderColor: "border.neutral.active",
         },
         "[data-state='checked']:focus-visible + &": {
-          outlineColor: {
-            base: "light.border.neutral.focus",
-            _dark: "dark.border.neutral.focus",
-          },
+          outlineColor: "border.neutral.focus",
         },
       },
       brand: {
-        borderColor: {
-          base: "light.border.brand.default",
-          _dark: "dark.border.brand.default",
-        },
+        borderColor: "border.brand.default",
         "[data-state='checked'] + &": {
-          borderColor: {
-            base: "light.border.brand.active",
-            _dark: "dark.border.brand.active",
-          },
+          borderColor: "border.brand.active",
         },
         "[data-state='checked']:focus-visible + &": {
-          outlineColor: {
-            base: "light.border.brand.focus",
-            _dark: "dark.border.brand.focus",
-          },
+          outlineColor: "border.brand.focus",
         },
       },
       danger: {
-        borderColor: {
-          base: "light.border.danger",
-          _dark: "dark.border.danger",
-        },
+        borderColor: "border.danger",
         "[data-state='checked'] + &": {
-          borderColor: {
-            base: "light.border.danger",
-            _dark: "dark.border.danger",
-          },
+          borderColor: "border.danger",
         },
         "[data-state='checked']:focus-visible + &": {
-          outlineColor: {
-            base: "light.border.danger",
-            _dark: "dark.border.danger",
-          },
+          outlineColor: "border.danger",
         },
       },
       warning: {
-        borderColor: {
-          base: "light.border.warning",
-          _dark: "dark.border.warning",
-        },
+        borderColor: "border.warning",
         "[data-state='checked'] + &": {
-          borderColor: {
-            base: "light.border.warning",
-            _dark: "dark.border.warning",
-          },
+          borderColor: "border.warning",
         },
         "[data-state='checked']:focus-visible + &": {
-          outlineColor: {
-            base: "light.border.warning",
-            _dark: "dark.border.warning",
-          },
+          outlineColor: "border.warning",
         },
       },
       success: {
-        borderColor: {
-          base: "light.border.success",
-          _dark: "dark.border.success",
-        },
+        borderColor: "border.success",
         "[data-state='checked'] + &": {
-          borderColor: {
-            base: "light.border.success",
-            _dark: "dark.border.success",
-          },
+          borderColor: "border.success",
         },
         "[data-state='checked']:focus-visible + &": {
-          outlineColor: {
-            base: "light.border.success",
-            _dark: "dark.border.success",
-          },
+          outlineColor: "border.success",
         },
       },
       info: {
-        borderColor: {
-          base: "light.border.info",
-          _dark: "dark.border.info",
-        },
+        borderColor: "border.info",
         "[data-state='checked'] + &": {
-          borderColor: {
-            base: "light.border.info",
-            _dark: "dark.border.info",
-          },
+          borderColor: "border.info",
         },
         "[data-state='checked']:focus-visible + &": {
-          outlineColor: {
-            base: "light.border.info",
-            _dark: "dark.border.info",
-          },
+          outlineColor: "border.info",
         },
       },
     },
     disabled: {
       true: {
-        borderColor: {
-          base: "light.fg.neutral.disabled",
-          _dark: "dark.fg.neutral.disabled",
-        },
+        borderColor: "fg.neutral.disabled",
         opacity: 0.5,
       },
     },
@@ -384,10 +318,7 @@ const labelTextStyles = cva({
   variants: {
     disabled: {
       true: {
-        color: {
-          base: "light.fg.neutral.disabled",
-          _dark: "dark.fg.neutral.disabled",
-        },
+        color: "fg.neutral.disabled",
       },
     },
   },
@@ -408,69 +339,45 @@ const radioDotStyles = cva({
       width: "2.5",
       height: "2.5",
       borderRadius: "full",
-      backgroundColor: {
-        base: "light.fg.neutral.default",
-        _dark: "dark.fg.neutral.default",
-      },
+      backgroundColor: "fg.neutral.default",
     },
   },
   variants: {
     tone: {
       neutral: {
         "&::after": {
-          backgroundColor: {
-            base: "light.fg.neutral.default",
-            _dark: "dark.fg.neutral.default",
-          },
+          backgroundColor: "fg.neutral.default",
         },
       },
       brand: {
         "&::after": {
-          backgroundColor: {
-            base: "light.fg.brand.default",
-            _dark: "dark.fg.brand.default",
-          },
+          backgroundColor: "fg.brand.default",
         },
       },
       danger: {
         "&::after": {
-          backgroundColor: {
-            base: "light.fg.danger",
-            _dark: "dark.fg.danger",
-          },
+          backgroundColor: "fg.danger",
         },
       },
       warning: {
         "&::after": {
-          backgroundColor: {
-            base: "light.fg.warning",
-            _dark: "dark.fg.warning",
-          },
+          backgroundColor: "fg.warning",
         },
       },
       success: {
         "&::after": {
-          backgroundColor: {
-            base: "light.fg.success",
-            _dark: "dark.fg.success",
-          },
+          backgroundColor: "fg.success",
         },
       },
       info: {
         "&::after": {
-          backgroundColor: {
-            base: "light.fg.info",
-            _dark: "dark.fg.info",
-          },
+          backgroundColor: "fg.info",
         },
       },
     },
     disabled: {
       true: {
-        backgroundColor: {
-          base: "light.fg.neutral.disabled",
-          _dark: "dark.fg.neutral.disabled",
-        },
+        backgroundColor: "fg.neutral.disabled",
         opacity: 0.5,
       },
     },

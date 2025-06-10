@@ -85,15 +85,9 @@ const styles = cva({
       tone: "neutral",
       muted: false,
       css: {
-        color: {
-          base: "light.fg.neutral.default",
-          _dark: "dark.fg.neutral.default",
-        },
+        color: "fg.neutral.default",
         "&:active, &:hover": {
-          color: {
-            base: "light.fg.neutral.hover",
-            _dark: "dark.fg.neutral.hover",
-          },
+          color: "fg.neutral.hover",
         },
       },
     },
@@ -101,15 +95,9 @@ const styles = cva({
       tone: "brand",
       muted: false,
       css: {
-        color: {
-          base: "light.fg.brand.default",
-          _dark: "dark.fg.brand.default",
-        },
+        color: "fg.brand.default",
         "&:active, &:hover": {
-          color: {
-            base: "light.fg.brand.hover",
-            _dark: "dark.fg.brand.hover",
-          },
+          color: "fg.brand.hover",
         },
       },
     },
@@ -117,15 +105,9 @@ const styles = cva({
       tone: "danger",
       muted: false,
       css: {
-        color: {
-          base: "light.fg.danger",
-          _dark: "dark.fg.danger",
-        },
+        color: "fg.danger",
         "&:active, &:hover": {
-          color: {
-            base: "light.fg.danger",
-            _dark: "dark.fg.danger",
-          },
+          color: "fg.danger",
         },
       },
     },
@@ -133,15 +115,9 @@ const styles = cva({
       tone: "warning",
       muted: false,
       css: {
-        color: {
-          base: "light.fg.warning",
-          _dark: "dark.fg.warning",
-        },
+        color: "fg.warning",
         "&:active, &:hover": {
-          color: {
-            base: "light.fg.warning",
-            _dark: "dark.fg.warning",
-          },
+          color: "fg.warning",
         },
       },
     },
@@ -149,15 +125,9 @@ const styles = cva({
       tone: "success",
       muted: false,
       css: {
-        color: {
-          base: "light.fg.success",
-          _dark: "dark.fg.success",
-        },
+        color: "fg.success",
         "&:active, &:hover": {
-          color: {
-            base: "light.fg.success",
-            _dark: "dark.fg.success",
-          },
+          color: "fg.success",
         },
       },
     },
@@ -165,15 +135,9 @@ const styles = cva({
       tone: "info",
       muted: false,
       css: {
-        color: {
-          base: "light.fg.info",
-          _dark: "dark.fg.info",
-        },
+        color: "fg.info",
         "&:active, &:hover": {
-          color: {
-            base: "light.fg.info",
-            _dark: "dark.fg.info",
-          },
+          color: "fg.info",
         },
       },
     },
@@ -181,15 +145,9 @@ const styles = cva({
       tone: "neutral",
       muted: true,
       css: {
-        color: {
-          base: "light.fg.neutral.placeholder",
-          _dark: "dark.fg.neutral.placeholder",
-        },
+        color: "fg.neutral.placeholder",
         "&:active, &:hover": {
-          color: {
-            base: "light.fg.neutral.default",
-            _dark: "dark.fg.neutral.default",
-          },
+          color: "fg.neutral.default",
         },
       },
     },
@@ -197,15 +155,9 @@ const styles = cva({
       tone: "brand",
       muted: true,
       css: {
-        color: {
-          base: "light.fg.neutral.placeholder",
-          _dark: "dark.fg.neutral.placeholder",
-        },
+        color: "fg.neutral.placeholder",
         "&:active, &:hover": {
-          color: {
-            base: "light.fg.brand.default",
-            _dark: "dark.fg.brand.default",
-          },
+          color: "fg.brand.default",
         },
       },
     },
@@ -213,15 +165,9 @@ const styles = cva({
       tone: "danger",
       muted: true,
       css: {
-        color: {
-          base: "light.fg.neutral.placeholder",
-          _dark: "dark.fg.neutral.placeholder",
-        },
+        color: "fg.neutral.placeholder",
         "&:active, &:hover": {
-          color: {
-            base: "light.fg.danger",
-            _dark: "dark.fg.danger",
-          },
+          color: "fg.danger",
         },
       },
     },
@@ -229,15 +175,9 @@ const styles = cva({
       tone: "warning",
       muted: true,
       css: {
-        color: {
-          base: "light.fg.neutral.placeholder",
-          _dark: "dark.fg.neutral.placeholder",
-        },
+        color: "fg.neutral.placeholder",
         "&:active, &:hover": {
-          color: {
-            base: "light.fg.warning",
-            _dark: "dark.fg.warning",
-          },
+          color: "fg.warning",
         },
       },
     },
@@ -245,15 +185,9 @@ const styles = cva({
       tone: "success",
       muted: true,
       css: {
-        color: {
-          base: "light.fg.neutral.placeholder",
-          _dark: "dark.fg.neutral.placeholder",
-        },
+        color: "fg.neutral.placeholder",
         "&:active, &:hover": {
-          color: {
-            base: "light.fg.success",
-            _dark: "dark.fg.success",
-          },
+          color: "fg.success",
         },
       },
     },
@@ -261,15 +195,9 @@ const styles = cva({
       tone: "info",
       muted: true,
       css: {
-        color: {
-          base: "light.fg.neutral.placeholder",
-          _dark: "dark.fg.neutral.placeholder",
-        },
+        color: "fg.neutral.placeholder",
         "&:active, &:hover": {
-          color: {
-            base: "light.fg.info",
-            _dark: "dark.fg.info",
-          },
+          color: "fg.info",
         },
       },
     },
