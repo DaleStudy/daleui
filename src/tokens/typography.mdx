@@ -12,17 +12,9 @@ import {
 
 - > 달레 UI는 [프리텐다드(Pretendard Variable)](https://github.com/orioncactus/pretendard) 웹폰트를 사용하고 있습니다.
 
-## Figma Design
-
-<Figma
-  url="https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/NoName-Design-System?node-id=1-2&t=83lHjREIQNo6Xe57-1"
-  collapsible={true}
-  defaultCollapsed={true}
-/>
-
 ### Display
 
-**Display.lg**
+#### Display.lg
 
 <Typeset
   fontSizes={[fontSizes["8xl"].value]}
@@ -33,7 +25,7 @@ import {
   fontFamily={fonts.sans.value}
 />
 
-**Display.md**
+#### Display.md
 
 <Typeset
   fontSizes={[fontSizes["7xl"].value]}
@@ -44,7 +36,7 @@ import {
   fontFamily={fonts.sans.value}
 />
 
-**Display.sm**
+#### Display.sm
 
 <Typeset
   fontSizes={[fontSizes["5xl"].value]}
@@ -57,7 +49,7 @@ import {
 
 ### Title
 
-**Title.lg**
+#### Title.lg
 
 <Typeset
   fontSizes={[fontSizes["4xl"].value]}
@@ -68,7 +60,7 @@ import {
   fontFamily={fonts.sans.value}
 />
 
-**Title.md**
+#### Title.md
 
 <Typeset
   fontSizes={[fontSizes["3xl"].value]}
@@ -79,7 +71,7 @@ import {
   fontFamily={fonts.sans.value}
 />
 
-**Title.sm**
+#### Title.sm
 
 <Typeset
   fontSizes={[fontSizes["2xl"].value]}
@@ -92,7 +84,7 @@ import {
 
 ### Body
 
-**Body.lg**
+#### Body.lg
 
 <Typeset
   fontSizes={[fontSizes.lg.value]}
@@ -103,7 +95,7 @@ import {
   fontFamily={fonts.sans.value}
 />
 
-**Body.md**
+#### Body.md
 
 <Typeset
   fontSizes={[fontSizes.md.value]}
@@ -114,7 +106,7 @@ import {
   fontFamily={fonts.sans.value}
 />
 
-**Body.sm**
+#### Body.sm
 
 <Typeset
   fontSizes={[fontSizes.sm.value]}
@@ -127,7 +119,7 @@ import {
 
 ### Label
 
-**Label.lg**
+#### Label.lg
 
 <Typeset
   fontSizes={[fontSizes.lg.value]}
@@ -138,7 +130,7 @@ import {
   fontFamily={fonts.sans.value}
 />
 
-**Label.md**
+#### Label.md
 
 <Typeset
   fontSizes={[fontSizes.md.value]}
@@ -149,7 +141,7 @@ import {
   fontFamily={fonts.sans.value}
 />
 
-**Label.sm**
+#### Label.sm
 
 <Typeset
   fontSizes={[fontSizes.sm.value]}
@@ -182,13 +174,13 @@ import {
   fontFamily={fonts.mono.value}
 />
 
-## 글꼴 크기
+### 글꼴 크기
 
-<p>
+<h4>
   {Object.entries(fontSizes)
     .map(([name, { value }]) => `${name}(${value})`)
     .join(", ")}
-</p>
+</h4>
 
 <Typeset
   fontSizes={Object.values(fontSizes).map(({ value }) => value)}
@@ -197,14 +189,14 @@ import {
   fontFamily={fonts.sans.value}
 />
 
-## 글꼴 굵기
+### 글꼴 굵기
 
 {Object.entries(fontWeights).map(([name, {value}]) => (
 
 <>
-  <h3>
+  <h4>
     {name}({value})
-  </h3>
+  </h4>
   <Typeset
     fontSizes={[fontSizes.md.value]}
     fontWeight={value}
@@ -214,9 +206,9 @@ import {
 </>
 ))}
 
-## 글꼴 패밀리
+### 글꼴 패밀리
 
-### Sans (Pretendard Variable)
+#### Sans (Pretendard Variable)
 
 <Typeset
   fontSizes={[fontSizes.md.value]}
@@ -225,11 +217,19 @@ import {
   fontFamily={fonts.sans.value}
 />
 
-### Mono (JetBrains Mono)
+#### Mono (JetBrains Mono)
 
 <Typeset
   fontSizes={[fontSizes.md.value]}
   fontWeight={fontWeights.normal.value}
   sampleText="const code = 'monospace font for code';"
   fontFamily={fonts.mono.value}
+/>
+
+### Design
+
+<Figma
+  url="https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/NoName-Design-System?node-id=1-2&t=83lHjREIQNo6Xe57-1"
+  collapsible={true}
+  defaultCollapsed={true}
 />
