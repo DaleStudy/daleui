@@ -2,8 +2,8 @@ import { composeStories } from "@storybook/react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, test, vi } from "vitest";
-import * as stories from "./Checkbox.stories";
 import { Checkbox } from "./Checkbox";
+import * as stories from "./Checkbox.stories";
 
 const { Basic, Tones, States, Disabled, Required } = composeStories(stories);
 
@@ -41,14 +41,14 @@ test("체크박스에 체크 시, tone 속성이 올바르게 적용됨", async 
   expect(infoCheckbox).toHaveAttribute("data-state", "checked");
 
   // Check for correct background colors based on tone
-  expect(brandCheckbox).toHaveClass("checked:bg_light.bgSolid.brand.default");
+  expect(brandCheckbox).toHaveClass("checked:bg_bgSolid.brand.default");
   expect(neutralCheckbox).toHaveClass(
-    "checked:bg_light.bgSolid.neutral.default",
+    "checked:bg_bgSolid.neutral.default",
   );
-  expect(dangerCheckbox).toHaveClass("checked:bg_light.bgSolid.danger.default");
-  expect(warningCheckbox).toHaveClass("checked:bg_light.bgSolid.warning");
-  expect(successCheckbox).toHaveClass("checked:bg_light.bgSolid.success");
-  expect(infoCheckbox).toHaveClass("checked:bg_light.bgSolid.info");
+  expect(dangerCheckbox).toHaveClass("checked:bg_bgSolid.danger.default");
+  expect(warningCheckbox).toHaveClass("checked:bg_bgSolid.warning");
+  expect(successCheckbox).toHaveClass("checked:bg_bgSolid.success");
+  expect(infoCheckbox).toHaveClass("checked:bg_bgSolid.info");
 });
 
 test("체크된 상태와 체크되지않은 상태가 올바르게 렌더링됨", () => {
@@ -76,13 +76,13 @@ test("disabled 속성이 올바르게 적용됨", () => {
 
   // Check for opacity class that indicates disabled state
   expect(disabledCheckedCheckbox).toHaveClass(
-    "checked:bg_light.bg.neutral.disabled!",
+    "checked:bg_bg.neutral.disabled!",
   );
   expect(disabledCheckedCheckbox).toHaveClass(
-    "checked:bd-c_light.bg.neutral.disabled!",
+    "checked:bd-c_bg.neutral.disabled!",
   );
   expect(disabledUncheckedCheckbox).toHaveClass(
-    "disabled:bd-c_light.border.neutral.disabled",
+    "disabled:bd-c_border.neutral.disabled",
   );
 });
 
@@ -184,6 +184,6 @@ test("required 속성값이 true일 경우, label에 별표가 추가됨", () =>
   const requiredIndicator = screen.getByText("*");
   expect(requiredIndicator).toBeInTheDocument();
   expect(requiredIndicator).toHaveClass(
-    "c_light.fg.danger dark:c_dark.fg.danger",
+    "c_fg.danger",
   );
 });
