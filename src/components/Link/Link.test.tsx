@@ -26,12 +26,12 @@ describe("렌더링 테스트", () => {
 
 describe("스타일 테스트", () => {
   test.each([
-    ["중립 링크", "c_light.fg.neutral.default"],
-    ["브랜드 링크", "c_light.fg.brand.default"],
-    ["위험 링크", "c_light.fg.danger"],
-    ["경고 링크", "c_light.fg.warning"],
-    ["성공 링크", "c_light.fg.success"],
-    ["정보 링크", "c_light.fg.info"],
+    ["중립 링크", "c_fg.neutral.default"],
+    ["브랜드 링크", "c_fg.brand.default"],
+    ["위험 링크", "c_fg.danger"],
+    ["경고 링크", "c_fg.warning"],
+    ["성공 링크", "c_fg.success"],
+    ["정보 링크", "c_fg.info"],
   ] as const)("%s에 올바른 톤 클래스를 적용한다", (linkName, className) => {
     render(<Tones />);
 
@@ -57,8 +57,8 @@ describe("스타일 테스트", () => {
   });
 
   test.each([
-    ["낮은 명암비", "c_light.fg.neutral.placeholder"],
-    ["높은 명암비", "c_light.fg.neutral.default"],
+    ["낮은 명암비", "c_fg.neutral.placeholder"],
+    ["높은 명암비", "c_fg.neutral.default"],
   ] as const)("%s에 대해 올바른 클래스를 적용한다", (linkName, className) => {
     render(<Contrasts />);
 

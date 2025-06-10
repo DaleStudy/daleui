@@ -24,12 +24,12 @@ test.each([
 });
 
 test.each([
-  ["neutral", "c_light.fg.neutral.default"],
-  ["brand", "c_light.fg.brand.default"],
-  ["danger", "c_light.fg.danger"],
-  ["warning", "c_light.fg.warning"],
-  ["success", "c_light.fg.success"],
-  ["info", "c_light.fg.info"],
+  ["neutral", "c_fg.neutral.default"],
+  ["brand", "c_fg.brand.default"],
+  ["danger", "c_fg.danger"],
+  ["warning", "c_fg.warning"],
+  ["success", "c_fg.success"],
+  ["info", "c_fg.info"],
 ] as const)("%s 톤에 올바른 색상 클래스를 적용한다", (tone, className) => {
   const { container } = render(<Basic tone={tone} muted={false} />);
 
@@ -37,8 +37,8 @@ test.each([
 });
 
 test.each([
-  [false, "c_light.fg.neutral.default"],
-  [true, "c_light.fg.neutral.placeholder"],
+  [false, "c_fg.neutral.default"],
+  [true, "c_fg.neutral.placeholder"],
 ] as const)("muted가 %s일 때 올바른 클래스를 적용한다", (muted, className) => {
   const { container } = render(<Basic tone="neutral" muted={muted} />);
 
@@ -109,8 +109,7 @@ test.each([
 
     const hasColorClass = Array.from(svg?.classList || []).some(
       (className) =>
-        className.startsWith("c_light.fg.") ||
-        className.startsWith("dark:c_dark.fg."),
+        className.startsWith("c_fg.") || className.startsWith("dark:c_fg."),
     );
     expect(hasColorClass).toBe(true);
   },

@@ -34,12 +34,12 @@ test("size prop에 따라 font size 클래스를 적용한다", () => {
 });
 
 test.each([
-  ["중립 색조", "c_light.fg.neutral.default"],
-  ["브랜드 색조", "c_light.fg.brand.default"],
-  ["위험 색조", "c_light.fg.danger"],
-  ["경고 색조", "c_light.fg.warning"],
-  ["성공 색조", "c_light.fg.success"],
-  ["정보 색조", "c_light.fg.info"],
+  ["중립 색조", "c_fg.neutral.default"],
+  ["브랜드 색조", "c_fg.brand.default"],
+  ["위험 색조", "c_fg.danger"],
+  ["경고 색조", "c_fg.warning"],
+  ["성공 색조", "c_fg.success"],
+  ["정보 색조", "c_fg.info"],
 ] as const)("%s에 올바른 톤 클래스를 적용한다", (textName, className) => {
   render(<Tones />);
 
@@ -47,8 +47,8 @@ test.each([
 });
 
 test.each([
-  ["낮은 명암비", "c_light.fg.neutral.placeholder"],
-  ["높은 명암비", "c_light.fg.neutral.default"],
+  ["낮은 명암비", "c_fg.neutral.placeholder"],
+  ["높은 명암비", "c_fg.neutral.default"],
 ] as const)("%s에 올바른 클래스를 적용한다", (textName, className) => {
   render(<Contrasts />);
 
