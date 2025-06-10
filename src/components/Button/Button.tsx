@@ -75,10 +75,7 @@ const styles = cva({
     _focusVisible: {
       outline: "2px solid",
       outlineOffset: "2px",
-      outlineColor: {
-        base: "light.border.brand.focus",
-        _dark: "dark.border.brand.focus",
-      },
+      outlineColor: "border.brand.focus",
     },
   },
   variants: {
@@ -122,25 +119,13 @@ const styles = cva({
       variant: "solid",
       tone: "brand",
       css: {
-        bg: {
-          base: "light.bgSolid.brand.default",
-          _dark: "dark.bgSolid.brand.default",
-        },
-        color: {
-          base: "light.fgSolid.brand",
-          _dark: "dark.fgSolid.brand",
-        },
+        bg: "bgSolid.brand.default",
+        color: "fgSolid.brand",
         _hover: {
-          bg: {
-            base: "light.bgSolid.brand.hover",
-            _dark: "dark.bgSolid.brand.hover",
-          },
+          bg: "bgSolid.brand.hover",
         },
         _active: {
-          bg: {
-            base: "light.bgSolid.brand.active",
-            _dark: "dark.bgSolid.brand.active",
-          },
+          bg: "bgSolid.brand.active",
         },
       },
     },
@@ -148,25 +133,13 @@ const styles = cva({
       variant: "solid",
       tone: "neutral",
       css: {
-        bg: {
-          base: "light.bgSolid.neutral.default",
-          _dark: "dark.bgSolid.neutral.default",
-        },
-        color: {
-          base: "light.fgSolid.neutral",
-          _dark: "dark.fgSolid.neutral",
-        },
+        bg: "bgSolid.neutral.default",
+        color: "fgSolid.neutral",
         _hover: {
-          bg: {
-            base: "light.bgSolid.neutral.hover",
-            _dark: "dark.bgSolid.neutral.hover",
-          },
+          bg: "bgSolid.neutral.hover",
         },
         _active: {
-          bg: {
-            base: "light.bgSolid.neutral.active",
-            _dark: "dark.bgSolid.neutral.active",
-          },
+          bg: "bgSolid.neutral.active",
         },
       },
     },
@@ -174,25 +147,13 @@ const styles = cva({
       variant: "solid",
       tone: "danger",
       css: {
-        bg: {
-          base: "light.bgSolid.danger.default",
-          _dark: "dark.bgSolid.danger.default",
-        },
-        color: {
-          base: "light.fgSolid.danger",
-          _dark: "dark.fgSolid.danger",
-        },
+        bg: "bgSolid.danger.default",
+        color: "fgSolid.danger",
         _hover: {
-          bg: {
-            base: "light.bgSolid.danger.hover",
-            _dark: "dark.bgSolid.danger.hover",
-          },
+          bg: "bgSolid.danger.hover",
         },
         _active: {
-          bg: {
-            base: "light.bgSolid.danger.active",
-            _dark: "dark.bgSolid.danger.active",
-          },
+          bg: "bgSolid.danger.active",
         },
       },
     },
@@ -200,42 +161,24 @@ const styles = cva({
       variant: "solid",
       tone: "success",
       css: {
-        bg: {
-          base: "light.bgSolid.success",
-          _dark: "dark.bgSolid.success",
-        },
-        color: {
-          base: "light.fgSolid.success",
-          _dark: "dark.fgSolid.success",
-        },
+        bg: "bgSolid.success",
+        color: "fgSolid.success",
       },
     },
     {
       variant: "solid",
       tone: "warning",
       css: {
-        bg: {
-          base: "light.bgSolid.warning",
-          _dark: "dark.bgSolid.warning",
-        },
-        color: {
-          base: "light.fgSolid.warning",
-          _dark: "dark.fgSolid.warning",
-        },
+        bg: "bgSolid.warning",
+        color: "fgSolid.warning",
       },
     },
     {
       variant: "solid",
       tone: "info",
       css: {
-        bg: {
-          base: "light.bgSolid.info",
-          _dark: "dark.bgSolid.info",
-        },
-        color: {
-          base: "light.fgSolid.info",
-          _dark: "dark.fgSolid.info",
-        },
+        bg: "bgSolid.info",
+        color: "fgSolid.info",
       },
     },
     // Outline Variants
@@ -244,33 +187,15 @@ const styles = cva({
       tone: "brand",
       css: {
         border: "1px solid",
-        borderColor: {
-          base: "light.border.brand.default",
-          _dark: "dark.border.brand.default",
-        },
-        color: {
-          base: "light.fg.brand.default",
-          _dark: "dark.fg.brand.default",
-        },
+        borderColor: "border.brand.default",
+        color: "fg.brand.default",
         _hover: {
-          bg: {
-            base: "light.bg.brand.hover",
-            _dark: "dark.bg.brand.hover",
-          },
-          color: {
-            base: "light.fg.brand.hover",
-            _dark: "dark.fg.brand.hover",
-          },
+          bg: "bg.brand.hover",
+          color: "fg.brand.hover",
         },
         _active: {
-          bg: {
-            base: "light.bg.brand.active",
-            _dark: "dark.bg.brand.active",
-          },
-          color: {
-            base: "light.fg.brand.active",
-            _dark: "dark.fg.brand.active",
-          },
+          bg: "bg.brand.active",
+          color: "fg.brand.active",
         },
       },
     },
@@ -279,41 +204,17 @@ const styles = cva({
       tone: "neutral",
       css: {
         border: "1px solid",
-        borderColor: {
-          base: "light.border.neutral.default",
-          _dark: "dark.border.neutral.default",
-        },
-        color: {
-          base: "light.fg.neutral.default",
-          _dark: "dark.fg.neutral.default",
-        },
+        borderColor: "border.neutral.default",
+        color: "fg.neutral.default",
         _hover: {
-          bg: {
-            base: "light.bg.neutral.hover",
-            _dark: "dark.bg.neutral.hover",
-          },
-          color: {
-            base: "light.fg.neutral.hover",
-            _dark: "dark.fg.neutral.hover",
-          },
-          borderColor: {
-            base: "light.border.neutral.hover",
-            _dark: "dark.border.neutral.hover",
-          },
+          bg: "bg.neutral.hover",
+          color: "fg.neutral.hover",
+          borderColor: "border.neutral.hover",
         },
         _active: {
-          bg: {
-            base: "light.bg.neutral.active",
-            _dark: "dark.bg.neutral.active",
-          },
-          color: {
-            base: "light.fg.neutral.active",
-            _dark: "dark.fg.neutral.active",
-          },
-          borderColor: {
-            base: "light.border.neutral.active",
-            _dark: "dark.border.neutral.active",
-          },
+          bg: "bg.neutral.active",
+          color: "fg.neutral.active",
+          borderColor: "border.neutral.active",
         },
       },
     },
@@ -322,25 +223,13 @@ const styles = cva({
       tone: "danger",
       css: {
         border: "1px solid",
-        borderColor: {
-          base: "light.border.danger",
-          _dark: "dark.border.danger",
-        },
-        color: {
-          base: "light.fg.danger",
-          _dark: "dark.fg.danger",
-        },
+        borderColor: "border.danger",
+        color: "fg.danger",
         _hover: {
-          bg: {
-            base: "light.bg.danger.hover",
-            _dark: "dark.bg.danger.hover",
-          },
+          bg: "bg.danger.hover",
         },
         _active: {
-          bg: {
-            base: "light.bg.danger.active",
-            _dark: "dark.bg.danger.active",
-          },
+          bg: "bg.danger.active",
         },
       },
     },
@@ -349,14 +238,8 @@ const styles = cva({
       tone: "success",
       css: {
         border: "1px solid",
-        borderColor: {
-          base: "light.border.success",
-          _dark: "dark.border.success",
-        },
-        color: {
-          base: "light.fg.success",
-          _dark: "dark.fg.success",
-        },
+        borderColor: "border.success",
+        color: "fg.success",
       },
     },
     {
@@ -364,14 +247,8 @@ const styles = cva({
       tone: "warning",
       css: {
         border: "1px solid",
-        borderColor: {
-          base: "light.border.warning",
-          _dark: "dark.border.warning",
-        },
-        color: {
-          base: "light.fg.warning",
-          _dark: "dark.fg.warning",
-        },
+        borderColor: "border.warning",
+        color: "fg.warning",
       },
     },
     {
@@ -379,14 +256,8 @@ const styles = cva({
       tone: "info",
       css: {
         border: "1px solid",
-        borderColor: {
-          base: "light.border.info",
-          _dark: "dark.border.info",
-        },
-        color: {
-          base: "light.fg.info",
-          _dark: "dark.fg.info",
-        },
+        borderColor: "border.info",
+        color: "fg.info",
       },
     },
     // Disabled States
@@ -394,14 +265,8 @@ const styles = cva({
       variant: "solid",
       disabled: true,
       css: {
-        bg: {
-          base: "light.bg.neutral.disabled!",
-          _dark: "dark.bg.neutral.disabled!",
-        },
-        color: {
-          base: "light.fg.neutral.disabled!",
-          _dark: "dark.fg.neutral.disabled!",
-        },
+        bg: "bg.neutral.disabled!",
+        color: "fg.neutral.disabled!",
       },
     },
     {
@@ -409,14 +274,8 @@ const styles = cva({
       disabled: true,
       css: {
         bg: "transparent!",
-        color: {
-          base: "light.fg.neutral.disabled!",
-          _dark: "dark.fg.neutral.disabled!",
-        },
-        borderColor: {
-          base: "light.border.neutral.disabled!",
-          _dark: "dark.border.neutral.disabled!",
-        },
+        color: "fg.neutral.disabled!",
+        borderColor: "border.neutral.disabled!",
       },
     },
   ],
