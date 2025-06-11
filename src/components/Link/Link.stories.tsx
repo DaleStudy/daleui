@@ -1,16 +1,16 @@
-import type { Meta, StoryObj, Decorator } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { vstack } from "../../../styled-system/patterns";
 import { Link } from "./Link";
 import { Icon } from "../Icon/Icon";
 
-export default {
+const meta: Meta<typeof Link> = {
   component: Link,
   parameters: {
     layout: "centered",
   },
   args: { children: "링크", href: undefined },
   decorators: [
-    ((Story, context) => {
+    (Story, context) => {
       return (
         <Story
           args={{
@@ -19,9 +19,11 @@ export default {
           }}
         />
       );
-    }) as Decorator,
+    },
   ],
-} satisfies Meta<typeof Link>;
+};
+
+export default meta;
 
 export const Basic: StoryObj<typeof Link> = {};
 
