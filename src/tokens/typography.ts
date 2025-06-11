@@ -1,101 +1,202 @@
 export const textStyles = {
-  xs: {
-    value: {
-      fontSize: "0.75rem",
-      lineHeight: "1rem",
+  display: {
+    lg: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "8xl",
+        fontWeight: "bold",
+        lineHeight: "tight",
+        letterSpacing: "tight",
+      },
+    },
+    md: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "7xl",
+        fontWeight: "bold",
+        lineHeight: "tight",
+        letterSpacing: "tight",
+      },
+    },
+    sm: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "5xl",
+        fontWeight: "bold",
+        lineHeight: "tight",
+        letterSpacing: "tight",
+      },
     },
   },
-  sm: {
-    value: {
-      fontSize: "0.875rem",
-      lineHeight: "1.25rem",
+  title: {
+    lg: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "4xl",
+        fontWeight: "semibold",
+        lineHeight: "tight",
+        letterSpacing: "balanced",
+      },
+    },
+    md: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "3xl",
+        fontWeight: "semibold",
+        lineHeight: "tight",
+        letterSpacing: "balanced",
+      },
+    },
+    sm: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "2xl",
+        fontWeight: "medium",
+        lineHeight: "tight",
+        letterSpacing: "balanced",
+      },
     },
   },
-  md: {
-    value: {
-      fontSize: "1rem",
-      lineHeight: "1.5rem",
+  body: {
+    lg: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "lg",
+        fontWeight: "normal",
+        lineHeight: "balanced",
+        letterSpacing: "balanced",
+      },
+    },
+    md: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "md",
+        fontWeight: "normal",
+        lineHeight: "balanced",
+        letterSpacing: "balanced",
+      },
+    },
+    sm: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "sm",
+        fontWeight: "semibold",
+        lineHeight: "balanced",
+        letterSpacing: "balanced",
+      },
     },
   },
-  lg: {
-    value: {
-      fontSize: "1.125rem",
-      lineHeight: "1.75rem",
+  label: {
+    lg: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "lg",
+        fontWeight: "medium",
+        lineHeight: "tight",
+        letterSpacing: "balanced",
+      },
+    },
+    md: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "md",
+        fontWeight: "medium",
+        lineHeight: "tight",
+        letterSpacing: "balanced",
+      },
+    },
+    sm: {
+      value: {
+        fontFamily: "sans",
+        fontSize: "sm",
+        fontWeight: "medium",
+        lineHeight: "tight",
+        letterSpacing: "balanced",
+      },
     },
   },
-  xl: {
+  caption: {
     value: {
-      fontSize: "1.25rem",
-      lineHeight: "1.75rem",
+      fontFamily: "sans",
+      fontSize: "xs",
+      fontWeight: "medium",
+      lineHeight: "tight",
+      letterSpacing: "balanced",
     },
   },
-  "2xl": {
+  code: {
     value: {
-      fontSize: "1.5rem",
-      lineHeight: "2rem",
+      fontFamily: "mono",
+      fontSize: "sm",
+      fontWeight: "medium",
+      lineHeight: "balanced",
+      letterSpacing: "balanced",
     },
   },
-  "3xl": {
-    value: {
-      fontSize: "1.875rem",
-      lineHeight: "2.25rem",
+  heading: {
+    "1": {
+      value: {
+        fontFamily: "sans",
+        fontSize: "3xl",
+        fontWeight: "bold",
+        lineHeight: "tight",
+        letterSpacing: "tight",
+      },
     },
-  },
-  "4xl": {
-    value: {
-      fontSize: "2.25rem",
-      lineHeight: "2.5rem",
+    "2": {
+      value: {
+        fontFamily: "sans",
+        fontSize: "2xl",
+        fontWeight: "bold",
+        lineHeight: "tight",
+        letterSpacing: "tight",
+      },
     },
-  },
-  "5xl": {
-    value: {
-      fontSize: "3rem",
-      lineHeight: "1",
+    "3": {
+      value: {
+        fontFamily: "sans",
+        fontSize: "xl",
+        fontWeight: "bold",
+        lineHeight: "tight",
+        letterSpacing: "tight",
+      },
     },
-  },
-  "6xl": {
-    value: {
-      fontSize: "3.75rem",
-      lineHeight: "1",
+    "4": {
+      value: {
+        fontFamily: "sans",
+        fontSize: "lg",
+        fontWeight: "bold",
+        lineHeight: "tight",
+        letterSpacing: "tight",
+      },
     },
-  },
-  "7xl": {
-    value: {
-      fontSize: "4.5rem",
-      lineHeight: "1",
-    },
-  },
-  "8xl": {
-    value: {
-      fontSize: "6rem",
-      lineHeight: "1",
-    },
-  },
-  "9xl": {
-    value: {
-      fontSize: "8rem",
-      lineHeight: "1",
+    "5": {
+      value: {
+        fontFamily: "sans",
+        fontSize: "md",
+        fontWeight: "bold",
+        lineHeight: "tight",
+        letterSpacing: "tight",
+      },
     },
   },
 };
 
 export const fonts = {
-  sans: { value: '"Pretendard Variable", "Noto Sans KR", sans-serif' },
-  // TODO customize serif and mono font styles when needed
+  sans: { value: '"Pretendard Variable", sans-serif' },
+  mono: { value: '"JetBrains Mono", monospace' },
 };
 
 export const fontWeights = {
-  thin: { value: "100" },
-  light: { value: "300" },
   normal: { value: "400" },
   medium: { value: "500" },
+  semibold: { value: "600" },
   bold: { value: "700" },
 };
 
 export type FontWeight = keyof typeof fontWeights;
 
 export const fontSizes = {
-  "2xs": { value: "0.5rem" },
   xs: { value: "0.75rem" },
   sm: { value: "0.875rem" },
   md: { value: "1rem" },
@@ -104,29 +205,20 @@ export const fontSizes = {
   "2xl": { value: "1.5rem" },
   "3xl": { value: "1.875rem" },
   "4xl": { value: "2.25rem" },
-  "5xl": { value: "3rem" },
-  "6xl": { value: "3.75rem" },
-  "7xl": { value: "4.5rem" },
-  "8xl": { value: "6rem" },
-  "9xl": { value: "8rem" },
+  "5xl": { value: "2.75rem" },
+  "6xl": { value: "3.25rem" },
+  "7xl": { value: "3.75rem" },
+  "8xl": { value: "4.5rem" },
 };
 
 export type FontSize = keyof typeof fontSizes;
 
 export const letterSpacings = {
-  tighter: { value: "-0.05em" },
-  tight: { value: "-0.025em" },
-  normal: { value: "0em" },
-  wide: { value: "0.025em" },
-  wider: { value: "0.05em" },
-  widest: { value: "0.1em" },
+  tight: { value: "-0.1" },
+  balanced: { value: "0" },
 };
 
 export const lineHeights = {
-  none: { value: "1" },
-  tight: { value: "1.25" },
-  snug: { value: "1.375" },
-  normal: { value: "1.5" },
-  relaxed: { value: "1.625" },
-  loose: { value: "2" },
+  tight: { value: "1.2" },
+  balanced: { value: "1.5" },
 };

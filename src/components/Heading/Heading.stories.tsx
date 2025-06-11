@@ -34,9 +34,6 @@ export const Levels: StoryObj<typeof Heading> = {
         <Heading {...args} level={5}>
           5 단계
         </Heading>
-        <Heading {...args} level={6}>
-          6 단계
-        </Heading>
       </div>
     );
   },

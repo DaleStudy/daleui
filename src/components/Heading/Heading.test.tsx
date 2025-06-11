@@ -13,7 +13,7 @@ test("텍스트와 함께 heading이 올바르게 렌더링됨", () => {
   expect(screen.getByRole("heading")).toHaveTextContent("제목");
 });
 
-test.each([1, 2, 3, 4, 5, 6] as const)(
+test.each([1, 2, 3, 4, 5] as const)(
   "level 값에 따라 HTML heading 요소가 올바르게 렌더링됨",
   (level) => {
     render(<Basic level={level} />);

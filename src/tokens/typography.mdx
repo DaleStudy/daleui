@@ -1,17 +1,186 @@
 import { Typeset } from "@storybook/blocks";
-import { fonts, fontWeights, fontSizes } from "./typography";
+import { Figma } from "@storybook/addon-designs/blocks";
+import {
+  fonts,
+  fontWeights,
+  fontSizes,
+  lineHeights,
+  letterSpacings,
+} from "./typography";
 
 # Typography
 
-> 달레 UI는 [프리텐다드(Pretendard Variable)](https://github.com/orioncactus/pretendard) 웹폰트를 사용하고 있습니다.
+- > 달레 UI는 [프리텐다드(Pretendard Variable)](https://github.com/orioncactus/pretendard) 웹폰트를 사용하고 있습니다.
 
-## 글꼴 크기
+### Display
 
-<p>
+#### Display.lg
+
+<Typeset
+  fontSizes={[fontSizes["8xl"].value]}
+  fontWeight={fontWeights.bold.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.tight.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Display.md
+
+<Typeset
+  fontSizes={[fontSizes["7xl"].value]}
+  fontWeight={fontWeights.bold.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.tight.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Display.sm
+
+<Typeset
+  fontSizes={[fontSizes["5xl"].value]}
+  fontWeight={fontWeights.bold.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.tight.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+### Title
+
+#### Title.lg
+
+<Typeset
+  fontSizes={[fontSizes["4xl"].value]}
+  fontWeight={fontWeights.semibold.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Title.md
+
+<Typeset
+  fontSizes={[fontSizes["3xl"].value]}
+  fontWeight={fontWeights.semibold.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Title.sm
+
+<Typeset
+  fontSizes={[fontSizes["2xl"].value]}
+  fontWeight={fontWeights.medium.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+### Body
+
+#### Body.lg
+
+<Typeset
+  fontSizes={[fontSizes.lg.value]}
+  fontWeight={fontWeights.normal.value}
+  lineHeight={lineHeights.balanced.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Body.md
+
+<Typeset
+  fontSizes={[fontSizes.md.value]}
+  fontWeight={fontWeights.normal.value}
+  lineHeight={lineHeights.balanced.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Body.sm
+
+<Typeset
+  fontSizes={[fontSizes.sm.value]}
+  fontWeight={fontWeights.semibold.value}
+  lineHeight={lineHeights.balanced.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+### Label
+
+#### Label.lg
+
+<Typeset
+  fontSizes={[fontSizes.lg.value]}
+  fontWeight={fontWeights.medium.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Label.md
+
+<Typeset
+  fontSizes={[fontSizes.md.value]}
+  fontWeight={fontWeights.medium.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Label.sm
+
+<Typeset
+  fontSizes={[fontSizes.sm.value]}
+  fontWeight={fontWeights.medium.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+### Caption
+
+<Typeset
+  fontSizes={[fontSizes.xs.value]}
+  fontWeight={fontWeights.medium.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+### Code
+
+<Typeset
+  fontSizes={[fontSizes.sm.value]}
+  fontWeight={fontWeights.medium.value}
+  lineHeight={lineHeights.balanced.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.mono.value}
+/>
+
+### 글꼴 크기
+
+<h4>
   {Object.entries(fontSizes)
     .map(([name, { value }]) => `${name}(${value})`)
     .join(", ")}
-</p>
+</h4>
 
 <Typeset
   fontSizes={Object.values(fontSizes).map(({ value }) => value)}
@@ -20,14 +189,14 @@ import { fonts, fontWeights, fontSizes } from "./typography";
   fontFamily={fonts.sans.value}
 />
 
-## 글꼴 굵기
+### 글꼴 굵기
 
 {Object.entries(fontWeights).map(([name, {value}]) => (
 
 <>
-  <h3>
+  <h4>
     {name}({value})
-  </h3>
+  </h4>
   <Typeset
     fontSizes={[fontSizes.md.value]}
     fontWeight={value}
@@ -36,3 +205,31 @@ import { fonts, fontWeights, fontSizes } from "./typography";
   />
 </>
 ))}
+
+### 글꼴 패밀리
+
+#### Sans (Pretendard Variable)
+
+<Typeset
+  fontSizes={[fontSizes.md.value]}
+  fontWeight={fontWeights.normal.value}
+  sampleText="깔끔하고 읽기 쉬운 본문용 폰트입니다."
+  fontFamily={fonts.sans.value}
+/>
+
+#### Mono (JetBrains Mono)
+
+<Typeset
+  fontSizes={[fontSizes.md.value]}
+  fontWeight={fontWeights.normal.value}
+  sampleText="const code = 'monospace font for code';"
+  fontFamily={fonts.mono.value}
+/>
+
+### Design
+
+<Figma
+  url="https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/NoName-Design-System?node-id=1-2&t=83lHjREIQNo6Xe57-1"
+  collapsible={true}
+  defaultCollapsed={true}
+/>
