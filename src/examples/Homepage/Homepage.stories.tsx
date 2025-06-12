@@ -17,7 +17,15 @@ export const Default: StoryObj = {
   render: (args) => {
     const MENU_ITEMS = ["소개", "서비스", "스토리", "채용"];
     return (
-      <div className={vstack({ minHeight: "100vh", gap: 0 })} {...args}>
+      <div
+        className={vstack({
+          minHeight: "100vh",
+          gap: 0,
+          background: "bg.neutral.default",
+          color: "fg.neutral.default",
+        })}
+        {...args}
+      >
         <header
           className={hstack({
             width: "100%",
@@ -25,8 +33,7 @@ export const Default: StoryObj = {
             justifyContent: "space-between",
             paddingX: { base: "16", md: "24" },
             borderBottom: "2px solid",
-            background: { base: "white", _dark: "tealDark.1" },
-            borderColor: { base: "teal.7", _dark: "tealDark.7" },
+            borderColor: "border.neutral.default",
             color: { base: "teal.11", _dark: "tealDark.11" },
           })}
         >
@@ -69,7 +76,7 @@ export const Default: StoryObj = {
           <Heading level={1}>달레 UI</Heading>
           <Text>한국어 친화적인 디자인시스템</Text>
           <div>
-            <Button variant="solid" tone="accent" size="lg">
+            <Button variant="solid" tone="brand" size="lg">
               문의하기
             </Button>
           </div>
@@ -79,8 +86,7 @@ export const Default: StoryObj = {
             textAlign: "center",
             paddingY: { base: "4", md: "8" },
             borderTop: "2px solid",
-            background: { base: "teal.1", _dark: "tealDark.1" },
-            borderColor: { base: "teal.7", _dark: "tealDark.7" },
+            borderColor: "border.neutral.default",
             width: "100%",
           })}
         >
