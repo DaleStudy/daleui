@@ -42,9 +42,7 @@ test("체크박스에 체크 시, tone 속성이 올바르게 적용됨", async 
 
   // Check for correct background colors based on tone
   expect(brandCheckbox).toHaveClass("checked:bg_bgSolid.brand.default");
-  expect(neutralCheckbox).toHaveClass(
-    "checked:bg_bgSolid.neutral.default",
-  );
+  expect(neutralCheckbox).toHaveClass("checked:bg_bgSolid.neutral.default");
   expect(dangerCheckbox).toHaveClass("checked:bg_bgSolid.danger.default");
   expect(warningCheckbox).toHaveClass("checked:bg_bgSolid.warning");
   expect(successCheckbox).toHaveClass("checked:bg_bgSolid.success");
@@ -183,7 +181,5 @@ test("required 속성값이 true일 경우, label에 별표가 추가됨", () =>
 
   const requiredIndicator = screen.getByText("*");
   expect(requiredIndicator).toBeInTheDocument();
-  expect(requiredIndicator).toHaveClass(
-    "c_fg.danger",
-  );
+  expect(requiredIndicator).toHaveClass("c_fg.danger");
 });
