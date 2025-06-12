@@ -17,7 +17,7 @@ test("variant 속성이 올바르게 적용됨", () => {
   render(<Variants />);
 
   expect(screen.getByText("솔리드 버튼")).toHaveClass("bg_bg");
-  expect(screen.getByText("아웃라인 버튼")).toHaveClass("bd_3px_solid");
+  expect(screen.getByText("아웃라인 버튼")).toHaveClass("bd_neutral bd-w_lg");
 });
 
 test("tone 속성이 올바르게 적용됨", () => {
