@@ -3,16 +3,27 @@ import { vstack } from "../../../styled-system/patterns";
 import { Link } from "./Link";
 import { Icon } from "../Icon/Icon";
 
-export default {
+const meta: Meta<typeof Link> = {
   component: Link,
   parameters: {
     layout: "centered",
   },
-  args: {
-    children: "링크",
-    href: "#",
-  },
-} satisfies Meta<typeof Link>;
+  args: { children: "링크", href: undefined },
+  decorators: [
+    (Story, context) => {
+      return (
+        <Story
+          args={{
+            ...context.args,
+            href: context.args.href || window.parent.location.href,
+          }}
+        />
+      );
+    },
+  ],
+};
+
+export default meta;
 
 export const Basic: StoryObj<typeof Link> = {};
 
@@ -151,9 +162,7 @@ export const Security: StoryObj<typeof Link> = {
         <Link {...args} target="_blank">
           새 탭에서 열기 (보안 속성 자동 추가)
         </Link>
-        <Link {...args} target="_self">
-          같은 탭에서 열기
-        </Link>
+        <Link {...args}>같은 탭에서 열기</Link>
       </div>
     );
   },
