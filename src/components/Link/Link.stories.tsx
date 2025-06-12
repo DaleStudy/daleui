@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { vstack } from "../../../styled-system/patterns";
+import { hstack, vstack } from "../../../styled-system/patterns";
 import { Link } from "./Link";
 import { Icon } from "../Icon/Icon";
 
@@ -194,5 +194,197 @@ export const Inline: StoryObj<typeof Link> = {
         이 문장에는 <Link {...args}>링크</Link>가 포함되어 있습니다.
       </p>
     );
+  },
+};
+
+export const UnderlineThickness: StoryObj<typeof Link> = {
+  render: (args) => {
+    return (
+      <div className={vstack({ gap: "0", alignItems: "start" })}>
+        <div className={hstack({ gap: "24" })}>
+          <Link {...args} size="xs" weight="normal">
+            일반
+          </Link>
+          <Link {...args} size="xs" weight="medium">
+            중간
+          </Link>
+          <Link {...args} size="xs" weight="semibold">
+            세미볼드
+          </Link>
+          <Link {...args} size="xs" weight="bold">
+            굵은
+          </Link>
+        </div>
+        <div className={hstack({ gap: "24" })}>
+          <Link {...args} size="sm" weight="normal">
+            일반
+          </Link>
+          <Link {...args} size="sm" weight="medium">
+            중간
+          </Link>
+          <Link {...args} size="sm" weight="semibold">
+            세미볼드
+          </Link>
+          <Link {...args} size="sm" weight="bold">
+            굵은
+          </Link>
+        </div>
+        <div className={hstack({ gap: "24" })}>
+          <Link {...args} size="md" weight="normal">
+            일반
+          </Link>
+          <Link {...args} size="md" weight="medium">
+            중간
+          </Link>
+          <Link {...args} size="md" weight="semibold">
+            세미볼드
+          </Link>
+          <Link {...args} size="md" weight="bold">
+            굵은
+          </Link>
+        </div>
+        <div className={hstack({ gap: "24" })}>
+          <Link {...args} size="lg" weight="normal">
+            일반
+          </Link>
+          <Link {...args} size="lg" weight="medium">
+            중간
+          </Link>
+          <Link {...args} size="lg" weight="semibold">
+            세미볼드
+          </Link>
+          <Link {...args} size="lg" weight="bold">
+            굵은
+          </Link>
+        </div>
+        <div className={hstack({ gap: "24" })}>
+          <Link {...args} size="xl" weight="normal">
+            일반
+          </Link>
+          <Link {...args} size="xl" weight="medium">
+            중간
+          </Link>
+          <Link {...args} size="xl" weight="semibold">
+            세미볼드
+          </Link>
+          <Link {...args} size="xl" weight="bold">
+            굵은
+          </Link>
+        </div>
+        <div className={hstack({ gap: "24" })}>
+          <Link {...args} size="2xl" weight="normal">
+            일반
+          </Link>
+          <Link {...args} size="2xl" weight="medium">
+            중간
+          </Link>
+          <Link {...args} size="2xl" weight="semibold">
+            세미볼드
+          </Link>
+          <Link {...args} size="2xl" weight="bold">
+            굵은
+          </Link>
+        </div>
+        <div className={hstack({ gap: "24" })}>
+          <Link {...args} size="3xl" weight="normal">
+            일반
+          </Link>
+          <Link {...args} size="3xl" weight="medium">
+            중간
+          </Link>
+          <Link {...args} size="3xl" weight="semibold">
+            세미볼드
+          </Link>
+          <Link {...args} size="3xl" weight="bold">
+            굵은
+          </Link>
+        </div>
+        <div className={hstack({ gap: "24" })}>
+          <Link {...args} size="4xl" weight="normal">
+            일반
+          </Link>
+          <Link {...args} size="4xl" weight="medium">
+            중간
+          </Link>
+          <Link {...args} size="4xl" weight="semibold">
+            세미볼드
+          </Link>
+          <Link {...args} size="4xl" weight="bold">
+            굵은
+          </Link>
+        </div>
+        <div className={hstack({ gap: "24" })}>
+          <Link {...args} size="5xl" weight="normal">
+            일반
+          </Link>
+          <Link {...args} size="5xl" weight="medium">
+            중간
+          </Link>
+          <Link {...args} size="5xl" weight="semibold">
+            세미볼드
+          </Link>
+          <Link {...args} size="5xl" weight="bold">
+            굵은
+          </Link>
+        </div>
+        <div className={hstack({ gap: "24" })}>
+          <Link {...args} size="6xl" weight="normal">
+            일반
+          </Link>
+          <Link {...args} size="6xl" weight="medium">
+            중간
+          </Link>
+          <Link {...args} size="6xl" weight="semibold">
+            세미볼드
+          </Link>
+          <Link {...args} size="6xl" weight="bold">
+            굵은
+          </Link>
+        </div>
+        <div className={hstack({ gap: "24" })}>
+          <Link {...args} size="7xl" weight="normal">
+            일반
+          </Link>
+          <Link {...args} size="7xl" weight="medium">
+            중간
+          </Link>
+          <Link {...args} size="7xl" weight="semibold">
+            세미볼드
+          </Link>
+          <Link {...args} size="7xl" weight="bold">
+            굵은
+          </Link>
+        </div>
+
+        <div className={hstack({ gap: "24" })}>
+          <Link {...args} size="8xl" weight="normal">
+            일반
+          </Link>
+          <Link {...args} size="8xl" weight="medium">
+            중간
+          </Link>
+          <Link {...args} size="8xl" weight="semibold">
+            세미볼드
+          </Link>
+          <Link {...args} size="8xl" weight="bold">
+            굵은
+          </Link>
+        </div>
+      </div>
+    );
+  },
+  argTypes: {
+    children: {
+      control: false,
+    },
+    weight: {
+      control: false,
+    },
+    size: {
+      control: false,
+    },
+    underline: {
+      control: false,
+    },
   },
 };
