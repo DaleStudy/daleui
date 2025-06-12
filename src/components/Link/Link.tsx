@@ -200,289 +200,433 @@ const styles = cva({
       underline: true,
       size: "xs",
       weight: "normal",
-      css: { textDecorationThickness: "1px", textUnderlineOffset: "2px" },
+      css: {
+        textDecorationThickness: "0.0625rem", // 1px
+        textUnderlineOffset: "0.125rem", // 2px
+      },
     },
     {
       underline: true,
       size: "xs",
       weight: "medium",
-      css: { textDecorationThickness: "1px", textUnderlineOffset: "2.5px" },
+      css: {
+        textDecorationThickness: "0.0625rem", // 1px
+        textUnderlineOffset: "0.15625rem", // 2.5px
+      },
     },
     {
       underline: true,
       size: "xs",
       weight: "semibold",
-      css: { textDecorationThickness: "1px", textUnderlineOffset: "2.5px" },
+      css: {
+        textDecorationThickness: "0.0625rem", // 1px
+        textUnderlineOffset: "0.15625rem", // 2.5px
+      },
     },
     {
       underline: true,
       size: "xs",
       weight: "bold",
-      css: { textDecorationThickness: "1px", textUnderlineOffset: "3px" },
+      css: {
+        textDecorationThickness: "0.0625rem", // 1px
+        textUnderlineOffset: "0.1875rem", // 3px
+      },
     },
     {
       underline: true,
       size: "sm",
       weight: "normal",
-      css: { textDecorationThickness: "1px", textUnderlineOffset: "2.5px" },
+      css: {
+        textDecorationThickness: "0.0625rem", // 1px
+        textUnderlineOffset: "0.15625rem", // 2.5px
+      },
     },
     {
       underline: true,
       size: "sm",
       weight: "medium",
-      css: { textDecorationThickness: "1px", textUnderlineOffset: "2.5px" },
+      css: {
+        textDecorationThickness: "0.0625rem", // 1px
+        textUnderlineOffset: "0.15625rem", // 2.5px
+      },
     },
     {
       underline: true,
       size: "sm",
       weight: "semibold",
-      css: { textDecorationThickness: "1px", textUnderlineOffset: "3px" },
+      css: {
+        textDecorationThickness: "0.0625rem", // 1px
+        textUnderlineOffset: "0.1875rem", // 3px
+      },
     },
     {
       underline: true,
       size: "sm",
       weight: "bold",
-      css: { textDecorationThickness: "2px", textUnderlineOffset: "3px" },
+      css: {
+        textDecorationThickness: "0.125rem", // 2px
+        textUnderlineOffset: "0.1875rem", // 3px
+      },
     },
     {
       underline: true,
       size: "md",
       weight: "normal",
-      css: { textDecorationThickness: "1px", textUnderlineOffset: "2.5px" },
+      css: {
+        textDecorationThickness: "0.0625rem", // 1px
+        textUnderlineOffset: "0.15625rem", // 2.5px
+      },
     },
     {
       underline: true,
       size: "md",
       weight: "medium",
-      css: { textDecorationThickness: "1px", textUnderlineOffset: "3px" },
+      css: {
+        textDecorationThickness: "0.0625rem", // 1px
+        textUnderlineOffset: "0.1875rem", // 3px
+      },
     },
     {
       underline: true,
       size: "md",
       weight: "semibold",
-      css: { textDecorationThickness: "2px", textUnderlineOffset: "3px" },
+      css: {
+        textDecorationThickness: "0.125rem", // 2px
+        textUnderlineOffset: "0.1875rem", // 3px
+      },
     },
     {
       underline: true,
       size: "md",
       weight: "bold",
-      css: { textDecorationThickness: "2px", textUnderlineOffset: "4px" },
+      css: {
+        textDecorationThickness: "0.125rem", // 2px
+        textUnderlineOffset: "0.25rem", // 4px
+      },
     },
     {
       underline: true,
       size: "lg",
       weight: "normal",
-      css: { textDecorationThickness: "1px", textUnderlineOffset: "3px" },
+      css: {
+        textDecorationThickness: "0.0625rem", // 1px
+        textUnderlineOffset: "0.1875rem", // 3px
+      },
     },
     {
       underline: true,
       size: "lg",
       weight: "medium",
-      css: { textDecorationThickness: "2px", textUnderlineOffset: "3px" },
+      css: {
+        textDecorationThickness: "0.125rem", // 2px
+        textUnderlineOffset: "0.1875rem", // 3px
+      },
     },
     {
       underline: true,
       size: "lg",
       weight: "semibold",
-      css: { textDecorationThickness: "2px", textUnderlineOffset: "4px" },
+      css: {
+        textDecorationThickness: "0.125rem", // 2px
+        textUnderlineOffset: "0.25rem", // 4px
+      },
     },
     {
       underline: true,
       size: "lg",
       weight: "bold",
-      css: { textDecorationThickness: "2px", textUnderlineOffset: "4px" },
+      css: {
+        textDecorationThickness: "0.125rem", // 2px
+        textUnderlineOffset: "0.25rem", // 4px
+      },
     },
     {
       underline: true,
       size: "xl",
       weight: "normal",
-      css: { textDecorationThickness: "2px", textUnderlineOffset: "3px" },
+      css: {
+        textDecorationThickness: "0.125rem", // 2px
+        textUnderlineOffset: "0.1875rem", // 3px
+      },
     },
     {
       underline: true,
       size: "xl",
       weight: "medium",
-      css: { textDecorationThickness: "2px", textUnderlineOffset: "4px" },
+      css: {
+        textDecorationThickness: "0.125rem", // 2px
+        textUnderlineOffset: "0.25rem", // 4px
+      },
     },
     {
       underline: true,
       size: "xl",
       weight: "semibold",
-      css: { textDecorationThickness: "2px", textUnderlineOffset: "4px" },
+      css: {
+        textDecorationThickness: "0.125rem", // 2px
+        textUnderlineOffset: "0.25rem", // 4px
+      },
     },
     {
       underline: true,
       size: "xl",
       weight: "bold",
-      css: { textDecorationThickness: "3px", textUnderlineOffset: "5px" },
+      css: {
+        textDecorationThickness: "0.1875rem", // 3px
+        textUnderlineOffset: "0.3125rem", // 5px
+      },
     },
     {
       underline: true,
       size: "2xl",
       weight: "normal",
-      css: { textDecorationThickness: "2px", textUnderlineOffset: "4px" },
+      css: {
+        textDecorationThickness: "0.125rem", // 2px
+        textUnderlineOffset: "0.25rem", // 4px
+      },
     },
     {
       underline: true,
       size: "2xl",
       weight: "medium",
-      css: { textDecorationThickness: "2px", textUnderlineOffset: "4px" },
+      css: {
+        textDecorationThickness: "0.125rem", // 2px
+        textUnderlineOffset: "0.25rem", // 4px
+      },
     },
     {
       underline: true,
       size: "2xl",
       weight: "semibold",
-      css: { textDecorationThickness: "3px", textUnderlineOffset: "5px" },
+      css: {
+        textDecorationThickness: "0.1875rem", // 3px
+        textUnderlineOffset: "0.3125rem", // 5px
+      },
     },
     {
       underline: true,
       size: "2xl",
       weight: "bold",
-      css: { textDecorationThickness: "3px", textUnderlineOffset: "6px" },
+      css: {
+        textDecorationThickness: "0.1875rem", // 3px
+        textUnderlineOffset: "0.375rem", // 6px
+      },
     },
     {
       underline: true,
       size: "3xl",
       weight: "normal",
-      css: { textDecorationThickness: "2px", textUnderlineOffset: "4px" },
+      css: {
+        textDecorationThickness: "0.125rem", // 2px
+        textUnderlineOffset: "0.25rem", // 4px
+      },
     },
     {
       underline: true,
       size: "3xl",
       weight: "medium",
-      css: { textDecorationThickness: "2px", textUnderlineOffset: "5px" },
+      css: {
+        textDecorationThickness: "0.125rem", // 2px
+        textUnderlineOffset: "0.3125rem", // 5px
+      },
     },
     {
       underline: true,
       size: "3xl",
       weight: "semibold",
-      css: { textDecorationThickness: "3px", textUnderlineOffset: "6px" },
+      css: {
+        textDecorationThickness: "0.1875rem", // 3px
+        textUnderlineOffset: "0.375rem", // 6px
+      },
     },
     {
       underline: true,
       size: "3xl",
       weight: "bold",
-      css: { textDecorationThickness: "3px", textUnderlineOffset: "7px" },
+      css: {
+        textDecorationThickness: "0.1875rem", // 3px
+        textUnderlineOffset: "0.4375rem", // 7px
+      },
     },
     {
       underline: true,
       size: "4xl",
       weight: "normal",
-      css: { textDecorationThickness: "2px", textUnderlineOffset: "5px" },
+      css: {
+        textDecorationThickness: "0.125rem", // 2px
+        textUnderlineOffset: "0.3125rem", // 5px
+      },
     },
     {
       underline: true,
       size: "4xl",
       weight: "medium",
-      css: { textDecorationThickness: "3px", textUnderlineOffset: "6px" },
+      css: {
+        textDecorationThickness: "0.1875rem", // 3px
+        textUnderlineOffset: "0.375rem", // 6px
+      },
     },
     {
       underline: true,
       size: "4xl",
       weight: "semibold",
-      css: { textDecorationThickness: "3px", textUnderlineOffset: "7px" },
+      css: {
+        textDecorationThickness: "0.1875rem", // 3px
+        textUnderlineOffset: "0.4375rem", // 7px
+      },
     },
     {
       underline: true,
       size: "4xl",
       weight: "bold",
-      css: { textDecorationThickness: "4px", textUnderlineOffset: "8px" },
+      css: {
+        textDecorationThickness: "0.25rem", // 4px
+        textUnderlineOffset: "0.5rem", // 8px
+      },
     },
     {
       underline: true,
       size: "5xl",
       weight: "normal",
-      css: { textDecorationThickness: "3px", textUnderlineOffset: "6px" },
+      css: {
+        textDecorationThickness: "0.1875rem", // 3px
+        textUnderlineOffset: "0.375rem", // 6px
+      },
     },
     {
       underline: true,
       size: "5xl",
       weight: "medium",
-      css: { textDecorationThickness: "3px", textUnderlineOffset: "7px" },
+      css: {
+        textDecorationThickness: "0.1875rem", // 3px
+        textUnderlineOffset: "0.4375rem", // 7px
+      },
     },
     {
       underline: true,
       size: "5xl",
       weight: "semibold",
-      css: { textDecorationThickness: "4px", textUnderlineOffset: "8px" },
+      css: {
+        textDecorationThickness: "0.25rem", // 4px
+        textUnderlineOffset: "0.5rem", // 8px
+      },
     },
     {
       underline: true,
       size: "5xl",
       weight: "bold",
-      css: { textDecorationThickness: "4px", textUnderlineOffset: "9px" },
+      css: {
+        textDecorationThickness: "0.25rem", // 4px
+        textUnderlineOffset: "0.5625rem", // 9px
+      },
     },
     {
       underline: true,
       size: "6xl",
       weight: "normal",
-      css: { textDecorationThickness: "3px", textUnderlineOffset: "7px" },
+      css: {
+        textDecorationThickness: "0.1875rem", // 3px
+        textUnderlineOffset: "0.4375rem", // 7px
+      },
     },
     {
       underline: true,
       size: "6xl",
       weight: "medium",
-      css: { textDecorationThickness: "4px", textUnderlineOffset: "8px" },
+      css: {
+        textDecorationThickness: "0.25rem", // 4px
+        textUnderlineOffset: "0.5rem", // 8px
+      },
     },
     {
       underline: true,
       size: "6xl",
       weight: "semibold",
-      css: { textDecorationThickness: "4px", textUnderlineOffset: "9px" },
+      css: {
+        textDecorationThickness: "0.25rem", // 4px
+        textUnderlineOffset: "0.5625rem", // 9px
+      },
     },
     {
       underline: true,
       size: "6xl",
       weight: "bold",
-      css: { textDecorationThickness: "5px", textUnderlineOffset: "10px" },
+      css: {
+        textDecorationThickness: "0.3125rem", // 5px
+        textUnderlineOffset: "0.625rem", // 10px
+      },
     },
     {
       underline: true,
       size: "7xl",
       weight: "normal",
-      css: { textDecorationThickness: "4px", textUnderlineOffset: "8px" },
+      css: {
+        textDecorationThickness: "0.25rem", // 4px
+        textUnderlineOffset: "0.5rem", // 8px
+      },
     },
     {
       underline: true,
       size: "7xl",
       weight: "medium",
-      css: { textDecorationThickness: "4px", textUnderlineOffset: "9px" },
+      css: {
+        textDecorationThickness: "0.25rem", // 4px
+        textUnderlineOffset: "0.5625rem", // 9px
+      },
     },
     {
       underline: true,
       size: "7xl",
       weight: "semibold",
-      css: { textDecorationThickness: "5px", textUnderlineOffset: "10px" },
+      css: {
+        textDecorationThickness: "0.3125rem", // 5px
+        textUnderlineOffset: "0.625rem", // 10px
+      },
     },
     {
       underline: true,
       size: "7xl",
       weight: "bold",
-      css: { textDecorationThickness: "6px", textUnderlineOffset: "11px" },
+      css: {
+        textDecorationThickness: "0.375rem", // 6px
+        textUnderlineOffset: "0.75rem", // 12px
+      },
     },
     {
       underline: true,
       size: "8xl",
       weight: "normal",
-      css: { textDecorationThickness: "4px", textUnderlineOffset: "9px" },
+      css: {
+        textDecorationThickness: "0.25rem", // 4px
+        textUnderlineOffset: "0.5625rem", // 9px
+      },
     },
     {
       underline: true,
       size: "8xl",
       weight: "medium",
-      css: { textDecorationThickness: "5px", textUnderlineOffset: "10px" },
+      css: {
+        textDecorationThickness: "0.3125rem", // 5px
+        textUnderlineOffset: "0.625rem", // 10px
+      },
     },
     {
       underline: true,
       size: "8xl",
       weight: "semibold",
-      css: { textDecorationThickness: "6px", textUnderlineOffset: "11px" },
+      css: {
+        textDecorationThickness: "0.375rem", // 6px
+        textUnderlineOffset: "0.75rem", // 12px
+      },
     },
     {
       underline: true,
       size: "8xl",
       weight: "bold",
-      css: { textDecorationThickness: "8px", textUnderlineOffset: "12px" },
+      css: {
+        textDecorationThickness: "0.5rem", // 8px
+        textUnderlineOffset: "0.875rem", // 14px
+      },
     },
   ],
   defaultVariants: {
