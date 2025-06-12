@@ -374,5 +374,8 @@ export const UnderlineThickness: StoryObj<typeof Link> = {
     size: {
       control: false,
     },
+    underline: {
+      control: false,
+    },
   },
 };

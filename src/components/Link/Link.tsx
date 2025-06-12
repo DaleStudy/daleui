@@ -634,5 +634,6 @@ const styles = cva({
     muted: false,
     underline: true,
     size: "md",
+    weight: "normal",
   },
 });
