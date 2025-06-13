@@ -30,10 +30,10 @@ const preview: Preview = {
     },
     backgrounds: {
       values: [
-        { name: "Light", value: "#FCFCFD" },
-        { name: "Dark", value: "#101211" },
+        { name: "light", value: "#FCFCFD" },
+        { name: "dark", value: "#101211" },
       ],
-      default: "Light",
+      default: "light",
     },
   },
   decorators: [
