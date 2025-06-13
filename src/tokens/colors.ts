@@ -61,10 +61,10 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
     },
     success: {
-      value: { base: "{colors.green.2}", _dark: "{colors.darkGreen.1}" },
+      value: { base: "{colors.green.1}", _dark: "{colors.darkGreen.1}" },
     },
     warning: {
-      value: { base: "{colors.amber.2}", _dark: "{colors.darkAmber.1}" },
+      value: { base: "{colors.amber.1}", _dark: "{colors.darkAmber.1}" },
     },
     info: { value: { base: "{colors.blue.2}", _dark: "{colors.darkBlue.3}" } },
   },
@@ -127,12 +127,6 @@ export const semanticColors: SemanticTokens["colors"] = {
         value: { base: "{colors.slate.6}", _dark: "{colors.darkSlate.6}" },
       },
     },
-    success: {
-      value: { base: "{colors.green.11}", _dark: "{colors.darkGreen.11}" },
-    },
-    warning: {
-      value: { base: "{colors.amber.9}", _dark: "{colors.darkAmber.9}" },
-    },
     danger: {
       default: {
         value: { base: "{colors.red.10}", _dark: "{colors.darkRed.10}" },
@@ -143,6 +137,12 @@ export const semanticColors: SemanticTokens["colors"] = {
       active: {
         value: { base: "{colors.red.12}", _dark: "{colors.darkRed.12}" },
       },
+    },
+    success: {
+      value: { base: "{colors.green.11}", _dark: "{colors.darkGreen.11}" },
+    },
+    warning: {
+      value: { base: "{colors.amber.9}", _dark: "{colors.darkAmber.9}" },
     },
     info: {
       value: { base: "{colors.blue.11}", _dark: "{colors.darkBlue.11}" },
@@ -159,6 +159,9 @@ export const semanticColors: SemanticTokens["colors"] = {
       active: {
         value: { base: "{colors.violet.11}", _dark: "{colors.darkTeal.11}" },
       },
+      visited: {
+        value: { base: "{colors.violet.12}", _dark: "{colors.darkTeal.12}" },
+      },
     },
     neutral: {
       default: {
@@ -169,7 +172,7 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
       active: { value: { base: "{colors.black}", _dark: "{colors.white}" } },
       placeholder: {
-        value: { base: "{colors.slate.7}", _dark: "{colors.darkSage.7}" },
+        value: { base: "{colors.slate.9}", _dark: "{colors.darkSage.9}" },
       },
       disabled: {
         value: { base: "{colors.slate.8}", _dark: "{colors.darkSage.8}" },
