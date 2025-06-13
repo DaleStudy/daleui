@@ -32,3 +32,6 @@ tsconfig.node.tsbuildinfo
 ## Panda
 styled-system
 styled-system-studio
+
+## Storybook
+storybook-static
