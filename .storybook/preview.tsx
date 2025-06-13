@@ -28,6 +28,13 @@ const preview: Preview = {
         }
       },
     },
+    backgrounds: {
+      values: [
+        { name: "Light", value: "#FCFCFD" },
+        { name: "Dark", value: "#101211" },
+      ],
+      default: "Light",
+    },
   },
   decorators: [
     withThemeByClassName<ReactRenderer>({
