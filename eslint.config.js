@@ -3,6 +3,7 @@ import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
+import testingLibrary from "eslint-plugin-testing-library";
 
 export default tseslint.config(
   { ignores: ["dist", "styled-system"] },
@@ -23,6 +24,24 @@ export default tseslint.config(
         "warn",
         { allowConstantExport: true },
       ],
+    },
+  },
+  {
+    files: ["src/components/**/*.test.[jt]s?(x)"],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: {
+        ...globals.browser,
+        ...globals.jest, // Vitest와 호환
+      },
+    },
+    plugins: {
+      "testing-library": testingLibrary,
+    },
+    rules: {
+      "testing-library/await-async-queries": "error",
+      "testing-library/no-debugging-utils": "warn",
+      "testing-library/no-dom-import": "off",
     },
   },
 );
