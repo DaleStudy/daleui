@@ -21,14 +21,20 @@ export const Tones: StoryObj<typeof Text> = {
         <Text {...args} tone="neutral">
           중립 색조
         </Text>
-        <Text {...args} tone="accent">
-          강조 색조
+        <Text {...args} tone="brand">
+          브랜드 색조
         </Text>
         <Text {...args} tone="danger">
           위험 색조
         </Text>
         <Text {...args} tone="warning">
           경고 색조
+        </Text>
+        <Text {...args} tone="success">
+          성공 색조
+        </Text>
+        <Text {...args} tone="info">
+          정보 색조
         </Text>
       </div>
     );
