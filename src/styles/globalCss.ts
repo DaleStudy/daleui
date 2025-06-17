@@ -5,7 +5,7 @@ export const globalCss = defineGlobalStyles({
     "--global-font-body": "var(--fonts-sans)",
   },
   body: {
-    backgroundColor: { base: "white", _dark: "black" },
+    backgroundColor: "appBg",
     color: "fg.neutral.default",
   },
   h1: {

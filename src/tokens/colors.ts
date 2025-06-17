@@ -9,6 +9,9 @@ export type Tone =
   | "info";
 
 export const semanticColors: SemanticTokens["colors"] = {
+  appBg: {
+    value: { base: "{colors.white}", _dark: "{colors.black}" },
+  },
   fgSolid: {
     brand: {
       value: { base: "{colors.violet.1}", _dark: "{colors.darkTeal.1}" },
@@ -196,8 +199,10 @@ export const semanticColors: SemanticTokens["colors"] = {
 };
 
 export const colors: Tokens["colors"] = {
-  white: { value: "#FFFFFF" },
-  black: { value: "#000000" },
+  base: {
+    white: { value: "#FFFFFF" },
+    black: { value: "#000000" },
+  },
   slate: {
     1: { value: "#F4F6F7" },
     2: { value: "#E3E8EA" },
