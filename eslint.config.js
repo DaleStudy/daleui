@@ -32,7 +32,7 @@ export default tseslint.config(
       ecmaVersion: 2020,
       globals: {
         ...globals.browser,
-        ...globals.jest, // Vitest와 호환
+        ...globals.vitest,
       },
     },
     plugins: {
