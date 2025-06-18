@@ -26,8 +26,8 @@ describe("렌더링 테스트", () => {
 
 describe("스타일 테스트", () => {
   test.each([
-    ["중립 링크", "c_fg.neutral.default"],
-    ["브랜드 링크", "c_fg.brand.default"],
+    ["중립 링크", "c_fg.neutral"],
+    ["브랜드 링크", "c_fg.brand"],
     ["위험 링크", "c_fg.danger"],
     ["경고 링크", "c_fg.warning"],
     ["성공 링크", "c_fg.success"],
@@ -58,7 +58,7 @@ describe("스타일 테스트", () => {
 
   test.each([
     ["낮은 명암비", "c_fg.neutral.placeholder"],
-    ["높은 명암비", "c_fg.neutral.default"],
+    ["높은 명암비", "c_fg.neutral"],
   ] as const)("%s에 대해 올바른 클래스를 적용한다", (linkName, className) => {
     render(<Contrasts />);
 

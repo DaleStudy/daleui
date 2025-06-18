@@ -234,12 +234,12 @@ const radioInputStyles = css({
 
 const radioCircleStyles = cva({
   base: {
-    backgroundColor: "bg.neutral.default",
+    backgroundColor: "bg.neutral",
     width: "5",
     height: "5",
     borderRadius: "full",
     border: "2px solid",
-    borderColor: "border.neutral.default",
+    borderColor: "border.neutral",
     position: "absolute",
     pointerEvents: "none",
     transition: "0.2s",
@@ -250,7 +250,7 @@ const radioCircleStyles = cva({
   variants: {
     tone: {
       neutral: {
-        borderColor: "border.neutral.default",
+        borderColor: "border.neutral",
         "[data-state='checked'] + &": {
           borderColor: "border.neutral.active",
         },
@@ -259,7 +259,7 @@ const radioCircleStyles = cva({
         },
       },
       brand: {
-        borderColor: "border.brand.default",
+        borderColor: "border.brand",
         "[data-state='checked'] + &": {
           borderColor: "border.brand.active",
         },
@@ -339,19 +339,19 @@ const radioDotStyles = cva({
       width: "2.5",
       height: "2.5",
       borderRadius: "full",
-      backgroundColor: "fg.neutral.default",
+      backgroundColor: "fg.neutral",
     },
   },
   variants: {
     tone: {
       neutral: {
         "&::after": {
-          backgroundColor: "fg.neutral.default",
+          backgroundColor: "fg.neutral",
         },
       },
       brand: {
         "&::after": {
-          backgroundColor: "fg.brand.default",
+          backgroundColor: "fg.brand",
         },
       },
       danger: {

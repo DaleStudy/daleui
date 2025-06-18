@@ -30,7 +30,7 @@ export const semanticColors: SemanticTokens["colors"] = {
   },
   bg: {
     brand: {
-      default: {
+      DEFAULT: {
         value: { base: "{colors.violet.2}", _dark: "{colors.darkTeal.2}" },
       },
       hover: {
@@ -41,7 +41,7 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
     },
     neutral: {
-      default: {
+      DEFAULT: {
         value: { base: "{colors.slate.1}", _dark: "{colors.darkSage.1}" },
       },
       hover: {
@@ -55,7 +55,7 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
     },
     danger: {
-      default: {
+      DEFAULT: {
         value: { base: "{colors.red.1}", _dark: "{colors.darkRed.1}" },
       },
       hover: { value: { base: "{colors.red.2}", _dark: "{colors.darkRed.2}" } },
@@ -73,7 +73,7 @@ export const semanticColors: SemanticTokens["colors"] = {
   },
   border: {
     brand: {
-      default: {
+      DEFAULT: {
         value: { base: "{colors.violet.8}", _dark: "{colors.darkTeal.8}" },
       },
       active: {
@@ -84,7 +84,7 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
     },
     neutral: {
-      default: {
+      DEFAULT: {
         value: { base: "{colors.slate.5}", _dark: "{colors.darkSage.6}" },
       },
       hover: {
@@ -108,7 +108,7 @@ export const semanticColors: SemanticTokens["colors"] = {
   },
   bgSolid: {
     brand: {
-      default: {
+      DEFAULT: {
         value: { base: "{colors.violet.9}", _dark: "{colors.darkTeal.9}" },
       },
       hover: {
@@ -119,7 +119,7 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
     },
     neutral: {
-      default: {
+      DEFAULT: {
         value: { base: "{colors.slate.9}", _dark: "{colors.darkSage.11}" },
       },
       hover: {
@@ -133,7 +133,7 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
     },
     danger: {
-      default: {
+      DEFAULT: {
         value: { base: "{colors.red.10}", _dark: "{colors.darkRed.10}" },
       },
       hover: {
@@ -155,7 +155,7 @@ export const semanticColors: SemanticTokens["colors"] = {
   },
   fg: {
     brand: {
-      default: {
+      DEFAULT: {
         value: { base: "{colors.violet.9}", _dark: "{colors.darkTeal.9}" },
       },
       hover: {
@@ -169,7 +169,7 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
     },
     neutral: {
-      default: {
+      DEFAULT: {
         value: { base: "{colors.slate.9}", _dark: "{colors.darkSage.11}" },
       },
       hover: {

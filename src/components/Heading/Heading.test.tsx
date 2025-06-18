@@ -50,6 +50,6 @@ test("낮은 명암비와 높은 명암비에 따라 글자 색이 올바르게 
   );
 
   expect(screen.getByRole("heading", { name: "높은 명암비" })).toHaveClass(
-    "c_fg.neutral.default",
+    "c_fg.neutral",
   );
 });

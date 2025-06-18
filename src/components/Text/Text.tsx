@@ -53,14 +53,14 @@ const styles = cva({
       muted: false,
       tone: "neutral",
       css: {
-        color: "fg.neutral.default",
+        color: "fg.neutral",
       },
     },
     {
       muted: false,
       tone: "brand",
       css: {
-        color: "fg.brand.default",
+        color: "fg.brand",
       },
     },
     {

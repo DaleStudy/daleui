@@ -24,8 +24,8 @@ test.each([
 });
 
 test.each([
-  ["neutral", "c_fg.neutral.default"],
-  ["brand", "c_fg.brand.default"],
+  ["neutral", "c_fg.neutral"],
+  ["brand", "c_fg.brand"],
   ["danger", "c_fg.danger"],
   ["warning", "c_fg.warning"],
   ["success", "c_fg.success"],
@@ -37,7 +37,7 @@ test.each([
 });
 
 test.each([
-  [false, "c_fg.neutral.default"],
+  [false, "c_fg.neutral"],
   [true, "c_fg.neutral.placeholder"],
 ] as const)("muted가 %s일 때 올바른 클래스를 적용한다", (muted, className) => {
   const { container } = render(<Basic tone="neutral" muted={muted} />);

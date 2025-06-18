@@ -21,8 +21,8 @@ export const Default: StoryObj = {
         className={vstack({
           minHeight: "100vh",
           gap: 0,
-          background: "bg.neutral.default",
-          color: "fg.neutral.default",
+          background: "bg.neutral",
+          color: "fg.neutral",
         })}
         {...args}
       >
@@ -33,7 +33,7 @@ export const Default: StoryObj = {
             justifyContent: "space-between",
             paddingX: { base: "16", md: "24" },
             borderBottom: "2px solid",
-            borderColor: "border.neutral.default",
+            borderColor: "border.neutral",
             color: { base: "teal.11", _dark: "tealDark.11" },
           })}
         >
@@ -86,7 +86,7 @@ export const Default: StoryObj = {
             textAlign: "center",
             paddingY: { base: "4", md: "8" },
             borderTop: "2px solid",
-            borderColor: "border.neutral.default",
+            borderColor: "border.neutral",
             width: "100%",
           })}
         >

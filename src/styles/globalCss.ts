@@ -6,7 +6,7 @@ export const globalCss = defineGlobalStyles({
   },
   body: {
     backgroundColor: "appBg",
-    color: "fg.neutral.default",
+    color: "fg.neutral",
   },
   h1: {
     fontSize: "var(--font-sizes-4xl)", // 2.25rem

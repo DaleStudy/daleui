@@ -119,7 +119,7 @@ const styles = cva({
       variant: "solid",
       tone: "brand",
       css: {
-        bg: "bgSolid.brand.default",
+        bg: "bgSolid.brand",
         color: "fgSolid.brand",
         _hover: {
           bg: "bgSolid.brand.hover",
@@ -133,7 +133,7 @@ const styles = cva({
       variant: "solid",
       tone: "neutral",
       css: {
-        bg: "bgSolid.neutral.default",
+        bg: "bgSolid.neutral",
         color: "fgSolid.neutral",
         _hover: {
           bg: "bgSolid.neutral.hover",
@@ -147,7 +147,7 @@ const styles = cva({
       variant: "solid",
       tone: "danger",
       css: {
-        bg: "bgSolid.danger.default",
+        bg: "bgSolid.danger",
         color: "fgSolid.danger",
         _hover: {
           bg: "bgSolid.danger.hover",
@@ -187,8 +187,8 @@ const styles = cva({
       tone: "brand",
       css: {
         border: "1px solid",
-        borderColor: "border.brand.default",
-        color: "fg.brand.default",
+        borderColor: "border.brand",
+        color: "fg.brand",
         _hover: {
           bg: "bg.brand.hover",
           color: "fg.brand.hover",
@@ -204,8 +204,8 @@ const styles = cva({
       tone: "neutral",
       css: {
         border: "1px solid",
-        borderColor: "border.neutral.default",
-        color: "fg.neutral.default",
+        borderColor: "border.neutral",
+        color: "fg.neutral",
         _hover: {
           bg: "bg.neutral.hover",
           color: "fg.neutral.hover",

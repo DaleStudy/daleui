@@ -85,7 +85,7 @@ const styles = cva({
       tone: "neutral",
       muted: false,
       css: {
-        color: "fg.neutral.default",
+        color: "fg.neutral",
         "&:active, &:hover": {
           color: "fg.neutral.hover",
         },
@@ -95,7 +95,7 @@ const styles = cva({
       tone: "brand",
       muted: false,
       css: {
-        color: "fg.brand.default",
+        color: "fg.brand",
         "&:active, &:hover": {
           color: "fg.brand.hover",
         },
@@ -147,7 +147,7 @@ const styles = cva({
       css: {
         color: "fg.neutral.placeholder",
         "&:active, &:hover": {
-          color: "fg.neutral.default",
+          color: "fg.neutral",
         },
       },
     },
@@ -157,7 +157,7 @@ const styles = cva({
       css: {
         color: "fg.neutral.placeholder",
         "&:active, &:hover": {
-          color: "fg.brand.default",
+          color: "fg.brand",
         },
       },
     },

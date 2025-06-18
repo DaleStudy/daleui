@@ -41,9 +41,9 @@ test("체크박스에 체크 시, tone 속성이 올바르게 적용됨", async 
   expect(infoCheckbox).toHaveAttribute("data-state", "checked");
 
   // Check for correct background colors based on tone
-  expect(brandCheckbox).toHaveClass("checked:bg_bgSolid.brand.default");
-  expect(neutralCheckbox).toHaveClass("checked:bg_bgSolid.neutral.default");
-  expect(dangerCheckbox).toHaveClass("checked:bg_bgSolid.danger.default");
+  expect(brandCheckbox).toHaveClass("checked:bg_bgSolid.brand");
+  expect(neutralCheckbox).toHaveClass("checked:bg_bgSolid.neutral");
+  expect(dangerCheckbox).toHaveClass("checked:bg_bgSolid.danger");
   expect(warningCheckbox).toHaveClass("checked:bg_bgSolid.warning");
   expect(successCheckbox).toHaveClass("checked:bg_bgSolid.success");
   expect(infoCheckbox).toHaveClass("checked:bg_bgSolid.info");

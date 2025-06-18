@@ -8,80 +8,82 @@ import { colors, semanticColors } from "./colors";
 semanticColors 객체는 디자인 시스템에서 의미 기반(semantic)으로 사용하는 색상 그룹입니다. 각 그룹(fg, bg, border 등)과 그 하위 항목을 시각적으로 확인할 수 있습니다.
 
 <ColorPalette>
-  {Object.entries(semanticColors).map(([category, categoryColors]) => (
-    <div key={category}>
-      <h3>{category}</h3>
-      {Object.entries(categoryColors).map(([semantic, colorStates]) => {
-        // fgSolid 등: { value: { base: ... } }
-        if (
-          colorStates &&
-          "value" in colorStates &&
-          colorStates.value &&
-          typeof colorStates.value.base === "string"
-        ) {
-          let base = colorStates.value.base;
-          let resolved = base;
-          const ref = base.match(/^\{colors\.([a-zA-Z]+)\.(\d+)\}$/);
-          if (ref) {
-            const colorName = ref[1];
-            const scale = ref[2];
-            resolved = colors[colorName]?.[scale]?.value ?? base;
-          } else {
-            const single = base.match(/^\{colors\.([a-zA-Z]+)\}$/);
-            if (single) {
-              const colorName = single[1];
-              resolved = colors[colorName]?.value ?? base;
-            }
-          }
-          return (
-            <ColorItem
-              key={semantic}
-              title={`${category}.${semantic}`}
-              colors={{ base: resolved }}
-            />
-          );
-        }
-        // bg, fg, border 등: { default: { value: { base: ... } }, ... }
-        if (colorStates && typeof colorStates === "object") {
-          const resolvedColors = Object.entries(colorStates).reduce(
-            (colorMap, [state, stateValue]) => {
-              if (
-                stateValue &&
-                stateValue.value &&
-                typeof stateValue.value.base === "string"
-              ) {
-                let base = stateValue.value.base;
-                let resolved = base;
-                const ref = base.match(/^\{colors\.([a-zA-Z]+)\.(\d+)\}$/);
-                if (ref) {
-                  const colorName = ref[1];
-                  const scale = ref[2];
-                  resolved = colors[colorName]?.[scale]?.value ?? base;
-                } else {
-                  const single = base.match(/^\{colors\.([a-zA-Z]+)\}$/);
-                  if (single) {
-                    const colorName = single[1];
-                    resolved = colors[colorName]?.value ?? base;
-                  }
-                }
-                colorMap[state] = resolved;
+  {Object.entries(semanticColors)
+    .filter(([category]) => category !== "appBg")
+    .map(([category, categoryColors]) => (
+      <div key={category}>
+        <h3>{category}</h3>
+        {Object.entries(categoryColors).map(([semantic, colorStates]) => {
+          // fgSolid 등: { value: { base: ... } }
+          if (
+            colorStates &&
+            "value" in colorStates &&
+            colorStates.value &&
+            typeof colorStates.value.base === "string"
+          ) {
+            let base = colorStates.value.base;
+            let resolved = base;
+            const ref = base.match(/^\{colors\.([a-zA-Z]+)\.(\d+)\}$/);
+            if (ref) {
+              const colorName = ref[1];
+              const scale = ref[2];
+              resolved = colors[colorName]?.[scale]?.value ?? base;
+            } else {
+              const single = base.match(/^\{colors\.([a-zA-Z]+)\}$/);
+              if (single) {
+                const colorName = single[1];
+                resolved = colors[colorName]?.value ?? base;
               }
-              return colorMap;
-            },
-            {},
-          );
-          return (
-            <ColorItem
-              key={semantic}
-              title={`${category}.${semantic}`}
-              colors={resolvedColors}
-            />
-          );
-        }
-        return null;
-      })}
-    </div>
-  ))}
+            }
+            return (
+              <ColorItem
+                key={semantic}
+                title={`${category}.${semantic}`}
+                colors={{ base: resolved }}
+              />
+            );
+          }
+          // bg, fg, border 등: { default: { value: { base: ... } }, ... }
+          if (colorStates && typeof colorStates === "object") {
+            const resolvedColors = Object.entries(colorStates).reduce(
+              (colorMap, [state, stateValue]) => {
+                if (
+                  stateValue &&
+                  stateValue.value &&
+                  typeof stateValue.value.base === "string"
+                ) {
+                  let base = stateValue.value.base;
+                  let resolved = base;
+                  const ref = base.match(/^\{colors\.([a-zA-Z]+)\.(\d+)\}$/);
+                  if (ref) {
+                    const colorName = ref[1];
+                    const scale = ref[2];
+                    resolved = colors[colorName]?.[scale]?.value ?? base;
+                  } else {
+                    const single = base.match(/^\{colors\.([a-zA-Z]+)\}$/);
+                    if (single) {
+                      const colorName = single[1];
+                      resolved = colors[colorName]?.value ?? base;
+                    }
+                  }
+                  colorMap[state] = resolved;
+                }
+                return colorMap;
+              },
+              {},
+            );
+            return (
+              <ColorItem
+                key={semantic}
+                title={`${category}.${semantic}`}
+                colors={resolvedColors}
+              />
+            );
+          }
+          return null;
+        })}
+      </div>
+    ))}
 </ColorPalette>
 
 ---
@@ -91,29 +93,29 @@ semanticColors 객체는 디자인 시스템에서 의미 기반(semantic)으로
 달레 UI의 근간이 되는 색상 팔레트입니다.
 
 <ColorPalette>
+  ### 청록
   <ColorItem
-    title="초록"
     subtitle="colors.teal"
     colors={Object.fromEntries(
       Object.entries(colors.teal).map(([name, { value }]) => [name, value]),
     )}
   />
+  ### 청록 (dark)
   <ColorItem
-    title="초록 (dark)"
     subtitle="colors.darkTeal"
     colors={Object.fromEntries(
       Object.entries(colors.darkTeal).map(([name, { value }]) => [name, value]),
     )}
   />
+  ### 보라
   <ColorItem
-    title="보라"
     subtitle="colors.violet"
     colors={Object.fromEntries(
       Object.entries(colors.violet).map(([name, { value }]) => [name, value]),
     )}
   />
+  ### 보라 (dark)
   <ColorItem
-    title="보라 (dark)"
     subtitle="colors.darkViolet"
     colors={Object.fromEntries(
       Object.entries(colors.darkViolet).map(([name, { value }]) => [
@@ -122,29 +124,29 @@ semanticColors 객체는 디자인 시스템에서 의미 기반(semantic)으로
       ]),
     )}
   />
+  ### 빨강
   <ColorItem
-    title="빨강"
     subtitle="colors.red"
     colors={Object.fromEntries(
       Object.entries(colors.red).map(([name, { value }]) => [name, value]),
     )}
   />
+  ### 빨강 (dark)
   <ColorItem
-    title="빨강 (dark)"
     subtitle="colors.darkRed"
     colors={Object.fromEntries(
       Object.entries(colors.darkRed).map(([name, { value }]) => [name, value]),
     )}
   />
+  ### 노랑
   <ColorItem
-    title="노랑"
     subtitle="colors.amber"
     colors={Object.fromEntries(
       Object.entries(colors.amber).map(([name, { value }]) => [name, value]),
     )}
   />
+  ### 노랑 (dark)
   <ColorItem
-    title="노랑 (dark)"
     subtitle="colors.darkAmber"
     colors={Object.fromEntries(
       Object.entries(colors.darkAmber).map(([name, { value }]) => [
@@ -153,15 +155,15 @@ semanticColors 객체는 디자인 시스템에서 의미 기반(semantic)으로
       ]),
     )}
   />
+  ### 회색
   <ColorItem
-    title="회색"
     subtitle="colors.slate"
     colors={Object.fromEntries(
       Object.entries(colors.slate).map(([name, { value }]) => [name, value]),
     )}
   />
+  ### 회색 (dark)
   <ColorItem
-    title="회색 (dark)"
     subtitle="colors.darkSlate"
     colors={Object.fromEntries(
       Object.entries(colors.darkSlate).map(([name, { value }]) => [
@@ -170,43 +172,43 @@ semanticColors 객체는 디자인 시스템에서 의미 기반(semantic)으로
       ]),
     )}
   />
+  ### 세이지
   <ColorItem
-    title="세이지"
     subtitle="colors.sage"
     colors={Object.fromEntries(
       Object.entries(colors.sage).map(([name, { value }]) => [name, value]),
     )}
   />
+  ### 세이지 (dark)
   <ColorItem
-    title="세이지 (dark)"
     subtitle="colors.darkSage"
     colors={Object.fromEntries(
       Object.entries(colors.darkSage).map(([name, { value }]) => [name, value]),
     )}
   />
+  ### 파랑
   <ColorItem
-    title="파랑"
     subtitle="colors.blue"
     colors={Object.fromEntries(
       Object.entries(colors.blue).map(([name, { value }]) => [name, value]),
     )}
   />
+  ### 파랑 (dark)
   <ColorItem
-    title="파랑 (dark)"
     subtitle="colors.darkBlue"
     colors={Object.fromEntries(
       Object.entries(colors.darkBlue).map(([name, { value }]) => [name, value]),
     )}
   />
+  ### 초록
   <ColorItem
-    title="초록"
     subtitle="colors.green"
     colors={Object.fromEntries(
       Object.entries(colors.green).map(([name, { value }]) => [name, value]),
     )}
   />
+  ### 초록 (dark)
   <ColorItem
-    title="초록 (dark)"
     subtitle="colors.darkGreen"
     colors={Object.fromEntries(
       Object.entries(colors.darkGreen).map(([name, { value }]) => [

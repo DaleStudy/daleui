@@ -66,7 +66,7 @@ const styles = cva({
     },
     muted: {
       true: { color: "fg.neutral.placeholder" },
-      false: { color: "fg.neutral.default" },
+      false: { color: "fg.neutral" },
     },
   },
 });

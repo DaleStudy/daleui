@@ -48,7 +48,7 @@ export const Checkbox = ({
         alignItems: "center",
         gap: "8",
         cursor: "pointer",
-        color: "fg.neutral.default",
+        color: "fg.neutral",
         _disabled: {
           cursor: "not-allowed",
           color: "fg.neutral.disabled",
@@ -97,7 +97,7 @@ const styles = cva({
     margin: "0",
     backgroundColor: "transparent",
     border: "3px solid",
-    borderColor: "border.neutral.default",
+    borderColor: "border.neutral",
     borderRadius: "sm",
     width: "1.5rem",
     height: "1.5rem",
@@ -126,22 +126,22 @@ const styles = cva({
     tone: {
       brand: {
         _checked: {
-          bg: "bgSolid.brand.default",
-          borderColor: "bgSolid.brand.default",
+          bg: "bgSolid.brand",
+          borderColor: "bgSolid.brand",
           color: "fgSolid.brand",
         },
       },
       neutral: {
         _checked: {
-          bg: "bgSolid.neutral.default",
-          borderColor: "bgSolid.neutral.default",
+          bg: "bgSolid.neutral",
+          borderColor: "bgSolid.neutral",
           color: "fgSolid.neutral",
         },
       },
       danger: {
         _checked: {
-          bg: "bgSolid.danger.default",
-          borderColor: "bgSolid.danger.default",
+          bg: "bgSolid.danger",
+          borderColor: "bgSolid.danger",
           color: "fgSolid.danger",
         },
       },
