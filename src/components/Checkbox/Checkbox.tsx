@@ -107,7 +107,7 @@ const styles = cva({
     cursor: "pointer",
     transition: "0.2s",
     outline: "none",
-    _hover: {
+    "&:hover": {
       bg: "bg.neutral.hover",
       color: "fg.neutral.hover",
     },

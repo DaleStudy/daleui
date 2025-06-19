@@ -121,10 +121,10 @@ const styles = cva({
       css: {
         bg: "bgSolid.brand",
         color: "fgSolid.brand",
-        _hover: {
+        "&:hover": {
           bg: "bgSolid.brand.hover",
         },
-        _active: {
+        "&:active": {
           bg: "bgSolid.brand.active",
         },
       },
@@ -135,10 +135,10 @@ const styles = cva({
       css: {
         bg: "bgSolid.neutral",
         color: "fgSolid.neutral",
-        _hover: {
+        "&:hover": {
           bg: "bgSolid.neutral.hover",
         },
-        _active: {
+        "&:active": {
           bg: "bgSolid.neutral.active",
         },
       },
@@ -149,10 +149,10 @@ const styles = cva({
       css: {
         bg: "bgSolid.danger",
         color: "fgSolid.danger",
-        _hover: {
+        "&:hover": {
           bg: "bgSolid.danger.hover",
         },
-        _active: {
+        "&:active": {
           bg: "bgSolid.danger.active",
         },
       },
@@ -189,11 +189,11 @@ const styles = cva({
         border: "1px solid",
         borderColor: "border.brand",
         color: "fg.brand",
-        _hover: {
+        "&:hover": {
           bg: "bg.brand.hover",
           color: "fg.brand.hover",
         },
-        _active: {
+        "&:active": {
           bg: "bg.brand.active",
           color: "fg.brand.active",
         },
@@ -206,12 +206,12 @@ const styles = cva({
         border: "1px solid",
         borderColor: "border.neutral",
         color: "fg.neutral",
-        _hover: {
+        "&:hover": {
           bg: "bg.neutral.hover",
           color: "fg.neutral.hover",
           borderColor: "border.neutral.hover",
         },
-        _active: {
+        "&:active": {
           bg: "bg.neutral.active",
           color: "fg.neutral.active",
           borderColor: "border.neutral.active",
@@ -225,10 +225,10 @@ const styles = cva({
         border: "1px solid",
         borderColor: "border.danger",
         color: "fg.danger",
-        _hover: {
+        "&:hover": {
           bg: "bg.danger.hover",
         },
-        _active: {
+        "&:active": {
           bg: "bg.danger.active",
         },
       },
