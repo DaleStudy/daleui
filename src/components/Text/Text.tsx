@@ -1,4 +1,4 @@
-import type { ReactNode, HTMLAttributes } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 import type { FontSize, FontWeight } from "../../tokens/typography";
@@ -52,42 +52,86 @@ const styles = cva({
     {
       muted: false,
       tone: "neutral",
-      css: { color: "text" },
+      css: {
+        color: "fg.neutral",
+      },
     },
     {
       muted: false,
-      tone: "accent",
-      css: { color: "text.accent" },
+      tone: "brand",
+      css: {
+        color: "fg.brand",
+      },
     },
     {
       muted: false,
       tone: "danger",
-      css: { color: "text.danger" },
+      css: {
+        color: "fg.danger",
+      },
     },
     {
       muted: false,
       tone: "warning",
-      css: { color: "text.warning" },
+      css: {
+        color: "fg.warning",
+      },
+    },
+    {
+      muted: false,
+      tone: "success",
+      css: {
+        color: "fg.success",
+      },
+    },
+    {
+      muted: false,
+      tone: "info",
+      css: {
+        color: "fg.info",
+      },
     },
     {
       muted: true,
       tone: "neutral",
-      css: { color: "text.muted" },
+      css: {
+        color: "fg.neutral.placeholder",
+      },
     },
     {
       muted: true,
-      tone: "accent",
-      css: { color: "text.muted.accent" },
+      tone: "brand",
+      css: {
+        color: "fg.brand.hover",
+      },
     },
     {
       muted: true,
       tone: "danger",
-      css: { color: "text.muted.danger" },
+      css: {
+        color: "fg.danger",
+      },
     },
     {
       muted: true,
       tone: "warning",
-      css: { color: "text.muted.warning" },
+      css: {
+        color: "fg.warning",
+      },
+    },
+    {
+      muted: true,
+      tone: "success",
+      css: {
+        color: "fg.success",
+      },
+    },
+    {
+      muted: true,
+      tone: "info",
+      css: {
+        color: "fg.info",
+      },
     },
   ],
 });

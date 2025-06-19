@@ -2,8 +2,8 @@ import { composeStories } from "@storybook/react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, test, vi } from "vitest";
-import * as stories from "./Button.stories";
 import { Button } from "./Button";
+import * as stories from "./Button.stories";
 
 const { Basic, Variants, Tones, Sizes, Disabled } = composeStories(stories);
 
@@ -16,17 +16,19 @@ test("텍스트와 함께 버튼이 올바르게 렌더링됨", () => {
 test("variant 속성이 올바르게 적용됨", () => {
   render(<Variants />);
 
-  expect(screen.getByText("솔리드 버튼")).toHaveClass("bg_bg");
-  expect(screen.getByText("아웃라인 버튼")).toHaveClass("bd_3px_solid");
+  expect(screen.getByText("솔리드 버튼")).toHaveClass("bg_bgSolid.brand");
+  expect(screen.getByText("아웃라인 버튼")).toHaveClass("bd_1px_solid");
 });
 
 test("tone 속성이 올바르게 적용됨", () => {
   render(<Tones />);
 
-  expect(screen.getByText("중립 색조")).toHaveClass("bg_bg");
-  expect(screen.getByText("강조 색조")).toHaveClass("bg_bg.accent");
-  expect(screen.getByText("위험 색조")).toHaveClass("bg_bg.danger");
-  expect(screen.getByText("경고 색조")).toHaveClass("bg_bg.warning");
+  expect(screen.getAllByText("브랜드 색조")[0]).toHaveClass("bg_bgSolid.brand");
+  expect(screen.getAllByText("중립 색조")[0]).toHaveClass("bg_bgSolid.neutral");
+  expect(screen.getAllByText("성공 색조")[0]).toHaveClass("bg_bgSolid.success");
+  expect(screen.getAllByText("경고 색조")[0]).toHaveClass("bg_bgSolid.warning");
+  expect(screen.getAllByText("위험 색조")[0]).toHaveClass("bg_bgSolid.danger");
+  expect(screen.getAllByText("정보 색조")[0]).toHaveClass("bg_bgSolid.info");
 });
 
 test("size prop에 따라 font size가 올바르게 적용됨", () => {
@@ -42,7 +44,9 @@ test("disabled 속성이 올바르게 적용됨", () => {
 
   expect(screen.getByText("비활성화 버튼")).toBeDisabled();
   expect(screen.getByText("활성화 버튼")).toBeEnabled();
-  expect(screen.getByText("비활성화 버튼")).toHaveClass("[&:disabled]:op_0.5");
+  expect(screen.getByText("비활성화 버튼")).toHaveClass(
+    "bg_bg.neutral.disabled!",
+  );
 });
 
 test("기본적으로 버튼이 type='button'으로 렌더링됨", () => {

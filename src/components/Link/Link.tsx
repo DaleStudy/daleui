@@ -1,6 +1,6 @@
 import { type AnchorHTMLAttributes } from "react";
-import type { Tone } from "../../tokens/colors";
 import { css, cva } from "../../../styled-system/css";
+import type { Tone } from "../../tokens/colors";
 import type { FontSize, FontWeight } from "../../tokens/typography";
 
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -65,9 +65,11 @@ const styles = cva({
   variants: {
     tone: {
       neutral: {},
-      accent: {},
+      brand: {},
       danger: {},
       warning: {},
+      success: {},
+      info: {},
     },
     muted: {
       true: {},
@@ -83,19 +85,19 @@ const styles = cva({
       tone: "neutral",
       muted: false,
       css: {
-        color: "text",
+        color: "fg.neutral",
         "&:active, &:hover": {
-          color: "text.muted",
+          color: "fg.neutral.hover",
         },
       },
     },
     {
-      tone: "accent",
+      tone: "brand",
       muted: false,
       css: {
-        color: "text.accent",
+        color: "fg.brand",
         "&:active, &:hover": {
-          color: "text.muted.accent",
+          color: "fg.brand.hover",
         },
       },
     },
@@ -103,9 +105,9 @@ const styles = cva({
       tone: "danger",
       muted: false,
       css: {
-        color: "text.danger",
+        color: "fg.danger",
         "&:active, &:hover": {
-          color: "text.muted.danger",
+          color: "fg.danger",
         },
       },
     },
@@ -113,9 +115,29 @@ const styles = cva({
       tone: "warning",
       muted: false,
       css: {
-        color: "text.warning",
+        color: "fg.warning",
         "&:active, &:hover": {
-          color: "text.muted.warning",
+          color: "fg.warning",
+        },
+      },
+    },
+    {
+      tone: "success",
+      muted: false,
+      css: {
+        color: "fg.success",
+        "&:active, &:hover": {
+          color: "fg.success",
+        },
+      },
+    },
+    {
+      tone: "info",
+      muted: false,
+      css: {
+        color: "fg.info",
+        "&:active, &:hover": {
+          color: "fg.info",
         },
       },
     },
@@ -123,19 +145,19 @@ const styles = cva({
       tone: "neutral",
       muted: true,
       css: {
-        color: "text.muted",
+        color: "fg.neutral.placeholder",
         "&:active, &:hover": {
-          color: "text",
+          color: "fg.neutral",
         },
       },
     },
     {
-      tone: "accent",
+      tone: "brand",
       muted: true,
       css: {
-        color: "text.muted.accent",
+        color: "fg.neutral.placeholder",
         "&:active, &:hover": {
-          color: "text.accent",
+          color: "fg.brand",
         },
       },
     },
@@ -143,9 +165,9 @@ const styles = cva({
       tone: "danger",
       muted: true,
       css: {
-        color: "text.muted.danger",
+        color: "fg.neutral.placeholder",
         "&:active, &:hover": {
-          color: "text.danger",
+          color: "fg.danger",
         },
       },
     },
@@ -153,9 +175,29 @@ const styles = cva({
       tone: "warning",
       muted: true,
       css: {
-        color: "text.muted.warning",
+        color: "fg.neutral.placeholder",
         "&:active, &:hover": {
-          color: "text.warning",
+          color: "fg.warning",
+        },
+      },
+    },
+    {
+      tone: "success",
+      muted: true,
+      css: {
+        color: "fg.neutral.placeholder",
+        "&:active, &:hover": {
+          color: "fg.success",
+        },
+      },
+    },
+    {
+      tone: "info",
+      muted: true,
+      css: {
+        color: "fg.neutral.placeholder",
+        "&:active, &:hover": {
+          color: "fg.info",
         },
       },
     },

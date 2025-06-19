@@ -1,23 +1,110 @@
-import { Meta, ColorPalette, ColorItem } from "@storybook/blocks";
-import { colors, semanticColors } from "./colors.ts";
+import { ColorItem, ColorPalette, Meta } from "@storybook/blocks";
+import { colors, semanticColors } from "./colors";
 
 # Colors
+
+### Semantic Colors
+
+semanticColors 객체는 디자인 시스템에서 의미 기반(semantic)으로 사용하는 색상 그룹입니다. 각 그룹(fg, bg, border 등)과 그 하위 항목을 시각적으로 확인할 수 있습니다.
+
+<ColorPalette>
+  {Object.entries(semanticColors)
+    .filter(([category]) => category !== "appBg")
+    .map(([category, categoryColors]) => (
+      <div key={category}>
+        <h4>{category}</h4>
+        {Object.entries(categoryColors).map(([semantic, colorStates]) => {
+          // fgSolid 등: { value: { base: ... } }
+          if (
+            colorStates &&
+            "value" in colorStates &&
+            colorStates.value &&
+            typeof colorStates.value.base === "string"
+          ) {
+            let base = colorStates.value.base;
+            let resolved = base;
+            const ref = base.match(/^\{colors\.([a-zA-Z]+)\.(\d+)\}$/);
+            if (ref) {
+              const colorName = ref[1];
+              const scale = ref[2];
+              resolved = colors[colorName]?.[scale]?.value ?? base;
+            } else {
+              const single = base.match(/^\{colors\.([a-zA-Z]+)\}$/);
+              if (single) {
+                const colorName = single[1];
+                resolved = colors[colorName]?.value ?? base;
+              }
+            }
+            return (
+              <ColorItem
+                key={semantic}
+                title={`${category}.${semantic}`}
+                colors={{ base: resolved }}
+              />
+            );
+          }
+          // bg, fg, border 등: { default: { value: { base: ... } }, ... }
+          if (colorStates && typeof colorStates === "object") {
+            const resolvedColors = Object.entries(colorStates).reduce(
+              (colorMap, [state, stateValue]) => {
+                if (
+                  stateValue &&
+                  stateValue.value &&
+                  typeof stateValue.value.base === "string"
+                ) {
+                  let base = stateValue.value.base;
+                  let resolved = base;
+                  const ref = base.match(/^\{colors\.([a-zA-Z]+)\.(\d+)\}$/);
+                  if (ref) {
+                    const colorName = ref[1];
+                    const scale = ref[2];
+                    resolved = colors[colorName]?.[scale]?.value ?? base;
+                  } else {
+                    const single = base.match(/^\{colors\.([a-zA-Z]+)\}$/);
+                    if (single) {
+                      const colorName = single[1];
+                      resolved = colors[colorName]?.value ?? base;
+                    }
+                  }
+                  colorMap[state] = resolved;
+                }
+                return colorMap;
+              },
+              {},
+            );
+            return (
+              <ColorItem
+                key={semantic}
+                title={`${category}.${semantic}`}
+                colors={resolvedColors}
+              />
+            );
+          }
+          return null;
+        })}
+      </div>
+    ))}
+</ColorPalette>
+
+---
+
+### Primitive Colors
 
 달레 UI의 근간이 되는 색상 팔레트입니다.
 
 <ColorPalette>
   <ColorItem
-    title="초록"
+    title="청록"
     subtitle="colors.teal"
     colors={Object.fromEntries(
       Object.entries(colors.teal).map(([name, { value }]) => [name, value]),
     )}
   />
   <ColorItem
-    title="초록 (dark)"
-    subtitle="colors.tealDark"
+    title="청록 (dark)"
+    subtitle="colors.darkTeal"
     colors={Object.fromEntries(
-      Object.entries(colors.tealDark).map(([name, { value }]) => [name, value]),
+      Object.entries(colors.darkTeal).map(([name, { value }]) => [name, value]),
     )}
   />
   <ColorItem
@@ -29,9 +116,9 @@ import { colors, semanticColors } from "./colors.ts";
   />
   <ColorItem
     title="보라 (dark)"
-    subtitle="colors.violetDark"
+    subtitle="colors.darkViolet"
     colors={Object.fromEntries(
-      Object.entries(colors.violetDark).map(([name, { value }]) => [
+      Object.entries(colors.darkViolet).map(([name, { value }]) => [
         name,
         value,
       ]),
@@ -46,23 +133,23 @@ import { colors, semanticColors } from "./colors.ts";
   />
   <ColorItem
     title="빨강 (dark)"
-    subtitle="colors.redDark"
+    subtitle="colors.darkRed"
     colors={Object.fromEntries(
-      Object.entries(colors.redDark).map(([name, { value }]) => [name, value]),
+      Object.entries(colors.darkRed).map(([name, { value }]) => [name, value]),
     )}
   />
   <ColorItem
     title="노랑"
-    subtitle="colors.yellow"
+    subtitle="colors.amber"
     colors={Object.fromEntries(
-      Object.entries(colors.yellow).map(([name, { value }]) => [name, value]),
+      Object.entries(colors.amber).map(([name, { value }]) => [name, value]),
     )}
   />
   <ColorItem
     title="노랑 (dark)"
-    subtitle="colors.yellowDark"
+    subtitle="colors.darkAmber"
     colors={Object.fromEntries(
-      Object.entries(colors.yellowDark).map(([name, { value }]) => [
+      Object.entries(colors.darkAmber).map(([name, { value }]) => [
         name,
         value,
       ]),
@@ -70,16 +157,64 @@ import { colors, semanticColors } from "./colors.ts";
   />
   <ColorItem
     title="회색"
-    subtitle="colors.gray"
+    subtitle="colors.slate"
     colors={Object.fromEntries(
-      Object.entries(colors.gray).map(([name, { value }]) => [name, value]),
+      Object.entries(colors.slate).map(([name, { value }]) => [name, value]),
     )}
   />
   <ColorItem
     title="회색 (dark)"
-    subtitle="colors.grayDark"
+    subtitle="colors.darkSlate"
     colors={Object.fromEntries(
-      Object.entries(colors.grayDark).map(([name, { value }]) => [name, value]),
+      Object.entries(colors.darkSlate).map(([name, { value }]) => [
+        name,
+        value,
+      ]),
+    )}
+  />
+  <ColorItem
+    title="세이지"
+    subtitle="colors.sage"
+    colors={Object.fromEntries(
+      Object.entries(colors.sage).map(([name, { value }]) => [name, value]),
+    )}
+  />
+  <ColorItem
+    title="세이지 (dark)"
+    subtitle="colors.darkSage"
+    colors={Object.fromEntries(
+      Object.entries(colors.darkSage).map(([name, { value }]) => [name, value]),
+    )}
+  />
+  <ColorItem
+    title="파랑"
+    subtitle="colors.blue"
+    colors={Object.fromEntries(
+      Object.entries(colors.blue).map(([name, { value }]) => [name, value]),
+    )}
+  />
+  <ColorItem
+    title="파랑 (dark)"
+    subtitle="colors.darkBlue"
+    colors={Object.fromEntries(
+      Object.entries(colors.darkBlue).map(([name, { value }]) => [name, value]),
+    )}
+  />
+  <ColorItem
+    title="초록"
+    subtitle="colors.green"
+    colors={Object.fromEntries(
+      Object.entries(colors.green).map(([name, { value }]) => [name, value]),
+    )}
+  />
+  <ColorItem
+    title="초록 (dark)"
+    subtitle="colors.darkGreen"
+    colors={Object.fromEntries(
+      Object.entries(colors.darkGreen).map(([name, { value }]) => [
+        name,
+        value,
+      ]),
     )}
   />
 </ColorPalette>

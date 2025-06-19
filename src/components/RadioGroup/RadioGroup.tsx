@@ -234,37 +234,37 @@ const radioInputStyles = css({
 
 const radioCircleStyles = cva({
   base: {
-    backgroundColor: "bg",
+    backgroundColor: "bg.neutral",
     width: "5",
     height: "5",
     borderRadius: "full",
     border: "2px solid",
-    borderColor: "border",
+    borderColor: "border.neutral",
     position: "absolute",
     pointerEvents: "none",
     transition: "0.2s",
-
     "input:hover + &": {
-      backgroundColor: "bg.hover",
+      backgroundColor: "bg.neutral.hover",
     },
   },
   variants: {
     tone: {
       neutral: {
+        borderColor: "border.neutral",
         "[data-state='checked'] + &": {
-          borderColor: "border",
+          borderColor: "border.neutral.active",
         },
         "[data-state='checked']:focus-visible + &": {
-          outlineColor: "border",
+          outlineColor: "border.neutral.focus",
         },
       },
-      accent: {
-        borderColor: "border.accent",
+      brand: {
+        borderColor: "border.brand",
         "[data-state='checked'] + &": {
-          borderColor: "border.accent",
+          borderColor: "border.brand.active",
         },
         "[data-state='checked']:focus-visible + &": {
-          outlineColor: "border.accent",
+          outlineColor: "border.brand.focus",
         },
       },
       danger: {
@@ -285,9 +285,28 @@ const radioCircleStyles = cva({
           outlineColor: "border.warning",
         },
       },
+      success: {
+        borderColor: "border.success",
+        "[data-state='checked'] + &": {
+          borderColor: "border.success",
+        },
+        "[data-state='checked']:focus-visible + &": {
+          outlineColor: "border.success",
+        },
+      },
+      info: {
+        borderColor: "border.info",
+        "[data-state='checked'] + &": {
+          borderColor: "border.info",
+        },
+        "[data-state='checked']:focus-visible + &": {
+          outlineColor: "border.info",
+        },
+      },
     },
     disabled: {
       true: {
+        borderColor: "fg.neutral.disabled",
         opacity: 0.5,
       },
     },
@@ -299,7 +318,7 @@ const labelTextStyles = cva({
   variants: {
     disabled: {
       true: {
-        color: "text.muted",
+        color: "fg.neutral.disabled",
       },
     },
   },
@@ -320,30 +339,46 @@ const radioDotStyles = cva({
       width: "2.5",
       height: "2.5",
       borderRadius: "full",
-      backgroundColor: "text",
+      backgroundColor: "fg.neutral",
     },
   },
   variants: {
     tone: {
       neutral: {
         "&::after": {
-          backgroundColor: "text",
+          backgroundColor: "fg.neutral",
         },
       },
-      accent: {
+      brand: {
         "&::after": {
-          backgroundColor: "text.accent",
+          backgroundColor: "fg.brand",
         },
       },
       danger: {
         "&::after": {
-          backgroundColor: "text.danger",
+          backgroundColor: "fg.danger",
         },
       },
       warning: {
         "&::after": {
-          backgroundColor: "text.warning",
+          backgroundColor: "fg.warning",
         },
+      },
+      success: {
+        "&::after": {
+          backgroundColor: "fg.success",
+        },
+      },
+      info: {
+        "&::after": {
+          backgroundColor: "fg.info",
+        },
+      },
+    },
+    disabled: {
+      true: {
+        backgroundColor: "fg.neutral.disabled",
+        opacity: 0.5,
       },
     },
   },

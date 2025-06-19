@@ -7,13 +7,13 @@ import * as stories from "./Text.stories";
 
 const { Basic, Tones, Contrasts } = composeStories(stories);
 
-test("텍스트가 올바르게 렌더링됨", () => {
+test("텍스트를 렌더링한다", () => {
   render(<Basic>테스트</Basic>);
 
-  expect(screen.getByText("테스트"));
+  expect(screen.getByText("테스트")).toBeInTheDocument();
 });
 
-test("weight prop에 따라 font weight 클래스가 올바르게 적용됨", () => {
+test("weight prop에 따라 font weight 클래스를 적용한다", () => {
   const weight = faker.helpers.arrayElement(
     Object.keys(fontWeights),
   ) as keyof typeof fontWeights;
@@ -23,7 +23,7 @@ test("weight prop에 따라 font weight 클래스가 올바르게 적용됨", ()
   expect(screen.getByText("본문")).toHaveClass(`fw_${weight}`);
 });
 
-test("size prop에 따라 font size 클래스가 올바르게 적용됨", () => {
+test("size prop에 따라 font size 클래스를 적용한다", () => {
   const size = faker.helpers.arrayElement(
     Object.keys(fontSizes),
   ) as keyof typeof fontSizes;
@@ -33,22 +33,24 @@ test("size prop에 따라 font size 클래스가 올바르게 적용됨", () => 
   expect(screen.getByText("본문")).toHaveClass(`fs_${size}`);
 });
 
-test("tone에 따라 글자 색이 올바르게 적용됨", () => {
+test.each([
+  ["중립 색조", "c_fg.neutral"],
+  ["브랜드 색조", "c_fg.brand"],
+  ["위험 색조", "c_fg.danger"],
+  ["경고 색조", "c_fg.warning"],
+  ["성공 색조", "c_fg.success"],
+  ["정보 색조", "c_fg.info"],
+] as const)("%s에 올바른 톤 클래스를 적용한다", (textName, className) => {
   render(<Tones />);
 
-  expect(screen.getByText("중립 색조")).toHaveClass("c_text");
-
-  expect(screen.getByText("강조 색조")).toHaveClass("c_text.accent");
-
-  expect(screen.getByText("위험 색조")).toHaveClass("c_text.danger");
-
-  expect(screen.getByText("경고 색조")).toHaveClass("c_text.warning");
+  expect(screen.getByText(textName)).toHaveClass(className);
 });
 
-test("낮은 명암비와 높은 명암비에 따라 글자 색이 올바르게 적용됨", () => {
+test.each([
+  ["낮은 명암비", "c_fg.neutral.placeholder"],
+  ["높은 명암비", "c_fg.neutral"],
+] as const)("%s에 올바른 클래스를 적용한다", (textName, className) => {
   render(<Contrasts />);
 
-  expect(screen.getByText("낮은 명암비")).toHaveClass("c_text.muted");
-
-  expect(screen.getByText("높은 명암비")).toHaveClass("c_text");
+  expect(screen.getByText(textName)).toHaveClass(className);
 });

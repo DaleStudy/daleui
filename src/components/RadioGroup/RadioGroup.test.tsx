@@ -5,7 +5,7 @@ import { describe, expect, test, vi } from "vitest";
 import { Radio, RadioGroup } from "./RadioGroup";
 
 describe("RadioGroup", () => {
-  test("RadioGroup이 올바르게 자식 요소와 함께 렌더링됨", () => {
+  test("라벨과 자식 요소들을 렌더링한다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group">
         <Radio value="option1">Option 1</Radio>
@@ -18,7 +18,7 @@ describe("RadioGroup", () => {
     expect(screen.getByText("Option 2")).toBeInTheDocument();
   });
 
-  test("defaultValue가 제공될 때 해당 값이 선택됨", () => {
+  test("defaultValue가 제공되면 해당 값을 선택한다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" defaultValue="option2">
         <Radio value="option1">Option 1</Radio>
@@ -33,7 +33,7 @@ describe("RadioGroup", () => {
     expect(option2).toBeChecked();
   });
 
-  test("defaultValue가 제공되지 않을 때 아무것도 선택되지 않음", () => {
+  test("defaultValue가 제공되지 않으면 아무것도 선택하지 않는다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group">
         <Radio value="option1">Option 1</Radio>
@@ -48,7 +48,7 @@ describe("RadioGroup", () => {
     expect(option2).not.toBeChecked();
   });
 
-  test("value와 defaultValue가 모두 제공될 때 value가 우선시됨", () => {
+  test("value가 defaultValue보다 우선한다", () => {
     render(
       <RadioGroup
         name="test"
@@ -68,7 +68,7 @@ describe("RadioGroup", () => {
     expect(option2).toBeChecked();
   });
 
-  test("disabled가 true일 때 모든 Radio이 비활성화됨", () => {
+  test("disabled가 true일 때 모든 라디오를 비활성화한다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" disabled>
         <Radio value="option1">Option 1</Radio>
@@ -83,7 +83,7 @@ describe("RadioGroup", () => {
     expect(option2).toBeDisabled();
   });
 
-  test("Radio 선택 시 onChange가 호출됨", async () => {
+  test("라디오 선택 시 onChange를 호출한다", async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
 
@@ -100,7 +100,7 @@ describe("RadioGroup", () => {
     expect(onChange).toHaveBeenCalledWith("option1");
   });
 
-  test("controlled 모드가 올바르게 작동되어짐", async () => {
+  test("제어 모드에서 정상적으로 동작한다", async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
 
@@ -139,7 +139,7 @@ describe("RadioGroup", () => {
 });
 
 describe("Radio", () => {
-  test("value가 올바르게 동작됨", async () => {
+  test("다른 값들을 선택할 수 있다", async () => {
     const user = userEvent.setup();
 
     render(
@@ -161,20 +161,51 @@ describe("Radio", () => {
     expect(option2).toBeChecked();
   });
 
-  test("disabled 속성이 올바르게 적용됨", () => {
+  test.each([
+    ["Option 1", false],
+    ["Option 2", true],
+  ] as const)(
+    "%s의 disabled 속성을 %s로 올바르게 적용한다",
+    (optionName, isDisabled) => {
+      render(
+        <RadioGroup name="test" label="Test Radio Group">
+          <Radio value="option1">Option 1</Radio>
+          <Radio value="option2" disabled>
+            Option 2
+          </Radio>
+        </RadioGroup>,
+      );
+
+      const option = screen.getByRole("radio", { name: optionName });
+
+      if (isDisabled) {
+        expect(option).toBeDisabled();
+      } else {
+        expect(option).not.toBeDisabled();
+      }
+    },
+  );
+
+  test.each([
+    ["neutral"],
+    ["brand"],
+    ["danger"],
+    ["warning"],
+    ["success"],
+    ["info"],
+  ] as const)("%s 톤을 올바르게 렌더링한다", (tone) => {
     render(
-      <RadioGroup name="test" label="Test Radio Group">
+      <RadioGroup name="test" label="Test Radio Group" tone={tone}>
         <Radio value="option1">Option 1</Radio>
-        <Radio value="option2" disabled>
-          Option 2
-        </Radio>
       </RadioGroup>,
     );
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
-    const option2 = screen.getByRole("radio", { name: "Option 2" });
+    const radio = screen.getByRole("radio", { name: "Option 1" });
+    expect(radio).toBeInTheDocument();
 
-    expect(option1).not.toBeDisabled();
-    expect(option2).toBeDisabled();
+    const container = radio.closest("label");
+    expect(
+      container?.querySelector('div[class*="border"]'),
+    ).toBeInTheDocument();
   });
 });

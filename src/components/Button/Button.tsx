@@ -35,14 +35,14 @@ export const Button = ({
   type = "button",
   onClick,
   variant = "solid",
-  tone = "neutral",
+  tone = "brand",
   size = "md",
   disabled,
   ...rest
 }: ButtonProps) => {
   return (
     <button
-      className={styles({ tone, variant, size })}
+      className={styles({ tone, variant, size, disabled })}
       type={type}
       onClick={onClick}
       disabled={disabled}
@@ -69,9 +69,13 @@ const styles = cva({
     transition: "0.2s",
     lineHeight: "1",
     outline: "0",
-    "&:disabled": {
-      opacity: 0.5,
+    _disabled: {
       cursor: "not-allowed",
+    },
+    _focusVisible: {
+      outline: "2px solid",
+      outlineOffset: "2px",
+      outlineColor: "border.brand.focus",
     },
   },
   variants: {
@@ -97,42 +101,45 @@ const styles = cva({
       outline: {},
     },
     tone: {
+      brand: {},
       neutral: {},
-      accent: {},
       danger: {},
+      success: {},
       warning: {},
+      info: {},
+    },
+    disabled: {
+      true: {},
+      false: {},
     },
   },
   compoundVariants: [
+    // Solid Variants
     {
       variant: "solid",
-      tone: "neutral",
+      tone: "brand",
       css: {
-        background: "bg",
-        color: "text",
-        "&:active, &:hover": {
-          background: "bg.hover",
+        bg: "bgSolid.brand",
+        color: "fgSolid.brand",
+        "&:hover": {
+          bg: "bgSolid.brand.hover",
         },
-        "&:focus": {
-          outlineColor: "border.neutral",
-          outline: "3px solid",
-          outlineOffset: "2px",
+        "&:active": {
+          bg: "bgSolid.brand.active",
         },
       },
     },
     {
       variant: "solid",
-      tone: "accent",
+      tone: "neutral",
       css: {
-        background: "bg.accent",
-        color: "text.accent",
-        "&:active, &:hover": {
-          background: "bg.hover.accent",
+        bg: "bgSolid.neutral",
+        color: "fgSolid.neutral",
+        "&:hover": {
+          bg: "bgSolid.neutral.hover",
         },
-        "&:focus": {
-          outlineColor: "border.accent",
-          outline: "3px solid",
-          outlineOffset: "2px",
+        "&:active": {
+          bg: "bgSolid.neutral.active",
         },
       },
     },
@@ -140,31 +147,55 @@ const styles = cva({
       variant: "solid",
       tone: "danger",
       css: {
-        background: "bg.danger",
-        color: "text.danger",
-        "&:active, &:hover": {
-          background: "bg.hover.danger",
+        bg: "bgSolid.danger",
+        color: "fgSolid.danger",
+        "&:hover": {
+          bg: "bgSolid.danger.hover",
         },
-        "&:focus": {
-          outlineColor: "border.danger",
-          outline: "3px solid",
-          outlineOffset: "2px",
+        "&:active": {
+          bg: "bgSolid.danger.active",
         },
+      },
+    },
+    {
+      variant: "solid",
+      tone: "success",
+      css: {
+        bg: "bgSolid.success",
+        color: "fgSolid.success",
       },
     },
     {
       variant: "solid",
       tone: "warning",
       css: {
-        background: "bg.warning",
-        color: "text.warning",
-        "&:active, &:hover": {
-          background: "bg.hover.warning",
+        bg: "bgSolid.warning",
+        color: "fgSolid.warning",
+      },
+    },
+    {
+      variant: "solid",
+      tone: "info",
+      css: {
+        bg: "bgSolid.info",
+        color: "fgSolid.info",
+      },
+    },
+    // Outline Variants
+    {
+      variant: "outline",
+      tone: "brand",
+      css: {
+        border: "1px solid",
+        borderColor: "border.brand",
+        color: "fg.brand",
+        "&:hover": {
+          bg: "bg.brand.hover",
+          color: "fg.brand.hover",
         },
-        "&:focus": {
-          outlineColor: "border.warning",
-          outline: "3px solid",
-          outlineOffset: "2px",
+        "&:active": {
+          bg: "bg.brand.active",
+          color: "fg.brand.active",
         },
       },
     },
@@ -172,35 +203,18 @@ const styles = cva({
       variant: "outline",
       tone: "neutral",
       css: {
-        border: "3px solid",
-        borderColor: "border",
-        color: "text",
-        "&:active, &:hover": {
-          background: "bg.hover",
-          color: "text.muted",
+        border: "1px solid",
+        borderColor: "border.neutral",
+        color: "fg.neutral",
+        "&:hover": {
+          bg: "bg.neutral.hover",
+          color: "fg.neutral.hover",
+          borderColor: "border.neutral.hover",
         },
-        "&:focus": {
-          outlineColor: "border.neutral",
-          outline: "3px solid",
-          outlineOffset: "2px",
-        },
-      },
-    },
-    {
-      variant: "outline",
-      tone: "accent",
-      css: {
-        border: "3px solid",
-        borderColor: "border.accent",
-        color: "text.accent",
-        "&:active, &:hover": {
-          background: "bg.hover.accent",
-          color: "text.muted.accent",
-        },
-        "&:focus": {
-          outlineColor: "border.accent",
-          outline: "3px solid",
-          outlineOffset: "2px",
+        "&:active": {
+          bg: "bg.neutral.active",
+          color: "fg.neutral.active",
+          borderColor: "border.neutral.active",
         },
       },
     },
@@ -208,36 +222,60 @@ const styles = cva({
       variant: "outline",
       tone: "danger",
       css: {
-        border: "3px solid",
+        border: "1px solid",
         borderColor: "border.danger",
-        color: "text.danger",
-        "&:active, &:hover": {
-          background: "bg.hover.danger",
-          color: "text.muted.danger",
+        color: "fg.danger",
+        "&:hover": {
+          bg: "bg.danger.hover",
         },
-        "&:focus": {
-          outlineColor: "border.danger",
-          outline: "3px solid",
-          outlineOffset: "2px",
+        "&:active": {
+          bg: "bg.danger.active",
         },
+      },
+    },
+    {
+      variant: "outline",
+      tone: "success",
+      css: {
+        border: "1px solid",
+        borderColor: "border.success",
+        color: "fg.success",
       },
     },
     {
       variant: "outline",
       tone: "warning",
       css: {
-        border: "3px solid",
+        border: "1px solid",
         borderColor: "border.warning",
-        color: "text.warning",
-        "&:active, &:hover": {
-          background: "bg.hover.warning",
-          color: "text.muted.warning",
-        },
-        "&:focus": {
-          outlineColor: "border.warning",
-          outline: "3px solid",
-          outlineOffset: "2px",
-        },
+        color: "fg.warning",
+      },
+    },
+    {
+      variant: "outline",
+      tone: "info",
+      css: {
+        border: "1px solid",
+        borderColor: "border.info",
+        color: "fg.info",
+      },
+    },
+    // Disabled States
+    {
+      variant: "solid",
+      disabled: true,
+      css: {
+        bg: "bg.neutral.disabled!",
+        color: "fg.neutral.disabled!",
+      },
+    },
+    {
+      variant: "outline",
+      disabled: true,
+      css: {
+        bg: "transparent!",
+        color: "fg.neutral.disabled!",
+        borderColor: "border.neutral.disabled!",
       },
     },
   ],

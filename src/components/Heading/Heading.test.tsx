@@ -46,10 +46,10 @@ test("낮은 명암비와 높은 명암비에 따라 글자 색이 올바르게 
   render(<Contrasts />);
 
   expect(screen.getByRole("heading", { name: "낮은 명암비" })).toHaveClass(
-    "c_text.muted",
+    "c_fg.neutral.placeholder",
   );
 
   expect(screen.getByRole("heading", { name: "높은 명암비" })).toHaveClass(
-    "c_text",
+    "c_fg.neutral",
   );
 });

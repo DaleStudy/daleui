@@ -1,8 +1,8 @@
+import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
+import { Check } from "lucide-react";
 import React, { type ButtonHTMLAttributes } from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { Check } from "lucide-react";
 
 export interface CheckboxProps
   extends Omit<
@@ -48,7 +48,11 @@ export const Checkbox = ({
         alignItems: "center",
         gap: "8",
         cursor: "pointer",
-        color: "text",
+        color: "fg.neutral",
+        _disabled: {
+          cursor: "not-allowed",
+          color: "fg.neutral.disabled",
+        },
       })}
     >
       <CheckboxPrimitive.Root
@@ -58,7 +62,7 @@ export const Checkbox = ({
           onChange?.(checked === true, value);
         }}
         disabled={disabled}
-        className={styles({ tone })}
+        className={styles({ tone, disabled })}
         {...rest}
       >
         <CheckboxPrimitive.Indicator
@@ -74,7 +78,15 @@ export const Checkbox = ({
         </CheckboxPrimitive.Indicator>
       </CheckboxPrimitive.Root>
       {label}
-      {required && <span className={css({ color: "text.danger" })}>*</span>}
+      {required && (
+        <span
+          className={css({
+            color: "fg.danger",
+          })}
+        >
+          *
+        </span>
+      )}
     </label>
   );
 };
@@ -85,7 +97,7 @@ const styles = cva({
     margin: "0",
     backgroundColor: "transparent",
     border: "3px solid",
-    borderColor: "border",
+    borderColor: "border.neutral",
     borderRadius: "sm",
     width: "1.5rem",
     height: "1.5rem",
@@ -96,95 +108,73 @@ const styles = cva({
     transition: "0.2s",
     outline: "none",
     "&:hover": {
-      backgroundColor: "bg.hover",
+      bg: "bg.neutral.hover",
+      color: "fg.neutral.hover",
     },
-    "&:focus": {
-      outline: "3px solid",
+    _focusVisible: {
+      outline: "2px solid",
       outlineOffset: "2px",
+      outlineColor: "border.brand.focus",
     },
-    "&:disabled": {
-      opacity: 0.5,
+    _disabled: {
+      borderColor: "border.neutral.disabled",
+      bg: "transparent!",
       cursor: "not-allowed",
-      "&:hover": {
-        backgroundColor: "transparent",
-      },
     },
   },
   variants: {
     tone: {
-      neutral: {
-        "&[data-state='checked']": {
-          backgroundColor: "bg",
-          borderColor: "border",
-          color: "text",
-        },
-        "&:disabled[data-state='checked']": {
-          backgroundColor: "bg",
-          borderColor: "border",
-        },
-        "&:focus": {
-          outlineColor: "border",
+      brand: {
+        _checked: {
+          bg: "bgSolid.brand",
+          borderColor: "bgSolid.brand",
+          color: "fgSolid.brand",
         },
       },
-      accent: {
-        "&[data-state='checked']": {
-          backgroundColor: "bg.accent",
-          borderColor: "border.accent",
-          color: "text.accent",
-        },
-        "&:disabled[data-state='checked']": {
-          backgroundColor: "bg.accent",
-          borderColor: "border.accent",
+      neutral: {
+        _checked: {
+          bg: "bgSolid.neutral",
+          borderColor: "bgSolid.neutral",
+          color: "fgSolid.neutral",
         },
       },
       danger: {
-        "&[data-state='checked']": {
-          backgroundColor: "bg.danger",
-          borderColor: "border.danger",
-          color: "text.danger",
-        },
-        "&:disabled[data-state='checked']": {
-          backgroundColor: "bg.danger",
-          borderColor: "border.danger",
+        _checked: {
+          bg: "bgSolid.danger",
+          borderColor: "bgSolid.danger",
+          color: "fgSolid.danger",
         },
       },
       warning: {
-        "&[data-state='checked']": {
-          backgroundColor: "bg.warning",
-          borderColor: "border.warning",
-          color: "text.warning",
+        _checked: {
+          bg: "bgSolid.warning",
+          borderColor: "bgSolid.warning",
+          color: "fgSolid.warning",
         },
-        "&:disabled[data-state='checked']": {
-          backgroundColor: "bg.warning",
-          borderColor: "border.warning",
+      },
+      success: {
+        _checked: {
+          bg: "bgSolid.success",
+          borderColor: "bgSolid.success",
+          color: "fgSolid.success",
+        },
+      },
+      info: {
+        _checked: {
+          bg: "bgSolid.info",
+          borderColor: "bgSolid.info",
+          color: "fgSolid.info",
+        },
+      },
+    },
+    disabled: {
+      true: {
+        _checked: {
+          bg: "bg.neutral.disabled!",
+          borderColor: "bg.neutral.disabled!",
+          color: "fg.neutral.disabled!",
         },
       },
     },
   },
-  compoundVariants: [
-    {
-      tone: "accent",
-      css: {
-        "&:focus": {
-          outlineColor: "border.accent",
-        },
-      },
-    },
-    {
-      tone: "danger",
-      css: {
-        "&:focus": {
-          outlineColor: "border.danger",
-        },
-      },
-    },
-    {
-      tone: "warning",
-      css: {
-        "&:focus": {
-          outlineColor: "border.warning",
-        },
-      },
-    },
-  ],
 });

@@ -2,8 +2,8 @@ import { composeStories } from "@storybook/react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, test, vi } from "vitest";
-import * as stories from "./Checkbox.stories";
 import { Checkbox } from "./Checkbox";
+import * as stories from "./Checkbox.stories";
 
 const { Basic, Tones, States, Disabled, Required } = composeStories(stories);
 
@@ -16,35 +16,37 @@ test("체크박스에 체크 시, tone 속성이 올바르게 적용됨", async 
   const user = userEvent.setup();
   render(<Tones />);
 
+  const brandCheckbox = screen.getByLabelText("브랜드 색조");
   const neutralCheckbox = screen.getByLabelText("중립 색조");
-  const accentCheckbox = screen.getByLabelText("강조 색조");
   const dangerCheckbox = screen.getByLabelText("위험 색조");
   const warningCheckbox = screen.getByLabelText("경고 색조");
+  const successCheckbox = screen.getByLabelText("성공 색조");
+  const infoCheckbox = screen.getByLabelText("정보 색조");
 
   // Simulate checking each checkbox
 
+  await user.click(brandCheckbox);
   await user.click(neutralCheckbox);
-  await user.click(accentCheckbox);
   await user.click(dangerCheckbox);
   await user.click(warningCheckbox);
+  await user.click(successCheckbox);
+  await user.click(infoCheckbox);
 
   // Check for data-state attribute which indicates checked state
+  expect(brandCheckbox).toHaveAttribute("data-state", "checked");
   expect(neutralCheckbox).toHaveAttribute("data-state", "checked");
-  expect(accentCheckbox).toHaveAttribute("data-state", "checked");
   expect(dangerCheckbox).toHaveAttribute("data-state", "checked");
   expect(warningCheckbox).toHaveAttribute("data-state", "checked");
+  expect(successCheckbox).toHaveAttribute("data-state", "checked");
+  expect(infoCheckbox).toHaveAttribute("data-state", "checked");
 
   // Check for correct background colors based on tone
-  expect(neutralCheckbox).toHaveClass("[&[data-state='checked']]:bg-c_bg");
-  expect(accentCheckbox).toHaveClass(
-    "[&[data-state='checked']]:bg-c_bg.accent",
-  );
-  expect(dangerCheckbox).toHaveClass(
-    "[&[data-state='checked']]:bg-c_bg.danger",
-  );
-  expect(warningCheckbox).toHaveClass(
-    "[&[data-state='checked']]:bg-c_bg.warning",
-  );
+  expect(brandCheckbox).toHaveClass("checked:bg_bgSolid.brand");
+  expect(neutralCheckbox).toHaveClass("checked:bg_bgSolid.neutral");
+  expect(dangerCheckbox).toHaveClass("checked:bg_bgSolid.danger");
+  expect(warningCheckbox).toHaveClass("checked:bg_bgSolid.warning");
+  expect(successCheckbox).toHaveClass("checked:bg_bgSolid.success");
+  expect(infoCheckbox).toHaveClass("checked:bg_bgSolid.info");
 });
 
 test("체크된 상태와 체크되지않은 상태가 올바르게 렌더링됨", () => {
@@ -71,8 +73,15 @@ test("disabled 속성이 올바르게 적용됨", () => {
   expect(enabledCheckbox).not.toBeDisabled();
 
   // Check for opacity class that indicates disabled state
-  expect(disabledCheckedCheckbox).toHaveClass("[&:disabled]:op_0.5");
-  expect(disabledUncheckedCheckbox).toHaveClass("[&:disabled]:op_0.5");
+  expect(disabledCheckedCheckbox).toHaveClass(
+    "checked:bg_bg.neutral.disabled!",
+  );
+  expect(disabledCheckedCheckbox).toHaveClass(
+    "checked:bd-c_bg.neutral.disabled!",
+  );
+  expect(disabledUncheckedCheckbox).toHaveClass(
+    "disabled:bd-c_border.neutral.disabled",
+  );
 });
 
 test("필수 표시가 올바르게 표시됨", () => {
@@ -172,5 +181,5 @@ test("required 속성값이 true일 경우, label에 별표가 추가됨", () =>
 
   const requiredIndicator = screen.getByText("*");
   expect(requiredIndicator).toBeInTheDocument();
-  expect(requiredIndicator).toHaveClass("c_text.danger");
+  expect(requiredIndicator).toHaveClass("c_fg.danger");
 });

@@ -1,4 +1,4 @@
-import type { ReactNode, HTMLAttributes } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { FontSize, FontWeight } from "../../tokens/typography";
 
@@ -65,8 +65,8 @@ const styles = cva({
       5: { fontSize: "md" },
     },
     muted: {
-      true: { color: "text.muted" },
-      false: { color: "text" },
+      true: { color: "fg.neutral.placeholder" },
+      false: { color: "fg.neutral" },
     },
   },
 });
