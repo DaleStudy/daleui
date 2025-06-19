@@ -36,7 +36,7 @@ export const Default: StoryObj = {
         >
           <input
             className={css({
-              border: "1px solid lightgray",
+              border: "neutral",
               borderRadius: "md",
               paddingLeft: "8",
               height: 50,
@@ -48,7 +48,7 @@ export const Default: StoryObj = {
           />
           <input
             className={css({
-              border: "1px solid lightgray",
+              border: "neutral",
               borderRadius: "md",
               paddingLeft: "8",
               height: 50,
