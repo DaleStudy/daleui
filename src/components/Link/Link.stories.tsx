@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { vstack } from "../../../styled-system/patterns";
-import { Icon } from "../Icon/Icon";
 import { Link } from "./Link";
 
 const meta: Meta<typeof Link> = {
@@ -8,7 +7,7 @@ const meta: Meta<typeof Link> = {
   parameters: {
     layout: "centered",
   },
-  args: { children: "링크", href: undefined },
+  args: { label: "링크", href: undefined, iconName: "externalLink" },
   decorators: [
     (Story, context) => {
       return (
@@ -31,53 +30,16 @@ export const Tones: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <Link {...args} tone="neutral">
-          중립 링크
-        </Link>
-        <Link {...args} tone="brand">
-          브랜드 링크
-        </Link>
-        <Link {...args} tone="danger">
-          위험 링크
-        </Link>
-        <Link {...args} tone="warning">
-          경고 링크
-        </Link>
-        <Link {...args} tone="success">
-          성공 링크
-        </Link>
-        <Link {...args} tone="info">
-          정보 링크
-        </Link>
+        <Link {...args} tone="brand" label="브랜드 링크" />
+        <Link {...args} tone="neutral" label="중립 링크" />
       </div>
     );
   },
   argTypes: {
-    children: {
+    label: {
       control: false,
     },
     tone: {
-      control: false,
-    },
-  },
-};
-
-export const Contrasts: StoryObj<typeof Link> = {
-  render: (args) => {
-    return (
-      <div className={vstack({ gap: "24" })}>
-        <Link {...args} muted>
-          낮은 명암비
-        </Link>
-        <Link {...args}>높은 명암비</Link>
-      </div>
-    );
-  },
-  argTypes: {
-    children: {
-      control: false,
-    },
-    muted: {
       control: false,
     },
   },
@@ -87,17 +49,13 @@ export const Underlines: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <Link {...args} underline>
-          밑줄 있음
-        </Link>
-        <Link {...args} underline={false}>
-          밑줄 없음
-        </Link>
+        <Link {...args} underline label="밑줄 있음" />
+        <Link {...args} underline={false} label="밑줄 없음" />
       </div>
     );
   },
   argTypes: {
-    children: {
+    label: {
       control: false,
     },
     underline: {
@@ -110,52 +68,17 @@ export const Sizes: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <Link {...args} size="sm">
-          작은 링크
-        </Link>
-        <Link {...args} size="md">
-          중간 링크
-        </Link>
-        <Link {...args} size="lg">
-          큰 링크
-        </Link>
+        <Link {...args} size="sm" label="작은 링크" />
+        <Link {...args} size="md" label="중간 링크" />
+        <Link {...args} size="lg" label="큰 링크" />
       </div>
     );
   },
   argTypes: {
-    children: {
+    label: {
       control: false,
     },
     size: {
-      control: false,
-    },
-  },
-};
-
-export const Weights: StoryObj<typeof Link> = {
-  render: (args) => {
-    return (
-      <div className={vstack({ gap: "24" })}>
-        <Link {...args} weight="normal">
-          일반 굵기
-        </Link>
-        <Link {...args} weight="medium">
-          중간 굵기
-        </Link>
-        <Link {...args} weight="semibold">
-          세미볼드 굵기
-        </Link>
-        <Link {...args} weight="bold">
-          굵은 굵기
-        </Link>
-      </div>
-    );
-  },
-  argTypes: {
-    children: {
-      control: false,
-    },
-    weight: {
       control: false,
     },
   },
@@ -165,15 +88,17 @@ export const Security: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <Link {...args} target="_blank">
-          새 탭에서 열기 (보안 속성 자동 추가)
-        </Link>
-        <Link {...args}>같은 탭에서 열기</Link>
+        <Link
+          {...args}
+          target="_blank"
+          label="새 탭에서 열기 (보안 속성 자동 추가)"
+        />
+        <Link {...args} label="같은 탭에서 열기" />
       </div>
     );
   },
   argTypes: {
-    children: {
+    label: {
       control: false,
     },
     target: {
@@ -182,22 +107,11 @@ export const Security: StoryObj<typeof Link> = {
   },
 };
 
-export const WithIcon: StoryObj<typeof Link> = {
-  render: (args) => {
-    return (
-      <Link {...args} target="_blank">
-        <Icon name="chevronRight" />
-        링크 아이콘
-      </Link>
-    );
-  },
-};
-
 export const Inline: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <p>
-        이 문장에는 <Link {...args}>링크</Link>가 포함되어 있습니다.
+        이 문장에는 <Link {...args} />가 포함되어 있습니다.
       </p>
     );
   },
