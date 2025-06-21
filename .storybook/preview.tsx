@@ -2,7 +2,7 @@ import "../src/index.css";
 import React from "react";
 import { withThemeByClassName } from "@storybook/addon-themes";
 import { DocsContainer } from "@storybook/addon-docs/blocks";
-import { themes } from "@storybook/theming";
+import { themes } from "storybook/theming";
 import type { Preview, ReactRenderer } from "@storybook/react-vite";
 import type { DocsContainerProps } from "@storybook/addon-docs/blocks";
 

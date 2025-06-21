@@ -7,7 +7,6 @@ const config: StorybookConfig = {
     "@chromatic-com/storybook",
     "@storybook/addon-a11y",
     "@storybook/addon-themes",
-    "@storybook/theming",
     "@storybook/addon-designs",
     "@storybook/addon-docs",
   ],
