@@ -49,7 +49,7 @@ export const Checkbox = ({
         gap: "8",
         cursor: "pointer",
         color: "fg.neutral",
-        _disabled: {
+        "&:disabled": {
           cursor: "not-allowed",
           color: "fg.neutral.disabled",
         },
@@ -111,12 +111,12 @@ const styles = cva({
       bg: "bg.neutral.hover",
       color: "fg.neutral.hover",
     },
-    _focusVisible: {
+    "&:focus-visible": {
       outline: "2px solid",
       outlineOffset: "2px",
       outlineColor: "border.brand.focus",
     },
-    _disabled: {
+    "&:disabled": {
       borderColor: "border.neutral.disabled",
       bg: "transparent!",
       cursor: "not-allowed",
@@ -125,42 +125,42 @@ const styles = cva({
   variants: {
     tone: {
       brand: {
-        _checked: {
+        "&[data-state='checked']": {
           bg: "bgSolid.brand",
           borderColor: "bgSolid.brand",
           color: "fgSolid.brand",
         },
       },
       neutral: {
-        _checked: {
+        "&[data-state='checked']": {
           bg: "bgSolid.neutral",
           borderColor: "bgSolid.neutral",
           color: "fgSolid.neutral",
         },
       },
       danger: {
-        _checked: {
+        "&[data-state='checked']": {
           bg: "bgSolid.danger",
           borderColor: "bgSolid.danger",
           color: "fgSolid.danger",
         },
       },
       warning: {
-        _checked: {
+        "&[data-state='checked']": {
           bg: "bgSolid.warning",
           borderColor: "bgSolid.warning",
           color: "fgSolid.warning",
         },
       },
       success: {
-        _checked: {
+        "&[data-state='checked']": {
           bg: "bgSolid.success",
           borderColor: "bgSolid.success",
           color: "fgSolid.success",
         },
       },
       info: {
-        _checked: {
+        "&[data-state='checked']": {
           bg: "bgSolid.info",
           borderColor: "bgSolid.info",
           color: "fgSolid.info",
@@ -169,7 +169,7 @@ const styles = cva({
     },
     disabled: {
       true: {
-        _checked: {
+        "&[data-state='checked']": {
           bg: "bg.neutral.disabled!",
           borderColor: "bg.neutral.disabled!",
           color: "fg.neutral.disabled!",

@@ -69,10 +69,10 @@ const styles = cva({
     transition: "0.2s",
     lineHeight: "1",
     outline: "0",
-    _disabled: {
+    "&:disabled": {
       cursor: "not-allowed",
     },
-    _focusVisible: {
+    "&:focus-visible": {
       outline: "2px solid",
       outlineOffset: "2px",
       outlineColor: "border.brand.focus",
