@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { composeStories } from "@storybook/react";
+import { composeStories } from "@storybook/react-vite";
 import { render, screen } from "@testing-library/react";
 import { expect, test } from "vitest";
 import { fontSizes, fontWeights } from "../../tokens/typography";
