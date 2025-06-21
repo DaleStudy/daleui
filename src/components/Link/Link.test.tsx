@@ -20,6 +20,7 @@ describe("렌더링 테스트", () => {
 
     const link = screen.getByRole("link");
     expect(link).toHaveTextContent("링크");
+    // eslint-disable-next-line testing-library/no-node-access
     expect(link.querySelector("svg")).toBeInTheDocument();
   });
 });

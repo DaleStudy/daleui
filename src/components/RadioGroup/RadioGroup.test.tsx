@@ -203,8 +203,10 @@ describe("Radio", () => {
     const radio = screen.getByRole("radio", { name: "Option 1" });
     expect(radio).toBeInTheDocument();
 
+    // eslint-disable-next-line testing-library/no-node-access
     const container = radio.closest("label");
     expect(
+      // eslint-disable-next-line testing-library/no-node-access
       container?.querySelector('div[class*="border"]'),
     ).toBeInTheDocument();
   });
