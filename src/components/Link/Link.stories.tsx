@@ -3,7 +3,7 @@ import { vstack } from "../../../styled-system/patterns";
 import { Icon } from "../Icon/Icon";
 import { Link } from "./Link";
 
-const meta: Meta<typeof Link> = {
+export default {
   component: Link,
   parameters: {
     layout: "centered",
@@ -21,9 +21,7 @@ const meta: Meta<typeof Link> = {
       );
     },
   ],
-};
-
-export default meta;
+} satisfies Meta;
 
 export const Basic: StoryObj<typeof Link> = {};
 
