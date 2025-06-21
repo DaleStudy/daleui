@@ -1,4 +1,4 @@
-import type { StoryObj } from "@storybook/react";
+import type { StoryObj } from "@storybook/react-vite";
 import { hstack, vstack } from "../../../styled-system/patterns";
 import { css } from "../../../styled-system/css";
 import { Icon } from "../../components/Icon/Icon";

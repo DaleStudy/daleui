@@ -1,4 +1,4 @@
-import { composeStories } from "@storybook/react";
+import { composeStories } from "@storybook/react-vite";
 import { render } from "@testing-library/react";
 import { expect, test } from "vitest";
 import * as stories from "./Icon.stories";
