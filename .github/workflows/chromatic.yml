@@ -8,8 +8,8 @@ jobs:
     steps:
       - id: gen_url
         run: |
-          # Dependabot can create branches with names that include `/` or `.`, which are not allowed in a URL.
-          URL=https://$(sed 's/[\.\/]/\-/g' <<< '${{ github.ref_name }}')--675790d317ba346348aa3490.chromatic.com
+          # Use commit hash instead of branch name to avoid 37-character limit
+          URL=https://${{ github.sha }}--675790d317ba346348aa3490.chromatic.com
           echo "url=$URL" >> $GITHUB_OUTPUT
     outputs:
       url: ${{ steps.gen_url.outputs.url }}
