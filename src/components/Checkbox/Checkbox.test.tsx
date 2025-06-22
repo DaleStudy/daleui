@@ -41,12 +41,22 @@ test("체크박스에 체크 시, tone 속성이 올바르게 적용됨", async 
   expect(infoCheckbox).toHaveAttribute("data-state", "checked");
 
   // Check for correct background colors based on tone
-  expect(brandCheckbox).toHaveClass("checked:bg_bgSolid.brand");
-  expect(neutralCheckbox).toHaveClass("checked:bg_bgSolid.neutral");
-  expect(dangerCheckbox).toHaveClass("checked:bg_bgSolid.danger");
-  expect(warningCheckbox).toHaveClass("checked:bg_bgSolid.warning");
-  expect(successCheckbox).toHaveClass("checked:bg_bgSolid.success");
-  expect(infoCheckbox).toHaveClass("checked:bg_bgSolid.info");
+  expect(brandCheckbox).toHaveClass(
+    "[&[data-state='checked']]:bg_bgSolid.brand",
+  );
+  expect(neutralCheckbox).toHaveClass(
+    "[&[data-state='checked']]:bg_bgSolid.neutral",
+  );
+  expect(dangerCheckbox).toHaveClass(
+    "[&[data-state='checked']]:bg_bgSolid.danger",
+  );
+  expect(warningCheckbox).toHaveClass(
+    "[&[data-state='checked']]:bg_bgSolid.warning",
+  );
+  expect(successCheckbox).toHaveClass(
+    "[&[data-state='checked']]:bg_bgSolid.success",
+  );
+  expect(infoCheckbox).toHaveClass("[&[data-state='checked']]:bg_bgSolid.info");
 });
 
 test("체크된 상태와 체크되지않은 상태가 올바르게 렌더링됨", () => {
@@ -72,15 +82,14 @@ test("disabled 속성이 올바르게 적용됨", () => {
   expect(disabledUncheckedCheckbox).toBeDisabled();
   expect(enabledCheckbox).not.toBeDisabled();
 
-  // Check for opacity class that indicates disabled state
   expect(disabledCheckedCheckbox).toHaveClass(
-    "checked:bg_bg.neutral.disabled!",
+    "[&[data-state='checked']]:bg_bg.neutral.disabled!",
   );
   expect(disabledCheckedCheckbox).toHaveClass(
-    "checked:bd-c_bg.neutral.disabled!",
+    "[&[data-state='checked']]:bd-c_bg.neutral.disabled!",
   );
   expect(disabledUncheckedCheckbox).toHaveClass(
-    "disabled:bd-c_border.neutral.disabled",
+    "[&:disabled]:bd-c_border.neutral.disabled",
   );
 });
 
