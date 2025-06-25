@@ -1,5 +1,5 @@
 import { action } from "storybook/actions";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Button } from "../../components/Button/Button";
 import { Checkbox } from "../../components/Checkbox/Checkbox";
 import { Heading } from "../../components/Heading/Heading";
