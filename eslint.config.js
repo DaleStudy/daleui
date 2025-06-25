@@ -28,6 +28,6 @@ export default tseslint.config(
   },
   {
     files: ["src/components/**/*.test.[jt]s?(x)"],
-    ...testingLibrary.configs["flat/dom"],
+    ...testingLibrary.configs["flat/react"],
   },
 );
