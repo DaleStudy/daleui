@@ -1,5 +1,8 @@
 import type { Tokens } from "@pandacss/types";
 
+/**
+ * margin, padding, gap, top, right, bottom, left, outlineOffset
+ */
 export const spacing: Tokens["spacing"] = {
   0: { value: "0rem" },
   2: { value: "0.125rem" },
