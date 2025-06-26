@@ -1,5 +1,6 @@
 import { defineConfig } from "@pandacss/dev";
 import { globalCss } from "./src/styles/globalCss";
+import { borders, borderWidths } from "./src/tokens/borders";
 import { colors, semanticColors } from "./src/tokens/colors";
 import { radii } from "./src/tokens/radii";
 import { spacing } from "./src/tokens/spacing";
@@ -45,6 +46,8 @@ export default defineConfig({
     extend: {
       textStyles,
       tokens: {
+        borders,
+        borderWidths,
         colors,
         fonts,
         fontWeights,

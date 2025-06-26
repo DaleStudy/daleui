@@ -222,9 +222,10 @@ const radioInputStyles = css({
   cursor: "inherit",
 
   "&:focus-visible + div": {
-    outline: "2px solid",
+    outline: "neutral",
+    outlineWidth: "lg",
     outlineColor: "rgba(0, 0, 0, 0.2)",
-    outlineOffset: "2px",
+    outlineOffset: "2",
   },
 
   "&:disabled + div": {
@@ -237,9 +238,9 @@ const radioCircleStyles = cva({
     backgroundColor: "bg.neutral",
     width: "5",
     height: "5",
+    border: "neutral",
+    borderWidth: "lg",
     borderRadius: "full",
-    border: "2px solid",
-    borderColor: "border.neutral",
     position: "absolute",
     pointerEvents: "none",
     transition: "0.2s",

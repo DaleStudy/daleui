@@ -73,9 +73,9 @@ const styles = cva({
       cursor: "not-allowed",
     },
     "&:focus-visible": {
-      outline: "2px solid",
-      outlineOffset: "2px",
-      outlineColor: "border.brand.focus",
+      outline: "neutral",
+      outlineWidth: "lg",
+      outlineOffset: "2",
     },
   },
   variants: {
@@ -186,8 +186,8 @@ const styles = cva({
       variant: "outline",
       tone: "brand",
       css: {
-        border: "1px solid",
-        borderColor: "border.brand",
+        border: "brand",
+        borderWidth: "lg",
         color: "fg.brand",
         "&:hover": {
           bg: "bg.brand.hover",
@@ -203,8 +203,8 @@ const styles = cva({
       variant: "outline",
       tone: "neutral",
       css: {
-        border: "1px solid",
-        borderColor: "border.neutral",
+        border: "neutral",
+        borderWidth: "lg",
         color: "fg.neutral",
         "&:hover": {
           bg: "bg.neutral.hover",
@@ -222,8 +222,8 @@ const styles = cva({
       variant: "outline",
       tone: "danger",
       css: {
-        border: "1px solid",
-        borderColor: "border.danger",
+        border: "danger",
+        borderWidth: "lg",
         color: "fg.danger",
         "&:hover": {
           bg: "bg.danger.hover",
@@ -237,8 +237,8 @@ const styles = cva({
       variant: "outline",
       tone: "success",
       css: {
-        border: "1px solid",
-        borderColor: "border.success",
+        border: "success",
+        borderWidth: "lg",
         color: "fg.success",
       },
     },
@@ -246,8 +246,8 @@ const styles = cva({
       variant: "outline",
       tone: "warning",
       css: {
-        border: "1px solid",
-        borderColor: "border.warning",
+        border: "warning",
+        borderWidth: "lg",
         color: "fg.warning",
       },
     },
@@ -255,8 +255,8 @@ const styles = cva({
       variant: "outline",
       tone: "info",
       css: {
-        border: "1px solid",
-        borderColor: "border.info",
+        border: "info",
+        borderWidth: "lg",
         color: "fg.info",
       },
     },
