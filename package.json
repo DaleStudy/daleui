@@ -38,7 +38,7 @@
     "@chromatic-com/storybook": "^4.0.1",
     "@eslint/js": "^9.29.0",
     "@faker-js/faker": "^9.8.0",
-    "@pandacss/dev": "^0.53.7",
+    "@pandacss/dev": "^0.54.0",
     "@storybook/addon-a11y": "^9.0.13",
     "@storybook/addon-designs": "^10.0.1",
     "@storybook/addon-docs": "^9.0.13",
