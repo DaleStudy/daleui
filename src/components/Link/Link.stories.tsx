@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { vstack } from "../../../styled-system/patterns";
-import { Icon } from "../Icon/Icon";
 import { Link } from "./Link";
 
 export default {
@@ -8,7 +7,16 @@ export default {
   parameters: {
     layout: "centered",
   },
-  args: { children: "링크", href: undefined },
+  args: {
+    children: "링크",
+    href: "#",
+    onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
+    },
+    tone: "brand",
+    size: "md",
+    iconName: "externalLink",
+  },
   decorators: [
     (Story, context) => {
       return (
@@ -29,23 +37,11 @@ export const Tones: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <Link {...args} tone="neutral">
-          중립 링크
-        </Link>
         <Link {...args} tone="brand">
           브랜드 링크
         </Link>
-        <Link {...args} tone="danger">
-          위험 링크
-        </Link>
-        {/* <Link {...args} tone="warning">
-          경고 링크
-        </Link> */}
-        <Link {...args} tone="success">
-          성공 링크
-        </Link>
-        <Link {...args} tone="info">
-          정보 링크
+        <Link {...args} tone="neutral">
+          중립 링크
         </Link>
       </div>
     );
@@ -55,27 +51,6 @@ export const Tones: StoryObj<typeof Link> = {
       control: false,
     },
     tone: {
-      control: false,
-    },
-  },
-};
-
-export const Contrasts: StoryObj<typeof Link> = {
-  render: (args) => {
-    return (
-      <div className={vstack({ gap: "24" })}>
-        <Link {...args} muted>
-          낮은 명암비
-        </Link>
-        <Link {...args}>높은 명암비</Link>
-      </div>
-    );
-  },
-  argTypes: {
-    children: {
-      control: false,
-    },
-    muted: {
       control: false,
     },
   },
@@ -130,21 +105,15 @@ export const Sizes: StoryObj<typeof Link> = {
   },
 };
 
-export const Weights: StoryObj<typeof Link> = {
+export const Icons: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <Link {...args} weight="normal">
-          일반 굵기
+        <Link {...args} iconName="externalLink">
+          아이콘 있음
         </Link>
-        <Link {...args} weight="medium">
-          중간 굵기
-        </Link>
-        <Link {...args} weight="semibold">
-          세미볼드 굵기
-        </Link>
-        <Link {...args} weight="bold">
-          굵은 굵기
+        <Link {...args} iconName={undefined}>
+          아이콘 없음
         </Link>
       </div>
     );
@@ -153,7 +122,28 @@ export const Weights: StoryObj<typeof Link> = {
     children: {
       control: false,
     },
-    weight: {
+    iconName: {
+      control: false,
+    },
+  },
+};
+
+export const Visited: StoryObj<typeof Link> = {
+  render: (args) => {
+    return (
+      <div className={vstack({ gap: "24" })}>
+        <Link {...args} href="https://www.daleui.com" target="_blank">
+          방문한 링크
+        </Link>
+        <Link {...args}>방문하지 않은 링크</Link>
+      </div>
+    );
+  },
+  argTypes: {
+    children: {
+      control: false,
+    },
+    href: {
       control: false,
     },
   },
@@ -180,22 +170,11 @@ export const Security: StoryObj<typeof Link> = {
   },
 };
 
-export const WithIcon: StoryObj<typeof Link> = {
-  render: (args) => {
-    return (
-      <Link {...args} target="_blank">
-        <Icon name="chevronRight" aria-label="chevronRight" />
-        링크 아이콘
-      </Link>
-    );
-  },
-};
-
 export const Inline: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <p>
-        이 문장에는 <Link {...args}>링크</Link>가 포함되어 있습니다.
+        이 문장에는 <Link {...args} />가 포함되어 있습니다.
       </p>
     );
   },

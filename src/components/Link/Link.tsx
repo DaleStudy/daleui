@@ -1,39 +1,38 @@
 import { type AnchorHTMLAttributes } from "react";
 import { css, cva } from "../../../styled-system/css";
-import type { Tone } from "../../tokens/colors";
-import type { FontSize, FontWeight } from "../../tokens/typography";
+import type { IconName } from "../../tokens/iconography";
+import { Icon } from "../Icon/Icon";
 
+type LinkSize = "sm" | "md" | "lg";
+type LinkTone = "neutral" | "brand";
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /** 링크 URL (필수) */
   href: string;
   /** 링크 내용 (필수) */
   children: React.ReactNode;
   /** 색조 */
-  tone?: Tone;
+  tone?: LinkTone;
   /** 크기 */
-  size?: FontSize;
-  /** 굵기 */
-  weight?: FontWeight;
-  /** 명암비 낮출지 */
-  muted?: boolean;
+  size?: LinkSize;
   /** 링크에 밑줄 표시 여부 */
   underline?: boolean;
+  /** 아이콘 이름 */
+  iconName?: IconName;
 }
 
 /**
  * - `underline` 속성으로 밑줄 표시 여부를 설정할 수 있습니다. 기본값은 `true`입니다.
  * - `target="_blank"`를 사용할 때는 자동으로 보안 속성이 추가됩니다.
- * - `tone` 속성을 통해서 링크의 색상을 변경할 수 있습니다. 기본값은 `neutral`입니다.
- * - `size` 속성과 `weight` 속성을 통해서 텍스트 스타일을 변경할 수 있습니다.
- * - `muted` 속성을 주시면 글자색이 옅어집니다. 명암비가 낮아지므로 접근성 측면에서 주의해서 사용하세요. 기본값은 `false`입니다.
+ * - `tone` 속성을 통해서 링크의 색상을 변경할 수 있습니다. 기본값은 `brand`입니다.
+ * - `size` 속성을 통해서 텍스트 크기를 변경할 수 있습니다.
+ * - `iconName` 속성을 통해서 아이콘을 추가할 수 있습니다. iconName이 없으면 아이콘이 표시되지 않습니다.
  */
 export function Link({
-  children,
   href,
-  tone = "neutral",
-  size,
-  weight,
-  muted = false,
+  children,
+  iconName,
+  tone = "brand",
+  size = "md",
   underline = true,
   target,
   rel,
@@ -42,10 +41,9 @@ export function Link({
   return (
     <a
       className={css(
-        styles.raw({ tone, muted, underline }),
+        styles.raw({ tone, underline, size }),
         css.raw({
           fontSize: size,
-          fontWeight: weight,
         }),
       )}
       href={href}
@@ -54,6 +52,7 @@ export function Link({
       {...props}
     >
       {children}
+      {iconName && <Icon name={iconName} tone={tone} size={size} />}
     </a>
   );
 }
@@ -61,162 +60,68 @@ export function Link({
 const styles = cva({
   base: {
     transition: "colors 0.2s",
+    display: "inline-flex",
+    justifyContent: "center",
+    alignItems: "center",
+    "&:focus": {
+      outline: "2px solid",
+      borderRadius: "md",
+      outlineColor: "border.brand.focus",
+    },
+    "&:visited": {
+      color: "fg.brand.visited",
+    },
   },
   variants: {
     tone: {
-      neutral: {},
-      brand: {},
-      danger: {},
-      warning: {},
-      success: {},
-      info: {},
-    },
-    muted: {
-      true: {},
-      false: {},
-    },
-    underline: {
-      true: {},
-      false: {},
-    },
-  },
-  compoundVariants: [
-    {
-      tone: "neutral",
-      muted: false,
-      css: {
+      brand: {
+        color: "fg.brand",
+        "&:focus": {
+          color: "fg.brand.focus",
+        },
+        "&:active, &:hover": {
+          color: "fg.brand.hover",
+        },
+      },
+      neutral: {
         color: "fg.neutral",
+        "&:focus": {
+          color: "fg.neutral.focus",
+        },
         "&:active, &:hover": {
           color: "fg.neutral.hover",
         },
       },
     },
-    {
-      tone: "brand",
-      muted: false,
-      css: {
-        color: "fg.brand",
-        "&:active, &:hover": {
-          color: "fg.brand.hover",
-        },
+    size: {
+      sm: {
+        fontSize: "sm",
+        gap: "2",
+      },
+      md: {
+        fontSize: "md",
+        gap: "4",
+      },
+      lg: {
+        fontSize: "lg",
+        gap: "4",
       },
     },
-    {
-      tone: "danger",
-      muted: false,
-      css: {
-        color: "fg.danger",
-        "&:active, &:hover": {
-          color: "fg.danger",
-        },
-      },
-    },
-    {
-      tone: "warning",
-      muted: false,
-      css: {
-        color: "fg.warning",
-        "&:active, &:hover": {
-          color: "fg.warning",
-        },
-      },
-    },
-    {
-      tone: "success",
-      muted: false,
-      css: {
-        color: "fg.success",
-        "&:active, &:hover": {
-          color: "fg.success",
-        },
-      },
-    },
-    {
-      tone: "info",
-      muted: false,
-      css: {
-        color: "fg.info",
-        "&:active, &:hover": {
-          color: "fg.info",
-        },
-      },
-    },
-    {
-      tone: "neutral",
-      muted: true,
-      css: {
-        color: "fg.neutral.placeholder",
-        "&:active, &:hover": {
-          color: "fg.neutral",
-        },
-      },
-    },
-    {
-      tone: "brand",
-      muted: true,
-      css: {
-        color: "fg.neutral.placeholder",
-        "&:active, &:hover": {
-          color: "fg.brand",
-        },
-      },
-    },
-    {
-      tone: "danger",
-      muted: true,
-      css: {
-        color: "fg.neutral.placeholder",
-        "&:active, &:hover": {
-          color: "fg.danger",
-        },
-      },
-    },
-    {
-      tone: "warning",
-      muted: true,
-      css: {
-        color: "fg.neutral.placeholder",
-        "&:active, &:hover": {
-          color: "fg.warning",
-        },
-      },
-    },
-    {
-      tone: "success",
-      muted: true,
-      css: {
-        color: "fg.neutral.placeholder",
-        "&:active, &:hover": {
-          color: "fg.success",
-        },
-      },
-    },
-    {
-      tone: "info",
-      muted: true,
-      css: {
-        color: "fg.neutral.placeholder",
-        "&:active, &:hover": {
-          color: "fg.info",
-        },
-      },
-    },
-    {
-      underline: true,
-      css: {
+    underline: {
+      true: {
         textDecoration: "underline",
       },
-    },
-    {
-      underline: false,
-      css: {
+      false: {
         textDecoration: "none",
+        "&:hover": {
+          textDecoration: "underline",
+        },
       },
     },
-  ],
+  },
   defaultVariants: {
-    tone: "neutral",
-    muted: false,
+    tone: "brand",
+    size: "md",
     underline: true,
   },
 });
