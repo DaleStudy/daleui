@@ -96,8 +96,8 @@ const styles = cva({
     appearance: "none",
     margin: "0",
     backgroundColor: "transparent",
-    border: "3px solid",
-    borderColor: "border.neutral",
+    border: "neutral",
+    borderWidth: "lg",
     borderRadius: "sm",
     width: "1.5rem",
     height: "1.5rem",
@@ -112,9 +112,9 @@ const styles = cva({
       color: "fg.neutral.hover",
     },
     "&:focus-visible": {
-      outline: "2px solid",
-      outlineOffset: "2px",
-      outlineColor: "border.brand.focus",
+      outline: "neutral",
+      outlineWidth: "lg",
+      outlineOffset: "2",
     },
     "&:disabled": {
       borderColor: "border.neutral.disabled",
