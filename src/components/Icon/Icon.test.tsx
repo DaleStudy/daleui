@@ -2,28 +2,23 @@ import { composeStories } from "@storybook/react-vite";
 import { render } from "@testing-library/react";
 import { expect, test } from "vitest";
 import * as stories from "./Icon.stories";
+import { icons, type IconName } from "../../tokens/iconography";
 
 const { Basic } = composeStories(stories);
 
-test("SVG 요소를 렌더링한다", () => {
-  const { container } = render(<Basic />);
+test.each(Object.keys(icons) as IconName[])(
+  "%s 기본 아이콘을 렌더링한다",
+  (name) => {
+    const { container } = render(<Basic name={name} />);
 
-  // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-  expect(container.querySelector("svg")).toBeInTheDocument();
-});
-
-test.each([
-  ["xs", "w_1em h_1em"],
-  ["sm", "w_1.25em h_1.25em"],
-  ["md", "w_1.5em h_1.5em"],
-  ["lg", "w_1.875em h_1.875em"],
-  ["xl", "w_2.25em h_2.25em"],
-] as const)("%s 크기에 올바른 클래스를 적용한다", (size, className) => {
-  const { container } = render(<Basic size={size} />);
-
-  // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-  expect(container.querySelector("svg")).toHaveClass(className);
-});
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    expect(container.querySelector("svg")).toBeInTheDocument();
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    expect(container.querySelector("svg")).toHaveClass("c_fg.neutral");
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    expect(container.querySelector("svg")).toHaveClass("w_1.25rem h_1.25rem");
+  },
+);
 
 test.each([
   ["neutral", "c_fg.neutral"],
@@ -33,91 +28,20 @@ test.each([
   ["success", "c_fg.success"],
   ["info", "c_fg.info"],
 ] as const)("%s 톤에 올바른 색상 클래스를 적용한다", (tone, className) => {
-  const { container } = render(<Basic tone={tone} muted={false} />);
+  const { container } = render(<Basic tone={tone} />);
 
   // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
   expect(container.querySelector("svg")).toHaveClass(className);
 });
 
 test.each([
-  [false, "c_fg.neutral"],
-  [true, "c_fg.neutral.placeholder"],
-] as const)("muted가 %s일 때 올바른 클래스를 적용한다", (muted, className) => {
-  const { container } = render(<Basic tone="neutral" muted={muted} />);
+  ["xs", "w_0.75rem h_0.75rem"],
+  ["sm", "w_1rem h_1rem"],
+  ["md", "w_1.25rem h_1.25rem"],
+  ["lg", "w_1.5rem h_1.5rem"],
+] as const)("%s 크기에 올바른 크기 클래스를 적용한다", (size, className) => {
+  const { container } = render(<Basic size={size} />);
 
   // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
   expect(container.querySelector("svg")).toHaveClass(className);
 });
-
-test.each([
-  ["neutral", false],
-  ["neutral", true],
-  ["brand", false],
-  ["brand", true],
-  ["danger", false],
-  ["danger", true],
-  ["warning", false],
-  ["warning", true],
-  ["success", false],
-  ["success", true],
-  ["info", false],
-  ["info", true],
-] as const)(
-  "%s 톤과 muted=%s 조합으로 SVG 요소를 렌더링한다",
-  (tone, muted) => {
-    const { container } = render(<Basic tone={tone} muted={muted} />);
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const svg = container.querySelector("svg");
-
-    expect(svg).toBeInTheDocument();
-  },
-);
-
-test.each([
-  ["neutral", false],
-  ["neutral", true],
-  ["brand", false],
-  ["brand", true],
-  ["danger", false],
-  ["danger", true],
-  ["warning", false],
-  ["warning", true],
-  ["success", false],
-  ["success", true],
-  ["info", false],
-  ["info", true],
-] as const)("%s 톤과 muted=%s 조합으로 class 속성을 가진다", (tone, muted) => {
-  const { container } = render(<Basic tone={tone} muted={muted} />);
-  // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-  const svg = container.querySelector("svg");
-
-  expect(svg).toHaveAttribute("class");
-});
-
-test.each([
-  ["neutral", false],
-  ["neutral", true],
-  ["brand", false],
-  ["brand", true],
-  ["danger", false],
-  ["danger", true],
-  ["warning", false],
-  ["warning", true],
-  ["success", false],
-  ["success", true],
-  ["info", false],
-  ["info", true],
-] as const)(
-  "%s 톤과 muted=%s 조합으로 색상 클래스를 포함한다",
-  (tone, muted) => {
-    const { container } = render(<Basic tone={tone} muted={muted} />);
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const svg = container.querySelector("svg");
-
-    const hasColorClass = Array.from(svg?.classList || []).some(
-      (className) =>
-        className.startsWith("c_fg.") || className.startsWith("dark:c_fg."),
-    );
-    expect(hasColorClass).toBe(true);
-  },
-);

@@ -1,26 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { vstack } from "../../../styled-system/patterns";
-import { Heading } from "../Heading/Heading";
-import { Text } from "../Text/Text";
 import { Icon } from "./Icon";
 
 export default {
   component: Icon,
   parameters: {
     layout: "centered",
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/Dale-UI-Kit?node-id=1600-343&t=uQRCbSZfenVmrky5-0",
+    },
   },
-  args: {
-    name: "user",
-  },
+  args: { name: "sun" },
 } satisfies Meta<typeof Icon>;
 
-export const Basic: StoryObj<typeof Icon> = {
-  args: {
-    tone: "brand",
-    muted: true,
-    size: "xl",
-  },
-};
+export const Basic: StoryObj<typeof Icon> = {};
 
 export const Sizes: StoryObj<typeof Icon> = {
   render: (args) => {
@@ -30,19 +24,10 @@ export const Sizes: StoryObj<typeof Icon> = {
         <Icon {...args} size="sm" />
         <Icon {...args} size="md" />
         <Icon {...args} size="lg" />
-        <Icon {...args} size="xl" />
       </div>
     );
   },
-  argTypes: {
-    size: {
-      control: false,
-    },
-  },
-  args: {
-    tone: "brand",
-    muted: true,
-  },
+  argTypes: { size: { control: false } },
 };
 
 export const Tones: StoryObj<typeof Icon> = {
@@ -58,51 +43,5 @@ export const Tones: StoryObj<typeof Icon> = {
       </div>
     );
   },
-  argTypes: {
-    tone: {
-      control: false,
-    },
-  },
-  args: {
-    muted: true,
-  },
-};
-
-export const Contrasts: StoryObj<typeof Icon> = {
-  render: (args) => {
-    return (
-      <div className={vstack({ gap: "24" })}>
-        <Text {...args} muted>
-          낮은 <Icon name="moon" /> 명암비
-        </Text>
-        <Text {...args}>
-          높은 <Icon name="sun" /> 명암비
-        </Text>
-      </div>
-    );
-  },
-  argTypes: {
-    name: {
-      control: false,
-    },
-    muted: {
-      control: false,
-    },
-  },
-};
-
-export const WithHeading: StoryObj<typeof Icon> = {
-  render: (args) => {
-    return (
-      <Heading level={2}>
-        <Icon {...args} name="user" />
-        프로필
-      </Heading>
-    );
-  },
-  argTypes: {
-    name: {
-      control: false,
-    },
-  },
+  argTypes: { tone: { control: false } },
 };
