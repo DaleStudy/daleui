@@ -28,20 +28,6 @@ export default tseslint.config(
   },
   {
     files: ["src/components/**/*.test.[jt]s?(x)"],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: {
-        ...globals.browser,
-        ...globals.vitest,
-      },
-    },
-    plugins: {
-      "testing-library": testingLibrary,
-    },
-    rules: {
-      "testing-library/await-async-queries": "error",
-      "testing-library/no-debugging-utils": "warn",
-      "testing-library/no-dom-import": "off",
-    },
+    ...testingLibrary.configs["flat/react"],
   },
 );
