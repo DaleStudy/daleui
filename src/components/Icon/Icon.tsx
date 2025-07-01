@@ -35,6 +35,7 @@ export const Icon = ({
           display: "inline-block",
         }),
       )}
+      role="presentation"
       {...rest}
     />
   );
