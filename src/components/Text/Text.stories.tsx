@@ -27,9 +27,9 @@ export const Tones: StoryObj<typeof Text> = {
         <Text {...args} tone="danger">
           위험 색조
         </Text>
-        <Text {...args} tone="warning">
+        {/* <Text {...args} tone="warning">
           경고 색조
-        </Text>
+        </Text> */}
         <Text {...args} tone="success">
           성공 색조
         </Text>
