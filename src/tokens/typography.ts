@@ -95,6 +95,16 @@ export const textStyles = {
         lineHeight: "tight",
         letterSpacing: "balanced",
       },
+      underline: {
+        value: {
+          fontFamily: "sans",
+          fontSize: "lg",
+          fontWeight: "medium",
+          lineHeight: "tight",
+          letterSpacing: "balanced",
+          textDecoration: "underline",
+        },
+      },
     },
     md: {
       value: {
@@ -104,6 +114,16 @@ export const textStyles = {
         lineHeight: "tight",
         letterSpacing: "balanced",
       },
+      underline: {
+        value: {
+          fontFamily: "sans",
+          fontSize: "md",
+          fontWeight: "medium",
+          lineHeight: "tight",
+          letterSpacing: "balanced",
+          textDecoration: "underline",
+        },
+      },
     },
     sm: {
       value: {
@@ -112,6 +132,16 @@ export const textStyles = {
         fontWeight: "medium",
         lineHeight: "tight",
         letterSpacing: "balanced",
+      },
+      underline: {
+        value: {
+          fontFamily: "sans",
+          fontSize: "sm",
+          fontWeight: "medium",
+          lineHeight: "tight",
+          letterSpacing: "balanced",
+          textDecoration: "underline",
+        },
       },
     },
   },
