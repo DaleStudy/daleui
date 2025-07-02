@@ -14,7 +14,7 @@ export interface IconProps {
 /**
  * - `name` 속성으로 어떤 모양의 아이콘을 사용할지 지정할 수 있습니다.
  * - 아이콘의 기본 크기는 기본 글자 크기의 1.25배이며, `size` 속성을 통해서 크기를 변경할 수 있습니다.
- * - 아이콘의 기본 색상은 neutral이며, `tone` 속성을 통해서 색상을 변경할 수 있습니다.
+ * - 아이콘의 기본 색조은 neutral이며, `tone` 속성을 통해서 색상을 변경할 수 있습니다.
  */
 export const Icon = ({ name, size, tone, ...rest }: IconProps) => {
   const Tag = icons[name];
