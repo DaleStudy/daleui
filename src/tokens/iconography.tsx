@@ -14,6 +14,9 @@ import {
   Sun,
   User,
   X,
+  Eye,
+  EyeClosed,
+  EyeOff,
 } from "lucide-react";
 import type { FunctionComponent, ComponentProps, SVGProps } from "react";
 import Discord from "../assets/Discord.svg?react";
@@ -49,6 +52,9 @@ export const icons = {
   sun: Sun,
   user: User,
   x: X,
+  eye: Eye,
+  eyeOff: EyeOff,
+  eyeClosed: EyeClosed,
 };
 
 export type IconName = keyof typeof icons;
