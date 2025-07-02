@@ -54,7 +54,7 @@
     "eslint": "^9.27.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.20",
-    "eslint-plugin-storybook": "^0.12.0",
+    "eslint-plugin-storybook": "^9.0.15",
     "eslint-plugin-testing-library": "^7.5.1",
     "globals": "^16.2.0",
     "happy-dom": "^18.0.1",
