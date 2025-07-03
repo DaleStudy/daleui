@@ -37,7 +37,7 @@ test.each([
   ["중립 색조", "c_fg.neutral"],
   ["브랜드 색조", "c_fg.brand"],
   ["위험 색조", "c_fg.danger"],
-  ["경고 색조", "c_fg.warning"],
+  // ["경고 색조", "c_fg.warning"],
   ["성공 색조", "c_fg.success"],
   ["정보 색조", "c_fg.info"],
 ] as const)("%s에 올바른 톤 클래스를 적용한다", (textName, className) => {

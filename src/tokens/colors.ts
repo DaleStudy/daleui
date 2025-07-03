@@ -13,11 +13,11 @@ export const semanticColors: SemanticTokens["colors"] = {
     value: { base: "{colors.white}", _dark: "{colors.black}" },
   },
   fgSolid: {
-    brand: {
-      value: { base: "{colors.violet.1}", _dark: "{colors.darkTeal.1}" },
-    },
     neutral: {
       value: { base: "{colors.slate.1}", _dark: "{colors.darkSage.1}" },
+    },
+    brand: {
+      value: { base: "{colors.violet.1}", _dark: "{colors.darkTeal.1}" },
     },
     success: {
       value: { base: "{colors.green.1}", _dark: "{colors.darkGreen.1}" },
@@ -42,7 +42,7 @@ export const semanticColors: SemanticTokens["colors"] = {
     },
     neutral: {
       DEFAULT: {
-        value: { base: "{colors.slate.1}", _dark: "{colors.darkSage.1}" },
+        value: { base: "{colors.white}", _dark: "{colors.darkSage.1}" },
       },
       hover: {
         value: { base: "{colors.slate.2}", _dark: "{colors.darkSage.2}" },
@@ -51,7 +51,7 @@ export const semanticColors: SemanticTokens["colors"] = {
         value: { base: "{colors.slate.3}", _dark: "{colors.darkSage.3}" },
       },
       disabled: {
-        value: { base: "{colors.slate.5}", _dark: "{colors.darkSage.6}" },
+        value: { base: "{colors.slate.5}", _dark: "{colors.darkSage.5}" },
       },
     },
     danger: {
@@ -144,13 +144,37 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
     },
     success: {
-      value: { base: "{colors.green.11}", _dark: "{colors.darkGreen.11}" },
+      DEFAULT: {
+        value: { base: "{colors.green.10}", _dark: "{colors.darkGreen.10}" },
+      },
+      hover: {
+        value: { base: "{colors.green.11}", _dark: "{colors.darkGreen.11}" },
+      },
+      active: {
+        value: { base: "{colors.green.12}", _dark: "{colors.darkGreen.12}" },
+      },
     },
     warning: {
-      value: { base: "{colors.amber.9}", _dark: "{colors.darkAmber.9}" },
+      DEFAULT: {
+        value: { base: "{colors.amber.9}", _dark: "{colors.darkAmber.10}" },
+      },
+      hover: {
+        value: { base: "{colors.amber.10}", _dark: "{colors.darkAmber.11}" },
+      },
+      active: {
+        value: { base: "{colors.amber.11}", _dark: "{colors.darkAmber.12}" },
+      },
     },
     info: {
-      value: { base: "{colors.blue.11}", _dark: "{colors.darkBlue.11}" },
+      DEFAULT: {
+        value: { base: "{colors.blue.10}", _dark: "{colors.darkBlue.10}" },
+      },
+      hover: {
+        value: { base: "{colors.blue.11}", _dark: "{colors.darkBlue.11}" },
+      },
+      active: {
+        value: { base: "{colors.blue.12}", _dark: "{colors.darkBlue.12}" },
+      },
     },
   },
   fg: {
@@ -180,7 +204,7 @@ export const semanticColors: SemanticTokens["colors"] = {
         value: { base: "{colors.slate.7}", _dark: "{colors.darkSage.9}" },
       },
       disabled: {
-        value: { base: "{colors.slate.8}", _dark: "{colors.darkSage.7}" },
+        value: { base: "{colors.slate.10}", _dark: "{colors.darkSage.9}" },
       },
     },
     success: {
@@ -354,7 +378,7 @@ export const colors: Tokens["colors"] = {
     8: { value: "#E2A336" },
     9: { value: "#FFC53D" },
     10: { value: "#FFBA18" },
-    11: { value: "#AB6400" },
+    11: { value: "#DD9E08" },
     12: { value: "#4F3422" },
   },
   darkAmber: {
@@ -381,8 +405,8 @@ export const colors: Tokens["colors"] = {
     7: { value: "#8EC8F6" },
     8: { value: "#5EB1EF" },
     9: { value: "#0090FF" },
-    10: { value: "#0588F0" },
-    11: { value: "#0D74CE" },
+    10: { value: "#0463AF" },
+    11: { value: "#095190" },
     12: { value: "#113264" },
   },
   darkBlue: {
@@ -409,8 +433,8 @@ export const colors: Tokens["colors"] = {
     7: { value: "#8ECEAA" },
     8: { value: "#5BB98B" },
     9: { value: "#30A46C" },
-    10: { value: "#2B9A66" },
-    11: { value: "#218358" },
+    10: { value: "#21784F" },
+    11: { value: "#1A6644" },
     12: { value: "#193B2D" },
   },
   darkGreen: {
