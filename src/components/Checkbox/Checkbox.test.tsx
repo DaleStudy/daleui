@@ -96,12 +96,16 @@ test("disabled 속성이 올바르게 적용됨", () => {
 test("필수 표시가 올바르게 표시됨", () => {
   render(<Required />);
 
-  const requiredLabel = screen.getByText("필수 체크박스").parentElement;
-  const optionalLabel = screen.getByText("선택 체크박스");
-
-  // Check for required indicator (asterisk)
-  expect(requiredLabel).toContainHTML("*");
-  expect(optionalLabel).not.toContainHTML("*");
+  expect(
+    screen.getByRole("checkbox", {
+      name: "필수 체크박스 *",
+    }),
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole("checkbox", {
+      name: "선택 체크박스",
+    }),
+  ).toBeInTheDocument();
 });
 
 test("체크박스 클릭 시, onChange 핸들러가 호출됨", async () => {
