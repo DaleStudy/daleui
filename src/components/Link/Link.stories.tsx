@@ -184,7 +184,7 @@ export const WithIcon: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <Link {...args} target="_blank">
-        <Icon name="chevronRight" />
+        <Icon name="chevronRight" aria-label="chevronRight" />
         링크 아이콘
       </Link>
     );

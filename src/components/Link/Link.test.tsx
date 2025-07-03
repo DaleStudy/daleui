@@ -18,10 +18,9 @@ describe("렌더링 테스트", () => {
   test("Icon 컴포넌트와 함께 잘 사용한다", () => {
     render(<WithIcon />);
 
-    expect(screen.getByRole("link")).toHaveTextContent("링크");
-    expect(screen.getByRole("link")).toContainElement(
-      screen.getByRole("presentation", { hidden: true }),
-    );
+    const link = screen.getByRole("link");
+    expect(link).toHaveTextContent("링크");
+    expect(link).toContainElement(screen.getByLabelText("chevronRight"));
   });
 });
 
