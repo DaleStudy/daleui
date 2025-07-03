@@ -20,6 +20,7 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
  * - `level` 속성을 통해서 `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>` 요소 중 하나를 선택할 수 있습니다.
  * - `level` 속성은 단계 별 기본 텍스트 스타일을 제공합니다.
  * - `size` 속성을 통해서 기본 스타일을 변경할 수 있습니다.
+ * - `tone` 속성을 통해서 색상 강조를 지정할 수 있습니다.
  */
 export const Heading = ({
   children,
