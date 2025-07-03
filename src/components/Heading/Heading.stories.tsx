@@ -10,6 +10,7 @@ export default {
   args: {
     children: "제목",
     level: 1,
+    tone: "brand",
   },
 } satisfies Meta<typeof Heading>;
 
@@ -47,14 +48,16 @@ export const Levels: StoryObj<typeof Heading> = {
   },
 };
 
-export const Contrasts: StoryObj<typeof Heading> = {
+export const Tones: StoryObj<typeof Heading> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <Heading {...args} muted>
-          낮은 명암비
+        <Heading {...args} tone="neutral">
+          중립 색조
         </Heading>
-        <Heading {...args}>높은 명암비</Heading>
+        <Heading {...args} tone="brand">
+          브랜드 색조
+        </Heading>
       </div>
     );
   },
@@ -62,7 +65,39 @@ export const Contrasts: StoryObj<typeof Heading> = {
     children: {
       control: false,
     },
-    muted: {
+    tone: {
+      control: false,
+    },
+  },
+};
+
+export const Sizes: StoryObj<typeof Heading> = {
+  render: (args) => {
+    return (
+      <div className={vstack({ gap: "24" })}>
+        <Heading {...args} size="md">
+          제목
+        </Heading>
+        <Heading {...args} size="lg">
+          제목
+        </Heading>
+        <Heading {...args} size="xl">
+          제목
+        </Heading>
+        <Heading {...args} size="2xl">
+          제목
+        </Heading>
+        <Heading {...args} size="3xl">
+          제목
+        </Heading>
+      </div>
+    );
+  },
+  argTypes: {
+    children: {
+      control: false,
+    },
+    size: {
       control: false,
     },
   },
