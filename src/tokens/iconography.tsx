@@ -32,11 +32,6 @@ function createBrandIcon(Icon: FunctionComponent<SVGProps<SVGSVGElement>>) {
 }
 
 export const icons = {
-  Discord: createBrandIcon(Discord),
-  GitHub: createBrandIcon(GitHub),
-  LinkedIn: createBrandIcon(LinkedIn),
-  Medium: createBrandIcon(Medium),
-  YouTube: createBrandIcon(YouTube),
   check: Check,
   chevronLeft: ChevronLeft,
   chevronRight: ChevronRight,
@@ -55,6 +50,11 @@ export const icons = {
   eye: Eye,
   eyeOff: EyeOff,
   eyeClosed: EyeClosed,
+  Discord: createBrandIcon(Discord),
+  GitHub: createBrandIcon(GitHub),
+  LinkedIn: createBrandIcon(LinkedIn),
+  Medium: createBrandIcon(Medium),
+  YouTube: createBrandIcon(YouTube),
 };
 
 export type IconName = keyof typeof icons;
