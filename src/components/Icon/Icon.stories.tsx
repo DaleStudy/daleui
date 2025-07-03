@@ -11,7 +11,7 @@ export default {
       url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/Dale-UI-Kit?node-id=1600-343&t=uQRCbSZfenVmrky5-0",
     },
   },
-  args: { name: "sun" },
+  args: { name: "user" },
 } satisfies Meta<typeof Icon>;
 
 export const Basic: StoryObj<typeof Icon> = {};
