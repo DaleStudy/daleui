@@ -61,6 +61,7 @@ describe("스타일 테스트", () => {
     render(<Icons />);
 
     const linkElement = screen.getByRole("link", { name: linkName });
+    // eslint-disable-next-line testing-library/no-node-access
     const iconElement = linkElement.querySelector("svg");
     if (className) {
       expect(iconElement).toBeInTheDocument();
