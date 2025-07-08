@@ -187,27 +187,22 @@ describe("Radio", () => {
   );
 
   test.each([
-    ["neutral"],
-    ["brand"],
-    ["danger"],
-    ["warning"],
-    ["success"],
-    ["info"],
-  ] as const)("%s 톤을 올바르게 렌더링한다", (tone) => {
+    ["neutral", "bd-c_border.neutral"],
+    ["brand", "bd-c_border.brand"],
+    ["danger", "bd-c_border.danger"],
+    ["warning", "bd-c_border.warning"],
+    ["success", "bd-c_border.success"],
+    ["info", "bd-c_border.info"],
+  ] as const)("%s 톤을 올바르게 렌더링한다", (tone, className) => {
     render(
       <RadioGroup name="test" label="Test Radio Group" tone={tone}>
         <Radio value="option1">Option 1</Radio>
       </RadioGroup>,
     );
 
-    const radio = screen.getByRole("radio", { name: "Option 1" });
-    expect(radio).toBeInTheDocument();
+    const indicator = screen.getByRole("presentation", { hidden: true });
+    expect(indicator).toBeInTheDocument();
 
-    // eslint-disable-next-line testing-library/no-node-access
-    const container = radio.closest("label");
-    expect(
-      // eslint-disable-next-line testing-library/no-node-access
-      container?.querySelector('div[class*="border"]'),
-    ).toBeInTheDocument();
+    expect(indicator).toHaveClass(className);
   });
 });
