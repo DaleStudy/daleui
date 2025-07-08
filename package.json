@@ -29,7 +29,7 @@
     "@radix-ui/react-checkbox": "^1.2.3",
     "@radix-ui/react-radio-group": "^1.3.7",
     "axe-playwright": "^2.0.3",
-    "chromatic": "^13.0.1",
+    "chromatic": "^13.1.2",
     "lucide-react": "^0.510.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
