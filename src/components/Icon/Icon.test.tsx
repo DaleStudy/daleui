@@ -12,7 +12,7 @@ test.each(Object.keys(icons) as IconName[])(
     render(<Basic name={name} aria-label={name} />);
 
     expect(screen.getByLabelText(name)).toBeInTheDocument();
-    expect(screen.getByLabelText(name)).toHaveClass("c_fg.neutral");
+    expect(screen.getByLabelText(name)).toHaveClass("c_currentcolor");
     expect(screen.getByLabelText(name)).toHaveClass("w_1.25rem h_1.25rem");
   },
 );
