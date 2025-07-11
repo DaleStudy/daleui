@@ -20,11 +20,13 @@ test.each([1, 2, 3, 4, 5] as const)(
   },
 );
 
-test.each(["md", "lg", "xl", "2xl", "3xl"] as const)(
-  "size prop에 따라 font size 클래스가 올바르게 적용됨",
+test.each([1, 2, 3, 4, 5] as const)(
+  "size prop에 따라 textStyle 클래스가 올바르게 적용됨",
   (size) => {
     render(<Basic size={size} />);
-    expect(screen.getByRole("heading")).toHaveClass(`fs_${size}`);
+    expect(screen.getByRole("heading")).toHaveClass(
+      `textStyle_heading.${size}`,
+    );
   },
 );
 
