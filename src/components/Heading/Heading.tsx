@@ -2,8 +2,8 @@ import type { HTMLAttributes, ReactNode } from "react";
 import { css, cva } from "../../../styled-system/css";
 
 type Level = 1 | 2 | 3 | 4 | 5;
-type Tone = "brand" | "neutral";
-type HeadingSize = "md" | "lg" | "xl" | "2xl" | "3xl";
+type HeadingTone = "brand" | "neutral";
+type HeadingSize = 1 | 2 | 3 | 4 | 5;
 
 export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   /** 텍스트 */
@@ -13,7 +13,7 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   /** 크기 */
   size?: HeadingSize;
   /** 색조 */
-  tone?: Tone;
+  tone?: HeadingTone;
 }
 
 /**
@@ -40,10 +40,11 @@ export const Heading = ({
   return (
     <Tag
       className={css(
-        styles.raw({ level, tone }),
-        css.raw({
-          fontSize: size,
-        }),
+        styles.raw({ level: size ? undefined : level, tone }),
+        size &&
+          css.raw({
+            textStyle: `heading.${size}`,
+          }),
       )}
       {...rest}
     >
@@ -55,30 +56,18 @@ export const Heading = ({
 const styles = cva({
   variants: {
     level: {
-      1: { fontSize: "3xl" },
-      2: { fontSize: "2xl" },
-      3: { fontSize: "xl" },
-      4: { fontSize: "lg" },
-      5: { fontSize: "md" },
+      1: { textStyle: "heading.1" },
+      2: { textStyle: "heading.2" },
+      3: { textStyle: "heading.3" },
+      4: { textStyle: "heading.4" },
+      5: { textStyle: "heading.5" },
     },
     tone: {
       brand: {
         color: "fg.brand",
-        "&:focus": {
-          color: "fg.brand.focus",
-        },
-        "&:active, &:hover": {
-          color: "fg.brand.hover",
-        },
       },
       neutral: {
         color: "fg.neutral",
-        "&:focus": {
-          color: "fg.neutral.focus",
-        },
-        "&:active, &:hover": {
-          color: "fg.neutral.hover",
-        },
       },
     },
   },

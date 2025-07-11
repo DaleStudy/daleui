@@ -6,6 +6,10 @@ export default {
   component: Heading,
   parameters: {
     layout: "centered",
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/Dale-UI-Kit?node-id=1571-804&m=dev",
+    },
   },
   args: {
     children: "제목",
@@ -75,19 +79,19 @@ export const Sizes: StoryObj<typeof Heading> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <Heading {...args} size="md">
+        <Heading {...args} size={1}>
           제목
         </Heading>
-        <Heading {...args} size="lg">
+        <Heading {...args} size={2}>
           제목
         </Heading>
-        <Heading {...args} size="xl">
+        <Heading {...args} size={3}>
           제목
         </Heading>
-        <Heading {...args} size="2xl">
+        <Heading {...args} size={4}>
           제목
         </Heading>
-        <Heading {...args} size="3xl">
+        <Heading {...args} size={5}>
           제목
         </Heading>
       </div>
