@@ -38,9 +38,9 @@ export const Tones: StoryObj<typeof Link> = {
         <Link {...args} tone="danger">
           위험 링크
         </Link>
-        <Link {...args} tone="warning">
+        {/* <Link {...args} tone="warning">
           경고 링크
-        </Link>
+        </Link> */}
         <Link {...args} tone="success">
           성공 링크
         </Link>
@@ -184,7 +184,7 @@ export const WithIcon: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <Link {...args} target="_blank">
-        <Icon name="chevronRight" />
+        <Icon name="chevronRight" aria-label="chevronRight" />
         링크 아이콘
       </Link>
     );

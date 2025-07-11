@@ -194,7 +194,10 @@ export function Radio({ value, children, disabled, ref }: RadioProps) {
         >
           <RadixRadioGroup.Indicator className={radioDotStyles({ tone })} />
         </RadixRadioGroup.Item>
-        <div className={radioCircleStyles({ tone, disabled })} />
+        <div
+          className={radioCircleStyles({ tone, disabled })}
+          role="presentation"
+        />
       </div>
       {children && (
         <span className={labelTextStyles({ disabled })}>{children}</span>
