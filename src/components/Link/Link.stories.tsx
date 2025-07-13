@@ -7,6 +7,10 @@ export default {
   component: Link,
   parameters: {
     layout: "centered",
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/Dale-UI-Kit?node-id=1259-6788&m=dev",
+    },
   },
   args: {
     children: "링크",
