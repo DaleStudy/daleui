@@ -20,7 +20,6 @@ interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
  * - `underline` 속성으로 밑줄 표시 여부를 설정할 수 있습니다. 기본값은 `true`입니다.
  * - `tone` 속성을 통해서 링크의 색상을 변경할 수 있습니다. 기본값은 `brand`입니다.
  * - `size` 속성을 통해서 텍스트 크기를 변경할 수 있습니다.
- * - `iconName` 속성을 통해서 아이콘을 추가할 수 있습니다. iconName이 없으면 아이콘이 표시되지 않습니다.
  *
  * ### 접근성(Accessibility) 안내
  * - 이 컴포넌트는 `<a>` 태그를 사용하여 시맨틱하게 구현되어 있습니다.
@@ -39,17 +38,29 @@ export function Link({
   rel,
   ...props
 }: LinkProps) {
+  if (typeof children !== "string" && !("aria-label" in props)) {
+    console.warn(
+      "Link 컴포넌트는 문자열이 아닌 자식 요소를 사용하는 경우 aria-label 속성을 추가하여 대체 텍스트를 제공하는 것을 권장합니다.",
+    );
+  }
+
+  const targetRel =
+    target === "_blank"
+      ? Array.from(
+          new Set(
+            ["noopener", "noreferrer", ...(rel?.split(" ") ?? [])].filter(
+              Boolean,
+            ),
+          ),
+        ).join(" ")
+      : rel;
+
   return (
     <a
-      className={css(
-        styles.raw({ tone, underline, size }),
-        css.raw({
-          fontSize: size,
-        }),
-      )}
+      className={css(styles.raw({ tone, underline, size }))}
       href={href}
       target={target}
-      rel={target === "_blank" ? "noopener noreferrer" : rel}
+      rel={targetRel}
       {...props}
     >
       {children}
