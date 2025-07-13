@@ -1,7 +1,5 @@
 import { type AnchorHTMLAttributes } from "react";
 import { css, cva } from "../../../styled-system/css";
-import type { IconName } from "../../tokens/iconography";
-import { Icon } from "../Icon/Icon";
 
 type LinkSize = "sm" | "md" | "lg";
 type LinkTone = "neutral" | "brand";
@@ -16,8 +14,6 @@ interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   size?: LinkSize;
   /** 링크에 밑줄 표시 여부 */
   underline?: boolean;
-  /** 아이콘 이름 */
-  iconName?: IconName;
 }
 
 /**
@@ -31,11 +27,11 @@ interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
  * - `target="_blank"` 사용 시 `rel="noopener noreferrer"`가 자동으로 추가되어 보안 및 접근성이 향상됩니다.
  * - 키보드 포커스 시 명확한 아웃라인이 표시됩니다.
  * - 텍스트가 없는 이미지나 아이콘만 사용하는 경우, 반드시 `aria-label` 속성을 추가하여 대체 텍스트를 제공하는 것을 권장합니다.
+ * - 아이콘 등 컴포넌트를 사용시 링크와 다른 `Tone`, `Size`를 사용하지 않도록 주의합니다.
  */
 export function Link({
   href,
   children,
-  iconName,
   tone = "brand",
   size = "md",
   underline = true,
@@ -57,7 +53,6 @@ export function Link({
       {...props}
     >
       {children}
-      {iconName && <Icon name={iconName} tone={tone} size={size} />}
     </a>
   );
 }
