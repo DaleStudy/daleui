@@ -83,6 +83,9 @@ const styles = cva({
     },
     "&:visited": {
       color: "fg.brand.visited",
+      "& svg": {
+        color: "fg.brand.visited",
+      },
     },
   },
   variants: {

@@ -9,7 +9,6 @@ import {
   Menu,
   MessageCircle,
   Moon,
-  ExternalLink,
   Search,
   Star,
   Sun,

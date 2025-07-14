@@ -159,7 +159,13 @@ export const Icons: StoryObj<typeof Link> = {
     return (
       <div className={vstack({ gap: "24" })}>
         <Link {...args} aria-label="아이콘 있음">
-          아이콘 있음 <Icon name="externalLink" size={args.size} />
+          아이콘 있음
+          <Icon
+            name="externalLink"
+            size={args.size}
+            role="presentation"
+            aria-label="아이콘 있음"
+          />
         </Link>
         <Link {...args}>아이콘 없음</Link>
       </div>
@@ -190,7 +196,7 @@ export const Visited: StoryObj<typeof Link> = {
           aria-label="방문한 링크"
         >
           방문한 링크
-          <Icon name="externalLink" size={args.size} />
+          <Icon name="externalLink" size={args.size} stroke="currentColor" />
         </Link>
         <Link {...args} aria-label="방문하지 않은 링크">
           방문하지 않은 링크
