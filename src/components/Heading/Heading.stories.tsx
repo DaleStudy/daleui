@@ -14,7 +14,7 @@ export default {
   args: {
     children: "제목",
     level: 1,
-    tone: "brand",
+    tone: "neutral",
   },
 } satisfies Meta<typeof Heading>;
 

@@ -26,7 +26,7 @@ export const Heading = ({
   children,
   level,
   size,
-  tone = "brand",
+  tone = "neutral",
   ...rest
 }: HeadingProps) => {
   if (!level) {
