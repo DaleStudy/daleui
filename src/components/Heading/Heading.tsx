@@ -1,9 +1,8 @@
 import type { HTMLAttributes, ReactNode } from "react";
 import { css, cva } from "../../../styled-system/css";
-import type { Tone } from "../../tokens/colors";
 
 type Level = 1 | 2 | 3 | 4 | 5;
-type HeadingTone = Extract<Tone, "brand" | "neutral">;
+type HeadingTone = "brand" | "neutral";
 type HeadingSize = 1 | 2 | 3 | 4 | 5;
 
 export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
