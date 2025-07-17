@@ -104,12 +104,18 @@ export const WithIcons: Story = {
  */
 export const ErrorState: Story = {
   render: (args) => (
-    <TextInput
-      {...args}
-      state="error"
-      trailingIcon={<Icon name="circleAlert" />}
-      placeholder="이메일 형식이 올바르지 않습니다."
-    />
+    <div
+      className={css({
+        w: "320px",
+      })}
+    >
+      <TextInput
+        {...args}
+        state="error"
+        trailingIcon={<Icon name="circleAlert" />}
+        placeholder="이메일 형식이 올바르지 않습니다."
+      />
+    </div>
   ),
 };
 
