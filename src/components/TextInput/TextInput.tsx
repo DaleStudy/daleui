@@ -28,7 +28,6 @@ const wrapperStyles = cva({
     },
     "&:focus-within": {
       borderColor: "border.brand.focus",
-      boxShadow: "0 0 0 3px token(colors.bg.brand)",
     },
     "&:has(input:disabled)": {
       cursor: "not-allowed",
