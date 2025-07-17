@@ -1,8 +1,9 @@
 import type { HTMLAttributes, ReactNode } from "react";
 import { css, cva } from "../../../styled-system/css";
-import type { FontSize, FontWeight } from "../../tokens/typography";
 
 type Level = 1 | 2 | 3 | 4 | 5;
+type HeadingTone = "brand" | "neutral";
+type HeadingSize = 1 | 2 | 3 | 4 | 5;
 
 export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   /** 텍스트 */
@@ -10,25 +11,22 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   /** 단계 */
   level: Level;
   /** 크기 */
-  size?: FontSize;
-  /** 굵기 */
-  weight?: FontWeight;
-  /** 명암비 낮출지 */
-  muted?: boolean;
+  size?: HeadingSize;
+  /** 색조 */
+  tone?: HeadingTone;
 }
 
 /**
  * - `level` 속성을 통해서 `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>` 요소 중 하나를 선택할 수 있습니다.
  * - `level` 속성은 단계 별 기본 텍스트 스타일을 제공합니다.
- * - `size` 속성과 `weight` 속성을 통해서 기본 스타일을 변경할 수 있습니다.
- * - `muted` 속성을 주시면 글자색이 옅어집니다. 명암비가 낮아지므로 접근성 측면에서 주의해서 사용하세요.
+ * - `size` 속성을 통해서 기본 스타일을 변경할 수 있습니다.
+ * - `tone` 속성을 통해서 색상 강조를 지정할 수 있습니다.
  */
 export const Heading = ({
   children,
   level,
   size,
-  weight,
-  muted = false,
+  tone = "neutral",
   ...rest
 }: HeadingProps) => {
   if (!level) {
@@ -42,11 +40,11 @@ export const Heading = ({
   return (
     <Tag
       className={css(
-        styles.raw({ level, muted }),
-        css.raw({
-          fontSize: size,
-          fontWeight: weight,
-        }),
+        styles.raw({ level: size ? undefined : level, tone }),
+        size &&
+          css.raw({
+            textStyle: `heading.${size}`,
+          }),
       )}
       {...rest}
     >
@@ -58,15 +56,19 @@ export const Heading = ({
 const styles = cva({
   variants: {
     level: {
-      1: { fontSize: "3xl" },
-      2: { fontSize: "2xl" },
-      3: { fontSize: "xl" },
-      4: { fontSize: "lg" },
-      5: { fontSize: "md" },
+      1: { textStyle: "heading.1" },
+      2: { textStyle: "heading.2" },
+      3: { textStyle: "heading.3" },
+      4: { textStyle: "heading.4" },
+      5: { textStyle: "heading.5" },
     },
-    muted: {
-      true: { color: "fg.neutral.placeholder" },
-      false: { color: "fg.neutral" },
+    tone: {
+      brand: {
+        color: "fg.brand",
+      },
+      neutral: {
+        color: "fg.neutral",
+      },
     },
   },
 });
