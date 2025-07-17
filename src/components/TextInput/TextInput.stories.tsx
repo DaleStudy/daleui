@@ -21,15 +21,15 @@ export default {
     },
     state: {
       control: "select",
-      options: ["success", "warning", "error", undefined],
-      description: "입력 필드의 상태(성공, 경고, 오류)를 설정합니다.",
+      options: ["error", undefined],
+      description: "입력 필드의 오류 상태를 설정합니다.",
     },
     disabled: {
       control: "boolean",
       description: "입력 필드를 비활성화합니다.",
     },
     leadingIcon: {
-      control: false, // 아이콘은 직접 코드로 보여주는 것이 더 명확하므로 컨트롤 비활성화
+      control: false,
     },
     trailingIcon: {
       control: false,
@@ -105,10 +105,10 @@ export const WithIcons: Story = {
 };
 
 /**
- * `state` prop을 통해 입력 필드의 상태(성공, 경고, 오류)를 시각적으로 표현할 수 있습니다.
- * 아이콘을 함께 사용하면, 아이콘의 색상도 상태에 맞게 자동으로 변경됩니다.
+ * `state` prop을 'error'로 설정하여 오류 상태를 시각적으로 표현할 수 있습니다.
+ * 아이콘을 함께 사용하면, 아이콘의 색상도 오류 상태에 맞게 자동으로 변경됩니다.
  */
-export const States: Story = {
+export const ErrorState: Story = {
   render: (args) => (
     <div
       className={css({
@@ -120,21 +120,9 @@ export const States: Story = {
     >
       <TextInput
         {...args}
-        state="success"
-        defaultValue="올바른 형식입니다."
-        trailingIcon={<Icon name="check" />}
-      />
-      <TextInput
-        {...args}
-        state="warning"
-        defaultValue="비밀번호가 곧 만료됩니다."
-        trailingIcon={<Icon name="circleAlert" />}
-      />
-      <TextInput
-        {...args}
         state="error"
-        defaultValue="이메일 형식이 올바르지 않습니다."
         trailingIcon={<Icon name="circleAlert" />}
+        placeholder="이메일 형식이 올바르지 않습니다."
       />
     </div>
   ),
@@ -154,9 +142,17 @@ export const Disabled: Story = {
 
 const ControlledTextInput = () => {
   const [value, setValue] = useState("");
+  const [hasError, setHasError] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    const newValue = e.target.value;
+    setValue(newValue);
+
+    if (newValue.length > 0 && newValue.length < 10) {
+      setHasError(true);
+    } else {
+      setHasError(false);
+    }
   };
 
   return (
@@ -164,12 +160,16 @@ const ControlledTextInput = () => {
       <TextInput
         value={value}
         onChange={handleChange}
-        placeholder="이곳에 입력하세요..."
+        placeholder="10자 이상 입력하세요..."
+        state={hasError ? "error" : undefined}
         trailingIcon={
           value.length > 0 ? (
             <span
               className={css({ cursor: "pointer", display: "inline-flex" })}
-              onClick={() => setValue("")}
+              onClick={() => {
+                setValue("");
+                setHasError(false);
+              }}
             >
               <Icon name="x" />
             </span>
@@ -179,6 +179,9 @@ const ControlledTextInput = () => {
       <div className={css({ mt: "16", fontSize: "sm" })}>
         <p>현재 값: {value}</p>
         <p>글자 수: {value.length}</p>
+        {hasError && (
+          <p className={css({ color: "danger" })}>10자 이상 입력해야 합니다.</p>
+        )}
       </div>
     </div>
   );

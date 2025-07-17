@@ -43,14 +43,6 @@ const wrapperStyles = cva({
       lg: { h: "56px", px: "24", fontSize: "lg" },
     },
     state: {
-      success: {
-        border: "success",
-        "&:focus-within": { borderColor: "border.success", boxShadow: "none" },
-      },
-      warning: {
-        border: "warning",
-        "&:focus-within": { borderColor: "border.warning", boxShadow: "none" },
-      },
       error: {
         border: "danger",
         "&:focus-within": { borderColor: "border.danger", boxShadow: "none" },
@@ -85,7 +77,7 @@ const inputStyles = cva({
 export interface TextInputProps
   extends Omit<ComponentPropsWithoutRef<"input">, "size"> {
   size?: "sm" | "md" | "lg";
-  state?: "success" | "warning" | "error";
+  state?: "error";
   leadingIcon?: ReactElement<IconProps>;
   trailingIcon?: ReactElement<IconProps>;
 }
@@ -93,8 +85,6 @@ export interface TextInputProps
 // TextInput의 state를 Icon의 tone으로 매핑하는 객체
 const stateToToneMap: Record<NonNullable<TextInputProps["state"]>, Tone> = {
   error: "danger",
-  warning: "warning",
-  success: "success",
 };
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
@@ -127,7 +117,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           className={inputStyles()}
           ref={ref}
           disabled={disabled}
-          aria-invalid={state === "error"}
+          aria-invalid={state === "error" ? true : undefined}
           {...rest}
         />
         {trailingIcon && renderIcon(trailingIcon)}
