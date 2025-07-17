@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { css } from "../../../styled-system/css";
+import { vstack } from "../../../styled-system/patterns";
 import { Icon } from "../Icon/Icon";
 import { TextInput } from "./TextInput";
 
@@ -75,14 +76,7 @@ export const Sizes: Story = {
  */
 export const WithIcons: Story = {
   render: (args) => (
-    <div
-      className={css({
-        display: "flex",
-        flexDirection: "column",
-        gap: "16",
-        w: "320px",
-      })}
-    >
+    <div className={vstack({ gap: "16", w: "320px" })}>
       <TextInput
         {...args}
         leadingIcon={<Icon name="search" />}
@@ -110,21 +104,12 @@ export const WithIcons: Story = {
  */
 export const ErrorState: Story = {
   render: (args) => (
-    <div
-      className={css({
-        display: "flex",
-        flexDirection: "column",
-        gap: "16",
-        w: "320px",
-      })}
-    >
-      <TextInput
-        {...args}
-        state="error"
-        trailingIcon={<Icon name="circleAlert" />}
-        placeholder="이메일 형식이 올바르지 않습니다."
-      />
-    </div>
+    <TextInput
+      {...args}
+      state="error"
+      trailingIcon={<Icon name="circleAlert" />}
+      placeholder="이메일 형식이 올바르지 않습니다."
+    />
   ),
 };
 

@@ -76,9 +76,13 @@ const inputStyles = cva({
 
 export interface TextInputProps
   extends Omit<ComponentPropsWithoutRef<"input">, "size"> {
+  /** 크기 */
   size?: "sm" | "md" | "lg";
+  /** 상태 */
   state?: "error";
+  /** 앞쪽 아이콘 */
   leadingIcon?: ReactElement<IconProps>;
+  /** 뒤쪽 아이콘 */
   trailingIcon?: ReactElement<IconProps>;
 }
 
@@ -87,6 +91,11 @@ const stateToToneMap: Record<NonNullable<TextInputProps["state"]>, Tone> = {
   error: "danger",
 };
 
+/**
+ * - 사용자가 텍스트를 입력할 수 있는 기본적인 입력 필드 컴포넌트입니다.
+ * - `leadingIcon`과 `trailingIcon` prop을 통해 아이콘을 앞뒤에 추가할 수 있습니다.
+ * - `disabled` prop으로 비활성화 상태를 제어할 수 있으며, `state` prop을 통해 'error'와 같은 특정 상태를 표현할 수 있습니다.
+ */
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
     { size, state, className, leadingIcon, trailingIcon, disabled, ...rest },
@@ -96,7 +105,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       const newProps: Partial<IconProps> = {};
 
       if (disabled) {
-        newProps.muted = true;
+        newProps.tone = "neutral";
       } else if (state) {
         newProps.tone = stateToToneMap[state];
       }
