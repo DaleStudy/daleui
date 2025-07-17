@@ -55,19 +55,20 @@ export const Default: Story = {};
  */
 export const Sizes: Story = {
   render: (args) => (
-    <div
-      className={css({
-        display: "flex",
-        flexDirection: "column",
-        gap: "16",
-        w: "320px",
-      })}
-    >
+    <div className={vstack({ gap: "16", w: "320px" })}>
       <TextInput {...args} size="sm" placeholder="Small size" />
       <TextInput {...args} size="md" placeholder="Medium size" />
       <TextInput {...args} size="lg" placeholder="Large size" />
     </div>
   ),
+  argTypes: {
+    size: {
+      control: false,
+    },
+    placeholder: {
+      control: false,
+    },
+  },
 };
 
 /**
@@ -96,6 +97,17 @@ export const WithIcons: Story = {
       />
     </div>
   ),
+  argTypes: {
+    leadingIcon: {
+      control: false,
+    },
+    trailingIcon: {
+      control: false,
+    },
+    placeholder: {
+      control: false,
+    },
+  },
 };
 
 /**
@@ -117,6 +129,17 @@ export const ErrorState: Story = {
       />
     </div>
   ),
+  args: {
+    state: "error",
+  },
+  argTypes: {
+    state: {
+      control: false,
+    },
+    placeholder: {
+      control: false,
+    },
+  },
 };
 
 /**
@@ -128,6 +151,15 @@ export const Disabled: Story = {
     disabled: true,
     defaultValue: "수정할 수 없습니다.",
     leadingIcon: <Icon name="star" />,
+    "aria-label": "수정할 수 없는 입력 필드",
+  },
+  argTypes: {
+    disabled: {
+      control: false,
+    },
+    placeholder: {
+      control: false,
+    },
   },
 };
 
@@ -183,5 +215,11 @@ const ControlledTextInput = () => {
  */
 export const Controlled: Story = {
   render: () => <ControlledTextInput />,
-  args: {},
+  argTypes: {
+    size: { control: false },
+    state: { control: false },
+    disabled: { control: false },
+    placeholder: { control: false },
+    value: { control: false },
+  },
 };
