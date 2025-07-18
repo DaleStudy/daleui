@@ -1,8 +1,9 @@
+import type { SVGProps } from "react";
 import { cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 import { type IconName, icons } from "../../tokens/iconography";
 
-export interface IconProps {
+export interface IconProps extends SVGProps<SVGSVGElement> {
   /** 이름 */
   name: IconName;
   /** 색조 */
