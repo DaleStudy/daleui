@@ -5,6 +5,7 @@ import type { FontSize } from "../../tokens/typography";
 
 type LinkSize = Extract<FontSize, "sm" | "md" | "lg">;
 type LinkTone = Extract<Tone, "neutral" | "brand">;
+
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /** 링크 URL (필수) */
   href: string;
@@ -46,23 +47,12 @@ export function Link({
     );
   }
 
-  const targetRel =
-    target === "_blank"
-      ? Array.from(
-          new Set(
-            ["noopener", "noreferrer", ...(rel?.split(" ") ?? [])].filter(
-              Boolean,
-            ),
-          ),
-        ).join(" ")
-      : rel;
-
   return (
     <a
       className={css(styles.raw({ tone, underline, size }))}
       href={href}
       target={target}
-      rel={targetRel}
+      rel={target === "_blank" && !rel ? "noopener noreferrer" : rel}
       {...props}
     >
       {children}
@@ -77,7 +67,7 @@ const styles = cva({
     justifyContent: "center",
     alignItems: "center",
     "&:focus": {
-      outline: "2px solid",
+      outline: "borderWidths.lg solid",
       borderRadius: "md",
       outlineColor: "border.brand.focus",
     },
