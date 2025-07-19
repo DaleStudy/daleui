@@ -88,58 +88,49 @@ export const textStyles = {
   },
   label: {
     lg: {
-      value: {
-        fontFamily: "sans",
-        fontSize: "lg",
-        fontWeight: "medium",
-        lineHeight: "tight",
-        letterSpacing: "balanced",
-      },
-      underline: {
+      DEFAULT: {
         value: {
           fontFamily: "sans",
           fontSize: "lg",
           fontWeight: "medium",
           lineHeight: "tight",
           letterSpacing: "balanced",
+        },
+      },
+      underline: {
+        value: {
           textDecoration: "underline",
         },
       },
     },
     md: {
-      value: {
-        fontFamily: "sans",
-        fontSize: "md",
-        fontWeight: "medium",
-        lineHeight: "tight",
-        letterSpacing: "balanced",
-      },
-      underline: {
+      DEFAULT: {
         value: {
           fontFamily: "sans",
           fontSize: "md",
           fontWeight: "medium",
           lineHeight: "tight",
           letterSpacing: "balanced",
+        },
+      },
+      underline: {
+        value: {
           textDecoration: "underline",
         },
       },
     },
     sm: {
-      value: {
-        fontFamily: "sans",
-        fontSize: "sm",
-        fontWeight: "medium",
-        lineHeight: "tight",
-        letterSpacing: "balanced",
-      },
-      underline: {
+      DEFAULT: {
         value: {
           fontFamily: "sans",
           fontSize: "sm",
           fontWeight: "medium",
           lineHeight: "tight",
           letterSpacing: "balanced",
+        },
+      },
+      underline: {
+        value: {
           textDecoration: "underline",
         },
       },

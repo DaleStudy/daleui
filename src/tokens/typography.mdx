@@ -119,74 +119,49 @@ import {
 
 ### Label
 
-#### Label.lg
+{[
+{
+title: "Label.lg",
+fontSizes: [fontSizes.lg.value],
+},
+{
+title: "Label.lg.underline",
+fontSizes: [fontSizes.lg.value],
+underline: true,
+},
+{
+title: "Label.md",
+fontSizes: [fontSizes.md.value],
+},
+{
+title: "Label.md.underline",
+fontSizes: [fontSizes.md.value],
+underline: true,
+},
+{
+title: "Label.sm",
+fontSizes: [fontSizes.sm.value],
+},
+{
+title: "Label.sm.underline",
+fontSizes: [fontSizes.sm.value],
+underline: true,
+},
+].map(({ title, fontSizes, underline }) => (
 
-<Typeset
-  fontSizes={[fontSizes.lg.value]}
-  fontWeight={fontWeights.medium.value}
-  lineHeight={lineHeights.tight.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-/>
-
-##### Label.lg.underline
-
-<Typeset
-  fontSizes={[fontSizes.lg.value]}
-  fontWeight={fontWeights.medium.value}
-  lineHeight={lineHeights.tight.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-  style={{ textDecoration: "underline" }}
-/>
-
-#### Label.md
-
-<Typeset
-  fontSizes={[fontSizes.md.value]}
-  fontWeight={fontWeights.medium.value}
-  lineHeight={lineHeights.tight.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-/>
-
-##### Label.md.underline
-
-<Typeset
-  fontSizes={[fontSizes.md.value]}
-  fontWeight={fontWeights.medium.value}
-  lineHeight={lineHeights.tight.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-  style={{ textDecoration: "underline" }}
-/>
-
-#### Label.sm
-
-<Typeset
-  fontSizes={[fontSizes.sm.value]}
-  fontWeight={fontWeights.medium.value}
-  lineHeight={lineHeights.tight.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-/>
-
-##### Label.sm.underline
-
-<Typeset
-  fontSizes={[fontSizes.sm.value]}
-  fontWeight={fontWeights.medium.value}
-  lineHeight={lineHeights.tight.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-  style={{ textDecoration: "underline" }}
-/>
+<div key={title}>
+  <h4>{title}</h4>
+  <Typeset
+    fontSizes={fontSizes}
+    fontWeight={fontWeights.medium.value}
+    lineHeight={lineHeights.tight.value}
+    letterSpacing={letterSpacings.balanced.value}
+    sampleText="누구든지 사용할 수 있는 Customizable Design System"
+    fontFamily={fonts.sans.value}
+    style={{ textDecoration: underline ? "underline" : "none" }}
+  />
+</div>
+))}
 
 ### Caption
 
