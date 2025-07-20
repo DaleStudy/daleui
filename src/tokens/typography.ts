@@ -88,30 +88,66 @@ export const textStyles = {
   },
   label: {
     lg: {
-      value: {
-        fontFamily: "sans",
-        fontSize: "lg",
-        fontWeight: "medium",
-        lineHeight: "tight",
-        letterSpacing: "balanced",
+      DEFAULT: {
+        value: {
+          fontFamily: "sans",
+          fontSize: "lg",
+          fontWeight: "medium",
+          lineHeight: "tight",
+          letterSpacing: "balanced",
+        },
+      },
+      underline: {
+        value: {
+          fontFamily: "sans",
+          fontSize: "lg",
+          fontWeight: "medium",
+          lineHeight: "tight",
+          letterSpacing: "balanced",
+          textDecoration: "underline",
+        },
       },
     },
     md: {
-      value: {
-        fontFamily: "sans",
-        fontSize: "md",
-        fontWeight: "medium",
-        lineHeight: "tight",
-        letterSpacing: "balanced",
+      DEFAULT: {
+        value: {
+          fontFamily: "sans",
+          fontSize: "md",
+          fontWeight: "medium",
+          lineHeight: "tight",
+          letterSpacing: "balanced",
+        },
+      },
+      underline: {
+        value: {
+          fontFamily: "sans",
+          fontSize: "md",
+          fontWeight: "medium",
+          lineHeight: "tight",
+          letterSpacing: "balanced",
+          textDecoration: "underline",
+        },
       },
     },
     sm: {
-      value: {
-        fontFamily: "sans",
-        fontSize: "sm",
-        fontWeight: "medium",
-        lineHeight: "tight",
-        letterSpacing: "balanced",
+      DEFAULT: {
+        value: {
+          fontFamily: "sans",
+          fontSize: "sm",
+          fontWeight: "medium",
+          lineHeight: "tight",
+          letterSpacing: "balanced",
+        },
+      },
+      underline: {
+        value: {
+          fontFamily: "sans",
+          fontSize: "sm",
+          fontWeight: "medium",
+          lineHeight: "tight",
+          letterSpacing: "balanced",
+          textDecoration: "underline",
+        },
       },
     },
   },
