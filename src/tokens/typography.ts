@@ -99,6 +99,11 @@ export const textStyles = {
       },
       underline: {
         value: {
+          fontFamily: "sans",
+          fontSize: "lg",
+          fontWeight: "medium",
+          lineHeight: "tight",
+          letterSpacing: "balanced",
           textDecoration: "underline",
         },
       },
@@ -115,6 +120,11 @@ export const textStyles = {
       },
       underline: {
         value: {
+          fontFamily: "sans",
+          fontSize: "md",
+          fontWeight: "medium",
+          lineHeight: "tight",
+          letterSpacing: "balanced",
           textDecoration: "underline",
         },
       },
@@ -131,6 +141,11 @@ export const textStyles = {
       },
       underline: {
         value: {
+          fontFamily: "sans",
+          fontSize: "sm",
+          fontWeight: "medium",
+          lineHeight: "tight",
+          letterSpacing: "balanced",
           textDecoration: "underline",
         },
       },
