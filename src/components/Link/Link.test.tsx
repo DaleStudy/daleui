@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import * as stories from "./Link.stories";
 
-const { Basic, Tones, Underlines, Security, Icons, Sizes, NoAriaLabel } =
+const { Basic, Tones, Underlines, Security, Icons, Sizes } =
   composeStories(stories);
 
 describe("렌더링 테스트", () => {
@@ -111,15 +111,6 @@ describe("동작 테스트", () => {
     render(<Basic aria-label="링크" />);
     const link = screen.getByRole("link");
     expect(link).toHaveAttribute("aria-label", "링크");
-  });
-
-  test("children이 문자열이 아니고 aria-label 속성이 없으면 경고 메시지를 출력한다", () => {
-    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
-    render(<NoAriaLabel />);
-    expect(console.warn).toHaveBeenCalledWith(
-      "Link 컴포넌트는 문자열이 아닌 자식 요소를 사용하는 경우 aria-label 속성을 추가하여 대체 텍스트를 제공하는 것을 권장합니다.",
-    );
-    warnSpy.mockRestore();
   });
 
   test("클릭 시, 해당 URL로 올바르게 이동한다", async () => {

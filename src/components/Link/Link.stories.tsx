@@ -228,7 +228,7 @@ export const Security: StoryObj<typeof Link> = {
       <div className={vstack({ gap: "24" })}>
         <Link
           {...args}
-          target="_blank"
+          useNewTab
           aria-label="새 탭에서 열기 (보안 속성 자동 추가)"
         >
           새 탭에서 열기 (보안 속성 자동 추가)
@@ -245,7 +245,7 @@ export const Security: StoryObj<typeof Link> = {
     children: {
       control: false,
     },
-    target: {
+    useNewTab: {
       control: false,
     },
   },
@@ -278,15 +278,5 @@ export const Inline: StoryObj<typeof Link> = {
         story: "링크를 텍스트 내에 포함할 수 있습니다.",
       },
     },
-  },
-};
-
-export const NoAriaLabel: StoryObj<typeof Link> = {
-  render: (args) => {
-    return (
-      <Link {...args}>
-        잘못된 링크 <Icon name="externalLink" size={args.size} />
-      </Link>
-    );
   },
 };
