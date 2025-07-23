@@ -55,17 +55,15 @@ describe("스타일 테스트", () => {
   );
 
   test.each([
-    ["아이콘 있음", "presentation"],
+    ["아이콘 있음", "img"],
     ["아이콘 없음", undefined],
   ] as const)("%s에 올바른 아이콘 클래스를 적용한다", (linkName, className) => {
     render(<Icons />);
 
     if (className) {
-      expect(
-        screen.getByRole("presentation", { name: linkName }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("img", { name: linkName })).toBeInTheDocument();
     } else {
-      expect(screen.queryByRole("presentation", { name: linkName })).toBeNull();
+      expect(screen.queryByRole("img", { name: linkName })).toBeNull();
     }
   });
 });

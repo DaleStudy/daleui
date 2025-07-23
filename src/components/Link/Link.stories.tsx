@@ -178,7 +178,7 @@ export const Icons: StoryObj<typeof Link> = {
           <Icon
             name="externalLink"
             size={args.size}
-            role="presentation"
+            role="img"
             aria-label="아이콘 있음"
           />
         </Link>
