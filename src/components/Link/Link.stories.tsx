@@ -228,7 +228,7 @@ export const Security: StoryObj<typeof Link> = {
       <div className={vstack({ gap: "24" })}>
         <Link
           {...args}
-          useNewTab
+          external
           aria-label="새 탭에서 열기 (보안 속성 자동 추가)"
         >
           새 탭에서 열기 (보안 속성 자동 추가)
@@ -245,7 +245,7 @@ export const Security: StoryObj<typeof Link> = {
     children: {
       control: false,
     },
-    useNewTab: {
+    external: {
       control: false,
     },
   },
