@@ -56,19 +56,19 @@ describe("TextInput", () => {
     expect(handleChange).not.toHaveBeenCalled();
   });
 
-  it('state가 "error"일 때 aria-invalid 속성이 "true"여야 합니다.', () => {
-    render(<TextInput state="error" data-testid="text-input" />);
+  it('isInvalid prop이 true일 때 aria-invalid 속성이 "true"여야 합니다.', () => {
+    render(<TextInput isInvalid data-testid="text-input" />);
     const inputElement = screen.getByTestId("text-input");
     expect(inputElement).toHaveAttribute("aria-invalid", "true");
   });
 
-  it("state가 없을 때 aria-invalid 속성을 갖지 않아야 합니다.", () => {
-    render(<TextInput data-testid="text-input" />);
+  it("isInvalid prop이 없거나 false일 때 aria-invalid 속성을 갖지 않아야 합니다.", () => {
+    const { rerender } = render(<TextInput data-testid="text-input" />);
     const inputElement = screen.getByTestId("text-input");
-    expect(inputElement).not.toHaveAttribute("aria-invalid", "true");
+    expect(inputElement).not.toHaveAttribute("aria-invalid");
 
-    // 또는 속성 자체가 없는 것을 명시적으로 테스트할 수 있습니다.
-    expect(inputElement.hasAttribute("aria-invalid")).toBe(false);
+    rerender(<TextInput isInvalid={false} data-testid="text-input" />);
+    expect(inputElement).not.toHaveAttribute("aria-invalid");
   });
 
   it("leadingIcon과 trailingIcon이 제공될 때 올바르게 렌더링되어야 합니다.", () => {

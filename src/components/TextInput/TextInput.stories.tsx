@@ -20,14 +20,17 @@ export default {
       options: ["sm", "md", "lg"],
       description: "입력 필드의 크기를 조절합니다.",
     },
-    state: {
-      control: "select",
-      options: ["error", undefined],
+    isInvalid: {
+      control: "boolean",
       description: "입력 필드의 오류 상태를 설정합니다.",
     },
     disabled: {
       control: "boolean",
       description: "입력 필드를 비활성화합니다.",
+    },
+    placeholder: {
+      control: "text",
+      description: "플레이스홀더 텍스트를 설정합니다.",
     },
     leadingIcon: {
       control: false,
@@ -40,13 +43,14 @@ export default {
     placeholder: "텍스트를 입력해주세요.",
     size: "md",
     disabled: false,
+    isInvalid: false,
   },
 } satisfies Meta<typeof TextInput>;
 
 type Story = StoryObj<typeof TextInput>;
 
 /**
- * 가장 기본적인 TextInput 컴포넌트입니다. `size`, `disabled` 등의 props를 조절해보세요.
+ * 가장 기본적인 TextInput 컴포넌트입니다. `size`, `disabled`, `isInvalid` 등의 props를 조절해보세요.
  */
 export const Default: Story = {};
 
@@ -111,10 +115,10 @@ export const WithIcons: Story = {
 };
 
 /**
- * `state` prop을 'error'로 설정하여 오류 상태를 시각적으로 표현할 수 있습니다.
+ * `isInvalid` prop을 `true`로 설정하여 오류 상태를 시각적으로 표현할 수 있습니다.
  * 아이콘을 함께 사용하면, 아이콘의 색상도 오류 상태에 맞게 자동으로 변경됩니다.
  */
-export const ErrorState: Story = {
+export const Invalid: Story = {
   render: (args) => (
     <div
       className={css({
@@ -123,17 +127,17 @@ export const ErrorState: Story = {
     >
       <TextInput
         {...args}
-        state="error"
+        isInvalid
         trailingIcon={<Icon name="circleAlert" />}
         placeholder="이메일 형식이 올바르지 않습니다."
       />
     </div>
   ),
   args: {
-    state: "error",
+    isInvalid: true,
   },
   argTypes: {
-    state: {
+    isInvalid: {
       control: false,
     },
     placeholder: {
@@ -184,7 +188,7 @@ const ControlledTextInput = () => {
         value={value}
         onChange={handleChange}
         placeholder="10자 이상 입력하세요..."
-        state={hasError ? "error" : undefined}
+        isInvalid={hasError}
         trailingIcon={
           value.length > 0 ? (
             <span
@@ -217,7 +221,7 @@ export const Controlled: Story = {
   render: () => <ControlledTextInput />,
   argTypes: {
     size: { control: false },
-    state: { control: false },
+    isInvalid: { control: false },
     disabled: { control: false },
     placeholder: { control: false },
     value: { control: false },
