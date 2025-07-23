@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { vstack } from "../../../styled-system/patterns";
 import { Icon } from "../Icon/Icon";
 import { Link } from "./Link";
+import { Text } from "../Text/Text";
 
 export default {
   component: Link,
@@ -20,6 +21,20 @@ export default {
     },
     tone: "brand",
     size: "md",
+    underline: true,
+    external: false,
+  },
+  argTypes: {
+    tone: {
+      control: "select",
+      options: ["brand", "neutral"],
+      description: "링크의 색상을 변경합니다.",
+    },
+    size: {
+      control: "select",
+      options: ["sm", "md", "lg"],
+      description: "링크의 크기를 조절합니다.",
+    },
   },
   decorators: [
     (Story, context) => {
@@ -189,10 +204,15 @@ export const Visited: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
+        <Text>
+          방문한 링크의 색상이 다르지 않다면 방문한 링크를 클릭하여
+          방문하여주세요.
+        </Text>
         <Link
           {...args}
           href="https://www.daleui.com"
-          target="_blank"
+          onClick={undefined}
+          external
           aria-label="방문한 링크"
         >
           방문한 링크
