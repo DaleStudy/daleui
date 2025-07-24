@@ -1,8 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { vstack } from "../../../styled-system/patterns";
 import { Icon } from "../Icon/Icon";
-import { Link } from "./Link";
+import { Link, type LinkSize, type LinkTone } from "./Link";
 import { Text } from "../Text/Text";
+import { action } from "storybook/internal/actions";
+
+const linkSizes: LinkSize[] = ["sm", "md", "lg"];
+const linkTones: LinkTone[] = ["neutral", "brand"];
 
 export default {
   component: Link,
@@ -18,6 +22,7 @@ export default {
     href: "#",
     onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();
+      action("onClick")(e);
     },
     tone: "brand",
     size: "md",
@@ -27,12 +32,12 @@ export default {
   argTypes: {
     tone: {
       control: "select",
-      options: ["brand", "neutral"],
+      options: linkTones,
       description: "링크의 색상을 변경합니다.",
     },
     size: {
       control: "select",
-      options: ["sm", "md", "lg"],
+      options: linkSizes,
       description: "링크의 크기를 조절합니다.",
     },
   },
@@ -175,12 +180,7 @@ export const Icons: StoryObj<typeof Link> = {
       <div className={vstack({ gap: "24" })}>
         <Link {...args} aria-label="아이콘 있음">
           아이콘 있음
-          <Icon
-            name="externalLink"
-            size={args.size}
-            role="img"
-            aria-label="아이콘 있음"
-          />
+          <Icon name="externalLink" size={args.size} />
         </Link>
         <Link {...args}>아이콘 없음</Link>
       </div>

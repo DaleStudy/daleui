@@ -4,9 +4,10 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import * as stories from "./Link.stories";
+import { Link } from "./Link";
+import { Icon } from "../Icon/Icon";
 
-const { Basic, Tones, Underlines, Security, Icons, Sizes } =
-  composeStories(stories);
+const { Basic, Tones, Underlines, Security, Sizes } = composeStories(stories);
 
 describe("렌더링 테스트", () => {
   test("텍스트와 함께 링크를 렌더링한다", () => {
@@ -54,17 +55,14 @@ describe("스타일 테스트", () => {
     },
   );
 
-  test.each([
-    ["아이콘 있음", "img"],
-    ["아이콘 없음", undefined],
-  ] as const)("%s에 올바른 아이콘 클래스를 적용한다", (linkName, className) => {
-    render(<Icons />);
-
-    if (className) {
-      expect(screen.getByRole("img", { name: linkName })).toBeInTheDocument();
-    } else {
-      expect(screen.queryByRole("img", { name: linkName })).toBeNull();
-    }
+  test("아이콘이 올바르게 렌더링된다", () => {
+    render(
+      <Link aria-label="아이콘 있음" href="#">
+        아이콘 있음
+        <Icon name="externalLink" size="md" role="img" />
+      </Link>,
+    );
+    expect(screen.getByRole("img")).toBeInTheDocument();
   });
 });
 
