@@ -2,13 +2,40 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { vstack } from "../../../styled-system/patterns";
 import { Icon } from "../Icon/Icon";
 import { Link } from "./Link";
+import { Text } from "../Text/Text";
+import { action } from "storybook/internal/actions";
 
 export default {
   component: Link,
   parameters: {
     layout: "centered",
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/Dale-UI-Kit?node-id=1259-6788&m=dev",
+    },
   },
-  args: { children: "링크", href: undefined },
+  args: {
+    children: "링크",
+    href: "#",
+    onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
+      action("onClick")(e);
+    },
+    tone: "brand",
+    size: "md",
+    underline: true,
+    external: false,
+  },
+  argTypes: {
+    tone: {
+      control: "select",
+      description: "링크의 색상을 변경합니다.",
+    },
+    size: {
+      control: "select",
+      description: "링크의 크기를 조절합니다.",
+    },
+  },
   decorators: [
     (Story, context) => {
       return (
@@ -23,29 +50,36 @@ export default {
   ],
 } satisfies Meta;
 
-export const Basic: StoryObj<typeof Link> = {};
+export const Basic: StoryObj<typeof Link> = {
+  render: (args) => {
+    return (
+      <Link {...args} aria-label="링크">
+        {args.children}
+        <Icon name="externalLink" size={args.size} />
+      </Link>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "기본적인 링크 컴포넌트 예시입니다. 아이콘과 함께 사용할 수 있습니다.",
+      },
+    },
+  },
+};
 
 export const Tones: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <Link {...args} tone="neutral">
-          중립 링크
-        </Link>
-        <Link {...args} tone="brand">
+        <Link {...args} tone="brand" aria-label="브랜드 링크">
           브랜드 링크
+          <Icon name="externalLink" size={args.size} />
         </Link>
-        <Link {...args} tone="danger">
-          위험 링크
-        </Link>
-        {/* <Link {...args} tone="warning">
-          경고 링크
-        </Link> */}
-        <Link {...args} tone="success">
-          성공 링크
-        </Link>
-        <Link {...args} tone="info">
-          정보 링크
+        <Link {...args} tone="neutral" aria-label="중립 링크">
+          중립 링크
+          <Icon name="externalLink" size={args.size} />
         </Link>
       </div>
     );
@@ -58,25 +92,11 @@ export const Tones: StoryObj<typeof Link> = {
       control: false,
     },
   },
-};
-
-export const Contrasts: StoryObj<typeof Link> = {
-  render: (args) => {
-    return (
-      <div className={vstack({ gap: "24" })}>
-        <Link {...args} muted>
-          낮은 명암비
-        </Link>
-        <Link {...args}>높은 명암비</Link>
-      </div>
-    );
-  },
-  argTypes: {
-    children: {
-      control: false,
-    },
-    muted: {
-      control: false,
+  parameters: {
+    docs: {
+      description: {
+        story: "링크의 색상을 변경할 수 있습니다. 기본값은 `brand`입니다.",
+      },
     },
   },
 };
@@ -85,11 +105,13 @@ export const Underlines: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <Link {...args} underline>
+        <Link {...args} underline aria-label="밑줄 있음">
           밑줄 있음
+          <Icon name="externalLink" size={args.size} />
         </Link>
-        <Link {...args} underline={false}>
+        <Link {...args} underline={false} aria-label="밑줄 없음">
           밑줄 없음
+          <Icon name="externalLink" size={args.size} />
         </Link>
       </div>
     );
@@ -102,20 +124,30 @@ export const Underlines: StoryObj<typeof Link> = {
       control: false,
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        story: "링크의 밑줄 여부를 변경할 수 있습니다. 기본값은 `true`입니다.",
+      },
+    },
+  },
 };
 
 export const Sizes: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <Link {...args} size="sm">
+        <Link {...args} size="sm" aria-label="작은 링크">
           작은 링크
+          <Icon name="externalLink" size="sm" />
         </Link>
-        <Link {...args} size="md">
+        <Link {...args} size="md" aria-label="중간 링크">
           중간 링크
+          <Icon name="externalLink" size="md" />
         </Link>
-        <Link {...args} size="lg">
+        <Link {...args} size="lg" aria-label="큰 링크">
           큰 링크
+          <Icon name="externalLink" size="lg" />
         </Link>
       </div>
     );
@@ -128,23 +160,62 @@ export const Sizes: StoryObj<typeof Link> = {
       control: false,
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        story: "링크의 크기를 변경할 수 있습니다. 기본값은 `md`입니다.",
+      },
+    },
+  },
 };
 
-export const Weights: StoryObj<typeof Link> = {
+export const Icons: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <Link {...args} weight="normal">
-          일반 굵기
+        <Link {...args} aria-label="아이콘 있음">
+          아이콘 있음
+          <Icon name="externalLink" size={args.size} />
         </Link>
-        <Link {...args} weight="medium">
-          중간 굵기
+        <Link {...args}>아이콘 없음</Link>
+      </div>
+    );
+  },
+  argTypes: {
+    children: {
+      control: false,
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "children에 아이콘을 추가할 수 있습니다.",
+      },
+    },
+  },
+};
+
+export const Visited: StoryObj<typeof Link> = {
+  render: (args) => {
+    return (
+      <div className={vstack({ gap: "24" })}>
+        <Text>
+          방문한 링크의 색상이 다르지 않다면 방문한 링크를 클릭하여
+          방문하여주세요.
+        </Text>
+        <Link
+          {...args}
+          href="https://www.daleui.com"
+          onClick={undefined}
+          external
+          aria-label="방문한 링크"
+        >
+          방문한 링크
+          <Icon name="externalLink" size={args.size} stroke="currentColor" />
         </Link>
-        <Link {...args} weight="semibold">
-          세미볼드 굵기
-        </Link>
-        <Link {...args} weight="bold">
-          굵은 굵기
+        <Link {...args} aria-label="방문하지 않은 링크">
+          방문하지 않은 링크
+          <Icon name="externalLink" size={args.size} />
         </Link>
       </div>
     );
@@ -153,8 +224,15 @@ export const Weights: StoryObj<typeof Link> = {
     children: {
       control: false,
     },
-    weight: {
+    href: {
       control: false,
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "링크의 방문 여부에 따라 아이콘의 색상이 변경됩니다.",
+      },
     },
   },
 };
@@ -163,10 +241,18 @@ export const Security: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <Link {...args} target="_blank">
+        <Link
+          {...args}
+          external
+          aria-label="새 탭에서 열기 (보안 속성 자동 추가)"
+        >
           새 탭에서 열기 (보안 속성 자동 추가)
+          <Icon name="externalLink" size={args.size} />
         </Link>
-        <Link {...args}>같은 탭에서 열기</Link>
+        <Link {...args} aria-label="같은 탭에서 열기">
+          같은 탭에서 열기
+          <Icon name="externalLink" size={args.size} />
+        </Link>
       </div>
     );
   },
@@ -174,20 +260,17 @@ export const Security: StoryObj<typeof Link> = {
     children: {
       control: false,
     },
-    target: {
+    external: {
       control: false,
     },
   },
-};
-
-export const WithIcon: StoryObj<typeof Link> = {
-  render: (args) => {
-    return (
-      <Link {...args} target="_blank">
-        <Icon name="chevronRight" aria-label="chevronRight" />
-        링크 아이콘
-      </Link>
-    );
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`target='_blank'`를 통해 새탭으로 열 경우 링크의 보안 속성을 자동으로 추가합니다.",
+      },
+    },
   },
 };
 
@@ -195,8 +278,20 @@ export const Inline: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <p>
-        이 문장에는 <Link {...args}>링크</Link>가 포함되어 있습니다.
+        이 문장에는{" "}
+        <Link {...args} aria-label="링크">
+          링크
+          <Icon name="externalLink" size={args.size} />
+        </Link>
+        가 포함되어 있습니다.
       </p>
     );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "링크를 텍스트 내에 포함할 수 있습니다.",
+      },
+    },
   },
 };
