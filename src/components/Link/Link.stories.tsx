@@ -1,12 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { vstack } from "../../../styled-system/patterns";
 import { Icon } from "../Icon/Icon";
-import { Link, type LinkSize, type LinkTone } from "./Link";
+import { Link } from "./Link";
 import { Text } from "../Text/Text";
 import { action } from "storybook/internal/actions";
-
-const linkSizes: LinkSize[] = ["sm", "md", "lg"];
-const linkTones: LinkTone[] = ["neutral", "brand"];
 
 export default {
   component: Link,
@@ -32,12 +29,10 @@ export default {
   argTypes: {
     tone: {
       control: "select",
-      options: linkTones,
       description: "링크의 색상을 변경합니다.",
     },
     size: {
       control: "select",
-      options: linkSizes,
       description: "링크의 크기를 조절합니다.",
     },
   },

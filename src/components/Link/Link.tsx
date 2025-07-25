@@ -1,10 +1,8 @@
 import { type AnchorHTMLAttributes } from "react";
 import { css, cva } from "../../../styled-system/css";
-import type { Tone } from "../../tokens/colors";
-import type { FontSize } from "../../tokens/typography";
 
-export type LinkSize = Extract<FontSize, "sm" | "md" | "lg">;
-export type LinkTone = Extract<Tone, "neutral" | "brand">;
+type LinkSize = "sm" | "md" | "lg";
+type LinkTone = "neutral" | "brand";
 
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /** 링크 URL (필수) */
