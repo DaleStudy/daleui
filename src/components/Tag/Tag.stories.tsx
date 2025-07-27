@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { css } from "../../../styled-system/css";
 import { hstack, vstack } from "../../../styled-system/patterns";
 import { Tag } from "./Tag";
 
@@ -81,7 +82,13 @@ export const Link: StoryObj<typeof Tag> = {
           </Tag>
         </div>
         <div>
-          <p style={{ fontSize: "12px", color: "#666", marginTop: "8px" }}>
+          <p
+            className={css({
+              fontSize: "sm",
+              color: "fg.neutral",
+              marginTop: "8",
+            })}
+          >
             링크 태그는 마우스를 올리거나 키보드로 포커스할 때 상호작용 상태를
             보여줍니다. 세 번째 태그는 실제 외부 링크로 연결됩니다.
           </p>
@@ -105,7 +112,11 @@ export const Removable: StoryObj<typeof Tag> = {
       <div className={vstack({ gap: "16" })}>
         <div>
           <h3
-            style={{ marginBottom: "8px", fontSize: "14px", fontWeight: "600" }}
+            className={css({
+              marginBottom: "8",
+              fontSize: "sm",
+              fontWeight: "semibold",
+            })}
           >
             제거 가능한 태그들 (X 버튼 클릭 시 제거됨)
           </h3>
@@ -120,7 +131,13 @@ export const Removable: StoryObj<typeof Tag> = {
               제거 가능 + 위험 톤
             </Tag>
           </div>
-          <p style={{ fontSize: "12px", color: "#666", marginTop: "8px" }}>
+          <p
+            className={css({
+              fontSize: "sm",
+              color: "fg.neutral",
+              marginTop: "8",
+            })}
+          >
             각 태그의 X 버튼을 클릭하면 해당 태그가 제거됩니다.
           </p>
         </div>
@@ -150,7 +167,11 @@ export const Interactive: StoryObj<typeof Tag> = {
       <div className={vstack({ gap: "16" })}>
         <div>
           <h3
-            style={{ marginBottom: "8px", fontSize: "14px", fontWeight: "600" }}
+            className={css({
+              marginBottom: "8",
+              fontSize: "sm",
+              fontWeight: "semibold",
+            })}
           >
             링크 태그 (클릭 가능)
           </h3>
@@ -161,7 +182,11 @@ export const Interactive: StoryObj<typeof Tag> = {
 
         <div>
           <h3
-            style={{ marginBottom: "8px", fontSize: "14px", fontWeight: "600" }}
+            className={css({
+              marginBottom: "8",
+              fontSize: "sm",
+              fontWeight: "semibold",
+            })}
           >
             제거 가능한 태그 (X 버튼으로만 제거됨)
           </h3>
@@ -183,7 +208,13 @@ export const Interactive: StoryObj<typeof Tag> = {
               클릭해보세요 (제거 안됨)
             </Tag>
           </div>
-          <p style={{ fontSize: "12px", color: "#666", marginTop: "8px" }}>
+          <p
+            className={css({
+              fontSize: "sm",
+              color: "fg.neutral",
+              marginTop: "8",
+            })}
+          >
             태그를 클릭하면 알림이 뜨고, X 버튼을 클릭하면 제거됩니다.
           </p>
         </div>
