@@ -23,21 +23,21 @@ type TagPropsWithoutLink = BaseTagProps &
     link?: false;
   };
 
-export type TagProps = TagPropsWithLink | TagPropsWithoutLink;
+type TagProps = TagPropsWithLink | TagPropsWithoutLink;
 
 /**
  * - `tone` 속성으로 태그의 색조를 지정할 수 있습니다.
  * - `removable` 속성을 사용하여 제거 가능한 태그로 만들 수 있습니다.
  * - `link` 속성을 사용하여 링크 스타일을 적용할 수 있습니다.
  */
-export const Tag = ({
+export function Tag({
   children,
   tone = "neutral",
   removable = false,
   link = false,
   onClick,
   ...rest
-}: TagProps) => {
+}: TagProps) {
   const [isRemoved, setIsRemoved] = useState(false);
 
   const handleRemoveClick = (e: React.MouseEvent) => {
@@ -73,7 +73,7 @@ export const Tag = ({
       )}
     </Element>
   );
-};
+}
 
 const styles = cva({
   base: {
