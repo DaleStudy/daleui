@@ -1,10 +1,15 @@
-import React, { type HTMLAttributes, useState } from "react";
+import {
+  type HTMLAttributes,
+  type MouseEvent,
+  type ReactNode,
+  useState,
+} from "react";
 import { cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 
 type BaseTagProps = {
   /** 태그 내용 */
-  children: React.ReactNode;
+  children: ReactNode;
   /** 색조 */
   tone?: Tone;
   /** 제거 가능 여부 */
@@ -40,7 +45,7 @@ export function Tag({
 }: TagProps) {
   const [isRemoved, setIsRemoved] = useState(false);
 
-  const handleRemoveClick = (e: React.MouseEvent) => {
+  const handleRemoveClick = (e: MouseEvent) => {
     e.stopPropagation();
     setIsRemoved(true);
   };
