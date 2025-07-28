@@ -1,13 +1,12 @@
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { Check } from "lucide-react";
-import React, { type ButtonHTMLAttributes } from "react";
+import * as Ariakit from "@ariakit/react";
+import React from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 
 export interface CheckboxProps
   extends Omit<
-    ButtonHTMLAttributes<HTMLButtonElement>,
-    "type" | "onChange" | "checked" | "value" | "required"
+    React.InputHTMLAttributes<HTMLInputElement>,
+    "type" | "onChange" | "checked" | "value" | "required" | "disabled"
   > {
   /** 라벨 */
   label: React.ReactNode;
@@ -36,7 +35,6 @@ export const Checkbox = ({
   value,
   tone = "neutral",
   disabled,
-  checked,
   required,
   onChange,
   ...rest
@@ -55,28 +53,16 @@ export const Checkbox = ({
         },
       })}
     >
-      <CheckboxPrimitive.Root
-        checked={checked}
+      <Ariakit.Checkbox
         required={required}
-        onCheckedChange={(checked) => {
-          onChange?.(checked === true, value);
+        onChange={(event) => {
+          onChange?.(event.target.checked, value);
         }}
         disabled={disabled}
         className={styles({ tone, disabled })}
+        aria-required={required}
         {...rest}
-      >
-        <CheckboxPrimitive.Indicator
-          className={css({
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          })}
-        >
-          <Check size={16} />
-        </CheckboxPrimitive.Indicator>
-      </CheckboxPrimitive.Root>
+      />
       {label}
       {required && (
         <span
@@ -107,6 +93,7 @@ const styles = cva({
     cursor: "pointer",
     transition: "0.2s",
     outline: "none",
+    position: "relative",
     "&:hover": {
       bg: "bg.neutral.hover",
       color: "fg.neutral.hover",
@@ -121,46 +108,62 @@ const styles = cva({
       bg: "transparent!",
       cursor: "not-allowed",
     },
+    "&:checked": {
+      "&::after": {
+        content: '""',
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "1rem",
+        height: "1rem",
+        transform: "translate(-50%, -50%)",
+        mask: 'url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>\')',
+        maskSize: "contain",
+        maskRepeat: "no-repeat",
+        maskPosition: "center",
+        backgroundColor: "currentColor",
+      },
+    },
   },
   variants: {
     tone: {
       brand: {
-        "&[data-state='checked']": {
+        "&:checked": {
           bg: "bgSolid.brand",
           borderColor: "bgSolid.brand",
           color: "fgSolid.brand",
         },
       },
       neutral: {
-        "&[data-state='checked']": {
+        "&:checked": {
           bg: "bgSolid.neutral",
           borderColor: "bgSolid.neutral",
           color: "fgSolid.neutral",
         },
       },
       danger: {
-        "&[data-state='checked']": {
+        "&:checked": {
           bg: "bgSolid.danger",
           borderColor: "bgSolid.danger",
           color: "fgSolid.danger",
         },
       },
       warning: {
-        "&[data-state='checked']": {
+        "&:checked": {
           bg: "bgSolid.warning",
           borderColor: "bgSolid.warning",
           color: "fgSolid.warning",
         },
       },
       success: {
-        "&[data-state='checked']": {
+        "&:checked": {
           bg: "bgSolid.success",
           borderColor: "bgSolid.success",
           color: "fgSolid.success",
         },
       },
       info: {
-        "&[data-state='checked']": {
+        "&:checked": {
           bg: "bgSolid.info",
           borderColor: "bgSolid.info",
           color: "fgSolid.info",
@@ -169,7 +172,7 @@ const styles = cva({
     },
     disabled: {
       true: {
-        "&[data-state='checked']": {
+        "&:checked": {
           bg: "bg.neutral.disabled!",
           borderColor: "bg.neutral.disabled!",
           color: "fg.neutral.disabled!",
