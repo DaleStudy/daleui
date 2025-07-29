@@ -2,7 +2,6 @@ import { createRef } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
-import { Icon } from "../Icon/Icon";
 import { TextInput } from "./TextInput";
 
 describe("TextInput", () => {
@@ -72,15 +71,10 @@ describe("TextInput", () => {
   });
 
   it("leadingIcon과 trailingIcon이 제공될 때 올바르게 렌더링되어야 합니다.", () => {
-    render(
-      <TextInput
-        leadingIcon={<Icon name="search" data-testid="leading-icon" />}
-        trailingIcon={<Icon name="x" data-testid="trailing-icon" />}
-      />,
-    );
+    render(<TextInput leadingIcon="search" trailingIcon="x" />);
 
-    expect(screen.getByTestId("leading-icon")).toBeInTheDocument();
-    expect(screen.getByTestId("trailing-icon")).toBeInTheDocument();
+    expect(screen.getByTestId("icon-search")).toBeInTheDocument();
+    expect(screen.getByTestId("icon-x")).toBeInTheDocument();
   });
 
   it("ref가 내부 input 엘리먼트로 전달되어야 합니다.", () => {

@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { css } from "../../../styled-system/css";
 import { vstack } from "../../../styled-system/patterns";
-import { Icon } from "../Icon/Icon";
 import { TextInput } from "./TextInput";
 
 export default {
@@ -76,7 +75,7 @@ export const Sizes: Story = {
 };
 
 /**
- * `leadingIcon`과 `trailingIcon` prop에 Icon 컴포넌트를 전달하여 아이콘을 표시할 수 있습니다.
+ * `leadingIcon`과 `trailingIcon` prop에 아이콘 이름을 문자열로 전달하여 아이콘을 표시할 수 있습니다.
  * TextInput의 상태에 따라 아이콘의 스타일(색상, 비활성화)이 자동으로 변경됩니다.
  */
 export const WithIcons: Story = {
@@ -84,19 +83,19 @@ export const WithIcons: Story = {
     <div className={vstack({ gap: "16", w: "320px" })}>
       <TextInput
         {...args}
-        leadingIcon={<Icon name="search" />}
+        leadingIcon="search"
         placeholder="검색어를 입력하세요..."
       />
       <TextInput
         {...args}
-        trailingIcon={<Icon name="x" />}
+        trailingIcon="x"
         placeholder="아이디"
         defaultValue="storybook_user"
       />
       <TextInput
         {...args}
         disabled
-        leadingIcon={<Icon name="star" />}
+        leadingIcon="star"
         placeholder="비활성화된 아이콘"
       />
     </div>
@@ -128,7 +127,7 @@ export const Invalid: Story = {
       <TextInput
         {...args}
         isInvalid
-        trailingIcon={<Icon name="circleAlert" />}
+        trailingIcon="circleAlert"
         placeholder="이메일 형식이 올바르지 않습니다."
       />
     </div>
@@ -154,7 +153,7 @@ export const Disabled: Story = {
   args: {
     disabled: true,
     defaultValue: "수정할 수 없습니다.",
-    leadingIcon: <Icon name="star" />,
+    leadingIcon: "star",
     "aria-label": "수정할 수 없는 입력 필드",
   },
   argTypes: {
@@ -189,19 +188,7 @@ const ControlledTextInput = () => {
         onChange={handleChange}
         placeholder="10자 이상 입력하세요..."
         isInvalid={hasError}
-        trailingIcon={
-          value.length > 0 ? (
-            <span
-              className={css({ cursor: "pointer", display: "inline-flex" })}
-              onClick={() => {
-                setValue("");
-                setHasError(false);
-              }}
-            >
-              <Icon name="x" />
-            </span>
-          ) : undefined
-        }
+        trailingIcon={value.length > 0 ? "x" : undefined}
       />
       <div className={css({ mt: "16", fontSize: "sm" })}>
         <p>현재 값: {value}</p>

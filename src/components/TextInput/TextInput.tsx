@@ -1,22 +1,16 @@
-import {
-  cloneElement,
-  forwardRef,
-  type ComponentPropsWithoutRef,
-  type ReactElement,
-} from "react";
+import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import { cva, cx } from "../../../styled-system/css";
-import type { IconProps } from "../Icon/Icon";
-
+import { Icon, type IconProps } from "../Icon/Icon";
 export interface TextInputProps
   extends Omit<ComponentPropsWithoutRef<"input">, "size"> {
   /** 크기 */
   size?: "sm" | "md" | "lg";
   /** 오류 상태 여부 (true일 경우 danger 색상으로 표시됩니다) */
   isInvalid?: boolean;
-  /** 앞쪽 아이콘 */
-  leadingIcon?: ReactElement<IconProps>;
-  /** 뒤쪽 아이콘 */
-  trailingIcon?: ReactElement<IconProps>;
+  /** 앞쪽 아이콘 이름 (아이콘 컴포넌트의 name 속성에 해당) */
+  leadingIcon?: IconProps["name"];
+  /** 뒤쪽 아이콘 이름 (아이콘 컴포넌트의 name 속성에 해당) */
+  trailingIcon?: IconProps["name"];
   /** 플레이스홀더 텍스트 */
   placeholder?: string;
 }
@@ -39,21 +33,23 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     },
     ref,
   ) => {
-    const renderIcon = (icon: ReactElement<IconProps>) => {
-      const newProps: Partial<IconProps> = {
-        size,
-      };
+    const renderIcon = (name: IconProps["name"]) => {
+      let tone: IconProps["tone"];
 
       if (disabled) {
-        newProps.tone = "neutral";
+        tone = "neutral";
       } else if (isInvalid) {
-        newProps.tone = "danger";
+        tone = "danger";
       }
 
-      return cloneElement(icon, {
-        ...icon.props,
-        ...newProps,
-      });
+      return (
+        <Icon
+          name={name}
+          size={size}
+          tone={tone}
+          data-testid={`icon-${name}`}
+        />
+      );
     };
 
     return (
