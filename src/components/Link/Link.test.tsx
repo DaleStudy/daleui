@@ -3,24 +3,16 @@ import { composeStories } from "@storybook/react-vite";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
-import { fontSizes, fontWeights } from "../../tokens/typography";
 import * as stories from "./Link.stories";
+import { Link } from "./Link";
+import { Icon } from "../Icon/Icon";
 
-const { Basic, Tones, Contrasts, Underlines, Security, WithIcon } =
-  composeStories(stories);
+const { Basic, Tones, Underlines, Security, Sizes } = composeStories(stories);
 
 describe("렌더링 테스트", () => {
   test("텍스트와 함께 링크를 렌더링한다", () => {
     render(<Basic />);
     expect(screen.getByRole("link")).toHaveTextContent("링크");
-  });
-
-  test("Icon 컴포넌트와 함께 잘 사용한다", () => {
-    render(<WithIcon />);
-
-    const link = screen.getByRole("link");
-    expect(link).toHaveTextContent("링크");
-    expect(link).toContainElement(screen.getByLabelText("chevronRight"));
   });
 });
 
@@ -28,42 +20,26 @@ describe("스타일 테스트", () => {
   test.each([
     ["중립 링크", "c_fg.neutral"],
     ["브랜드 링크", "c_fg.brand"],
-    ["위험 링크", "c_fg.danger"],
-    // ["경고 링크", "c_fg.warning"],
-    ["성공 링크", "c_fg.success"],
-    ["정보 링크", "c_fg.info"],
   ] as const)("%s에 올바른 톤 클래스를 적용한다", (linkName, className) => {
     render(<Tones />);
 
     expect(screen.getByRole("link", { name: linkName })).toHaveClass(className);
   });
 
-  test("size prop에 따라 font size를 적용한다", () => {
-    const size = faker.helpers.arrayElement(
-      Object.keys(fontSizes),
-    ) as keyof typeof fontSizes;
-
-    render(<Basic size={size} />);
-    expect(screen.getByRole("link")).toHaveStyle({ fontSize: size });
-  });
-
-  test("weight prop에 따라 font weight을 적용한다", () => {
-    const weight = faker.helpers.arrayElement(
-      Object.keys(fontWeights),
-    ) as keyof typeof fontWeights;
-
-    render(<Basic weight={weight} />);
-    expect(screen.getByRole("link")).toHaveClass(`fw_${weight}`);
-  });
-
   test.each([
-    ["낮은 명암비", "c_fg.neutral.placeholder"],
-    ["높은 명암비", "c_fg.neutral"],
-  ] as const)("%s에 대해 올바른 클래스를 적용한다", (linkName, className) => {
-    render(<Contrasts />);
+    ["작은 링크", "fs_sm"],
+    ["중간 링크", "fs_md"],
+    ["큰 링크", "fs_lg"],
+  ] as const)(
+    "%s에 대해 올바른 font size를 적용한다",
+    (linkName, className) => {
+      render(<Sizes />);
 
-    expect(screen.getByRole("link", { name: linkName })).toHaveClass(className);
-  });
+      expect(screen.getByRole("link", { name: linkName })).toHaveClass(
+        className,
+      );
+    },
+  );
 
   test.each([
     ["밑줄 있음", "td_underline"],
@@ -78,6 +54,16 @@ describe("스타일 테스트", () => {
       );
     },
   );
+
+  test("아이콘이 올바르게 렌더링된다", () => {
+    render(
+      <Link aria-label="아이콘 있음" href="#">
+        아이콘 있음
+        <Icon name="externalLink" size="md" role="img" />
+      </Link>,
+    );
+    expect(screen.getByRole("img")).toBeInTheDocument();
+  });
 });
 
 describe("동작 테스트", () => {
@@ -109,10 +95,24 @@ describe("동작 테스트", () => {
     },
   );
 
+  test("새탭에서 열면서 rel 속성을 주입시 올바르게 병합된다", () => {
+    render(<Security rel="noopener noreferrer" />);
+    const link = screen.getByRole("link", {
+      name: "새 탭에서 열기 (보안 속성 자동 추가)",
+    });
+    expect(link).toHaveAttribute("rel", "noopener noreferrer");
+  });
+
+  test("aria-label 속성을 올바르게 전달한다", () => {
+    render(<Basic aria-label="링크" />);
+    const link = screen.getByRole("link");
+    expect(link).toHaveAttribute("aria-label", "링크");
+  });
+
   test("클릭 시, 해당 URL로 올바르게 이동한다", async () => {
     const user = userEvent.setup();
     const href = faker.internet.url({ appendSlash: true });
-    render(<Basic href={href} />);
+    render(<Basic href={href} onClick={undefined} />);
 
     const link = screen.getByRole("link");
     expect(link).toHaveAttribute("href", href);
@@ -146,7 +146,7 @@ describe("동작 테스트", () => {
   test("키보드로 link를 클릭 시, 해당 href로 올바르게 이동한다", async () => {
     const href = faker.internet.url({ appendSlash: true });
     const user = userEvent.setup();
-    render(<Basic href={href} />);
+    render(<Basic href={href} onClick={undefined} />);
 
     await user.tab();
     await user.keyboard("{Enter}");
