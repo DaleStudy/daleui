@@ -6,10 +6,15 @@ export default {
   component: Heading,
   parameters: {
     layout: "centered",
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/Dale-UI-Kit?node-id=1571-804&m=dev",
+    },
   },
   args: {
     children: "제목",
     level: 1,
+    tone: "neutral",
   },
 } satisfies Meta<typeof Heading>;
 
@@ -47,14 +52,16 @@ export const Levels: StoryObj<typeof Heading> = {
   },
 };
 
-export const Contrasts: StoryObj<typeof Heading> = {
+export const Tones: StoryObj<typeof Heading> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <Heading {...args} muted>
-          낮은 명암비
+        <Heading {...args} tone="neutral">
+          중립 색조
         </Heading>
-        <Heading {...args}>높은 명암비</Heading>
+        <Heading {...args} tone="brand">
+          브랜드 색조
+        </Heading>
       </div>
     );
   },
@@ -62,7 +69,39 @@ export const Contrasts: StoryObj<typeof Heading> = {
     children: {
       control: false,
     },
-    muted: {
+    tone: {
+      control: false,
+    },
+  },
+};
+
+export const Sizes: StoryObj<typeof Heading> = {
+  render: (args) => {
+    return (
+      <div className={vstack({ gap: "24" })}>
+        <Heading {...args} size={1}>
+          제목
+        </Heading>
+        <Heading {...args} size={2}>
+          제목
+        </Heading>
+        <Heading {...args} size={3}>
+          제목
+        </Heading>
+        <Heading {...args} size={4}>
+          제목
+        </Heading>
+        <Heading {...args} size={5}>
+          제목
+        </Heading>
+      </div>
+    );
+  },
+  argTypes: {
+    children: {
+      control: false,
+    },
+    size: {
       control: false,
     },
   },
