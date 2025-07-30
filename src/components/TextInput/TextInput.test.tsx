@@ -55,18 +55,18 @@ describe("TextInput", () => {
     expect(handleChange).not.toHaveBeenCalled();
   });
 
-  it('isInvalid prop이 true일 때 aria-invalid 속성이 "true"여야 합니다.', () => {
-    render(<TextInput isInvalid data-testid="text-input" />);
+  it('invalid prop이 true일 때 aria-invalid 속성이 "true"여야 합니다.', () => {
+    render(<TextInput invalid data-testid="text-input" />);
     const inputElement = screen.getByTestId("text-input");
     expect(inputElement).toHaveAttribute("aria-invalid", "true");
   });
 
-  it("isInvalid prop이 없거나 false일 때 aria-invalid 속성을 갖지 않아야 합니다.", () => {
+  it("invalid prop이 없거나 false일 때 aria-invalid 속성을 갖지 않아야 합니다.", () => {
     const { rerender } = render(<TextInput data-testid="text-input" />);
     const inputElement = screen.getByTestId("text-input");
     expect(inputElement).not.toHaveAttribute("aria-invalid");
 
-    rerender(<TextInput isInvalid={false} data-testid="text-input" />);
+    rerender(<TextInput invalid={false} data-testid="text-input" />);
     expect(inputElement).not.toHaveAttribute("aria-invalid");
   });
 

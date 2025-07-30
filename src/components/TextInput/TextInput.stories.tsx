@@ -13,43 +13,18 @@ export default {
       url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/Dale-UI-Kit?node-id=1716-641&t=DTMfNzoC2d19WCiu-4",
     },
   },
-  argTypes: {
-    size: {
-      control: "select",
-      options: ["sm", "md", "lg"],
-      description: "입력 필드의 크기를 조절합니다.",
-    },
-    isInvalid: {
-      control: "boolean",
-      description: "입력 필드의 오류 상태를 설정합니다.",
-    },
-    disabled: {
-      control: "boolean",
-      description: "입력 필드를 비활성화합니다.",
-    },
-    placeholder: {
-      control: "text",
-      description: "플레이스홀더 텍스트를 설정합니다.",
-    },
-    leadingIcon: {
-      control: false,
-    },
-    trailingIcon: {
-      control: false,
-    },
-  },
   args: {
     placeholder: "텍스트를 입력해주세요.",
     size: "md",
     disabled: false,
-    isInvalid: false,
+    invalid: false,
   },
 } satisfies Meta<typeof TextInput>;
 
 type Story = StoryObj<typeof TextInput>;
 
 /**
- * 가장 기본적인 TextInput 컴포넌트입니다. `size`, `disabled`, `isInvalid` 등의 props를 조절해보세요.
+ * 가장 기본적인 TextInput 컴포넌트입니다. `size`, `disabled`, `invalid` 등의 props를 조절해보세요.
  */
 export const Default: Story = {};
 
@@ -114,7 +89,7 @@ export const WithIcons: Story = {
 };
 
 /**
- * `isInvalid` prop을 `true`로 설정하여 오류 상태를 시각적으로 표현할 수 있습니다.
+ * `invalid` prop을 `true`로 설정하여 오류 상태를 시각적으로 표현할 수 있습니다.
  * 아이콘을 함께 사용하면, 아이콘의 색상도 오류 상태에 맞게 자동으로 변경됩니다.
  */
 export const Invalid: Story = {
@@ -126,17 +101,17 @@ export const Invalid: Story = {
     >
       <TextInput
         {...args}
-        isInvalid
+        invalid
         trailingIcon="circleAlert"
         placeholder="이메일 형식이 올바르지 않습니다."
       />
     </div>
   ),
   args: {
-    isInvalid: true,
+    invalid: true,
   },
   argTypes: {
-    isInvalid: {
+    invalid: {
       control: false,
     },
     placeholder: {
@@ -187,7 +162,7 @@ const ControlledTextInput = () => {
         value={value}
         onChange={handleChange}
         placeholder="10자 이상 입력하세요..."
-        isInvalid={hasError}
+        invalid={hasError}
         trailingIcon={value.length > 0 ? "x" : undefined}
       />
       <div className={css({ mt: "16", fontSize: "sm" })}>
@@ -208,7 +183,7 @@ export const Controlled: Story = {
   render: () => <ControlledTextInput />,
   argTypes: {
     size: { control: false },
-    isInvalid: { control: false },
+    invalid: { control: false },
     disabled: { control: false },
     placeholder: { control: false },
     value: { control: false },

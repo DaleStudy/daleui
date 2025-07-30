@@ -6,7 +6,7 @@ export interface TextInputProps
   /** 크기 */
   size?: "sm" | "md" | "lg";
   /** 오류 상태 여부 (true일 경우 danger 색상으로 표시됩니다) */
-  isInvalid?: boolean;
+  invalid?: boolean;
   /** 앞쪽 아이콘 이름 (아이콘 컴포넌트의 name 속성에 해당) */
   leadingIcon?: IconProps["name"];
   /** 뒤쪽 아이콘 이름 (아이콘 컴포넌트의 name 속성에 해당) */
@@ -22,15 +22,7 @@ export interface TextInputProps
  */
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
-    {
-      size,
-      isInvalid,
-      className,
-      leadingIcon,
-      trailingIcon,
-      disabled,
-      ...rest
-    },
+    { size, invalid, className, leadingIcon, trailingIcon, disabled, ...rest },
     ref,
   ) => {
     const renderIcon = (name: IconProps["name"]) => {
@@ -38,7 +30,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 
       if (disabled) {
         tone = "neutral";
-      } else if (isInvalid) {
+      } else if (invalid) {
         tone = "danger";
       }
 
@@ -55,7 +47,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     return (
       <div
         className={cx(
-          wrapperStyles({ size, state: isInvalid ? "error" : undefined }),
+          wrapperStyles({ size, state: invalid ? "error" : undefined }),
           className,
         )}
         data-disabled={disabled ? "" : undefined}
@@ -65,7 +57,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           className={inputStyles()}
           ref={ref}
           disabled={disabled}
-          aria-invalid={isInvalid ? true : undefined}
+          aria-invalid={invalid ? true : undefined}
           {...rest}
         />
         {trailingIcon && renderIcon(trailingIcon)}
