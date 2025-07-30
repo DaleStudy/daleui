@@ -187,12 +187,12 @@ describe("Radio", () => {
   );
 
   test.each([
-    ["neutral", "bd-c_border.neutral"],
-    ["brand", "bd-c_border.brand"],
-    ["danger", "bd-c_border.danger"],
-    ["warning", "bd-c_border.warning"],
-    ["success", "bd-c_border.success"],
-    ["info", "bd-c_border.info"],
+    ["neutral", "[&:checked]:bd-c_border.neutral.active"],
+    ["brand", "[&:checked]:bd-c_border.brand.active"],
+    ["danger", "[&:checked]:bd-c_border.danger.active"],
+    ["warning", "[&:checked]:bd-c_border.warning.active"],
+    ["success", "[&:checked]:bd-c_border.success.active"],
+    ["info", "[&:checked]:bd-c_border.info.active"],
   ] as const)("%s 톤을 올바르게 렌더링한다", (tone, className) => {
     render(
       <RadioGroup name="test" label="Test Radio Group" tone={tone}>
@@ -200,9 +200,9 @@ describe("Radio", () => {
       </RadioGroup>,
     );
 
-    const indicator = screen.getByRole("presentation", { hidden: true });
-    expect(indicator).toBeInTheDocument();
+    const radio = screen.getByRole("radio", { name: "Option 1" });
+    expect(radio).toBeInTheDocument();
 
-    expect(indicator).toHaveClass(className);
+    expect(radio).toHaveClass(className);
   });
 });
