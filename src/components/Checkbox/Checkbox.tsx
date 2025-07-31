@@ -1,12 +1,13 @@
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { Check } from "lucide-react";
+import { Checkbox as ArkCheckbox } from "@ark-ui/react/checkbox";
 import React, { type ButtonHTMLAttributes } from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
+import { Icon } from "../Icon/Icon";
+import { hstack } from "../../../styled-system/patterns";
 
 export interface CheckboxProps
   extends Omit<
-    ButtonHTMLAttributes<HTMLButtonElement>,
+    ButtonHTMLAttributes<HTMLInputElement>,
     "type" | "onChange" | "checked" | "value" | "required"
   > {
   /** 라벨 */
@@ -42,7 +43,7 @@ export const Checkbox = ({
   ...rest
 }: CheckboxProps) => {
   return (
-    <label
+    <ArkCheckbox.Root
       className={css({
         display: "flex",
         alignItems: "center",
@@ -54,46 +55,46 @@ export const Checkbox = ({
           color: "fg.neutral.disabled",
         },
       })}
+      checked={checked}
+      required={required}
+      onCheckedChange={(details) => {
+        onChange?.(Boolean(details.checked), value);
+      }}
+      disabled={disabled}
     >
-      <CheckboxPrimitive.Root
-        checked={checked}
-        required={required}
-        onCheckedChange={(checked) => {
-          onChange?.(checked === true, value);
-        }}
-        disabled={disabled}
+      <ArkCheckbox.Control
         className={styles({ tone, disabled })}
+        data-testid={rest.id}
         {...rest}
       >
-        <CheckboxPrimitive.Indicator
-          className={css({
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          })}
-        >
-          <Check size={16} />
-        </CheckboxPrimitive.Indicator>
-      </CheckboxPrimitive.Root>
-      {label}
-      {required && (
-        <span
-          className={css({
-            color: "fg.danger",
-          })}
-        >
-          *
-        </span>
-      )}
-    </label>
+        <ArkCheckbox.Indicator className={hstack()}>
+          <Icon name="check" size="sm" />
+        </ArkCheckbox.Indicator>
+      </ArkCheckbox.Control>
+      <ArkCheckbox.Label className={hstack({ gap: "8" })}>
+        {label}
+        {required && (
+          <span
+            className={css({
+              color: "fg.danger",
+            })}
+          >
+            *
+          </span>
+        )}
+      </ArkCheckbox.Label>
+      <ArkCheckbox.HiddenInput
+        aria-required={required}
+        aria-disabled={disabled}
+        disabled={disabled}
+      />
+    </ArkCheckbox.Root>
   );
 };
 
 const styles = cva({
   base: {
-    appearance: "none",
+    // appearance: "none",
     margin: "0",
     backgroundColor: "transparent",
     border: "neutral",
