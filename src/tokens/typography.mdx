@@ -14,148 +14,179 @@ import {
 
 ### Display
 
-{[
-{
-title: "Display.lg",
-fontSizes: [fontSizes["8xl"].value],
-},
-{
-title: "Display.md",
-fontSizes: [fontSizes["7xl"].value],
-},
-{
-title: "Display.sm",
-fontSizes: [fontSizes["5xl"].value],
-},
-].map(({ title, fontSizes }) => (
+#### Display.lg
 
-<div key={title}>
-  <h4>{title}</h4>
-  <Typeset
-    fontSizes={fontSizes}
-    fontWeight={fontWeights.bold.value}
-    lineHeight={lineHeights.tight.value}
-    letterSpacing={letterSpacings.tight.value}
-    sampleText="누구든지 사용할 수 있는 Customizable Design System"
-    fontFamily={fonts.sans.value}
-  />
-</div>
-))}
+<Typeset
+  fontSizes={[fontSizes["8xl"].value]}
+  fontWeight={fontWeights.bold.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.tight.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Display.md
+
+<Typeset
+  fontSizes={[fontSizes["7xl"].value]}
+  fontWeight={fontWeights.bold.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.tight.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Display.sm
+
+<Typeset
+  fontSizes={[fontSizes["5xl"].value]}
+  fontWeight={fontWeights.bold.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.tight.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
 
 ### Title
 
-{[
-{
-title: "Title.lg",
-fontSizes: [fontSizes["4xl"].value],
-fontWeight: fontWeights.semibold.value,
-lineHeight: lineHeights.tight.value,
-},
-{
-title: "Title.md",
-fontSizes: [fontSizes["3xl"].value],
-fontWeight: fontWeights.semibold.value,
-lineHeight: lineHeights.tight.value,
-},
-{
-title: "Title.sm",
-fontSizes: [fontSizes["2xl"].value],
-fontWeight: fontWeights.medium.value,
-lineHeight: lineHeights.tight.value,
-},
-].map(({ title, fontSizes, fontWeight, lineHeight }) => (
+#### Title.lg
 
-<div key={title}>
-  <h4>{title}</h4>
-  <Typeset
-    fontSizes={fontSizes}
-    fontWeight={fontWeight}
-    lineHeight={lineHeight}
-    letterSpacing={letterSpacings.balanced.value}
-    sampleText="누구든지 사용할 수 있는 Customizable Design System"
-    fontFamily={fonts.sans.value}
-  />
-</div>
-))}
+<Typeset
+  fontSizes={[fontSizes["4xl"].value]}
+  fontWeight={fontWeights.semibold.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Title.md
+
+<Typeset
+  fontSizes={[fontSizes["3xl"].value]}
+  fontWeight={fontWeights.semibold.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Title.sm
+
+<Typeset
+  fontSizes={[fontSizes["2xl"].value]}
+  fontWeight={fontWeights.medium.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
 
 ### Body
 
-{[
-{
-title: "Body.lg",
-fontSizes: [fontSizes.lg.value],
-fontWeight: fontWeights.normal.value,
-},
-{
-title: "Body.md",
-fontSizes: [fontSizes.md.value],
-fontWeight: fontWeights.normal.value,
-},
-{
-title: "Body.sm",
-fontSizes: [fontSizes.sm.value],
-fontWeight: fontWeights.semibold.value,
-},
-].map(({ title, fontSizes, fontWeight }) => (
+#### Body.lg
 
-<div key={title}>
-  <h4>{title}</h4>
-  <Typeset
-    fontSizes={fontSizes}
-    fontWeight={fontWeight}
-    lineHeight={lineHeights.balanced.value}
-    letterSpacing={letterSpacings.balanced.value}
-    sampleText="누구든지 사용할 수 있는 Customizable Design System"
-    fontFamily={fonts.sans.value}
-  />
-</div>
-))}
+<Typeset
+  fontSizes={[fontSizes.lg.value]}
+  fontWeight={fontWeights.normal.value}
+  lineHeight={lineHeights.balanced.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Body.md
+
+<Typeset
+  fontSizes={[fontSizes.md.value]}
+  fontWeight={fontWeights.normal.value}
+  lineHeight={lineHeights.balanced.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Body.sm
+
+<Typeset
+  fontSizes={[fontSizes.sm.value]}
+  fontWeight={fontWeights.semibold.value}
+  lineHeight={lineHeights.balanced.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
 
 ### Label
 
-{[
-{
-title: "Label.lg",
-fontSizes: [fontSizes.lg.value],
-},
-{
-title: "Label.lg.underline",
-fontSizes: [fontSizes.lg.value],
-underline: true,
-},
-{
-title: "Label.md",
-fontSizes: [fontSizes.md.value],
-},
-{
-title: "Label.md.underline",
-fontSizes: [fontSizes.md.value],
-underline: true,
-},
-{
-title: "Label.sm",
-fontSizes: [fontSizes.sm.value],
-},
-{
-title: "Label.sm.underline",
-fontSizes: [fontSizes.sm.value],
-underline: true,
-},
-].map(({ title, fontSizes, underline }) => (
+#### Label.lg
 
-<div key={title}>
-  <h4>{title}</h4>
-  <Typeset
-    fontSizes={fontSizes}
-    fontWeight={fontWeights.medium.value}
-    lineHeight={lineHeights.tight.value}
-    letterSpacing={letterSpacings.balanced.value}
-    sampleText="누구든지 사용할 수 있는 Customizable Design System"
-    fontFamily={fonts.sans.value}
-    style={{ textDecoration: underline ? "underline" : "none" }}
-  />
-</div>
-))}
+<Typeset
+  fontSizes={[fontSizes.lg.value]}
+  fontWeight={fontWeights.medium.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Label.lg.underline
+
+<Typeset
+  fontSizes={[fontSizes.lg.value]}
+  fontWeight={fontWeights.medium.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+  style={{ textDecoration: "underline" }}
+/>
+
+#### Label.md
+
+<Typeset
+  fontSizes={[fontSizes.md.value]}
+  fontWeight={fontWeights.medium.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Label.md.underline
+
+<Typeset
+  fontSizes={[fontSizes.md.value]}
+  fontWeight={fontWeights.medium.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+  style={{ textDecoration: "underline" }}
+/>
+
+#### Label.sm
+
+<Typeset
+  fontSizes={[fontSizes.sm.value]}
+  fontWeight={fontWeights.medium.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### Label.sm.underline
+
+<Typeset
+  fontSizes={[fontSizes.sm.value]}
+  fontWeight={fontWeights.medium.value}
+  lineHeight={lineHeights.tight.value}
+  letterSpacing={letterSpacings.balanced.value}
+  sampleText="누구든지 사용할 수 있는 Customizable Design System"
+  fontFamily={fonts.sans.value}
+  style={{ textDecoration: "underline" }}
+/>
 
 ### Caption
 
@@ -196,46 +227,61 @@ underline: true,
 
 ### 글꼴 굵기
 
-{Object.entries(fontWeights).map(([name, {value}]) => (
+#### normal(400)
 
-<>
-  <h4>
-    {name}({value})
-  </h4>
-  <Typeset
-    fontSizes={[fontSizes.md.value]}
-    fontWeight={value}
-    sampleText="달레 UI 디자인 System"
-    fontFamily={fonts.sans.value}
-  />
-</>
-))}
+<Typeset
+  fontSizes={[fontSizes.md.value]}
+  fontWeight={fontWeights.normal.value}
+  sampleText="달레 UI 디자인 System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### medium(500)
+
+<Typeset
+  fontSizes={[fontSizes.md.value]}
+  fontWeight={fontWeights.medium.value}
+  sampleText="달레 UI 디자인 System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### semibold(600)
+
+<Typeset
+  fontSizes={[fontSizes.md.value]}
+  fontWeight={fontWeights.semibold.value}
+  sampleText="달레 UI 디자인 System"
+  fontFamily={fonts.sans.value}
+/>
+
+#### bold(700)
+
+<Typeset
+  fontSizes={[fontSizes.md.value]}
+  fontWeight={fontWeights.bold.value}
+  sampleText="달레 UI 디자인 System"
+  fontFamily={fonts.sans.value}
+/>
 
 ### 글꼴 패밀리
 
-{[
-{
-title: "Sans (Pretendard Variable)",
-fontFamily: fonts.sans.value,
-sampleText: "깔끔하고 읽기 쉬운 본문용 폰트입니다.",
-},
-{
-title: "Mono (JetBrains Mono)",
-fontFamily: fonts.mono.value,
-sampleText: "const code = 'monospace font for code';",
-},
-].map(({ title, fontFamily, sampleText }) => (
+#### Sans (Pretendard Variable)
 
-<div key={title}>
-  <h4>{title}</h4>
-  <Typeset
-    fontSizes={[fontSizes.md.value]}
-    fontWeight={fontWeights.normal.value}
-    sampleText={sampleText}
-    fontFamily={fontFamily}
-  />
-</div>
-))}
+<Typeset
+  fontSizes={[fontSizes.md.value]}
+  fontWeight={fontWeights.normal.value}
+  sampleText="깔끔하고 읽기 쉬운 본문용 폰트입니다."
+  fontFamily={fonts.sans.value}
+/>
+
+#### Mono (JetBrains Mono)
+
+<Typeset
+  fontSizes={[fontSizes.md.value]}
+  fontWeight={fontWeights.normal.value}
+  sampleText="const code = 'monospace font for code';"
+  fontFamily={fonts.mono.value}
+/>
 
 ### Design
 
