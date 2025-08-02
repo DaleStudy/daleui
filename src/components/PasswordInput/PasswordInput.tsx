@@ -60,12 +60,24 @@ const containerStyles = cva({
     position: "relative",
     display: "flex",
     alignItems: "center",
-    width: "334px", // Fixed width from design
-    borderWidth: "1px",
+    width: "334px",
+    borderWidth: "1.5px",
     borderStyle: "solid",
     borderRadius: "sm",
-    backgroundColor: "bg.surface",
+    backgroundColor: "white",
     transition: "all 0.2s ease-in-out",
+    "&:hover": {
+      borderColor: "#788D98",
+    },
+    "&:active": {
+      borderColor: "#5D727D",
+    },
+    "&:focus-within": {
+      borderWidth: "2px",
+      borderColor: "#481ACF",
+      outline: "2px solid #481ACF",
+      outlineOffset: "1px",
+    },
   },
   variants: {
     size: {
@@ -75,23 +87,57 @@ const containerStyles = cva({
     },
     tone: {
       brand: { borderColor: "border.brand.default" },
-      neutral: { borderColor: "border.neutral.default" },
+      neutral: { borderColor: "#A4B4BC" },
       success: { borderColor: "border.success.default" },
       warning: { borderColor: "border.warning.default" },
-      danger: { borderColor: "border.danger.default" },
+      danger: { borderColor: "#E43F44" },
       info: { borderColor: "border.info.default" },
     },
     disabled: {
       true: {
-        opacity: "0.5",
         cursor: "not-allowed",
-        backgroundColor: "bg.disabled",
+        backgroundColor: "bg.neutral.disabled",
+        borderColor: "border.neutral.disabled",
+        color: "fg.neutral.disabled",
+        "&:hover": {
+          borderColor: "border.neutral.hover",
+        },
+        "&:active": {
+          borderColor: "border.neutral.active",
+        },
       },
     },
   },
+  compoundVariants: [
+    {
+      tone: "danger",
+      disabled: false,
+      css: {
+        "&:hover": {
+          borderColor: "#E43F44",
+        },
+        "&:active": {
+          borderColor: "#E43F44",
+        },
+      },
+    },
+    {
+      tone: "brand",
+      disabled: false,
+      css: {
+        "&:hover": {
+          borderColor: "border.brand.default",
+        },
+        "&:active": {
+          borderColor: "border.brand.default",
+        },
+      },
+    },
+  ],
   defaultVariants: {
     size: "md",
     tone: "neutral",
+    disabled: false,
   },
 });
 
@@ -101,7 +147,7 @@ const inputStyles = cva({
     border: "none",
     outline: "none",
     backgroundColor: "transparent",
-    color: "fg.neutral.placeholder",
+    color: "fg.neutral.default",
     fontSize: "sm",
     lineHeight: "tight",
     "&::placeholder": {
@@ -109,6 +155,10 @@ const inputStyles = cva({
     },
     "&:disabled": {
       cursor: "not-allowed",
+      color: "fg.neutral.disabled",
+      "&::placeholder": {
+        color: "fg.neutral.disabled",
+      },
     },
   },
   variants: {
