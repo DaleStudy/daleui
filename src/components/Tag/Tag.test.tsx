@@ -63,7 +63,7 @@ test("removable 속성을 올바르게 적용한다", () => {
 
   removableTags.forEach((removeButton) => {
     expect(removeButton).toHaveAttribute("type", "button");
-    expect(removeButton).toHaveAttribute("tabIndex", "-1");
+    expect(removeButton).not.toHaveAttribute("tabIndex", "-1");
   });
 });
 
@@ -77,7 +77,7 @@ test("제거 버튼이 올바르게 렌더링된다", async () => {
 
   const removeButton = screen.getByLabelText("제거");
   expect(removeButton).toBeInTheDocument();
-  expect(removeButton).toHaveAttribute("tabIndex", "-1");
+  expect(removeButton).not.toHaveAttribute("tabIndex", "-1");
   await user.click(removeButton);
 });
 
@@ -156,4 +156,96 @@ test("X 버튼만 클릭했을 때만 제거되고, 태그 자체 클릭으로�
   // X 버튼 클릭 - 제거되어야 함
   await user.click(removeButton);
   expect(screen.queryByText("테스트 태그")).not.toBeInTheDocument();
+});
+
+test("제거 버튼에 focus가 가능하다", async () => {
+  const user = userEvent.setup();
+
+  render(<Tag removable>Focus 테스트 태그</Tag>);
+
+  const removeButton = screen.getByLabelText("제거");
+
+  // 제거 버튼에 focus 가능한지 확인
+  await user.tab();
+  expect(removeButton).toHaveFocus();
+});
+
+test("제거 버튼이 키보드로 동작한다", async () => {
+  const user = userEvent.setup();
+
+  render(<Tag removable>키보드 테스트 태그</Tag>);
+
+  const removeButton = screen.getByLabelText("제거");
+
+  // 제거 버튼에 focus
+  await user.tab();
+  expect(removeButton).toHaveFocus();
+
+  // Enter 키로 제거
+  await user.keyboard("{Enter}");
+  expect(screen.queryByText("키보드 테스트 태그")).not.toBeInTheDocument();
+});
+
+test("제거 버튼이 Space 키로 동작한다", async () => {
+  const user = userEvent.setup();
+
+  render(<Tag removable>Space 키 테스트 태그</Tag>);
+
+  const removeButton = screen.getByLabelText("제거");
+
+  // 제거 버튼에 focus
+  await user.tab();
+  expect(removeButton).toHaveFocus();
+
+  // Space 키로 제거
+  await user.keyboard(" ");
+  expect(screen.queryByText("Space 키 테스트 태그")).not.toBeInTheDocument();
+});
+
+test("링크 + 제거 가능 태그에서 제거 버튼 키보드 동작 시 링크가 클릭되지 않는다", async () => {
+  const handleClick = vi.fn();
+  const user = userEvent.setup();
+
+  render(
+    <Tag link removable onClick={handleClick}>
+      링크 + 제거 가능 태그
+    </Tag>,
+  );
+
+  const removeButton = screen.getByLabelText("제거");
+
+  // 제거 버튼에 focus - 링크가 있으므로 두 번 tab
+  await user.tab(); // 링크에 포커스
+  await user.tab(); // 제거 버튼에 포커스
+  expect(removeButton).toHaveFocus();
+
+  // Enter 키로 제거 - 링크 클릭 핸들러가 호출되지 않아야 함
+  await user.keyboard("{Enter}");
+  expect(handleClick).not.toHaveBeenCalled();
+  expect(screen.queryByText("링크 + 제거 가능 태그")).not.toBeInTheDocument();
+});
+
+test("링크 + 제거 가능 태그에서 제거 버튼 Space 키 동작 시 링크가 클릭되지 않는다", async () => {
+  const handleClick = vi.fn();
+  const user = userEvent.setup();
+
+  render(
+    <Tag link removable onClick={handleClick}>
+      링크 + 제거 가능 태그 Space
+    </Tag>,
+  );
+
+  const removeButton = screen.getByLabelText("제거");
+
+  // 제거 버튼에 focus - 링크가 있으므로 두 번 tab
+  await user.tab(); // 링크에 포커스
+  await user.tab(); // 제거 버튼에 포커스
+  expect(removeButton).toHaveFocus();
+
+  // Space 키로 제거 - 링크 클릭 핸들러가 호출되지 않아야 함
+  await user.keyboard(" ");
+  expect(handleClick).not.toHaveBeenCalled();
+  expect(
+    screen.queryByText("링크 + 제거 가능 태그 Space"),
+  ).not.toBeInTheDocument();
 });

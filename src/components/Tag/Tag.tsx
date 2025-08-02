@@ -1,11 +1,13 @@
 import {
   type HTMLAttributes,
+  type KeyboardEvent,
   type MouseEvent,
   type ReactNode,
   useState,
 } from "react";
 import { cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
+import { Icon } from "../Icon/Icon";
 
 type BaseTagProps = {
   /** 태그 내용 */
@@ -50,6 +52,14 @@ export function Tag({
     setIsRemoved(true);
   };
 
+  const handleRemoveKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsRemoved(true);
+    }
+  };
+
   const Element = link ? "a" : "span";
 
   if (isRemoved) {
@@ -58,7 +68,7 @@ export function Tag({
 
   return (
     <Element
-      className={styles({ tone, removable, link })}
+      className={styles({ tone, link })}
       role={link ? "link" : undefined}
       tabIndex={link ? 0 : undefined}
       onClick={onClick}
@@ -69,11 +79,11 @@ export function Tag({
         <button
           type="button"
           onClick={handleRemoveClick}
+          onKeyDown={handleRemoveKeyDown}
           className={removeButtonStyles()}
           aria-label="제거"
-          tabIndex={-1}
         >
-          ×
+          <Icon name="x" size="xs" />
         </button>
       )}
     </Element>
@@ -89,9 +99,7 @@ const styles = cva({
     py: "4",
     height: "8",
     borderRadius: "full",
-    fontSize: "sm",
-    fontWeight: "medium",
-    lineHeight: "tight",
+    textStyle: "label.sm",
     cursor: "default",
     transition: "0.2s",
   },
@@ -107,9 +115,8 @@ const styles = cva({
           bg: "bgSolid.neutral.active",
         },
         "&:focus-visible": {
-          outlineWidth: "lg",
-          outlineStyle: "solid",
-          outlineColor: "border.neutral.active",
+          outlineWidth: "{borderWidths.lg}",
+          outlineColor: "border.brand.focus",
           outlineOffset: "2",
         },
       },
@@ -123,8 +130,7 @@ const styles = cva({
           bg: "bgSolid.brand.active",
         },
         "&:focus-visible": {
-          outlineWidth: "lg",
-          outlineStyle: "solid",
+          outlineWidth: "{borderWidths.lg}",
           outlineColor: "border.brand.focus",
           outlineOffset: "2",
         },
@@ -139,9 +145,8 @@ const styles = cva({
           bg: "bgSolid.danger.active",
         },
         "&:focus-visible": {
-          outlineWidth: "lg",
-          outlineStyle: "solid",
-          outlineColor: "border.danger",
+          outlineWidth: "{borderWidths.lg}",
+          outlineColor: "border.brand.focus",
           outlineOffset: "2",
         },
       },
@@ -155,9 +160,8 @@ const styles = cva({
           bg: "bgSolid.warning.active",
         },
         "&:focus-visible": {
-          outlineWidth: "lg",
-          outlineStyle: "solid",
-          outlineColor: "border.warning",
+          outlineWidth: "{borderWidths.lg}",
+          outlineColor: "border.brand.focus",
           outlineOffset: "2",
         },
       },
@@ -171,9 +175,8 @@ const styles = cva({
           bg: "bgSolid.success.active",
         },
         "&:focus-visible": {
-          outlineWidth: "lg",
-          outlineStyle: "solid",
-          outlineColor: "border.success",
+          outlineWidth: "{borderWidths.lg}",
+          outlineColor: "border.brand.focus",
           outlineOffset: "2",
         },
       },
@@ -187,16 +190,11 @@ const styles = cva({
           bg: "bgSolid.info.active",
         },
         "&:focus-visible": {
-          outlineWidth: "lg",
-          outlineStyle: "solid",
-          outlineColor: "border.info",
+          outlineWidth: "{borderWidths.lg}",
+          outlineColor: "border.brand.focus",
           outlineOffset: "2",
         },
       },
-    },
-    removable: {
-      true: {},
-      false: {},
     },
     link: {
       true: {
@@ -205,7 +203,6 @@ const styles = cva({
           textDecoration: "underline",
         },
       },
-      false: {},
     },
   },
 });
@@ -222,14 +219,12 @@ const removeButtonStyles = cva({
     bg: "transparent",
     color: "inherit",
     cursor: "pointer",
-    fontSize: "xs",
-    lineHeight: "tight",
     transition: "0.2s",
     "&:focus-visible": {
-      outlineWidth: "sm",
-      outlineStyle: "solid",
-      outlineColor: "border.neutral",
+      outlineWidth: "{borderWidths.lg}",
+      outlineColor: "border.brand.focus",
       outlineOffset: "2",
+      outlineStyle: "solid",
     },
   },
 });
