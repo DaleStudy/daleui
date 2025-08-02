@@ -29,47 +29,48 @@ const meta: Meta<typeof PasswordInput> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-
+// 기본 상태
 export const Default: Story = {
   args: {
     placeholder: "패스워드를 입력해주세요.",
   },
 };
 
-
-export const Sizes: Story = {
-  render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <PasswordInput size="sm" placeholder="Small size" />
-      <PasswordInput size="md" placeholder="Medium size" />
-      <PasswordInput size="lg" placeholder="Large size" />
-    </div>
-  ),
-};
-
-
-export const Tones: Story = {
-  render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <PasswordInput tone="neutral" placeholder="Neutral tone" />
-      <PasswordInput tone="brand" placeholder="Brand tone" />
-      <PasswordInput tone="success" placeholder="Success tone" />
-      <PasswordInput tone="warning" placeholder="Warning tone" />
-      <PasswordInput tone="danger" placeholder="Danger tone" />
-      <PasswordInput tone="info" placeholder="Info tone" />
-    </div>
-  ),
-};
-
-
-export const Disabled: Story = {
+// 입력된 상태 - 패스워드가 입력되어 있음
+export const WithPassword: Story = {
   args: {
-    disabled: true,
+    defaultValue: "password123",
+    placeholder: "패스워드를 입력해주세요.",
   },
 };
 
-export const WithValue: Story = {
+// 포커스 상태
+export const Focused: Story = {
+  render: () => {
+    return (
+      <div>
+        <p style={{ marginBottom: "8px", fontSize: "14px", color: "#666" }}>
+          아래 입력창을 클릭하면 포커스 상태를 확인할 수 있습니다:
+        </p>
+        <PasswordInput placeholder="패스워드를 입력해주세요." autoFocus />
+      </div>
+    );
+  },
+};
+
+// 에러 상태
+export const Error: Story = {
   args: {
-    defaultValue: "password123",
+    tone: "danger",
+    placeholder: "패스워드를 입력해주세요.",
+    defaultValue: "123", // 너무 짧은 패스워드 예시
+  },
+};
+
+// 비활성화 상태
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    placeholder: "패스워드를 입력해주세요.",
   },
 }; 
