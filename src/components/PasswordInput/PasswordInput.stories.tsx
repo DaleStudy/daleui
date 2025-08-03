@@ -73,4 +73,4 @@ export const Disabled: Story = {
     disabled: true,
     placeholder: "패스워드를 입력해주세요.",
   },
-}; 
+};
