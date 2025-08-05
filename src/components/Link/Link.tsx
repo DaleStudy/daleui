@@ -7,7 +7,7 @@ type LinkTone = "neutral" | "brand";
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /** 링크 URL (필수) */
   href: string;
-  /** 링크 내용 (필수) */
+  /** 링크 내용, 아이콘, 이미지 등 (필수) */
   children: React.ReactNode;
   /** 색조 */
   tone?: LinkTone;
@@ -31,6 +31,7 @@ interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
  * - `external`을 true로 설정하더라도 `target`과 `rel` 속성을 직접 설정할 수 있습니다.
  * - 키보드 포커스 시 명확한 아웃라인이 표시됩니다.
  * - 텍스트가 없는 이미지나 아이콘만 사용하는 경우, 반드시 `aria-label` 속성을 추가하여 대체 텍스트를 제공하는 것을 권장합니다.
+ * - `external` 속성이 `true` 일 때, 외부 링크 아이콘(externalLink)이 함께 제공되지 않으면 시각적 안내 부족으로 접근성 문제가 발생할 수 있습니다.
  */
 export function Link({
   href,
