@@ -20,13 +20,13 @@ type BaseTagProps = {
 
 type TagPropsWithLink = BaseTagProps &
   Omit<HTMLAttributes<HTMLAnchorElement>, "style"> & {
-    /** 링크 여부 */
+    /** true시 a 태그, false/생략시 span 태그로 렌더링 */
     link: true;
   };
 
 type TagPropsWithoutLink = BaseTagProps &
   Omit<HTMLAttributes<HTMLSpanElement>, "style"> & {
-    /** 링크 여부 */
+    /** true시 a 태그, false/생략시 span 태그로 렌더링 */
     link?: false;
   };
 
@@ -36,6 +36,8 @@ type TagProps = TagPropsWithLink | TagPropsWithoutLink;
  * - `tone` 속성으로 태그의 색조를 지정할 수 있습니다.
  * - `removable` 속성을 사용하여 제거 가능한 태그로 만들 수 있습니다.
  * - `link` 속성을 사용하여 링크 스타일을 적용할 수 있습니다.
+ *   - `link={true}`일 때는 `a` 태그로 렌더링되며, `href`, `target` 등 `a` 태그의 모든 속성을 사용할 수 있습니다.
+ *   - `link={false}` 또는 생략시에는 `span` 태그로 렌더링됩니다.
  */
 export function Tag({
   children,
