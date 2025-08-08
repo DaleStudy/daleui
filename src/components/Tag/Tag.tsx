@@ -104,6 +104,11 @@ const styles = cva({
     textStyle: "label.sm",
     cursor: "default",
     transition: "0.2s",
+    "&:focus-visible": {
+      outlineWidth: "{borderWidths.lg}",
+      outlineColor: "border.brand.focus",
+      outlineOffset: "2",
+    },
   },
   variants: {
     tone: {
@@ -116,11 +121,6 @@ const styles = cva({
         "&:active": {
           bg: "bgSolid.neutral.active",
         },
-        "&:focus-visible": {
-          outlineWidth: "{borderWidths.lg}",
-          outlineColor: "border.brand.focus",
-          outlineOffset: "2",
-        },
       },
       brand: {
         bg: "bgSolid.brand",
@@ -130,11 +130,6 @@ const styles = cva({
         },
         "&:active": {
           bg: "bgSolid.brand.active",
-        },
-        "&:focus-visible": {
-          outlineWidth: "{borderWidths.lg}",
-          outlineColor: "border.brand.focus",
-          outlineOffset: "2",
         },
       },
       danger: {
@@ -146,11 +141,6 @@ const styles = cva({
         "&:active": {
           bg: "bgSolid.danger.active",
         },
-        "&:focus-visible": {
-          outlineWidth: "{borderWidths.lg}",
-          outlineColor: "border.brand.focus",
-          outlineOffset: "2",
-        },
       },
       warning: {
         bg: "bgSolid.warning",
@@ -160,11 +150,6 @@ const styles = cva({
         },
         "&:active": {
           bg: "bgSolid.warning.active",
-        },
-        "&:focus-visible": {
-          outlineWidth: "{borderWidths.lg}",
-          outlineColor: "border.brand.focus",
-          outlineOffset: "2",
         },
       },
       success: {
@@ -176,11 +161,6 @@ const styles = cva({
         "&:active": {
           bg: "bgSolid.success.active",
         },
-        "&:focus-visible": {
-          outlineWidth: "{borderWidths.lg}",
-          outlineColor: "border.brand.focus",
-          outlineOffset: "2",
-        },
       },
       info: {
         bg: "bgSolid.info",
@@ -190,11 +170,6 @@ const styles = cva({
         },
         "&:active": {
           bg: "bgSolid.info.active",
-        },
-        "&:focus-visible": {
-          outlineWidth: "{borderWidths.lg}",
-          outlineColor: "border.brand.focus",
-          outlineOffset: "2",
         },
       },
     },
