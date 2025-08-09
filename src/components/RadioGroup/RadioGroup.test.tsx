@@ -187,12 +187,12 @@ describe("Radio", () => {
   );
 
   test.each([
-    ["neutral", "bd-c_border.neutral"],
-    ["brand", "bd-c_border.brand"],
-    ["danger", "bd-c_border.danger"],
-    ["warning", "bd-c_border.warning"],
-    ["success", "bd-c_border.success"],
-    ["info", "bd-c_border.info"],
+    ["neutral", "bg-c_fg.neutral"],
+    ["brand", "bg-c_fg.brand"],
+    ["danger", "bg-c_fg.danger"],
+    ["warning", "bg-c_fg.warning"],
+    ["success", "bg-c_fg.success"],
+    ["info", "bg-c_fg.info"],
   ] as const)("%s 톤을 올바르게 렌더링한다", (tone, className) => {
     render(
       <RadioGroup name="test" label="Test Radio Group" tone={tone}>

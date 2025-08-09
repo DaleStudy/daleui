@@ -24,7 +24,6 @@ test("체크박스에 체크 시, tone 속성이 올바르게 적용됨", async 
   const infoCheckbox = screen.getByLabelText("정보 색조");
 
   // Simulate checking each checkbox
-
   await user.click(brandCheckbox);
   await user.click(neutralCheckbox);
   await user.click(dangerCheckbox);
@@ -33,30 +32,32 @@ test("체크박스에 체크 시, tone 속성이 올바르게 적용됨", async 
   await user.click(infoCheckbox);
 
   // Check for data-state attribute which indicates checked state
-  expect(brandCheckbox).toHaveAttribute("data-state", "checked");
-  expect(neutralCheckbox).toHaveAttribute("data-state", "checked");
-  expect(dangerCheckbox).toHaveAttribute("data-state", "checked");
-  expect(warningCheckbox).toHaveAttribute("data-state", "checked");
-  expect(successCheckbox).toHaveAttribute("data-state", "checked");
-  expect(infoCheckbox).toHaveAttribute("data-state", "checked");
+  expect(brandCheckbox).toBeChecked();
+  expect(neutralCheckbox).toBeChecked();
+  expect(dangerCheckbox).toBeChecked();
+  expect(warningCheckbox).toBeChecked();
+  expect(successCheckbox).toBeChecked();
+  expect(infoCheckbox).toBeChecked();
 
   // Check for correct background colors based on tone
-  expect(brandCheckbox).toHaveClass(
+  expect(screen.getByTestId("brand")).toHaveClass(
     "[&[data-state='checked']]:bg_bgSolid.brand",
   );
-  expect(neutralCheckbox).toHaveClass(
+  expect(screen.getByTestId("neutral")).toHaveClass(
     "[&[data-state='checked']]:bg_bgSolid.neutral",
   );
-  expect(dangerCheckbox).toHaveClass(
+  expect(screen.getByTestId("danger")).toHaveClass(
     "[&[data-state='checked']]:bg_bgSolid.danger",
   );
-  expect(warningCheckbox).toHaveClass(
+  expect(screen.getByTestId("warning")).toHaveClass(
     "[&[data-state='checked']]:bg_bgSolid.warning",
   );
-  expect(successCheckbox).toHaveClass(
+  expect(screen.getByTestId("success")).toHaveClass(
     "[&[data-state='checked']]:bg_bgSolid.success",
   );
-  expect(infoCheckbox).toHaveClass("[&[data-state='checked']]:bg_bgSolid.info");
+  expect(screen.getByTestId("info")).toHaveClass(
+    "[&[data-state='checked']]:bg_bgSolid.info",
+  );
 });
 
 test("체크된 상태와 체크되지않은 상태가 올바르게 렌더링됨", () => {
@@ -65,8 +66,8 @@ test("체크된 상태와 체크되지않은 상태가 올바르게 렌더링됨
   const checkedCheckbox = screen.getByLabelText("체크된 상태");
   const uncheckedCheckbox = screen.getByLabelText("체크되지 않은 상태");
 
-  expect(checkedCheckbox).toHaveAttribute("data-state", "checked");
-  expect(uncheckedCheckbox).toHaveAttribute("data-state", "unchecked");
+  expect(checkedCheckbox).toBeChecked();
+  expect(uncheckedCheckbox).not.toBeChecked();
 });
 
 test("disabled 속성이 올바르게 적용됨", () => {
@@ -82,13 +83,17 @@ test("disabled 속성이 올바르게 적용됨", () => {
   expect(disabledUncheckedCheckbox).toBeDisabled();
   expect(enabledCheckbox).not.toBeDisabled();
 
-  expect(disabledCheckedCheckbox).toHaveClass(
+  expect(disabledCheckedCheckbox).toHaveAttribute("aria-disabled", "true");
+  expect(disabledUncheckedCheckbox).toHaveAttribute("aria-disabled", "true");
+  expect(enabledCheckbox).not.toHaveAttribute("aria-disabled");
+
+  expect(screen.getByTestId("disabled-checked")).toHaveClass(
     "[&[data-state='checked']]:bg_bg.neutral.disabled!",
   );
-  expect(disabledCheckedCheckbox).toHaveClass(
+  expect(screen.getByTestId("disabled-checked")).toHaveClass(
     "[&[data-state='checked']]:bd-c_bg.neutral.disabled!",
   );
-  expect(disabledUncheckedCheckbox).toHaveClass(
+  expect(screen.getByTestId("disabled-unchecked")).toHaveClass(
     "[&:disabled]:bd-c_border.neutral.disabled",
   );
 });
@@ -123,7 +128,7 @@ test("체크박스 클릭 시, onChange 핸들러가 호출됨", async () => {
   const checkbox = screen.getByLabelText("테스트 체크박스");
 
   // Initially unchecked
-  expect(checkbox).toHaveAttribute("data-state", "unchecked");
+  expect(checkbox).not.toBeChecked();
 
   // Click to check
   await user.click(checkbox);
@@ -176,15 +181,15 @@ test("체크박스가 클릭될 때 체크 상태가 전환됨", async () => {
   const checkbox = screen.getByLabelText("기본 체크박스");
 
   // Initially unchecked
-  expect(checkbox).toHaveAttribute("data-state", "unchecked");
+  expect(checkbox).not.toBeChecked();
 
   // Click to check
   await user.click(checkbox);
-  expect(checkbox).toHaveAttribute("data-state", "checked");
+  expect(checkbox).toBeChecked();
 
   // Click again to uncheck
   await user.click(checkbox);
-  expect(checkbox).toHaveAttribute("data-state", "unchecked");
+  expect(checkbox).not.toBeChecked();
 });
 
 test("required 속성값이 true일 경우, label에 별표가 추가됨", () => {
