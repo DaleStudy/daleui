@@ -169,7 +169,7 @@ export const Sizes: StoryObj<typeof Link> = {
   },
 };
 
-export const Icons: StoryObj<typeof Link> = {
+export const WithIcon: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
@@ -237,7 +237,7 @@ export const Visited: StoryObj<typeof Link> = {
   },
 };
 
-export const Security: StoryObj<typeof Link> = {
+export const External: StoryObj<typeof Link> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
@@ -245,6 +245,8 @@ export const Security: StoryObj<typeof Link> = {
           {...args}
           external
           aria-label="새 탭에서 열기 (보안 속성 자동 추가)"
+          href="https://www.daleui.com"
+          onClick={undefined}
         >
           새 탭에서 열기 (보안 속성 자동 추가)
           <Icon name="externalLink" size={args.size} />

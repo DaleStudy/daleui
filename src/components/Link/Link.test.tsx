@@ -7,7 +7,7 @@ import * as stories from "./Link.stories";
 import { Link } from "./Link";
 import { Icon } from "../Icon/Icon";
 
-const { Basic, Tones, Underlines, Security, Sizes } = composeStories(stories);
+const { Basic, Tones, Underlines, External, Sizes } = composeStories(stories);
 
 describe("렌더링 테스트", () => {
   test("텍스트와 함께 링크를 렌더링한다", () => {
@@ -84,7 +84,7 @@ describe("동작 테스트", () => {
   ] as const)(
     "%s 링크의 rel 속성을 올바르게 설정한다",
     (linkName, expectedRel) => {
-      render(<Security />);
+      render(<External />);
 
       const link = screen.getByRole("link", { name: linkName });
       if (expectedRel) {
@@ -96,7 +96,7 @@ describe("동작 테스트", () => {
   );
 
   test("새탭에서 열면서 rel 속성을 주입시 올바르게 병합된다", () => {
-    render(<Security rel="noopener noreferrer" />);
+    render(<External rel="noopener noreferrer" />);
     const link = screen.getByRole("link", {
       name: "새 탭에서 열기 (보안 속성 자동 추가)",
     });
