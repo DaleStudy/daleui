@@ -1,59 +1,83 @@
-import { useState } from "react";
-import type { InputHTMLAttributes } from "react";
+import { forwardRef, useState, type ComponentPropsWithoutRef } from "react";
 import { cva } from "../../../styled-system/css";
 import { Icon } from "../Icon/Icon";
-import type { Tone } from "../../tokens/colors";
 
-type PasswordInputSize = "sm" | "md" | "lg";
-
+/**
+ * 패스워드 입력 컨트롤입니다. 우측 아이콘으로 비밀번호 가시성을 토글할 수 있습니다.
+ *
+ * 접근성 가이드
+ * - 토글 버튼은 `aria-label`("패스워드 보기/숨기기")와 `aria-pressed`를 제공합니다.
+ */
 export interface PasswordInputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
-  tone?: Tone;
-  size?: PasswordInputSize;
-  defaultValue?: string;
-  value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  disabled?: boolean;
+  extends Omit<ComponentPropsWithoutRef<"input">, "size" | "type"> {
+  /** 플레이스홀더 텍스트 */
   placeholder?: string;
-  readOnly?: boolean;
+  /** 컨트롤 크기 */
+  size?: "sm" | "md" | "lg";
+  /** 오류 상태 여부 (true면 위험 톤 적용 및 aria-invalid=true) */
+  invalid?: boolean;
+  /** 비활성화 여부 */
+  disabled?: boolean;
 }
 
-export const PasswordInput = ({
-  tone = "neutral",
-  size = "md",
-  disabled = false,
-  placeholder = "패스워드를 입력해주세요.",
-  ...rest
-}: PasswordInputProps) => {
-  const [isVisible, setIsVisible] = useState(false);
+export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
+  (
+    {
+      size = "md",
+      invalid = false,
+      disabled = false,
+      placeholder = "패스워드를 입력해주세요.",
+      ...rest
+    },
+    ref,
+  ) => {
+    const [isVisible, setIsVisible] = useState(false);
+    const iconSizeMap = { sm: "sm", md: "md", lg: "lg" } as const;
 
-  const toggleVisibility = () => {
-    if (!disabled) {
-      setIsVisible(!isVisible);
-    }
-  };
+    const toggleVisibility = () => {
+      if (!disabled) {
+        setIsVisible(!isVisible);
+      }
+    };
 
-  return (
-    <div className={containerStyles({ size, tone, disabled })}>
-      <input
-        type={isVisible ? "text" : "password"}
-        placeholder={placeholder}
-        disabled={disabled}
-        className={inputStyles({ size })}
-        {...rest}
-      />
-      <button
-        type="button"
-        onClick={toggleVisibility}
-        disabled={disabled}
-        className={iconButtonStyles({ disabled })}
-        aria-label={isVisible ? "패스워드 숨기기" : "패스워드 보기"}
-      >
-        <Icon name={isVisible ? "eyeOff" : "eye"} size="sm" tone="neutral" />
-      </button>
-    </div>
-  );
-};
+    return (
+      <div>
+        <div
+          className={containerStyles({
+            size,
+            state: invalid ? "error" : undefined,
+          })}
+          data-disabled={disabled ? "" : undefined}
+        >
+          <input
+            ref={ref}
+            type={isVisible ? "text" : "password"}
+            placeholder={placeholder}
+            disabled={disabled}
+            className={inputStyles({ size })}
+            aria-label="패스워드"
+            aria-invalid={invalid ? true : undefined}
+            {...rest}
+          />
+          <button
+            type="button"
+            onClick={toggleVisibility}
+            disabled={disabled}
+            className={iconButtonStyles({ disabled })}
+            aria-pressed={isVisible}
+            aria-label={isVisible ? "패스워드 숨기기" : "패스워드 보기"}
+          >
+            <Icon
+              name={isVisible ? "eye" : "eyeOff"}
+              size={iconSizeMap[size]}
+              tone="neutral"
+            />
+          </button>
+        </div>
+      </div>
+    );
+  },
+);
 
 const containerStyles = cva({
   base: {
@@ -61,83 +85,59 @@ const containerStyles = cva({
     display: "flex",
     alignItems: "center",
     width: "334px",
-    borderWidth: "1.5px",
+    borderWidth: "md",
     borderStyle: "solid",
     borderRadius: "sm",
     backgroundColor: "white",
-    transition: "all 0.2s ease-in-out",
+    borderColor: "border.neutral",
+    padding: "12",
+    gap: "8",
     "&:hover": {
-      borderColor: "#788D98",
+      borderColor: "border.neutral.hover",
     },
     "&:active": {
-      borderColor: "#5D727D",
+      borderColor: "border.neutral.active",
     },
     "&:focus-within": {
-      borderWidth: "2px",
-      borderColor: "#481ACF",
-      outline: "2px solid #481ACF",
-      outlineOffset: "1px",
+      borderColor: "border.neutral",
+      outlineStyle: "solid",
+      outlineWidth: "lg",
+      outlineColor: "border.brand.focus",
+      outlineOffset: "2px",
+      borderRadius: "md",
+    },
+    "&:has(input:disabled)": {
+      cursor: "not-allowed",
+      backgroundColor: "bg.neutral.disabled",
+      borderColor: "border.neutral.disabled",
+      borderTopWidth: "md",
+      borderTopColor: "border.neutral.disabled",
+      color: "fg.neutral.disabled",
     },
   },
   variants: {
     size: {
-      sm: { height: "8", paddingX: "3", gap: "2" },
-      md: { height: "10", paddingX: "3", gap: "2" },
-      lg: { height: "12", paddingX: "4", gap: "3" },
+      sm: { height: "8", paddingX: "12", gap: "8" },
+      md: { height: "10", paddingX: "12", gap: "8" },
+      lg: { height: "12", paddingX: "12", gap: "8" },
     },
-    tone: {
-      brand: { borderColor: "border.brand.default" },
-      neutral: { borderColor: "#A4B4BC" },
-      success: { borderColor: "border.success.default" },
-      warning: { borderColor: "border.warning.default" },
-      danger: { borderColor: "#E43F44" },
-      info: { borderColor: "border.info.default" },
-    },
-    disabled: {
-      true: {
-        cursor: "not-allowed",
-        backgroundColor: "bg.neutral.disabled",
-        borderColor: "border.neutral.disabled",
-        color: "fg.neutral.disabled",
+    state: {
+      error: {
+        borderColor: "border.danger",
+        "&:focus-within": {
+          borderColor: "border.danger",
+        },
         "&:hover": {
-          borderColor: "border.neutral.hover",
+          borderColor: "border.danger",
         },
         "&:active": {
-          borderColor: "border.neutral.active",
+          borderColor: "border.danger",
         },
       },
     },
   },
-  compoundVariants: [
-    {
-      tone: "danger",
-      disabled: false,
-      css: {
-        "&:hover": {
-          borderColor: "#E43F44",
-        },
-        "&:active": {
-          borderColor: "#E43F44",
-        },
-      },
-    },
-    {
-      tone: "brand",
-      disabled: false,
-      css: {
-        "&:hover": {
-          borderColor: "border.brand.default",
-        },
-        "&:active": {
-          borderColor: "border.brand.default",
-        },
-      },
-    },
-  ],
   defaultVariants: {
     size: "md",
-    tone: "neutral",
-    disabled: false,
   },
 });
 
@@ -146,10 +146,12 @@ const inputStyles = cva({
     flex: "1",
     border: "none",
     outline: "none",
-    backgroundColor: "transparent",
     color: "fg.neutral.default",
     fontSize: "sm",
+    fontWeight: "medium",
     lineHeight: "tight",
+    letterSpacing: "balanced",
+
     "&::placeholder": {
       color: "fg.neutral.placeholder",
     },
@@ -175,12 +177,7 @@ const iconButtonStyles = cva({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    border: "none",
-    backgroundColor: "transparent",
     cursor: "pointer",
-    padding: "1",
-    borderRadius: "xs",
-    transition: "all 0.2s ease-in-out",
     "&:hover": {
       backgroundColor: "bg.neutral.hover",
     },

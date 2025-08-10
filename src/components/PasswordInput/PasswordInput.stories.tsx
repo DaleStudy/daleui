@@ -7,15 +7,13 @@ const meta: Meta<typeof PasswordInput> = {
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
   argTypes: {
-    tone: {
-      control: "select",
-      options: ["brand", "neutral", "success", "warning", "danger", "info"],
-    },
     size: {
       control: "select",
       options: ["sm", "md", "lg"],
+    },
+    invalid: {
+      control: "boolean",
     },
     disabled: {
       control: "boolean",
@@ -34,37 +32,35 @@ export const Default: Story = {
   args: {
     placeholder: "패스워드를 입력해주세요.",
   },
+  render: (args) => <PasswordInput {...args} />,
 };
 
-// 입력된 상태 - 패스워드가 입력되어 있음
+// 패스워드가 입력된 상태
 export const WithPassword: Story = {
   args: {
     defaultValue: "password123",
     placeholder: "패스워드를 입력해주세요.",
   },
+  render: (args) => <PasswordInput {...args} />,
 };
 
 // 포커스 상태
 export const Focused: Story = {
-  render: () => {
-    return (
-      <div>
-        <p style={{ marginBottom: "8px", fontSize: "14px", color: "#666" }}>
-          아래 입력창을 클릭하면 포커스 상태를 확인할 수 있습니다:
-        </p>
-        <PasswordInput placeholder="패스워드를 입력해주세요." autoFocus />
-      </div>
-    );
+  args: {
+    placeholder: "패스워드를 입력해주세요.",
+    autoFocus: true,
   },
+  render: (args) => <PasswordInput {...args} />,
 };
 
 // 에러 상태
 export const Error: Story = {
   args: {
-    tone: "danger",
+    invalid: true,
     placeholder: "패스워드를 입력해주세요.",
-    defaultValue: "123", // 너무 짧은 패스워드 예시
+    defaultValue: "123",
   },
+  render: (args) => <PasswordInput {...args} />,
 };
 
 // 비활성화 상태
@@ -73,4 +69,5 @@ export const Disabled: Story = {
     disabled: true,
     placeholder: "패스워드를 입력해주세요.",
   },
+  render: (args) => <PasswordInput {...args} />,
 };
