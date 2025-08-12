@@ -21,16 +21,16 @@ export interface PasswordInputProps
 }
 
 export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
-  (
+  function PasswordInput(
     {
       size = "md",
       invalid = false,
       disabled = false,
       placeholder = "패스워드를 입력해주세요.",
       ...rest
-    },
+    }: PasswordInputProps,
     ref,
-  ) => {
+  ) {
     const [isVisible, setIsVisible] = useState(false);
     const iconSizeMap = { sm: "sm", md: "md", lg: "lg" } as const;
 
