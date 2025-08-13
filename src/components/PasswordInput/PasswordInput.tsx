@@ -45,7 +45,6 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
           size,
           state: invalid ? "error" : undefined,
         })}
-        data-disabled={disabled ? "" : undefined}
       >
         <input
           ref={ref}
