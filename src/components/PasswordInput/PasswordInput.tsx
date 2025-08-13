@@ -32,7 +32,6 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
     ref,
   ) {
     const [isVisible, setIsVisible] = useState(false);
-    const iconSizeMap = { sm: "sm", md: "md", lg: "lg" } as const;
 
     const toggleVisibility = () => {
       if (!disabled) {
@@ -41,39 +40,37 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
     };
 
     return (
-      <div>
-        <div
-          className={containerStyles({
-            size,
-            state: invalid ? "error" : undefined,
-          })}
-          data-disabled={disabled ? "" : undefined}
+      <div
+        className={containerStyles({
+          size,
+          state: invalid ? "error" : undefined,
+        })}
+        data-disabled={disabled ? "" : undefined}
+      >
+        <input
+          ref={ref}
+          type={isVisible ? "text" : "password"}
+          placeholder={placeholder}
+          disabled={disabled}
+          className={inputStyles({ size })}
+          aria-label="패스워드"
+          aria-invalid={invalid ? true : undefined}
+          {...rest}
+        />
+        <button
+          type="button"
+          onClick={toggleVisibility}
+          disabled={disabled}
+          className={iconButtonStyles({ disabled })}
+          aria-pressed={isVisible}
+          aria-label={isVisible ? "패스워드 숨기기" : "패스워드 보기"}
         >
-          <input
-            ref={ref}
-            type={isVisible ? "text" : "password"}
-            placeholder={placeholder}
-            disabled={disabled}
-            className={inputStyles({ size })}
-            aria-label="패스워드"
-            aria-invalid={invalid ? true : undefined}
-            {...rest}
+          <Icon
+            name={isVisible ? "eye" : "eyeOff"}
+            size={size}
+            tone="neutral"
           />
-          <button
-            type="button"
-            onClick={toggleVisibility}
-            disabled={disabled}
-            className={iconButtonStyles({ disabled })}
-            aria-pressed={isVisible}
-            aria-label={isVisible ? "패스워드 숨기기" : "패스워드 보기"}
-          >
-            <Icon
-              name={isVisible ? "eye" : "eyeOff"}
-              size={iconSizeMap[size]}
-              tone="neutral"
-            />
-          </button>
-        </div>
+        </button>
       </div>
     );
   },
@@ -84,14 +81,12 @@ const containerStyles = cva({
     position: "relative",
     display: "flex",
     alignItems: "center",
-    width: "334px",
+    width: "100%",
     borderWidth: "md",
     borderStyle: "solid",
     borderRadius: "sm",
     backgroundColor: "white",
     borderColor: "border.neutral",
-    padding: "12",
-    gap: "8",
     "&:hover": {
       borderColor: "border.neutral.hover",
     },
