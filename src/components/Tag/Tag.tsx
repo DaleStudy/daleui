@@ -82,7 +82,7 @@ export function Tag({
           type="button"
           onClick={handleRemoveClick}
           onKeyDown={handleRemoveKeyDown}
-          className={removeButtonStyles()}
+          className={removeButtonStyles({ tone })}
           aria-label="제거"
         >
           <Icon name="x" size="xs" />
@@ -199,9 +199,18 @@ const removeButtonStyles = cva({
     transition: "0.2s",
     "&:focus-visible": {
       outlineWidth: "{borderWidths.lg}",
-      outlineColor: "border.brand.focus",
       outlineOffset: "2",
       outlineStyle: "solid",
+    },
+  },
+  variants: {
+    tone: {
+      neutral: { "&:focus-visible": { outlineColor: "border.neutral.focus" } },
+      brand: { "&:focus-visible": { outlineColor: "border.neutral.focus" } },
+      danger: { "&:focus-visible": { outlineColor: "border.neutral.focus" } },
+      success: { "&:focus-visible": { outlineColor: "border.neutral.focus" } },
+      info: { "&:focus-visible": { outlineColor: "border.neutral.focus" } },
+      warning: { "&:focus-visible": { outlineColor: "border.brand.focus" } },
     },
   },
 });
