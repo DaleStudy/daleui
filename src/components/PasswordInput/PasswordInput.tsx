@@ -2,15 +2,9 @@ import { forwardRef, useState, type ComponentPropsWithoutRef } from "react";
 import { cva } from "../../../styled-system/css";
 import { Icon } from "../Icon/Icon";
 
-/**
- * 패스워드 입력 컨트롤입니다. 우측 아이콘으로 비밀번호 가시성을 토글할 수 있습니다.
- *
- * 접근성 가이드
- * - 토글 버튼은 `aria-label`("패스워드 보기/숨기기")와 `aria-pressed`를 제공합니다.
- */
 export interface PasswordInputProps
   extends Omit<ComponentPropsWithoutRef<"input">, "size" | "type"> {
-  /** 플레이스홀더 텍스트 */
+  /** 입력 안내 텍스트 */
   placeholder?: string;
   /** 컨트롤 크기 */
   size?: "sm" | "md" | "lg";
@@ -20,6 +14,12 @@ export interface PasswordInputProps
   disabled?: boolean;
 }
 
+/**
+ * 패스워드 입력 컨트롤입니다. 우측 아이콘으로 비밀번호 가시성을 토글할 수 있습니다.
+ *
+ * 접근성 가이드
+ * - 토글 버튼은 `aria-label`("패스워드 보기/숨기기")와 `aria-pressed`를 제공합니다.
+ */
 export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
   function PasswordInput(
     {

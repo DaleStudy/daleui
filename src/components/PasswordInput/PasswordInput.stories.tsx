@@ -11,21 +11,6 @@ const meta: Meta<typeof PasswordInput> = {
       url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/Dale-UI-Kit?node-id=1780-2822&t=KboHYHT3LB7QCZnb-1",
     },
   },
-  argTypes: {
-    size: {
-      control: "select",
-      options: ["sm", "md", "lg"],
-    },
-    invalid: {
-      control: "boolean",
-    },
-    disabled: {
-      control: "boolean",
-    },
-    placeholder: {
-      control: "text",
-    },
-  },
 };
 
 export default meta;
