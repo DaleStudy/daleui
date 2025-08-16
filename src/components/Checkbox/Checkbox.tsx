@@ -1,6 +1,6 @@
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { Check } from "lucide-react";
-import React, { type ButtonHTMLAttributes } from "react";
+import React, { useState, type ButtonHTMLAttributes } from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 
@@ -41,6 +41,26 @@ export const Checkbox = ({
   onChange,
   ...rest
 }: CheckboxProps) => {
+  // Handle uncontrolled behavior by managing internal state
+  const [internalChecked, setInternalChecked] = useState(false);
+  const isControlled = checked !== undefined;
+  const checkedValue = isControlled ? checked : internalChecked;
+
+  const handleCheckedChange = (checked: boolean, _event: Event) => {
+    if (!isControlled) {
+      setInternalChecked(checked);
+    }
+    onChange?.(checked, value);
+  };
+
+  // Manually create data attributes to match expected styling
+  const dataAttributes: Record<string, string> = {};
+  if (checkedValue) {
+    dataAttributes['data-checked'] = '';
+  } else {
+    dataAttributes['data-unchecked'] = '';
+  }
+
   return (
     <label
       className={css({
@@ -56,13 +76,14 @@ export const Checkbox = ({
       })}
     >
       <CheckboxPrimitive.Root
-        checked={checked}
+        checked={checkedValue}
         required={required}
         onCheckedChange={(checked) => {
-          onChange?.(checked === true, value);
+          handleCheckedChange(checked === true, {} as Event);
         }}
         disabled={disabled}
         className={styles({ tone, disabled })}
+        {...dataAttributes}
         {...rest}
       >
         <CheckboxPrimitive.Indicator
@@ -125,42 +146,42 @@ const styles = cva({
   variants: {
     tone: {
       brand: {
-        "&[data-state='checked']": {
+        "&[data-checked]": {
           bg: "bgSolid.brand",
           borderColor: "bgSolid.brand",
           color: "fgSolid.brand",
         },
       },
       neutral: {
-        "&[data-state='checked']": {
+        "&[data-checked]": {
           bg: "bgSolid.neutral",
           borderColor: "bgSolid.neutral",
           color: "fgSolid.neutral",
         },
       },
       danger: {
-        "&[data-state='checked']": {
+        "&[data-checked]": {
           bg: "bgSolid.danger",
           borderColor: "bgSolid.danger",
           color: "fgSolid.danger",
         },
       },
       warning: {
-        "&[data-state='checked']": {
+        "&[data-checked]": {
           bg: "bgSolid.warning",
           borderColor: "bgSolid.warning",
           color: "fgSolid.warning",
         },
       },
       success: {
-        "&[data-state='checked']": {
+        "&[data-checked]": {
           bg: "bgSolid.success",
           borderColor: "bgSolid.success",
           color: "fgSolid.success",
         },
       },
       info: {
-        "&[data-state='checked']": {
+        "&[data-checked]": {
           bg: "bgSolid.info",
           borderColor: "bgSolid.info",
           color: "fgSolid.info",
@@ -169,7 +190,7 @@ const styles = cva({
     },
     disabled: {
       true: {
-        "&[data-state='checked']": {
+        "&[data-checked]": {
           bg: "bg.neutral.disabled!",
           borderColor: "bg.neutral.disabled!",
           color: "fg.neutral.disabled!",
