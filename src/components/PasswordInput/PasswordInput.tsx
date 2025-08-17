@@ -84,7 +84,7 @@ const containerStyles = cva({
     borderWidth: "md",
     borderStyle: "solid",
     borderRadius: "sm",
-    backgroundColor: "white",
+    backgroundColor: "appBg",
     borderColor: "border.neutral",
     "&:hover": {
       borderColor: "border.neutral.hover",
