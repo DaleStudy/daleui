@@ -19,6 +19,11 @@ export default {
       </>
     ),
   },
+  argTypes: {
+    children: {
+      control: false,
+    },
+  },
 } satisfies Meta<typeof RadioGroup>;
 
 type Story = StoryObj<typeof RadioGroup>;
