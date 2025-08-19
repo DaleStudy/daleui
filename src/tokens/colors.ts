@@ -204,7 +204,7 @@ export const semanticColors: SemanticTokens["colors"] = {
         value: { base: "{colors.slate.7}", _dark: "{colors.darkSage.9}" },
       },
       disabled: {
-        value: { base: "{colors.slate.10}", _dark: "{colors.darkSage.9}" },
+        value: { base: "{colors.slate.7}", _dark: "{colors.darkSage.9}" },
       },
     },
     success: {
