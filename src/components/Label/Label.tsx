@@ -17,7 +17,7 @@ export type LabelFormChild =
   | React.ReactElement<React.JSX.IntrinsicElements["output"], "output">
   | React.ReactElement<React.JSX.IntrinsicElements["progress"], "progress">;
 
-export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
+type LabelBaseProps = HTMLAttributes<HTMLLabelElement> & {
   /** 라벨이 연결된 요소 */
   children?: LabelFormChild;
   /** 라벨 텍스트 */
@@ -28,13 +28,23 @@ export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
   disabled?: boolean;
   /** 라벨 종류 (기본/필수/옵션선택) */
   variant?: LabelVariant;
-  /** 보조설명문 표시 여부 */
-  isDescription?: boolean;
-  /** 보조설명문 텍스트 */
-  description?: string;
   /** 라벨이 연결된 요소의 id */
   htmlFor?: string;
-}
+};
+
+export type LabelProps =
+  | (LabelBaseProps & {
+      /** 보조설명문 표시 여부 */
+      isDescription: true;
+      /** 보조설명문 텍스트 (필수) */
+      description: string;
+    })
+  | (LabelBaseProps & {
+      /** 보조설명문 표시 여부 */
+      isDescription?: false;
+      /** 보조설명문 텍스트 (금지) */
+      description?: never;
+    });
 
 /**
  * - `children` 속성을 통해서 자식 요소는 `button`, `input`, `meter`, `output`, `progress`, `select`, `textarea` 태그만 올 수 있습니다.
@@ -43,7 +53,8 @@ export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
  * - `disabled` 속성을 통해서 라벨의 비활성화 여부를 설정할 수 있습니다.
  * - `variant` 속성을 통해서 라벨의 종류(기본/필수/옵션선택)를 선택할 수 있습니다.
  * - `isDescription` 속성을 통해서 보조설명문 표시 여부를 설정할 수 있습니다.
- *   - `isDescription` 속성이 true인 경우, `description` 속성을 통해서 보조설명문 텍스트를 지정할 수 있습니다.
+ *   - `isDescription={true}`인 경우, `description` 속성이 필수입니다.
+ *   - `isDescription={false}` 또는 생략시, `description` 속성을 사용할 수 없습니다.
  * - `htmlFor` 속성을 통해서 라벨과 연결할 요소의 id를 지정할 수 있습니다.
  */
 export const Label = ({
