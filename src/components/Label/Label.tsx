@@ -17,8 +17,8 @@ export type LabelFormChild =
   | React.ReactElement<React.JSX.IntrinsicElements["output"], "output">
   | React.ReactElement<React.JSX.IntrinsicElements["progress"], "progress">;
 
-type LabelBaseProps = HTMLAttributes<HTMLLabelElement> & {
-  /** 라벨이 연결된 요소 */
+export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
+  /** 라벨과 연결된 요소 */
   children?: LabelFormChild;
   /** 라벨 텍스트 */
   labelText: string;
@@ -28,23 +28,11 @@ type LabelBaseProps = HTMLAttributes<HTMLLabelElement> & {
   disabled?: boolean;
   /** 라벨 종류 (기본/필수/옵션선택) */
   variant?: LabelVariant;
-  /** 라벨이 연결된 요소의 id */
+  /** 보조설명문 텍스트 */
+  description?: string;
+  /** 라벨과 연결된 요소의 id */
   htmlFor?: string;
-};
-
-export type LabelProps =
-  | (LabelBaseProps & {
-      /** 보조설명문 표시 여부 */
-      isDescription: true;
-      /** 보조설명문 텍스트 (필수) */
-      description: string;
-    })
-  | (LabelBaseProps & {
-      /** 보조설명문 표시 여부 */
-      isDescription?: false;
-      /** 보조설명문 텍스트 (금지) */
-      description?: never;
-    });
+}
 
 /**
  * - `children` 속성을 통해서 자식 요소는 `button`, `input`, `meter`, `output`, `progress`, `select`, `textarea` 태그만 올 수 있습니다.
@@ -63,7 +51,6 @@ export const Label = ({
   tone = "neutral",
   variant = "default",
   disabled = false,
-  isDescription = false,
   description,
   ...rest
 }: LabelProps) => {
@@ -73,7 +60,6 @@ export const Label = ({
         tone: disabled ? undefined : tone,
         variant,
         disabled,
-        isDescription,
       })}
       {...rest}
     >
@@ -89,8 +75,8 @@ export const Label = ({
         </span>
       )}
       {variant === "optional" && <span> (옵션 선택)</span>}
-      {isDescription && description && <br />}
-      {isDescription && description && <Text>{description}</Text>}
+      {description && <br />}
+      {description && <Text>{description}</Text>}
       {children}
     </label>
   );
