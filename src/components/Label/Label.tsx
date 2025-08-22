@@ -1,21 +1,19 @@
-import type { HTMLAttributes } from "react";
-import { cva } from "../../../styled-system/css";
+import type { HTMLAttributes, JSX, ReactElement } from "react";
+import { css, cva } from "../../../styled-system/css";
 import { Text } from "../Text/Text";
-import { css } from "../../../styled-system/css";
-import type React from "react";
 
 type LabelTone = "danger" | "neutral";
 type LabelVariant = "default" | "required" | "optional";
 
 // Label태그와 연결 가능한 요소들
 export type LabelFormChild =
-  | React.ReactElement<React.JSX.IntrinsicElements["input"], "input">
-  | React.ReactElement<React.JSX.IntrinsicElements["textarea"], "textarea">
-  | React.ReactElement<React.JSX.IntrinsicElements["select"], "select">
-  | React.ReactElement<React.JSX.IntrinsicElements["button"], "button">
-  | React.ReactElement<React.JSX.IntrinsicElements["meter"], "meter">
-  | React.ReactElement<React.JSX.IntrinsicElements["output"], "output">
-  | React.ReactElement<React.JSX.IntrinsicElements["progress"], "progress">;
+  | ReactElement<JSX.IntrinsicElements["input"], "input">
+  | ReactElement<JSX.IntrinsicElements["textarea"], "textarea">
+  | ReactElement<JSX.IntrinsicElements["select"], "select">
+  | ReactElement<JSX.IntrinsicElements["button"], "button">
+  | ReactElement<JSX.IntrinsicElements["meter"], "meter">
+  | ReactElement<JSX.IntrinsicElements["output"], "output">
+  | ReactElement<JSX.IntrinsicElements["progress"], "progress">;
 
 export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
   /** 라벨과 연결된 요소 */
