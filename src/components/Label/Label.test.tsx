@@ -3,7 +3,7 @@ import { render, screen, within } from "@testing-library/react";
 import { expect, test } from "vitest";
 import * as stories from "./Label.stories";
 
-const { Basic, Tones, Variants, Disabled, IsDescription } =
+const { Basic, Tones, Variants, Disabled, Description } =
   composeStories(stories);
 
 test("텍스트와 함께 라벨이 올바르게 렌더링됨", () => {
@@ -37,8 +37,8 @@ test("variant 속성이 올바르게 적용됨", () => {
   expect(optionalLabel).toHaveTextContent(/\(옵션 선택\)/);
 });
 
-test("isDescription 속성이 올바르게 적용됨", () => {
-  render(<IsDescription />);
+test("Description 속성이 올바르게 적용됨", () => {
+  render(<Description />);
   expect(screen.getByText("보조설명문 있는 라벨")).toBeInTheDocument();
   expect(screen.getByText("보조설명문 없는 라벨")).toBeInTheDocument();
 
