@@ -13,6 +13,7 @@ export interface TextInputProps
   trailingIcon?: IconProps["name"];
   /** 플레이스홀더 텍스트 */
   placeholder?: string;
+  id?: string;
 }
 
 /**
