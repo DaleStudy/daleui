@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { vstack } from "../../../styled-system/patterns";
 import { Label } from "./Label";
+import { TextInput } from "../TextInput/TextInput";
 
 export default {
   component: Label,
@@ -16,8 +17,7 @@ export default {
     tone: "neutral",
     variant: "default",
     disabled: false,
-    isDescription: false,
-    description: "보조설명문",
+    description: "",
   },
 } satisfies Meta<typeof Label>;
 
@@ -90,20 +90,16 @@ export const Variants: StoryObj<typeof Label> = {
   },
 };
 
-export const IsDescription: StoryObj<typeof Label> = {
+export const Description: StoryObj<typeof Label> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
         <Label
           {...args}
-          isDescription={true}
           labelText="보조설명문 있는 라벨"
+          description="보조설명문"
         ></Label>
-        <Label
-          {...args}
-          isDescription={false}
-          labelText="보조설명문 없는 라벨"
-        ></Label>
+        <Label {...args} labelText="보조설명문 없는 라벨"></Label>
       </div>
     );
   },
@@ -111,10 +107,57 @@ export const IsDescription: StoryObj<typeof Label> = {
     labelText: {
       control: false,
     },
-    isDescription: {
+    description: {
       control: false,
     },
     children: {
+      control: false,
+    },
+  },
+};
+
+export const WithHtmlFor: StoryObj<typeof Label> = {
+  render: (args) => {
+    return (
+      <div className={vstack({ gap: "16" })}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+          }}
+        >
+          <Label {...args} htmlFor="name" labelText="이름"></Label>
+          <TextInput id="name" placeholder="이름을 입력하세요"></TextInput>
+        </div>
+      </div>
+    );
+  },
+  argTypes: {
+    htmlFor: {
+      control: false,
+    },
+    children: {
+      control: false,
+    },
+  },
+};
+
+export const WithChildren: StoryObj<typeof Label> = {
+  render: (args) => {
+    return (
+      <div className={vstack({ gap: "16" })}>
+        <Label {...args} labelText="이름">
+          <TextInput placeholder="이름을 입력하세요"></TextInput>
+        </Label>
+      </div>
+    );
+  },
+  argTypes: {
+    children: {
+      control: false,
+    },
+    htmlFor: {
       control: false,
     },
   },
