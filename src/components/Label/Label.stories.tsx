@@ -13,7 +13,7 @@ export default {
     },
   },
   args: {
-    labelText: "라벨",
+    labelText: "타이틀",
     tone: "neutral",
     variant: "default",
     disabled: false,
@@ -116,39 +116,16 @@ export const Description: StoryObj<typeof Label> = {
   },
 };
 
-export const WithHtmlFor: StoryObj<typeof Label> = {
-  render: (args) => {
-    return (
-      <div className={vstack({ gap: "16" })}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-          }}
-        >
-          <Label {...args} htmlFor="name" labelText="이름"></Label>
-          <TextInput id="name" placeholder="이름을 입력하세요"></TextInput>
-        </div>
-      </div>
-    );
+export const WithTextInput: StoryObj<typeof Label> = {
+  args: {
+    description: "가이드라인을 적어주세요",
   },
-  argTypes: {
-    htmlFor: {
-      control: false,
-    },
-    children: {
-      control: false,
-    },
-  },
-};
 
-export const WithChildren: StoryObj<typeof Label> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
-        <Label {...args} labelText="이름">
-          <TextInput placeholder="이름을 입력하세요"></TextInput>
+        <Label {...args}>
+          <TextInput placeholder="내용을 입력해주세요"></TextInput>
         </Label>
       </div>
     );
