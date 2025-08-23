@@ -8,7 +8,7 @@ const { Basic, Tones, Variants, Disabled, Description } =
 
 test("텍스트와 함께 라벨이 올바르게 렌더링됨", () => {
   render(<Basic />);
-  expect(screen.getByText("라벨")).toBeInTheDocument();
+  expect(screen.getByText("타이틀")).toBeInTheDocument();
 });
 
 test("tone 속성이 올바르게 적용됨", () => {
