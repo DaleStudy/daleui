@@ -1,19 +1,20 @@
-import type { HTMLAttributes, JSX, ReactElement } from "react";
+import type { HTMLAttributes, ReactElement } from "react";
 import { css, cva } from "../../../styled-system/css";
 import { Text } from "../Text/Text";
+import type { ButtonProps } from "../Button/Button";
+import type { TextInputProps } from "../TextInput/TextInput";
+import type { CheckboxProps } from "../Checkbox/Checkbox";
+import type { RadioGroupProps } from "../RadioGroup/RadioGroup";
 
 type LabelTone = "danger" | "neutral";
 type LabelVariant = "default" | "required" | "optional";
 
 // Label태그와 연결 가능한 요소들
 export type LabelFormChild =
-  | ReactElement<JSX.IntrinsicElements["input"], "input">
-  | ReactElement<JSX.IntrinsicElements["textarea"], "textarea">
-  | ReactElement<JSX.IntrinsicElements["select"], "select">
-  | ReactElement<JSX.IntrinsicElements["button"], "button">
-  | ReactElement<JSX.IntrinsicElements["meter"], "meter">
-  | ReactElement<JSX.IntrinsicElements["output"], "output">
-  | ReactElement<JSX.IntrinsicElements["progress"], "progress">;
+  | ReactElement<ButtonProps>
+  | ReactElement<CheckboxProps>
+  | ReactElement<RadioGroupProps>
+  | ReactElement<TextInputProps>;
 
 export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
   /** 라벨과 연결된 요소 */
@@ -33,14 +34,12 @@ export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
 }
 
 /**
- * - `children` 속성을 통해서 자식 요소는 `button`, `input`, `meter`, `output`, `progress`, `select`, `textarea` 태그만 올 수 있습니다.
+ * - `children` 속성을 통해서 자식 요소는 `Button`, `Checkbox`, `RadioGroup`, `TextInput` 컴포넌트가 올 수 있습니다. (form요소 컴포넌트 추가 개발 시, 업데이트 예정)
  * - `labelText` 속성을 통해서 라벨의 텍스트를 지정할 수 있습니다.
  * - `tone` 속성을 통해서 색상 강조를 지정할 수 있습니다.
  * - `disabled` 속성을 통해서 라벨의 비활성화 여부를 설정할 수 있습니다.
  * - `variant` 속성을 통해서 라벨의 종류(기본/필수/옵션선택)를 선택할 수 있습니다.
- * - `isDescription` 속성을 통해서 보조설명문 표시 여부를 설정할 수 있습니다.
- *   - `isDescription={true}`인 경우, `description` 속성이 필수입니다.
- *   - `isDescription={false}` 또는 생략시, `description` 속성을 사용할 수 없습니다.
+ * - `description` 속성을 통해서 보조설명문을 추가할 수 있습니다.
  * - `htmlFor` 속성을 통해서 라벨과 연결할 요소의 id를 지정할 수 있습니다.
  */
 export const Label = ({
@@ -64,6 +63,7 @@ export const Label = ({
       {labelText}
       {variant === "required" && (
         <span
+          aria-label="옵션 필수"
           className={css({
             color: disabled ? "fg.neutral.disabled" : "fg.danger",
           })}
@@ -72,10 +72,12 @@ export const Label = ({
           *
         </span>
       )}
-      {variant === "optional" && <span> (옵션 선택)</span>}
+      {variant === "optional" && (
+        <span aria-label="옵션 선택"> (옵션 선택)</span>
+      )}
+      {children}
       {description && <br />}
       {description && <Text>{description}</Text>}
-      {children}
     </label>
   );
 };
