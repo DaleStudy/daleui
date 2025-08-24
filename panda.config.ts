@@ -45,6 +45,11 @@ export default defineConfig({
   theme: {
     extend: {
       textStyles,
+      breakpoints: {
+        sm: "641px",
+        md: "1025px",
+        lg: "1281px",
+      },
       tokens: {
         borders,
         borderWidths,
