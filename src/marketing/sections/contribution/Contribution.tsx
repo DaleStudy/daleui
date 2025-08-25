@@ -12,18 +12,19 @@ export function Contribution() {
     <section
       className={vstack({
         bg: "bg.brand",
-        minWidth: { base: "auto", sm: "auto", md: "auto", lg: "5xl" },
-        px: { base: "0", sm: "0", md: "0", lg: "24" },
-        py: { base: "40px", sm: "40px", md: "60px", lg: "80px" },
+        px: { base: "0", lg: "24" },
+        minWidth: { base: "auto", lg: "5xl" },
+        // spacing 토큰 부족으로 px 사용
+        py: { base: "40", md: "60px", lg: "80px" },
       })}
     >
       <div
         className={stack({
-          minWidth: { base: "auto", lg: "5xl" },
-          maxWidth: { base: "auto", lg: "7xl" },
           py: "0",
-          px: { base: "16", sm: "16", md: "24", lg: "24" },
           gap: "40",
+          px: { base: "16", md: "24" },
+          maxWidth: { base: "auto", lg: "7xl" },
+          minWidth: { base: "auto", lg: "5xl" },
         })}
       >
         <div
@@ -37,10 +38,10 @@ export function Contribution() {
           <h4
             className={css({
               textWrap: "wrap",
-              textStyle: "heading.4",
-              fontSize: { base: "20px", sm: "20px", md: "24px", lg: "24px" },
               textAlign: "center",
               wordBreak: "keep-all",
+              textStyle: "heading.4",
+              fontSize: { base: "2xl", md: "3xl" },
             })}
           >
             프로젝트의 성공을 위해 응원도 부탁드립니다.
@@ -50,12 +51,7 @@ export function Contribution() {
           className={flex({
             gap: "24",
             alignSelf: "stretch",
-            flexDirection: {
-              base: "column",
-              sm: "column",
-              md: "column",
-              lg: "row",
-            },
+            flexDirection: { base: "column", lg: "row" },
           })}
         >
           <Card
@@ -85,6 +81,9 @@ export function Contribution() {
   );
 }
 
+/**
+ * 임시 카드 컴포넌트
+ */
 const Card = ({
   icon,
   title,
@@ -105,19 +104,19 @@ const Card = ({
       className={stack({
         py: "24",
         px: "16",
-        alignItems: "flex-start",
         gap: "24",
         flex: "1 0 0",
         bg: "bg.neutral",
         borderRadius: "md",
+        alignItems: "flex-start",
       })}
     >
       <div
         className={flex({
           p: "12",
-          alignItems: "center",
           bg: "bg.brand",
           borderRadius: "lg",
+          alignItems: "center",
         })}
       >
         <Icon name={icon} tone="brand" />
@@ -125,8 +124,8 @@ const Card = ({
       <div
         className={stack({
           gap: "4",
-          alignSelf: "stretch",
           flex: "1 0 0",
+          alignSelf: "stretch",
         })}
       >
         <Text size="lg" weight="semibold" as="p">
