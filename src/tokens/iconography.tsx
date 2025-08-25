@@ -17,6 +17,8 @@ import {
   Eye,
   EyeClosed,
   EyeOff,
+  HandHeart,
+  ThumbsUp,
 } from "lucide-react";
 import type { FunctionComponent, ComponentProps, SVGProps } from "react";
 import Discord from "../assets/Discord.svg?react";
@@ -50,6 +52,8 @@ export const icons = {
   eye: Eye,
   eyeOff: EyeOff,
   eyeClosed: EyeClosed,
+  handHeart: HandHeart,
+  thumbsUp: ThumbsUp,
   Discord: createBrandIcon(Discord),
   GitHub: createBrandIcon(GitHub),
   LinkedIn: createBrandIcon(LinkedIn),
