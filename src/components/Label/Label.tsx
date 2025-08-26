@@ -60,7 +60,7 @@ export const Label = ({
       })}
       {...rest}
     >
-      {labelText}
+      <span className={css({ textStyle: "label.md.strong" })}>{labelText}</span>
       {variant === "required" && (
         <span
           aria-label="옵션 필수"
@@ -75,9 +75,12 @@ export const Label = ({
       {variant === "optional" && (
         <span aria-label="옵션 선택"> (옵션 선택)</span>
       )}
-      {children}
-      {description && <br />}
-      {description && <Text>{description}</Text>}
+      {children && <div style={{ marginTop: "8px" }}>{children}</div>}
+      {description && (
+        <div style={{ display: "block", marginTop: "8px" }}>
+          <Text size="sm">{description}</Text>
+        </div>
+      )}
     </label>
   );
 };
