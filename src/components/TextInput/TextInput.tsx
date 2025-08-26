@@ -75,7 +75,8 @@ const wrapperStyles = cva({
     width: "100%",
     position: "relative",
     border: "neutral",
-    borderRadius: "md",
+    borderWidth: "md",
+    borderRadius: "sm",
     transition: "all 0.2s ease-in-out",
     backgroundColor: "appBg",
 
@@ -97,7 +98,7 @@ const wrapperStyles = cva({
   variants: {
     size: {
       sm: { h: "40px", px: "16", fontSize: "sm" },
-      md: { h: "48px", px: "20", fontSize: "md" },
+      md: { h: "48px", px: "12", fontSize: "md" },
       lg: { h: "56px", px: "24", fontSize: "lg" },
     },
     state: {
