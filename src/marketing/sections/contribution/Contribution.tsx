@@ -14,7 +14,10 @@ export function Contribution() {
         bg: "bg.brand",
         px: { base: "0", lg: "24" },
         minWidth: { base: "auto", lg: "5xl" },
-        // spacing 토큰 부족으로 px 사용
+        /**
+         * TODO: 추후 spacing 토큰 추가 시 변경
+         * spacing 토큰 부족으로 px 사용
+         */
         py: { base: "40", md: "60px", lg: "80px" },
       })}
     >
@@ -34,7 +37,10 @@ export function Contribution() {
           })}
         >
           <Tag tone="brand">기여 & 응원</Tag>
-          {/* heading 컴포넌트 사용시 small mobile에서 줄바꿈 문제 및 font-size 조절 반응형 불가능하여 직접 작성 */}
+          {/* 
+            TODO: 추후 heading 컴포넌트 반응형 처리 완료시 변경
+            heading 컴포넌트 사용시 small mobile에서 줄바꿈 문제 및 font-size 조절 반응형 불가능하여 직접 작성 
+          */}
           <h4
             className={css({
               textWrap: "wrap",
@@ -54,6 +60,7 @@ export function Contribution() {
             flexDirection: { base: "column", lg: "row" },
           })}
         >
+          {/* TODO: 카드 컴포넌트 개발 완료시 변경 */}
           <Card
             icon="star"
             title={`깃허브 스타로\n프로젝트 응원하기`}
@@ -82,6 +89,7 @@ export function Contribution() {
 }
 
 /**
+ * TODO: 카드 컴포넌트 개발 완료시 제거
  * 임시 카드 컴포넌트
  */
 const Card = ({
