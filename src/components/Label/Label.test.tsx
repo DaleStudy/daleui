@@ -1,18 +1,23 @@
-import { composeStories } from "@storybook/react-vite";
 import { render, screen, within } from "@testing-library/react";
 import { expect, test } from "vitest";
-import * as stories from "./Label.stories";
-
-const { Basic, Tones, Variants, Disabled, Description } =
-  composeStories(stories);
+import { Label } from "./Label";
 
 test("텍스트와 함께 라벨이 올바르게 렌더링됨", () => {
-  render(<Basic />);
-  expect(screen.getByText("타이틀")).toBeInTheDocument();
+  render(
+    <>
+      <Label labelText="라벨" />
+    </>,
+  );
+  expect(screen.getByText("라벨")).toBeInTheDocument();
 });
 
 test("tone 속성이 올바르게 적용됨", () => {
-  render(<Tones />);
+  render(
+    <>
+      <Label tone="neutral" labelText="중립 색조 라벨" />
+      <Label tone="danger" labelText="위험 색조 라벨" />
+    </>,
+  );
   const neutralText = screen.getAllByText("중립 색조 라벨")[0];
   const dangerText = screen.getAllByText("위험 색조 라벨")[0];
   // eslint-disable-next-line testing-library/no-node-access
@@ -22,14 +27,25 @@ test("tone 속성이 올바르게 적용됨", () => {
 });
 
 test("disabled 속성이 올바르게 적용됨", () => {
-  render(<Disabled />);
+  render(
+    <>
+      <Label disabled={true} labelText="비활성화 라벨" />
+      <Label disabled={false} labelText="활성화 라벨" />
+    </>,
+  );
   const disabledText = screen.getByText("비활성화 라벨");
   // eslint-disable-next-line testing-library/no-node-access
   expect(disabledText.closest("label")).toHaveClass("c_fg.neutral.disabled");
 });
 
 test("variant 속성이 올바르게 적용됨", () => {
-  render(<Variants />);
+  render(
+    <>
+      <Label variant="default" labelText="기본 라벨" />
+      <Label variant="required" labelText="필수 라벨" />
+      <Label variant="optional" labelText="선택 라벨" />
+    </>,
+  );
   expect(screen.getByText("기본 라벨")).toBeInTheDocument();
 
   const requiredText = screen.getByText("필수 라벨");
@@ -45,7 +61,12 @@ test("variant 속성이 올바르게 적용됨", () => {
 });
 
 test("Description 속성이 올바르게 적용됨", () => {
-  render(<Description />);
+  render(
+    <>
+      <Label description="보조설명문" labelText="보조설명문 있는 라벨" />
+      <Label labelText="보조설명문 없는 라벨" />
+    </>,
+  );
   expect(screen.getByText("보조설명문 있는 라벨")).toBeInTheDocument();
   expect(screen.getByText("보조설명문 없는 라벨")).toBeInTheDocument();
 
