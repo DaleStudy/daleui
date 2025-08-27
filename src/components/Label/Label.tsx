@@ -42,7 +42,7 @@ export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
  * - `description` 속성을 통해서 보조설명문을 추가할 수 있습니다.
  * - `htmlFor` 속성을 통해서 라벨과 연결할 요소의 id를 지정할 수 있습니다.
  */
-export const Label = ({
+export function Label({
   children,
   labelText,
   tone = "neutral",
@@ -50,7 +50,7 @@ export const Label = ({
   disabled = false,
   description,
   ...rest
-}: LabelProps) => {
+}: LabelProps) {
   return (
     <label
       className={styles({
@@ -83,7 +83,7 @@ export const Label = ({
       )}
     </label>
   );
-};
+}
 
 const styles = cva({
   variants: {
