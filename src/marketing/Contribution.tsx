@@ -1,11 +1,11 @@
 import { Fragment } from "react/jsx-runtime";
-import { flex, stack, vstack } from "../../../../styled-system/patterns";
-import { Icon } from "../../../components/Icon/Icon";
-import { Link } from "../../../components/Link/Link";
-import { Tag } from "../../../components/Tag/Tag";
-import { Text } from "../../../components/Text/Text";
-import type { IconName } from "../../../tokens/iconography";
-import { css } from "../../../../styled-system/css";
+import { flex, stack, vstack } from "../../styled-system/patterns";
+import { Icon } from "../components/Icon/Icon";
+import { Link } from "../components/Link/Link";
+import { Tag } from "../components/Tag/Tag";
+import { Text } from "../components/Text/Text";
+import type { IconName } from "../tokens/iconography";
+import { css } from "../../styled-system/css";
 
 export function Contribution() {
   return (
