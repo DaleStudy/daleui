@@ -118,7 +118,7 @@ export const Description: StoryObj<typeof Label> = {
 
 export const WithTextInput: StoryObj<typeof Label> = {
   args: {
-    description: "가이드라인을 적어주세요",
+    description: "보조 설명문",
   },
 
   render: (args) => {

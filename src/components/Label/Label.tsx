@@ -75,12 +75,12 @@ export function Label({
       {variant === "optional" && (
         <span aria-label="옵션 선택"> (옵션 선택)</span>
       )}
-      {children && <div style={{ marginTop: "8px" }}>{children}</div>}
       {description && (
-        <div style={{ display: "block", marginTop: "8px" }}>
-          <Text size="sm">{description}</Text>
-        </div>
+        <Text as="div" size="sm">
+          {description}
+        </Text>
       )}
+      {children && <div style={{ marginTop: "8px" }}>{children}</div>}
     </label>
   );
 }
