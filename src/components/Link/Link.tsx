@@ -1,5 +1,6 @@
 import { type AnchorHTMLAttributes } from "react";
 import { css, cva } from "../../../styled-system/css";
+import { textStyles } from "../../tokens/typography";
 
 type LinkSize = "sm" | "md" | "lg";
 type LinkTone = "neutral" | "brand";
@@ -47,7 +48,10 @@ export function Link({
 
   return (
     <a
-      className={css(styles.raw({ tone, underline, size }))}
+      className={css(
+        styles.raw({ tone, underline, size }),
+        textStyles.label[size][underline ? "underline" : "DEFAULT"].value,
+      )}
       href={href}
       target={target}
       rel={rel}
@@ -99,24 +103,17 @@ const styles = cva({
     },
     size: {
       sm: {
-        fontSize: "sm",
         gap: "2",
       },
       md: {
-        fontSize: "md",
         gap: "4",
       },
       lg: {
-        fontSize: "lg",
         gap: "4",
       },
     },
     underline: {
-      true: {
-        textDecoration: "underline",
-      },
       false: {
-        textDecoration: "none",
         "&:hover": {
           textDecoration: "underline",
         },
