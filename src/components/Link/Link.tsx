@@ -8,7 +8,7 @@ type LinkTone = "neutral" | "brand";
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /** 링크 URL (필수) */
   href: string;
-  /** 링크 내용, 아이콘, 이미지 등 (필수) */
+  /** 링크 내용, 아이콘, 이미지 등을 주ㅇ (필수) */
   children: React.ReactNode;
   /** 색조 */
   tone?: LinkTone;
@@ -114,6 +114,7 @@ const styles = cva({
     },
     underline: {
       false: {
+        textDecoration: "none",
         "&:hover": {
           textDecoration: "underline",
         },
