@@ -73,5 +73,5 @@ test("Description 속성이 올바르게 적용됨", () => {
   // Text 컴포넌트 안에 description이 있는지 확인
   const descriptionInText = screen.getByText("보조설명문");
   expect(descriptionInText).toBeInTheDocument();
-  expect(descriptionInText.tagName).toBe("SPAN");
+  expect(descriptionInText.tagName).toBe("DIV");
 });
