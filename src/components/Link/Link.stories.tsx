@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { action } from "storybook/internal/actions";
 import { vstack } from "../../../styled-system/patterns";
 import { Icon } from "../Icon/Icon";
-import { Link } from "./Link";
 import { Text } from "../Text/Text";
-import { action } from "storybook/internal/actions";
+import { Link } from "./Link";
 
 export default {
   component: Link,
@@ -27,6 +27,10 @@ export default {
     external: false,
   },
   argTypes: {
+    children: {
+      control: "text",
+      description: "링크 텍스트",
+    },
     tone: {
       control: "select",
       description: "링크의 색상을 변경합니다.",
