@@ -1,4 +1,5 @@
 import { css } from "../../styled-system/css";
+import { stack } from "../../styled-system/patterns";
 import { Heading } from "../components/Heading/Heading";
 import { Icon } from "../components/Icon/Icon";
 import { Link } from "../components/Link/Link";
@@ -29,16 +30,15 @@ function Card({
 }: CardProps) {
   return (
     <div
-      className={css({
-        width: "100%",
+      className={stack({
+        align: "start",
+        direction: "column",
         backgroundColor: "bg.neutral",
+        width: "100%",
         py: "24px",
         px: "16px",
-        borderRadius: "md",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "start",
         gap: "24px",
+        borderRadius: "md",
       })}
     >
       <div
@@ -52,9 +52,8 @@ function Card({
         <Icon name={icon} size="lg" />
       </div>
       <div
-        className={css({
-          display: "flex",
-          flexDirection: "column",
+        className={stack({
+          direction: "column",
           gap: "4",
         })}
       >
@@ -133,15 +132,14 @@ export function HowSection() {
       })}
     >
       <div
-        className={css({
+        className={stack({
+          direction: "column",
           width: {
             base: "100%",
             lg: "1280px",
           },
           mx: "auto",
           px: "24px",
-          display: "flex",
-          flexDirection: "column",
           gap: "48px",
         })}
       >
