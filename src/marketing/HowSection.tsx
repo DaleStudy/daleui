@@ -159,8 +159,7 @@ export function HowSection() {
           className={css({
             display: "grid",
             gridTemplateColumns: {
-              base: "1fr",
-              sm: "repeat(2, 1fr)",
+              base: "repeat(1, 1fr)",
               md: "repeat(3, 1fr)",
             },
             gap: "24",
