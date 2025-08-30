@@ -1,6 +1,5 @@
 import { css } from "../../styled-system/css";
 import { stack } from "../../styled-system/patterns";
-import { Heading } from "../components/Heading/Heading";
 import { Icon } from "../components/Icon/Icon";
 import { Link } from "../components/Link/Link";
 import type { IconName } from "../tokens/iconography";
@@ -147,14 +146,15 @@ export function HowSection() {
           gap: "48",
         })}
       >
-        <Heading
-          level={1}
+        <h3
           className={css({
             textAlign: "center",
+            textStyle: "heading.3",
+            fontSize: { base: "2xl", md: "3xl" },
           })}
         >
           달레 UI 살펴보기
-        </Heading>
+        </h3>
         <div
           className={css({
             display: "grid",
