@@ -35,16 +35,16 @@ function Card({
         direction: "column",
         backgroundColor: "bg.neutral",
         width: "100%",
-        py: "24px",
-        px: "16px",
-        gap: "24px",
+        py: "24",
+        px: "16",
+        gap: "24",
         borderRadius: "md",
       })}
     >
       <div
         className={css({
           backgroundColor: "bg.brand",
-          p: "12px",
+          p: "12",
           borderRadius: "lg",
           display: "inline-flex",
         })}
@@ -127,6 +127,10 @@ export function HowSection() {
     <section
       className={css({
         width: "100%",
+        /**
+         * TODO: 추후 spacing 토큰 추가 시 변경
+         * spacing 토큰 부족으로 px 사용
+         */
         py: "80px",
         backgroundColor: "bg.brand",
       })}
@@ -139,8 +143,8 @@ export function HowSection() {
             lg: "1280px",
           },
           mx: "auto",
-          px: "24px",
-          gap: "48px",
+          px: "24",
+          gap: "48",
         })}
       >
         <Heading
@@ -159,7 +163,7 @@ export function HowSection() {
               sm: "repeat(2, 1fr)",
               md: "repeat(3, 1fr)",
             },
-            gap: "24px",
+            gap: "24",
             width: "100%",
             height: "100%",
           })}
