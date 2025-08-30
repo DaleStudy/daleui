@@ -8,7 +8,7 @@ const RadioGroupContext = createContext<{
   tone: Tone;
 } | null>(null);
 
-interface RadioGroupProps {
+export interface RadioGroupProps {
   /**
    * RadioGroup의 자식 요소로 Radio 컴포넌트만 허용됩니다.
    */
