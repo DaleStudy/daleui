@@ -128,15 +128,6 @@ export const textStyles = {
           textDecoration: "underline",
         },
       },
-      strong: {
-        value: {
-          fontFamily: "sans",
-          fontSize: "md",
-          fontWeight: "semibold",
-          lineHeight: "tight",
-          letterSpacing: "balanced",
-        },
-      },
     },
     sm: {
       DEFAULT: {
