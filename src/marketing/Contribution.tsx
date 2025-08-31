@@ -1,4 +1,3 @@
-import { Fragment } from "react/jsx-runtime";
 import { flex, stack, vstack } from "../../styled-system/patterns";
 import { Icon } from "../components/Icon/Icon";
 import { Link } from "../components/Link/Link";
@@ -63,21 +62,21 @@ export function Contribution() {
           {/* TODO: 카드 컴포넌트 개발 완료시 변경 */}
           <Card
             icon="star"
-            title={`깃허브 스타로\n프로젝트 응원하기`}
+            title="깃허브 스타로 프로젝트 응원하기"
             description="간단한 클릭 한 번으로 저희에게 큰 힘이 됩니다. 깃허브 스타는 프로젝트의 가치를 알리는 가장 쉬운 방법입니다."
             linkText="스타 남기고 응원하기"
             href="https://github.com/DaleStudy/daleui"
           />
           <Card
             icon="handHeart"
-            title={`깃허브 스폰서로\n지속적인 개발 후원하기`}
+            title="깃허브 스폰서로 지속적인 개발 후원하기"
             description="깃허브 스폰서를 통해 프로젝트의 지속적인 발전을 도와주실 수 있습니다."
             linkText="후원하기"
             href="https://github.com/sponsors/DaleStudy"
           />
           <Card
             icon="thumbsUp"
-            title={`개발 과정을 담은\n블로그 읽어보기`}
+            title="개발 과정을 담은 블로그 읽어보기"
             description="프로젝트 개발 과정, 고민했던 지점들, 그리고 해결 과정을 솔직하게 담은 블로그입니다. "
             linkText="좋아요 하러 가기"
             href="https://github.com/DaleStudy/daleui/discussions"
@@ -105,8 +104,6 @@ const Card = ({
   linkText?: string;
   href?: string;
 }) => {
-  const titleLines = title.split("\n");
-  const titleLineCount = titleLines.length - 1;
   return (
     <article
       className={stack({
@@ -137,12 +134,7 @@ const Card = ({
         })}
       >
         <Text size="lg" weight="semibold" as="p">
-          {titleLines.map((line, index) => (
-            <Fragment key={index}>
-              {line}
-              {index < titleLineCount && <br />}
-            </Fragment>
-          ))}
+          {title}
         </Text>
         <Text size="md" as="p">
           {description}
