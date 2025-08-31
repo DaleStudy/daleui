@@ -50,7 +50,7 @@ export function Link({
     <a
       className={css(
         styles.raw({ tone, underline, size }),
-        textStyles.label[size][underline ? "underline" : "DEFAULT"].value,
+        textStyles.label[size].DEFAULT.value,
       )}
       href={href}
       target={target}
@@ -113,6 +113,9 @@ const styles = cva({
       },
     },
     underline: {
+      true: {
+        textDecoration: "underline",
+      },
       false: {
         textDecoration: "none",
         "&:hover": {
