@@ -1,4 +1,4 @@
-import { forwardRef, type ComponentPropsWithoutRef } from "react";
+import { type ComponentPropsWithoutRef, type Ref } from "react";
 import { cva, cx } from "../../../styled-system/css";
 import { Icon, type IconProps } from "../Icon/Icon";
 export interface TextInputProps
@@ -13,6 +13,9 @@ export interface TextInputProps
   trailingIcon?: IconProps["name"];
   /** 플레이스홀더 텍스트 */
   placeholder?: string;
+  id?: string;
+  /** DOM 요소 참조 */
+  ref?: Ref<HTMLInputElement>;
 }
 
 /**
@@ -20,51 +23,50 @@ export interface TextInputProps
  * - `leadingIcon`과 `trailingIcon` prop을 통해 아이콘을 앞뒤에 추가할 수 있습니다.
  * - `disabled` prop으로 비활성화 상태를 제어할 수 있으며, `state` prop을 통해 'error'와 같은 특정 상태를 표현할 수 있습니다.
  */
-export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  (
-    { size, invalid, className, leadingIcon, trailingIcon, disabled, ...rest },
-    ref,
-  ) => {
-    const renderIcon = (name: IconProps["name"]) => {
-      let tone: IconProps["tone"];
+export function TextInput({
+  size,
+  invalid,
+  className,
+  leadingIcon,
+  trailingIcon,
+  disabled,
+  ref,
+  ...rest
+}: TextInputProps) {
+  const renderIcon = (name: IconProps["name"]) => {
+    let tone: IconProps["tone"];
 
-      if (disabled) {
-        tone = "neutral";
-      } else if (invalid) {
-        tone = "danger";
-      }
-
-      return (
-        <Icon
-          name={name}
-          size={size}
-          tone={tone}
-          data-testid={`icon-${name}`}
-        />
-      );
-    };
+    if (disabled) {
+      tone = "neutral";
+    } else if (invalid) {
+      tone = "danger";
+    }
 
     return (
-      <div
-        className={cx(
-          wrapperStyles({ size, state: invalid ? "error" : undefined }),
-          className,
-        )}
-        data-disabled={disabled ? "" : undefined}
-      >
-        {leadingIcon && renderIcon(leadingIcon)}
-        <input
-          className={inputStyles()}
-          ref={ref}
-          disabled={disabled}
-          aria-invalid={invalid ? true : undefined}
-          {...rest}
-        />
-        {trailingIcon && renderIcon(trailingIcon)}
-      </div>
+      <Icon name={name} size={size} tone={tone} data-testid={`icon-${name}`} />
     );
-  },
-);
+  };
+
+  return (
+    <div
+      className={cx(
+        wrapperStyles({ size, state: invalid ? "error" : undefined }),
+        className,
+      )}
+      data-disabled={disabled ? "" : undefined}
+    >
+      {leadingIcon && renderIcon(leadingIcon)}
+      <input
+        className={inputStyles()}
+        ref={ref}
+        disabled={disabled}
+        aria-invalid={invalid ? true : undefined}
+        {...rest}
+      />
+      {trailingIcon && renderIcon(trailingIcon)}
+    </div>
+  );
+}
 
 const wrapperStyles = cva({
   base: {
@@ -74,7 +76,8 @@ const wrapperStyles = cva({
     width: "100%",
     position: "relative",
     border: "neutral",
-    borderRadius: "md",
+    borderWidth: "md",
+    borderRadius: "sm",
     transition: "all 0.2s ease-in-out",
     backgroundColor: "appBg",
 
@@ -96,7 +99,7 @@ const wrapperStyles = cva({
   variants: {
     size: {
       sm: { h: "40px", px: "16", fontSize: "sm" },
-      md: { h: "48px", px: "20", fontSize: "md" },
+      md: { h: "48px", px: "12", fontSize: "md" },
       lg: { h: "56px", px: "24", fontSize: "lg" },
     },
     state: {
