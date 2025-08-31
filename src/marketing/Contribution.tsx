@@ -141,7 +141,7 @@ const Card = ({
         </Text>
       </div>
       {href && (
-        <Link href={href} size="lg" tone="brand">
+        <Link href={href} size="lg" tone="brand" underline={false}>
           {linkText}
           <Icon name="externalLink" tone="brand" size="sm" />
         </Link>
