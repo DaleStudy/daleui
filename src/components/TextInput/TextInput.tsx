@@ -78,6 +78,14 @@ const wrapperStyles = cva({
     transition: "all 0.2s ease-in-out",
     backgroundColor: "appBg",
 
+    "&:focus-within": {
+      outlineStyle: "solid",
+      outlineWidth: "lg",
+      outlineOffset: "2px",
+      borderRadius: "md",
+      outlineColor: "border.brand.focus",
+    },
+
     "&:has(input:disabled)": {
       cursor: "not-allowed",
       backgroundColor: "bg.neutral.disabled",
@@ -93,7 +101,6 @@ const wrapperStyles = cva({
     invalid: {
       true: {
         border: "danger",
-        "&:focus-within": { borderColor: "border.danger", boxShadow: "none" },
       },
       false: {
         "&:hover": {
@@ -101,9 +108,6 @@ const wrapperStyles = cva({
         },
         "&:active": {
           borderColor: "border.neutral.active",
-        },
-        "&:focus-within": {
-          borderColor: "border.brand.focus",
         },
       },
     },
