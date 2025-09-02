@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Button } from "./Button";
 import { vstack } from "../../../styled-system/patterns";
+import { Button } from "./Button";
 
 export default {
   component: Button,
@@ -16,6 +16,24 @@ export default {
     variant: "solid",
     size: "md",
     disabled: false,
+  },
+  argTypes: {
+    children: {
+      control: "text",
+      description: "버튼 텍스트",
+    },
+    variant: {
+      control: "select",
+      description: "버튼의 스타일 종류",
+    },
+    size: {
+      control: "select",
+      description: "버튼의 크기",
+    },
+    tone: {
+      control: "select",
+      description: "버튼의 색상 강조",
+    },
   },
 } satisfies Meta<typeof Button>;
 
