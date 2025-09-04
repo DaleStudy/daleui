@@ -49,10 +49,7 @@ export function TextInput({
 
   return (
     <div
-      className={cx(
-        wrapperStyles({ size, state: invalid ? "error" : undefined }),
-        className,
-      )}
+      className={cx(wrapperStyles({ size, invalid }), className)}
       data-disabled={disabled ? "" : undefined}
     >
       {leadingIcon && renderIcon(leadingIcon)}
@@ -81,15 +78,14 @@ const wrapperStyles = cva({
     transition: "all 0.2s ease-in-out",
     backgroundColor: "appBg",
 
-    "&:hover": {
-      borderColor: "border.neutral.hover",
-    },
-    "&:active": {
-      borderColor: "border.neutral.active",
-    },
     "&:focus-within": {
-      borderColor: "border.brand.focus",
+      outlineStyle: "solid",
+      outlineWidth: "lg",
+      outlineOffset: "2px",
+      borderRadius: "md",
+      outlineColor: "border.brand.focus",
     },
+
     "&:has(input:disabled)": {
       cursor: "not-allowed",
       backgroundColor: "bg.neutral.disabled",
@@ -102,10 +98,17 @@ const wrapperStyles = cva({
       md: { h: "48px", px: "12", fontSize: "md" },
       lg: { h: "56px", px: "24", fontSize: "lg" },
     },
-    state: {
-      error: {
+    invalid: {
+      true: {
         border: "danger",
-        "&:focus-within": { borderColor: "border.danger", boxShadow: "none" },
+      },
+      false: {
+        "&:hover": {
+          borderColor: "border.neutral.hover",
+        },
+        "&:active": {
+          borderColor: "border.neutral.active",
+        },
       },
     },
   },
