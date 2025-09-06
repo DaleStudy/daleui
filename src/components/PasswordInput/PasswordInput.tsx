@@ -4,7 +4,7 @@ import { Icon } from "../Icon/Icon";
 
 export interface PasswordInputProps
   extends Omit<ComponentPropsWithoutRef<"input">, "size" | "type"> {
-  /** 입력 안내 텍스트 */
+  /** 플레이스홀더 */
   placeholder?: string;
   /** 컨트롤 크기 */
   size?: "sm" | "md" | "lg";
@@ -91,7 +91,6 @@ const containerStyles = cva({
       outlineWidth: "lg",
       outlineColor: "border.brand.focus",
       outlineOffset: "2px",
-      borderRadius: "md",
     },
     "&:has(input:disabled)": {
       cursor: "not-allowed",
