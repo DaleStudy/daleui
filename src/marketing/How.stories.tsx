@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { HowSection } from "./HowSection";
+import { How } from "./How";
 
 export default {
-  component: HowSection,
+  component: How,
   parameters: {
     layout: "fullscreen",
   },
-} satisfies Meta<typeof HowSection>;
+} satisfies Meta<typeof How>;
 
 export const Default: StoryObj = {};

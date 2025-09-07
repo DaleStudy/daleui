@@ -121,7 +121,7 @@ const CARDS: CardProps[] = [
   },
 ] as const;
 
-export function HowSection() {
+export function How() {
   return (
     <section
       className={css({
@@ -137,6 +137,9 @@ export function HowSection() {
       <div
         className={vstack({
           width: {
+            base: "100%",
+          },
+          maxWidth: {
             base: "100%",
             lg: "1280px",
           },
