@@ -19,6 +19,12 @@ export default {
     disabled: false,
     invalid: false,
   },
+  argTypes: {
+    size: {
+      control: "select",
+      description: "입력 필드의 크기",
+    },
+  },
 } satisfies Meta<typeof TextInput>;
 
 type Story = StoryObj<typeof TextInput>;
