@@ -1,5 +1,5 @@
 import { css } from "../../styled-system/css";
-import { stack } from "../../styled-system/patterns";
+import { stack, vstack } from "../../styled-system/patterns";
 import { Icon } from "../components/Icon/Icon";
 import { Link } from "../components/Link/Link";
 import type { IconName } from "../tokens/iconography";
@@ -51,8 +51,8 @@ function Card({
         <Icon name={icon} size="lg" />
       </div>
       <div
-        className={stack({
-          direction: "column",
+        className={vstack({
+          alignItems: "start",
           gap: "4",
         })}
       >
@@ -135,8 +135,7 @@ export function HowSection() {
       })}
     >
       <div
-        className={stack({
-          direction: "column",
+        className={vstack({
           width: {
             base: "100%",
             lg: "1280px",
