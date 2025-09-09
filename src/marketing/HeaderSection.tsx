@@ -23,7 +23,7 @@ export function Header() {
           textAlign: "center",
           maxWidth: { base: "100%", md: "56rem" },
           mx: "auto",
-          px: { base: "16", sm: "24" }
+          px: { base: "16", sm: "24" },
         })}
       >
         <h1
@@ -61,9 +61,10 @@ export function Header() {
           </Button>
         </div>
       </div>
-      <div className={css({
+      <div
+        className={css({
           width: "100%",
-          height: "370px",  // 피그마 고정 높이
+          height: "370px",
           backgroundColor: "bg.neutral.subtle",
           borderRadius: "lg",
           backgroundImage: "url('/src/assets/HeaderSection.webp')",
@@ -76,8 +77,8 @@ export function Header() {
           color: "fg.neutral.muted",
           fontSize: "sm",
           fontWeight: "medium",
-        })}>
-        </div>
+        })}
+      ></div>
     </section>
   );
 }
