@@ -10,23 +10,22 @@ export function NavigationSection() {
   return (
     <nav
       className={stack({
-        direction: { base: "column", lg: "row" },
+        direction: { base: "column", md: "row" },
         width: {
           base: "100%",
-          lg: "1024px",
         },
-        px: { base: "0", lg: "24" },
-        py: { base: "0", lg: "5px" },
+        maxWidth: { base: "100%", md: "1280px" },
+        px: { base: "0", md: "24" },
+        py: { base: "0", md: "5px" },
         justifyContent: "space-between",
-        alignItems: { base: "flex-start", lg: "center" },
+        alignItems: { base: "flex-start", md: "center" },
         position: "relative",
-        gap: { base: "0", lg: "24" },
+        gap: { base: "0" },
       })}
     >
-      {/* 로고 */}
       <div
         className={css({
-          width: { base: "100%", lg: "auto" },
+          width: { base: "100%", md: "auto" },
           height: "71px",
           px: { base: 16 },
           display: "flex",
@@ -40,15 +39,25 @@ export function NavigationSection() {
             className={css({
               height: { base: "1.5rem", md: "2rem" },
               objectFit: "contain",
+              marginRight: "10px",
             })}
           />
-          <div className={css({ textStyle: "label.lg", fontWeight: "bold" })}>
+          <div
+            className={css({
+              color: "fg.brand",
+              fontFamily: "Roboto",
+              fontSize: "2xl",
+              fontStyle: "normal",
+              fontWeight: "bold",
+              lineHeight: "tight",
+            })}
+          >
             Dale UI
           </div>
         </Link>
         <span
           className={css({
-            display: { base: "inline-flex", lg: "none" },
+            display: { base: "inline-flex", md: "none" },
             position: "absolute",
             top: "16",
             right: "16",
@@ -63,36 +72,37 @@ export function NavigationSection() {
         </span>
       </div>
 
-      {/* 링크 & 토글 & 후원하기 */}
-      {/* <div
-        className={css({
-          width: { base: "100%", lg: "auto" },
-          px: { base: "24", lg: "0" },
-          py: { base: "24", lg: "0" },
-          display: { base: isOpenMenu ? "flex" : "none", lg: "flex" },
-          justifyContent: "space-between",
-          gap: { base: "24", lg: "auto" },
-        })}
-      > */}
       <ul
         className={stack({
-          gap: { base: "24", lg: "45" },
-          display: "flex",
-          direction: { base: "column", lg: "row" },
-          alignItems: { base: "flex-start", lg: "center" },
-          width: { base: "100%", lg: "auto" },
-          paddingLeft: { base: "24", lg: "0" },
-          paddingRight: { base: "24", lg: "0" },
-          paddingTop: { base: "24", lg: "0" },
+          gap: { base: "24", md: "45" },
+          display: { base: isOpenMenu ? "flex" : "none", md: "flex" },
+          direction: { base: "column", md: "row" },
+          alignItems: { base: "flex-start", md: "center" },
+          width: { base: "100%", md: "auto" },
+          paddingLeft: { base: "24", md: "0" },
+          paddingRight: { base: "24", md: "0" },
+          paddingTop: { base: "24", md: "0" },
         })}
       >
         <li>
-          <Link href="/" underline={false} tone="neutral" size="lg">
+          <Link
+            href="https://github.com/DaleStudy/daleui"
+            external={true}
+            underline={false}
+            tone="neutral"
+            size="lg"
+          >
             깃허브
           </Link>
         </li>
         <li>
-          <Link href="/" underline={false} tone="neutral" size="lg">
+          <Link
+            href="https://main--675790d317ba346348aa3490.chromatic.com/"
+            external={true}
+            underline={false}
+            tone="neutral"
+            size="lg"
+          >
             스토리북
           </Link>
         </li>
@@ -103,30 +113,39 @@ export function NavigationSection() {
         </li>
       </ul>
 
-      {/* 토글 & 후원하기 */}
       <ul
         className={stack({
           gap: "22",
-          display: "flex",
-          direction: { base: "column", lg: "row" },
-          alignItems: { base: "flex-start", lg: "center" },
-          width: { base: "100%", lg: "auto" },
-          padding: { base: "24", lg: "0" },
+          display: { base: isOpenMenu ? "flex" : "none", md: "flex" },
+          direction: { base: "column", md: "row" },
+          alignItems: { base: "flex-start", md: "center" },
+          width: { base: "100%", md: "auto" },
+          padding: { base: "24", md: "0" },
         })}
       >
         <li>
-          <Icon name="sun" size="lg" tone="brand" />
+          <Icon
+            name="sun"
+            size="lg"
+            tone="brand"
+            onClick={() => {
+              const el = document.documentElement;
+              const next =
+                el.getAttribute("data-theme") === "dark" ? "light" : "dark";
+              el.setAttribute("data-theme", next);
+              el.classList.toggle("dark", next === "dark");
+            }}
+          />
         </li>
         <li
           className={css({
-            width: { base: "100%", lg: "auto" },
-            "& > button": { width: { base: "100%", lg: "auto" } },
+            width: { base: "100%", md: "auto" },
+            "& > button": { width: { base: "100%", md: "auto" } },
           })}
         >
-          <Button>후원하기</Button>
+          <Button variant="solid">후원하기</Button>
         </li>
       </ul>
-      {/* </div> */}
     </nav>
   );
 }
