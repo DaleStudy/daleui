@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Checkbox } from "./Checkbox";
 import { vstack } from "../../../styled-system/patterns";
+import { Checkbox } from "./Checkbox";
 
 export default {
   component: Checkbox,
@@ -10,6 +10,16 @@ export default {
   args: {
     id: "checkbox",
     label: "기본 체크박스",
+  },
+  argTypes: {
+    label: {
+      control: "text",
+      description: "체크박스 라벨",
+    },
+    tone: {
+      control: "select",
+      description: "체크박스의 색조",
+    },
   },
 } satisfies Meta<typeof Checkbox>;
 

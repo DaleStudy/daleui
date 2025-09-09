@@ -22,6 +22,7 @@ export default {
   argTypes: {
     children: {
       control: false,
+      description: "라디오 버튼 요소들",
     },
   },
 } satisfies Meta<typeof RadioGroup>;
