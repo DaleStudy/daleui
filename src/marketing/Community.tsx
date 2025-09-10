@@ -12,8 +12,6 @@ export function Community() {
       className={vstack({
         bg: "bg.brand",
         px: { base: "0", lg: "24" },
-        minWidth: { base: "auto", lg: "5xl" },
-        maxWidth: { base: "auto", lg: "7xl" },
         py: { base: "40", md: "60px", lg: "80px" },
         gap: "10",
       })}
