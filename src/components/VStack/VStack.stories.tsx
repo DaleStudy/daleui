@@ -12,6 +12,7 @@ export default {
   },
   tags: ["autodocs"],
   argTypes: {
+    children: { control: false },
     as: { control: "select" },
     role: { control: "text" },
     alignItems: {
@@ -22,9 +23,8 @@ export default {
       control: "select",
       description: "주축 정렬 방식 (세로 정렬)",
     },
-    gap: { control: "select" },
     isReverse: { control: "boolean", description: "세로 배치 방향" },
-    children: { control: false },
+    gap: { control: "select" },
   },
   args: {
     as: "div",
