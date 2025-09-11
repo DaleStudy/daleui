@@ -17,7 +17,6 @@ export function Footer() {
     <footer
       className={css({
         bg: "bg.neutral",
-        minWidth: { base: "auto", lg: "5xl" },
         // TODO: spacing 토큰 부족으로 px 사용
         px: { base: "0", "2xl": "348px" },
         py: { base: "40", sm: "60px", lg: "72px" },
@@ -28,6 +27,8 @@ export function Footer() {
           gap: "24",
           flexDirection: { base: "column" },
           paddingX: "24",
+          width: { base: "100%", xl: "1280px" },
+          margin: { base: "0", xl: "0 auto" },
         })}
       >
         {/* TODO: spacing 토큰 부족으로 px 사용 */}
