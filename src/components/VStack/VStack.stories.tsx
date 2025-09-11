@@ -25,12 +25,6 @@ export default {
     gap: { control: "select" },
     isReverse: { control: "boolean", description: "세로 배치 방향" },
     children: { control: false },
-    width: { control: "select", description: "너비" },
-    height: { control: "select", description: "높이" },
-    minWidth: { control: "select", description: "최소 너비" },
-    minHeight: { control: "select", description: "최소 높이" },
-    maxWidth: { control: "select", description: "최대 너비" },
-    maxHeight: { control: "select", description: "최대 높이" },
   },
   args: {
     as: "div",
@@ -98,13 +92,10 @@ export const JustifyContents: Story = {
   argTypes: {
     justifyContent: { control: false },
     alignItems: { control: false },
-    width: { control: false },
-    minWidth: { control: false },
-    maxWidth: { control: false },
   },
   args: {
     gap: "4",
-    height: "180",
+    className: css({ height: "160" }),
   },
 };
 
@@ -163,13 +154,10 @@ export const AlignItems: Story = {
   argTypes: {
     alignItems: { control: false },
     justifyContent: { control: false },
-    height: { control: false },
-    minHeight: { control: false },
-    maxHeight: { control: false },
   },
   args: {
     gap: "4",
-    width: "640",
+    className: css({ width: "160" }),
     children: (
       <>
         <Item>아이템 1</Item>
