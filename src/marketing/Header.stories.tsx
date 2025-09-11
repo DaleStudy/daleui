@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Header } from "./HeaderSection";
+import { Header } from "./Header";
 
 export default {
   component: Header,
