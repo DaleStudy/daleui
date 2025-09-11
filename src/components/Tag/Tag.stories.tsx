@@ -16,7 +16,7 @@ export default {
     children: "태그",
     tone: "neutral",
     removable: false,
-    link: false,
+    href: undefined,
   },
   argTypes: {
     children: {
@@ -26,6 +26,11 @@ export default {
     tone: {
       control: "select",
       description: "태그의 색조",
+    },
+    href: {
+      control: "text",
+      description: "링크 URL. 설정 시 `<a>` 태그로 렌더링됩니다.",
+      type: { name: "string" },
     },
   },
 } satisfies Meta<typeof Tag>;
@@ -77,17 +82,10 @@ export const Link: StoryObj<typeof Tag> = {
       <div className={vstack({ gap: "16" })}>
         <div className={hstack({ gap: "8" })}>
           <Tag {...args}>기본 태그</Tag>
-          <Tag {...args} link>
+          <Tag {...args} href="#">
             링크 태그 (호버 해보세요)
           </Tag>
-          <Tag
-            {...args}
-            {...({
-              link: true,
-              href: "https://example.com",
-              target: "_blank",
-            } as const)}
-          >
+          <Tag {...args} href="https://example.com" target="_blank">
             외부 링크 태그
           </Tag>
         </div>
@@ -108,9 +106,6 @@ export const Link: StoryObj<typeof Tag> = {
   },
   argTypes: {
     children: {
-      control: false,
-    },
-    link: {
       control: false,
     },
   },
