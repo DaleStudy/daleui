@@ -64,10 +64,11 @@ export function Header() {
       <div
         className={css({
           width: "100%",
-          height: "370px",
+          height: { base: "150px", md: "264px", xl: "370px" },
           backgroundColor: "bg.neutral.subtle",
           borderRadius: "lg",
-          backgroundImage: "url('/src/assets/HeaderSection.webp')",
+          backgroundImage:
+            "url('/src/assets/images/marketing/header/background.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
