@@ -62,7 +62,6 @@ export function Footer() {
         >
           {FOOTER_ITEMS.map((item) => (
             <Link
-              key={item.label}
               href={item.href}
               tone="neutral"
               size="sm"
