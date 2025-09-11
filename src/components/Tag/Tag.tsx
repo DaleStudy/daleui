@@ -1,4 +1,5 @@
 import {
+  type AnchorHTMLAttributes,
   type HTMLAttributes,
   type KeyboardEvent,
   type MouseEvent,
@@ -18,38 +19,39 @@ type BaseTagProps = {
   removable?: boolean;
 };
 
-type TagPropsWithLink = BaseTagProps &
-  Omit<HTMLAttributes<HTMLAnchorElement>, "style"> & {
-    /** true시 a 태그, false/생략시 span 태그로 렌더링 */
-    link: true;
+/** href가 있으면 자동으로 <a> 로 렌더링 */
+type TagAsLink = BaseTagProps &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "style" | "children"> & {
+    href: string;
   };
 
-type TagPropsWithoutLink = BaseTagProps &
-  Omit<HTMLAttributes<HTMLSpanElement>, "style"> & {
-    /** true시 a 태그, false/생략시 span 태그로 렌더링 */
-    link?: false;
+/** href가 없으면 <span> 로 렌더링 */
+type TagAsSpan = BaseTagProps &
+  Omit<HTMLAttributes<HTMLSpanElement>, "style" | "children"> & {
+    href?: never;
   };
 
-type TagProps = TagPropsWithLink | TagPropsWithoutLink;
+export type TagProps = TagAsLink | TagAsSpan;
 
 /**
- * - `tone` 속성으로 태그의 색조를 지정할 수 있습니다.
- * - `removable` 속성을 사용하여 제거 가능한 태그로 만들 수 있습니다.
- * - `link` 속성을 사용하여 링크 스타일을 적용할 수 있습니다.
- *   - `link={true}`일 때는 `a` 태그로 렌더링되며, `href`, `target` 등 `a` 태그의 모든 속성을 사용할 수 있습니다.
- *   - `link={false}` 또는 생략시에는 `span` 태그로 렌더링됩니다.
+ * - `tone` 색조를 지정합니다.
+ * - `removable` 로 제거 가능한 태그를 만들 수 있습니다.
+ * - `href` 유무로 링크 태그(`<a>`) 또는 일반 태그(`<span>`)로 자동 선택됩니다.
  */
 export function Tag({
   children,
   tone = "neutral",
   removable = false,
-  link = false,
-  onClick,
+  href,
   ...rest
 }: TagProps) {
   const [isRemoved, setIsRemoved] = useState(false);
 
-  const handleRemoveClick = (e: MouseEvent) => {
+  if (isRemoved) return null;
+
+  const handleRemoveClick = (e: MouseEvent<HTMLButtonElement>) => {
+    // 링크 클릭/네비게이션과 충돌 방지
+    e.preventDefault();
     e.stopPropagation();
     setIsRemoved(true);
   };
@@ -62,20 +64,45 @@ export function Tag({
     }
   };
 
-  const Element = link ? "a" : "span";
+  if (href) {
+    const {
+      target: propTarget,
+      rel: propRel,
+      ...anchorRest
+    } = rest as AnchorHTMLAttributes<HTMLAnchorElement>;
 
-  if (isRemoved) {
-    return null;
+    const target = propTarget;
+    const rel =
+      target === "_blank" ? (propRel ?? "noopener noreferrer") : propRel;
+
+    return (
+      <a
+        href={href}
+        target={target}
+        rel={rel}
+        className={styles({ tone, link: true })}
+        {...anchorRest}
+      >
+        {children}
+        {removable && (
+          <button
+            type="button"
+            onClick={handleRemoveClick}
+            onKeyDown={handleRemoveKeyDown}
+            className={removeButtonStyles({ tone })}
+            aria-label="제거"
+          >
+            <Icon name="x" size="xs" />
+          </button>
+        )}
+      </a>
+    );
   }
 
+  const spanRest = rest as HTMLAttributes<HTMLSpanElement>;
+
   return (
-    <Element
-      className={styles({ tone, link })}
-      role={link ? "link" : undefined}
-      tabIndex={link ? 0 : undefined}
-      onClick={onClick}
-      {...rest}
-    >
+    <span className={styles({ tone, link: false })} {...spanRest}>
       {children}
       {removable && (
         <button
@@ -88,7 +115,7 @@ export function Tag({
           <Icon name="x" size="xs" />
         </button>
       )}
-    </Element>
+    </span>
   );
 }
 

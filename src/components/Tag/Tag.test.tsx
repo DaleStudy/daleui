@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, test, vi } from "vitest";
 import { Tag } from "./Tag";
+import type { TagProps } from "./Tag";
 
 test("텍스트와 함께 태그를 올바르게 렌더링한다", () => {
   render(<Tag>테스트 태그</Tag>);
@@ -26,18 +27,17 @@ test("tone 속성을 올바르게 적용한다", () => {
   expect(dangerTag).toHaveClass("bg_bgSolid.danger");
 });
 
-test("link 속성을 올바르게 적용한다", () => {
-  render(<Tag link>링크 태그</Tag>);
+test("href가 있으면 a 태그로 렌더링된다", () => {
+  render(<Tag href="https://example.com">링크 태그</Tag>);
   const linkTag = screen.getByText("링크 태그");
-  expect(linkTag).toHaveAttribute("role", "link");
-  expect(linkTag).toHaveAttribute("tabIndex", "0");
+  expect(linkTag.tagName).toBe("A");
+  expect(linkTag).toHaveAttribute("href", "https://example.com");
 });
 
 test("link 태그에 href 속성을 올바르게 적용한다", () => {
-  const tagProps = {
-    link: true as const,
+  const tagProps: TagProps = {
     href: "https://example.com",
-    target: "_blank" as const,
+    target: "_blank",
     children: "외부 링크 태그",
   };
 
@@ -46,7 +46,8 @@ test("link 태그에 href 속성을 올바르게 적용한다", () => {
   expect(linkTag.tagName).toBe("A");
   expect(linkTag).toHaveAttribute("href", "https://example.com");
   expect(linkTag).toHaveAttribute("target", "_blank");
-  expect(linkTag).toHaveAttribute("role", "link");
+  // target=_blank일 때 보안 속성 자동 추가 확인
+  expect(linkTag).toHaveAttribute("rel", "noopener noreferrer");
 });
 
 test("removable 속성을 올바르게 적용한다", () => {
@@ -86,7 +87,7 @@ test("링크 태그가 올바르게 동작한다", async () => {
   const user = userEvent.setup();
 
   render(
-    <Tag tone="success" link onClick={handleClick}>
+    <Tag tone="success" href="#" onClick={handleClick}>
       클릭 가능한 태그
     </Tag>,
   );
@@ -102,7 +103,7 @@ test("제거 버튼 클릭 시 이벤트 전파를 중단한다", async () => {
 
   render(
     <div onClick={handleClick}>
-      <Tag tone="warning" link removable>
+      <Tag tone="warning" href="#" removable>
         링크 + 제거 가능 태그
       </Tag>
     </div>,
@@ -207,7 +208,7 @@ test("링크 + 제거 가능 태그에서 제거 버튼 키보드 동작 시 링
   const user = userEvent.setup();
 
   render(
-    <Tag link removable onClick={handleClick}>
+    <Tag href="#" removable onClick={handleClick}>
       링크 + 제거 가능 태그
     </Tag>,
   );
@@ -230,7 +231,7 @@ test("링크 + 제거 가능 태그에서 제거 버튼 Space 키 동작 시 링
   const user = userEvent.setup();
 
   render(
-    <Tag link removable onClick={handleClick}>
+    <Tag href="#" removable onClick={handleClick}>
       링크 + 제거 가능 태그 Space
     </Tag>,
   );
