@@ -25,7 +25,6 @@ export function Footer() {
     >
       <div
         className={flex({
-          minWidth: { base: "auto", lg: "5xl" },
           gap: "24",
           flexDirection: { base: "column" },
           paddingX: "24",
