@@ -19,8 +19,11 @@ import {
   ThumbsUp,
   User,
   X,
+  Globe,
+  Award,
+  Users
 } from "lucide-react";
-import type { FunctionComponent, ComponentProps, SVGProps } from "react";
+import { type FunctionComponent, type ComponentProps, type SVGProps, use } from "react";
 import Discord from "../assets/Discord.svg?react";
 import GitHub from "../assets/GitHub.svg?react";
 import LinkedIn from "../assets/LinkedIn.svg?react";
@@ -55,7 +58,10 @@ export const icons = {
   sun: Sun,
   thumbsUp: ThumbsUp,
   user: User,
+  users: Users,
   x: X,
+  globe: Globe,
+  award: Award,
   Discord: createBrandIcon(Discord),
   GitHub: createBrandIcon(GitHub),
   LinkedIn: createBrandIcon(LinkedIn),
