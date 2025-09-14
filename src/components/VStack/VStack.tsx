@@ -46,7 +46,6 @@ export const VStack = ({
   isReversed = false,
   gap,
   className,
-  role,
   ...rest
 }: VStackProps) => {
   const Component = as;
@@ -62,7 +61,6 @@ export const VStack = ({
         css({ gap }),
         className,
       ),
-      role,
       ...rest,
     },
     children,

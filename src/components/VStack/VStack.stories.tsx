@@ -14,7 +14,6 @@ export default {
   argTypes: {
     children: { control: false },
     as: { control: "select" },
-    role: { control: "text" },
     align: {
       control: "select",
       description: "교차축 정렬 방식 (가로 정렬)",
