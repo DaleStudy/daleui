@@ -2,7 +2,22 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { VStack } from "./VStack";
 import { css } from "../../../styled-system/css";
 import { grid } from "../../../styled-system/patterns";
-import { Button } from "../Button/Button";
+import { spacing } from "../../tokens/spacing";
+
+const Item = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div
+      className={css({
+        padding: "16",
+        backgroundColor: "bgSolid.brand",
+        color: "fgSolid.brand",
+        borderRadius: "md",
+      })}
+    >
+      {children}
+    </div>
+  );
+};
 
 export default {
   title: "Components/VStack",
@@ -19,7 +34,7 @@ export default {
       description: "교차축 정렬 방식 (가로 정렬)",
     },
     isReversed: { control: "boolean", description: "세로 배치 방향" },
-    gap: { control: "select" },
+    gap: { control: "select", options: Object.keys(spacing || {}) },
   },
   args: {
     as: "div",
@@ -28,10 +43,11 @@ export default {
     gap: "8",
     children: (
       <>
-        <Button variant="solid">아이템 1</Button>
-        <Button variant="solid">아이템 2</Button>
+        <Item>아이템 1</Item>
+        <Item>아이템 2</Item>
       </>
     ),
+    className: css({ width: "160" }),
   },
 } satisfies Meta<typeof VStack>;
 
@@ -69,20 +85,6 @@ export const Reverse: Story = {
   },
 };
 
-const Item = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div
-      className={css({
-        padding: "16",
-        backgroundColor: "bg.neutral.disabled",
-        borderRadius: "md",
-      })}
-    >
-      {children}
-    </div>
-  );
-};
-
 export const Align: Story = {
   render: (args) => (
     <div className={grid({ gridTemplateColumns: "repeat(4, 1fr)", gap: "16" })}>
@@ -113,11 +115,5 @@ export const Align: Story = {
   args: {
     gap: "4",
     className: css({ width: "160" }),
-    children: (
-      <>
-        <Item>아이템 1</Item>
-        <Item>아이템 2</Item>
-      </>
-    ),
   },
 };
