@@ -16,6 +16,24 @@ export default {
     level: 1,
     tone: "neutral",
   },
+  argTypes: {
+    children: {
+      control: "text",
+      description: "제목 텍스트",
+    },
+    level: {
+      control: "select",
+      description: "제목 단계",
+    },
+    size: {
+      control: "select",
+      description: "제목 크기",
+    },
+    tone: {
+      control: "select",
+      description: "제목의 색조",
+    },
+  },
 } satisfies Meta<typeof Heading>;
 
 export const Basic: StoryObj<typeof Heading> = {};

@@ -18,6 +18,16 @@ export default {
     removable: false,
     link: false,
   },
+  argTypes: {
+    children: {
+      control: "text",
+      description: "태그 내용",
+    },
+    tone: {
+      control: "select",
+      description: "태그의 색조",
+    },
+  },
 } satisfies Meta<typeof Tag>;
 
 export const Basic: StoryObj<typeof Tag> = {};
