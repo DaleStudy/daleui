@@ -15,13 +15,9 @@ export default {
     children: { control: false },
     as: { control: "select" },
     role: { control: "text" },
-    alignItems: {
+    align: {
       control: "select",
       description: "교차축 정렬 방식 (가로 정렬)",
-    },
-    justifyContent: {
-      control: "select",
-      description: "주축 정렬 방식 (세로 정렬)",
     },
     isReversed: { control: "boolean", description: "세로 배치 방향" },
     gap: { control: "select" },
@@ -29,7 +25,7 @@ export default {
   args: {
     as: "div",
     isReversed: false,
-    alignItems: "center",
+    align: "center",
     gap: "8",
     children: (
       <>
@@ -45,7 +41,7 @@ export const Default: Story = {};
 
 export const Gaps: Story = {
   render: (args) => (
-    <VStack gap="8" alignItems="center">
+    <VStack gap="8" align="center">
       <h4>간격 2</h4>
       <VStack {...args} gap="4" />
       <h4>간격 8</h4>
@@ -60,48 +56,9 @@ export const Gaps: Story = {
   },
 };
 
-export const JustifyContents: Story = {
-  render: (args) => (
-    <div className={grid({ gridTemplateColumns: "repeat(3, 1fr)", gap: "16" })}>
-      <div>
-        <h4>start - 시작점 정렬</h4>
-        <VStack {...args} justifyContent="start" />
-      </div>
-
-      <div>
-        <h4>center - 중앙 정렬</h4>
-        <VStack {...args} justifyContent="center" />
-      </div>
-
-      <div>
-        <h4>end - 끝점 정렬</h4>
-        <VStack {...args} justifyContent="flex-end" />
-      </div>
-
-      <div>
-        <h4>space-between - 양 끝 정렬</h4>
-        <VStack {...args} justifyContent="space-between" />
-      </div>
-
-      <div>
-        <h4>space-around - 균등 분할</h4>
-        <VStack {...args} gap={undefined} justifyContent="space-around" />
-      </div>
-    </div>
-  ),
-  argTypes: {
-    justifyContent: { control: false },
-    alignItems: { control: false },
-  },
-  args: {
-    gap: "4",
-    className: css({ height: "160" }),
-  },
-};
-
 export const Reverse: Story = {
   render: (args) => (
-    <VStack gap="8" alignItems="center">
+    <VStack gap="8" align="center">
       <h4>false</h4>
       <VStack {...args} isReversed={false} />
       <h4>true</h4>
@@ -127,33 +84,32 @@ const Item = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const AlignItems: Story = {
+export const Align: Story = {
   render: (args) => (
     <div className={grid({ gridTemplateColumns: "repeat(4, 1fr)", gap: "16" })}>
       <div>
         <h4>start - 시작점 정렬</h4>
-        <VStack {...args} alignItems="start" />
+        <VStack {...args} align="start" />
       </div>
 
       <div>
         <h4>center - 중앙 정렬</h4>
-        <VStack {...args} alignItems="center" />
+        <VStack {...args} align="center" />
       </div>
 
       <div>
         <h4>end - 끝점 정렬</h4>
-        <VStack {...args} alignItems="end" />
+        <VStack {...args} align="end" />
       </div>
 
       <div>
         <h4>stretch - 균등 분할</h4>
-        <VStack {...args} alignItems="stretch" />
+        <VStack {...args} align="stretch" />
       </div>
     </div>
   ),
   argTypes: {
-    alignItems: { control: false },
-    justifyContent: { control: false },
+    align: { control: false },
   },
   args: {
     gap: "4",

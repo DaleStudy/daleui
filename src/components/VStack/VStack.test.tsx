@@ -7,9 +7,6 @@ import { spacing, type Spacing } from "../../tokens/spacing";
 
 const { Default } = composeStories(stories);
 
-type AlignItems = VStackProps["alignItems"];
-const alignItems: AlignItems[] = ["start", "center", "end", "stretch"];
-
 describe("VStack 렌더링", () => {
   test("Default 스토리가 자식들을 렌더링한다", () => {
     render(<Default />);
@@ -49,17 +46,16 @@ describe("클래스 토큰 및 스타일", () => {
     },
   );
 
-  test.each(alignItems)(
-    "alignItems=%s이면 ai_%s 클래스가 적용된다",
-    (alignItems) => {
-      render(
-        <VStack data-testid="align" alignItems={alignItems}>
-          <span>child</span>
-        </VStack>,
-      );
-      expect(screen.getByTestId("align").className).toMatch(`ai_${alignItems}`);
-    },
-  );
+  type Align = VStackProps["align"];
+  const aligns: Align[] = ["start", "center", "end", "stretch"];
+  test.each(aligns)("alignItems=%s이면 ai_%s 클래스가 적용된다", (align) => {
+    render(
+      <VStack data-testid="align" align={align}>
+        <span>child</span>
+      </VStack>,
+    );
+    expect(screen.getByTestId("align").className).toMatch(`ai_${align}`);
+  });
 
   const gaps = Object.keys(spacing || {}) as Spacing[];
   test.each(gaps)("gap=%s이면 gap_%s 클래스가 적용된다", (gap) => {
@@ -71,28 +67,6 @@ describe("클래스 토큰 및 스타일", () => {
 
     expect(screen.getByTestId("gap").className).toMatch(`gap_${gap}`);
   });
-
-  type JustifyContent = VStackProps["justifyContent"];
-  const justifyContents: JustifyContent[] = [
-    "start",
-    "center",
-    "flex-end",
-    "space-around",
-    "space-between",
-  ];
-  test.each(justifyContents)(
-    "justifyContent=%s이면 jc_%s 클래스가 적용된다",
-    (justifyContent) => {
-      render(
-        <VStack data-testid="justify" justifyContent={justifyContent}>
-          <span>child</span>
-        </VStack>,
-      );
-      expect(screen.getByTestId("justify").className).toMatch(
-        `jc_${justifyContent}`,
-      );
-    },
-  );
 });
 
 describe("VStack 접근성", () => {
