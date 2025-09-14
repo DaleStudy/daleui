@@ -18,16 +18,4 @@ export const spacing: Tokens["spacing"] = {
   48: { value: "3rem" },
 };
 
-export type Spacing =
-  | "0"
-  | "2"
-  | "4"
-  | "8"
-  | "12"
-  | "16"
-  | "20"
-  | "24"
-  | "32"
-  | "36"
-  | "40"
-  | "48";
+export type Spacing = keyof typeof spacing;
