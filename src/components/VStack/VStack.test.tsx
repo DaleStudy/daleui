@@ -7,17 +7,6 @@ import { spacing, type Spacing } from "../../tokens/spacing";
 
 const { Default } = composeStories(stories);
 
-const gaps = Object.keys(spacing || {}) as Spacing[];
-
-type JustifyContent = VStackProps["justifyContent"];
-const justifyContents: JustifyContent[] = [
-  "start",
-  "center",
-  "flex-end",
-  "space-around",
-  "space-between",
-];
-
 type AlignItems = VStackProps["alignItems"];
 const alignItems: AlignItems[] = ["start", "center", "end", "stretch"];
 
@@ -46,10 +35,10 @@ describe("클래스 토큰 및 스타일", () => {
     [true, "flex-d_column-reverse"],
     [false, "flex-d_column"],
   ])(
-    "isReverse=%s이면 flex-d_column%s 클래스가 적용된다",
-    (isReverse, direction) => {
+    "isReversed=%s이면 flex-d_column%s 클래스가 적용된다",
+    (isReversed, direction) => {
       render(
-        <VStack data-testid="rev" isReverse={isReverse}>
+        <VStack data-testid="rev" isReversed={isReversed}>
           <span>child</span>
         </VStack>,
       );
@@ -72,6 +61,7 @@ describe("클래스 토큰 및 스타일", () => {
     },
   );
 
+  const gaps = Object.keys(spacing || {}) as Spacing[];
   test.each(gaps)("gap=%s이면 gap_%s 클래스가 적용된다", (gap) => {
     render(
       <VStack data-testid="gap" gap={gap}>
@@ -82,6 +72,14 @@ describe("클래스 토큰 및 스타일", () => {
     expect(screen.getByTestId("gap").className).toMatch(`gap_${gap}`);
   });
 
+  type JustifyContent = VStackProps["justifyContent"];
+  const justifyContents: JustifyContent[] = [
+    "start",
+    "center",
+    "flex-end",
+    "space-around",
+    "space-between",
+  ];
   test.each(justifyContents)(
     "justifyContent=%s이면 jc_%s 클래스가 적용된다",
     (justifyContent) => {
