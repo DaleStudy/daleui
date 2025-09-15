@@ -67,8 +67,11 @@ export function Header() {
           height: { base: "150px", md: "264px", xl: "370px" },
           backgroundColor: "bg.neutral.subtle",
           borderRadius: "lg",
-          backgroundImage:
-            "url('/src/assets/images/marketing/header/background.webp')",
+          backgroundImage: {
+            base: "url('/src/assets/images/marketing/header/background-light.webp')",
+            _dark:
+              "url('/src/assets/images/marketing/header/background-dark.webp')",
+          },
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
