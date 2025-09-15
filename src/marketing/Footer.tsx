@@ -56,6 +56,7 @@ export function Footer() {
             gap: { base: "16", sm: "48" },
             flexDirection: { base: "column", sm: "row" },
             alignItems: { base: "flex-start", sm: "center" },
+            textStyle: "label.sm",
           })}
         >
           {FOOTER_ITEMS.map((item) => (
@@ -64,12 +65,7 @@ export function Footer() {
               tone="neutral"
               size="sm"
               underline={false}
-              className={css({
-                textStyle: "label.sm",
-                "&:visited": {
-                  color: "fg.neutral",
-                },
-              })}
+              external
             >
               {item.label}
             </Link>
