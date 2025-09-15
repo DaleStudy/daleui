@@ -15,11 +15,10 @@ const FOOTER_ITEMS = [
 export function Footer() {
   return (
     <footer
-      className={css({
+      className={flex({
         bg: "bg.neutral",
-        // TODO: spacing 토큰 부족으로 px 사용
-        px: { base: "0", "2xl": "348px" },
         py: { base: "40", sm: "60px", lg: "72px" },
+        justifyContent: "center",
       })}
     >
       <div
@@ -27,8 +26,8 @@ export function Footer() {
           gap: "24",
           flexDirection: { base: "column" },
           paddingX: "24",
-          width: { base: "100%", xl: "1280px" },
-          margin: { base: "0", xl: "0 auto" },
+          width: "100%",
+          maxWidth: "1280px",
         })}
       >
         {/* TODO: spacing 토큰 부족으로 px 사용 */}
@@ -52,7 +51,6 @@ export function Footer() {
             Dale UI
           </span>
         </div>
-
         <div
           className={flex({
             gap: { base: "16", sm: "48" },
@@ -77,7 +75,6 @@ export function Footer() {
             </Link>
           ))}
         </div>
-
         <div className={css({ textStyle: "label.sm", color: "fg.neutral" })}>
           © 2025 Dale UI. All rights reserved.
         </div>
