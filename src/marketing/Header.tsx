@@ -7,11 +7,9 @@ export function Header() {
     <section
       className={vstack({
         width: "100%",
-        justifyContent: "center",
         gap: "48",
         backgroundColor: "bg.brand",
         color: "fg.neutral",
-        position: "relative",
         overflow: "hidden",
         py: { md: "80px", base: "60px" },
       })}
@@ -19,7 +17,6 @@ export function Header() {
       <div
         className={vstack({
           gap: "24",
-          alignItems: "center",
           textAlign: "center",
           maxWidth: { base: "100%", md: "56rem" },
           mx: "auto",
@@ -28,7 +25,6 @@ export function Header() {
       >
         <h1
           className={css({
-            textAlign: "center",
             textStyle: "heading.1",
             fontSize: { base: "3xl", md: "5xl" },
             fontWeight: "bold",
@@ -40,14 +36,9 @@ export function Header() {
         </h1>
         <p
           className={css({
-            textAlign: "center",
-            fontFamily: "sans",
-            fontSize: "lg",
+            textStyle: "body.lg",
             fontWeight: "semibold",
-            lineHeight: "150%",
-            letterSpacing: "balanced",
             color: "fg.neutral.placeholder",
-            margin: 0,
           })}
         >
           달레UI는 한국어 사용자 경험을 최우선으로 고려한 디자인 시스템입니다.
@@ -75,12 +66,6 @@ export function Header() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "fg.neutral.muted",
-          fontSize: "sm",
-          fontWeight: "medium",
         })}
       ></div>
     </section>
