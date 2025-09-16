@@ -12,8 +12,6 @@ type As =
   | "footer"
   | "nav"
   | "ul"
-  | "ol"
-  | "li"
   | "span";
 
 export interface VStackProps
