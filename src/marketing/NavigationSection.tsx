@@ -17,11 +17,15 @@ const LINK_ITEMS = [
 
 export function NavigationSection() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    const el = document.documentElement;
+    return el.classList.contains("dark");
+  });
+
   const handleToggleTheme = () => {
     const el = document.documentElement;
-    const next = el.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    el.setAttribute("data-theme", next);
-    el.classList.toggle("dark", next === "dark");
+    el.classList.toggle("dark");
+    setIsDark(el.classList.contains("dark"));
   };
 
   const handleToggleMenu = () => {
@@ -185,7 +189,7 @@ export function NavigationSection() {
         >
           <li>
             <Icon
-              name="sun"
+              name={isDark ? "moon" : "sun"}
               size="lg"
               tone="brand"
               onClick={handleToggleTheme}
