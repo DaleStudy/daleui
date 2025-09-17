@@ -5,6 +5,16 @@ import { Link } from "../components/Link/Link";
 import { Button } from "../components/Button/Button";
 import { useState } from "react";
 
+const LINK_ITEMS = [
+  { id: 1, label: "깃허브", href: "https://github.com/DaleStudy/daleui" },
+  {
+    id: 2,
+    label: "스토리북",
+    href: "https://main--675790d317ba346348aa3490.chromatic.com/",
+  },
+  { id: 3, label: "피그마 디자인", href: "/" }, //@TODO:  피그마 커뮤니티가 생긴 후 해당 링크로 연결예정
+];
+
 export function NavigationSection() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const handleToggleTheme = () => {
@@ -137,33 +147,19 @@ export function NavigationSection() {
             transition: "opacity 200ms ease, transform 200ms ease",
           })}
         >
-          <li>
-            <Link
-              href="https://github.com/DaleStudy/daleui"
-              external={true}
-              underline={false}
-              tone="neutral"
-              size="lg"
-            >
-              깃허브
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="https://main--675790d317ba346348aa3490.chromatic.com/"
-              external={true}
-              underline={false}
-              tone="neutral"
-              size="lg"
-            >
-              스토리북
-            </Link>
-          </li>
-          <li>
-            <Link href="/" underline={false} tone="neutral" size="lg">
-              피그마 디자인
-            </Link>
-          </li>
+          {LINK_ITEMS.map((item) => (
+            <li key={item.id}>
+              <Link
+                href={item.href}
+                external
+                underline={false}
+                tone="neutral"
+                size="lg"
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
         </ul>
 
         {/* 토글 & 후원하기 */}
