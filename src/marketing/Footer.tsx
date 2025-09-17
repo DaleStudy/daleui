@@ -51,26 +51,30 @@ export function Footer() {
             Dale UI
           </span>
         </div>
-        <div
-          className={flex({
-            gap: { base: "16", sm: "48" },
-            flexDirection: { base: "column", sm: "row" },
-            alignItems: { base: "flex-start", sm: "center" },
-            textStyle: "label.sm",
-          })}
-        >
-          {FOOTER_ITEMS.map((item) => (
-            <Link
-              href={item.href}
-              tone="neutral"
-              size="sm"
-              underline={false}
-              external
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
+        <nav aria-label="Footer">
+          <ul
+            className={flex({
+              gap: { base: "16", sm: "48" },
+              flexDirection: { base: "column", sm: "row" },
+              alignItems: { base: "flex-start", sm: "center" },
+              textStyle: "label.sm",
+            })}
+          >
+            {FOOTER_ITEMS.map((item) => (
+              <li key={item.label}>
+                <Link
+                  href={item.href}
+                  tone="neutral"
+                  size="sm"
+                  underline={false}
+                  external
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <div className={css({ textStyle: "label.sm", color: "fg.neutral" })}>
           © {new Date().getFullYear()} Dale UI. All rights reserved.
         </div>
