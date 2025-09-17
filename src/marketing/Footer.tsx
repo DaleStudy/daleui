@@ -1,4 +1,4 @@
-import { flex, hstack } from "../../styled-system/patterns";
+import { flex } from "../../styled-system/patterns";
 import { Link } from "../components/Link/Link";
 import { css } from "../../styled-system/css";
 
@@ -30,27 +30,15 @@ export function Footer() {
           maxWidth: "1280px",
         })}
       >
-        {/* TODO: spacing 토큰 부족으로 px 사용 */}
-        <div className={hstack({ gap: "10px" })}>
-          <img
-            src="/logo.svg"
-            alt="DaleUI Logo"
-            className={css({
-              width: "30px",
-              height: "24px",
-              objectFit: "contain",
-            })}
-          />
-          <span
-            className={css({
-              textStyle: "heading.2",
-              letterSpacing: "0",
-              color: "fg.brand",
-            })}
-          >
-            Dale UI
-          </span>
-        </div>
+        <img
+          src="/newLogoWithText.svg"
+          alt="DaleUI Logo"
+          className={css({
+            width: "123px",
+            height: "41px",
+            objectFit: "contain",
+          })}
+        />
         <nav aria-label="Footer">
           <ul
             className={flex({
