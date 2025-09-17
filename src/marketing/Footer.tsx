@@ -3,7 +3,7 @@ import { Link } from "../components/Link/Link";
 import { css } from "../../styled-system/css";
 
 const FOOTER_ITEMS = [
-  { label: "Github", href: "https://github.com/DaleStudy/daleui" },
+  { label: "GitHub", href: "https://github.com/DaleStudy/daleui" },
   {
     label: "Storybook",
     href: "https://main--675790d317ba346348aa3490.chromatic.com/",
