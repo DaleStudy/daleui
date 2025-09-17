@@ -72,7 +72,7 @@ export function Footer() {
           ))}
         </div>
         <div className={css({ textStyle: "label.sm", color: "fg.neutral" })}>
-          © 2025 Dale UI. All rights reserved.
+          © {new Date().getFullYear()} Dale UI. All rights reserved.
         </div>
       </div>
     </footer>
