@@ -23,12 +23,15 @@ export function NavigationSection() {
     el.setAttribute("data-theme", next);
     el.classList.toggle("dark", next === "dark");
   };
+
   const handleToggleMenu = () => {
     setIsOpenMenu((v) => !v);
   };
+
   const handleSponsorClick = () => {
     window.open("https://github.com/sponsors/DaleStudy", "_blank");
   };
+
   return (
     <header
       className={css({
