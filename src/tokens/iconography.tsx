@@ -21,9 +21,9 @@ import {
   X,
   Globe,
   Award,
-  Users
+  Users,
 } from "lucide-react";
-import { type FunctionComponent, type ComponentProps, type SVGProps, use } from "react";
+import { FunctionComponent, ComponentProps, SVGProps } from "react";
 import Discord from "../assets/Discord.svg?react";
 import GitHub from "../assets/GitHub.svg?react";
 import LinkedIn from "../assets/LinkedIn.svg?react";
