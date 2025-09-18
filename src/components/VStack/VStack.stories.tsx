@@ -33,12 +33,12 @@ export default {
       control: "select",
       description: "교차축 정렬 방식 (가로 정렬)",
     },
-    isReversed: { control: "boolean", description: "세로 배치 방향" },
+    reversed: { control: "boolean", description: "세로 배치 방향" },
     gap: { control: "select", options: Object.keys(spacing || {}) },
   },
   args: {
     as: "div",
-    isReversed: false,
+    reversed: false,
     align: "center",
     gap: "8",
     children: (
@@ -75,13 +75,13 @@ export const Reverse: Story = {
   render: (args) => (
     <VStack gap="8" align="center">
       <h4>false</h4>
-      <VStack {...args} isReversed={false} />
+      <VStack {...args} reversed={false} />
       <h4>true</h4>
-      <VStack {...args} isReversed={true} />
+      <VStack {...args} reversed={true} />
     </VStack>
   ),
   argTypes: {
-    isReversed: { control: false },
+    reversed: { control: false },
   },
 };
 

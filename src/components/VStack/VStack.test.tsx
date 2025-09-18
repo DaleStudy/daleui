@@ -32,10 +32,10 @@ describe("클래스 토큰 및 스타일", () => {
     [true, "flex-d_column-reverse"],
     [false, "flex-d_column"],
   ])(
-    "isReversed=%s이면 flex-d_column%s 클래스가 적용된다",
-    (isReversed, direction) => {
+    "reversed=%s이면 flex-d_column%s 클래스가 적용된다",
+    (reversed, direction) => {
       render(
-        <VStack data-testid="rev" isReversed={isReversed}>
+        <VStack data-testid="rev" reversed={reversed}>
           <span>child</span>
         </VStack>,
       );

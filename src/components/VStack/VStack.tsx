@@ -30,7 +30,7 @@ export interface VStackProps
  * - `as` 속성을 통해서 렌더링할 HTML 요소를 지정할 수 있습니다. 기본값은 `div`입니다.
  * - `role` 속성을 통해서 역할을 지정할 수 있습니다.
  * - `align` 속성을 통해서 가로 정렬 방식을 지정할 수 있습니다. 기본값은 `center`입니다.
- * - `isReversed` 속성을 통해서 세로 배치 방식을 지정할 수 있습니다. 기본값은 `false`입니다.
+ * - `reversed` 속성을 통해서 세로 배치 방식을 지정할 수 있습니다. 기본값은 `false`입니다.
  * - `gap` 속성을 통해서 요소 간 간격을 지정할 수 있습니다.
  *
  * ### 접근성(Accessibility) 안내
@@ -41,7 +41,7 @@ export const VStack = ({
   children,
   as = "div",
   align = "center",
-  isReversed = false,
+  reversed = false,
   gap,
   className,
   ...rest
@@ -54,7 +54,7 @@ export const VStack = ({
       className: cx(
         vstackVariants({
           align,
-          isReversed,
+          reversed,
         }),
         css({ gap }),
         className,
@@ -76,13 +76,13 @@ const vstackVariants = cva({
       end: { alignItems: "end" },
       stretch: { alignItems: "stretch" },
     },
-    isReversed: {
+    reversed: {
       true: { flexDirection: "column-reverse" },
       false: { flexDirection: "column" },
     },
   },
   defaultVariants: {
     align: "center",
-    isReversed: false,
+    reversed: false,
   },
 });
