@@ -136,6 +136,7 @@ export function Mission() {
           className={css({
             display: "grid",
             alignSelf: "stretch",
+            gap: "24",
             gridTemplateColumns: {
               base: "1fr", // 320-640
               sm: "repeat(2, 1fr)", // 640-1024
