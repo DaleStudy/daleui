@@ -17,3 +17,5 @@ export const spacing: Tokens["spacing"] = {
   40: { value: "2.5rem" },
   48: { value: "3rem" },
 };
+
+export type Spacing = keyof typeof spacing;
