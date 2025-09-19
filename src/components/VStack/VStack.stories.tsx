@@ -89,8 +89,8 @@ export const Align: Story = {
   render: (args) => (
     <div className={grid({ gridTemplateColumns: "repeat(4, 1fr)", gap: "16" })}>
       <div>
-        <h4>start - 시작점 정렬</h4>
-        <VStack {...args} align="start" />
+        <h4>left - 왼쪽 정렬</h4>
+        <VStack {...args} align="left" />
       </div>
 
       <div>
@@ -99,8 +99,8 @@ export const Align: Story = {
       </div>
 
       <div>
-        <h4>end - 끝점 정렬</h4>
-        <VStack {...args} align="end" />
+        <h4>right - 오른쪽 정렬</h4>
+        <VStack {...args} align="right" />
       </div>
 
       <div>

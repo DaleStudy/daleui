@@ -47,15 +47,23 @@ describe("클래스 토큰 및 스타일", () => {
   );
 
   type Align = VStackProps["align"];
-  const aligns: Align[] = ["start", "center", "end", "stretch"];
-  test.each(aligns)("alignItems=%s이면 ai_%s 클래스가 적용된다", (align) => {
-    render(
-      <VStack data-testid="align" align={align}>
-        <span>child</span>
-      </VStack>,
-    );
-    expect(screen.getByTestId("align").className).toMatch(`ai_${align}`);
-  });
+  const aligns: [Align, string][] = [
+    ["left", "ai_start"],
+    ["center", "ai_center"],
+    ["right", "ai_end"],
+    ["stretch", "ai_stretch"],
+  ];
+  test.each(aligns)(
+    "alignItems=%s이면 ai_%s 클래스가 적용된다",
+    (align, className) => {
+      render(
+        <VStack data-testid="align" align={align}>
+          <span>child</span>
+        </VStack>,
+      );
+      expect(screen.getByTestId("align").className).toMatch(className);
+    },
+  );
 
   const gaps = Object.keys(spacing || {}) as Spacing[];
   test.each(gaps)("gap=%s이면 gap_%s 클래스가 적용된다", (gap) => {
