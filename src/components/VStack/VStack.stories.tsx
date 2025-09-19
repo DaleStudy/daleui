@@ -35,6 +35,7 @@ export default {
     },
     reversed: { control: "boolean", description: "세로 배치 방향" },
     gap: { control: "select", options: Object.keys(spacing || {}) },
+    className: { control: false },
   },
   args: {
     as: "div",
