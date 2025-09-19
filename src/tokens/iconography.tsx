@@ -31,6 +31,7 @@ import Medium from "../assets/Medium.svg?react";
 import YouTube from "../assets/YouTube.svg?react";
 import Storybook from "../assets/Storybook.svg?react";
 import Figma from "../assets/Figma.svg?react";
+import Kr from "../assets/Kr.svg?react";
 
 function createBrandIcon(Icon: FunctionComponent<SVGProps<SVGSVGElement>>) {
   return (args: ComponentProps<typeof Icon>) => (
@@ -62,6 +63,7 @@ export const icons = {
   x: X,
   globe: Globe,
   award: Award,
+  Kr: createBrandIcon(Kr),
   Discord: createBrandIcon(Discord),
   GitHub: createBrandIcon(GitHub),
   LinkedIn: createBrandIcon(LinkedIn),

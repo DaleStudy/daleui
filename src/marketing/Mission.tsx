@@ -17,19 +17,18 @@ interface CardProps {
 function Card({ icon, title, description }: CardProps) {
   return (
     <div
-      className={stack({
-        align: "start",
-        direction: "column",
+      className={vstack({
         width: "100%",
-        py: "24px",
-        px: "16px",
+        px: "16",
+        py: "24",
         borderRadius: "md",
-        gap: "24px",
+        alignItems: "flex-start",
+        gap: "24",
       })}
     >
       <div
         className={css({
-          p: "12px",
+          p: "12",
           bg: "bg.brand",
           borderRadius: "lg",
           display: "inline-flex",
@@ -38,7 +37,7 @@ function Card({ icon, title, description }: CardProps) {
         <Icon name={icon} size="lg" tone="brand" />
       </div>
       <div
-        className={vstack({
+        className={stack({
           alignItems: "start",
         })}
       >
@@ -65,7 +64,6 @@ function Card({ icon, title, description }: CardProps) {
 }
 
 const CARDS: CardProps[] = [
-  // 25.09.12 기준 아이콘 등록이 아직 되지 않아 임시로 star 사용
   {
     icon: "globe",
     title: "모두를 위한 경험 설계",
@@ -73,7 +71,7 @@ const CARDS: CardProps[] = [
       "누구나 쉽게 시작할 수 있도록, 디자인 시스템의 진입 장벽을 낮춥니다.",
   },
   {
-    icon: "star",
+    icon: "Kr",
     title: "한국어 최적화",
     description:
       "글로벌 기준을 참고하되, 한국어에 최적화된 현지화 경험을 제공합니다.",
@@ -96,14 +94,14 @@ export function Mission() {
   return (
     <section
       className={vstack({
-        px: { base: "16px", sm: "24px" },
-        py: { base: "80px" },
+        px: { base: "16", sm: "24" },
+        py: { base: "80" },
         alignSelf: "stretch",
       })}
     >
       <div
         className={vstack({
-          gap: "72px",
+          gap: "72",
           width: "100%",
           minWidth: { base: "auto", lg: "5xl" },
           maxWidth: { base: "auto", lg: "7xl" },
