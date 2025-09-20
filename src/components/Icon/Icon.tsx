@@ -1,5 +1,5 @@
 import type { SVGProps } from "react";
-import { cva, cx } from "../../../styled-system/css";
+import { cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 import { type IconName, icons } from "../../tokens/iconography";
 
@@ -17,9 +17,10 @@ export interface IconProps extends SVGProps<SVGSVGElement> {
  * - 아이콘의 기본 크기는 기본 글자 크기의 1.25배이며, `size` 속성을 통해서 크기를 변경할 수 있습니다.
  * - 아이콘의 `tone` 속성을 통해서 색조를 변경할 수 있으며, 지정하지 않으면 부모의 색조를 상속합니다.
  */
-export const Icon = ({ name, size, tone, className, ...rest }: IconProps) => {
+export const Icon = ({ name, size, tone, ...rest }: IconProps) => {
   const Tag = icons[name];
-  return <Tag className={cx(styles({ size, tone }), className)} {...rest} />;
+
+  return <Tag className={styles({ size, tone })} {...rest} />;
 };
 
 const styles = cva({
