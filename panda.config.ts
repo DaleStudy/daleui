@@ -36,6 +36,7 @@ export default defineConfig({
           textStyle: Object.keys(textStyles),
           fontSize: Object.keys(fontSizes),
           fontWeight: Object.keys(fontWeights),
+          gap: Object.keys(spacing || {}),
         },
       },
     ],
