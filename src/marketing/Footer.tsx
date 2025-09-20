@@ -12,6 +12,15 @@ const FOOTER_ITEMS = [
   { label: "Discord", href: "https://dales.link/discord" },
 ];
 
+const getCopyrightYear = () => {
+  const START_YEAR = 2025;
+  const currentYear = new Date().getFullYear();
+
+  return currentYear <= START_YEAR
+    ? START_YEAR.toString()
+    : `${START_YEAR}-${currentYear}`;
+};
+
 export function Footer() {
   return (
     <footer
@@ -64,7 +73,7 @@ export function Footer() {
           </ul>
         </nav>
         <div className={css({ textStyle: "label.sm", color: "fg.neutral" })}>
-          © {new Date().getFullYear()} Dale UI. All rights reserved.
+          © {getCopyrightYear()} Dale UI. All rights reserved.
         </div>
       </div>
     </footer>
