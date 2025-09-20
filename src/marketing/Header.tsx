@@ -19,7 +19,6 @@ export function Header() {
           gap: "24",
           textAlign: "center",
           maxWidth: { base: "100%", md: "56rem" },
-          mx: "auto",
           px: { base: "16", sm: "24" },
         })}
       >
