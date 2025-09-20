@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { NavigationSection } from "./NavigationSection";
+import { Navigation } from "./Navigation.tsx";
 
 export default {
-  component: NavigationSection,
+  component: Navigation,
   parameters: {
     layout: "fullscreen",
   },
-} satisfies Meta<typeof NavigationSection>;
+} satisfies Meta<typeof Navigation>;
 
 export const Default: StoryObj = {};

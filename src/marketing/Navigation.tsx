@@ -15,7 +15,7 @@ const LINK_ITEMS = [
   { id: 3, label: "피그마 디자인", href: "/" }, //@TODO:  피그마 커뮤니티가 생긴 후 해당 링크로 연결예정
 ];
 
-export function NavigationSection() {
+export function Navigation() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isDark, setIsDark] = useState(() => {
     const el = document.documentElement;
