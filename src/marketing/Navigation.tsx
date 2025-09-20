@@ -185,6 +185,7 @@ export function Navigation() {
             },
             pointerEvents: { base: isOpenMenu ? "auto" : "none", md: "auto" },
             transition: "opacity 200ms ease, transform 200ms ease",
+            userSelect: "none",
           })}
         >
           <li
