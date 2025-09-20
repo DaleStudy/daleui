@@ -187,15 +187,16 @@ export function Navigation() {
             transition: "opacity 200ms ease, transform 200ms ease",
           })}
         >
-          <li>
+          <li
+            className={css({
+              cursor: "pointer",
+            })}
+          >
             <Icon
               name={isDark ? "moon" : "sun"}
               size="lg"
               tone="brand"
               onClick={handleToggleTheme}
-              className={css({
-                cursor: "pointer",
-              })}
             />
           </li>
           <li
