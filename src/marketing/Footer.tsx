@@ -46,6 +46,9 @@ export function Footer() {
             width: "123px",
             height: "41px",
             objectFit: "contain",
+            _dark: {
+              content: 'url("/newLogoWithText_dark.svg")',
+            },
           })}
         />
         <nav aria-label="Footer">
