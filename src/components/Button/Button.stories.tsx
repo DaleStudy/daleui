@@ -49,6 +49,9 @@ export const Variants: StoryObj<typeof Button> = {
         <Button {...args} variant="outline">
           아웃라인 버튼
         </Button>
+        <Button {...args} variant="ghost">
+          고스트 버튼
+        </Button>
       </div>
     );
   },
@@ -66,23 +69,14 @@ export const Tones: StoryObj<typeof Button> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
-        <Button {...args} variant="solid" tone="brand">
+        <Button {...args} tone="brand">
           브랜드 색조
         </Button>
-        <Button {...args} variant="solid" tone="neutral">
+        <Button {...args} tone="neutral">
           중립 색조
         </Button>
-        <Button {...args} variant="solid" tone="danger">
+        <Button {...args} tone="danger">
           위험 색조
-        </Button>
-        <Button {...args} variant="solid" tone="success">
-          성공 색조
-        </Button>
-        <Button {...args} variant="solid" tone="warning">
-          경고 색조
-        </Button>
-        <Button {...args} variant="solid" tone="info">
-          정보 색조
         </Button>
       </div>
     );
@@ -127,10 +121,10 @@ export const Disabled: StoryObj<typeof Button> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
+        <Button {...args}>활성화 버튼</Button>
         <Button {...args} disabled>
           비활성화 버튼
         </Button>
-        <Button {...args}>활성화 버튼</Button>
       </div>
     );
   },

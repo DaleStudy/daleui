@@ -1,26 +1,27 @@
-import React, { type HTMLAttributes } from "react";
+import { type HTMLAttributes, type ReactNode } from "react";
 import { cva } from "../../../styled-system/css";
-import type { Tone } from "../../tokens/colors";
 
-type ButtonVariant = "solid" | "outline";
-type ButtonSize = "sm" | "md" | "lg";
+type variant = "solid" | "outline" | "ghost";
+type size = "sm" | "md" | "lg";
+type tone = "brand" | "neutral" | "danger";
 
 export interface ButtonProps
   extends Omit<HTMLAttributes<HTMLElement>, "style"> {
   /** 텍스트 */
-  children: React.ReactNode;
-  /** 타입 */
-  type?: "button" | "submit";
-  /** 클릭 시 실행함수 */
-  onClick?: () => void;
+  children: ReactNode;
   /** 종류 */
-  variant: ButtonVariant;
-  /** 색조 */
-  tone?: Tone;
-  /** 버튼의 크기 */
-  size?: ButtonSize;
+  variant: variant;
+
   /** 버튼 비활성화 여부 */
   disabled?: boolean;
+  /** 클릭 시 실행함수 */
+  onClick?: () => void;
+  /** 버튼의 크기 */
+  size?: size;
+  /** 색조 */
+  tone?: tone;
+  /** 타입 */
+  type?: "button" | "submit";
 }
 
 /**
@@ -32,12 +33,12 @@ export interface ButtonProps
  */
 export const Button = ({
   children,
-  type = "button",
-  onClick,
   variant = "solid",
-  tone = "brand",
-  size = "md",
   disabled,
+  onClick,
+  size = "md",
+  tone = "brand",
+  type = "button",
   ...rest
 }: ButtonProps) => {
   return (
@@ -98,15 +99,18 @@ const styles = cva({
     },
     variant: {
       solid: {},
-      outline: {},
+      outline: {
+        borderWidth: "lg",
+      },
+      ghost: {
+        bg: "transparent",
+        border: "none",
+      },
     },
     tone: {
       brand: {},
       neutral: {},
       danger: {},
-      success: {},
-      warning: {},
-      info: {},
     },
     disabled: {
       true: {},
@@ -114,7 +118,7 @@ const styles = cva({
     },
   },
   compoundVariants: [
-    // Solid Variants
+    // solid
     {
       variant: "solid",
       tone: "brand",
@@ -157,37 +161,48 @@ const styles = cva({
         },
       },
     },
-    {
-      variant: "solid",
-      tone: "success",
-      css: {
-        bg: "bgSolid.success",
-        color: "fgSolid.success",
-      },
-    },
-    {
-      variant: "solid",
-      tone: "warning",
-      css: {
-        bg: "bgSolid.warning",
-        color: "fgSolid.warning",
-      },
-    },
-    {
-      variant: "solid",
-      tone: "info",
-      css: {
-        bg: "bgSolid.info",
-        color: "fgSolid.info",
-      },
-    },
-    // Outline Variants
+    // outline
     {
       variant: "outline",
       tone: "brand",
       css: {
         border: "brand",
-        borderWidth: "lg",
+        color: "fg.brand",
+        "&:active": {
+          color: "fg.brand.active",
+          borderColor: "border.brand.active",
+        },
+      },
+    },
+    {
+      variant: "outline",
+      tone: "neutral",
+      css: {
+        border: "neutral",
+        color: "fg.neutral",
+        "&:active": {
+          color: "fg.neutral.active",
+          borderColor: "border.neutral.active",
+        },
+      },
+    },
+    {
+      variant: "outline",
+      tone: "danger",
+      css: {
+        border: "danger",
+        color: "fg.danger",
+        "&:active": {
+          color: "fg.danger.active",
+          borderColor: "border.danger.active",
+        },
+      },
+    },
+    // ghost
+    {
+      variant: "ghost",
+      tone: "brand",
+      css: {
         color: "fg.brand",
         "&:hover": {
           bg: "bg.brand.hover",
@@ -200,82 +215,42 @@ const styles = cva({
       },
     },
     {
-      variant: "outline",
+      variant: "ghost",
       tone: "neutral",
       css: {
-        border: "neutral",
-        borderWidth: "lg",
         color: "fg.neutral",
         "&:hover": {
           bg: "bg.neutral.hover",
           color: "fg.neutral.hover",
-          borderColor: "border.neutral.hover",
         },
         "&:active": {
           bg: "bg.neutral.active",
           color: "fg.neutral.active",
-          borderColor: "border.neutral.active",
         },
       },
     },
     {
-      variant: "outline",
+      variant: "ghost",
       tone: "danger",
       css: {
-        border: "danger",
-        borderWidth: "lg",
         color: "fg.danger",
         "&:hover": {
           bg: "bg.danger.hover",
+          color: "fg.danger.hover",
         },
         "&:active": {
           bg: "bg.danger.active",
+          color: "fg.danger.active",
         },
       },
     },
-    {
-      variant: "outline",
-      tone: "success",
-      css: {
-        border: "success",
-        borderWidth: "lg",
-        color: "fg.success",
-      },
-    },
-    {
-      variant: "outline",
-      tone: "warning",
-      css: {
-        border: "warning",
-        borderWidth: "lg",
-        color: "fg.warning",
-      },
-    },
-    {
-      variant: "outline",
-      tone: "info",
-      css: {
-        border: "info",
-        borderWidth: "lg",
-        color: "fg.info",
-      },
-    },
-    // Disabled States
+    // disabled
     {
       variant: "solid",
       disabled: true,
       css: {
         bg: "bg.neutral.disabled!",
         color: "fg.neutral.disabled!",
-      },
-    },
-    {
-      variant: "outline",
-      disabled: true,
-      css: {
-        bg: "transparent!",
-        color: "fg.neutral.disabled!",
-        borderColor: "border.neutral.disabled!",
       },
     },
   ],

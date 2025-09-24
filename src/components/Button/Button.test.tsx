@@ -18,6 +18,7 @@ test("variant 속성이 올바르게 적용됨", () => {
 
   expect(screen.getByText("솔리드 버튼")).toHaveClass("bg_bgSolid.brand");
   expect(screen.getByText("아웃라인 버튼")).toHaveClass("bd_brand bd-w_lg");
+  expect(screen.getByText("고스트 버튼")).toHaveClass("bg_transparent bd_none");
 });
 
 test("tone 속성이 올바르게 적용됨", () => {
@@ -25,10 +26,7 @@ test("tone 속성이 올바르게 적용됨", () => {
 
   expect(screen.getAllByText("브랜드 색조")[0]).toHaveClass("bg_bgSolid.brand");
   expect(screen.getAllByText("중립 색조")[0]).toHaveClass("bg_bgSolid.neutral");
-  expect(screen.getAllByText("성공 색조")[0]).toHaveClass("bg_bgSolid.success");
-  expect(screen.getAllByText("경고 색조")[0]).toHaveClass("bg_bgSolid.warning");
   expect(screen.getAllByText("위험 색조")[0]).toHaveClass("bg_bgSolid.danger");
-  expect(screen.getAllByText("정보 색조")[0]).toHaveClass("bg_bgSolid.info");
 });
 
 test("size prop에 따라 font size가 올바르게 적용됨", () => {
