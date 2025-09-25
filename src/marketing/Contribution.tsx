@@ -4,7 +4,7 @@ import { Link } from "../components/Link/Link";
 import { Tag } from "../components/Tag/Tag";
 import { Text } from "../components/Text/Text";
 import type { IconName } from "../tokens/iconography";
-import { css } from "../../styled-system/css";
+import { Heading } from "../components/Heading/Heading";
 
 export function Contribution() {
   return (
@@ -36,21 +36,9 @@ export function Contribution() {
           })}
         >
           <Tag tone="brand">기여 & 응원</Tag>
-          {/* 
-            TODO: 추후 heading 컴포넌트 반응형 처리 완료시 변경
-            heading 컴포넌트 사용시 small mobile에서 줄바꿈 문제 및 font-size 조절 반응형 불가능하여 직접 작성 
-          */}
-          <h4
-            className={css({
-              textWrap: "wrap",
-              textAlign: "center",
-              wordBreak: "keep-all",
-              textStyle: "heading.4",
-              fontSize: { base: "2xl", md: "3xl" },
-            })}
-          >
+          <Heading level={4} wordBreak="keep-all" align="center">
             프로젝트의 성공을 위해 응원도 부탁드립니다.
-          </h4>
+          </Heading>
         </div>
         <div
           className={flex({
