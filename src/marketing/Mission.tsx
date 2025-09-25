@@ -17,10 +17,10 @@ interface CardProps {
 function Card({ icon, title, description }: CardProps) {
   return (
     <div
-      className={vstack({
-        width: "100%",
-        px: "16",
-        py: "24",
+      className={stack({
+        align: "start",
+        direction: "column",
+        p: "16 24",
         borderRadius: "md",
         alignItems: "flex-start",
         gap: "24",
@@ -38,7 +38,7 @@ function Card({ icon, title, description }: CardProps) {
       </div>
       <div
         className={stack({
-          alignItems: "start",
+          align: "start",
         })}
       >
         <p
