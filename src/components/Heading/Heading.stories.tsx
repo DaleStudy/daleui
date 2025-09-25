@@ -33,6 +33,16 @@ export default {
       control: "select",
       description: "제목의 색조",
     },
+    align: {
+      control: "select",
+      options: ["left", "center", "right"],
+      description: "텍스트 정렬",
+    },
+    wordBreak: {
+      control: "select",
+      options: ["normal", "keep-all", "break-word"],
+      description: "단어 줄바꿈",
+    },
   },
 } satisfies Meta<typeof Heading>;
 
@@ -120,6 +130,68 @@ export const Sizes: StoryObj<typeof Heading> = {
       control: false,
     },
     size: {
+      control: false,
+    },
+  },
+};
+
+export const Alignments: StoryObj<typeof Heading> = {
+  render: (args) => {
+    return (
+      <div
+        className={vstack({
+          gap: "16",
+          maxWidth: "200px",
+        })}
+      >
+        <Heading {...args} align="left">
+          텍스트를 왼쪽 정렬된 제목
+        </Heading>
+        <Heading {...args} align="center">
+          텍스트를 가운데 정렬된 제목
+        </Heading>
+        <Heading {...args} align="right">
+          텍스트를 오른쪽 정렬된 제목
+        </Heading>
+      </div>
+    );
+  },
+  argTypes: {
+    children: {
+      control: false,
+    },
+    align: {
+      control: false,
+    },
+  },
+};
+
+export const WordBreaks: StoryObj<typeof Heading> = {
+  render: (args) => {
+    return (
+      <div
+        className={vstack({
+          gap: "16",
+          maxWidth: "200px",
+        })}
+      >
+        <Heading {...args} wordBreak="normal">
+          일반적인 단어 줄바꿈입니다.
+        </Heading>
+        <Heading {...args} wordBreak="keep-all">
+          한글은 단어 단위로 줄바꿈됩니다.
+        </Heading>
+        <Heading {...args} wordBreak="break-word">
+          긴 단어만 줄바꿈됩니다.
+        </Heading>
+      </div>
+    );
+  },
+  argTypes: {
+    children: {
+      control: false,
+    },
+    wordBreak: {
       control: false,
     },
   },
