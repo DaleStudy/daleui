@@ -96,23 +96,9 @@ export function Navigation() {
                 src="/newLogo.svg"
                 alt="DaleUI Logo"
                 className={css({
-                  height: "24px",
-                  width: "30px",
                   objectFit: "contain",
                 })}
               />
-              <div
-                className={css({
-                  color: "fg.brand",
-                  fontFamily: "Roboto",
-                  fontSize: "2xl",
-                  fontStyle: "normal",
-                  fontWeight: "bold",
-                  lineHeight: "tight",
-                })}
-              >
-                Dale UI
-              </div>
             </div>
           </div>
 
