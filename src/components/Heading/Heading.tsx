@@ -4,6 +4,8 @@ import { css, cva } from "../../../styled-system/css";
 type Level = 1 | 2 | 3 | 4 | 5;
 type HeadingTone = "brand" | "neutral";
 type HeadingSize = 1 | 2 | 3 | 4 | 5;
+type Align = "left" | "center" | "right";
+type WordBreak = "normal" | "keep-all" | "break-word";
 
 export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   /** 텍스트 */
@@ -14,6 +16,10 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   size?: HeadingSize;
   /** 색조 */
   tone?: HeadingTone;
+  /** 텍스트 정렬 */
+  align?: Align;
+  /** 단어 줄바꿈 */
+  wordBreak?: WordBreak;
 }
 
 /**
@@ -23,12 +29,16 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
  * - `level`과 `size` 속성이 같이 있는 경우, `size` 속성이 `level` 속성보다 우선순위가 높습니다.
  * 예를 들어 `size` 속성은 2, `level` 속성은 1인 경우, `<h1>` 태그이지만 `size` 속성이 2에 해당하는 스타일이 적용됩니다.
  * - `tone` 속성을 통해서 색상 강조를 지정할 수 있습니다.
+ * - `align` 속성을 통해서 텍스트 정렬을 지정할 수 있습니다.
+ * - `wordBreak` 속성을 통해서 단어 줄바꿈을 지정할 수 있습니다.
  */
 export const Heading = ({
   children,
   level,
   size,
   tone = "neutral",
+  align,
+  wordBreak,
   ...rest
 }: HeadingProps) => {
   if (!level) {
@@ -42,7 +52,12 @@ export const Heading = ({
   return (
     <Tag
       className={css(
-        styles.raw({ level: size ? undefined : level, tone }),
+        styles.raw({
+          level: size ? undefined : level,
+          tone,
+          align,
+          wordBreak,
+        }),
         size &&
           css.raw({
             textStyle: `heading.${size}`,
@@ -71,6 +86,17 @@ const styles = cva({
       neutral: {
         color: "fg.neutral",
       },
+    },
+    align: {
+      left: { textAlign: "left" },
+      center: { textAlign: "center" },
+      right: { textAlign: "right" },
+      justify: { textAlign: "justify" },
+    },
+    wordBreak: {
+      normal: { wordBreak: "normal" },
+      "keep-all": { wordBreak: "keep-all" },
+      "break-word": { wordBreak: "break-word" },
     },
   },
 });
