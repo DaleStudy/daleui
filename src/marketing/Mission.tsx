@@ -20,7 +20,7 @@ function Card({ icon, title, description }: CardProps) {
       className={stack({
         align: "start",
         direction: "column",
-        p: "16 24",
+        p: "24 16",
         borderRadius: "md",
         alignItems: "flex-start",
         gap: "24",
