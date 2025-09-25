@@ -14,6 +14,39 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    viewport: {
+      options: {
+        mobile: {
+          name: "Mobile",
+          styles: {
+            width: "320px",
+            height: "568px",
+          },
+        },
+        tablet: {
+          name: "Tablet",
+          styles: {
+            width: "640px",
+            height: "1024px",
+          },
+        },
+        desktop: {
+          name: "Desktop",
+          styles: {
+            width: "1024px",
+            height: "800px",
+          },
+        },
+        largeDesktop: {
+          name: "Large Desktop",
+          styles: {
+            width: "1280px",
+            height: "1024px",
+          },
+        },
+      },
+    },
+
     docs: {
       toc: true,
       container: (props: DocsContainerProps<ReactRenderer>) => {
