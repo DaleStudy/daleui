@@ -1,6 +1,7 @@
 import { css } from "../../styled-system/css";
 import { vstack } from "../../styled-system/patterns";
 import { Button } from "../components/Button/Button";
+import { Heading } from "../components/Heading/Heading";
 
 export function Header() {
   return (
@@ -22,17 +23,11 @@ export function Header() {
           px: { base: "16", sm: "24" },
         })}
       >
-        <h1
-          className={css({
-            textStyle: "heading.1",
-            fontSize: { base: "3xl", md: "5xl" },
-            fontWeight: "bold",
-          })}
-        >
+        <Heading level={1} align="center">
           한국어 환경에 특화된
           <br />
           모두를 위한 디자인 시스템, 달레UI
-        </h1>
+        </Heading>
         <p
           className={css({
             textStyle: "body.lg",
