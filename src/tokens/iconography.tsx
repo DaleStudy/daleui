@@ -43,6 +43,7 @@ function createBrandIcon(Icon: FunctionComponent<SVGProps<SVGSVGElement>>) {
 }
 
 export const icons = {
+  award: Award,
   check: Check,
   chevronLeft: ChevronLeft,
   chevronRight: ChevronRight,
@@ -53,9 +54,11 @@ export const icons = {
   eye: Eye,
   eyeClosed: EyeClosed,
   eyeOff: EyeOff,
+  globe: Globe,
   handHeart: HandHeart,
   heartHandshake: HeartHandshake,
   info: Info,
+  kr: Kr,
   menu: Menu,
   messageCircle: MessageCircle,
   messageCircleMore: MessageCircleMore,
@@ -67,9 +70,6 @@ export const icons = {
   user: User,
   users: Users,
   x: X,
-  globe: Globe,
-  award: Award,
-  Kr: createBrandIcon(Kr),
   Discord: createBrandIcon(Discord),
   GitHub: createBrandIcon(GitHub),
   LinkedIn: createBrandIcon(LinkedIn),
