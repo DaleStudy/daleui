@@ -246,11 +246,11 @@ const styles = cva({
     },
     // disabled
     {
-      variant: "solid",
       disabled: true,
       css: {
         bg: "bg.neutral.disabled!",
         color: "fg.neutral.disabled!",
+        border: "none!",
       },
     },
   ],
