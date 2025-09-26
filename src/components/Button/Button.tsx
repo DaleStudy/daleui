@@ -1,20 +1,25 @@
 import { type HTMLAttributes, type ReactNode } from "react";
 import { cva } from "../../../styled-system/css";
+import { Icon, type IconProps } from "../Icon/Icon";
+import { hstack } from "../../../styled-system/patterns";
 
 type variant = "solid" | "outline" | "ghost";
 type size = "sm" | "md" | "lg";
 type tone = "brand" | "neutral" | "danger";
 
 export interface ButtonProps
-  extends Omit<HTMLAttributes<HTMLElement>, "style"> {
+  extends Omit<HTMLAttributes<HTMLButtonElement>, "style"> {
   /** 텍스트 */
   children: ReactNode;
   /** 종류 */
-  variant: variant;
-
+  variant?: variant;
   /** 버튼 비활성화 여부 */
   disabled?: boolean;
   fullWidth?: boolean;
+  /** 좌측 아이콘 */
+  leftIcon?: IconProps["name"];
+  /** 우측 아이콘 */
+  rightIcon?: IconProps["name"];
   /** 클릭 시 실행함수 */
   onClick?: () => void;
   /** 버튼의 크기 */
@@ -22,7 +27,7 @@ export interface ButtonProps
   /** 색조 */
   tone?: tone;
   /** 타입 */
-  type?: "button" | "submit";
+  type?: "button" | "submit" | "reset";
 }
 
 /**
@@ -37,6 +42,8 @@ export const Button = ({
   variant = "solid",
   disabled,
   fullWidth,
+  leftIcon,
+  rightIcon,
   onClick,
   size = "md",
   tone = "brand",
@@ -51,7 +58,19 @@ export const Button = ({
       disabled={disabled}
       {...rest}
     >
-      {children}
+      <div className={hstack({ gap: "8" })}>
+        {leftIcon && (
+          <Icon data-testid={`icon-${leftIcon}`} name={leftIcon} size={size} />
+        )}
+        {children}
+        {rightIcon && (
+          <Icon
+            data-testid={`icon-${rightIcon}`}
+            name={rightIcon}
+            size={size}
+          />
+        )}
+      </div>
     </button>
   );
 };
@@ -176,6 +195,9 @@ const styles = cva({
       css: {
         border: "brand",
         color: "fg.brand",
+        "&:hover": {
+          color: "fg.brand.hover",
+        },
         "&:active": {
           color: "fg.brand.active",
           borderColor: "border.brand.active",
@@ -188,6 +210,9 @@ const styles = cva({
       css: {
         border: "neutral",
         color: "fg.neutral",
+        "&:hover": {
+          color: "fg.neutral.hover",
+        },
         "&:active": {
           color: "fg.neutral.active",
           borderColor: "border.neutral.active",
@@ -200,6 +225,9 @@ const styles = cva({
       css: {
         border: "danger",
         color: "fg.danger",
+        "&:hover": {
+          color: "fg.danger.hover",
+        },
         "&:active": {
           color: "fg.danger.active",
           borderColor: "border.danger.active",

@@ -158,3 +158,32 @@ export const FullWidth: StoryObj<typeof Button> = {
     },
   },
 };
+
+export const WithIcons: StoryObj<typeof Button> = {
+  render: (args) => {
+    return (
+      <div className={vstack({ gap: "16" })}>
+        <Button {...args} leftIcon="star">
+          좌측 아이콘
+        </Button>
+        <Button {...args} rightIcon="search">
+          우측 아이콘
+        </Button>
+        <Button {...args} leftIcon="star" rightIcon="search">
+          양쪽 아이콘
+        </Button>
+        <Button {...args} leftIcon="star" rightIcon="search" disabled>
+          양쪽 아이콘 비활성화
+        </Button>
+      </div>
+    );
+  },
+  argTypes: {
+    children: {
+      control: false,
+    },
+    disabled: {
+      control: false,
+    },
+  },
+};
