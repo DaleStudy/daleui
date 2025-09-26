@@ -16,6 +16,7 @@ export default {
     variant: "solid",
     size: "md",
     disabled: false,
+    fullWidth: false,
   },
   argTypes: {
     children: {
@@ -133,6 +134,26 @@ export const Disabled: StoryObj<typeof Button> = {
       control: false,
     },
     disabled: {
+      control: false,
+    },
+  },
+};
+
+export const FullWidth: StoryObj<typeof Button> = {
+  args: {
+    fullWidth: true,
+  },
+  render: (args) => {
+    return (
+      <div className={vstack({ gap: "16" })}>
+        <div style={{ border: "2px dashed #ccc", width: "300px" }}>
+          <Button {...args}>가득찬 버튼</Button>
+        </div>
+      </div>
+    );
+  },
+  argTypes: {
+    children: {
       control: false,
     },
   },
