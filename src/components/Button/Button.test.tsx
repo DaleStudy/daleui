@@ -5,7 +5,8 @@ import { expect, test, vi } from "vitest";
 import { Button } from "./Button";
 import * as stories from "./Button.stories";
 
-const { Basic, Variants, Tones, Sizes, Disabled } = composeStories(stories);
+const { Basic, Variants, Tones, Sizes, Disabled, FullWidth } =
+  composeStories(stories);
 
 test("텍스트와 함께 버튼이 올바르게 렌더링됨", () => {
   render(<Basic>테스트</Basic>);
@@ -111,4 +112,10 @@ test("type='button'으로 지정된 버튼 클릭 시 form이 제출되지 않�
   const buttonTypeButton = screen.getByText("Button Type Button");
   await user.click(buttonTypeButton);
   expect(handleSubmit).toHaveBeenCalledTimes(0);
+});
+
+test("fullWidth 속성이 올바르게 적용됨", () => {
+  render(<FullWidth />);
+  const button = screen.getByText("가득찬 버튼");
+  expect(button).toHaveClass("w_100%");
 });

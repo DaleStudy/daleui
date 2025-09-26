@@ -14,6 +14,7 @@ export interface ButtonProps
 
   /** 버튼 비활성화 여부 */
   disabled?: boolean;
+  fullWidth?: boolean;
   /** 클릭 시 실행함수 */
   onClick?: () => void;
   /** 버튼의 크기 */
@@ -35,6 +36,7 @@ export const Button = ({
   children,
   variant = "solid",
   disabled,
+  fullWidth,
   onClick,
   size = "md",
   tone = "brand",
@@ -43,7 +45,7 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={styles({ tone, variant, size, disabled })}
+      className={styles({ tone, variant, size, disabled, fullWidth })}
       type={type}
       onClick={onClick}
       disabled={disabled}
@@ -64,7 +66,7 @@ const styles = cva({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    width: ["auto", "100%"],
+    width: "auto",
     borderRadius: "md",
     cursor: "pointer",
     transition: "0.2s",
@@ -114,6 +116,12 @@ const styles = cva({
     },
     disabled: {
       true: {},
+      false: {},
+    },
+    fullWidth: {
+      true: {
+        width: "100%",
+      },
       false: {},
     },
   },
