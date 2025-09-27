@@ -2,7 +2,7 @@ import { css } from "../../styled-system/css";
 import { stack, vstack } from "../../styled-system/patterns";
 import { Icon } from "../components/Icon/Icon";
 import { Text } from "../components/Text/Text";
-import { Heading } from "../components/Heading/Heading";
+// import { Heading } from "../components/Heading/Heading";
 import type { IconName } from "../tokens/iconography";
 
 interface CardProps {
