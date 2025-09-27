@@ -112,24 +112,29 @@ export function Mission() {
             alignSelf: "stretch",
           })}
         >
-          <div
+          {/* TODO: heading 컴포넌트 작업 완료 시 변경 */}
+          <h2
             className={css({
               textWrap: "wrap",
               textAlign: "center",
-              wordBreak: "keep-all",
+              wordBreak: "break-all",
               textStyle: "heading.2",
               fontSize: { base: "3xl", sm: "4xl" }, // 320-640: 30px, 640+: 36px
               "& br": {
-                display: { base: "none", md: "inline" }, // 640+ 에서만 br 표시
+                display: {
+                  base: "none",
+                  lg: "inline", // 1024+ 에서만 br 표시
+                },
               },
             })}
           >
-            <Heading level={2}>
-              달레 UI는 <Text tone="brand">한국어 친화적 디자인 시스템</Text>
-              으로,
-              <br /> 모두가 쉽게 협업하고 기여할 수 있도록 돕습니다.
-            </Heading>
-          </div>
+            {/* <Heading level={2}> */}
+            달레 UI는 <Text tone="brand">한국어 친화적 디자인 시스템</Text>
+            으로,
+            <br />
+            모두가 쉽게 협업하고 기여할 수 있도록 돕습니다.
+            {/* </Heading> */}
+          </h2>
         </div>
 
         <div
