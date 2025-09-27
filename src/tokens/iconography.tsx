@@ -22,6 +22,9 @@ import {
   ThumbsUp,
   User,
   X,
+  Globe,
+  Award,
+  Users,
 } from "lucide-react";
 import type { FunctionComponent, ComponentProps, SVGProps } from "react";
 import Discord from "../assets/Discord.svg?react";
@@ -31,6 +34,7 @@ import Medium from "../assets/Medium.svg?react";
 import YouTube from "../assets/YouTube.svg?react";
 import Storybook from "../assets/Storybook.svg?react";
 import Figma from "../assets/Figma.svg?react";
+import Kr from "../assets/Kr.svg?react";
 
 function createBrandIcon(Icon: FunctionComponent<SVGProps<SVGSVGElement>>) {
   return (args: ComponentProps<typeof Icon>) => (
@@ -39,6 +43,7 @@ function createBrandIcon(Icon: FunctionComponent<SVGProps<SVGSVGElement>>) {
 }
 
 export const icons = {
+  award: Award,
   check: Check,
   chevronLeft: ChevronLeft,
   chevronRight: ChevronRight,
@@ -49,9 +54,11 @@ export const icons = {
   eye: Eye,
   eyeClosed: EyeClosed,
   eyeOff: EyeOff,
+  globe: Globe,
   handHeart: HandHeart,
   heartHandshake: HeartHandshake,
   info: Info,
+  kr: Kr,
   menu: Menu,
   messageCircle: MessageCircle,
   messageCircleMore: MessageCircleMore,
@@ -61,6 +68,7 @@ export const icons = {
   sun: Sun,
   thumbsUp: ThumbsUp,
   user: User,
+  users: Users,
   x: X,
   Discord: createBrandIcon(Discord),
   GitHub: createBrandIcon(GitHub),
