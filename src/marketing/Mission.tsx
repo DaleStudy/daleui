@@ -117,10 +117,10 @@ export function Mission() {
               textWrap: "wrap",
               textAlign: "center",
               wordBreak: "keep-all",
-              textStyle: "heading.4",
-              fontSize: { base: "xl", sm: "2xl" }, // 320-640: 20px, 640+: 24px
+              textStyle: "heading.2",
+              fontSize: { base: "3xl", sm: "4xl" }, // 320-640: 30px, 640+: 36px
               "& br": {
-                display: { base: "none", sm: "inline" }, // 640+ 에서만 br 표시
+                display: { base: "none", md: "inline" }, // 640+ 에서만 br 표시
               },
             })}
           >
