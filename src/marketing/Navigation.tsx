@@ -93,7 +93,9 @@ export function Navigation() {
               })}
             >
               <img
-                src="/newLogo.svg"
+                src={
+                  isDark ? "/newLogoWithText_dark.svg" : "/newLogoWithText.svg"
+                }
                 alt="DaleUI Logo"
                 className={css({
                   objectFit: "contain",
