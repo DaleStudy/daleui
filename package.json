@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.3.3",
-    "@radix-ui/react-radio-group": "^1.3.7",
+    "@radix-ui/react-radio-group": "^1.3.8",
     "axe-playwright": "^2.2.2",
     "chromatic": "^13.2.1",
     "lucide-react": "^0.544.0",
