@@ -1,11 +1,10 @@
 import { type HTMLAttributes, type ReactNode } from "react";
-import { cva } from "../../../styled-system/css";
+import { css, cva } from "../../../styled-system/css";
 import { Icon, type IconProps } from "../Icon/Icon";
 import { hstack } from "../../../styled-system/patterns";
+import "./Button.css";
 
 type size = "sm" | "md" | "lg";
-
-// TODO: Loading status 추가
 
 /** 공통 버튼 속성 */
 interface BaseButtonProps
@@ -16,6 +15,7 @@ interface BaseButtonProps
   disabled?: boolean;
   /** 버튼 너비 100% */
   fullWidth?: boolean;
+  loading?: boolean;
   /** 좌측 아이콘 */
   leftIcon?: IconProps["name"];
   /** 우측 아이콘 */
@@ -52,25 +52,19 @@ export type ButtonProps =
   | GhostButtonProps;
 
 /**
- * Button 컴포넌트
- *
- * @description
  * - `variant` 속성으로 버튼의 스타일 종류를 지정할 수 있습니다.
  * - `tone` 속성으로 버튼의 색상 강조를 지정할 수 있습니다.
  * - `size` 속성으로 버튼의 크기를 지정할 수 있습니다.
  * - `type` 속성으로 버튼의 타입을 지정할 수 있습니다.
  * - `disabled` 속성을 사용하여 버튼을 비활성화할 수 있습니다.
- *
- * @variant 기본 tone 및 지원하는 tone
- * - `solid` (기본값: brand): brand, neutral, danger 지원
- * - `outline` (기본값: brand): brand만 지원
- * - `ghost` (기본값: neutral): neutral, danger 지원
+ * - `loading` 속성을 사용하여 버튼을 로딩 상태로 지정할 수 있습니다.
  */
 export const Button = ({
   children,
   variant = "solid",
   disabled,
   fullWidth,
+  loading,
   leftIcon,
   rightIcon,
   onClick,
@@ -95,7 +89,10 @@ export const Button = ({
       disabled={disabled}
       {...rest}
     >
-      <div className={hstack({ gap: "8" })}>
+      <div
+        className={hstack({ gap: "8" })}
+        style={{ visibility: loading ? "hidden" : "visible" }}
+      >
         {leftIcon && (
           <Icon data-testid={`icon-${leftIcon}`} name={leftIcon} size={size} />
         )}
@@ -108,6 +105,25 @@ export const Button = ({
           />
         )}
       </div>
+      {loading && (
+        <div
+          className={css({
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          })}
+        >
+          <Icon
+            name="loaderCircle"
+            size={size}
+            data-testid="button-loader"
+            className={css({
+              animation: "spin 1s linear infinite",
+            })}
+          />
+        </div>
+      )}
     </button>
   );
 };
@@ -128,6 +144,7 @@ const styles = cva({
     transition: "0.2s",
     lineHeight: "1",
     outline: "0",
+    position: "relative",
     "&:disabled": {
       cursor: "not-allowed",
     },

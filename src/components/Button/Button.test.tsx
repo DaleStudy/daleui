@@ -198,3 +198,9 @@ test("Icon과 함께 버튼이 올바르게 렌더링됨", () => {
   expect(screen.getByTestId("icon-star")).toBeInTheDocument();
   expect(screen.getByTestId("icon-search")).toBeInTheDocument();
 });
+
+test("로딩 상태가 올바르게 렌더링 됨", () => {
+  render(<Button loading>로딩 상태</Button>);
+  const loader = screen.getByTestId("button-loader");
+  expect(loader).toBeInTheDocument();
+});
