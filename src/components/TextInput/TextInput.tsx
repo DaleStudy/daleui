@@ -3,8 +3,6 @@ import { cva, cx } from "../../../styled-system/css";
 import { Icon, type IconProps } from "../Icon/Icon";
 export interface TextInputProps
   extends Omit<ComponentPropsWithoutRef<"input">, "size"> {
-  /** 크기 */
-  size?: "sm" | "md" | "lg";
   /** 오류 상태 여부 (true일 경우 danger 색상으로 표시됩니다) */
   invalid?: boolean;
   /** 앞쪽 아이콘 이름 (아이콘 컴포넌트의 name 속성에 해당) */
@@ -24,7 +22,6 @@ export interface TextInputProps
  * - `disabled` prop으로 비활성화 상태를 제어할 수 있으며, `state` prop을 통해 'error'와 같은 특정 상태를 표현할 수 있습니다.
  */
 export function TextInput({
-  size,
   invalid,
   className,
   leadingIcon,
@@ -43,13 +40,13 @@ export function TextInput({
     }
 
     return (
-      <Icon name={name} size={size} tone={tone} data-testid={`icon-${name}`} />
+      <Icon name={name} size="md" tone={tone} data-testid={`icon-${name}`} />
     );
   };
 
   return (
     <div
-      className={cx(wrapperStyles({ size, invalid }), className)}
+      className={cx(wrapperStyles({ invalid }), className)}
       data-disabled={disabled ? "" : undefined}
     >
       {leadingIcon && renderIcon(leadingIcon)}
@@ -71,6 +68,9 @@ const wrapperStyles = cva({
     alignItems: "center",
     gap: "8",
     width: "100%",
+    height: "12",
+    paddingX: "12",
+    fontSize: "md",
     position: "relative",
     border: "neutral",
     borderWidth: "md",
@@ -93,11 +93,6 @@ const wrapperStyles = cva({
     },
   },
   variants: {
-    size: {
-      sm: { h: "40px", px: "16", fontSize: "sm" },
-      md: { h: "48px", px: "12", fontSize: "md" },
-      lg: { h: "56px", px: "24", fontSize: "lg" },
-    },
     invalid: {
       true: {
         border: "danger",
@@ -111,9 +106,6 @@ const wrapperStyles = cva({
         },
       },
     },
-  },
-  defaultVariants: {
-    size: "md",
   },
 });
 

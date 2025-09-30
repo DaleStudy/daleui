@@ -15,45 +15,17 @@ export default {
   },
   args: {
     placeholder: "텍스트를 입력해주세요.",
-    size: "md",
     disabled: false,
     invalid: false,
-  },
-  argTypes: {
-    size: {
-      control: "select",
-      description: "입력 필드의 크기",
-    },
   },
 } satisfies Meta<typeof TextInput>;
 
 type Story = StoryObj<typeof TextInput>;
 
 /**
- * 가장 기본적인 TextInput 컴포넌트입니다. `size`, `disabled`, `invalid` 등의 props를 조절해보세요.
+ * 가장 기본적인 TextInput 컴포넌트입니다. `disabled`, `invalid` 등의 props를 조절해보세요.
  */
 export const Default: Story = {};
-
-/**
- * `size` prop을 통해 입력 필드의 크기를 조절할 수 있습니다.
- */
-export const Sizes: Story = {
-  render: (args) => (
-    <div className={vstack({ gap: "16", w: "320px" })}>
-      <TextInput {...args} size="sm" placeholder="Small size" />
-      <TextInput {...args} size="md" placeholder="Medium size" />
-      <TextInput {...args} size="lg" placeholder="Large size" />
-    </div>
-  ),
-  argTypes: {
-    size: {
-      control: false,
-    },
-    placeholder: {
-      control: false,
-    },
-  },
-};
 
 /**
  * `leadingIcon`과 `trailingIcon` prop에 아이콘 이름을 문자열로 전달하여 아이콘을 표시할 수 있습니다.
@@ -188,7 +160,6 @@ const ControlledTextInput = () => {
 export const Controlled: Story = {
   render: () => <ControlledTextInput />,
   argTypes: {
-    size: { control: false },
     invalid: { control: false },
     disabled: { control: false },
     placeholder: { control: false },
