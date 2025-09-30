@@ -4,7 +4,11 @@ import { expect, test, vi } from "vitest";
 import { Button } from "./Button";
 
 test("텍스트와 함께 버튼이 올바르게 렌더링됨", () => {
-  render(<Button variant="solid">테스트</Button>);
+  render(
+    <Button variant="solid" tone="brand">
+      테스트
+    </Button>,
+  );
 
   expect(screen.getByText("테스트")).toBeInTheDocument();
 });
@@ -12,9 +16,15 @@ test("텍스트와 함께 버튼이 올바르게 렌더링됨", () => {
 test("variant 속성이 올바르게 적용됨", () => {
   render(
     <>
-      <Button variant="solid">솔리드 버튼</Button>
-      <Button variant="outline">아웃라인 버튼</Button>
-      <Button variant="ghost">고스트 버튼</Button>
+      <Button variant="solid" tone="brand">
+        솔리드 버튼
+      </Button>
+      <Button variant="outline" tone="brand">
+        아웃라인 버튼
+      </Button>
+      <Button variant="ghost" tone="neutral">
+        고스트 버튼
+      </Button>
     </>,
   );
 
@@ -29,12 +39,18 @@ test("variant 속성이 올바르게 적용됨", () => {
   );
 });
 
-test("tone 속성이 올바르게 적용됨", () => {
+test("solid variant의 tone 속성이 올바르게 적용됨", () => {
   render(
     <>
-      <Button tone="brand">브랜드 색조</Button>
-      <Button tone="neutral">중립 색조</Button>
-      <Button tone="danger">위험 색조</Button>
+      <Button variant="solid" tone="brand">
+        브랜드 색조
+      </Button>
+      <Button variant="solid" tone="neutral">
+        중립 색조
+      </Button>
+      <Button variant="solid" tone="danger">
+        위험 색조
+      </Button>
     </>,
   );
 
@@ -46,6 +62,38 @@ test("tone 속성이 올바르게 적용됨", () => {
   );
   expect(screen.getByRole("button", { name: "위험 색조" })).toHaveClass(
     "bg_bgSolid.danger",
+  );
+});
+
+test("outline variant는 brand tone만 지원됨", () => {
+  render(
+    <Button variant="outline" tone="brand">
+      아웃라인 버튼
+    </Button>,
+  );
+
+  expect(screen.getByRole("button", { name: "아웃라인 버튼" })).toHaveClass(
+    "bd_brand",
+  );
+});
+
+test("ghost variant의 tone 속성이 올바르게 적용됨", () => {
+  render(
+    <>
+      <Button variant="ghost" tone="neutral">
+        중립 색조
+      </Button>
+      <Button variant="ghost" tone="danger">
+        위험 색조
+      </Button>
+    </>,
+  );
+
+  expect(screen.getByRole("button", { name: "중립 색조" })).toHaveClass(
+    "c_fg.neutral",
+  );
+  expect(screen.getByRole("button", { name: "위험 색조" })).toHaveClass(
+    "c_fg.danger",
   );
 });
 

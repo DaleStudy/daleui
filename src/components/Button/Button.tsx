@@ -3,18 +3,18 @@ import { cva } from "../../../styled-system/css";
 import { Icon, type IconProps } from "../Icon/Icon";
 import { hstack } from "../../../styled-system/patterns";
 
-type variant = "solid" | "outline" | "ghost";
 type size = "sm" | "md" | "lg";
-type tone = "brand" | "neutral" | "danger";
 
-export interface ButtonProps
+// TODO: Loading status 추가
+
+/** 공통 버튼 속성 */
+interface BaseButtonProps
   extends Omit<HTMLAttributes<HTMLButtonElement>, "style"> {
   /** 텍스트 */
   children: ReactNode;
-  /** 종류 */
-  variant?: variant;
   /** 버튼 비활성화 여부 */
   disabled?: boolean;
+  /** 버튼 너비 100% */
   fullWidth?: boolean;
   /** 좌측 아이콘 */
   leftIcon?: IconProps["name"];
@@ -24,18 +24,47 @@ export interface ButtonProps
   onClick?: () => void;
   /** 버튼의 크기 */
   size?: size;
-  /** 색조 */
-  tone?: tone;
   /** 타입 */
   type?: "button" | "submit" | "reset";
 }
 
+/** Solid 버튼 속성 (brand, neutral, danger tone 지원) */
+type SolidButtonProps = BaseButtonProps & {
+  variant?: "solid";
+  tone?: "brand" | "neutral" | "danger";
+};
+
+/** Outline 버튼 속성 (brand tone만 지원) */
+type OutlineButtonProps = BaseButtonProps & {
+  variant: "outline";
+  tone?: "brand";
+};
+
+/** Ghost 버튼 속성 (neutral, danger tone 지원) */
+type GhostButtonProps = BaseButtonProps & {
+  variant: "ghost";
+  tone?: "neutral" | "danger";
+};
+
+export type ButtonProps =
+  | SolidButtonProps
+  | OutlineButtonProps
+  | GhostButtonProps;
+
 /**
+ * Button 컴포넌트
+ *
+ * @description
  * - `variant` 속성으로 버튼의 스타일 종류를 지정할 수 있습니다.
  * - `tone` 속성으로 버튼의 색상 강조를 지정할 수 있습니다.
  * - `size` 속성으로 버튼의 크기를 지정할 수 있습니다.
  * - `type` 속성으로 버튼의 타입을 지정할 수 있습니다.
  * - `disabled` 속성을 사용하여 버튼을 비활성화할 수 있습니다.
+ *
+ * @variant 기본 tone 및 지원하는 tone
+ * - `solid` (기본값: brand): brand, neutral, danger 지원
+ * - `outline` (기본값: brand): brand만 지원
+ * - `ghost` (기본값: neutral): neutral, danger 지원
  */
 export const Button = ({
   children,
@@ -46,13 +75,21 @@ export const Button = ({
   rightIcon,
   onClick,
   size = "md",
-  tone = "brand",
+  tone,
   type = "button",
   ...rest
 }: ButtonProps) => {
+  const defaultTone = tone ?? (variant === "ghost" ? "neutral" : "brand");
+
   return (
     <button
-      className={styles({ tone, variant, size, disabled, fullWidth })}
+      className={styles({
+        tone: defaultTone,
+        variant,
+        size,
+        disabled,
+        fullWidth,
+      })}
       type={type}
       onClick={onClick}
       disabled={disabled}
@@ -188,7 +225,7 @@ const styles = cva({
         },
       },
     },
-    // outline
+    // outline (brand만 지원)
     {
       variant: "outline",
       tone: "brand",
@@ -204,52 +241,7 @@ const styles = cva({
         },
       },
     },
-    {
-      variant: "outline",
-      tone: "neutral",
-      css: {
-        border: "neutral",
-        color: "fg.neutral",
-        "&:hover": {
-          color: "fg.neutral.hover",
-        },
-        "&:active": {
-          color: "fg.neutral.active",
-          borderColor: "border.neutral.active",
-        },
-      },
-    },
-    {
-      variant: "outline",
-      tone: "danger",
-      css: {
-        border: "danger",
-        color: "fg.danger",
-        "&:hover": {
-          color: "fg.danger.hover",
-        },
-        "&:active": {
-          color: "fg.danger.active",
-          borderColor: "border.danger.active",
-        },
-      },
-    },
-    // ghost
-    {
-      variant: "ghost",
-      tone: "brand",
-      css: {
-        color: "fg.brand",
-        "&:hover": {
-          bg: "bg.brand.hover",
-          color: "fg.brand.hover",
-        },
-        "&:active": {
-          bg: "bg.brand.active",
-          color: "fg.brand.active",
-        },
-      },
-    },
+    // ghost (neutral, danger만 지원)
     {
       variant: "ghost",
       tone: "neutral",
