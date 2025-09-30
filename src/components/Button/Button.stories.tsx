@@ -218,3 +218,17 @@ export const WithIcons: StoryObj<typeof Button> = {
     },
   },
 };
+
+export const Loading: StoryObj<typeof Button> = {
+  args: {
+    loading: true,
+  },
+  render: (args) => {
+    return <Button {...args}>로딩 버튼</Button>;
+  },
+  argTypes: {
+    children: {
+      control: false,
+    },
+  },
+};
