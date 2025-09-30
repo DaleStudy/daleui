@@ -36,7 +36,7 @@ export function Contribution() {
           })}
         >
           <Tag tone="brand">기여 & 응원</Tag>
-          <Heading level={4} lineBreak="cjk" align="center">
+          <Heading level={4} wordBreak="cjk" align="center">
             프로젝트의 성공을 위해 응원도 부탁드립니다.
           </Heading>
         </div>

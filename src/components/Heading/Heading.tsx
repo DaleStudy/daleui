@@ -5,7 +5,7 @@ type Level = 1 | 2 | 3 | 4 | 5;
 type HeadingTone = "brand" | "neutral";
 type HeadingSize = 1 | 2 | 3 | 4 | 5;
 type Align = "left" | "center" | "right";
-type LineBreak = "english" | "cjk";
+type WordBreak = "english" | "cjk";
 
 export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   /** 텍스트 */
@@ -18,8 +18,8 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   tone?: HeadingTone;
   /** 텍스트 정렬 */
   align?: Align;
-  /** 단어 줄바꿈 */
-  lineBreak?: LineBreak;
+  /** 단어 줄바꿈 방식 */
+  wordBreak?: WordBreak;
 }
 
 /**
@@ -30,7 +30,7 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
  * 예를 들어 `size` 속성은 2, `level` 속성은 1인 경우, `<h1>` 태그이지만 `size` 속성이 2에 해당하는 스타일이 적용됩니다.
  * - `tone` 속성을 통해서 색상 강조를 지정할 수 있습니다.
  * - `align` 속성을 통해서 텍스트 정렬을 지정할 수 있습니다.
- * - `lineBreak` 속성을 통해서 단어 줄바꿈을 지정할 수 있습니다.
+ * - `wordBreak` 속성을 통해서 단어 줄바꿈 방식을 지정할 수 있습니다. `english`는 영어 단어 단위로 줄바꿈하고, `cjk`는 한중일 단어 단위로 줄바꿈합니다.
  */
 export const Heading = ({
   children,
@@ -38,7 +38,7 @@ export const Heading = ({
   size,
   tone = "neutral",
   align,
-  lineBreak,
+  wordBreak,
   ...rest
 }: HeadingProps) => {
   if (!level) {
@@ -56,7 +56,7 @@ export const Heading = ({
           level: size ? undefined : level,
           tone,
           align,
-          lineBreak,
+          wordBreak,
         }),
         size &&
           css.raw({
@@ -93,7 +93,7 @@ const styles = cva({
       right: { textAlign: "right" },
       justify: { textAlign: "justify" },
     },
-    lineBreak: {
+    wordBreak: {
       english: { wordBreak: "normal" },
       cjk: { wordBreak: "keep-all" },
     },

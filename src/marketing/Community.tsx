@@ -65,7 +65,7 @@ export function Community() {
           })}
         >
           <Tag tone="brand">커뮤니티 & 참여</Tag>
-          <Heading level={4} align="center" lineBreak="cjk">
+          <Heading level={4} align="center" wordBreak="cjk">
             달레UI는 누구나 참여할 수 있는 커뮤니티 기반 프로젝트입니다.
             <br />
             함께 만들고, 함께 성장해요.

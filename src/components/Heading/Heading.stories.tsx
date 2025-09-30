@@ -38,7 +38,7 @@ export default {
       options: ["left", "center", "right"],
       description: "텍스트 정렬",
     },
-    lineBreak: {
+    wordBreak: {
       control: "select",
       options: ["english", "cjk"],
       description: "단어 줄바꿈",
@@ -166,7 +166,7 @@ export const Alignments: StoryObj<typeof Heading> = {
   },
 };
 
-export const LineBreaks: StoryObj<typeof Heading> = {
+export const WordBreaks: StoryObj<typeof Heading> = {
   render: (args) => {
     return (
       <div
@@ -175,10 +175,10 @@ export const LineBreaks: StoryObj<typeof Heading> = {
           maxWidth: "200px",
         })}
       >
-        <Heading {...args} lineBreak="english">
+        <Heading {...args} wordBreak="english">
           english line break
         </Heading>
-        <Heading {...args} lineBreak="cjk">
+        <Heading {...args} wordBreak="cjk">
           한글은 단어 단위로 줄바꿈됩니다.
         </Heading>
       </div>
@@ -188,7 +188,7 @@ export const LineBreaks: StoryObj<typeof Heading> = {
     children: {
       control: false,
     },
-    lineBreak: {
+    wordBreak: {
       control: false,
     },
   },
