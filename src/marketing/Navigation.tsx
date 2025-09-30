@@ -3,7 +3,7 @@ import { stack } from "../../styled-system/patterns";
 import { Icon } from "../components/Icon/Icon";
 import { Link } from "../components/Link/Link";
 import { Button } from "../components/Button/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const LINK_ITEMS = [
   { id: 1, label: "깃허브", href: "https://github.com/DaleStudy/daleui" },
@@ -22,10 +22,25 @@ export function Navigation() {
     return el.classList.contains("dark");
   });
 
+  useEffect(() => {
+    const el = document.documentElement;
+
+    const updateThemeState = () => {
+      const hasDarkClass = el.classList.contains("dark");
+      setIsDark(hasDarkClass);
+    };
+
+    const observer = new MutationObserver(updateThemeState);
+    observer.observe(el, {
+      attributes: true,
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const handleToggleTheme = () => {
     const el = document.documentElement;
     el.classList.toggle("dark");
-    setIsDark(el.classList.contains("dark"));
   };
 
   const handleToggleMenu = () => {
