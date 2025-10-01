@@ -28,10 +28,10 @@ interface BaseButtonProps
   type?: "button" | "submit" | "reset";
 }
 
-/** Solid 버튼 속성 (brand, neutral, danger tone 지원) */
+/** Solid 버튼 속성 (brand tone만 지원) */
 type SolidButtonProps = BaseButtonProps & {
   variant?: "solid";
-  tone?: "brand" | "neutral" | "danger";
+  tone?: "brand";
 };
 
 /** Outline 버튼 속성 (brand tone만 지원) */
@@ -166,11 +166,6 @@ const styles = cva({
     "&:disabled": {
       cursor: "not-allowed",
     },
-    "&:focus-visible": {
-      outline: "neutral",
-      outlineWidth: "lg",
-      outlineOffset: "2",
-    },
   },
   variants: {
     size: {
@@ -217,7 +212,7 @@ const styles = cva({
     },
   },
   compoundVariants: [
-    // solid
+    // solid (brand만 지원)
     {
       variant: "solid",
       tone: "brand",
@@ -229,34 +224,6 @@ const styles = cva({
         },
         "&:active": {
           bg: "bgSolid.brand.active",
-        },
-      },
-    },
-    {
-      variant: "solid",
-      tone: "neutral",
-      css: {
-        bg: "bgSolid.neutral",
-        color: "fgSolid.neutral",
-        "&:hover": {
-          bg: "bgSolid.neutral.hover",
-        },
-        "&:active": {
-          bg: "bgSolid.neutral.active",
-        },
-      },
-    },
-    {
-      variant: "solid",
-      tone: "danger",
-      css: {
-        bg: "bgSolid.danger",
-        color: "fgSolid.danger",
-        "&:hover": {
-          bg: "bgSolid.danger.hover",
-        },
-        "&:active": {
-          bg: "bgSolid.danger.active",
         },
       },
     },
@@ -314,6 +281,40 @@ const styles = cva({
         bg: "bg.neutral.disabled!",
         color: "fg.neutral.disabled!",
         border: "none!",
+      },
+    },
+    // borders 토큰과 스타이 달라 별도로 설정
+    {
+      tone: "brand",
+      css: {
+        "&:focus-visible": {
+          outlineStyle: "solid",
+          outlineWidth: "lg",
+          outlineColor: "border.brand.focus",
+          outlineOffset: "3px",
+        },
+      },
+    },
+    {
+      tone: "neutral",
+      css: {
+        "&:focus-visible": {
+          outlineStyle: "solid",
+          outlineWidth: "lg",
+          outlineColor: "border.neutral.focus",
+          outlineOffset: "3px",
+        },
+      },
+    },
+    {
+      tone: "danger",
+      css: {
+        "&:focus-visible": {
+          outlineStyle: "solid",
+          outlineWidth: "lg",
+          outlineColor: "border.danger.focus",
+          outlineOffset: "3px",
+        },
       },
     },
   ],
