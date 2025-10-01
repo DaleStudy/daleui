@@ -1,8 +1,7 @@
-import { type HTMLAttributes, type ReactNode } from "react";
-import { css, cva } from "../../../styled-system/css";
+import { type HTMLAttributes } from "react";
+import { css, cva, cx } from "../../../styled-system/css";
 import { Icon, type IconProps } from "../Icon/Icon";
 import { hstack } from "../../../styled-system/patterns";
-import "./Button.css";
 
 type size = "sm" | "md" | "lg";
 
@@ -10,7 +9,7 @@ type size = "sm" | "md" | "lg";
 interface BaseButtonProps
   extends Omit<HTMLAttributes<HTMLButtonElement>, "style"> {
   /** 텍스트 */
-  children: ReactNode;
+  children: string;
   /** 버튼 비활성화 여부 */
   disabled?: boolean;
   /** 버튼 너비 100% */
@@ -90,19 +89,37 @@ export const Button = ({
       {...rest}
     >
       <div
-        className={hstack({ gap: "8" })}
-        style={{ visibility: loading ? "hidden" : "visible" }}
+        className={cx(
+          hstack({ gap: "8" }),
+          css({ visibility: loading ? "hidden" : "visible" }),
+        )}
       >
         {leftIcon && (
-          <Icon data-testid={`icon-${leftIcon}`} name={leftIcon} size={size} />
+          <span className={css({ flexShrink: 0 })}>
+            <Icon
+              data-testid={`icon-${leftIcon}`}
+              name={leftIcon}
+              size={size}
+            />
+          </span>
         )}
-        {children}
+        <span
+          className={css({
+            whiteSpace: "normal",
+            wordBreak: "keep-all",
+            overflowWrap: "anywhere",
+          })}
+        >
+          {children}
+        </span>
         {rightIcon && (
-          <Icon
-            data-testid={`icon-${rightIcon}`}
-            name={rightIcon}
-            size={size}
-          />
+          <span className={css({ flexShrink: 0 })}>
+            <Icon
+              data-testid={`icon-${rightIcon}`}
+              name={rightIcon}
+              size={size}
+            />
+          </span>
         )}
       </div>
       {loading && (

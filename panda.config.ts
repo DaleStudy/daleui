@@ -46,6 +46,16 @@ export default defineConfig({
   theme: {
     extend: {
       textStyles,
+      keyframes: {
+        spin: {
+          from: {
+            transform: "rotate(0deg)",
+          },
+          to: {
+            transform: "rotate(360deg)",
+          },
+        },
+      },
       tokens: {
         borders,
         borderWidths,
