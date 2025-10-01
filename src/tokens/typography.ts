@@ -182,7 +182,7 @@ export const textStyles = {
     "1": {
       value: {
         fontFamily: "sans",
-        fontSize: "3xl",
+        fontSize: { base: "3xl", lg: "5xl" },
         fontWeight: "bold",
         lineHeight: "tight",
         letterSpacing: "tight",
@@ -191,7 +191,7 @@ export const textStyles = {
     "2": {
       value: {
         fontFamily: "sans",
-        fontSize: "2xl",
+        fontSize: { base: "3xl", lg: "4xl" },
         fontWeight: "bold",
         lineHeight: "tight",
         letterSpacing: "tight",
@@ -200,7 +200,7 @@ export const textStyles = {
     "3": {
       value: {
         fontFamily: "sans",
-        fontSize: "xl",
+        fontSize: { base: "2xl", lg: "3xl" },
         fontWeight: "bold",
         lineHeight: "tight",
         letterSpacing: "tight",
@@ -209,7 +209,7 @@ export const textStyles = {
     "4": {
       value: {
         fontFamily: "sans",
-        fontSize: "lg",
+        fontSize: { base: "xl", lg: "2xl" },
         fontWeight: "bold",
         lineHeight: "tight",
         letterSpacing: "tight",
@@ -218,7 +218,7 @@ export const textStyles = {
     "5": {
       value: {
         fontFamily: "sans",
-        fontSize: "md",
+        fontSize: { base: "md", lg: "xl" },
         fontWeight: "bold",
         lineHeight: "tight",
         letterSpacing: "tight",
