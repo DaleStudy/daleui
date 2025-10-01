@@ -17,6 +17,7 @@ export default {
     size: "md",
     disabled: false,
     fullWidth: false,
+    loading: false,
   },
   argTypes: {
     children: {
