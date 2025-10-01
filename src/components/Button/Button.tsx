@@ -94,14 +94,27 @@ export const Button = ({
         style={{ visibility: loading ? "hidden" : "visible" }}
       >
         {leftIcon && (
-          <Icon data-testid={`icon-${leftIcon}`} name={leftIcon} size={size} />
+          <Icon
+            data-testid={`icon-${leftIcon}`}
+            name={leftIcon}
+            size={size}
+            className={css({ flexShrink: 0 })}
+          />
         )}
-        {children}
+        <span
+          className={css({
+            whiteSpace: "normal",
+            wordBreak: "break-word",
+          })}
+        >
+          {children}
+        </span>
         {rightIcon && (
           <Icon
             data-testid={`icon-${rightIcon}`}
             name={rightIcon}
             size={size}
+            className={css({ flexShrink: 0 })}
           />
         )}
       </div>
