@@ -1,7 +1,8 @@
 import { type HTMLAttributes } from "react";
 import { css, cva, cx } from "../../../styled-system/css";
-import { Icon, type IconProps } from "../Icon/Icon";
+import { Icon } from "../Icon/Icon";
 import { hstack } from "../../../styled-system/patterns";
+import { type IconName } from "../../tokens/iconography";
 
 type size = "sm" | "md" | "lg";
 
@@ -16,9 +17,9 @@ interface BaseButtonProps
   fullWidth?: boolean;
   loading?: boolean;
   /** 좌측 아이콘 */
-  leftIcon?: IconProps["name"];
+  leftIcon?: IconName;
   /** 우측 아이콘 */
-  rightIcon?: IconProps["name"];
+  rightIcon?: IconName;
   /** 클릭 시 실행함수 */
   onClick?: () => void;
   /** 버튼의 크기 */
