@@ -66,7 +66,7 @@ export const ToneBrand: StoryObj<typeof Button> = {
 export const ToneNeutral: StoryObj<typeof Button> = {
   args: {
     tone: "neutral",
-    variant: "solid",
+    variant: "ghost",
   },
   argTypes: {
     tone: {
@@ -74,8 +74,8 @@ export const ToneNeutral: StoryObj<typeof Button> = {
     },
     variant: {
       control: "select",
-      options: ["solid", "ghost"],
-      description: "neutral tone은 solid, ghost를 지원합니다",
+      options: ["ghost"],
+      description: "neutral tone은 ghost를 지원합니다",
     },
   },
 };
@@ -84,7 +84,7 @@ export const ToneNeutral: StoryObj<typeof Button> = {
 export const ToneDanger: StoryObj<typeof Button> = {
   args: {
     tone: "danger",
-    variant: "solid",
+    variant: "ghost",
   },
   argTypes: {
     tone: {
@@ -92,8 +92,8 @@ export const ToneDanger: StoryObj<typeof Button> = {
     },
     variant: {
       control: "select",
-      options: ["solid", "ghost"],
-      description: "danger tone은 solid, ghost를 지원합니다",
+      options: ["ghost"],
+      description: "danger tone은 ghost를 지원합니다",
     },
   },
 };

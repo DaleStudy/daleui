@@ -45,23 +45,11 @@ test("solid variant의 tone 속성이 올바르게 적용됨", () => {
       <Button variant="solid" tone="brand">
         브랜드 색조
       </Button>
-      <Button variant="solid" tone="neutral">
-        중립 색조
-      </Button>
-      <Button variant="solid" tone="danger">
-        위험 색조
-      </Button>
     </>,
   );
 
   expect(screen.getByRole("button", { name: "브랜드 색조" })).toHaveClass(
     "bg_bgSolid.brand",
-  );
-  expect(screen.getByRole("button", { name: "중립 색조" })).toHaveClass(
-    "bg_bgSolid.neutral",
-  );
-  expect(screen.getByRole("button", { name: "위험 색조" })).toHaveClass(
-    "bg_bgSolid.danger",
   );
 });
 
