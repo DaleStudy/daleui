@@ -172,24 +172,25 @@ export const Disabled: StoryObj<typeof Button> = {
 };
 
 export const FullWidth: StoryObj<typeof Button> = {
-  args: {
-    fullWidth: true,
-    children: "가득찬 버튼",
-  },
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
         <div style={{ border: "2px dashed #ccc", width: "300px" }}>
-          <Button {...args}>{args.children}</Button>
+          <Button {...args}>일반 버튼</Button>
+        </div>
+        <div style={{ border: "2px dashed #ccc", width: "300px" }}>
+          <Button {...args} fullWidth>
+            가득찬 버튼
+          </Button>
         </div>
       </div>
     );
   },
-  // argTypes: {
-  //   children: {
-  //     control: false,
-  //   },
-  // },
+  argTypes: {
+    children: {
+      control: false,
+    },
+  },
 };
 
 export const WithIcons: StoryObj<typeof Button> = {
