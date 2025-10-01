@@ -1,7 +1,8 @@
 import { type HTMLAttributes } from "react";
 import { css, cva, cx } from "../../../styled-system/css";
-import { Icon, type IconProps } from "../Icon/Icon";
+import { Icon } from "../Icon/Icon";
 import { hstack } from "../../../styled-system/patterns";
+import { type IconName } from "../../tokens/iconography";
 
 type size = "sm" | "md" | "lg";
 
@@ -16,9 +17,9 @@ interface BaseButtonProps
   fullWidth?: boolean;
   loading?: boolean;
   /** 좌측 아이콘 */
-  leftIcon?: IconProps["name"];
+  leftIcon?: IconName;
   /** 우측 아이콘 */
-  rightIcon?: IconProps["name"];
+  rightIcon?: IconName;
   /** 클릭 시 실행함수 */
   onClick?: () => void;
   /** 버튼의 크기 */
@@ -27,10 +28,10 @@ interface BaseButtonProps
   type?: "button" | "submit" | "reset";
 }
 
-/** Solid 버튼 속성 (brand, neutral, danger tone 지원) */
+/** Solid 버튼 속성 (brand tone만 지원) */
 type SolidButtonProps = BaseButtonProps & {
   variant?: "solid";
-  tone?: "brand" | "neutral" | "danger";
+  tone?: "brand";
 };
 
 /** Outline 버튼 속성 (brand tone만 지원) */
@@ -90,7 +91,7 @@ export const Button = ({
     >
       <div
         className={cx(
-          hstack({ gap: "8" }),
+          hstack({ gap: "4" }),
           css({ visibility: loading ? "hidden" : "visible" }),
         )}
       >
@@ -156,44 +157,46 @@ const styles = cva({
     alignItems: "center",
     justifyContent: "center",
     width: "auto",
-    borderRadius: "md",
+    borderRadius: "sm",
     cursor: "pointer",
     transition: "0.2s",
     lineHeight: "1",
     outline: "0",
     position: "relative",
+    boxSizing: "border-box",
     "&:disabled": {
       cursor: "not-allowed",
     },
     "&:focus-visible": {
-      outline: "neutral",
+      outlineStyle: "solid",
       outlineWidth: "lg",
-      outlineOffset: "2",
+      outlineOffset: "3px",
     },
   },
   variants: {
     size: {
       sm: {
-        px: "24",
-        py: "8",
+        px: "8",
+        py: "4",
+        height: "32px",
         fontSize: "sm",
       },
       md: {
-        px: "32",
-        py: "12",
+        px: "12",
+        py: "4",
+        height: "40px",
         fontSize: "md",
       },
       lg: {
-        px: "40",
-        py: "16",
+        px: "16",
+        py: "8",
+        height: "48px",
         fontSize: "lg",
       },
     },
     variant: {
       solid: {},
-      outline: {
-        borderWidth: "lg",
-      },
+      outline: {},
       ghost: {
         bg: "transparent",
         border: "none",
@@ -216,7 +219,7 @@ const styles = cva({
     },
   },
   compoundVariants: [
-    // solid
+    // solid (brand만 지원)
     {
       variant: "solid",
       tone: "brand",
@@ -231,40 +234,13 @@ const styles = cva({
         },
       },
     },
-    {
-      variant: "solid",
-      tone: "neutral",
-      css: {
-        bg: "bgSolid.neutral",
-        color: "fgSolid.neutral",
-        "&:hover": {
-          bg: "bgSolid.neutral.hover",
-        },
-        "&:active": {
-          bg: "bgSolid.neutral.active",
-        },
-      },
-    },
-    {
-      variant: "solid",
-      tone: "danger",
-      css: {
-        bg: "bgSolid.danger",
-        color: "fgSolid.danger",
-        "&:hover": {
-          bg: "bgSolid.danger.hover",
-        },
-        "&:active": {
-          bg: "bgSolid.danger.active",
-        },
-      },
-    },
     // outline (brand만 지원)
     {
       variant: "outline",
       tone: "brand",
       css: {
         border: "brand",
+        borderWidth: "lg",
         color: "fg.brand",
         "&:hover": {
           color: "fg.brand.hover",
@@ -273,6 +249,27 @@ const styles = cva({
           color: "fg.brand.active",
           borderColor: "border.brand.active",
         },
+      },
+    },
+    {
+      variant: "outline",
+      size: "sm",
+      css: {
+        px: "0.4rem",
+      },
+    },
+    {
+      variant: "outline",
+      size: "md",
+      css: {
+        px: "0.65rem",
+      },
+    },
+    {
+      variant: "outline",
+      size: "lg",
+      css: {
+        px: "0.9rem",
       },
     },
     // ghost (neutral, danger만 지원)
@@ -313,6 +310,31 @@ const styles = cva({
         bg: "bg.neutral.disabled!",
         color: "fg.neutral.disabled!",
         border: "none!",
+      },
+    },
+    // borders 토큰과 스타일이 달라 별도로 설정
+    {
+      tone: "brand",
+      css: {
+        "&:focus-visible": {
+          outlineColor: "border.brand.focus",
+        },
+      },
+    },
+    {
+      tone: "neutral",
+      css: {
+        "&:focus-visible": {
+          outlineColor: "border.neutral.focus",
+        },
+      },
+    },
+    {
+      tone: "danger",
+      css: {
+        "&:focus-visible": {
+          outlineColor: "border.danger.focus",
+        },
       },
     },
   ],
