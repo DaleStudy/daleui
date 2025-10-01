@@ -40,7 +40,7 @@ export default {
     },
     wordBreak: {
       control: "select",
-      options: ["english", "cjk"],
+      options: ["eng", "cjk"],
       description: "단어 줄바꿈",
     },
   },
@@ -175,7 +175,7 @@ export const WordBreaks: StoryObj<typeof Heading> = {
           maxWidth: "200px",
         })}
       >
-        <Heading {...args} wordBreak="english">
+        <Heading {...args} wordBreak="eng">
           english line break
         </Heading>
         <Heading {...args} wordBreak="cjk">
