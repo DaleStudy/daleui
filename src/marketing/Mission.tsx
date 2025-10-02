@@ -20,7 +20,8 @@ function Card({ icon, title, description }: CardProps) {
       className={stack({
         align: "start",
         direction: "column",
-        p: "24 16",
+        py: "24",
+        px: "16",
         borderRadius: "md",
         alignItems: "flex-start",
         gap: "24",
@@ -95,7 +96,7 @@ export function Mission() {
     <section
       className={vstack({
         px: { base: "16", sm: "24" },
-        py: { base: "80" },
+        py: { base: "80px" },
         alignSelf: "stretch",
       })}
     >
@@ -113,28 +114,13 @@ export function Mission() {
           })}
         >
           {/* TODO: heading 컴포넌트 작업 완료 시 변경 */}
-          {/* <h2
-            className={css({
-              textWrap: "wrap",
-              textAlign: "center",
-              wordBreak: "break-all",
-              textStyle: "heading.2",
-              fontSize: { base: "3xl", sm: "4xl" }, // 320-640: 30px, 640+: 36px
-              "& br": {
-                display: {
-                  base: "none",
-                  lg: "inline", // 1024+ 에서만 br 표시
-                },
-              },
-            })}
-          > */}
+\
           <Heading align="center" wordBreak="cjk" level={2}>
             달레 UI는 <Text tone="brand">한국어 친화적 디자인 시스템</Text>
             으로,
             <br />
             모두가 쉽게 협업하고 기여할 수 있도록 돕습니다.
           </Heading>
-          {/* </h2> */}
         </div>
 
         <div
