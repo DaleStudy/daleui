@@ -12,15 +12,8 @@ export default {
   },
   args: {
     placeholder: "패스워드를 입력해주세요.",
-    size: "md",
     disabled: false,
     invalid: false,
-  },
-  argTypes: {
-    size: {
-      control: "select",
-      description: "입력 필드의 크기",
-    },
   },
 } satisfies Meta<typeof PasswordInput>;
 

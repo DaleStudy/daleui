@@ -6,8 +6,6 @@ export interface PasswordInputProps
   extends Omit<ComponentPropsWithoutRef<"input">, "size" | "type"> {
   /** 플레이스홀더 */
   placeholder?: string;
-  /** 컨트롤 크기 */
-  size?: "sm" | "md" | "lg";
   /** 오류 상태 여부 (true면 위험 톤 적용 및 aria-invalid=true) */
   invalid?: boolean;
   /** 비활성화 여부 */
@@ -18,11 +16,10 @@ export interface PasswordInputProps
 
 /**
  * - 패스워드 입력 컴포넌트입니다. 우측 아이콘으로 비밀번호 가시성을 토글할 수 있습니다.
- * - `size`(sm/md/lg), `invalid`, `disabled` prop으로 상태를 제어할 수 있습니다.
+ * - `invalid`, `disabled` prop으로 상태를 제어할 수 있습니다.
  * - 토글 버튼은 키보드 접근성과 스크린 리더를 지원합니다.
  */
 export function PasswordInput({
-  size = "md",
   invalid = false,
   disabled = false,
   placeholder = "패스워드를 입력해주세요.",
@@ -40,7 +37,6 @@ export function PasswordInput({
   return (
     <div
       className={containerStyles({
-        size,
         state: invalid ? "error" : undefined,
       })}
     >
@@ -49,7 +45,7 @@ export function PasswordInput({
         type={isVisible ? "text" : "password"}
         placeholder={placeholder}
         disabled={disabled}
-        className={inputStyles({ size })}
+        className={inputStyles()}
         aria-label="패스워드"
         aria-invalid={invalid ? true : undefined}
         {...rest}
@@ -62,7 +58,7 @@ export function PasswordInput({
         aria-pressed={isVisible}
         aria-label={isVisible ? "패스워드 숨기기" : "패스워드 보기"}
       >
-        <Icon name={isVisible ? "eye" : "eyeOff"} size={size} tone="neutral" />
+        <Icon name={isVisible ? "eye" : "eyeOff"} size="md" tone="neutral" />
       </button>
     </div>
   );
@@ -74,6 +70,9 @@ const containerStyles = cva({
     display: "flex",
     alignItems: "center",
     width: "100%",
+    height: "12",
+    paddingX: "12",
+    gap: "8",
     borderWidth: "md",
     borderStyle: "solid",
     borderRadius: "sm",
@@ -102,11 +101,6 @@ const containerStyles = cva({
     },
   },
   variants: {
-    size: {
-      sm: { height: "8", paddingX: "12", gap: "8" },
-      md: { height: "10", paddingX: "12", gap: "8" },
-      lg: { height: "12", paddingX: "12", gap: "8" },
-    },
     state: {
       error: {
         borderColor: "border.danger",
@@ -122,9 +116,6 @@ const containerStyles = cva({
       },
     },
   },
-  defaultVariants: {
-    size: "md",
-  },
 });
 
 const inputStyles = cva({
@@ -133,7 +124,7 @@ const inputStyles = cva({
     border: "none",
     outline: "none",
     color: "fg.neutral.default",
-    fontSize: "sm",
+    fontSize: "md",
     fontWeight: "medium",
     lineHeight: "tight",
     letterSpacing: "balanced",
@@ -147,13 +138,6 @@ const inputStyles = cva({
       "&::placeholder": {
         color: "fg.neutral.disabled",
       },
-    },
-  },
-  variants: {
-    size: {
-      sm: { fontSize: "xs" },
-      md: { fontSize: "sm" },
-      lg: { fontSize: "md" },
     },
   },
 });
