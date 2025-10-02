@@ -104,22 +104,14 @@ export function Mission() {
         className={vstack({
           gap: "72px",
           width: "100%",
-          minWidth: { base: "auto", lg: "5xl" },
-          maxWidth: { base: "auto", lg: "7xl" },
         })}
       >
-        <div
-          className={vstack({
-            alignSelf: "stretch",
-          })}
-        >
-          <Heading align="center" wordBreak="cjk" level={2}>
-            달레 UI는 <Text tone="brand">한국어 친화적 디자인 시스템</Text>
-            으로,
-            <br />
-            모두가 쉽게 협업하고 기여할 수 있도록 돕습니다.
-          </Heading>
-        </div>
+        <Heading align="center" wordBreak="cjk" level={2}>
+          달레 UI는 <Text tone="brand">한국어 친화적 디자인 시스템</Text>
+          으로,
+          <br />
+          모두가 쉽게 협업하고 기여할 수 있도록 돕습니다.
+        </Heading>
 
         <div
           className={css({
