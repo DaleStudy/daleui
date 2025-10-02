@@ -113,8 +113,6 @@ export function Mission() {
             alignSelf: "stretch",
           })}
         >
-          {/* TODO: heading 컴포넌트 작업 완료 시 변경 */}
-\
           <Heading align="center" wordBreak="cjk" level={2}>
             달레 UI는 <Text tone="brand">한국어 친화적 디자인 시스템</Text>
             으로,
