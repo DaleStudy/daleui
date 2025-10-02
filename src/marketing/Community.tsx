@@ -5,6 +5,7 @@ import { Tag } from "../components/Tag/Tag";
 import { Text } from "../components/Text/Text";
 import type { IconName } from "../tokens/iconography";
 import { css } from "../../styled-system/css";
+import { Heading } from "../components/Heading/Heading";
 
 const communityCards = [
   {
@@ -64,23 +65,11 @@ export function Community() {
           })}
         >
           <Tag tone="brand">커뮤니티 & 참여</Tag>
-          {/* 임시 헤딩 컴포넌트; TODO: 추후 헤딩 컴포넌트 완료시 변경 필요 */}
-          <h4
-            className={css({
-              textWrap: "wrap",
-              textAlign: "center",
-              wordBreak: "keep-all",
-              textStyle: "heading.4",
-              fontSize: { base: "xl", sm: "2xl" }, // 320-640: 20px, 640+: 24px
-              "& br": {
-                display: { base: "none", sm: "inline" }, // 640+ 에서만 br 표시
-              },
-            })}
-          >
+          <Heading level={4} align="center" wordBreak="cjk">
             달레UI는 누구나 참여할 수 있는 커뮤니티 기반 프로젝트입니다.
             <br />
             함께 만들고, 함께 성장해요.
-          </h4>
+          </Heading>
         </div>
 
         <div
