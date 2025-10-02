@@ -2,7 +2,7 @@ import { css } from "../../styled-system/css";
 import { stack, vstack } from "../../styled-system/patterns";
 import { Icon } from "../components/Icon/Icon";
 import { Text } from "../components/Text/Text";
-// import { Heading } from "../components/Heading/Heading";
+import { Heading } from "../components/Heading/Heading";
 import type { IconName } from "../tokens/iconography";
 
 interface CardProps {
@@ -113,7 +113,7 @@ export function Mission() {
           })}
         >
           {/* TODO: heading 컴포넌트 작업 완료 시 변경 */}
-          <h2
+          {/* <h2
             className={css({
               textWrap: "wrap",
               textAlign: "center",
@@ -127,14 +127,14 @@ export function Mission() {
                 },
               },
             })}
-          >
-            {/* <Heading level={2}> */}
+          > */}
+          <Heading align="center" wordBreak="cjk" level={2}>
             달레 UI는 <Text tone="brand">한국어 친화적 디자인 시스템</Text>
             으로,
             <br />
             모두가 쉽게 협업하고 기여할 수 있도록 돕습니다.
-            {/* </Heading> */}
-          </h2>
+          </Heading>
+          {/* </h2> */}
         </div>
 
         <div
