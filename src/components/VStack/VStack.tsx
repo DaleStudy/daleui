@@ -11,7 +11,6 @@ type As =
   | "header"
   | "footer"
   | "nav"
-  | "ul"
   | "span";
 
 export interface VStackProps
@@ -34,8 +33,8 @@ export interface VStackProps
  * - `gap` 속성을 통해서 요소 간 간격을 지정할 수 있습니다.
  *
  * ### 접근성(Accessibility) 안내
- * - 이미 시맨틱 태그를 쓰면(as=`nav` | `main` | `aside` | `footer` | `ul` | `ol` 등) 중복 role 지정은 피하시길 바랍니다.
- * - 목록이라면 가능하면 ul/ol을 사용하고, 불가능하면 role="list" + 자식 role="listitem"으로 지정합니다.
+ * - 이미 시맨틱 태그를 쓰면(as=`nav` | `main` | `aside` | `footer` 등) 중복 role 지정은 피하시길 바랍니다.
+ * - 접근성을 위해 기본적으로 적절한 HTML 시맨틱 요소를 사용하고 필요시 ARIA 속성을 활용하여 접근성을 향상시킵니다.
  */
 export const VStack = ({
   children,
