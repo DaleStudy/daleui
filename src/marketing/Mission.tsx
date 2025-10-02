@@ -101,7 +101,7 @@ export function Mission() {
     >
       <div
         className={vstack({
-          gap: "72",
+          gap: "72px",
           width: "100%",
           minWidth: { base: "auto", lg: "5xl" },
           maxWidth: { base: "auto", lg: "7xl" },
