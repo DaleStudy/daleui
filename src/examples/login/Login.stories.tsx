@@ -39,18 +39,12 @@ export const Default: StoryObj = {
           })}
         >
           <TextInput
-            size="md" // TODO: 디자인 확인 필요
             required
             type="email"
             name="user_email"
             placeholder="이메일 주소"
           />
-          <PasswordInput
-            size="lg" // TODO: 디자인 확인 필요
-            required
-            name="user_password"
-            placeholder="비밀번호"
-          />
+          <PasswordInput required name="user_password" placeholder="비밀번호" />
         </div>
 
         <div
