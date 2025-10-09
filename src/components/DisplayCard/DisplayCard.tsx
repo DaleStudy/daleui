@@ -56,7 +56,7 @@ export function DisplayCard({
           bg: "bg.brand",
         })}
       >
-        <Icon name={icon} size="lg" tone={tone} />
+        <Icon name={icon} size="lg" tone={tone} aria-label={icon} />
       </div>
       <div className={stack({ gap: "4" })}>
         <Text size="lg" weight="semibold" as="p">
