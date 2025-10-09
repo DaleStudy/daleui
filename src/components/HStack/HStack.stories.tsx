@@ -1,0 +1,133 @@
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { HStack } from "./HStack";
+import { css } from "../../../styled-system/css";
+import { grid } from "../../../styled-system/patterns";
+import { spacing } from "../../tokens/spacing";
+
+const Item = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div
+      className={css({
+        padding: "16",
+        backgroundColor: "bgSolid.brand",
+        color: "fgSolid.brand",
+        borderRadius: "md",
+      })}
+    >
+      {children}
+    </div>
+  );
+};
+
+export default {
+  title: "Components/HStack",
+  component: HStack,
+  parameters: {
+    layout: "centered",
+  },
+  tags: ["autodocs"],
+  argTypes: {
+    children: { control: false },
+    as: { control: "select" },
+    justify: {
+      control: "select",
+      description: "가로 정렬 방식",
+    },
+    reversed: { control: "boolean", description: "가로 배치 방향" },
+    gap: { control: "select", options: Object.keys(spacing || {}) },
+    className: { control: false },
+  },
+  args: {
+    as: "div",
+    reversed: false,
+    gap: "8",
+    children: (
+      <>
+        <Item>아이템 1</Item>
+        <Item>아이템 2</Item>
+      </>
+    ),
+  },
+} satisfies Meta<typeof HStack>;
+
+type Story = StoryObj<typeof HStack>;
+export const Default: Story = {};
+
+export const Gaps: Story = {
+  render: (args) => (
+    <div className={grid({ gridTemplateRows: "repeat(3, 1fr)", gap: "16" })}>
+      <div>
+        <h4>간격 4</h4>
+        <HStack {...args} gap="4" />
+      </div>
+      <div>
+        <h4>간격 8</h4>
+        <HStack {...args} gap="8" />
+      </div>
+      <div>
+        <h4>간격 16</h4>
+        <HStack {...args} gap="16" />
+      </div>
+    </div>
+  ),
+  argTypes: {
+    children: { control: false },
+    gap: { control: false },
+  },
+};
+
+export const Reverse: Story = {
+  render: (args) => (
+    <div className={grid({ gridTemplateRows: "repeat(2, 1fr)", gap: "16" })}>
+      <div>
+        <h4>false</h4>
+        <HStack {...args} reversed={false} />
+      </div>
+      <div>
+        <h4>true</h4>
+        <HStack {...args} reversed={true} />
+      </div>
+    </div>
+  ),
+  argTypes: {
+    reversed: { control: false },
+  },
+};
+
+export const Justify: Story = {
+  render: (args) => (
+    <div className={grid({ gridTemplateRows: "repeat(5, 1fr)", gap: "16" })}>
+      <div>
+        <h4>start - 시작점 정렬</h4>
+        <HStack {...args} justify="start" />
+      </div>
+
+      <div>
+        <h4>center - 중앙 정렬</h4>
+        <HStack {...args} justify="center" />
+      </div>
+
+      <div>
+        <h4>end - 끝점 정렬</h4>
+        <HStack {...args} justify="end" />
+      </div>
+
+      <div>
+        <h4>between - 양 끝 정렬</h4>
+        <HStack {...args} justify="between" />
+      </div>
+
+      <div>
+        <h4>around - 균등 분산</h4>
+        <HStack {...args} justify="around" />
+      </div>
+    </div>
+  ),
+  argTypes: {
+    justify: { control: false },
+  },
+  args: {
+    gap: "4",
+    className: css({ width: "400" }),
+  },
+};
