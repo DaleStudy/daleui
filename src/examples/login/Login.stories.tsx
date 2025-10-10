@@ -5,6 +5,8 @@ import { Checkbox } from "../../components/Checkbox/Checkbox";
 import { Heading } from "../../components/Heading/Heading";
 import { Link } from "../../components/Link/Link";
 import { css } from "../../../styled-system/css";
+import { PasswordInput } from "../../components/PasswordInput/PasswordInput";
+import { TextInput } from "../../components/TextInput/TextInput";
 
 export default {
   parameters: {
@@ -18,7 +20,9 @@ export const Default: StoryObj = {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          action("onSubmit")(event);
+          const formData = new FormData(event.currentTarget);
+          const data = Object.fromEntries(formData.entries());
+          action("onSubmit")(data);
         }}
         className={css({ width: "500px" })}
       >
@@ -34,30 +38,13 @@ export const Default: StoryObj = {
             marginBottom: "16",
           })}
         >
-          <input
-            className={css({
-              border: "neutral",
-              borderRadius: "md",
-              paddingLeft: "8",
-              height: 50,
-            })}
+          <TextInput
             required
             type="email"
             name="user_email"
             placeholder="이메일 주소"
           />
-          <input
-            className={css({
-              border: "neutral",
-              borderRadius: "md",
-              paddingLeft: "8",
-              height: 50,
-            })}
-            required
-            type="password"
-            name="user_password"
-            placeholder="비밀번호"
-          />
+          <PasswordInput required name="user_password" placeholder="비밀번호" />
         </div>
 
         <div
