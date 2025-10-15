@@ -190,6 +190,9 @@ export const FullWidth: StoryObj<typeof Button> = {
     children: {
       control: false,
     },
+    fullWidth: {
+      control: false,
+    },
   },
 };
 
