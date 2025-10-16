@@ -1,9 +1,15 @@
 name: "Chromatic 🎨"
 
-on: push
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
 
 jobs:
   pre-chromatic:
+    if: github.event_name == 'push' || github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - id: gen_url
@@ -15,6 +21,7 @@ jobs:
       url: ${{ steps.gen_url.outputs.url }}
 
   chromatic:
+    if: github.event_name == 'push' || github.event.pull_request.draft == false
     environment:
       name: chromatic
       url: ${{ needs.pre-chromatic.outputs.url }}
@@ -24,9 +31,14 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
       - uses: oven-sh/setup-bun@v2
       - run: bun install
       - uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           onlyChanged: true
+        env:
+          CHROMATIC_BRANCH: ${{ github.event.pull_request.head.ref || github.ref_name }}
+          CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          CHROMATIC_SLUG: ${{ github.repository }}
