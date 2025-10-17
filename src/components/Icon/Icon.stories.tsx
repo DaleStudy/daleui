@@ -58,13 +58,13 @@ export const Tones: StoryObj<typeof Icon> = {
   argTypes: { tone: { control: false } },
 };
 
-export const Solids: StoryObj<typeof Icon> = {
+export const Solid: StoryObj<typeof Icon> = {
   render: (args) => {
     return (
       <VStack
         gap="24"
         className={css({
-          bgColor: "bg.neutral.disabled",
+          bgColor: "fg.neutral.disabled",
           p: "24",
         })}
       >
