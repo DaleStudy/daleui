@@ -46,20 +46,42 @@ export const Horizontal: Story = {
 export const GroupDisabled: Story = {
   args: {
     disabled: true,
+    defaultValue: "banana",
+    label: "전체 그룹 비활성화",
   },
 };
 
 export const ItemDisabled: Story = {
-  args: {
-    children: (
-      <>
-        <Radio value="apple">사과</Radio>
-        <Radio value="banana" disabled>
-          바나나
-        </Radio>
-        <Radio value="orange">오렌지</Radio>
-      </>
-    ),
+  render: () => {
+    return (
+      <div
+        className={css({ display: "flex", flexDirection: "column", gap: "32" })}
+      >
+        <RadioGroup
+          name="disabled-checked"
+          label="개별 아이템 비활성화 (선택됨)"
+          defaultValue="banana"
+        >
+          <Radio value="apple">사과</Radio>
+          <Radio value="banana" disabled>
+            바나나 (disabled)
+          </Radio>
+          <Radio value="orange">오렌지</Radio>
+        </RadioGroup>
+
+        <RadioGroup
+          name="disabled-unchecked"
+          label="개별 아이템 비활성화 (선택 안 됨)"
+          defaultValue="apple"
+        >
+          <Radio value="apple">사과</Radio>
+          <Radio value="banana" disabled>
+            바나나 (disabled)
+          </Radio>
+          <Radio value="orange">오렌지</Radio>
+        </RadioGroup>
+      </div>
+    );
   },
 };
 

@@ -6,6 +6,7 @@ import type { Tone } from "../../tokens/colors";
 
 const RadioGroupContext = createContext<{
   tone: Tone;
+  disabled?: boolean;
 } | null>(null);
 
 export interface RadioGroupProps {
@@ -99,13 +100,13 @@ export function RadioGroup({
       <div
         id={`${name}-label`}
         className={css({
-          fontWeight: "medium",
+          textStyle: "body.lg",
           marginBottom: "8",
         })}
       >
         {label}
       </div>
-      <RadioGroupContext.Provider value={{ tone }}>
+      <RadioGroupContext.Provider value={{ tone, disabled }}>
         <RadixRadioGroup.Root
           name={name}
           defaultValue={defaultValue}
@@ -174,33 +175,39 @@ export function Radio({ value, children, disabled, ref }: RadioProps) {
     throw new Error("Radio 컴포넌트는 RadioGroup 내부에서만 사용해야 합니다.");
   }
 
-  const { tone } = context;
+  const { tone, disabled: groupDisabled } = context;
+  const isDisabled = disabled || groupDisabled;
 
   return (
     <label
       className={flex({
         alignItems: "center",
         gap: "8",
-        cursor: disabled ? "not-allowed" : "pointer",
+        cursor: isDisabled ? "not-allowed" : "pointer",
       })}
     >
       <div className={radioWrapperStyles}>
         <RadixRadioGroup.Item
           ref={ref}
           value={value}
-          disabled={disabled}
+          disabled={isDisabled}
           className={radioInputStyles}
           id={`radio-${value}`}
         >
-          <RadixRadioGroup.Indicator className={radioDotStyles({ tone })} />
+          <RadixRadioGroup.Indicator
+            className={radioDotStyles({ tone, disabled: isDisabled })}
+          />
         </RadixRadioGroup.Item>
         <div
-          className={radioCircleStyles({ tone, disabled })}
+          className={radioCircleStyles({ tone, disabled: isDisabled })}
           role="presentation"
         />
+        <div className={radioHoverStyles({ tone, disabled: isDisabled })} />
       </div>
       {children && (
-        <span className={labelTextStyles({ disabled })}>{children}</span>
+        <span className={labelTextStyles({ disabled: isDisabled })}>
+          {children}
+        </span>
       )}
     </label>
   );
@@ -208,8 +215,8 @@ export function Radio({ value, children, disabled, ref }: RadioProps) {
 
 const radioWrapperStyles = css({
   position: "relative",
-  width: "5",
-  height: "5",
+  width: "4",
+  height: "4",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -225,10 +232,11 @@ const radioInputStyles = css({
   cursor: "inherit",
 
   "&:focus-visible + div": {
-    outline: "neutral",
-    outlineWidth: "lg",
-    outlineColor: "rgba(0, 0, 0, 0.2)",
-    outlineOffset: "2",
+    outline: "solid",
+    outlineWidth: "2px",
+    outlineColor: "border.brand.focus",
+    outlineOffset: "2px",
+    borderRadius: "full",
   },
 
   "&:disabled + div": {
@@ -239,8 +247,8 @@ const radioInputStyles = css({
 const radioCircleStyles = cva({
   base: {
     backgroundColor: "bg.neutral",
-    width: "5",
-    height: "5",
+    width: "4",
+    height: "4",
     border: "neutral",
     borderWidth: "lg",
     borderRadius: "full",
@@ -310,15 +318,63 @@ const radioCircleStyles = cva({
     },
     disabled: {
       true: {
-        borderColor: "fg.neutral.disabled",
-        opacity: 0.5,
+        borderColor: "slate.3!",
+        backgroundColor: "slate.2!",
+        "[data-state='checked'] + &": {
+          borderColor: "slate.3!",
+          backgroundColor: "slate.2!",
+        },
+      },
+    },
+  },
+});
+
+const radioHoverStyles = cva({
+  base: {
+    position: "absolute",
+    width: "6",
+    height: "6",
+    borderRadius: "full",
+    pointerEvents: "none",
+    opacity: 0,
+    transition: "opacity 0.2s",
+    "button:hover ~ &": {
+      opacity: 0.1,
+    },
+  },
+  variants: {
+    tone: {
+      neutral: {
+        backgroundColor: "fg.neutral",
+      },
+      brand: {
+        backgroundColor: "fg.brand",
+      },
+      danger: {
+        backgroundColor: "fg.danger",
+      },
+      warning: {
+        backgroundColor: "fg.warning",
+      },
+      success: {
+        backgroundColor: "fg.success",
+      },
+      info: {
+        backgroundColor: "fg.info",
+      },
+    },
+    disabled: {
+      true: {
+        display: "none",
       },
     },
   },
 });
 
 const labelTextStyles = cva({
-  base: {},
+  base: {
+    textStyle: "label.md",
+  },
   variants: {
     disabled: {
       true: {
@@ -340,8 +396,8 @@ const radioDotStyles = cva({
     "&::after": {
       content: '""',
       display: "block",
-      width: "2.5",
-      height: "2.5",
+      width: "2",
+      height: "2",
       borderRadius: "full",
       backgroundColor: "fg.neutral",
     },
@@ -381,8 +437,9 @@ const radioDotStyles = cva({
     },
     disabled: {
       true: {
-        backgroundColor: "fg.neutral.disabled",
-        opacity: 0.5,
+        "&::after": {
+          backgroundColor: "slate.3!",
+        },
       },
     },
   },

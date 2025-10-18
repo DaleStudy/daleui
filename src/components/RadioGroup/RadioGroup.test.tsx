@@ -83,6 +83,49 @@ describe("RadioGroup", () => {
     expect(option2).toBeDisabled();
   });
 
+  test("그룹 disabled가 하위 Radio의 disabled 스타일을 적용한다", () => {
+    render(
+      <RadioGroup
+        name="test"
+        label="Test Radio Group"
+        disabled
+        defaultValue="option1"
+      >
+        <Radio value="option1">Option 1</Radio>
+        <Radio value="option2">Option 2</Radio>
+      </RadioGroup>,
+    );
+
+    const option1 = screen.getByRole("radio", { name: "Option 1" });
+    const option2 = screen.getByRole("radio", { name: "Option 2" });
+
+    // 모든 라디오가 disabled 상태
+    expect(option1).toBeDisabled();
+    expect(option2).toBeDisabled();
+
+    // disabled 스타일이 적용되었는지 확인 (회색 스타일)
+    const option1Circle = option1.nextElementSibling;
+    expect(option1Circle).toHaveClass("bd-c_slate.3!");
+  });
+
+  test("그룹 disabled와 개별 disabled가 모두 적용된다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" disabled>
+        <Radio value="option1" disabled>
+          Option 1
+        </Radio>
+        <Radio value="option2">Option 2</Radio>
+      </RadioGroup>,
+    );
+
+    const option1 = screen.getByRole("radio", { name: "Option 1" });
+    const option2 = screen.getByRole("radio", { name: "Option 2" });
+
+    // 둘 다 disabled
+    expect(option1).toBeDisabled();
+    expect(option2).toBeDisabled();
+  });
+
   test("라디오 선택 시 onChange를 호출한다", async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
