@@ -17,9 +17,9 @@ export default {
 
 - **tone** 속성으로 카드의 색조를 지정할 수 있습니다. (\`neutral\`, \`brand\`)
 - **outline** 속성을 사용하여 카드에 테두리를 추가할 수 있습니다.
-- **link**, **linkText**, **isExternalLink** 속성을 함께 사용하여 링크 기능을 추가할 수 있습니다.
+- **link**, **linkText**, **externalLink** 속성을 함께 사용하여 링크 기능을 추가할 수 있습니다.
 - **link**와 **linkText**가 모두 제공되면 카드 하단에 링크가 표시됩니다.
-- **isExternalLink={true}**일 때는 새 탭에서 열리며, \`target="_blank"\`와 보안 속성이 자동으로 추가됩니다.
+- **externalLink={true}**일 때는 새 탭에서 열리며, \`target="_blank"\`와 보안 속성이 자동으로 추가됩니다.
         `,
       },
     },
@@ -61,7 +61,7 @@ export default {
       control: "text",
       description: "링크 텍스트 (link가 있을 때 필수)",
     },
-    isExternalLink: {
+    externalLink: {
       control: "boolean",
       description: "외부 링크 여부",
     },
@@ -222,7 +222,7 @@ export const External: StoryObj<typeof Card> = {
           icon="messageCircle"
           link="/internal-page"
           linkText="페이지로 이동"
-          isExternalLink={false}
+          externalLink={false}
         />
         <Card
           {...args}
@@ -231,7 +231,7 @@ export const External: StoryObj<typeof Card> = {
           icon="externalLink"
           link="https://www.example.com"
           linkText="외부 사이트 방문"
-          isExternalLink={true}
+          externalLink={true}
         />
       </div>
     );
@@ -252,7 +252,7 @@ export const External: StoryObj<typeof Card> = {
     linkText: {
       control: false,
     },
-    isExternalLink: {
+    externalLink: {
       control: false,
     },
   },
@@ -260,7 +260,7 @@ export const External: StoryObj<typeof Card> = {
     docs: {
       description: {
         story:
-          "**isExternalLink** 속성으로 외부 링크 여부를 설정할 수 있습니다. `true`로 설정하면 내부 Link 컴포넌트의 `external` 속성이 활성화되어 새 탭에서 열립니다.",
+          "**externalLink** 속성으로 외부 링크 여부를 설정할 수 있습니다. `true`로 설정하면 내부 Link 컴포넌트의 `external` 속성이 활성화되어 새 탭에서 열립니다.",
       },
     },
   },

@@ -23,13 +23,13 @@ interface BaseCardProps extends Omit<HTMLAttributes<HTMLElement>, "style"> {
 type CardPropsWithLink = BaseCardProps & {
   link: string;
   linkText: string;
-  isExternalLink?: boolean;
+  externalLink?: boolean;
 };
 
 type CardPropsWithoutLink = BaseCardProps & {
   link?: undefined;
   linkText?: undefined;
-  isExternalLink?: undefined;
+  externalLink?: undefined;
 };
 
 type CardProps = CardPropsWithLink | CardPropsWithoutLink;
@@ -41,7 +41,7 @@ export function Card({
   tone = "neutral",
   link,
   linkText,
-  isExternalLink,
+  externalLink,
   outline = false,
   className,
   ...rest
@@ -72,10 +72,10 @@ export function Card({
           size="lg"
           tone={tone}
           underline={false}
-          external={isExternalLink}
+          external={externalLink}
         >
           {linkText}
-          <Icon name="externalLink" tone={tone} size="sm" />
+          {externalLink && <Icon name="externalLink" tone={tone} size="sm" />}
         </Link>
       )}
     </article>
