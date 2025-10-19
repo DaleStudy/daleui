@@ -5,8 +5,10 @@ import { Link } from "../Link/Link";
 import { cva, cx } from "../../../styled-system/css";
 import { stack } from "../../../styled-system/patterns";
 import { Text } from "../Text/Text";
+import type { HTMLAttributes } from "react";
 
-type BaseDisplayCardProps = {
+interface BaseDisplayCardProps
+  extends Omit<HTMLAttributes<HTMLElement>, "style"> {
   /** 제목 */
   title: string;
   /** 설명 */
@@ -17,9 +19,7 @@ type BaseDisplayCardProps = {
   tone?: Extract<Tone, "neutral" | "brand">;
   /** border 여부 */
   outline?: boolean;
-  /** 클래스명 */
-  className?: string;
-};
+}
 
 type DisplayCardPropsWithLink = BaseDisplayCardProps & {
   link: string;
@@ -45,9 +45,10 @@ export function DisplayCard({
   isExternalLink,
   outline = false,
   className,
+  ...rest
 }: DisplayCardProps) {
   return (
-    <article className={cx(styles({ tone, outline }), className)}>
+    <article className={cx(styles({ tone, outline }), className)} {...rest}>
       <div
         className={stack({
           display: "inline-flex",
