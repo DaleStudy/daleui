@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { vstack } from "../../../styled-system/patterns";
-import { DisplayCard } from "./DisplayCard";
+import { Card } from "./Card";
 
 export default {
-  component: DisplayCard,
+  component: Card,
   parameters: {
     layout: "centered",
     design: {
@@ -13,7 +13,7 @@ export default {
     docs: {
       description: {
         component: `
-**DisplayCard** 컴포넌트는 아이콘, 제목, 설명을 포함한 카드 형태의 UI 요소입니다.
+**Card** 컴포넌트는 아이콘, 제목, 설명을 포함한 카드 형태의 UI 요소입니다.
 
 - **tone** 속성으로 카드의 색조를 지정할 수 있습니다. (\`neutral\`, \`brand\`)
 - **outline** 속성을 사용하여 카드에 테두리를 추가할 수 있습니다.
@@ -66,31 +66,31 @@ export default {
       description: "외부 링크 여부",
     },
   },
-} satisfies Meta<typeof DisplayCard>;
+} satisfies Meta<typeof Card>;
 
-export const Basic: StoryObj<typeof DisplayCard> = {
+export const Basic: StoryObj<typeof Card> = {
   parameters: {
     docs: {
       description: {
         story:
-          "기본적인 DisplayCard 컴포넌트입니다. 제목, 설명, 아이콘으로 구성되며, 링크 없이 정보만 표시합니다.",
+          "기본적인 Card 컴포넌트입니다. 제목, 설명, 아이콘으로 구성되며, 링크 없이 정보만 표시합니다.",
       },
     },
   },
 };
 
-export const Tones: StoryObj<typeof DisplayCard> = {
+export const Tones: StoryObj<typeof Card> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <DisplayCard
+        <Card
           {...args}
           tone="neutral"
           title="neutral"
           description="neutral 색조를 사용한 카드입니다."
           outline={true}
         />
-        <DisplayCard
+        <Card
           {...args}
           tone="brand"
           title="brand"
@@ -123,20 +123,20 @@ export const Tones: StoryObj<typeof DisplayCard> = {
   },
 };
 
-export const Outlines: StoryObj<typeof DisplayCard> = {
+export const Outlines: StoryObj<typeof Card> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <DisplayCard
+        <Card
           {...args}
           title="테두리 없는 카드"
-          description="기본적으로 테두리가 없는 DisplayCard입니다."
+          description="기본적으로 테두리가 없는 Card입니다."
           outline={false}
         />
-        <DisplayCard
+        <Card
           {...args}
           title="테두리 있는 카드"
-          description="테두리가 있는 DisplayCard입니다."
+          description="테두리가 있는 Card입니다."
           outline={true}
         />
       </div>
@@ -163,20 +163,20 @@ export const Outlines: StoryObj<typeof DisplayCard> = {
   },
 };
 
-export const WithLink: StoryObj<typeof DisplayCard> = {
+export const WithLink: StoryObj<typeof Card> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <DisplayCard
+        <Card
           {...args}
           title="링크 없는 카드"
-          description="링크가 없는 기본 DisplayCard입니다."
+          description="링크가 없는 기본 Card입니다."
           icon="info"
         />
-        <DisplayCard
+        <Card
           {...args}
           title="링크 있는 카드"
-          description="링크가 포함된 DisplayCard입니다."
+          description="링크가 포함된 Card입니다."
           icon="externalLink"
           link="#"
           linkText="자세히 보기"
@@ -211,11 +211,11 @@ export const WithLink: StoryObj<typeof DisplayCard> = {
   },
 };
 
-export const External: StoryObj<typeof DisplayCard> = {
+export const External: StoryObj<typeof Card> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "24" })}>
-        <DisplayCard
+        <Card
           {...args}
           title="내부 링크 카드"
           description="같은 사이트 내의 다른 페이지로 이동하는 링크입니다."
@@ -224,7 +224,7 @@ export const External: StoryObj<typeof DisplayCard> = {
           linkText="페이지로 이동"
           isExternalLink={false}
         />
-        <DisplayCard
+        <Card
           {...args}
           title="외부 링크 카드"
           description="외부 사이트로 이동하는 링크입니다. 새 탭에서 열립니다."

@@ -7,8 +7,7 @@ import { stack } from "../../../styled-system/patterns";
 import { Text } from "../Text/Text";
 import type { HTMLAttributes } from "react";
 
-interface BaseDisplayCardProps
-  extends Omit<HTMLAttributes<HTMLElement>, "style"> {
+interface BaseCardProps extends Omit<HTMLAttributes<HTMLElement>, "style"> {
   /** 제목 */
   title: string;
   /** 설명 */
@@ -21,21 +20,21 @@ interface BaseDisplayCardProps
   outline?: boolean;
 }
 
-type DisplayCardPropsWithLink = BaseDisplayCardProps & {
+type CardPropsWithLink = BaseCardProps & {
   link: string;
   linkText: string;
   isExternalLink?: boolean;
 };
 
-type DisplayCardPropsWithoutLink = BaseDisplayCardProps & {
+type CardPropsWithoutLink = BaseCardProps & {
   link?: undefined;
   linkText?: undefined;
   isExternalLink?: undefined;
 };
 
-type DisplayCardProps = DisplayCardPropsWithLink | DisplayCardPropsWithoutLink;
+type CardProps = CardPropsWithLink | CardPropsWithoutLink;
 
-export function DisplayCard({
+export function Card({
   title,
   description,
   icon,
@@ -46,7 +45,7 @@ export function DisplayCard({
   outline = false,
   className,
   ...rest
-}: DisplayCardProps) {
+}: CardProps) {
   return (
     <article className={cx(styles({ tone, outline }), className)} {...rest}>
       <div

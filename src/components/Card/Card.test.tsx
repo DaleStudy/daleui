@@ -1,12 +1,12 @@
 import { composeStories } from "@storybook/react-vite";
 import { render, screen } from "@testing-library/react";
 import { expect, test } from "vitest";
-import { DisplayCard } from "./DisplayCard";
-import * as stories from "./DisplayCard.stories";
+import { Card } from "./Card";
+import * as stories from "./Card.stories";
 
 const { Basic, Tones, Outlines, WithLink, External } = composeStories(stories);
 
-test("기본 DisplayCard가 올바르게 렌더링됨", () => {
+test("기본 Card가 올바르게 렌더링됨", () => {
   render(<Basic />);
 
   expect(screen.getByText("제목")).toBeInTheDocument();
@@ -17,9 +17,7 @@ test("기본 DisplayCard가 올바르게 렌더링됨", () => {
 });
 
 test("아이콘이 올바르게 렌더링됨", () => {
-  render(
-    <DisplayCard title="테스트 제목" description="테스트 설명" icon="star" />,
-  );
+  render(<Card title="테스트 제목" description="테스트 설명" icon="star" />);
 
   expect(screen.getByLabelText("star")).toBeInTheDocument();
 });
