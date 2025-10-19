@@ -18,7 +18,7 @@ export interface IconProps extends SVGProps<SVGSVGElement> {
  * - `name` 속성으로 어떤 모양의 아이콘을 사용할지 지정할 수 있습니다.
  * - 아이콘의 기본 크기는 기본 글자 크기의 1.25배이며, `size` 속성을 통해서 크기를 변경할 수 있습니다.
  * - 아이콘의 `tone` 속성을 통해서 색조를 변경할 수 있으며, 지정하지 않으면 부모의 색조를 상속합니다.
- * - 솔리드 여부를 지정해 아이콘을 솔리드 또는 비솔리드로 변경할 수 있습니다.
+ * - 솔리드 여부를 지정해 아이콘을 솔리드 또는 비솔리드로 변경할 수 있습니다. 톤을 지정하지 않으면 적용되지 않습니다.
  */
 export const Icon = ({ name, size, tone, solid, ...rest }: IconProps) => {
   const Tag = icons[name];

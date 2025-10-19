@@ -69,10 +69,6 @@ export const Solid: StoryObj<typeof Icon> = {
         })}
       >
         <div className={flex({ gap: "24" })}>
-          <Icon {...args} solid={false} />
-          <Icon {...args} solid />
-        </div>
-        <div className={flex({ gap: "24" })}>
           <Icon {...args} solid={false} tone="neutral" />
           <Icon {...args} solid tone="neutral" />
         </div>
