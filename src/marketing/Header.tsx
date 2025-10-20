@@ -5,7 +5,7 @@ import { Heading } from "../components/Heading/Heading";
 
 export function Header() {
   const handleScrollToHow = () => {
-    document.getElementById("how")?.scrollIntoView({
+    document.getElementById("mission")?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });

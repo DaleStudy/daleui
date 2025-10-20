@@ -3,6 +3,8 @@ import { Header } from "./Header";
 import { How } from "./How";
 import { Community } from "./Community";
 import { Contribution } from "./Contribution";
+import { Footer } from "./Footer";
+import { Mission } from "./Mission";
 
 /**
  * DaleUI 마케팅 페이지
@@ -14,9 +16,11 @@ export function MarketingPage() {
     <>
       <Navigation />
       <Header />
+      <Mission />
       <How />
       <Community />
       <Contribution />
+      <Footer />
     </>
   );
 }

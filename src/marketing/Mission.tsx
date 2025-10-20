@@ -94,6 +94,7 @@ const CARDS: CardProps[] = [
 export function Mission() {
   return (
     <section
+      id="mission"
       className={vstack({
         px: { base: "16", sm: "24" },
         py: { base: "80px" },
