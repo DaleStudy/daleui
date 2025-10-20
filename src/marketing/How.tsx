@@ -125,7 +125,6 @@ const CARDS: CardProps[] = [
 export function How() {
   return (
     <section
-      id="how"
       className={css({
         width: "100%",
         /**

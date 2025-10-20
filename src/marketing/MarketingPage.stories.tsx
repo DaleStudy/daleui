@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { MarketingPage } from "./index";
+import App from "../App";
 
 export default {
-  component: MarketingPage,
+  component: App,
   parameters: {
     layout: "fullscreen",
   },
-} satisfies Meta<typeof MarketingPage>;
+} satisfies Meta<typeof App>;
 
 export const Default: StoryObj = {};
