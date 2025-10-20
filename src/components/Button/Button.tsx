@@ -166,6 +166,11 @@ const styles = cva({
     "&:disabled": {
       cursor: "not-allowed",
     },
+    "&:focus-visible": {
+      outlineStyle: "solid",
+      outlineWidth: "lg",
+      outlineOffset: "3px",
+    },
   },
   variants: {
     size: {
@@ -187,9 +192,7 @@ const styles = cva({
     },
     variant: {
       solid: {},
-      outline: {
-        borderWidth: "lg",
-      },
+      outline: {},
       ghost: {
         bg: "transparent",
         border: "none",
@@ -233,6 +236,7 @@ const styles = cva({
       tone: "brand",
       css: {
         border: "brand",
+        borderWidth: "lg",
         color: "fg.brand",
         "&:hover": {
           color: "fg.brand.hover",
@@ -283,15 +287,12 @@ const styles = cva({
         border: "none!",
       },
     },
-    // borders 토큰과 스타이 달라 별도로 설정
+    // borders 토큰과 스타일이 달라 별도로 설정
     {
       tone: "brand",
       css: {
         "&:focus-visible": {
-          outlineStyle: "solid",
-          outlineWidth: "lg",
           outlineColor: "border.brand.focus",
-          outlineOffset: "3px",
         },
       },
     },
@@ -299,10 +300,7 @@ const styles = cva({
       tone: "neutral",
       css: {
         "&:focus-visible": {
-          outlineStyle: "solid",
-          outlineWidth: "lg",
           outlineColor: "border.neutral.focus",
-          outlineOffset: "3px",
         },
       },
     },
@@ -310,10 +308,7 @@ const styles = cva({
       tone: "danger",
       css: {
         "&:focus-visible": {
-          outlineStyle: "solid",
-          outlineWidth: "lg",
           outlineColor: "border.danger.focus",
-          outlineOffset: "3px",
         },
       },
     },
