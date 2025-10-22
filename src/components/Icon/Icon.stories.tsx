@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { vstack } from "../../../styled-system/patterns";
+import { flex, vstack } from "../../../styled-system/patterns";
 import { Icon } from "./Icon";
+import { VStack } from "../VStack/VStack";
+import { css } from "../../../styled-system/css";
 
 export default {
   component: Icon,
@@ -54,4 +56,44 @@ export const Tones: StoryObj<typeof Icon> = {
     );
   },
   argTypes: { tone: { control: false } },
+};
+
+export const Solid: StoryObj<typeof Icon> = {
+  render: (args) => {
+    return (
+      <VStack
+        gap="24"
+        className={css({
+          bgColor: "fg.neutral.disabled",
+          p: "24",
+        })}
+      >
+        <div className={flex({ gap: "24" })}>
+          <Icon {...args} solid={false} tone="neutral" />
+          <Icon {...args} solid tone="neutral" />
+        </div>
+        <div className={flex({ gap: "24" })}>
+          <Icon {...args} solid={false} tone="brand" />
+          <Icon {...args} solid tone="brand" />
+        </div>
+        <div className={flex({ gap: "24" })}>
+          <Icon {...args} solid={false} tone="danger" />
+          <Icon {...args} solid tone="danger" />
+        </div>
+        <div className={flex({ gap: "24" })}>
+          <Icon {...args} solid={false} tone="warning" />
+          <Icon {...args} solid tone="warning" />
+        </div>
+        <div className={flex({ gap: "24" })}>
+          <Icon {...args} solid={false} tone="success" />
+          <Icon {...args} solid tone="success" />
+        </div>
+        <div className={flex({ gap: "24" })}>
+          <Icon {...args} solid={false} tone="info" />
+          <Icon {...args} solid tone="info" />
+        </div>
+      </VStack>
+    );
+  },
+  argTypes: { solid: { control: false }, tone: { control: false } },
 };
