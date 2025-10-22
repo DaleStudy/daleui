@@ -42,6 +42,7 @@ const communityCards = [
 export function Community() {
   return (
     <section
+      id="community"
       className={vstack({
         bg: "bg.brand",
         px: { base: "0", lg: "24" },

@@ -96,9 +96,15 @@ export function Mission() {
     <section
       id="mission"
       className={vstack({
-        px: { base: "16", sm: "24" },
+        px: { base: "16", sm: "24", xl: "0" },
         py: { base: "80px" },
         alignSelf: "stretch",
+        width: "100%",
+        maxWidth: {
+          base: "100%",
+          xl: "1280px",
+        },
+        mx: "auto",
       })}
     >
       <div
@@ -117,7 +123,6 @@ export function Mission() {
         <div
           className={css({
             display: "grid",
-            alignSelf: "stretch",
             gap: "24",
             gridTemplateColumns: {
               base: "1fr", // 320-640

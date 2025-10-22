@@ -9,6 +9,7 @@ import { Heading } from "../components/Heading/Heading";
 export function Contribution() {
   return (
     <section
+      id="contribution"
       className={vstack({
         bg: "bg.brand",
         px: { base: "0", lg: "24" },

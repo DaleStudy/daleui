@@ -3,14 +3,11 @@ import { vstack } from "../../styled-system/patterns";
 import { Button } from "../components/Button/Button";
 import { Heading } from "../components/Heading/Heading";
 
-export function Header() {
-  const handleScrollToHow = () => {
-    document.getElementById("mission")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
+interface HeaderProps {
+  handleScrollToSection: (sectionId: string) => void;
+}
 
+export function Header({ handleScrollToSection }: HeaderProps) {
   return (
     <section
       className={vstack({
@@ -52,7 +49,7 @@ export function Header() {
             variant="solid"
             tone="brand"
             size="lg"
-            onClick={handleScrollToHow}
+            onClick={() => handleScrollToSection("mission")}
           >
             더 알아보기
           </Button>
