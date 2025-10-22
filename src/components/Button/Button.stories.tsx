@@ -106,7 +106,7 @@ export const Variants: StoryObj<typeof Button> = {
           솔리드 버튼
         </Button>
         <Button {...args} tone="brand" variant="outline">
-          솔리드 버튼
+          아웃라인 버튼
         </Button>
         <Button {...args} tone="neutral" variant="ghost">
           고스트 버튼

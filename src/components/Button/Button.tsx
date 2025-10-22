@@ -91,7 +91,7 @@ export const Button = ({
     >
       <div
         className={cx(
-          hstack({ gap: "8" }),
+          hstack({ gap: "4" }),
           css({ visibility: loading ? "hidden" : "visible" }),
         )}
       >
@@ -157,12 +157,13 @@ const styles = cva({
     alignItems: "center",
     justifyContent: "center",
     width: "auto",
-    borderRadius: "md",
+    borderRadius: "sm",
     cursor: "pointer",
     transition: "0.2s",
     lineHeight: "1",
     outline: "0",
     position: "relative",
+    boxSizing: "border-box",
     "&:disabled": {
       cursor: "not-allowed",
     },
@@ -175,18 +176,21 @@ const styles = cva({
   variants: {
     size: {
       sm: {
-        px: "24",
-        py: "8",
+        px: "8",
+        py: "4",
+        height: "32px",
         fontSize: "sm",
       },
       md: {
-        px: "32",
-        py: "12",
+        px: "12",
+        py: "4",
+        height: "40px",
         fontSize: "md",
       },
       lg: {
-        px: "40",
-        py: "16",
+        px: "16",
+        py: "8",
+        height: "48px",
         fontSize: "lg",
       },
     },
@@ -245,6 +249,27 @@ const styles = cva({
           color: "fg.brand.active",
           borderColor: "border.brand.active",
         },
+      },
+    },
+    {
+      variant: "outline",
+      size: "sm",
+      css: {
+        px: "0.4rem",
+      },
+    },
+    {
+      variant: "outline",
+      size: "md",
+      css: {
+        px: "0.65rem",
+      },
+    },
+    {
+      variant: "outline",
+      size: "lg",
+      css: {
+        px: "0.9rem",
       },
     },
     // ghost (neutral, danger만 지원)
