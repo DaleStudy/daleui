@@ -9,7 +9,7 @@ on:
 
 jobs:
   pre-chromatic:
-    if: github.event_name == 'push' || github.event.pull_request.draft == false
+    if: (github.event_name == 'push' || github.event.pull_request.draft == false) && github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - id: gen_url
@@ -21,7 +21,7 @@ jobs:
       url: ${{ steps.gen_url.outputs.url }}
 
   chromatic:
-    if: github.event_name == 'push' || github.event.pull_request.draft == false
+    if: (github.event_name == 'push' || github.event.pull_request.draft == false) && github.actor != 'dependabot[bot]'
     environment:
       name: chromatic
       url: ${{ needs.pre-chromatic.outputs.url }}
