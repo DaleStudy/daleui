@@ -74,5 +74,3 @@ export function Header({ handleScrollToSection }: HeaderProps) {
     </section>
   );
 }
-
-export default Header;
