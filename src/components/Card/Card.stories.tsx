@@ -1,9 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { vstack } from "../../../styled-system/patterns";
 import { Card } from "./Card";
+import type { IconName } from "../../tokens/iconography";
+import type { Tone } from "../../tokens/colors";
+interface CardStoryArgs {
+  tone: Extract<Tone, "neutral" | "brand">;
+  outline: boolean;
+  iconName: IconName;
+  title: string;
+  description: string;
+  linkHref: string;
+  linkText: string;
+  linkExternal: boolean;
+}
 
 export default {
-  component: Card,
+  title: "Components/Card",
   parameters: {
     layout: "centered",
     design: {
@@ -15,104 +26,113 @@ export default {
         component: `
 **Card** 컴포넌트는 아이콘, 제목, 설명을 포함한 카드 형태의 UI 요소입니다.
 
-- **tone** 속성으로 카드의 색조를 지정할 수 있습니다. (\`neutral\`, \`brand\`)
-- **outline** 속성을 사용하여 카드에 테두리를 추가할 수 있습니다.
-- **link**, **linkText**, **externalLink** 속성을 함께 사용하여 링크 기능을 추가할 수 있습니다.
-- **link**와 **linkText**가 모두 제공되면 카드 하단에 링크가 표시됩니다.
-- **externalLink={true}**일 때는 새 탭에서 열리며, \`target="_blank"\`와 보안 속성이 자동으로 추가됩니다.
+컴파운드 컴포넌트 패턴을 사용하여 구성됩니다:
+- \`Card.Root\`: 카드 컨테이너 (tone, outline 설정)
+- \`Card.Icon\`: 아이콘 (Root 바로 아래 배치)
+- \`Card.Body\`: 제목과 설명을 감싸는 컨테이너
+- \`Card.Title\`: 제목
+- \`Card.Description\`: 설명
+- \`Card.Link\`: 링크 (선택사항, href와 external 속성 지원)
+
+**tone** 속성은 Root에서 설정하며, Icon과 Link에 자동으로 전달됩니다.
+**outline** 속성을 사용하여 카드에 테두리를 추가할 수 있습니다.
         `,
       },
     },
   },
   args: {
-    title: "제목",
-    description: "이 기능에 대한 설명을 여기에 작성합니다",
-    icon: "star",
     tone: "neutral",
     outline: false,
+    iconName: "star",
+    title: "제목",
+    description: "이 기능에 대한 설명을 여기에 작성합니다",
+    linkHref: "",
+    linkText: "",
+    linkExternal: false,
   },
   argTypes: {
-    title: {
-      control: "text",
-      description: "카드의 제목",
-    },
-    description: {
-      control: "text",
-      description: "카드의 설명",
-    },
-    icon: {
-      control: "select",
-      description: "카드에 표시될 아이콘",
-    },
     tone: {
       control: "select",
-      description: "카드의 색조",
       options: ["neutral", "brand"],
+      description: "카드의 색조",
     },
     outline: {
       control: "boolean",
-      description: "카드 테두리 표시 여부",
+      description: "테두리 표시 여부",
     },
-    link: {
+    iconName: {
+      control: "select",
+      options: [
+        "star",
+        "info",
+        "circleAlert",
+        "check",
+        "externalLink",
+        "messageCircle",
+        "handHeart",
+        "heartHandshake",
+        "thumbsUp",
+        "user",
+        "award",
+        "globe",
+        "search",
+      ],
+      description: "아이콘 이름",
+    },
+    title: {
       control: "text",
-      description: "링크 URL (선택사항)",
+      description: "카드 제목",
+    },
+    description: {
+      control: "text",
+      description: "카드 설명",
+    },
+    linkHref: {
+      control: "text",
+      description: "링크 URL (비어있으면 링크 미표시)",
     },
     linkText: {
       control: "text",
-      description: "링크 텍스트 (link가 있을 때 필수)",
+      description: "링크 텍스트",
     },
-    externalLink: {
+    linkExternal: {
       control: "boolean",
       description: "외부 링크 여부",
     },
   },
-} satisfies Meta<typeof Card>;
+  render: (args) => (
+    <Card.Root tone={args.tone} outline={args.outline}>
+      <Card.Icon name={args.iconName} />
+      <Card.Body>
+        <Card.Title>{args.title}</Card.Title>
+        <Card.Description>{args.description}</Card.Description>
+      </Card.Body>
+      {args.linkHref && (
+        <Card.Link href={args.linkHref} external={args.linkExternal}>
+          {args.linkText}
+        </Card.Link>
+      )}
+    </Card.Root>
+  ),
+} satisfies Meta<CardStoryArgs>;
 
-export const Basic: StoryObj<typeof Card> = {
+export const Basic: StoryObj<CardStoryArgs> = {
   parameters: {
     docs: {
       description: {
         story:
-          "기본적인 Card 컴포넌트입니다. 제목, 설명, 아이콘으로 구성되며, 링크 없이 정보만 표시합니다.",
+          "기본적인 Card 컴포넌트입니다. Controls 패널에서 모든 속성을 조정하여 테스트할 수 있습니다.",
       },
     },
   },
 };
 
-export const Tones: StoryObj<typeof Card> = {
-  render: (args) => {
-    return (
-      <div className={vstack({ gap: "24" })}>
-        <Card
-          {...args}
-          tone="neutral"
-          title="neutral"
-          description="neutral 색조를 사용한 카드입니다."
-          outline={true}
-        />
-        <Card
-          {...args}
-          tone="brand"
-          title="brand"
-          description="brand 색조를 사용한 카드입니다."
-          outline={true}
-        />
-      </div>
-    );
-  },
-  argTypes: {
-    tone: {
-      control: false,
-    },
-    title: {
-      control: false,
-    },
-    description: {
-      control: false,
-    },
-    outline: {
-      control: false,
-    },
+export const WithBrand: StoryObj<CardStoryArgs> = {
+  args: {
+    tone: "brand",
+    outline: true,
+    title: "브랜드 색조",
+    description: "brand 색조를 사용한 카드입니다.",
   },
   parameters: {
     docs: {
@@ -123,35 +143,9 @@ export const Tones: StoryObj<typeof Card> = {
   },
 };
 
-export const Outlines: StoryObj<typeof Card> = {
-  render: (args) => {
-    return (
-      <div className={vstack({ gap: "24" })}>
-        <Card
-          {...args}
-          title="테두리 없는 카드"
-          description="기본적으로 테두리가 없는 Card입니다."
-          outline={false}
-        />
-        <Card
-          {...args}
-          title="테두리 있는 카드"
-          description="테두리가 있는 Card입니다."
-          outline={true}
-        />
-      </div>
-    );
-  },
-  argTypes: {
-    outline: {
-      control: false,
-    },
-    title: {
-      control: false,
-    },
-    description: {
-      control: false,
-    },
+export const WithOutline: StoryObj<CardStoryArgs> = {
+  args: {
+    outline: true,
   },
   parameters: {
     docs: {
@@ -163,104 +157,38 @@ export const Outlines: StoryObj<typeof Card> = {
   },
 };
 
-export const WithLink: StoryObj<typeof Card> = {
-  render: (args) => {
-    return (
-      <div className={vstack({ gap: "24" })}>
-        <Card
-          {...args}
-          title="링크 없는 카드"
-          description="링크가 없는 기본 Card입니다."
-          icon="info"
-        />
-        <Card
-          {...args}
-          title="링크 있는 카드"
-          description="링크가 포함된 Card입니다."
-          icon="externalLink"
-          link="#"
-          linkText="자세히 보기"
-        />
-      </div>
-    );
-  },
-  argTypes: {
-    title: {
-      control: false,
-    },
-    description: {
-      control: false,
-    },
-    icon: {
-      control: false,
-    },
-    link: {
-      control: false,
-    },
-    linkText: {
-      control: false,
-    },
+export const WithLink: StoryObj<CardStoryArgs> = {
+  args: {
+    iconName: "info",
+    title: "링크 있는 카드",
+    description: "링크가 포함된 Card입니다.",
+    linkHref: "#",
+    linkText: "자세히 보기",
   },
   parameters: {
     docs: {
       description: {
         story:
-          "**link**와 **linkText** 속성을 함께 제공하면 카드 하단에 링크가 표시됩니다. 링크는 카드의 tone에 맞는 색상으로 표시되며, external 아이콘이 자동으로 포함됩니다.",
+          "**Card.Link**를 사용하여 카드 하단에 링크를 추가할 수 있습니다. 링크는 자동으로 Card의 tone을 따릅니다.",
       },
     },
   },
 };
 
-export const External: StoryObj<typeof Card> = {
-  render: (args) => {
-    return (
-      <div className={vstack({ gap: "24" })}>
-        <Card
-          {...args}
-          title="내부 링크 카드"
-          description="같은 사이트 내의 다른 페이지로 이동하는 링크입니다."
-          icon="messageCircle"
-          link="/internal-page"
-          linkText="페이지로 이동"
-          externalLink={false}
-        />
-        <Card
-          {...args}
-          title="외부 링크 카드"
-          description="외부 사이트로 이동하는 링크입니다. 새 탭에서 열립니다."
-          icon="externalLink"
-          link="https://www.example.com"
-          linkText="외부 사이트 방문"
-          externalLink={true}
-        />
-      </div>
-    );
-  },
-  argTypes: {
-    title: {
-      control: false,
-    },
-    description: {
-      control: false,
-    },
-    icon: {
-      control: false,
-    },
-    link: {
-      control: false,
-    },
-    linkText: {
-      control: false,
-    },
-    externalLink: {
-      control: false,
-    },
+export const WithExternalLink: StoryObj<CardStoryArgs> = {
+  args: {
+    iconName: "externalLink",
+    title: "외부 링크 카드",
+    description: "외부 사이트로 이동하는 링크입니다. 새 탭에서 열립니다.",
+    linkHref: "https://www.example.com",
+    linkText: "외부 사이트 방문",
+    linkExternal: true,
   },
   parameters: {
     docs: {
       description: {
         story:
-          "**externalLink** 속성으로 외부 링크 여부를 설정할 수 있습니다. `true`로 설정하면 내부 Link 컴포넌트의 `external` 속성이 활성화되어 새 탭에서 열립니다.",
+          "**Card.Link**의 **external** 속성으로 외부 링크 여부를 설정할 수 있습니다. `true`로 설정하면 새 탭에서 열리며 아이콘이 자동으로 추가됩니다.",
       },
     },
   },
