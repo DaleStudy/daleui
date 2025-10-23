@@ -12,7 +12,11 @@ const LINK_ITEMS = [
     label: "스토리북",
     href: "https://main--675790d317ba346348aa3490.chromatic.com/",
   },
-  { id: 3, label: "피그마 디자인", href: "/" }, //@TODO:  피그마 커뮤니티가 생긴 후 해당 링크로 연결예정
+  {
+    id: 3,
+    label: "피그마 디자인",
+    href: "https://www.figma.com/community/file/1559487636467651573",
+  },
 ];
 
 export function Navigation() {

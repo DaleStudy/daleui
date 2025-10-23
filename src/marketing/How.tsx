@@ -116,9 +116,8 @@ const CARDS: CardProps[] = [
     icon: "Figma",
     title: "피그마 디자인",
     description: "디자인 컴포넌트가 담긴 협업 툴",
-    link: "",
-    linkText: "준비중",
-    linkDisabled: true,
+    link: "https://www.figma.com/community/file/1559487636467651573",
+    linkText: "피그마 디자인 보기",
   },
 ] as const;
 
