@@ -145,7 +145,11 @@ export function Navigation() {
         <ul
           className={stack({
             gap: { base: "24", md: "45" },
-            display: "flex",
+            display: {
+              base: isOpenMenu ? "flex" : "none",
+              md: isOpenMenu ? "flex" : "none",
+              lg: "flex",
+            },
             direction: { base: "column", md: "row" },
             alignItems: { base: "flex-start", md: "center" },
             width: { base: "100%", md: "auto" },
@@ -180,7 +184,11 @@ export function Navigation() {
         <ul
           className={stack({
             gap: "22",
-            display: "flex",
+            display: {
+              base: isOpenMenu ? "flex" : "none",
+              md: isOpenMenu ? "flex" : "none",
+              lg: "flex",
+            },
             direction: { base: "column", md: "row" },
             alignItems: { base: "flex-start", md: "center" },
             width: { base: "100%", md: "auto" },
