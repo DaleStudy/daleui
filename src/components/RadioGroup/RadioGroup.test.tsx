@@ -26,8 +26,8 @@ describe("RadioGroup", () => {
       </RadioGroup>,
     );
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
-    const option2 = screen.getByRole("radio", { name: "Option 2" });
+    const option1 = screen.getByLabelText("Option 1");
+    const option2 = screen.getByLabelText("Option 2");
 
     expect(option1).not.toBeChecked();
     expect(option2).toBeChecked();
@@ -41,8 +41,8 @@ describe("RadioGroup", () => {
       </RadioGroup>,
     );
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
-    const option2 = screen.getByRole("radio", { name: "Option 2" });
+    const option1 = screen.getByLabelText("Option 1");
+    const option2 = screen.getByLabelText("Option 2");
 
     expect(option1).not.toBeChecked();
     expect(option2).not.toBeChecked();
@@ -61,8 +61,8 @@ describe("RadioGroup", () => {
       </RadioGroup>,
     );
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
-    const option2 = screen.getByRole("radio", { name: "Option 2" });
+    const option1 = screen.getByLabelText("Option 1");
+    const option2 = screen.getByLabelText("Option 2");
 
     expect(option1).not.toBeChecked();
     expect(option2).toBeChecked();
@@ -76,8 +76,8 @@ describe("RadioGroup", () => {
       </RadioGroup>,
     );
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
-    const option2 = screen.getByRole("radio", { name: "Option 2" });
+    const option1 = screen.getByLabelText("Option 1");
+    const option2 = screen.getByLabelText("Option 2");
 
     expect(option1).toBeDisabled();
     expect(option2).toBeDisabled();
@@ -96,15 +96,17 @@ describe("RadioGroup", () => {
       </RadioGroup>,
     );
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
-    const option2 = screen.getByRole("radio", { name: "Option 2" });
+    const option1 = screen.getByLabelText("Option 1");
+    const option2 = screen.getByLabelText("Option 2");
 
     // 모든 라디오가 disabled 상태
     expect(option1).toBeDisabled();
     expect(option2).toBeDisabled();
 
     // disabled 스타일이 적용되었는지 확인 (회색 스타일)
-    const option1Circle = option1.nextElementSibling;
+    const option1Circle = screen.getAllByRole("presentation", {
+      hidden: true,
+    })[0];
     expect(option1Circle).toHaveClass("bd-c_slate.3!");
   });
 
@@ -118,8 +120,8 @@ describe("RadioGroup", () => {
       </RadioGroup>,
     );
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
-    const option2 = screen.getByRole("radio", { name: "Option 2" });
+    const option1 = screen.getByLabelText("Option 1");
+    const option2 = screen.getByLabelText("Option 2");
 
     // 둘 다 disabled
     expect(option1).toBeDisabled();
@@ -137,7 +139,7 @@ describe("RadioGroup", () => {
       </RadioGroup>,
     );
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
+    const option1 = screen.getByLabelText("Option 1");
 
     await user.click(option1);
     expect(onChange).toHaveBeenCalledWith("option1");
@@ -168,8 +170,8 @@ describe("RadioGroup", () => {
 
     render(<ControlledRadioTest />);
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
-    const option2 = screen.getByRole("radio", { name: "Option 2" });
+    const option1 = screen.getByLabelText("Option 1");
+    const option2 = screen.getByLabelText("Option 2");
 
     expect(option1).toBeChecked();
     expect(option2).not.toBeChecked();
@@ -192,8 +194,8 @@ describe("Radio", () => {
       </RadioGroup>,
     );
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
-    const option2 = screen.getByRole("radio", { name: "Option 2" });
+    const option1 = screen.getByLabelText("Option 1");
+    const option2 = screen.getByLabelText("Option 2");
 
     await user.click(option1);
     expect(option1).toBeChecked();
@@ -219,7 +221,7 @@ describe("Radio", () => {
         </RadioGroup>,
       );
 
-      const option = screen.getByRole("radio", { name: optionName });
+      const option = screen.getByLabelText(optionName);
 
       if (isDisabled) {
         expect(option).toBeDisabled();
