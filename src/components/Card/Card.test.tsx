@@ -2,7 +2,14 @@ import { composeStories } from "@storybook/react-vite";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, test, describe, vi } from "vitest";
-import { Card } from "./Card";
+import {
+  Card,
+  CardBody,
+  CardDescription,
+  CardIcon,
+  CardLink,
+  CardTitle,
+} from "./Card";
 import * as stories from "./Card.stories";
 
 const { Basic, WithLink, WithExternalLink } = composeStories(stories);
@@ -20,13 +27,13 @@ describe("Card 렌더링", () => {
 
   test("아이콘이 올바르게 렌더링됨", () => {
     render(
-      <Card.Root>
-        <Card.Icon name="star" />
-        <Card.Body>
-          <Card.Title>테스트 제목</Card.Title>
-          <Card.Description>테스트 설명</Card.Description>
-        </Card.Body>
-      </Card.Root>,
+      <Card>
+        <CardIcon name="star" />
+        <CardBody>
+          <CardTitle>테스트 제목</CardTitle>
+          <CardDescription>테스트 설명</CardDescription>
+        </CardBody>
+      </Card>,
     );
 
     expect(screen.getByLabelText("star")).toBeInTheDocument();
@@ -54,20 +61,20 @@ describe("Card 스타일 속성", () => {
   test("tone 속성이 올바르게 적용됨", () => {
     render(
       <>
-        <Card.Root tone="neutral" outline>
-          <Card.Icon name="star" />
-          <Card.Body>
-            <Card.Title>neutral</Card.Title>
-            <Card.Description>neutral 카드</Card.Description>
-          </Card.Body>
-        </Card.Root>
-        <Card.Root tone="brand" outline>
-          <Card.Icon name="star" />
-          <Card.Body>
-            <Card.Title>brand</Card.Title>
-            <Card.Description>brand 카드</Card.Description>
-          </Card.Body>
-        </Card.Root>
+        <Card tone="neutral" outline>
+          <CardIcon name="star" />
+          <CardBody>
+            <CardTitle>neutral</CardTitle>
+            <CardDescription>neutral 카드</CardDescription>
+          </CardBody>
+        </Card>
+        <Card tone="brand" outline>
+          <CardIcon name="star" />
+          <CardBody>
+            <CardTitle>brand</CardTitle>
+            <CardDescription>brand 카드</CardDescription>
+          </CardBody>
+        </Card>
       </>,
     );
 
@@ -80,20 +87,20 @@ describe("Card 스타일 속성", () => {
   test("outline 속성이 올바르게 적용됨", () => {
     render(
       <>
-        <Card.Root outline={false}>
-          <Card.Icon name="star" />
-          <Card.Body>
-            <Card.Title>테두리 없음</Card.Title>
-            <Card.Description>테두리 없는 카드</Card.Description>
-          </Card.Body>
-        </Card.Root>
-        <Card.Root outline={true}>
-          <Card.Icon name="star" />
-          <Card.Body>
-            <Card.Title>테두리 있음</Card.Title>
-            <Card.Description>테두리 있는 카드</Card.Description>
-          </Card.Body>
-        </Card.Root>
+        <Card outline={false}>
+          <CardIcon name="star" />
+          <CardBody>
+            <CardTitle>테두리 없음</CardTitle>
+            <CardDescription>테두리 없는 카드</CardDescription>
+          </CardBody>
+        </Card>
+        <Card outline={true}>
+          <CardIcon name="star" />
+          <CardBody>
+            <CardTitle>테두리 있음</CardTitle>
+            <CardDescription>테두리 있는 카드</CardDescription>
+          </CardBody>
+        </Card>
       </>,
     );
 
@@ -156,30 +163,30 @@ describe("Card 접근성", () => {
     const user = userEvent.setup();
     render(
       <div>
-        <Card.Root>
-          <Card.Icon name="info" />
-          <Card.Body>
-            <Card.Title>첫 번째 카드</Card.Title>
-            <Card.Description>첫 번째 설명</Card.Description>
-          </Card.Body>
-          <Card.Link href="/first">첫 번째 링크</Card.Link>
-        </Card.Root>
-        <Card.Root>
-          <Card.Icon name="star" />
-          <Card.Body>
-            <Card.Title>두 번째 카드</Card.Title>
-            <Card.Description>두 번째 설명</Card.Description>
-          </Card.Body>
-          <Card.Link href="/second">두 번째 링크</Card.Link>
-        </Card.Root>
-        <Card.Root>
-          <Card.Icon name="award" />
-          <Card.Body>
-            <Card.Title>세 번째 카드</Card.Title>
-            <Card.Description>세 번째 설명</Card.Description>
-          </Card.Body>
-          <Card.Link href="/third">세 번째 링크</Card.Link>
-        </Card.Root>
+        <Card>
+          <CardIcon name="info" />
+          <CardBody>
+            <CardTitle>첫 번째 카드</CardTitle>
+            <CardDescription>첫 번째 설명</CardDescription>
+          </CardBody>
+          <CardLink href="/first">첫 번째 링크</CardLink>
+        </Card>
+        <Card>
+          <CardIcon name="star" />
+          <CardBody>
+            <CardTitle>두 번째 카드</CardTitle>
+            <CardDescription>두 번째 설명</CardDescription>
+          </CardBody>
+          <CardLink href="/second">두 번째 링크</CardLink>
+        </Card>
+        <Card>
+          <CardIcon name="award" />
+          <CardBody>
+            <CardTitle>세 번째 카드</CardTitle>
+            <CardDescription>세 번째 설명</CardDescription>
+          </CardBody>
+          <CardLink href="/third">세 번째 링크</CardLink>
+        </Card>
       </div>,
     );
 
@@ -202,22 +209,22 @@ describe("Card 접근성", () => {
     const user = userEvent.setup();
     render(
       <div>
-        <Card.Root>
-          <Card.Icon name="info" />
-          <Card.Body>
-            <Card.Title>첫 번째 카드</Card.Title>
-            <Card.Description>첫 번째 설명</Card.Description>
-          </Card.Body>
-          <Card.Link href="/first">첫 번째 링크</Card.Link>
-        </Card.Root>
-        <Card.Root>
-          <Card.Icon name="star" />
-          <Card.Body>
-            <Card.Title>두 번째 카드</Card.Title>
-            <Card.Description>두 번째 설명</Card.Description>
-          </Card.Body>
-          <Card.Link href="/second">두 번째 링크</Card.Link>
-        </Card.Root>
+        <Card>
+          <CardIcon name="info" />
+          <CardBody>
+            <CardTitle>첫 번째 카드</CardTitle>
+            <CardDescription>첫 번째 설명</CardDescription>
+          </CardBody>
+          <CardLink href="/first">첫 번째 링크</CardLink>
+        </Card>
+        <Card>
+          <CardIcon name="star" />
+          <CardBody>
+            <CardTitle>두 번째 카드</CardTitle>
+            <CardDescription>두 번째 설명</CardDescription>
+          </CardBody>
+          <CardLink href="/second">두 번째 링크</CardLink>
+        </Card>
       </div>,
     );
 
@@ -239,16 +246,16 @@ describe("Card 접근성", () => {
     const handleClick = vi.fn((e: React.MouseEvent) => e.preventDefault());
 
     render(
-      <Card.Root>
-        <Card.Icon name="info" />
-        <Card.Body>
-          <Card.Title>테스트 카드</Card.Title>
-          <Card.Description>설명</Card.Description>
-        </Card.Body>
-        <Card.Link href="/test" onClick={handleClick}>
+      <Card>
+        <CardIcon name="info" />
+        <CardBody>
+          <CardTitle>테스트 카드</CardTitle>
+          <CardDescription>설명</CardDescription>
+        </CardBody>
+        <CardLink href="/test" onClick={handleClick}>
           테스트 링크
-        </Card.Link>
-      </Card.Root>,
+        </CardLink>
+      </Card>,
     );
 
     const link = screen.getByRole("link", { name: "테스트 링크" });

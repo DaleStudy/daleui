@@ -1,5 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Card } from "./Card";
+import {
+  Card,
+  CardBody,
+  CardDescription,
+  CardIcon,
+  CardLink,
+  CardTitle,
+} from "./Card";
 import type { IconName } from "../../tokens/iconography";
 import type { Tone } from "../../tokens/colors";
 interface CardStoryArgs {
@@ -101,18 +108,18 @@ export default {
     },
   },
   render: (args) => (
-    <Card.Root tone={args.tone} outline={args.outline}>
-      <Card.Icon name={args.iconName} />
-      <Card.Body>
-        <Card.Title>{args.title}</Card.Title>
-        <Card.Description>{args.description}</Card.Description>
-      </Card.Body>
+    <Card tone={args.tone} outline={args.outline}>
+      <CardIcon name={args.iconName} />
+      <CardBody>
+        <CardTitle>{args.title}</CardTitle>
+        <CardDescription>{args.description}</CardDescription>
+      </CardBody>
       {args.linkHref && (
-        <Card.Link href={args.linkHref} external={args.linkExternal}>
+        <CardLink href={args.linkHref} external={args.linkExternal}>
           {args.linkText}
-        </Card.Link>
+        </CardLink>
       )}
-    </Card.Root>
+    </Card>
   ),
 } satisfies Meta<CardStoryArgs>;
 
