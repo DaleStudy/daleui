@@ -128,6 +128,7 @@ export function How() {
       className={css({
         width: "100%",
         /**
+         
          * TODO: 추후 spacing 토큰 추가 시 변경
          * spacing 토큰 부족으로 px 사용
          */

@@ -96,7 +96,6 @@ export function Mission() {
     <section
       id="mission"
       className={vstack({
-        px: { base: "16", sm: "24", xl: "0" },
         py: { base: "80px" },
         alignSelf: "stretch",
         width: "100%",

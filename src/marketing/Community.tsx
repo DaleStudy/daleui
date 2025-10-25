@@ -45,7 +45,6 @@ export function Community() {
       id="community"
       className={vstack({
         bg: "bg.brand",
-        px: { base: "0", lg: "24" },
         py: { base: "40", md: "60px", lg: "80px" },
         gap: "10",
       })}

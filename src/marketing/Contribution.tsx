@@ -12,7 +12,6 @@ export function Contribution() {
       id="contribution"
       className={vstack({
         bg: "bg.brand",
-        px: { base: "0", lg: "24" },
         minWidth: { base: "auto", lg: "5xl" },
         /**
          * TODO: 추후 spacing 토큰 추가 시 변경
