@@ -3,7 +3,11 @@ import { vstack } from "../../styled-system/patterns";
 import { Button } from "../components/Button/Button";
 import { Heading } from "../components/Heading/Heading";
 
-export function Header() {
+interface HeaderProps {
+  handleScrollToSection: (sectionId: string) => void;
+}
+
+export function Header({ handleScrollToSection }: HeaderProps) {
   return (
     <section
       className={vstack({
@@ -41,7 +45,12 @@ export function Header() {
           구조까지 전 과정을 함께 만들어갑니다.
         </p>
         <div>
-          <Button variant="solid" tone="brand" size="lg">
+          <Button
+            variant="solid"
+            tone="brand"
+            size="lg"
+            onClick={() => handleScrollToSection("mission")}
+          >
             더 알아보기
           </Button>
         </div>
@@ -65,5 +74,3 @@ export function Header() {
     </section>
   );
 }
-
-export default Header;

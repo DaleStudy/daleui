@@ -12,7 +12,11 @@ const LINK_ITEMS = [
     label: "스토리북",
     href: "https://main--675790d317ba346348aa3490.chromatic.com/",
   },
-  { id: 3, label: "피그마 디자인", href: "/" }, //@TODO:  피그마 커뮤니티가 생긴 후 해당 링크로 연결예정
+  {
+    id: 3,
+    label: "피그마 디자인",
+    href: "https://www.figma.com/community/file/1559487636467651573",
+  },
 ];
 
 export function Navigation() {
@@ -62,12 +66,12 @@ export function Navigation() {
     >
       <nav
         className={stack({
-          direction: { base: "column", md: "row" },
+          direction: { base: "column", md: "column", lg: "row" },
           maxWidth: "1024px",
           width: {
             base: "100%",
           },
-          px: { base: "16", md: "24" },
+          px: { base: "16", md: "16", lg: "24" },
           py: "5px",
           pb: { lg: "6px" },
           justifyContent: "space-between",
@@ -79,7 +83,7 @@ export function Navigation() {
         {/* 로고 & 햄버거바 */}
         <div
           className={css({
-            width: { base: "100%", md: "auto" },
+            width: { base: "100%", md: "100%", lg: "auto" },
             justifyContent: "space-between",
             display: "flex",
             alignItems: "center",
@@ -122,7 +126,7 @@ export function Navigation() {
           {/* 햄버거바 */}
           <div
             className={css({
-              display: { base: "inline-flex", md: "none" },
+              display: { base: "inline-flex", md: "inline-flex", lg: "none" },
               top: "24",
               right: "24",
               padding: "10px",
@@ -140,20 +144,33 @@ export function Navigation() {
         {/* 링크 */}
         <ul
           className={stack({
-            gap: { base: "24", md: "45" },
-            display: "flex",
-            direction: { base: "column", md: "row" },
-            alignItems: { base: "flex-start", md: "center" },
-            width: { base: "100%", md: "auto" },
-            paddingLeft: { base: "24", md: "0" },
-            paddingRight: { base: "24", md: "0" },
-            paddingTop: { base: "24", md: "0" },
-            opacity: { base: isOpenMenu ? 1 : 0, md: 1 },
+            gap: { base: "24", md: "24", lg: "45" },
+            display: {
+              base: isOpenMenu ? "flex" : "none",
+              md: isOpenMenu ? "flex" : "none",
+              lg: "flex",
+            },
+            direction: { base: "column", md: "column", lg: "row" },
+            alignItems: { base: "flex-start", md: "flex-start", lg: "center" },
+            width: { base: "100%", md: "100%", lg: "auto" },
+            paddingLeft: { base: "24", md: "24", lg: "0" },
+            paddingRight: { base: "24", md: "24", lg: "0" },
+            paddingTop: { base: "24", md: "24", lg: "0" },
+            opacity: {
+              base: isOpenMenu ? 1 : 0,
+              md: isOpenMenu ? 1 : 0,
+              lg: 1,
+            },
             transform: {
               base: isOpenMenu ? "translateY(0)" : "translateY(-8px)",
-              md: "none",
+              md: isOpenMenu ? "translateY(0)" : "translateY(-8px)",
+              lg: "none",
             },
-            pointerEvents: { base: isOpenMenu ? "auto" : "none", md: "auto" },
+            pointerEvents: {
+              base: isOpenMenu ? "auto" : "none",
+              md: isOpenMenu ? "auto" : "none",
+              lg: "auto",
+            },
             transition: "opacity 200ms ease, transform 200ms ease",
           })}
         >
@@ -176,17 +193,30 @@ export function Navigation() {
         <ul
           className={stack({
             gap: "22",
-            display: "flex",
-            direction: { base: "column", md: "row" },
-            alignItems: { base: "flex-start", md: "center" },
-            width: { base: "100%", md: "auto" },
-            padding: { base: "24", md: "0" },
-            opacity: { base: isOpenMenu ? 1 : 0, md: 1 },
+            display: {
+              base: isOpenMenu ? "flex" : "none",
+              md: isOpenMenu ? "flex" : "none",
+              lg: "flex",
+            },
+            direction: { base: "column", md: "column", lg: "row" },
+            alignItems: { base: "flex-start", md: "flex-start", lg: "center" },
+            width: { base: "100%", md: "100%", lg: "auto" },
+            padding: { base: "24", md: "24", lg: "0" },
+            opacity: {
+              base: isOpenMenu ? 1 : 0,
+              md: isOpenMenu ? 1 : 0,
+              lg: 1,
+            },
             transform: {
               base: isOpenMenu ? "translateY(0)" : "translateY(-8px)",
-              md: "none",
+              md: isOpenMenu ? "translateY(0)" : "translateY(-8px)",
+              lg: "none",
             },
-            pointerEvents: { base: isOpenMenu ? "auto" : "none", md: "auto" },
+            pointerEvents: {
+              base: isOpenMenu ? "auto" : "none",
+              md: isOpenMenu ? "auto" : "none",
+              lg: "auto",
+            },
             transition: "opacity 200ms ease, transform 200ms ease",
             userSelect: "none",
           })}
@@ -205,8 +235,8 @@ export function Navigation() {
           </li>
           <li
             className={css({
-              width: { base: "100%", md: "auto" },
-              "& > button": { width: { base: "100%", md: "auto" } },
+              width: { base: "100%", md: "100%", lg: "auto" },
+              "& > button": { width: { base: "100%", md: "100%", lg: "auto" } },
             })}
           >
             <Button variant="solid" onClick={handleSponsorClick}>

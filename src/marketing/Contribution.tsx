@@ -9,9 +9,9 @@ import { Heading } from "../components/Heading/Heading";
 export function Contribution() {
   return (
     <section
+      id="contribution"
       className={vstack({
         bg: "bg.brand",
-        px: { base: "0", lg: "24" },
         minWidth: { base: "auto", lg: "5xl" },
         /**
          * TODO: 추후 spacing 토큰 추가 시 변경
@@ -24,7 +24,7 @@ export function Contribution() {
         className={stack({
           py: "0",
           gap: "40",
-          px: { base: "16", md: "24" },
+          px: { base: "16", sm: "24" },
           maxWidth: { base: "auto", lg: "7xl" },
           minWidth: { base: "auto", lg: "5xl" },
         })}

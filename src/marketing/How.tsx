@@ -116,18 +116,19 @@ const CARDS: CardProps[] = [
     icon: "Figma",
     title: "피그마 디자인",
     description: "디자인 컴포넌트가 담긴 협업 툴",
-    link: "",
-    linkText: "준비중",
-    linkDisabled: true,
+    link: "https://www.figma.com/community/file/1559487636467651573",
+    linkText: "피그마 디자인 보기",
   },
 ] as const;
 
 export function How() {
   return (
     <section
+      id="how"
       className={css({
         width: "100%",
         /**
+         
          * TODO: 추후 spacing 토큰 추가 시 변경
          * spacing 토큰 부족으로 px 사용
          */
@@ -145,7 +146,7 @@ export function How() {
             lg: "1280px",
           },
           mx: "auto",
-          px: "24",
+          px: { base: "16", sm: "24" },
           gap: "48",
         })}
       >

@@ -94,16 +94,23 @@ const CARDS: CardProps[] = [
 export function Mission() {
   return (
     <section
+      id="mission"
       className={vstack({
-        px: { base: "16", sm: "24" },
         py: { base: "80px" },
         alignSelf: "stretch",
+        width: "100%",
+        maxWidth: {
+          base: "100%",
+          xl: "1280px",
+        },
+        mx: "auto",
       })}
     >
       <div
         className={vstack({
           gap: "72px",
           width: "100%",
+          px: { base: "16", sm: "24" },
         })}
       >
         <Heading align="center" wordBreak="cjk" level={2}>
@@ -116,7 +123,6 @@ export function Mission() {
         <div
           className={css({
             display: "grid",
-            alignSelf: "stretch",
             gap: "24",
             gridTemplateColumns: {
               base: "1fr", // 320-640
