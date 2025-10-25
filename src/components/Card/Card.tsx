@@ -25,7 +25,7 @@ const useCardContext = () => {
   }
   return context;
 };
-interface CardProps extends Omit<HTMLAttributes<HTMLElement>, "style"> {
+interface CardRootProps extends Omit<HTMLAttributes<HTMLElement>, "style"> {
   /** 색조 */
   tone?: Extract<Tone, "neutral" | "brand">;
   /** border 여부 */
@@ -33,17 +33,13 @@ interface CardProps extends Omit<HTMLAttributes<HTMLElement>, "style"> {
   children: ReactNode;
 }
 
-/**
- * Card의 최상위 컨테이너입니다. tone과 outline 속성을 설정하며,
- * tone은 하위의 Icon과 Link 컴포넌트에 자동으로 전달됩니다.
- */
-export function Card({
+function CardRoot({
   tone = "neutral",
   outline = false,
   className,
   children,
   ...rest
-}: CardProps) {
+}: CardRootProps) {
   return (
     <CardContext.Provider value={{ tone }}>
       <article
@@ -59,11 +55,7 @@ interface CardBodyProps extends Omit<HTMLAttributes<HTMLDivElement>, "style"> {
   children: ReactNode;
 }
 
-/**
- * Card.Title과 Card.Description을 감싸는 컨테이너입니다.
- * 제목과 설명 사이의 간격을 관리합니다.
- */
-export function CardBody({ className, children, ...rest }: CardBodyProps) {
+function CardBody({ className, children, ...rest }: CardBodyProps) {
   return (
     <div className={cx(bodyStyles(), className)} {...rest}>
       {children}
@@ -77,11 +69,7 @@ interface CardIconProps extends SVGProps<SVGSVGElement> {
   size?: "sm" | "md" | "lg";
 }
 
-/**
- * Card의 아이콘을 표시합니다. Card 바로 아래에 배치하며,
- * tone은 Card로부터 자동으로 전달받습니다.
- */
-export function CardIcon({ name, size = "lg", ...rest }: CardIconProps) {
+function CardIcon({ name, size = "lg", ...rest }: CardIconProps) {
   const { tone } = useCardContext();
   return (
     <div className={cx(iconContainerStyles())}>
@@ -93,10 +81,7 @@ interface CardTitleProps extends Omit<HTMLAttributes<HTMLElement>, "style"> {
   children: ReactNode;
 }
 
-/**
- * Card의 제목을 표시합니다. CardBody 안에서 사용합니다.
- */
-export function CardTitle({ children, ...rest }: CardTitleProps) {
+function CardTitle({ children, ...rest }: CardTitleProps) {
   return (
     <Text size="lg" weight="semibold" as="p" {...rest}>
       {children}
@@ -108,10 +93,7 @@ interface CardDescriptionProps
   children: ReactNode;
 }
 
-/**
- * Card의 설명을 표시합니다. CardBody 안에서 CardTitle 아래에 사용합니다.
- */
-export function CardDescription({ children, ...rest }: CardDescriptionProps) {
+function CardDescription({ children, ...rest }: CardDescriptionProps) {
   return (
     <Text size="md" as="p" {...rest}>
       {children}
@@ -126,11 +108,7 @@ interface CardLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   external?: boolean;
 }
 
-/**
- * Card 하단에 링크를 표시합니다. tone은 Card로부터 자동으로 전달받으며,
- * external prop이 true일 경우 외부 링크 아이콘이 자동으로 추가됩니다.
- */
-export function CardLink({ children, href, external, ...rest }: CardLinkProps) {
+function CardLink({ children, href, external, ...rest }: CardLinkProps) {
   const { tone } = useCardContext();
   return (
     <Link
@@ -194,4 +172,34 @@ const iconContainerStyles = cva({
     borderRadius: "md",
     bg: "bg.brand",
   },
+});
+
+/**
+ * Card의 최상위 컨테이너입니다. tone과 outline 속성을 설정하며,
+ * tone은 하위의 Icon과 Link 컴포넌트에 자동으로 전달됩니다.
+ */
+export const Card = Object.assign(CardRoot, {
+  /**
+   * Card의 제목과 설명을 감싸는 컨테이너입니다.
+   * 제목과 설명 사이의 간격을 관리합니다.
+   */
+  Body: CardBody,
+  /**
+   * Card의 아이콘을 표시합니다. Card 바로 아래에 배치하며,
+   * tone은 Card로부터 자동으로 전달받습니다.
+   */
+  Icon: CardIcon,
+  /**
+   * Card의 제목을 표시합니다. CardBody 안에서 사용합니다.
+   */
+  Title: CardTitle,
+  /**
+   * Card의 설명을 표시합니다. CardBody 안에서 CardTitle 아래에 사용합니다.
+   */
+  Description: CardDescription,
+  /**
+   * Card 하단에 링크를 표시합니다. tone은 Card로부터 자동으로 전달받으며,
+   * external prop이 true일 경우 외부 링크 아이콘이 자동으로 추가됩니다.
+   */
+  Link: CardLink,
 });

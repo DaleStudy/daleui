@@ -1,12 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import {
-  Card,
-  CardBody,
-  CardDescription,
-  CardIcon,
-  CardLink,
-  CardTitle,
-} from "./Card";
+import { Card } from "./Card";
 import type { IconName } from "../../tokens/iconography";
 import type { Tone } from "../../tokens/colors";
 interface CardStoryArgs {
@@ -34,7 +27,7 @@ export default {
 **Card** 컴포넌트는 아이콘, 제목, 설명을 포함한 카드 형태의 UI 요소입니다.
 
 컴파운드 컴포넌트 패턴을 사용하여 구성됩니다:
-- \`Card.Root\`: 카드 컨테이너 (tone, outline 설정)
+- \`Card\`: 카드 컨테이너 (tone, outline 설정)
 - \`Card.Icon\`: 아이콘 (Root 바로 아래 배치)
 - \`Card.Body\`: 제목과 설명을 감싸는 컨테이너
 - \`Card.Title\`: 제목
@@ -109,15 +102,15 @@ export default {
   },
   render: (args) => (
     <Card tone={args.tone} outline={args.outline}>
-      <CardIcon name={args.iconName} />
-      <CardBody>
-        <CardTitle>{args.title}</CardTitle>
-        <CardDescription>{args.description}</CardDescription>
-      </CardBody>
+      <Card.Icon name={args.iconName} />
+      <Card.Body>
+        <Card.Title>{args.title}</Card.Title>
+        <Card.Description>{args.description}</Card.Description>
+      </Card.Body>
       {args.linkHref && (
-        <CardLink href={args.linkHref} external={args.linkExternal}>
+        <Card.Link href={args.linkHref} external={args.linkExternal}>
           {args.linkText}
-        </CardLink>
+        </Card.Link>
       )}
     </Card>
   ),
