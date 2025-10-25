@@ -111,6 +111,7 @@ export function Mission() {
         className={vstack({
           gap: "72px",
           width: "100%",
+          px: { base: "16", sm: "24" },
         })}
       >
         <Heading align="center" wordBreak="cjk" level={2}>

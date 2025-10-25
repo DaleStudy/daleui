@@ -25,7 +25,7 @@ export function Contribution() {
         className={stack({
           py: "0",
           gap: "40",
-          px: { base: "16", md: "24" },
+          px: { base: "16", sm: "24" },
           maxWidth: { base: "auto", lg: "7xl" },
           minWidth: { base: "auto", lg: "5xl" },
         })}

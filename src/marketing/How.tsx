@@ -145,7 +145,7 @@ export function How() {
             lg: "1280px",
           },
           mx: "auto",
-          px: "24",
+          px: { base: "16", sm: "24" },
           gap: "48",
         })}
       >

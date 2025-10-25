@@ -53,7 +53,7 @@ export function Community() {
       <div
         className={vstack({
           gap: "40",
-          px: { base: "16", lg: "24" },
+          px: { base: "16", sm: "24" },
           width: "100%",
           minWidth: { base: "auto", lg: "5xl" },
           maxWidth: { base: "auto", lg: "7xl" },
