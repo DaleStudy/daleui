@@ -1,4 +1,4 @@
-<!-- PR에 대해 알아야 하는 내용은 위키의 컨벤션을 확인해 주세요. 
+<!-- PR에 대해 알아야 하는 내용은 위키의 컨벤션을 확인해 주세요.
 위키 - https://github.com/DaleStudy/daleui/wiki/Conventions -->
 
 ## 변경 사항
