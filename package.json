@@ -57,7 +57,7 @@
     "eslint-plugin-storybook": "^9.1.10",
     "eslint-plugin-testing-library": "^7.13.3",
     "globals": "^16.4.0",
-    "happy-dom": "^19.0.1",
+    "happy-dom": "^20.0.0",
     "prettier": "^3.6.2",
     "storybook": "^9.1.10",
     "typescript": "^5.9.3",
