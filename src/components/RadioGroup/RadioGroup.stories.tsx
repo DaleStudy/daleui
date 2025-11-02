@@ -37,9 +37,35 @@ export const WithDefaultValue: Story = {
   },
 };
 
-export const Horizontal: Story = {
-  args: {
-    orientation: "horizontal",
+export const Orientation: Story = {
+  render: () => {
+    return (
+      <div
+        className={css({ display: "flex", flexDirection: "column", gap: "32" })}
+      >
+        <RadioGroup
+          name="vertical-orientation"
+          label="세로 방향 (Vertical)"
+          orientation="vertical"
+          defaultValue="apple"
+        >
+          <Radio value="apple">사과</Radio>
+          <Radio value="banana">바나나</Radio>
+          <Radio value="orange">오렌지</Radio>
+        </RadioGroup>
+
+        <RadioGroup
+          name="horizontal-orientation"
+          label="가로 방향 (Horizontal)"
+          orientation="horizontal"
+          defaultValue="banana"
+        >
+          <Radio value="apple">사과</Radio>
+          <Radio value="banana">바나나</Radio>
+          <Radio value="orange">오렌지</Radio>
+        </RadioGroup>
+      </div>
+    );
   },
 };
 
