@@ -1,20 +1,25 @@
-import { composeStories } from "@storybook/react-vite";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, test, vi } from "vitest";
 import { Checkbox } from "./Checkbox";
-import * as stories from "./Checkbox.stories";
-
-const { Basic, Tones, States, Disabled, Required } = composeStories(stories);
 
 test("label과 함께 체크박스가 올바르게 렌더링됨", () => {
-  render(<Basic />);
+  render(<Checkbox label="기본 체크박스" />);
   expect(screen.getByText("기본 체크박스")).toBeInTheDocument();
 });
 
 test("체크박스에 체크 시, tone 속성이 올바르게 적용됨", async () => {
   const user = userEvent.setup();
-  render(<Tones />);
+  render(
+    <>
+      <Checkbox label="브랜드 색조" tone="brand" />
+      <Checkbox label="중립 색조" tone="neutral" />
+      <Checkbox label="위험 색조" tone="danger" />
+      <Checkbox label="경고 색조" tone="warning" />
+      <Checkbox label="성공 색조" tone="success" />
+      <Checkbox label="정보 색조" tone="info" />
+    </>,
+  );
 
   const brandCheckbox = screen.getByLabelText("브랜드 색조");
   const neutralCheckbox = screen.getByLabelText("중립 색조");
@@ -60,7 +65,12 @@ test("체크박스에 체크 시, tone 속성이 올바르게 적용됨", async 
 });
 
 test("체크된 상태와 체크되지않은 상태가 올바르게 렌더링됨", () => {
-  render(<States />);
+  render(
+    <>
+      <Checkbox label="체크된 상태" checked={true} />
+      <Checkbox label="체크되지 않은 상태" checked={false} />
+    </>,
+  );
 
   const checkedCheckbox = screen.getByLabelText("체크된 상태");
   const uncheckedCheckbox = screen.getByLabelText("체크되지 않은 상태");
@@ -70,7 +80,13 @@ test("체크된 상태와 체크되지않은 상태가 올바르게 렌더링됨
 });
 
 test("disabled 속성이 올바르게 적용됨", () => {
-  render(<Disabled />);
+  render(
+    <>
+      <Checkbox label="비활성화 & 체크된 상태" disabled checked />
+      <Checkbox label="비활성화 & 체크되지 않은 상태" disabled />
+      <Checkbox label="활성화 상태" />
+    </>,
+  );
 
   const disabledCheckedCheckbox =
     screen.getByLabelText("비활성화 & 체크된 상태");
@@ -94,7 +110,12 @@ test("disabled 속성이 올바르게 적용됨", () => {
 });
 
 test("필수 표시가 올바르게 표시됨", () => {
-  render(<Required />);
+  render(
+    <>
+      <Checkbox label="필수 체크박스" required />
+      <Checkbox label="선택 체크박스" />
+    </>,
+  );
 
   expect(
     screen.getByRole("checkbox", {
@@ -112,13 +133,7 @@ test("체크박스 클릭 시, onChange 핸들러가 호출됨", async () => {
   const handleChange = vi.fn();
   const user = userEvent.setup();
 
-  render(
-    <Checkbox
-      id="test-checkbox"
-      label="테스트 체크박스"
-      onChange={handleChange}
-    />,
-  );
+  render(<Checkbox label="테스트 체크박스" onChange={handleChange} />);
 
   const checkbox = screen.getByLabelText("테스트 체크박스");
 
@@ -142,7 +157,6 @@ test("value값이 있을 경우, 체크 시 value가 onChange 핸들러로 전�
 
   render(
     <Checkbox
-      id="value-checkbox"
       label="값이 있는 체크박스"
       value="test-value"
       onChange={handleChange}
@@ -157,9 +171,7 @@ test("value값이 있을 경우, 체크 시 value가 onChange 핸들러로 전�
 });
 
 test("required 속성이 올바르게 처리됨", () => {
-  render(
-    <Checkbox id="required-checkbox" label="필수 체크박스" required={true} />,
-  );
+  render(<Checkbox label="필수 체크박스" required={true} />);
 
   // 정규 표현식을 사용하여 라벨 찾기 (별표가 있어도 일치)
   const checkbox = screen.getByRole("checkbox", { name: /필수 체크박스/ });
@@ -171,7 +183,7 @@ test("required 속성이 올바르게 처리됨", () => {
 test("체크박스가 클릭될 때 체크 상태가 전환됨", async () => {
   const user = userEvent.setup();
 
-  render(<Basic />);
+  render(<Checkbox label="기본 체크박스" />);
 
   const checkbox = screen.getByLabelText("기본 체크박스");
 
@@ -188,9 +200,7 @@ test("체크박스가 클릭될 때 체크 상태가 전환됨", async () => {
 });
 
 test("required 속성값이 true일 경우, label에 별표가 추가됨", () => {
-  render(
-    <Checkbox id="required-checkbox" label="필수 체크박스" required={true} />,
-  );
+  render(<Checkbox label="필수 체크박스" required={true} />);
 
   const requiredIndicator = screen.getByText("*");
   expect(requiredIndicator).toBeInTheDocument();

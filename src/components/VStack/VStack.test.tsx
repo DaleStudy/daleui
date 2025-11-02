@@ -1,15 +1,16 @@
-import { composeStories } from "@storybook/react-vite";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
-import * as stories from "./VStack.stories";
 import { VStack, type VStackProps } from "./VStack";
 import { spacing, type Spacing } from "../../tokens/spacing";
 
-const { Default } = composeStories(stories);
-
 describe("VStack 렌더링", () => {
   test("Default 스토리가 자식들을 렌더링한다", () => {
-    render(<Default />);
+    render(
+      <VStack>
+        <div>아이템 1</div>
+        <div>아이템 2</div>
+      </VStack>,
+    );
     expect(screen.getByText("아이템 1")).toBeInTheDocument();
     expect(screen.getByText("아이템 2")).toBeInTheDocument();
   });
