@@ -16,6 +16,8 @@ export default {
     variant: "solid",
     size: "md",
     disabled: false,
+    fullWidth: false,
+    loading: false,
   },
   argTypes: {
     children: {
@@ -24,30 +26,90 @@ export default {
     },
     variant: {
       control: "select",
+      options: ["solid", "outline", "ghost"],
       description: "버튼의 스타일 종류",
+    },
+    tone: {
+      control: "select",
+      options: ["brand", "neutral", "danger"],
+      description:
+        "색상 강조 (⚠️ solid: brand/neutral/danger, outline: brand만, ghost: neutral/danger만 지원)",
     },
     size: {
       control: "select",
       description: "버튼의 크기",
-    },
-    tone: {
-      control: "select",
-      description: "버튼의 색상 강조",
     },
   },
 } satisfies Meta<typeof Button>;
 
 export const Basic: StoryObj<typeof Button> = {};
 
+// Brand Tone - solid, outline 지원
+export const ToneBrand: StoryObj<typeof Button> = {
+  args: {
+    tone: "brand",
+    variant: "solid",
+  },
+  argTypes: {
+    tone: {
+      control: false,
+    },
+    variant: {
+      control: "select",
+      options: ["solid", "outline"],
+      description: "brand tone은 solid, outline을 지원합니다",
+    },
+  },
+};
+
+// Neutral Tone - solid, ghost 지원
+export const ToneNeutral: StoryObj<typeof Button> = {
+  args: {
+    tone: "neutral",
+    variant: "ghost",
+  },
+  argTypes: {
+    tone: {
+      control: false,
+    },
+    variant: {
+      control: "select",
+      options: ["ghost"],
+      description: "neutral tone은 ghost를 지원합니다",
+    },
+  },
+};
+
+// Danger Tone - solid, ghost 지원
+export const ToneDanger: StoryObj<typeof Button> = {
+  args: {
+    tone: "danger",
+    variant: "ghost",
+  },
+  argTypes: {
+    tone: {
+      control: false,
+    },
+    variant: {
+      control: "select",
+      options: ["ghost"],
+      description: "danger tone은 ghost를 지원합니다",
+    },
+  },
+};
+
 export const Variants: StoryObj<typeof Button> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
-        <Button {...args} variant="solid">
+        <Button {...args} tone="brand" variant="solid">
           솔리드 버튼
         </Button>
-        <Button {...args} variant="outline">
+        <Button {...args} tone="brand" variant="outline">
           아웃라인 버튼
+        </Button>
+        <Button {...args} tone="neutral" variant="ghost">
+          고스트 버튼
         </Button>
       </div>
     );
@@ -57,41 +119,6 @@ export const Variants: StoryObj<typeof Button> = {
       control: false,
     },
     variant: {
-      control: false,
-    },
-  },
-};
-
-export const Tones: StoryObj<typeof Button> = {
-  render: (args) => {
-    return (
-      <div className={vstack({ gap: "16" })}>
-        <Button {...args} variant="solid" tone="brand">
-          브랜드 색조
-        </Button>
-        <Button {...args} variant="solid" tone="neutral">
-          중립 색조
-        </Button>
-        <Button {...args} variant="solid" tone="danger">
-          위험 색조
-        </Button>
-        <Button {...args} variant="solid" tone="success">
-          성공 색조
-        </Button>
-        <Button {...args} variant="solid" tone="warning">
-          경고 색조
-        </Button>
-        <Button {...args} variant="solid" tone="info">
-          정보 색조
-        </Button>
-      </div>
-    );
-  },
-  argTypes: {
-    children: {
-      control: false,
-    },
-    tone: {
       control: false,
     },
   },
@@ -127,10 +154,10 @@ export const Disabled: StoryObj<typeof Button> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
+        <Button {...args}>활성화 버튼</Button>
         <Button {...args} disabled>
           비활성화 버튼
         </Button>
-        <Button {...args}>활성화 버튼</Button>
       </div>
     );
   },
@@ -139,6 +166,74 @@ export const Disabled: StoryObj<typeof Button> = {
       control: false,
     },
     disabled: {
+      control: false,
+    },
+  },
+};
+
+export const FullWidth: StoryObj<typeof Button> = {
+  render: (args) => {
+    return (
+      <div className={vstack({ gap: "16" })}>
+        <div style={{ border: "2px dashed #ccc", width: "300px" }}>
+          <Button {...args}>일반 버튼</Button>
+        </div>
+        <div style={{ border: "2px dashed #ccc", width: "300px" }}>
+          <Button {...args} fullWidth>
+            가득찬 버튼
+          </Button>
+        </div>
+      </div>
+    );
+  },
+  argTypes: {
+    children: {
+      control: false,
+    },
+    fullWidth: {
+      control: false,
+    },
+  },
+};
+
+export const WithIcons: StoryObj<typeof Button> = {
+  render: (args) => {
+    return (
+      <div className={vstack({ gap: "16" })}>
+        <Button {...args} leftIcon="star">
+          좌측 아이콘
+        </Button>
+        <Button {...args} rightIcon="search">
+          우측 아이콘
+        </Button>
+        <Button {...args} leftIcon="star" rightIcon="search">
+          양쪽 아이콘
+        </Button>
+        <Button {...args} leftIcon="star" rightIcon="search" disabled>
+          양쪽 아이콘 비활성화
+        </Button>
+      </div>
+    );
+  },
+  argTypes: {
+    children: {
+      control: false,
+    },
+    disabled: {
+      control: false,
+    },
+  },
+};
+
+export const Loading: StoryObj<typeof Button> = {
+  args: {
+    loading: true,
+  },
+  render: (args) => {
+    return <Button {...args}>로딩 버튼</Button>;
+  },
+  argTypes: {
+    children: {
       control: false,
     },
   },
