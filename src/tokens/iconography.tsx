@@ -1,4 +1,5 @@
 import {
+  Award,
   Check,
   ChevronLeft,
   ChevronRight,
@@ -9,6 +10,7 @@ import {
   Eye,
   EyeClosed,
   EyeOff,
+  Globe,
   HandHeart,
   HeartHandshake,
   Info,
@@ -22,20 +24,20 @@ import {
   Sun,
   ThumbsUp,
   User,
-  X,
-  Globe,
-  Award,
   Users,
+  X,
 } from "lucide-react";
-import type { FunctionComponent, ComponentProps, SVGProps } from "react";
+
+import type { ComponentProps, FunctionComponent, SVGProps } from "react";
 import Discord from "../assets/Discord.svg?react";
+import Figma from "../assets/Figma.svg?react";
 import GitHub from "../assets/GitHub.svg?react";
+import Kr from "../assets/Kr.svg?react";
 import LinkedIn from "../assets/LinkedIn.svg?react";
 import Medium from "../assets/Medium.svg?react";
-import YouTube from "../assets/YouTube.svg?react";
 import Storybook from "../assets/Storybook.svg?react";
-import Figma from "../assets/Figma.svg?react";
-import Kr from "../assets/Kr.svg?react";
+import YouTube from "../assets/YouTube.svg?react";
+
 
 function createBrandIcon(Icon: FunctionComponent<SVGProps<SVGSVGElement>>) {
   return (args: ComponentProps<typeof Icon>) => (
