@@ -38,7 +38,6 @@ import Medium from "../assets/Medium.svg?react";
 import Storybook from "../assets/Storybook.svg?react";
 import YouTube from "../assets/YouTube.svg?react";
 
-
 function createBrandIcon(Icon: FunctionComponent<SVGProps<SVGSVGElement>>) {
   return (args: ComponentProps<typeof Icon>) => (
     <Icon {...args} fill="currentColor" />
