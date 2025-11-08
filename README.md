@@ -8,5 +8,3 @@
 
 - [스토리북](https://main--675790d317ba346348aa3490.chromatic.com)
 - [위키](https://github.com/DaleStudy/daleui/wiki)
-
-🧑‍💻
