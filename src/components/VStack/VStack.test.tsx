@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import * as stories from "./VStack.stories";
 import { VStack, type VStackProps } from "./VStack";
-import { spacing, type Spacing } from "../../tokens/spacing";
+import { type Spacing, spacing } from "../../tokens/spacing";
 
 const { Default } = composeStories(stories);
 
