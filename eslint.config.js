@@ -32,16 +32,12 @@ export default tseslint.config(
           groups: [
             "builtin",
             "external",
-            "internal",
-            "parent",
-            "sibling",
-            "index",
+            ["internal", "parent", "sibling", "index"],
           ],
           pathGroups: [
             { pattern: "@/**", group: "internal", position: "after" },
           ],
           pathGroupsExcludedImportTypes: ["builtin"],
-          alphabetize: { order: "asc", caseInsensitive: true },
         },
       ],
       "sort-imports": [
