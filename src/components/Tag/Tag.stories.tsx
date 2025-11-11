@@ -21,11 +21,6 @@ export default {
   argTypes: {
     children: {
       control: "text",
-      description: "태그 내용",
-    },
-    tone: {
-      control: "select",
-      description: "태그의 색조",
     },
     href: {
       control: "text",

@@ -10,9 +10,9 @@ interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
   /** 링크 내용, 아이콘, 이미지 등 (필수) */
   children: React.ReactNode;
-  /** 색조 */
+  /** 링크의 색조 */
   tone?: LinkTone;
-  /** 크기 */
+  /** 링크의 크기 */
   size?: LinkSize;
   /** 링크에 밑줄 표시 여부 */
   underline?: boolean;

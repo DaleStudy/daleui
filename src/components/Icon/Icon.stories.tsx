@@ -14,16 +14,6 @@ export default {
     },
   },
   args: { name: "user" },
-  argTypes: {
-    size: {
-      control: "select",
-      description: "아이콘의 크기",
-    },
-    tone: {
-      control: "select",
-      description: "아이콘의 색조",
-    },
-  },
 } satisfies Meta<typeof Icon>;
 
 export const Basic: StoryObj<typeof Icon> = {};

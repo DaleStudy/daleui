@@ -29,15 +29,6 @@ export default {
   argTypes: {
     children: {
       control: "text",
-      description: "링크 텍스트",
-    },
-    tone: {
-      control: "select",
-      description: "링크의 색상을 변경합니다.",
-    },
-    size: {
-      control: "select",
-      description: "링크의 크기를 조절합니다.",
     },
   },
   decorators: [

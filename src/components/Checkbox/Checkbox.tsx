@@ -9,11 +9,11 @@ export interface CheckboxProps
     ButtonHTMLAttributes<HTMLButtonElement>,
     "type" | "onChange" | "checked" | "value" | "required"
   > {
-  /** 라벨 */
+  /** 체크박스 라벨 */
   label: React.ReactNode;
   /** 체크박스의 값 */
   value?: string;
-  /** 색조 */
+  /** 체크박스의 색조 */
   tone?: Tone;
   /** 체크박스 비활성화 여부 */
   disabled?: boolean;

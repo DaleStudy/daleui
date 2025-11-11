@@ -52,12 +52,11 @@ export default {
   },
   argTypes: {
     tone: {
-      control: "select",
+      control: "radio",
       options: ["neutral", "brand"],
       description: "카드의 색조",
     },
     outline: {
-      control: "boolean",
       description: "테두리 표시 여부",
     },
     iconName: {
@@ -80,23 +79,18 @@ export default {
       description: "아이콘 이름",
     },
     title: {
-      control: "text",
       description: "카드 제목",
     },
     description: {
-      control: "text",
       description: "카드 설명",
     },
     linkHref: {
-      control: "text",
       description: "링크 URL (비어있으면 링크 미표시)",
     },
     linkText: {
-      control: "text",
       description: "링크 텍스트",
     },
     linkExternal: {
-      control: "boolean",
       description: "외부 링크 여부",
     },
   },

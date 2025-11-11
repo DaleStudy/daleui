@@ -13,7 +13,7 @@ import { Icon } from "../Icon/Icon";
 type BaseTagProps = {
   /** 태그 내용 */
   children: ReactNode;
-  /** 색조 */
+  /** 태그의 색조 */
   tone?: Tone;
   /** 제거 가능 여부 */
   removable?: boolean;
