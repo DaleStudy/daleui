@@ -2,6 +2,7 @@ import { css } from "../../styled-system/css";
 import { vstack } from "../../styled-system/patterns";
 import { Button } from "../components/Button/Button";
 import { Heading } from "../components/Heading/Heading";
+import { VStack } from "../components/VStack/VStack";
 
 interface HeaderProps {
   handleScrollToSection: (sectionId: string) => void;
@@ -19,9 +20,9 @@ export function Header({ handleScrollToSection }: HeaderProps) {
         py: { md: "80px", base: "60px" },
       })}
     >
-      <div
-        className={vstack({
-          gap: "24",
+      <VStack
+        gap="24"
+        className={css({
           textAlign: "center",
           maxWidth: { base: "100%", md: "56rem" },
           px: { base: "16", sm: "24" },
@@ -54,7 +55,7 @@ export function Header({ handleScrollToSection }: HeaderProps) {
             더 알아보기
           </Button>
         </div>
-      </div>
+      </VStack>
       <div
         className={css({
           width: "100%",

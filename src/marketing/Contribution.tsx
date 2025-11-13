@@ -1,8 +1,14 @@
 import { css } from "../../styled-system/css";
 import { flex, stack, vstack } from "../../styled-system/patterns";
 import { Card } from "../components/Card/Card";
-import { Heading } from "../components/Heading/Heading";
+import { Icon } from "../components/Icon/Icon";
+import { Link } from "../components/Link/Link";
 import { Tag } from "../components/Tag/Tag";
+import { Text } from "../components/Text/Text";
+import { VStack } from "../components/VStack/VStack";
+import type { IconName } from "../tokens/iconography";
+import { Heading } from "../components/Heading/Heading";
+import { css } from "../../styled-system/css";
 
 const contributionCards = [
   {
@@ -95,3 +101,66 @@ export function Contribution() {
     </section>
   );
 }
+
+/**
+ * TODO: 카드 컴포넌트 개발 완료시 제거
+ * 임시 카드 컴포넌트
+ */
+const Card = ({
+  icon,
+  title,
+  description,
+  linkText,
+  href,
+}: {
+  icon: IconName;
+  title: string;
+  description: string;
+  linkText?: string;
+  href?: string;
+}) => {
+  return (
+    <article
+      className={stack({
+        py: "24",
+        px: "16",
+        gap: "24",
+        flex: "1 0 0",
+        bg: "bg.neutral",
+        borderRadius: "md",
+        alignItems: "flex-start",
+      })}
+    >
+      <div
+        className={flex({
+          p: "12",
+          bg: "bg.brand",
+          borderRadius: "lg",
+          alignItems: "center",
+        })}
+      >
+        <Icon name={icon} tone="brand" />
+      </div>
+      <VStack
+        align="stretch"
+        gap="4"
+        className={css({
+          flex: "1 0 0",
+        })}
+      >
+        <Text size="lg" weight="semibold" as="p">
+          {title}
+        </Text>
+        <Text size="md" as="p">
+          {description}
+        </Text>
+      </VStack>
+      {href && (
+        <Link href={href} size="lg" tone="brand" underline={false} external>
+          {linkText}
+          <Icon name="externalLink" tone="brand" size="sm" />
+        </Link>
+      )}
+    </article>
+  );
+};
