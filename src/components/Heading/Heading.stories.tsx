@@ -19,29 +19,6 @@ export default {
   argTypes: {
     children: {
       control: "text",
-      description: "제목 텍스트",
-    },
-    level: {
-      control: "select",
-      description: "제목 단계",
-    },
-    size: {
-      control: "select",
-      description: "제목 크기",
-    },
-    tone: {
-      control: "select",
-      description: "제목의 색조",
-    },
-    align: {
-      control: "select",
-      options: ["left", "center", "right"],
-      description: "텍스트 정렬",
-    },
-    wordBreak: {
-      control: "select",
-      options: ["eng", "cjk"],
-      description: "단어 줄바꿈",
     },
   },
 } satisfies Meta<typeof Heading>;

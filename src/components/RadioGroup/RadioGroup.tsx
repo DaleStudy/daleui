@@ -10,7 +10,7 @@ const RadioGroupContext = createContext<{
 
 export interface RadioGroupProps {
   /**
-   * RadioGroup의 자식 요소로 Radio 컴포넌트만 허용됩니다.
+   * 라디오 버튼 요소들
    */
   children: ReactNode;
 

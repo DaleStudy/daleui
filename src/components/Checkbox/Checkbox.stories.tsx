@@ -14,11 +14,6 @@ export default {
   argTypes: {
     label: {
       control: "text",
-      description: "체크박스 라벨",
-    },
-    tone: {
-      control: "select",
-      description: "체크박스의 색조",
     },
   },
 } satisfies Meta<typeof Checkbox>;
