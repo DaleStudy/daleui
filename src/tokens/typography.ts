@@ -218,7 +218,7 @@ export const textStyles = {
     "5": {
       value: {
         fontFamily: "sans",
-        fontSize: { base: "md", lg: "xl" },
+        fontSize: { base: "lg", lg: "xl" },
         fontWeight: "bold",
         lineHeight: "tight",
         letterSpacing: "tight",
@@ -242,18 +242,18 @@ export const fontWeights = {
 export type FontWeight = keyof typeof fontWeights;
 
 export const fontSizes = {
-  xs: { value: "0.75rem" },
-  sm: { value: "0.875rem" },
-  md: { value: "1rem" },
-  lg: { value: "1.125rem" },
-  xl: { value: "1.25rem" },
-  "2xl": { value: "1.5rem" },
-  "3xl": { value: "1.875rem" },
-  "4xl": { value: "2.25rem" },
-  "5xl": { value: "2.75rem" },
-  "6xl": { value: "3.25rem" },
-  "7xl": { value: "3.75rem" },
-  "8xl": { value: "4.5rem" },
+  xs: { value: "0.75rem" }, // 12px
+  sm: { value: "0.875rem" }, // 14px
+  md: { value: "1rem" }, // 16px
+  lg: { value: "1.125rem" }, // 18px
+  xl: { value: "1.25rem" }, // 20px
+  "2xl": { value: "1.5rem" }, // 24px
+  "3xl": { value: "1.875rem" }, // 30px
+  "4xl": { value: "2.25rem" }, // 36px
+  "5xl": { value: "2.75rem" }, // 44px
+  "6xl": { value: "3.25rem" }, // 52px
+  "7xl": { value: "3.75rem" }, // 60px
+  "8xl": { value: "4.5rem" }, // 72px
 };
 
 export type FontSize = keyof typeof fontSizes;
