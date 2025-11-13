@@ -1,8 +1,9 @@
-import { flex, stack, vstack } from "../../styled-system/patterns";
+import { flex, vstack } from "../../styled-system/patterns";
 import { Icon } from "../components/Icon/Icon";
 import { Link } from "../components/Link/Link";
 import { Tag } from "../components/Tag/Tag";
 import { Text } from "../components/Text/Text";
+import { VStack } from "../components/VStack/VStack";
 import type { IconName } from "../tokens/iconography";
 import { css } from "../../styled-system/css";
 import { Heading } from "../components/Heading/Heading";
@@ -133,11 +134,11 @@ const Card = ({
       >
         <Icon name={icon} tone="brand" size="lg" />
       </div>
-      <div
-        className={stack({
-          gap: "4",
+      <VStack
+        align="stretch"
+        gap="4"
+        className={css({
           flex: "1 0 0",
-          alignSelf: "stretch",
         })}
       >
         <Text size="lg" weight="semibold" as="p">
@@ -146,7 +147,7 @@ const Card = ({
         <Text size="md" as="p">
           {description}
         </Text>
-      </div>
+      </VStack>
       {href && (
         <Link href={href} tone="brand" size="lg" underline={false} external>
           {linkText}
