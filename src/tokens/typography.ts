@@ -251,9 +251,6 @@ export const fontSizes = {
   "3xl": { value: "1.875rem" }, // 30px
   "4xl": { value: "2.25rem" }, // 36px
   "5xl": { value: "2.75rem" }, // 44px
-  "6xl": { value: "3.25rem" }, // 52px
-  "7xl": { value: "3.75rem" }, // 60px
-  "8xl": { value: "4.5rem" }, // 72px
 };
 
 export type FontSize = keyof typeof fontSizes;
