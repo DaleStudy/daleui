@@ -1,4 +1,4 @@
-import { useState, type ComponentPropsWithoutRef, type Ref } from "react";
+import { type ComponentPropsWithoutRef, type Ref, useState } from "react";
 import { cva } from "../../../styled-system/css";
 import { Icon } from "../Icon/Icon";
 

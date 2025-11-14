@@ -1,5 +1,5 @@
 import React from "react";
-import { css, cva, cx, type RecipeVariant } from "../../../styled-system/css";
+import { type RecipeVariant, css, cva, cx } from "../../../styled-system/css";
 import type { Spacing } from "../../tokens/spacing";
 
 type As =

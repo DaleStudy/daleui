@@ -1,9 +1,3 @@
-import type { Tone } from "../../tokens/colors";
-import type { IconName } from "../../tokens/iconography";
-import { Icon } from "../Icon/Icon";
-import { Link } from "../Link/Link";
-import { cva, cx } from "../../../styled-system/css";
-import { Text } from "../Text/Text";
 import type {
   AnchorHTMLAttributes,
   HTMLAttributes,
@@ -11,6 +5,12 @@ import type {
   SVGProps,
 } from "react";
 import { createContext, useContext } from "react";
+import type { Tone } from "../../tokens/colors";
+import type { IconName } from "../../tokens/iconography";
+import { Icon } from "../Icon/Icon";
+import { Link } from "../Link/Link";
+import { cva, cx } from "../../../styled-system/css";
+import { Text } from "../Text/Text";
 
 interface CardContextValue {
   tone: Extract<Tone, "neutral" | "brand">;

@@ -1,7 +1,7 @@
 import type { TestRunnerConfig } from "@storybook/test-runner";
 import { getStoryContext } from "@storybook/test-runner";
 
-import { injectAxe, checkA11y, configureAxe } from "axe-playwright";
+import { checkA11y, configureAxe, injectAxe } from "axe-playwright";
 
 /*
  * See https://storybook.js.org/docs/writing-tests/test-runner#test-hook-api
