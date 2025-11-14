@@ -107,7 +107,7 @@ describe("RadioGroup", () => {
     const option1Circle = screen.getAllByRole("presentation", {
       hidden: true,
     })[0];
-    expect(option1Circle).toHaveClass("bd-c_slate.3!");
+    expect(option1Circle).toHaveClass("bd-c_fg.neutral.disabled!");
   });
 
   test("그룹 disabled와 개별 disabled가 모두 적용된다", () => {
@@ -232,12 +232,12 @@ describe("Radio", () => {
   );
 
   test.each([
-    ["neutral", "bd-c_border.neutral"],
-    ["brand", "bd-c_border.brand"],
-    ["danger", "bd-c_border.danger"],
-    ["warning", "bd-c_border.warning"],
-    ["success", "bd-c_border.success"],
-    ["info", "bd-c_border.info"],
+    ["neutral", "bd-c_slate.9"],
+    ["brand", "bd-c_slate.9"],
+    ["danger", "bd-c_slate.9"],
+    ["warning", "bd-c_slate.9"],
+    ["success", "bd-c_slate.9"],
+    ["info", "bd-c_slate.9"],
   ] as const)("%s 톤을 올바르게 렌더링한다", (tone, className) => {
     render(
       <RadioGroup name="test" label="Test Radio Group" tone={tone}>
@@ -248,6 +248,7 @@ describe("Radio", () => {
     const indicator = screen.getByRole("presentation", { hidden: true });
     expect(indicator).toBeInTheDocument();
 
+    // 모든 tone에서 일반 상태에는 slate.9 사용
     expect(indicator).toHaveClass(className);
   });
 });
