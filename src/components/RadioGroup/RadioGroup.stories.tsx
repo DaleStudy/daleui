@@ -7,6 +7,10 @@ export default {
   component: RadioGroup,
   parameters: {
     layout: "centered",
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/Dale-UI-Kit?node-id=851-1771",
+    },
   },
   args: {
     name: "fruits",
