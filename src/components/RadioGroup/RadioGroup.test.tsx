@@ -26,8 +26,8 @@ describe("RadioGroup", () => {
       </RadioGroup>,
     );
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
-    const option2 = screen.getByRole("radio", { name: "Option 2" });
+    const option1 = screen.getByLabelText("Option 1");
+    const option2 = screen.getByLabelText("Option 2");
 
     expect(option1).not.toBeChecked();
     expect(option2).toBeChecked();
@@ -41,8 +41,8 @@ describe("RadioGroup", () => {
       </RadioGroup>,
     );
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
-    const option2 = screen.getByRole("radio", { name: "Option 2" });
+    const option1 = screen.getByLabelText("Option 1");
+    const option2 = screen.getByLabelText("Option 2");
 
     expect(option1).not.toBeChecked();
     expect(option2).not.toBeChecked();
@@ -61,8 +61,8 @@ describe("RadioGroup", () => {
       </RadioGroup>,
     );
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
-    const option2 = screen.getByRole("radio", { name: "Option 2" });
+    const option1 = screen.getByLabelText("Option 1");
+    const option2 = screen.getByLabelText("Option 2");
 
     expect(option1).not.toBeChecked();
     expect(option2).toBeChecked();
@@ -76,9 +76,54 @@ describe("RadioGroup", () => {
       </RadioGroup>,
     );
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
-    const option2 = screen.getByRole("radio", { name: "Option 2" });
+    const option1 = screen.getByLabelText("Option 1");
+    const option2 = screen.getByLabelText("Option 2");
 
+    expect(option1).toBeDisabled();
+    expect(option2).toBeDisabled();
+  });
+
+  test("그룹 disabled가 하위 Radio의 disabled 스타일을 적용한다", () => {
+    render(
+      <RadioGroup
+        name="test"
+        label="Test Radio Group"
+        disabled
+        defaultValue="option1"
+      >
+        <Radio value="option1">Option 1</Radio>
+        <Radio value="option2">Option 2</Radio>
+      </RadioGroup>,
+    );
+
+    const option1 = screen.getByLabelText("Option 1");
+    const option2 = screen.getByLabelText("Option 2");
+
+    // 모든 라디오가 disabled 상태
+    expect(option1).toBeDisabled();
+    expect(option2).toBeDisabled();
+
+    // disabled 스타일이 적용되었는지 확인 (회색 스타일)
+    const option1Circle = screen.getAllByRole("presentation", {
+      hidden: true,
+    })[0];
+    expect(option1Circle).toHaveClass("bd-c_fg.neutral.disabled!");
+  });
+
+  test("그룹 disabled와 개별 disabled가 모두 적용된다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" disabled>
+        <Radio value="option1" disabled>
+          Option 1
+        </Radio>
+        <Radio value="option2">Option 2</Radio>
+      </RadioGroup>,
+    );
+
+    const option1 = screen.getByLabelText("Option 1");
+    const option2 = screen.getByLabelText("Option 2");
+
+    // 둘 다 disabled
     expect(option1).toBeDisabled();
     expect(option2).toBeDisabled();
   });
@@ -94,7 +139,7 @@ describe("RadioGroup", () => {
       </RadioGroup>,
     );
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
+    const option1 = screen.getByLabelText("Option 1");
 
     await user.click(option1);
     expect(onChange).toHaveBeenCalledWith("option1");
@@ -125,8 +170,8 @@ describe("RadioGroup", () => {
 
     render(<ControlledRadioTest />);
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
-    const option2 = screen.getByRole("radio", { name: "Option 2" });
+    const option1 = screen.getByLabelText("Option 1");
+    const option2 = screen.getByLabelText("Option 2");
 
     expect(option1).toBeChecked();
     expect(option2).not.toBeChecked();
@@ -149,8 +194,8 @@ describe("Radio", () => {
       </RadioGroup>,
     );
 
-    const option1 = screen.getByRole("radio", { name: "Option 1" });
-    const option2 = screen.getByRole("radio", { name: "Option 2" });
+    const option1 = screen.getByLabelText("Option 1");
+    const option2 = screen.getByLabelText("Option 2");
 
     await user.click(option1);
     expect(option1).toBeChecked();
@@ -176,7 +221,7 @@ describe("Radio", () => {
         </RadioGroup>,
       );
 
-      const option = screen.getByRole("radio", { name: optionName });
+      const option = screen.getByLabelText(optionName);
 
       if (isDisabled) {
         expect(option).toBeDisabled();
@@ -187,12 +232,12 @@ describe("Radio", () => {
   );
 
   test.each([
-    ["neutral", "bd-c_border.neutral"],
-    ["brand", "bd-c_border.brand"],
-    ["danger", "bd-c_border.danger"],
-    ["warning", "bd-c_border.warning"],
-    ["success", "bd-c_border.success"],
-    ["info", "bd-c_border.info"],
+    ["neutral", "bd-c_slate.9"],
+    ["brand", "bd-c_slate.9"],
+    ["danger", "bd-c_slate.9"],
+    ["warning", "bd-c_slate.9"],
+    ["success", "bd-c_slate.9"],
+    ["info", "bd-c_slate.9"],
   ] as const)("%s 톤을 올바르게 렌더링한다", (tone, className) => {
     render(
       <RadioGroup name="test" label="Test Radio Group" tone={tone}>
@@ -203,6 +248,7 @@ describe("Radio", () => {
     const indicator = screen.getByRole("presentation", { hidden: true });
     expect(indicator).toBeInTheDocument();
 
+    // 모든 tone에서 일반 상태에는 slate.9 사용
     expect(indicator).toHaveClass(className);
   });
 });
