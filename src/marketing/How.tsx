@@ -3,6 +3,7 @@ import { stack, vstack } from "../../styled-system/patterns";
 import { Heading } from "../components/Heading/Heading";
 import { Icon } from "../components/Icon/Icon";
 import { Link } from "../components/Link/Link";
+import { VStack } from "../components/VStack/VStack";
 import type { IconName } from "../tokens/iconography";
 
 interface CardProps {
@@ -51,12 +52,7 @@ function Card({
       >
         <Icon name={icon} size="lg" />
       </div>
-      <div
-        className={vstack({
-          alignItems: "start",
-          gap: "4",
-        })}
-      >
+      <VStack align="left" gap="4">
         <p
           className={css({
             textStyle: "body.lg",
@@ -74,7 +70,7 @@ function Card({
         >
           {description}
         </p>
-      </div>
+      </VStack>
       {!linkDisabled ? (
         <Link href={link} external tone="brand" size="lg" underline={false}>
           <span className={css({ textStyle: "label.lg", fontWeight: "bold" })}>
