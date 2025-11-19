@@ -20,28 +20,20 @@ const Item = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default {
-  title: "Components/Flex",
   component: Flex,
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
   argTypes: {
     children: { control: false },
-    as: { control: "select" },
+
     direction: {
-      control: "select",
-      options: ["row", "rowReverse", "column", "columnReverse"],
       description: "Flex 방향",
     },
     justify: {
-      control: "select",
-      options: ["start", "center", "end", "between"],
       description: "주축 정렬 방식",
     },
     align: {
-      control: "select",
-      options: ["start", "center", "end", "stretch"],
       description: "교차축 정렬 방식",
     },
     gap: { control: "select", options: Object.keys(spacing || {}) },
@@ -52,6 +44,7 @@ export default {
     direction: "row",
     justify: "center",
     align: "center",
+    className: css({ width: "400", height: "200" }),
     gap: "8",
     children: (
       <>
@@ -65,11 +58,7 @@ export default {
 
 type Story = StoryObj<typeof Flex>;
 
-export const Default: Story = {
-  args: {
-    className: css({ width: "400", height: "200" }),
-  },
-};
+export const Default: Story = {};
 
 export const Direction: Story = {
   render: (args) => (
