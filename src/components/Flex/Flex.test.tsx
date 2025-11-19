@@ -17,7 +17,7 @@ describe("Flex 렌더링", () => {
 });
 
 describe("클래스 토큰 및 스타일", () => {
-  test("기본값으로 row 방향, center 정렬, center 교차축 클래스가 적용된다", () => {
+  test("기본값으로 row 방향, start 정렬, stretch 교차축 클래스가 적용된다", () => {
     render(
       <Flex as="nav" aria-label="flex-root">
         <span>child</span>
@@ -26,8 +26,8 @@ describe("클래스 토큰 및 스타일", () => {
     const root = screen.getByRole("navigation", { name: "flex-root" });
     expect(root.className).toMatch(/d_flex/);
     expect(root.className).toMatch(/flex-d_row/);
-    expect(root.className).toMatch(/jc_center/);
-    expect(root.className).toMatch(/ai_center/);
+    expect(root.className).toMatch(/jc_flex-start/);
+    expect(root.className).toMatch(/ai_stretch/);
   });
 
   type Direction = FlexProps["direction"];
@@ -62,6 +62,7 @@ describe("클래스 토큰 및 스타일", () => {
     ["center", "jc_center"],
     ["end", "jc_flex-end"],
     ["between", "jc_space-between"],
+    ["around", "jc_space-around"],
   ];
   test.each(justifies)(
     "justify=%s이면 %s 클래스가 적용된다",

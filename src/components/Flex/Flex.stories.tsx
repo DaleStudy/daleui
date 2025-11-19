@@ -42,8 +42,8 @@ export default {
   args: {
     as: "div",
     direction: "row",
-    justify: "center",
-    align: "center",
+    justify: "start",
+    align: "stretch",
     className: css({ width: "400", height: "200" }),
     gap: "8",
     children: (
