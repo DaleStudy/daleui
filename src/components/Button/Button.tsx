@@ -31,7 +31,7 @@ interface BaseButtonProps
 type ButtonProps = BaseButtonProps & {
   variant?: "solid" | "outline" | "ghost";
   tone?: "brand" | "neutral" | "danger";
-}
+};
 
 // /** Solid 버튼 속성 (brand, neutral, danger tone 지원) */
 // type SolidButtonProps = BaseButtonProps & {
