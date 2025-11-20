@@ -18,6 +18,7 @@ export default {
     disabled: false,
     fullWidth: false,
     loading: false,
+    tone: "brand",
   },
   argTypes: {
     variant: {
@@ -25,7 +26,8 @@ export default {
     },
     tone: {
       description:
-        "색상 강조 (⚠️ solid: brand/neutral/danger, outline: brand만, ghost: neutral/danger만 지원)",
+        "색상 강조"
+        // (⚠️ solid: brand/neutral/danger, outline: brand만, ghost: neutral/danger만 지원)",
     },
   },
 } satisfies Meta<typeof Button>;
@@ -62,7 +64,7 @@ export const ToneNeutral: StoryObj<typeof Button> = {
     },
     variant: {
       control: "select",
-      options: ["solid","outline","ghost"],
+      options: ["solid", "outline", "ghost"],
       description: "neutral tone은 solid, outline, ghost를 지원합니다",
     },
   },
@@ -80,7 +82,7 @@ export const ToneDanger: StoryObj<typeof Button> = {
     },
     variant: {
       control: "select",
-      options: ["solid","outline","ghost"],
+      options: ["solid", "outline", "ghost"],
       description: "danger tone은 solid, outline, ghost를 지원합니다",
     },
   },

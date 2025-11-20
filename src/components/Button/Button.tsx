@@ -28,28 +28,33 @@ interface BaseButtonProps
   type?: "button" | "submit" | "reset";
 }
 
-/** Solid 버튼 속성 (brand, neutral, danger tone 지원) */
-type SolidButtonProps = BaseButtonProps & {
-  variant?: "solid";
+type ButtonProps = BaseButtonProps & {
+  variant?: "solid" | "outline" | "ghost";
   tone?: "brand" | "neutral" | "danger";
-};
+}
 
-/** Outline 버튼 속성 (brand, neutral, danger tone 지원) */
-type OutlineButtonProps = BaseButtonProps & {
-  variant: "outline";
-  tone?: "brand" | "neutral" | "danger";
-};
+// /** Solid 버튼 속성 (brand, neutral, danger tone 지원) */
+// type SolidButtonProps = BaseButtonProps & {
+//   variant?: "solid";
+//   tone?: "brand" | "neutral" | "danger";
+// };
 
-/** Ghost 버튼 속성 (brand, neutral, danger tone 지원) */
-type GhostButtonProps = BaseButtonProps & {
-  variant: "ghost";
-  tone?: "brand" | "neutral" | "danger";
-};
+// /** Outline 버튼 속성 (brand, neutral, danger tone 지원) */
+// type OutlineButtonProps = BaseButtonProps & {
+//   variant: "outline";
+//   tone?: "brand" | "neutral" | "danger";
+// };
 
-export type ButtonProps =
-  | SolidButtonProps
-  | OutlineButtonProps
-  | GhostButtonProps;
+// /** Ghost 버튼 속성 (brand, neutral, danger tone 지원) */
+// type GhostButtonProps = BaseButtonProps & {
+//   variant: "ghost";
+//   tone?: "brand" | "neutral" | "danger";
+// };
+
+// export type ButtonProps =
+//   | SolidButtonProps
+//   | OutlineButtonProps
+//   | GhostButtonProps;
 
 /**
  * - `variant` 속성으로 버튼의 스타일 종류를 지정할 수 있습니다.
@@ -69,7 +74,7 @@ export const Button = ({
   rightIcon,
   onClick,
   size = "md",
-  tone,
+  tone = "brand",
   type = "button",
   ...rest
 }: ButtonProps) => {
@@ -297,7 +302,6 @@ const styles = cva({
         "&:active": {
           color: "fg.neutral.active",
           backgroundColor: "bg.neutral.active",
-          // borderColor: "border.neutral.active",
         },
       },
     },
@@ -340,7 +344,22 @@ const styles = cva({
         px: "0.9rem",
       },
     },
-    // ghost (neutral, danger만 지원)
+    // ghost
+    {
+      variant: "ghost",
+      tone: "brand",
+      css: {
+        color: "fg.brand",
+        "&:hover": {
+          bg: "bg.brand.hover",
+          color: "fg.brand.hover",
+        },
+        "&:active": {
+          bg: "bg.brand.active",
+          color: "fg.brand.active",
+        },
+      },
+    },
     {
       variant: "ghost",
       tone: "neutral",
