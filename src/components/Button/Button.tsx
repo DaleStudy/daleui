@@ -28,7 +28,7 @@ interface BaseButtonProps
   type?: "button" | "submit" | "reset";
 }
 
-type ButtonProps = BaseButtonProps & {
+export type ButtonProps = BaseButtonProps & {
   variant?: "solid" | "outline" | "ghost";
   tone?: "brand" | "neutral" | "danger";
 };
