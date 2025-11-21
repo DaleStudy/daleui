@@ -33,29 +33,6 @@ export type ButtonProps = BaseButtonProps & {
   tone?: "brand" | "neutral" | "danger";
 };
 
-// /** Solid 버튼 속성 (brand, neutral, danger tone 지원) */
-// type SolidButtonProps = BaseButtonProps & {
-//   variant?: "solid";
-//   tone?: "brand" | "neutral" | "danger";
-// };
-
-// /** Outline 버튼 속성 (brand, neutral, danger tone 지원) */
-// type OutlineButtonProps = BaseButtonProps & {
-//   variant: "outline";
-//   tone?: "brand" | "neutral" | "danger";
-// };
-
-// /** Ghost 버튼 속성 (brand, neutral, danger tone 지원) */
-// type GhostButtonProps = BaseButtonProps & {
-//   variant: "ghost";
-//   tone?: "brand" | "neutral" | "danger";
-// };
-
-// export type ButtonProps =
-//   | SolidButtonProps
-//   | OutlineButtonProps
-//   | GhostButtonProps;
-
 /**
  * - `variant` 속성으로 버튼의 스타일 종류를 지정할 수 있습니다.
  * - `tone` 속성으로 버튼의 색상 강조를 지정할 수 있습니다.

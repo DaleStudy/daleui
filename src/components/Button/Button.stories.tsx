@@ -26,7 +26,6 @@ export default {
     },
     tone: {
       description: "색상 강조",
-      // (⚠️ solid: brand/neutral/danger, outline: brand만, ghost: neutral/danger만 지원)",
     },
   },
 } satisfies Meta<typeof Button>;
