@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { action } from "storybook/internal/actions";
+import { action } from "storybook/actions";
 import { vstack } from "../../../styled-system/patterns";
 import { Icon } from "../Icon/Icon";
 import { Text } from "../Text/Text";
