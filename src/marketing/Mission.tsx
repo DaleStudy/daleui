@@ -1,70 +1,10 @@
 import { css } from "../../styled-system/css";
-import { stack, vstack } from "../../styled-system/patterns";
-import { Icon } from "../components/Icon/Icon";
-import { Text } from "../components/Text/Text";
+import { vstack } from "../../styled-system/patterns";
+import { Card } from "../components/Card/Card";
 import { Heading } from "../components/Heading/Heading";
-import type { IconName } from "../tokens/iconography";
+import { Text } from "../components/Text/Text";
 
-interface CardProps {
-  /** 아이콘 */
-  icon: IconName;
-  /** 제목 */
-  title: string;
-  /** 설명 */
-  description: string;
-}
-
-function Card({ icon, title, description }: CardProps) {
-  return (
-    <div
-      className={stack({
-        align: "start",
-        direction: "column",
-        py: "24",
-        px: "16",
-        borderRadius: "md",
-        alignItems: "flex-start",
-        gap: "24",
-      })}
-    >
-      <div
-        className={css({
-          p: "12",
-          bg: "bg.brand",
-          borderRadius: "lg",
-          display: "inline-flex",
-        })}
-      >
-        <Icon name={icon} size="lg" tone="brand" />
-      </div>
-      <div
-        className={stack({
-          align: "start",
-        })}
-      >
-        <p
-          className={css({
-            textStyle: "body.lg",
-            fontWeight: "semibold",
-            color: "fg.neutral",
-          })}
-        >
-          {title}
-        </p>
-        <p
-          className={css({
-            textStyle: "body.md",
-            color: "fg.neutral",
-          })}
-        >
-          {description}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-const CARDS: CardProps[] = [
+const CARDS = [
   {
     icon: "globe",
     title: "모두를 위한 경험 설계",
@@ -132,7 +72,19 @@ export function Mission() {
           })}
         >
           {CARDS.map((card) => (
-            <Card key={card.title} {...card} />
+            <Card
+              key={card.title}
+              tone="brand"
+              className={css({
+                flex: 1,
+              })}
+            >
+              <Card.Icon name={card.icon} />
+              <Card.Body>
+                <Card.Title>{card.title}</Card.Title>
+                <Card.Description>{card.description}</Card.Description>
+              </Card.Body>
+            </Card>
           ))}
         </div>
       </div>

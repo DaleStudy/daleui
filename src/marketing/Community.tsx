@@ -1,11 +1,8 @@
-import { flex, stack, vstack } from "../../styled-system/patterns";
-import { Icon } from "../components/Icon/Icon";
-import { Link } from "../components/Link/Link";
-import { Tag } from "../components/Tag/Tag";
-import { Text } from "../components/Text/Text";
-import type { IconName } from "../tokens/iconography";
 import { css } from "../../styled-system/css";
+import { vstack } from "../../styled-system/patterns";
+import { Card } from "../components/Card/Card";
 import { Heading } from "../components/Heading/Heading";
+import { Tag } from "../components/Tag/Tag";
 
 const communityCards = [
   {
@@ -85,74 +82,19 @@ export function Community() {
           })}
         >
           {communityCards.map((card) => (
-            <Card key={card.title} {...card} />
+            <Card key={card.title} tone="brand">
+              <Card.Icon name={card.icon} />
+              <Card.Body>
+                <Card.Title>{card.title}</Card.Title>
+                <Card.Description>{card.description}</Card.Description>
+              </Card.Body>
+              <Card.Link href={card.href} external>
+                {card.linkText}
+              </Card.Link>
+            </Card>
           ))}
         </div>
       </div>
     </section>
   );
 }
-
-/**
- * 임시 카드 컴포넌트
- * TODO: 카드 컴포넌트 완료시 제거 필요
- */
-const Card = ({
-  icon,
-  title,
-  description,
-  linkText,
-  href,
-}: {
-  icon: IconName;
-  title: string;
-  description: string;
-  linkText?: string;
-  href?: string;
-}) => {
-  return (
-    <article
-      className={vstack({
-        py: "24",
-        px: "16",
-        gap: "24",
-        flex: "1 0 0",
-        bg: "bg.neutral",
-        borderRadius: "md",
-        alignItems: "flex-start",
-        width: "100%",
-      })}
-    >
-      <div
-        className={flex({
-          p: "12",
-          bg: "bg.brand",
-          borderRadius: "lg",
-          alignItems: "center",
-        })}
-      >
-        <Icon name={icon} tone="brand" size="lg" />
-      </div>
-      <div
-        className={stack({
-          gap: "4",
-          flex: "1 0 0",
-          alignSelf: "stretch",
-        })}
-      >
-        <Text size="lg" weight="semibold" as="p">
-          {title}
-        </Text>
-        <Text size="md" as="p">
-          {description}
-        </Text>
-      </div>
-      {href && (
-        <Link href={href} tone="brand" size="lg" underline={false} external>
-          {linkText}
-          <Icon name="externalLink" tone="brand" size="sm" />
-        </Link>
-      )}
-    </article>
-  );
-};
