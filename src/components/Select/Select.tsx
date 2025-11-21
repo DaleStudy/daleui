@@ -243,7 +243,6 @@ const selectStyles = cva({
       outlineStyle: "solid",
       outlineWidth: "lg",
       outlineOffset: "2",
-      borderRadius: "md",
       outlineColor: "border.brand.focus",
     },
   },
