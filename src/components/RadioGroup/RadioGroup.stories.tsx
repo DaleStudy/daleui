@@ -7,6 +7,10 @@ export default {
   component: RadioGroup,
   parameters: {
     layout: "centered",
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/Dale-UI-Kit?node-id=851-1771",
+    },
   },
   args: {
     name: "fruits",
@@ -36,101 +40,79 @@ export const WithDefaultValue: Story = {
   },
 };
 
-export const Horizontal: Story = {
-  args: {
-    orientation: "horizontal",
+export const Orientation: Story = {
+  render: () => {
+    return (
+      <div
+        className={css({ display: "flex", flexDirection: "column", gap: "32" })}
+      >
+        <RadioGroup
+          name="vertical-orientation"
+          label="세로 방향 (Vertical)"
+          orientation="vertical"
+          defaultValue="apple"
+        >
+          <Radio value="apple">사과</Radio>
+          <Radio value="banana">바나나</Radio>
+          <Radio value="orange">오렌지</Radio>
+        </RadioGroup>
+
+        <RadioGroup
+          name="horizontal-orientation"
+          label="가로 방향 (Horizontal)"
+          orientation="horizontal"
+          defaultValue="banana"
+        >
+          <Radio value="apple">사과</Radio>
+          <Radio value="banana">바나나</Radio>
+          <Radio value="orange">오렌지</Radio>
+        </RadioGroup>
+      </div>
+    );
   },
 };
 
 export const GroupDisabled: Story = {
   args: {
     disabled: true,
+    defaultValue: "banana",
+    label: "전체 그룹 비활성화",
   },
 };
 
 export const ItemDisabled: Story = {
-  args: {
-    children: (
-      <>
-        <Radio value="apple">사과</Radio>
-        <Radio value="banana" disabled>
-          바나나
-        </Radio>
-        <Radio value="orange">오렌지</Radio>
-      </>
-    ),
-  },
-};
-
-export const Required: Story = {
-  args: {
-    required: true,
-    label: "필수 선택 항목 - 좋아하는 과일을 선택하세요",
-  },
-};
-
-Required.decorators = [
-  (StoryFn) => {
-    const [submitted, setSubmitted] = useState(false);
-    const [formValid, setFormValid] = useState(false);
-
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
-      const form = e.target as HTMLFormElement;
-
-      // Check if the form is valid (browser validation passed)
-      if (form.checkValidity()) {
-        setFormValid(true);
-        // Get the selected radio value
-        const formData = new FormData(form);
-        console.log("Form submitted with value:", formData.get("fruits"));
-      } else {
-        setFormValid(false);
-      }
-
-      setSubmitted(true);
-    };
-
+  render: () => {
     return (
-      <div className={css({ minWidth: "300px" })}>
-        <form onSubmit={handleSubmit} noValidate>
-          <StoryFn />
-          <div className={css({ marginTop: "20" })}>
-            <button
-              type="submit"
-              className={css({
-                paddingX: "16",
-                paddingY: "8",
-                backgroundColor: "#2E7D32",
-                color: "white",
-                border: "none",
-                borderRadius: "sm",
-                cursor: "pointer",
-              })}
-            >
-              제출하기
-            </button>
-          </div>
-          {submitted && (
-            <div
-              className={css({
-                marginTop: "20",
-                padding: "8",
-                backgroundColor: formValid ? "#E8F5E9" : "#FFEBEE",
-                color: formValid ? "#2E7D32" : "#C62828",
-                borderRadius: "sm",
-              })}
-            >
-              {formValid
-                ? "✅ 폼이 성공적으로 제출되었습니다."
-                : "⚠️ 필수 항목을 선택해주세요."}
-            </div>
-          )}
-        </form>
+      <div
+        className={css({ display: "flex", flexDirection: "column", gap: "32" })}
+      >
+        <RadioGroup
+          name="disabled-checked"
+          label="개별 아이템 비활성화 (선택됨)"
+          defaultValue="banana"
+        >
+          <Radio value="apple">사과</Radio>
+          <Radio value="banana" disabled>
+            바나나 (disabled)
+          </Radio>
+          <Radio value="orange">오렌지</Radio>
+        </RadioGroup>
+
+        <RadioGroup
+          name="disabled-unchecked"
+          label="개별 아이템 비활성화 (선택 안 됨)"
+          defaultValue="apple"
+        >
+          <Radio value="apple">사과</Radio>
+          <Radio value="banana" disabled>
+            바나나 (disabled)
+          </Radio>
+          <Radio value="orange">오렌지</Radio>
+        </RadioGroup>
       </div>
     );
   },
-];
+};
 
 export const Tones: Story = {
   render: () => {
