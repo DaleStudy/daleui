@@ -3,6 +3,7 @@ import { stack, vstack } from "../../styled-system/patterns";
 import { Icon } from "../components/Icon/Icon";
 import { Text } from "../components/Text/Text";
 import { Heading } from "../components/Heading/Heading";
+import { VStack } from "../components/VStack/VStack";
 import type { IconName } from "../tokens/iconography";
 
 interface CardProps {
@@ -37,11 +38,7 @@ function Card({ icon, title, description }: CardProps) {
       >
         <Icon name={icon} size="lg" tone="brand" />
       </div>
-      <div
-        className={stack({
-          align: "start",
-        })}
-      >
+      <VStack align="left" gap="4">
         <p
           className={css({
             textStyle: "body.lg",
@@ -59,7 +56,7 @@ function Card({ icon, title, description }: CardProps) {
         >
           {description}
         </p>
-      </div>
+      </VStack>
     </div>
   );
 }
