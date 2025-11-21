@@ -62,30 +62,22 @@ export const Default: Story = {};
 
 export const Direction: Story = {
   render: (args) => (
-    <div className={grid({ gridTemplateRows: "repeat(4, 1fr)", gap: "24" })}>
+    <div className={grid({ gridTemplateRows: "repeat(4, 1fr)", gap: "16" })}>
       <div>
         <h4>row - 가로 방향</h4>
-        <Flex {...args} direction="row" className={css({ width: "400" })} />
+        <Flex {...args} direction="row" />
       </div>
       <div>
         <h4>column - 세로 방향</h4>
-        <Flex {...args} direction="column" className={css({ width: "160" })} />
+        <Flex {...args} direction="column" />
       </div>
       <div>
         <h4>rowReverse - 가로 역방향</h4>
-        <Flex
-          {...args}
-          direction="rowReverse"
-          className={css({ width: "400" })}
-        />
+        <Flex {...args} direction="rowReverse" />
       </div>
       <div>
         <h4>columnReverse - 세로 역방향</h4>
-        <Flex
-          {...args}
-          direction="columnReverse"
-          className={css({ width: "160" })}
-        />
+        <Flex {...args} direction="columnReverse" />
       </div>
     </div>
   ),
@@ -99,15 +91,15 @@ export const Gaps: Story = {
     <div className={grid({ gridTemplateRows: "repeat(3, 1fr)", gap: "16" })}>
       <div>
         <h4>간격 4</h4>
-        <Flex {...args} gap="4" className={css({ width: "400" })} />
+        <Flex {...args} gap="4" />
       </div>
       <div>
         <h4>간격 8</h4>
-        <Flex {...args} gap="8" className={css({ width: "400" })} />
+        <Flex {...args} gap="8" />
       </div>
       <div>
         <h4>간격 16</h4>
-        <Flex {...args} gap="16" className={css({ width: "400" })} />
+        <Flex {...args} gap="16" />
       </div>
     </div>
   ),
@@ -115,11 +107,12 @@ export const Gaps: Story = {
     children: { control: false },
     gap: { control: false },
   },
+  args: {},
 };
 
 export const Justify: Story = {
   render: (args) => (
-    <div className={grid({ gridTemplateRows: "repeat(4, 1fr)", gap: "24" })}>
+    <div className={grid({ gridTemplateRows: "repeat(4, 1fr)", gap: "16" })}>
       <div>
         <h4>start - 시작점 정렬</h4>
         <Flex {...args} justify="start" />
@@ -143,44 +136,27 @@ export const Justify: Story = {
   },
   args: {
     gap: "4",
-    className: css({ width: "500" }),
   },
 };
 
 export const Align: Story = {
   render: (args) => (
-    <div className={grid({ gridTemplateColumns: "repeat(4, 1fr)", gap: "16" })}>
+    <div className={grid({ gridTemplateRows: "repeat(4, 1fr)", gap: "16" })}>
       <div>
         <h4>start - 시작점 정렬</h4>
-        <Flex
-          {...args}
-          align="start"
-          className={css({ width: "120", height: "200" })}
-        />
+        <Flex {...args} align="start" />
       </div>
       <div>
         <h4>center - 중앙 정렬</h4>
-        <Flex
-          {...args}
-          align="center"
-          className={css({ width: "120", height: "200" })}
-        />
+        <Flex {...args} align="center" />
       </div>
       <div>
         <h4>end - 끝점 정렬</h4>
-        <Flex
-          {...args}
-          align="end"
-          className={css({ width: "120", height: "200" })}
-        />
+        <Flex {...args} align="end" />
       </div>
       <div>
         <h4>stretch - 늘리기</h4>
-        <Flex
-          {...args}
-          align="stretch"
-          className={css({ width: "120", height: "200" })}
-        />
+        <Flex {...args} align="stretch" />
       </div>
     </div>
   ),
@@ -188,7 +164,6 @@ export const Align: Story = {
     align: { control: false },
   },
   args: {
-    direction: "column",
     gap: "4",
   },
 };
