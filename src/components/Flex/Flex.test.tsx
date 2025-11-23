@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { Flex, type FlexProps } from "./Flex";
-import { spacing, type Spacing } from "../../tokens/spacing";
+import { type Spacing, spacing } from "../../tokens/spacing";
 
 describe("Flex 렌더링", () => {
   test("자식 요소들을 렌더링한다", () => {

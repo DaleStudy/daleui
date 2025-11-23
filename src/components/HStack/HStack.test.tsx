@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
-import { spacing, type Spacing } from "../../tokens/spacing";
+import { type Spacing, spacing } from "../../tokens/spacing";
 import { HStack, type HStackProps } from "./HStack";
 
 describe("HStack 렌더링", () => {
