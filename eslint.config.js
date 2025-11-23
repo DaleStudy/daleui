@@ -34,10 +34,6 @@ export default tseslint.config(
             "external",
             ["internal", "parent", "sibling", "index"],
           ],
-          pathGroups: [
-            { pattern: "@/**", group: "internal", position: "after" },
-          ],
-          pathGroupsExcludedImportTypes: ["builtin"],
         },
       ],
       "sort-imports": [
