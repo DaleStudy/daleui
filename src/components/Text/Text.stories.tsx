@@ -13,19 +13,6 @@ export default {
   argTypes: {
     children: {
       control: "text",
-      description: "텍스트 내용",
-    },
-    tone: {
-      control: "select",
-      description: "텍스트의 색조",
-    },
-    size: {
-      control: "select",
-      description: "텍스트의 크기",
-    },
-    weight: {
-      control: "select",
-      description: "텍스트의 굵기",
     },
   },
 } satisfies Meta<typeof Text>;

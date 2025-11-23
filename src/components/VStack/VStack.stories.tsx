@@ -28,12 +28,10 @@ export default {
   tags: ["autodocs"],
   argTypes: {
     children: { control: false },
-    as: { control: "select" },
     align: {
-      control: "select",
       description: "교차축 정렬 방식 (가로 정렬)",
     },
-    reversed: { control: "boolean", description: "세로 배치 방향" },
+    reversed: { description: "세로 배치 방향" },
     gap: { control: "select", options: Object.keys(spacing || {}) },
     className: { control: false },
   },

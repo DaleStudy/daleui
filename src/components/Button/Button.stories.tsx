@@ -20,24 +20,12 @@ export default {
     loading: false,
   },
   argTypes: {
-    children: {
-      control: "text",
-      description: "버튼 텍스트",
-    },
     variant: {
-      control: "select",
-      options: ["solid", "outline", "ghost"],
       description: "버튼의 스타일 종류",
     },
     tone: {
-      control: "select",
-      options: ["brand", "neutral", "danger"],
       description:
         "색상 강조 (⚠️ solid: brand/neutral/danger, outline: brand만, ghost: neutral/danger만 지원)",
-    },
-    size: {
-      control: "select",
-      description: "버튼의 크기",
     },
   },
 } satisfies Meta<typeof Button>;
