@@ -3,6 +3,7 @@ import { VStack } from "./VStack";
 import { css } from "../../../styled-system/css";
 import { grid } from "../../../styled-system/patterns";
 import { spacing } from "../../tokens/spacing";
+import { HStack } from "../HStack/HStack";
 
 const Item = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -29,7 +30,7 @@ export default {
   argTypes: {
     children: { control: false },
     align: {
-      description: "교차축 정렬 방식 (가로 정렬)",
+      description: "주축 정렬 방식 (세로 정렬)",
     },
     reversed: { description: "세로 배치 방향" },
     gap: { control: "select", options: Object.keys(spacing || {}) },
@@ -38,7 +39,7 @@ export default {
   args: {
     as: "div",
     reversed: false,
-    align: "center",
+    align: "top",
     gap: "8",
     children: (
       <>
@@ -46,7 +47,7 @@ export default {
         <Item>아이템 2</Item>
       </>
     ),
-    className: css({ width: "160" }),
+    className: css({ height: "160" }),
   },
 } satisfies Meta<typeof VStack>;
 
@@ -55,29 +56,38 @@ export const Default: Story = {};
 
 export const Gaps: Story = {
   render: (args) => (
-    <VStack gap="8" align="center">
-      <h4>간격 2</h4>
-      <VStack {...args} gap="4" />
-      <h4>간격 8</h4>
-      <VStack {...args} gap="8" />
-      <h4>간격 16</h4>
-      <VStack {...args} gap="16" />
-    </VStack>
+    <HStack gap="24" align="center">
+      <div>
+        <h4>간격 2</h4>
+        <VStack {...args} gap="4" />
+      </div>
+      <div>
+        <h4>간격 8</h4>
+        <VStack {...args} gap="8" />
+      </div>
+      <div>
+        <h4>간격 16</h4>
+        <VStack {...args} gap="16" />
+      </div>
+    </HStack>
   ),
   argTypes: {
-    children: { control: false },
     gap: { control: false },
   },
 };
 
 export const Reverse: Story = {
   render: (args) => (
-    <VStack gap="8" align="center">
-      <h4>false</h4>
-      <VStack {...args} reversed={false} />
-      <h4>true</h4>
-      <VStack {...args} reversed={true} />
-    </VStack>
+    <HStack gap="24" align="center">
+      <div>
+        <h4>false</h4>
+        <VStack {...args} reversed={false} />
+      </div>
+      <div>
+        <h4>true</h4>
+        <VStack {...args} reversed={true} />
+      </div>
+    </HStack>
   ),
   argTypes: {
     reversed: { control: false },
@@ -86,10 +96,15 @@ export const Reverse: Story = {
 
 export const Align: Story = {
   render: (args) => (
-    <div className={grid({ gridTemplateColumns: "repeat(4, 1fr)", gap: "16" })}>
+    <div className={grid({ gridTemplateColumns: "repeat(3, 1fr)", gap: "16" })}>
       <div>
-        <h4>left - 왼쪽 정렬</h4>
-        <VStack {...args} align="left" />
+        <h4>top - 위쪽 정렬</h4>
+        <VStack {...args} align="top" />
+      </div>
+
+      <div>
+        <h4>bottom - 아래쪽 정렬</h4>
+        <VStack {...args} align="bottom" />
       </div>
 
       <div>
@@ -98,21 +113,16 @@ export const Align: Story = {
       </div>
 
       <div>
-        <h4>right - 오른쪽 정렬</h4>
-        <VStack {...args} align="right" />
+        <h4>between - 양 끝 정렬</h4>
+        <VStack {...args} align="between" />
       </div>
-
       <div>
-        <h4>stretch - 균등 분할</h4>
-        <VStack {...args} align="stretch" />
+        <h4>around - 균등 분산</h4>
+        <VStack {...args} align="around" />
       </div>
     </div>
   ),
   argTypes: {
     align: { control: false },
-  },
-  args: {
-    gap: "4",
-    className: css({ width: "160" }),
   },
 };

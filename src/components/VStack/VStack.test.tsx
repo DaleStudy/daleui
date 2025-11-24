@@ -49,10 +49,11 @@ describe("클래스 토큰 및 스타일", () => {
 
   type Align = VStackProps["align"];
   const aligns: [Align, string][] = [
-    ["left", "ai_start"],
-    ["center", "ai_center"],
-    ["right", "ai_end"],
-    ["stretch", "ai_stretch"],
+    ["top", "jc_flex-start"],
+    ["center", "jc_center"],
+    ["bottom", "jc_flex-end"],
+    ["between", "jc_space-between"],
+    ["around", "jc_space-around"],
   ];
   test.each(aligns)(
     "alignItems=%s이면 ai_%s 클래스가 적용된다",
@@ -67,15 +68,17 @@ describe("클래스 토큰 및 스타일", () => {
   );
 
   const gaps = Object.keys(spacing || {}) as Spacing[];
-  test.each(gaps)("gap=%s이면 gap_%s 클래스가 적용된다", (gap) => {
-    render(
-      <VStack data-testid="gap" gap={gap}>
-        <span>child</span>
-      </VStack>,
-    );
-
-    expect(screen.getByTestId("gap").className).toMatch(`gap_${gap}`);
-  });
+  test.each(gaps.map((gap) => [gap, `gap_${gap}`]))(
+    "gap=%s이면 %s 클래스가 적용된다",
+    (gap, className) => {
+      render(
+        <VStack data-testid="gap" gap={gap}>
+          <span>child</span>
+        </VStack>,
+      );
+      expect(screen.getByTestId("gap").className).toMatch(className);
+    },
+  );
 });
 
 describe("VStack 접근성", () => {
