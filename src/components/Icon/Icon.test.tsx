@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { expect, test } from "vitest";
-import { icons, type IconName } from "../../tokens/iconography";
+import { type IconName, icons } from "../../tokens/iconography";
 import { Icon } from "./Icon";
 
 test.each(Object.keys(icons) as IconName[])(

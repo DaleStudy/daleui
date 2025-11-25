@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { VStack, type VStackProps } from "./VStack";
-import { spacing, type Spacing } from "../../tokens/spacing";
+import { type Spacing, spacing } from "../../tokens/spacing";
 
 describe("VStack 렌더링", () => {
   test("Default 스토리가 자식들을 렌더링한다", () => {
