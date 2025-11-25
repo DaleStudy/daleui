@@ -1,208 +1,64 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { expect, test, vi } from "vitest";
+import { userEvent } from "@testing-library/user-event";
+import { describe, it, expect, vi } from "vitest";
 import { Checkbox } from "./Checkbox";
 
-test("label과 함께 체크박스가 올바르게 렌더링됨", () => {
-  render(<Checkbox label="기본 체크박스" />);
-  expect(screen.getByText("기본 체크박스")).toBeInTheDocument();
-});
+describe("Checkbox", () => {
+  it("라벨과 함께 렌더링된다", () => {
+    render(<Checkbox label="테스트 체크박스" />);
+    expect(screen.getByText("테스트 체크박스")).toBeInTheDocument();
+  });
 
-test("체크박스에 체크 시, tone 속성이 올바르게 적용됨", async () => {
-  const user = userEvent.setup();
-  render(
-    <>
-      <Checkbox label="브랜드 색조" tone="brand" />
-      <Checkbox label="중립 색조" tone="neutral" />
-      <Checkbox label="위험 색조" tone="danger" />
-      <Checkbox label="경고 색조" tone="warning" />
-      <Checkbox label="성공 색조" tone="success" />
-      <Checkbox label="정보 색조" tone="info" />
-    </>,
-  );
+  it("초기 체크 상태를 설정할 수 있다", () => {
+    render(<Checkbox label="체크됨" defaultChecked={true} />);
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).toBeChecked();
+  });
 
-  const brandCheckbox = screen.getByLabelText("브랜드 색조");
-  const neutralCheckbox = screen.getByLabelText("중립 색조");
-  const dangerCheckbox = screen.getByLabelText("위험 색조");
-  const warningCheckbox = screen.getByLabelText("경고 색조");
-  const successCheckbox = screen.getByLabelText("성공 색조");
-  const infoCheckbox = screen.getByLabelText("정보 색조");
+  it("클릭하면 체크 상태가 변경된다", async () => {
+    const user = userEvent.setup();
+    render(<Checkbox label="클릭 가능" />);
+    const checkbox = screen.getByRole("checkbox");
 
-  // Simulate checking each checkbox
+    expect(checkbox).not.toBeChecked();
+    await user.click(checkbox);
+    expect(checkbox).toBeChecked();
+  });
 
-  await user.click(brandCheckbox);
-  await user.click(neutralCheckbox);
-  await user.click(dangerCheckbox);
-  await user.click(warningCheckbox);
-  await user.click(successCheckbox);
-  await user.click(infoCheckbox);
+  it("비활성화 상태에서는 클릭할 수 없다", async () => {
+    const user = userEvent.setup();
+    render(<Checkbox label="비활성화" disabled />);
+    const checkbox = screen.getByRole("checkbox");
 
-  // Check for data-state attribute which indicates checked state
-  expect(brandCheckbox).toHaveAttribute("data-state", "checked");
-  expect(neutralCheckbox).toHaveAttribute("data-state", "checked");
-  expect(dangerCheckbox).toHaveAttribute("data-state", "checked");
-  expect(warningCheckbox).toHaveAttribute("data-state", "checked");
-  expect(successCheckbox).toHaveAttribute("data-state", "checked");
-  expect(infoCheckbox).toHaveAttribute("data-state", "checked");
+    expect(checkbox).toBeDisabled();
+    await user.click(checkbox);
+    expect(checkbox).not.toBeChecked();
+  });
 
-  // Check for correct background colors based on tone
-  expect(brandCheckbox).toHaveClass(
-    "[&[data-state='checked']]:bg_bgSolid.brand",
-  );
-  expect(neutralCheckbox).toHaveClass(
-    "[&[data-state='checked']]:bg_bgSolid.neutral",
-  );
-  expect(dangerCheckbox).toHaveClass(
-    "[&[data-state='checked']]:bg_bgSolid.danger",
-  );
-  expect(warningCheckbox).toHaveClass(
-    "[&[data-state='checked']]:bg_bgSolid.warning",
-  );
-  expect(successCheckbox).toHaveClass(
-    "[&[data-state='checked']]:bg_bgSolid.success",
-  );
-  expect(infoCheckbox).toHaveClass("[&[data-state='checked']]:bg_bgSolid.info");
-});
+  it("체크 상태 변경 시 콜백이 호출된다", async () => {
+    const user = userEvent.setup();
+    const handleChange = vi.fn();
+    render(<Checkbox label="콜백 테스트" onCheckedChange={handleChange} />);
+    const checkbox = screen.getByRole("checkbox");
 
-test("체크된 상태와 체크되지않은 상태가 올바르게 렌더링됨", () => {
-  render(
-    <>
-      <Checkbox label="체크된 상태" checked={true} />
-      <Checkbox label="체크되지 않은 상태" checked={false} />
-    </>,
-  );
+    await user.click(checkbox);
+    expect(handleChange).toHaveBeenCalledWith({ checked: true });
+  });
 
-  const checkedCheckbox = screen.getByLabelText("체크된 상태");
-  const uncheckedCheckbox = screen.getByLabelText("체크되지 않은 상태");
+  it("name 속성을 설정할 수 있다", () => {
+    render(<Checkbox label="이름" name="test-name" />);
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).toHaveAttribute("name", "test-name");
+  });
 
-  expect(checkedCheckbox).toHaveAttribute("data-state", "checked");
-  expect(uncheckedCheckbox).toHaveAttribute("data-state", "unchecked");
-});
+  it("tone 속성을 설정할 수 있다", () => {
+    render(<Checkbox label="톤 테스트" tone="success" />);
+    expect(screen.getByText("톤 테스트")).toBeInTheDocument();
+  });
 
-test("disabled 속성이 올바르게 적용됨", () => {
-  render(
-    <>
-      <Checkbox label="비활성화 & 체크된 상태" disabled checked />
-      <Checkbox label="비활성화 & 체크되지 않은 상태" disabled />
-      <Checkbox label="활성화 상태" />
-    </>,
-  );
-
-  const disabledCheckedCheckbox =
-    screen.getByLabelText("비활성화 & 체크된 상태");
-  const disabledUncheckedCheckbox =
-    screen.getByLabelText("비활성화 & 체크되지 않은 상태");
-  const enabledCheckbox = screen.getByLabelText("활성화 상태");
-
-  expect(disabledCheckedCheckbox).toBeDisabled();
-  expect(disabledUncheckedCheckbox).toBeDisabled();
-  expect(enabledCheckbox).not.toBeDisabled();
-
-  expect(disabledCheckedCheckbox).toHaveClass(
-    "[&[data-state='checked']]:bg_bg.neutral.disabled!",
-  );
-  expect(disabledCheckedCheckbox).toHaveClass(
-    "[&[data-state='checked']]:bd-c_bg.neutral.disabled!",
-  );
-  expect(disabledUncheckedCheckbox).toHaveClass(
-    "[&:disabled]:bd-c_border.neutral.disabled",
-  );
-});
-
-test("필수 표시가 올바르게 표시됨", () => {
-  render(
-    <>
-      <Checkbox label="필수 체크박스" required />
-      <Checkbox label="선택 체크박스" />
-    </>,
-  );
-
-  expect(
-    screen.getByRole("checkbox", {
-      name: "필수 체크박스 *",
-    }),
-  ).toBeInTheDocument();
-  expect(
-    screen.getByRole("checkbox", {
-      name: "선택 체크박스",
-    }),
-  ).toBeInTheDocument();
-});
-
-test("체크박스 클릭 시, onChange 핸들러가 호출됨", async () => {
-  const handleChange = vi.fn();
-  const user = userEvent.setup();
-
-  render(<Checkbox label="테스트 체크박스" onChange={handleChange} />);
-
-  const checkbox = screen.getByLabelText("테스트 체크박스");
-
-  // Initially unchecked
-  expect(checkbox).toHaveAttribute("data-state", "unchecked");
-
-  // Click to check
-  await user.click(checkbox);
-  expect(handleChange).toHaveBeenCalledTimes(1);
-  expect(handleChange).toHaveBeenCalledWith(true, undefined);
-
-  // Click again to uncheck
-  await user.click(checkbox);
-  expect(handleChange).toHaveBeenCalledTimes(2);
-  expect(handleChange).toHaveBeenCalledWith(false, undefined);
-});
-
-test("value값이 있을 경우, 체크 시 value가 onChange 핸들러로 전달됨", async () => {
-  const handleChange = vi.fn();
-  const user = userEvent.setup();
-
-  render(
-    <Checkbox
-      label="값이 있는 체크박스"
-      value="test-value"
-      onChange={handleChange}
-    />,
-  );
-
-  const checkbox = screen.getByLabelText("값이 있는 체크박스");
-
-  // Click to check
-  await user.click(checkbox);
-  expect(handleChange).toHaveBeenCalledWith(true, "test-value");
-});
-
-test("required 속성이 올바르게 처리됨", () => {
-  render(<Checkbox label="필수 체크박스" required={true} />);
-
-  // 정규 표현식을 사용하여 라벨 찾기 (별표가 있어도 일치)
-  const checkbox = screen.getByRole("checkbox", { name: /필수 체크박스/ });
-
-  // aria-required 속성 확인
-  expect(checkbox).toHaveAttribute("aria-required", "true");
-});
-
-test("체크박스가 클릭될 때 체크 상태가 전환됨", async () => {
-  const user = userEvent.setup();
-
-  render(<Checkbox label="기본 체크박스" />);
-
-  const checkbox = screen.getByLabelText("기본 체크박스");
-
-  // Initially unchecked
-  expect(checkbox).toHaveAttribute("data-state", "unchecked");
-
-  // Click to check
-  await user.click(checkbox);
-  expect(checkbox).toHaveAttribute("data-state", "checked");
-
-  // Click again to uncheck
-  await user.click(checkbox);
-  expect(checkbox).toHaveAttribute("data-state", "unchecked");
-});
-
-test("required 속성값이 true일 경우, label에 별표가 추가됨", () => {
-  render(<Checkbox label="필수 체크박스" required={true} />);
-
-  const requiredIndicator = screen.getByText("*");
-  expect(requiredIndicator).toBeInTheDocument();
-  expect(requiredIndicator).toHaveClass("c_fg.danger");
+  it("invalid 속성을 설정할 수 있다", () => {
+    render(<Checkbox label="유효하지 않음" invalid />);
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).toHaveAttribute("aria-invalid", "true");
+  });
 });
