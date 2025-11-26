@@ -1,10 +1,10 @@
 import {
+  type HTMLAttributes,
   type Ref,
   useCallback,
   useEffect,
   useRef,
   useState,
-  type HTMLAttributes,
 } from "react";
 import { cva } from "../../../styled-system/css";
 import { Icon } from "../Icon/Icon";

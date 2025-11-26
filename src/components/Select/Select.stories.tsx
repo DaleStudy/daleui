@@ -20,8 +20,24 @@ export default {
     required: false,
     invalid: false,
     clearButtonName: undefined,
-    placeholder: "라이브러리를 선택하세요",
-    "aria-label": "라이브러리를 선택하세요",
+    placeholder: "국가를 선택하세요",
+    "aria-label": "국가를 선택하세요",
+    children: (
+      <>
+        <option value="kr">대한민국</option>
+        <option value="ca">캐나다</option>
+        <option value="us">미국</option>
+        <option value="jp">일본</option>
+        <option value="cn">중국</option>
+        <option value="gb">영국</option>
+        <option value="fr">프랑스</option>
+        <option value="de">독일</option>
+        <option value="it">이탈리아</option>
+        <option value="es">스페인</option>
+        <option value="au">호주</option>
+        <option value="br">브라질</option>
+      </>
+    ),
   },
 } satisfies Meta<typeof Select>;
 
@@ -34,11 +50,7 @@ type Story = StoryObj<typeof Select>;
 export const Default: Story = {
   render: (args) => (
     <div className={css({ w: "280px" })}>
-      <Select {...args}>
-        <option value="react">React</option>
-        <option value="vue">Vue</option>
-        <option value="svelte">Svelte</option>
-      </Select>
+      <Select {...args} />
     </div>
   ),
 };
@@ -49,11 +61,7 @@ export const Default: Story = {
 export const WithDefaultValue: Story = {
   render: (args) => (
     <div className={css({ w: "280px" })}>
-      <Select {...args}>
-        <option value="react">React</option>
-        <option value="vue">Vue</option>
-        <option value="svelte">Svelte</option>
-      </Select>
+      <Select {...args} />
     </div>
   ),
   argTypes: {
@@ -75,11 +83,7 @@ const ControlledSelect = (args: React.ComponentProps<typeof Select>) => {
         {...args}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-      >
-        <option value="react">React</option>
-        <option value="vue">Vue</option>
-        <option value="svelte">Svelte</option>
-      </Select>
+      />
       <div className={css({ mt: "16", fontSize: "sm" })}>
         <p>선택된 값: {value || "없음"}</p>
       </div>
@@ -107,26 +111,19 @@ export const Controlled: Story = {
 export const Disabled: Story = {
   render: (args) => (
     <VStack gap="16" className={css({ w: "280px" })}>
-      <Select {...args} defaultValue="react">
-        <option value="react">React</option>
-        <option value="vue">Vue</option>
-        <option value="svelte">Svelte</option>
-      </Select>
-      <Select {...args} placeholder="비활성화된 선택">
-        <option value="react">React</option>
-        <option value="vue">Vue</option>
-      </Select>
-
+      <Select {...args} defaultValue="react" />
+      <Select {...args} placeholder="비활성화된 선택" />
       <Select {...args} disabled={false} placeholder="일부 옵션을 disabled">
-        <option value="react">React</option>
-        <option value="vue" disabled>
-          Vue
+        <option value="ko">대한민국</option>
+        <option value="ca">캐나다</option>
+        <option value="us" disabled>
+          미국
         </option>
-        <option value="svelte">Svelte</option>
-        <option value="angular" disabled>
-          Angular
+        <option value="jp" disabled>
+          일본
         </option>
-        <option value="solid">Solid</option>
+        <option value="cn">중국</option>
+        <option value="gb">영국</option>
       </Select>
     </VStack>
   ),
@@ -149,11 +146,7 @@ export const Invalid: Story = {
   },
   render: (args) => (
     <div className={css({ w: "280px" })}>
-      <Select {...args}>
-        <option value="react">React</option>
-        <option value="vue">Vue</option>
-        <option value="svelte">Svelte</option>
-      </Select>
+      <Select {...args} />
     </div>
   ),
   argTypes: {
@@ -180,11 +173,7 @@ const RequiredSelect = (args: React.ComponentProps<typeof Select>) => {
       noValidate
       className={css({ w: "280px", spaceY: "16" })}
     >
-      <Select {...args} invalid={isInvalid}>
-        <option value="react">React</option>
-        <option value="vue">Vue</option>
-        <option value="svelte">Svelte</option>
-      </Select>
+      <Select {...args} invalid={isInvalid} />
       {isInvalid && (
         <div className={css({ mt: "16", fontSize: "sm", color: "fg.danger" })}>
           <p>필수 항목을 선택해주세요.</p>
@@ -218,10 +207,7 @@ export const Required: Story = {
 export const Clearable: Story = {
   render: (args) => (
     <div className={css({ w: "280px" })}>
-      <Select {...args}>
-        <option value="react">React</option>
-        <option value="vue">Vue</option>
-      </Select>
+      <Select {...args} />
     </div>
   ),
   argTypes: {
@@ -236,50 +222,23 @@ export const Clearable: Story = {
 };
 
 /**
- * 많은 옵션을 가진 Select 컴포넌트입니다.
- */
-export const WithManyOptions: Story = {
-  render: (args) => (
-    <div className={css({ w: "280px" })}>
-      <Select {...args}>
-        <option value="kr">대한민국</option>
-        <option value="us">미국</option>
-        <option value="jp">일본</option>
-        <option value="cn">중국</option>
-        <option value="gb">영국</option>
-        <option value="fr">프랑스</option>
-        <option value="de">독일</option>
-        <option value="it">이탈리아</option>
-        <option value="es">스페인</option>
-        <option value="ca">캐나다</option>
-        <option value="au">호주</option>
-        <option value="br">브라질</option>
-      </Select>
-    </div>
-  ),
-  args: {
-    placeholder: "국가를 선택하세요",
-  },
-};
-
-/**
  * 텍스트가 너무 길 때 ellipsis 처리됩니다.
  */
 export const OverflowText: Story = {
   render: (args) => (
     <div className={css({ w: "280px" })}>
       <Select {...args}>
-        <option value="react">
-          React is a JavaScript library for building user interfaces.
+        <option value="ko">
+          대한민국은 동아시아에 위치한 국가로 수도는 서울입니다.
         </option>
-        <option value="vue">
-          Vue is a progressive framework for building user interfaces.
+        <option value="ca">
+          캐나다는 북미 대륙에 위치한 국가로 수도는 오타와입니다.
         </option>
       </Select>
     </div>
   ),
   args: {
-    placeholder: "Overflow placeholder text will be shown on hover",
+    placeholder: "오버플로우 처리가 제대로 되는지 확인할 수 있습니다.",
     clearButtonName: "clear",
   },
 };
