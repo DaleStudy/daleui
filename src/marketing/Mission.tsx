@@ -1,66 +1,10 @@
 import { css } from "../../styled-system/css";
-import { vstack } from "../../styled-system/patterns";
 import { Card } from "../components/Card/Card";
 import { Heading } from "../components/Heading/Heading";
 import { VStack } from "../components/VStack/VStack";
-import type { IconName } from "../tokens/iconography";
+import { Text } from "../components/Text/Text";
 
-interface CardProps {
-  /** 아이콘 */
-  icon: IconName;
-  /** 제목 */
-  title: string;
-  /** 설명 */
-  description: string;
-}
-
-function Card({ icon, title, description }: CardProps) {
-  return (
-    <div
-      className={stack({
-        align: "start",
-        direction: "column",
-        py: "24",
-        px: "16",
-        borderRadius: "md",
-        alignItems: "flex-start",
-        gap: "24",
-      })}
-    >
-      <div
-        className={css({
-          p: "12",
-          bg: "bg.brand",
-          borderRadius: "lg",
-          display: "inline-flex",
-        })}
-      >
-        <Icon name={icon} size="lg" tone="brand" />
-      </div>
-      <VStack align="left" gap="4">
-        <p
-          className={css({
-            textStyle: "body.lg",
-            fontWeight: "semibold",
-            color: "fg.neutral",
-          })}
-        >
-          {title}
-        </p>
-        <p
-          className={css({
-            textStyle: "body.md",
-            color: "fg.neutral",
-          })}
-        >
-          {description}
-        </p>
-      </VStack>
-    </div>
-  );
-}
-
-const CARDS: CardProps[] = [
+const CARDS = [
   {
     icon: "globe",
     title: "모두를 위한 경험 설계",
@@ -89,9 +33,10 @@ const CARDS: CardProps[] = [
 
 export function Mission() {
   return (
-    <section
+    <VStack
+      as="section"
       id="mission"
-      className={vstack({
+      className={css({
         py: { base: "80px" },
         alignSelf: "stretch",
         width: "100%",
@@ -102,11 +47,11 @@ export function Mission() {
         mx: "auto",
       })}
     >
-      <div
-        className={vstack({
-          gap: "72px",
+      <VStack
+        className={css({
           width: "100%",
           px: { base: "16", sm: "24" },
+          gap: "72px",
         })}
       >
         <Heading align="center" wordBreak="cjk" level={2}>
@@ -143,7 +88,7 @@ export function Mission() {
             </Card>
           ))}
         </div>
-      </div>
-    </section>
+      </VStack>
+    </VStack>
   );
 }

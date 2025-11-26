@@ -1,5 +1,4 @@
 import { css } from "../../styled-system/css";
-import { vstack } from "../../styled-system/patterns";
 import { Button } from "../components/Button/Button";
 import { Heading } from "../components/Heading/Heading";
 import { VStack } from "../components/VStack/VStack";
@@ -10,10 +9,11 @@ interface HeaderProps {
 
 export function Header({ handleScrollToSection }: HeaderProps) {
   return (
-    <section
-      className={vstack({
+    <VStack
+      as="section"
+      gap="48"
+      className={css({
         width: "100%",
-        gap: "48",
         backgroundColor: "bg.brand",
         color: "fg.neutral",
         overflow: "hidden",
@@ -76,6 +76,6 @@ export function Header({ handleScrollToSection }: HeaderProps) {
           backgroundRepeat: "no-repeat",
         })}
       ></div>
-    </section>
+    </VStack>
   );
 }
