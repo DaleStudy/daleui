@@ -455,7 +455,7 @@ describe("접근성 및 기타", () => {
     expect(screen.getByRole("combobox")).not.toHaveAttribute("aria-invalid");
   });
 
-  test("aria-required가 true일 때 aria-required 속성이 올바르게 설정된다", () => {
+  test("required가 true일 때 aria-required 속성이 올바르게 설정된다", () => {
     render(
       <Select required placeholder="라이브러리를 선택하세요">
         <option value="react">React</option>
@@ -467,7 +467,7 @@ describe("접근성 및 기타", () => {
     );
   });
 
-  test("aria-required가 false일 때 aria-required 속성이 올바르게 설정된다", () => {
+  test("required가 false일 때 aria-required 속성이 올바르게 설정된다", () => {
     render(
       <Select required={false} placeholder="라이브러리를 선택하세요">
         <option value="react">React</option>
