@@ -160,7 +160,7 @@ describe("사용자 액션", () => {
     );
   });
 
-  test("disabled가 true일 때 사용자 액션이 차단된다", async () => {
+  test("disabled가 true일 때 사용자 액션이 차단된다", () => {
     const handleChange = vi.fn();
 
     render(
@@ -284,7 +284,7 @@ describe("사용자 액션", () => {
     expect(screen.getByText("라이브러리를 선택하세요")).toBeInTheDocument();
   });
 
-  test("disabled 상태일 때 clear 버튼이 작동하지 않는다", async () => {
+  test("disabled 상태일 때 clear 버튼이 작동하지 않는다", () => {
     const handleChange = vi.fn();
 
     render(
@@ -434,47 +434,47 @@ describe("상태 관리", () => {
 });
 
 describe("접근성 및 기타", () => {
-  test.each([
-    [true, "true"],
-    [false, null],
-  ])(
-    "invalid가 %s일 때 aria-invalid 속성이 올바르게 설정된다",
-    (invalid, expected) => {
-      render(
-        <Select invalid={invalid} placeholder="라이브러리를 선택하세요">
-          <option value="react">React</option>
-        </Select>,
-      );
+  test("invalid가 true일 때 오류 메시지가 표시된다", () => {
+    render(
+      <Select invalid placeholder="라이브러리를 선택하세요">
+        <option value="react">React</option>
+      </Select>,
+    );
+    expect(screen.getByRole("combobox")).toHaveAttribute(
+      "aria-invalid",
+      "true",
+    );
+  });
 
-      const select = screen.getByRole("combobox");
-      if (invalid) {
-        expect(select).toHaveAttribute("aria-invalid", expected);
-      } else {
-        expect(select).not.toHaveAttribute("aria-invalid");
-      }
-    },
-  );
+  test("invalid가 false일 때 오류 메시지가 표시되지 않는다", () => {
+    render(
+      <Select invalid={false} placeholder="라이브러리를 선택하세요">
+        <option value="react">React</option>
+      </Select>,
+    );
+    expect(screen.getByRole("combobox")).not.toHaveAttribute("aria-invalid");
+  });
 
-  test.each([
-    [true, "true"],
-    [false, null],
-  ])(
-    "required가 %s일 때 aria-required 속성이 올바르게 설정된다",
-    (required, expected) => {
-      render(
-        <Select required={required} placeholder="라이브러리를 선택하세요">
-          <option value="react">React</option>
-        </Select>,
-      );
+  test("aria-required가 true일 때 aria-required 속성이 올바르게 설정된다", () => {
+    render(
+      <Select required placeholder="라이브러리를 선택하세요">
+        <option value="react">React</option>
+      </Select>,
+    );
+    expect(screen.getByRole("combobox")).toHaveAttribute(
+      "aria-required",
+      "true",
+    );
+  });
 
-      const select = screen.getByRole("combobox");
-      if (required) {
-        expect(select).toHaveAttribute("aria-required", expected);
-      } else {
-        expect(select).not.toHaveAttribute("aria-required");
-      }
-    },
-  );
+  test("aria-required가 false일 때 aria-required 속성이 올바르게 설정된다", () => {
+    render(
+      <Select required={false} placeholder="라이브러리를 선택하세요">
+        <option value="react">React</option>
+      </Select>,
+    );
+    expect(screen.getByRole("combobox")).not.toHaveAttribute("aria-required");
+  });
 
   test("disabled 옵션이 있을 때 해당 옵션은 disabled 속성을 가진다", () => {
     render(

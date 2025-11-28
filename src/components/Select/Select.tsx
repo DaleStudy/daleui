@@ -65,7 +65,6 @@ export function Select({
 
   /**
    * 내부 ref(overflowed 상태를 확인)와 외부에서 ref를 주입할 경우 덮어쓰기 방지를 위한 함수입니다.
-   * @param node - select 엘리먼트
    */
   const setRef = (node: HTMLSelectElement | null) => {
     selectRef.current = node;
@@ -78,7 +77,7 @@ export function Select({
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (onChange) onChange(e);
-    setHasValue(!!e.target.value && e.target.value !== "");
+    setHasValue(!!e.target.value);
     checkOverflow();
   };
 
@@ -146,7 +145,9 @@ export function Select({
     };
   }, [checkOverflow]);
 
-  const showClearButton = Boolean(clearButtonName && !disabled && hasValue);
+  const showClearButton = !!(clearButtonName && !disabled && hasValue);
+  const isUncontrolled = value === undefined;
+  const defaultValueStr = defaultValue || "";
 
   return (
     <div
@@ -156,7 +157,7 @@ export function Select({
       <select
         ref={setRef}
         value={value}
-        defaultValue={value !== undefined ? undefined : defaultValue || ""}
+        defaultValue={isUncontrolled ? defaultValueStr : undefined}
         onChange={handleChange}
         disabled={disabled}
         required={required}
