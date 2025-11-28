@@ -7,7 +7,7 @@ export interface HStackProps
   extends Omit<FlexProps, "direction" | "align" | "justify"> {
   /** 가로 배치 방식 */
   reversed?: boolean;
-  /** 주축 정렬 방식 */
+  /** 주축 정렬 방식(가로 정렬) */
   align?: Align;
 }
 
