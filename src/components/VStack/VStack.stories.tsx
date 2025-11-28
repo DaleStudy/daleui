@@ -26,13 +26,8 @@ export default {
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
   argTypes: {
     children: { control: false },
-    align: {
-      description: "주축 정렬 방식 (세로 정렬)",
-    },
-    reversed: { description: "세로 배치 방향" },
     gap: { control: "select", options: Object.keys(spacing || {}) },
     className: { control: false },
   },
