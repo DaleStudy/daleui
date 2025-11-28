@@ -41,6 +41,8 @@ export interface SelectProps extends HTMLAttributes<HTMLSelectElement> {
  *
  * ### 접근성(Accessibility) 안내
  * - label을 사용하거나 aria-label 속성을 설정하여 Select 컴포넌트의 역할을 명시적으로 설명해주세요.
+ * - invalid 속성을 true로 설정하면 오류 상태를 표시하며 aria-invalid 속성을 true로 설정합니다.
+ * - required 속성을 true로 설정하면 필수 입력 여부를 표시하며 aria-required 속성을 true로 설정합니다.
  */
 export function Select({
   value,

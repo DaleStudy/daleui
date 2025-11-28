@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { action } from "storybook/internal/actions";
+import { action } from "storybook/actions";
 import { useState } from "react";
 import { css } from "../../../styled-system/css";
 import { Select } from "./Select";
