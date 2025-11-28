@@ -39,6 +39,20 @@ export default {
       </>
     ),
   },
+  argTypes: {
+    children: {
+      control: false,
+    },
+    onChange: {
+      control: false,
+    },
+    ref: {
+      control: false,
+    },
+    name: {
+      control: false,
+    },
+  },
 } satisfies Meta<typeof Select>;
 
 type Story = StoryObj<typeof Select>;
@@ -66,6 +80,12 @@ export const WithDefaultValue: Story = {
   ),
   argTypes: {
     defaultValue: {
+      control: false,
+    },
+    value: {
+      control: false,
+    },
+    onChange: {
       control: false,
     },
   },
@@ -99,6 +119,7 @@ export const Controlled: Story = {
   argTypes: {
     value: { control: false },
     onChange: { control: false },
+    defaultValue: { control: false },
   },
   args: {
     clearButtonName: "clear",
