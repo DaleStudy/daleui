@@ -1,5 +1,5 @@
 import { css } from "../../styled-system/css";
-import { vstack } from "../../styled-system/patterns";
+import { VStack } from "../components/VStack/VStack";
 import { Card } from "../components/Card/Card";
 import { Heading } from "../components/Heading/Heading";
 import { Tag } from "../components/Tag/Tag";
@@ -38,26 +38,27 @@ const communityCards = [
 
 export function Community() {
   return (
-    <section
+    <VStack
+      as="section"
       id="community"
-      className={vstack({
+      gap="10"
+      className={css({
         bg: "bg.brand",
         py: { base: "40", md: "60px", lg: "80px" },
-        gap: "10",
       })}
     >
-      <div
-        className={vstack({
-          gap: "40",
+      <VStack
+        gap="40"
+        className={css({
           px: { base: "16", sm: "24" },
           width: "100%",
           minWidth: { base: "auto", lg: "5xl" },
           maxWidth: { base: "auto", lg: "7xl" },
         })}
       >
-        <div
-          className={vstack({
-            gap: "12",
+        <VStack
+          gap="12"
+          className={css({
             alignSelf: "stretch",
           })}
         >
@@ -67,7 +68,7 @@ export function Community() {
             <br />
             함께 만들고, 함께 성장해요.
           </Heading>
-        </div>
+        </VStack>
 
         <div
           className={css({
@@ -94,7 +95,7 @@ export function Community() {
             </Card>
           ))}
         </div>
-      </div>
-    </section>
+      </VStack>
+    </VStack>
   );
 }

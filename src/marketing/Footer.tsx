@@ -1,5 +1,6 @@
 import { flex } from "../../styled-system/patterns";
 import { Link } from "../components/Link/Link";
+import { VStack } from "../components/VStack/VStack";
 import { css } from "../../styled-system/css";
 
 const FOOTER_ITEMS = [
@@ -30,10 +31,10 @@ export function Footer() {
         justifyContent: "center",
       })}
     >
-      <div
-        className={flex({
-          gap: "24",
-          flexDirection: { base: "column" },
+      <VStack
+        gap="24"
+        align="left"
+        className={css({
           paddingX: "24",
           width: "100%",
           maxWidth: "1280px",
@@ -78,7 +79,7 @@ export function Footer() {
         <div className={css({ textStyle: "label.sm", color: "fg.neutral" })}>
           © {getCopyrightYear()} Dale UI. All rights reserved.
         </div>
-      </div>
+      </VStack>
     </footer>
   );
 }
