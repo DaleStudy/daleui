@@ -1,5 +1,4 @@
 import "../src/index.css";
-import React from "react";
 import { withThemeByClassName } from "@storybook/addon-themes";
 import { DocsContainer } from "@storybook/addon-docs/blocks";
 import { themes } from "storybook/theming";
