@@ -10,6 +10,15 @@ import { cva } from "../../../styled-system/css";
 import { Icon } from "../Icon/Icon";
 
 export interface SelectProps extends HTMLAttributes<HTMLSelectElement> {
+  /** custom props */
+  /** 오류 상태 */
+  invalid?: boolean;
+  /** 지우기 버튼의 aria-label */
+  clearButtonName?: string;
+  /** placeholder 텍스트 */
+  placeholder?: string;
+
+  /** native props */
   /** 선택된 값 */
   value?: string;
   /** 값이 변경될 때 호출되는 함수 */
@@ -18,12 +27,6 @@ export interface SelectProps extends HTMLAttributes<HTMLSelectElement> {
   disabled?: boolean;
   /** 필수 입력 여부 */
   required?: boolean;
-  /** 오류 상태 */
-  invalid?: boolean;
-  /** 지우기 버튼의 aria-label */
-  clearButtonName?: string;
-  /** placeholder 텍스트 */
-  placeholder?: string;
   /** 역할을 설명하는 레이블 */
   "aria-label"?: string;
   /** DOM 요소 참조 */
