@@ -9,59 +9,63 @@ export interface CheckboxProps {
   label?: React.ReactNode;
   /** 체크박스의 name 속성 */
   name?: string;
-  /** 체크박스의 value 속성 */
-  value?: string;
+  /** 체크 상태 (controlled 모드) */
+  checked?: boolean;
   /** 초기 체크 상태 (uncontrolled 모드) */
   defaultChecked?: boolean;
   /** 비활성화 상태 */
   disabled?: boolean;
-  /** 읽기 전용 상태 */
-  readOnly?: boolean;
-  /** 유효하지 않은 상태 */
-  invalid?: boolean;
+  /** 에러 상태 (테두리 + 체크 아이콘 + 라벨 모두 붉은색) */
+  error?: boolean;
   /** 체크박스의 색조 */
   tone?: Tone;
   /** 체크 상태 변경 시 호출되는 콜백 */
-  onCheckedChange?: (details: { checked: boolean | "indeterminate" }) => void;
+  onChange?: (details: { checked: boolean }) => void;
 }
 
 /**
- * Ark UI 기반 체크박스 컴포넌트
+ * - `label` 속성으로 체크박스의 라벨을 지정할 수 있습니다.
+ * - `name` 속성으로 체크박스의 form에서 사용할 name 속성을 지정할 수 있습니다.
+ * - `checked` 속성으로 체크박스의 체크 상태를 제어할 수 있습니다.
+ * - `defaultChecked` 속성으로 체크박스의 초기 체크 상태를 설정할 수 있습니다.
+ * - `disabled` 속성으로 체크박스를 비활성화할 수 있습니다.
+ * - `error` 속성으로 체크박스의 에러 상태를 지정할 수 있습니다.
  * - `tone` 속성으로 체크박스의 색상 강조를 지정할 수 있습니다.
- * - `disabled` 속성을 사용하여 체크박스를 비활성화할 수 있습니다.
- * - `invalid` 속성을 사용하여 에러 상태를 표시할 수 있습니다.
+ * - `onChange` 속성으로 체크박스의 체크 상태 변경 시 호출되는 콜백을 지정할 수 있습니다.
  */
 export const Checkbox = ({
   label,
   name,
-  value,
+  checked,
   defaultChecked,
   disabled,
-  readOnly,
-  invalid,
+  error,
   tone = "brand",
-  onCheckedChange,
+  onChange,
 }: CheckboxProps) => {
+  const handleCheckedChange = onChange
+    ? (details: { checked: boolean | "indeterminate" }) => {
+        onChange({ checked: details.checked === true });
+      }
+    : undefined;
+
   return (
     <ArkCheckbox.Root
       name={name}
-      value={value}
+      checked={checked}
       defaultChecked={defaultChecked}
       disabled={disabled}
-      readOnly={readOnly}
-      invalid={invalid}
-      onCheckedChange={onCheckedChange}
+      invalid={error}
+      onCheckedChange={handleCheckedChange}
       className={rootStyles({ disabled })}
     >
-      <ArkCheckbox.Control
-        className={controlStyles({ tone, disabled, invalid })}
-      >
+      <ArkCheckbox.Control className={controlStyles({ tone, disabled, error })}>
         <ArkCheckbox.Indicator className={indicatorStyles()}>
           <Check size={10} strokeWidth={3} />
         </ArkCheckbox.Indicator>
       </ArkCheckbox.Control>
       {label && (
-        <ArkCheckbox.Label className={labelStyles({ disabled })}>
+        <ArkCheckbox.Label className={labelStyles({ disabled, error })}>
           {label}
         </ArkCheckbox.Label>
       )}
@@ -89,7 +93,6 @@ const rootStyles = cva({
 
 const controlStyles = cva({
   base: {
-    appearance: "none",
     position: "relative",
     flexShrink: 0,
     width: "16px",
@@ -102,9 +105,7 @@ const controlStyles = cva({
     borderStyle: "solid",
     borderColor: "fg.neutral",
     borderRadius: "sm",
-    cursor: "pointer",
     transition: "all 0.2s",
-    outline: "none",
     color: "transparent",
 
     '&[data-state="checked"]': {
@@ -119,7 +120,7 @@ const controlStyles = cva({
           position: "absolute",
           width: "26px",
           height: "26px",
-          borderRadius: "9999px",
+          borderRadius: "8",
           backgroundColor: "fg.brand.hover",
           opacity: 0.2,
           left: "50%",
@@ -140,7 +141,7 @@ const controlStyles = cva({
           position: "absolute",
           width: "26px",
           height: "26px",
-          borderRadius: "9999px",
+          borderRadius: "8",
           backgroundColor: "fg.success",
           opacity: 0.2,
           left: "50%",
@@ -161,7 +162,7 @@ const controlStyles = cva({
           position: "absolute",
           width: "26px",
           height: "26px",
-          borderRadius: "9999px",
+          borderRadius: "8",
           backgroundColor: "fg.warning",
           opacity: 0.2,
           left: "50%",
@@ -182,7 +183,7 @@ const controlStyles = cva({
           position: "absolute",
           width: "26px",
           height: "26px",
-          borderRadius: "9999px",
+          borderRadius: "8",
           backgroundColor: "fg.info",
           opacity: 0.2,
           left: "50%",
@@ -203,7 +204,7 @@ const controlStyles = cva({
           position: "absolute",
           width: "26px",
           height: "26px",
-          borderRadius: "9999px",
+          borderRadius: "8",
           backgroundColor: "fg.danger",
           opacity: 0.2,
           left: "50%",
@@ -224,7 +225,7 @@ const controlStyles = cva({
           position: "absolute",
           width: "26px",
           height: "26px",
-          borderRadius: "9999px",
+          borderRadius: "8",
           backgroundColor: "fg.neutral.hover",
           opacity: 0.2,
           left: "50%",
@@ -253,9 +254,31 @@ const controlStyles = cva({
         },
       },
     },
-    invalid: {
+    error: {
       true: {
         borderColor: "border.danger",
+        "&:hover::before": {
+          content: '""',
+          position: "absolute",
+          width: "26px",
+          height: "26px",
+          borderRadius: "8",
+          backgroundColor: "fg.danger",
+          opacity: 0.2,
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: -1,
+        },
+        "&[data-focus-visible]": {
+          outline: "solid",
+          outlineWidth: "lg",
+          outlineColor: "border.danger",
+          outlineOffset: "2",
+        },
+        '&[data-state="checked"]': {
+          color: "fg.danger",
+        },
       },
     },
   },
@@ -277,14 +300,17 @@ const labelStyles = cva({
     fontWeight: "semibold",
     lineHeight: "1.2",
     color: "fg.neutral",
-    cursor: "pointer",
     userSelect: "none",
   },
   variants: {
     disabled: {
       true: {
         color: "fg.neutral.disabled",
-        cursor: "not-allowed",
+      },
+    },
+    error: {
+      true: {
+        color: "fg.danger",
       },
     },
   },
