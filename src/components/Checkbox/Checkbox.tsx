@@ -59,13 +59,17 @@ export const Checkbox = ({
       onCheckedChange={handleCheckedChange}
       className={rootStyles({ disabled })}
     >
-      <ArkCheckbox.Control className={controlStyles({ tone, disabled, error })}>
+      <ArkCheckbox.Control
+        className={controlStyles({ tone, disabled, error: !disabled && error })}
+      >
         <ArkCheckbox.Indicator className={indicatorStyles()}>
           <Check size={10} strokeWidth={3} />
         </ArkCheckbox.Indicator>
       </ArkCheckbox.Control>
       {label && (
-        <ArkCheckbox.Label className={labelStyles({ disabled, error })}>
+        <ArkCheckbox.Label
+          className={labelStyles({ disabled, error: !disabled && error })}
+        >
           {label}
         </ArkCheckbox.Label>
       )}

@@ -10,7 +10,7 @@ export default {
   args: {
     label: "기본 체크박스",
     tone: "brand",
-    checked: false,
+    checked: undefined,
     defaultChecked: false,
     disabled: false,
     error: false,
