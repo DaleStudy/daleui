@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Box } from "./Box";
+import { VStack } from "../VStack/VStack";
 import { css } from "../../../styled-system/css";
 import { spacing } from "../../tokens/spacing";
 
@@ -35,40 +36,36 @@ export const Default: Story = {
 };
 
 export const Padding: Story = {
-  render: () => (
-    <div
+  render: (args) => (
+    <VStack
+      gap="32"
       className={css({
         width: "300px",
-        display: "flex",
-        gap: "32",
-        flexDirection: "column",
       })}
     >
       <div>
         <h4>padding: 16</h4>
-        <Box padding="16" className={boxStyle}>
+        <Box {...args} padding="16">
           Box 컴포넌트
         </Box>
       </div>
 
       <div>
         <h4>padding: 32</h4>
-        <Box padding="32" className={boxStyle}>
+        <Box {...args} padding="32">
           Box 컴포넌트
         </Box>
       </div>
-    </div>
+    </VStack>
   ),
 };
 
 export const Margin: Story = {
-  render: () => (
-    <div
+  render: (args) => (
+    <VStack
+      gap="16"
       className={css({
         width: "300px",
-        display: "flex",
-        gap: "16",
-        flexDirection: "column",
       })}
     >
       <div>
@@ -79,7 +76,7 @@ export const Margin: Story = {
             padding: "4",
           })}
         >
-          <Box margin="16" padding="8" className={boxStyle}>
+          <Box {...args} margin="16" padding="8">
             Box 컴포넌트
           </Box>
         </div>
@@ -92,29 +89,27 @@ export const Margin: Story = {
             padding: "4",
           })}
         >
-          <Box margin="32" padding="8" className={boxStyle}>
+          <Box {...args} margin="32" padding="8">
             Box 컴포넌트
           </Box>
         </div>
       </div>
-    </div>
+    </VStack>
   ),
 };
 
 export const Size: Story = {
-  render: () => (
-    <div
-      className={css({ display: "flex", gap: "16", flexDirection: "column" })}
-    >
+  render: (args) => (
+    <VStack gap="16">
       <div>
         <h4>100 x 100</h4>
-        <Box width={100} height={100} className={boxStyle} />
+        <Box {...args} width={100} height={100} />
       </div>
       <div>
         <h4>200 x 150</h4>
-        <Box width={200} height={150} className={boxStyle} />
+        <Box {...args} width={200} height={150} />
       </div>
-    </div>
+    </VStack>
   ),
 };
 
