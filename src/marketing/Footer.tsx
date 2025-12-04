@@ -1,7 +1,7 @@
 import { flex } from "../../styled-system/patterns";
 import { Link } from "../components/Link/Link";
-import { VStack } from "../components/VStack/VStack";
 import { css } from "../../styled-system/css";
+import { Flex } from "../components/Flex/Flex";
 
 const FOOTER_ITEMS = [
   { label: "GitHub", href: "https://github.com/DaleStudy/daleui" },
@@ -31,9 +31,10 @@ export function Footer() {
         justifyContent: "center",
       })}
     >
-      <VStack
+      <Flex
         gap="24"
-        align="left"
+        direction="column"
+        align="start"
         className={css({
           paddingX: "24",
           width: "100%",
@@ -79,7 +80,7 @@ export function Footer() {
         <div className={css({ textStyle: "label.sm", color: "fg.neutral" })}>
           © {getCopyrightYear()} Dale UI. All rights reserved.
         </div>
-      </VStack>
+      </Flex>
     </footer>
   );
 }
