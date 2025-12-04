@@ -1,6 +1,6 @@
 import { Checkbox as ArkCheckbox } from "@ark-ui/react/checkbox";
 import { Check } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 
@@ -43,16 +43,27 @@ export const Checkbox = ({
   tone = "brand",
   onChange,
 }: CheckboxProps) => {
+  const [isChecked, setIsChecked] = useState(
+    checked || defaultChecked || false,
+  );
+
   const handleCheckedChange = onChange
     ? (details: { checked: boolean | "indeterminate" }) => {
-        onChange({ checked: details.checked === true });
+        const detailChecked = details.checked === true;
+        setIsChecked(detailChecked);
+        onChange({ checked: detailChecked });
       }
-    : undefined;
+    : () => {
+        console.warn(
+          "checked prop is provided but no onChange handler, checked state will not be controlled",
+        );
+        setIsChecked(!isChecked);
+      };
 
   return (
     <ArkCheckbox.Root
       name={name}
-      checked={checked}
+      checked={isChecked}
       defaultChecked={defaultChecked}
       disabled={disabled}
       invalid={error}
