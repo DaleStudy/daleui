@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { Box } from "./Box";
 import { css } from "../../../styled-system/css";
+import { type Spacing, spacing } from "../../tokens/spacing";
 
 describe("Box 렌더링", () => {
   test("자식 요소들을 렌더링한다", () => {
@@ -22,7 +23,9 @@ describe("Box 렌더링", () => {
 });
 
 describe("Box 스타일", () => {
-  test.each(["8", "16", "32"] as const)(
+  const spacingValues = Object.keys(spacing || {}) as Spacing[];
+
+  test.each(spacingValues)(
     "padding=%s이면 p_%s 클래스가 적용된다",
     (padding) => {
       render(
@@ -34,17 +37,14 @@ describe("Box 스타일", () => {
     },
   );
 
-  test.each(["8", "16", "32"] as const)(
-    "margin=%s이면 m_%s 클래스가 적용된다",
-    (margin) => {
-      render(
-        <Box as="nav" margin={margin}>
-          child
-        </Box>,
-      );
-      expect(screen.getByRole("navigation").className).toMatch(`m_${margin}`);
-    },
-  );
+  test.each(spacingValues)("margin=%s이면 m_%s 클래스가 적용된다", (margin) => {
+    render(
+      <Box as="nav" margin={margin}>
+        child
+      </Box>,
+    );
+    expect(screen.getByRole("navigation").className).toMatch(`m_${margin}`);
+  });
 
   test("width, height prop으로 크기를 지정할 수 있다 (px 단위로 변환)", () => {
     render(
