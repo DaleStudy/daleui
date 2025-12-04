@@ -1,7 +1,7 @@
 import { css } from "../../styled-system/css";
-import { vstack } from "../../styled-system/patterns";
 import { Card } from "../components/Card/Card";
 import { Heading } from "../components/Heading/Heading";
+import { VStack } from "../components/VStack/VStack";
 
 const CARDS = [
   {
@@ -42,8 +42,9 @@ export function How() {
         backgroundColor: "bg.brand",
       })}
     >
-      <div
-        className={vstack({
+      <VStack
+        gap="48"
+        className={css({
           width: {
             base: "100%",
           },
@@ -53,7 +54,6 @@ export function How() {
           },
           mx: "auto",
           px: { base: "16", sm: "24" },
-          gap: "48",
         })}
       >
         <Heading level={3} align="center">
@@ -90,7 +90,7 @@ export function How() {
             </Card>
           ))}
         </div>
-      </div>
+      </VStack>
     </section>
   );
 }

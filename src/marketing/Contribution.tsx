@@ -1,6 +1,7 @@
 import { css } from "../../styled-system/css";
-import { flex, stack, vstack } from "../../styled-system/patterns";
+import { flex, stack } from "../../styled-system/patterns";
 import { Card } from "../components/Card/Card";
+import { VStack } from "../components/VStack/VStack";
 import { Heading } from "../components/Heading/Heading";
 import { Tag } from "../components/Tag/Tag";
 
@@ -33,9 +34,10 @@ const contributionCards = [
 
 export function Contribution() {
   return (
-    <section
+    <VStack
+      as="section"
       id="contribution"
-      className={vstack({
+      className={css({
         bg: "bg.brand",
         minWidth: { base: "auto", lg: "5xl" },
         /**
@@ -54,9 +56,9 @@ export function Contribution() {
           minWidth: { base: "auto", lg: "5xl" },
         })}
       >
-        <div
-          className={vstack({
-            gap: "12",
+        <VStack
+          gap="12"
+          className={css({
             alignSelf: "stretch",
           })}
         >
@@ -64,7 +66,7 @@ export function Contribution() {
           <Heading level={4} wordBreak="cjk" align="center">
             프로젝트의 성공을 위해 응원도 부탁드립니다.
           </Heading>
-        </div>
+        </VStack>
         <div
           className={flex({
             gap: "24",
@@ -92,6 +94,6 @@ export function Contribution() {
           ))}
         </div>
       </div>
-    </section>
+    </VStack>
   );
 }

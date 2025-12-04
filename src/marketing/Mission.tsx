@@ -1,7 +1,7 @@
 import { css } from "../../styled-system/css";
-import { vstack } from "../../styled-system/patterns";
 import { Card } from "../components/Card/Card";
 import { Heading } from "../components/Heading/Heading";
+import { VStack } from "../components/VStack/VStack";
 import { Text } from "../components/Text/Text";
 
 const CARDS = [
@@ -33,9 +33,10 @@ const CARDS = [
 
 export function Mission() {
   return (
-    <section
+    <VStack
+      as="section"
       id="mission"
-      className={vstack({
+      className={css({
         py: { base: "80px" },
         alignSelf: "stretch",
         width: "100%",
@@ -46,11 +47,11 @@ export function Mission() {
         mx: "auto",
       })}
     >
-      <div
-        className={vstack({
-          gap: "72px",
+      <VStack
+        className={css({
           width: "100%",
           px: { base: "16", sm: "24" },
+          gap: "72px",
         })}
       >
         <Heading align="center" wordBreak="cjk" level={2}>
@@ -87,7 +88,7 @@ export function Mission() {
             </Card>
           ))}
         </div>
-      </div>
-    </section>
+      </VStack>
+    </VStack>
   );
 }
