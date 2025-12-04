@@ -57,7 +57,7 @@ export const Checkbox = ({
       disabled={disabled}
       invalid={error}
       onCheckedChange={handleCheckedChange}
-      className={rootStyles({ disabled })}
+      className={`group ${rootStyles({ disabled })}`}
     >
       <ArkCheckbox.Control
         className={controlStyles({ tone, disabled, error: !disabled && error })}
@@ -119,7 +119,7 @@ const controlStyles = cva({
   variants: {
     tone: {
       brand: {
-        "&:hover::before": {
+        ".group:hover &::before": {
           content: '""',
           position: "absolute",
           width: "26px",
@@ -135,12 +135,12 @@ const controlStyles = cva({
         "&[data-focus-visible]": {
           outline: "solid",
           outlineWidth: "lg",
-          outlineColor: "border.brand.focus",
+          outlineColor: "border.brand.active",
           outlineOffset: "2",
         },
       },
       success: {
-        "&:hover::before": {
+        ".group:hover &::before": {
           content: '""',
           position: "absolute",
           width: "26px",
@@ -161,7 +161,7 @@ const controlStyles = cva({
         },
       },
       warning: {
-        "&:hover::before": {
+        ".group:hover &::before": {
           content: '""',
           position: "absolute",
           width: "26px",
@@ -182,7 +182,7 @@ const controlStyles = cva({
         },
       },
       info: {
-        "&:hover::before": {
+        ".group:hover &::before": {
           content: '""',
           position: "absolute",
           width: "26px",
@@ -203,7 +203,8 @@ const controlStyles = cva({
         },
       },
       danger: {
-        "&:hover::before": {
+        borderColor: "fg.danger",
+        ".group:hover &::before": {
           content: '""',
           position: "absolute",
           width: "26px",
@@ -224,7 +225,7 @@ const controlStyles = cva({
         },
       },
       neutral: {
-        "&:hover::before": {
+        ".group:hover &::before": {
           content: '""',
           position: "absolute",
           width: "26px",
@@ -240,7 +241,7 @@ const controlStyles = cva({
         "&[data-focus-visible]": {
           outline: "solid",
           outlineWidth: "lg",
-          outlineColor: "border.neutral.focus",
+          outlineColor: "border.neutral.active",
           outlineOffset: "2",
         },
       },
@@ -249,8 +250,8 @@ const controlStyles = cva({
       true: {
         cursor: "not-allowed",
         borderColor: "fg.neutral.disabled",
-        backgroundColor: "transparent!",
-        "&:hover::before": {
+        backgroundColor: "bg.neutral.disabled!",
+        ".group:hover &::before": {
           display: "none",
         },
         '&[data-state="checked"]': {
@@ -260,8 +261,8 @@ const controlStyles = cva({
     },
     error: {
       true: {
-        borderColor: "border.danger",
-        "&:hover::before": {
+        borderColor: "fg.danger",
+        ".group:hover &::before": {
           content: '""',
           position: "absolute",
           width: "26px",
