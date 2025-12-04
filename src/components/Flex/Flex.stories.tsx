@@ -62,7 +62,7 @@ export const Default: Story = {};
 
 export const Direction: Story = {
   render: (args) => (
-    <div className={grid({ gridTemplateRows: "repeat(4, 1fr)", gap: "16" })}>
+    <div className={grid({ gridTemplateColumns: "repeat(2, 1fr)", gap: "24" })}>
       <div>
         <h4>row - 가로 방향</h4>
         <Flex {...args} direction="row" />
@@ -88,11 +88,7 @@ export const Direction: Story = {
 
 export const Gaps: Story = {
   render: (args) => (
-    <div className={grid({ gridTemplateRows: "repeat(3, 1fr)", gap: "16" })}>
-      <div>
-        <h4>간격 4</h4>
-        <Flex {...args} gap="4" />
-      </div>
+    <div>
       <div>
         <h4>간격 8</h4>
         <Flex {...args} gap="8" />
@@ -112,7 +108,7 @@ export const Gaps: Story = {
 
 export const Justify: Story = {
   render: (args) => (
-    <div className={grid({ gridTemplateRows: "repeat(4, 1fr)", gap: "16" })}>
+    <div className={grid({ gridTemplateColumns: "repeat(2, 1fr)", gap: "24" })}>
       <div>
         <h4>start - 시작점 정렬</h4>
         <Flex {...args} justify="start" />
@@ -141,7 +137,7 @@ export const Justify: Story = {
 
 export const Align: Story = {
   render: (args) => (
-    <div className={grid({ gridTemplateRows: "repeat(4, 1fr)", gap: "16" })}>
+    <div className={grid({ gridTemplateColumns: "repeat(2, 1fr)", gap: "24" })}>
       <div>
         <h4>start - 시작점 정렬</h4>
         <Flex {...args} align="start" />
