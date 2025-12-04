@@ -1,103 +1,9 @@
 import { css } from "../../styled-system/css";
-import { stack, vstack } from "../../styled-system/patterns";
+import { Card } from "../components/Card/Card";
 import { Heading } from "../components/Heading/Heading";
-import { Icon } from "../components/Icon/Icon";
-import { Link } from "../components/Link/Link";
-import type { IconName } from "../tokens/iconography";
+import { VStack } from "../components/VStack/VStack";
 
-interface CardProps {
-  /** 아이콘 */
-  icon: IconName;
-  /** 제목 */
-  title: string;
-  /** 설명 */
-  description: string;
-  /** 링크 */
-  link: string;
-  /** 링크 텍스트 */
-  linkText: string;
-  /** 링크 비활성화 여부 */
-  linkDisabled?: boolean;
-}
-
-function Card({
-  icon,
-  title,
-  description,
-  link,
-  linkText,
-  linkDisabled = false,
-}: CardProps) {
-  return (
-    <div
-      className={stack({
-        align: "start",
-        direction: "column",
-        backgroundColor: "bg.neutral",
-        width: "100%",
-        py: "24",
-        px: "16",
-        gap: "24",
-        borderRadius: "md",
-      })}
-    >
-      <div
-        className={css({
-          backgroundColor: "bg.brand",
-          p: "12",
-          borderRadius: "lg",
-          display: "inline-flex",
-        })}
-      >
-        <Icon name={icon} size="lg" />
-      </div>
-      <div
-        className={vstack({
-          alignItems: "start",
-          gap: "4",
-        })}
-      >
-        <p
-          className={css({
-            textStyle: "body.lg",
-            fontWeight: "semibold",
-            color: "fg.neutral",
-          })}
-        >
-          {title}
-        </p>
-        <p
-          className={css({
-            textStyle: "body.md",
-            color: "fg.neutral",
-          })}
-        >
-          {description}
-        </p>
-      </div>
-      {!linkDisabled ? (
-        <Link href={link} external tone="brand" size="lg" underline={false}>
-          <span className={css({ textStyle: "label.lg", fontWeight: "bold" })}>
-            {linkText}
-          </span>
-          <Icon name="externalLink" size="sm" />
-        </Link>
-      ) : (
-        <span
-          className={css({
-            textStyle: "label.lg",
-            fontWeight: "bold",
-            color: "fg.neutral.disabled",
-          })}
-        >
-          {linkText}
-        </span>
-      )}
-    </div>
-  );
-}
-
-const CARDS: CardProps[] = [
+const CARDS = [
   {
     icon: "GitHub",
     title: "깃허브 레포지토리",
@@ -136,8 +42,9 @@ export function How() {
         backgroundColor: "bg.brand",
       })}
     >
-      <div
-        className={vstack({
+      <VStack
+        gap="48"
+        className={css({
           width: {
             base: "100%",
           },
@@ -147,7 +54,6 @@ export function How() {
           },
           mx: "auto",
           px: { base: "16", sm: "24" },
-          gap: "48",
         })}
       >
         <Heading level={3} align="center">
@@ -166,10 +72,25 @@ export function How() {
           })}
         >
           {CARDS.map((card) => (
-            <Card key={card.title} {...card} />
+            <Card
+              key={card.title}
+              tone="brand"
+              className={css({
+                flex: 1,
+              })}
+            >
+              <Card.Icon name={card.icon} />
+              <Card.Body>
+                <Card.Title>{card.title}</Card.Title>
+                <Card.Description>{card.description}</Card.Description>
+              </Card.Body>
+              <Card.Link href={card.link} external>
+                {card.linkText}
+              </Card.Link>
+            </Card>
           ))}
         </div>
-      </div>
+      </VStack>
     </section>
   );
 }

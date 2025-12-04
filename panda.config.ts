@@ -1,16 +1,16 @@
 import { defineConfig } from "@pandacss/dev";
 import { globalCss } from "./src/styles/globalCss";
-import { borders, borderWidths } from "./src/tokens/borders";
+import { borderWidths, borders } from "./src/tokens/borders";
 import { colors, semanticColors } from "./src/tokens/colors";
 import { radii } from "./src/tokens/radii";
 import { spacing } from "./src/tokens/spacing";
 import {
-  textStyles,
-  fonts,
-  fontWeights,
   fontSizes,
+  fontWeights,
+  fonts,
   letterSpacings,
   lineHeights,
+  textStyles,
 } from "./src/tokens/typography";
 
 export default defineConfig({
