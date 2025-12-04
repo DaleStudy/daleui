@@ -24,14 +24,15 @@ interface BaseButtonProps
   onClick?: () => void;
   /** 버튼의 크기 */
   size?: size;
+  /** 버튼의 색상 강조 */
+  tone?: "brand" | "neutral" | "danger";
   /** 타입 */
   type?: "button" | "submit" | "reset";
+  /** 버튼의 스타일 종류 */
+  variant?: "solid" | "outline" | "ghost";
 }
 
-export type ButtonProps = BaseButtonProps & {
-  variant?: "solid" | "outline" | "ghost";
-  tone?: "brand" | "neutral" | "danger";
-};
+export type ButtonProps = BaseButtonProps;
 
 /**
  * - `variant` 속성으로 버튼의 스타일 종류를 지정할 수 있습니다.

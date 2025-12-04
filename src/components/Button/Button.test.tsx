@@ -38,8 +38,23 @@ test("tone 속성이 올바르게 적용됨", () => {
       <Button variant="outline" tone="brand">
         아웃라인 브랜드
       </Button>
+      <Button variant="ghost" tone="brand">
+        고스트 브랜드
+      </Button>
+      <Button variant="solid" tone="neutral">
+        솔리드 중립
+      </Button>
+      <Button variant="outline" tone="neutral">
+        아웃라인 중립
+      </Button>
       <Button variant="ghost" tone="neutral">
         고스트 중립
+      </Button>
+      <Button variant="solid" tone="danger">
+        솔리드 위험
+      </Button>
+      <Button variant="outline" tone="danger">
+        아웃라인 위험
       </Button>
       <Button variant="ghost" tone="danger">
         고스트 위험
@@ -52,9 +67,34 @@ test("tone 속성이 올바르게 적용됨", () => {
     "bg_bgSolid.brand",
   );
 
+  // solid는 neutral tone을 지원
+  expect(screen.getByRole("button", { name: "솔리드 중립" })).toHaveClass(
+    "bg_bgSolid.neutral",
+  );
+
+  // solid는 danger tone을 지원
+  expect(screen.getByRole("button", { name: "솔리드 위험" })).toHaveClass(
+    "bg_bgSolid.danger",
+  );
+
   // outline은 brand tone을 지원
   expect(screen.getByRole("button", { name: "아웃라인 브랜드" })).toHaveClass(
     "bd_brand",
+  );
+
+  // outline은 neutral tone을 지원
+  expect(screen.getByRole("button", { name: "아웃라인 중립" })).toHaveClass(
+    "bd_neutral",
+  );
+
+  // outline은 danger tone을 지원
+  expect(screen.getByRole("button", { name: "아웃라인 위험" })).toHaveClass(
+    "bd_danger",
+  );
+
+  // ghost는 brand tone을 지원
+  expect(screen.getByRole("button", { name: "고스트 브랜드" })).toHaveClass(
+    "c_fg.brand",
   );
 
   // ghost는 neutral tone을 지원
