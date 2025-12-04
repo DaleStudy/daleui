@@ -135,7 +135,7 @@ const controlStyles = cva({
         "&[data-focus-visible]": {
           outline: "solid",
           outlineWidth: "lg",
-          outlineColor: "border.brand.active",
+          outlineColor: "border.brand.focus",
           outlineOffset: "2",
         },
       },

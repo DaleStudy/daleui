@@ -15,22 +15,6 @@ export default {
     disabled: false,
     error: false,
   },
-  argTypes: {
-    label: {
-      control: "text",
-    },
-    tone: {
-      control: "select",
-      options: ["brand", "success", "warning", "info", "danger", "neutral"],
-    },
-    checked: {
-      control: "select",
-      options: [undefined, true, false],
-    },
-    defaultChecked: {
-      control: "boolean",
-    },
-  },
 } satisfies Meta<typeof Checkbox>;
 
 export const Basic: StoryObj<typeof Checkbox> = {};
