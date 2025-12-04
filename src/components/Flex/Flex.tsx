@@ -40,8 +40,8 @@ export interface FlexProps
  *
  * ### 레이아웃 컴포넌트 사용 가이드
  *
- * - HStack은 Flex의 `direction="row" + justify` 조합입니다. 수평 배치에 사용합니다.
- * - VStack은 Flex의 `direction="column" + align` 조합입니다. 수직 배치에 사용합니다.
+ * - HStack은 Flex의 `Flex + direction="row" + align="center"` 조합입니다. 수평 배치에 사용합니다.
+ * - VStack은 Flex의 `Flex + direction="column" + align="center"` 조합입니다. 수직 배치에 사용합니다.
  * - Flex는 추가적으로 세밀한 레이아웃 제어가 필요할 때 사용합니다.
  */
 export const Flex = ({
