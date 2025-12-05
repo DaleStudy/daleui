@@ -24,27 +24,37 @@ describe("Box 렌더링", () => {
 
 describe("Box 스타일", () => {
   const spacingValues = Object.keys(spacing || {}) as Spacing[];
+  const spacingTestCases = spacingValues.map(
+    (value) => [value, value] as const,
+  );
 
-  test.each(spacingValues)(
+  test.each(spacingTestCases)(
     "padding=%s이면 p_%s 클래스가 적용된다",
-    (padding) => {
+    (padding, expectedClass) => {
       render(
         <Box as="nav" padding={padding}>
           child
         </Box>,
       );
-      expect(screen.getByRole("navigation").className).toMatch(`p_${padding}`);
+      expect(screen.getByRole("navigation").className).toMatch(
+        `p_${expectedClass}`,
+      );
     },
   );
 
-  test.each(spacingValues)("margin=%s이면 m_%s 클래스가 적용된다", (margin) => {
-    render(
-      <Box as="nav" margin={margin}>
-        child
-      </Box>,
-    );
-    expect(screen.getByRole("navigation").className).toMatch(`m_${margin}`);
-  });
+  test.each(spacingTestCases)(
+    "margin=%s이면 m_%s 클래스가 적용된다",
+    (margin, expectedClass) => {
+      render(
+        <Box as="nav" margin={margin}>
+          child
+        </Box>,
+      );
+      expect(screen.getByRole("navigation").className).toMatch(
+        `m_${expectedClass}`,
+      );
+    },
+  );
 
   test("width, height prop으로 크기를 지정할 수 있다 (px 단위로 변환)", () => {
     render(
