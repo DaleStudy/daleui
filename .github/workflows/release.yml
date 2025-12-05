@@ -1,0 +1,47 @@
+name: Release & Publish
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build package
+        run: |
+          bun run prepare
+          bun run build
+
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "${NODE_AUTH_TOKEN}" ]; then
+            echo "Error: NPM_TOKEN이 설정되지 않았습니다."
+            exit 1
+          fi
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+
+          TAG_NAME="${GITHUB_REF#refs/tags/}"
+          VERSION=${TAG_NAME#v}
+          echo "버전 ${VERSION} 배포를 시작합니다..."
+
+          npm publish --access public
+          echo "npm 배포가 완료되었습니다."
