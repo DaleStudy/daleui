@@ -1,15 +1,21 @@
-import { composeStories } from "@storybook/react-vite";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import { Card } from "./Card";
-import * as stories from "./Card.stories";
-
-const { Basic, WithLink, WithExternalLink } = composeStories(stories);
 
 describe("Card 렌더링", () => {
   test("기본 Card가 올바르게 렌더링됨", () => {
-    render(<Basic />);
+    render(
+      <Card>
+        <Card.Icon name="star" />
+        <Card.Body>
+          <Card.Title>제목</Card.Title>
+          <Card.Description>
+            이 기능에 대한 설명을 여기에 작성합니다
+          </Card.Description>
+        </Card.Body>
+      </Card>,
+    );
 
     expect(screen.getByText("제목")).toBeInTheDocument();
     expect(
@@ -33,7 +39,17 @@ describe("Card 렌더링", () => {
   });
 
   test("제목이 올바른 스타일로 렌더링됨", () => {
-    render(<Basic />);
+    render(
+      <Card>
+        <Card.Icon name="star" />
+        <Card.Body>
+          <Card.Title>제목</Card.Title>
+          <Card.Description>
+            이 기능에 대한 설명을 여기에 작성합니다
+          </Card.Description>
+        </Card.Body>
+      </Card>,
+    );
 
     const title = screen.getByText("제목");
     expect(title).toHaveClass("fs_lg");
@@ -41,7 +57,17 @@ describe("Card 렌더링", () => {
   });
 
   test("설명이 올바른 스타일로 렌더링됨", () => {
-    render(<Basic />);
+    render(
+      <Card>
+        <Card.Icon name="star" />
+        <Card.Body>
+          <Card.Title>제목</Card.Title>
+          <Card.Description>
+            이 기능에 대한 설명을 여기에 작성합니다
+          </Card.Description>
+        </Card.Body>
+      </Card>,
+    );
 
     const description = screen.getByText(
       "이 기능에 대한 설명을 여기에 작성합니다",
@@ -106,7 +132,16 @@ describe("Card 스타일 속성", () => {
 
 describe("Card 링크", () => {
   test("링크가 올바르게 렌더링됨", () => {
-    render(<WithLink />);
+    render(
+      <Card>
+        <Card.Icon name="info" />
+        <Card.Body>
+          <Card.Title>링크 있는 카드</Card.Title>
+          <Card.Description>링크가 포함된 Card입니다.</Card.Description>
+        </Card.Body>
+        <Card.Link href="#">자세히 보기</Card.Link>
+      </Card>,
+    );
 
     const link = screen.getByRole("link", { name: /자세히 보기/ });
     expect(link).toBeInTheDocument();
@@ -114,7 +149,20 @@ describe("Card 링크", () => {
   });
 
   test("외부 링크가 올바르게 렌더링됨", () => {
-    render(<WithExternalLink />);
+    render(
+      <Card>
+        <Card.Icon name="externalLink" />
+        <Card.Body>
+          <Card.Title>외부 링크 카드</Card.Title>
+          <Card.Description>
+            외부 사이트로 이동하는 링크입니다. 새 탭에서 열립니다.
+          </Card.Description>
+        </Card.Body>
+        <Card.Link href="https://www.example.com" external>
+          외부 사이트 방문
+        </Card.Link>
+      </Card>,
+    );
 
     const externalLink = screen.getByRole("link", {
       name: /외부 사이트 방문/,
@@ -126,14 +174,33 @@ describe("Card 링크", () => {
   });
 
   test("링크의 tone이 올바르게 적용됨", () => {
-    render(<WithLink />);
+    render(
+      <Card>
+        <Card.Icon name="info" />
+        <Card.Body>
+          <Card.Title>링크 있는 카드</Card.Title>
+          <Card.Description>링크가 포함된 Card입니다.</Card.Description>
+        </Card.Body>
+        <Card.Link href="#">자세히 보기</Card.Link>
+      </Card>,
+    );
 
     const link = screen.getByRole("link", { name: /자세히 보기/ });
     expect(link).toHaveClass("c_fg.neutral");
   });
 
   test("링크가 없을 때는 표시되지 않음", () => {
-    render(<Basic />);
+    render(
+      <Card>
+        <Card.Icon name="star" />
+        <Card.Body>
+          <Card.Title>제목</Card.Title>
+          <Card.Description>
+            이 기능에 대한 설명을 여기에 작성합니다
+          </Card.Description>
+        </Card.Body>
+      </Card>,
+    );
 
     expect(screen.queryByRole("link")).not.toBeInTheDocument();
   });
@@ -142,7 +209,16 @@ describe("Card 링크", () => {
 describe("Card 접근성", () => {
   test("Tab 키로 링크에 포커스할 수 있음", async () => {
     const user = userEvent.setup();
-    render(<WithLink />);
+    render(
+      <Card>
+        <Card.Icon name="info" />
+        <Card.Body>
+          <Card.Title>링크 있는 카드</Card.Title>
+          <Card.Description>링크가 포함된 Card입니다.</Card.Description>
+        </Card.Body>
+        <Card.Link href="#">자세히 보기</Card.Link>
+      </Card>,
+    );
 
     const link = screen.getByRole("link", { name: /자세히 보기/ });
 
