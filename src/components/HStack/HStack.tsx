@@ -1,30 +1,18 @@
-import React from "react";
-import { type RecipeVariant, css, cva, cx } from "../../../styled-system/css";
-import type { Spacing } from "../../tokens/spacing";
+import { Flex } from "../Flex/Flex";
+import type { FlexProps } from "../Flex/Flex";
 
-type As =
-  | "div"
-  | "section"
-  | "article"
-  | "main"
-  | "aside"
-  | "header"
-  | "footer"
-  | "nav"
-  | "span";
+type Align = "left" | "center" | "right" | "between" | "around";
 
 export interface HStackProps
-  extends React.HTMLAttributes<HTMLElement>,
-    Partial<RecipeVariant<typeof hstackVariants>> {
-  /** 자식 요소들 (필수) */
-  children: React.ReactNode;
-  /** 렌더링할 HTML 요소 */
-  as?: As;
-  /** 요소 간 간격 */
-  gap?: Spacing;
+  extends Omit<FlexProps, "direction" | "align" | "justify"> {
+  /** 가로 배치 방식 */
+  reversed?: boolean;
+  /** 주축 정렬 방식(가로 정렬) */
+  align?: Align;
 }
 
 /**
+ * - 가로 정렬을 위한 추상화 컴포넌트로, 정렬 방식 변경이 필요하면 Flex 컴포넌트를 권장합니다.
  * - `children` 속성을 통해서 자식 요소들을 전달할 수 있습니다.
  * - `as` 속성을 통해서 렌더링할 HTML 요소를 지정할 수 있습니다. 기본값은 `div`입니다.
  * - `role` 속성을 통해서 역할을 지정할 수 있습니다.
@@ -39,51 +27,33 @@ export interface HStackProps
 export const HStack = ({
   children,
   as = "div",
-  align,
+  align = "center",
   reversed = false,
   gap,
   className,
   ...rest
 }: HStackProps) => {
-  const Component = as;
+  const direction = reversed ? "rowReverse" : "row";
+  const alignVariants: Record<Align, FlexProps["justify"]> = {
+    left: "start",
+    center: "center",
+    right: "end",
+    between: "between",
+    around: "around",
+  };
+  const alignContent = alignVariants[align];
 
-  return React.createElement(
-    Component,
-    {
-      className: cx(
-        hstackVariants({
-          align,
-          reversed,
-        }),
-        css({ gap }),
-        className,
-      ),
-      ...rest,
-    },
-    children,
+  return (
+    <Flex
+      as={as}
+      direction={direction}
+      justify={alignContent}
+      align="center"
+      gap={gap}
+      className={className}
+      {...rest}
+    >
+      {children}
+    </Flex>
   );
 };
-
-const hstackVariants = cva({
-  base: {
-    display: "flex",
-    alignItems: "center",
-  },
-  variants: {
-    align: {
-      left: { justifyContent: "flex-start" },
-      center: { justifyContent: "center" },
-      right: { justifyContent: "flex-end" },
-      between: { justifyContent: "space-between" },
-      around: { justifyContent: "space-around" },
-    },
-    reversed: {
-      true: { flexDirection: "row-reverse" },
-      false: { flexDirection: "row" },
-    },
-  },
-  defaultVariants: {
-    align: "center",
-    reversed: false,
-  },
-});
