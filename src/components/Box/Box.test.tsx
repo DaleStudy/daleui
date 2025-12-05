@@ -101,14 +101,15 @@ describe("Box HTML 요소", () => {
     expect(screen.getByText("content").tagName).toBe(tagName);
   });
 
-  test("as=span이면 inline-block으로 렌더링되어 width/height가 적용된다", () => {
+  test("as=span이면 inline 요소로 렌더링되어 width/height가 적용되지 않는다", () => {
     render(
       <Box as="span" width={100} height={50}>
         content
       </Box>,
     );
     const element = screen.getByText("content");
-    expect(element.className).toMatch(/d_inline-block/);
+    expect(element.className).not.toMatch(/d_block/);
+    expect(element.className).not.toMatch(/d_inline-block/);
     expect(element).toHaveStyle({ width: "100px", height: "50px" });
   });
 });

@@ -4,8 +4,6 @@ import { VStack } from "../VStack/VStack";
 import { css } from "../../../styled-system/css";
 import { spacing } from "../../tokens/spacing";
 
-const boxStyle = css({ bg: "bgSolid.brand", color: "fgSolid.brand" });
-
 export default {
   component: Box,
   parameters: {
@@ -22,7 +20,7 @@ export default {
     className: { control: false },
   },
   args: {
-    className: boxStyle,
+    className: css({ bg: "bgSolid.brand", color: "fgSolid.brand" }),
   },
 } satisfies Meta<typeof Box>;
 

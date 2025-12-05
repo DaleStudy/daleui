@@ -36,6 +36,7 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
  * - `padding`, `margin` 속성을 통해서 spacing을 지정할 수 있습니다.
  * - `width`, `height` 속성을 통해서 크기를 지정할 수 있습니다.
  * - `className` 속성을 통해서 추가 스타일을 적용할 수 있습니다.
+ * - `as="span"`을 사용할 경우, span은 기본적으로 `inline` 요소이므로 `width`와 `height` 속성이 적용되지 않습니다.
  *
  * ### 접근성(Accessibility) 안내
  * - 이미 시맨틱 태그를 쓰면(as=`nav` | `main` | `aside` | `footer` 등) 중복 role 지정은 피하시길 바랍니다.
@@ -54,10 +55,7 @@ export const Box = ({
 }: BoxProps) => {
   const Component = as;
 
-  const isInline = as === "span";
-
   const baseStyle = css({
-    display: isInline ? "inline-block" : "block",
     padding,
     margin,
   });
