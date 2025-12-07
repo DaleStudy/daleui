@@ -36,6 +36,13 @@ export interface FlexProps
  * ### 접근성(Accessibility) 안내
  * - 이미 시맨틱 태그를 쓰면(as=`nav` | `main` | `aside` | `footer` 등) 중복 role 지정은 피하시길 바랍니다.
  * - 접근성을 위해 기본적으로 적절한 HTML 시맨틱 요소를 사용하고 필요시 ARIA 속성을 활용하여 접근성을 향상시킵니다.
+ * - reverse 방향(rowReverse, columnReverse)을 사용할 경우, 화면에 보여지는 시각적 순서와 DOM의 순서가 다를 수 있습니다.
+ *
+ * ### 레이아웃 컴포넌트 사용 가이드
+ *
+ * - HStack은 Flex의 `Flex + direction="row" + align="center"` 조합입니다. 수평 배치에 사용합니다.
+ * - VStack은 Flex의 `Flex + direction="column" + align="center"` 조합입니다. 수직 배치에 사용합니다.
+ * - Flex는 추가적으로 세밀한 레이아웃 제어가 필요할 때 사용합니다.
  */
 export const Flex = ({
   children,
