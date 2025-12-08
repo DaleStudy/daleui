@@ -37,7 +37,8 @@ export interface SelectProps extends HTMLAttributes<HTMLSelectElement> {
 
 /**
  * - 네이티브 select 태그를 사용하는 Select 컴포넌트입니다.
- * - 여러 선택지 중 하나를 고를 때 사용하며, 화면 공간을 절약하고 옵션 목록을 펼쳤을 때만 표시하고 싶을 때 적합합니다. 옵션이 6개 이상일 때 특히 유용합니다.
+ * - 여러 선택지 중 하나를 고를 때 사용하며, 화면 공간을 절약하고 옵션 목록을 펼쳤을 때만 표시하고 싶을 때 적합합니다.
+ * - 선택지가 적은 경우(5개 이하)에는 대신 [RadioGroup](?path=/docs/components-radiogroup--docs) 컴포넌트 사용을 권장합니다.
  * - `children`으로 `<option>` 요소를 직접 전달할 수 있습니다.
  * - `disabled` 속성으로 비활성화 상태를 제어할 수 있으며, `invalid` 속성을 통해 오류 상태를 표현할 수 있습니다.
  * - `clearButtonName` 속성을 통해 선택된 값을 지울 수 있는 버튼을 표시할 수 있습니다.
