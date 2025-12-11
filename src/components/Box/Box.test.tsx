@@ -56,14 +56,25 @@ describe("Box 스타일", () => {
     },
   );
 
-  test("width, height prop으로 크기를 지정할 수 있다 (px 단위로 변환)", () => {
+  test("width, height prop으로 크기를 지정할 수 있다 (px)", () => {
     render(
-      <Box as="nav" width={100} height={200}>
+      <Box as="nav" width="100px" height="200px">
         child
       </Box>,
     );
     const element = screen.getByRole("navigation");
     expect(element).toHaveStyle({ width: "100px", height: "200px" });
+  });
+
+  test("width, height prop으로 다양한 단위를 사용할 수 있다", () => {
+    render(
+      <Box as="nav" width="2rem" height="50%">
+        child
+      </Box>,
+    );
+    const element = screen.getByRole("navigation");
+    expect(element.style.width).toBe("2rem");
+    expect(element.style.height).toBe("50%");
   });
 
   test("className을 통해 추가 스타일을 적용할 수 있다", () => {
@@ -113,7 +124,7 @@ describe("Box HTML 요소", () => {
 
   test("as=span이면 inline 요소로 렌더링되어 width/height가 적용되지 않는다", () => {
     render(
-      <Box as="span" width={100} height={50}>
+      <Box as="span" width="100px" height="50px">
         content
       </Box>,
     );

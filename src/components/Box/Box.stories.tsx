@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Box } from "./Box";
+import { Flex } from "../Flex/Flex";
 import { VStack } from "../VStack/VStack";
 import { css } from "../../../styled-system/css";
 import { spacing } from "../../tokens/spacing";
@@ -28,8 +29,8 @@ type Story = StoryObj<typeof Box>;
 
 export const Default: Story = {
   args: {
-    width: 100,
-    height: 100,
+    width: "100px",
+    height: "100px",
   },
 };
 
@@ -100,12 +101,18 @@ export const Size: Story = {
   render: (args) => (
     <VStack gap="16">
       <div>
-        <h4>100 x 100</h4>
-        <Box {...args} width={100} height={100} />
+        <h4>100px x 100px</h4>
+        <Box {...args} width="100px" height="100px" />
       </div>
       <div>
-        <h4>200 x 150</h4>
-        <Box {...args} width={200} height={150} />
+        <h4>10rem x 5rem</h4>
+        <Box {...args} width="10rem" height="5rem" />
+      </div>
+      <div>
+        <h4>50% x 100px</h4>
+        <div className={css({ width: "300px" })}>
+          <Box {...args} width="100%" height="100px" />
+        </div>
       </div>
     </VStack>
   ),
@@ -113,7 +120,7 @@ export const Size: Story = {
 
 export const CardExample: Story = {
   render: () => (
-    <div className={css({ display: "flex", gap: "16" })}>
+    <Flex gap="16">
       <Box
         padding="24"
         className={css({
@@ -130,6 +137,6 @@ export const CardExample: Story = {
           카드 형태의 박스로 활용할 수 있습니다.
         </p>
       </Box>
-    </div>
+    </Flex>
   ),
 };

@@ -13,6 +13,8 @@ type As =
   | "nav"
   | "span";
 
+type CSSLength = `${number}px` | `${number}em` | `${number}rem` | `${number}%`;
+
 export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   /** 자식 요소들 */
   children?: React.ReactNode;
@@ -22,10 +24,10 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   padding?: Spacing;
   /** margin */
   margin?: Spacing;
-  /** 너비 (px 단위) */
-  width?: number;
-  /** 높이 (px 단위) */
-  height?: number;
+  /** 너비 (예: "100px", "2rem", "2em", "50%") */
+  width?: CSSLength;
+  /** 높이 (예: "100px", "2rem", "2em", "50%") */
+  height?: CSSLength;
 }
 
 /**
@@ -61,8 +63,8 @@ export const Box = ({
   });
 
   const inlineStyle = {
-    ...(width !== undefined && { width: `${width}px` }),
-    ...(height !== undefined && { height: `${height}px` }),
+    ...(width !== undefined && { width }),
+    ...(height !== undefined && { height }),
   };
 
   return (
