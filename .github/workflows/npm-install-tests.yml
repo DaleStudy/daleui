@@ -1,6 +1,4 @@
 name: NPM Install Test - daleui
-permissions:
-  contents: read
 
 on:
   pull_request:
