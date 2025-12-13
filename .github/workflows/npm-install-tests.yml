@@ -14,23 +14,23 @@ jobs:
         include:
           - name: "Create React App (React 18)"
             project: cra
-            node: 20
+            node: "lts/*"
 
           - name: "Vite + React"
             project: vite
-            node: 20
+            node: "lts/*"
 
           - name: "Next.js 13 (Pages Router)"
             project: next13-pages
-            node: 20
+            node: "lts/*"
 
           - name: "Next.js 14 (App Router)"
             project: next14-app
-            node: 20
+            node: "lts/*"
 
           - name: "Next.js 14 (App Router + Turbopack)"
             project: next14-turbo
-            node: 20
+            node: "lts/*"
 
     runs-on: ubuntu-latest
     name: ${{ matrix.name }}
