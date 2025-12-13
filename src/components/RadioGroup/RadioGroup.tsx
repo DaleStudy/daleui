@@ -68,7 +68,7 @@ export interface RadioGroupProps {
  * 사용자가 제한된 선택지 중 하나만 선택해야 할 때 사용합니다.
  * 특히 선택지가 2-5개로 적고 모든 옵션을 한눈에 보여주어야 할 때 적합합니다.
  *
- * 선택지가 많은 경우(6개 이상)에는 대신 `<Select/>` 컴포넌트 사용을 권장합니다.
+ * 선택지가 많은 경우(6개 이상)에는 대신 [Select](?path=/docs/components-select--docs) 컴포넌트 사용을 권장합니다.
  *
  * @example
  * <RadioGroup name="fruits" label="좋아하는 과일을 선택하세요">
