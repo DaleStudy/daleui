@@ -12,5 +12,8 @@ jobs:
       - run: bun install
       - run: bun run format
       - run: bun run lint
-      - run: bun run test run
+      - run: bun run coverage
+      - uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
       - run: bun run build
