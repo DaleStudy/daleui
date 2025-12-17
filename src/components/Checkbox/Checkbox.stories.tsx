@@ -1,6 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 import { vstack } from "../../../styled-system/patterns";
 import { Checkbox } from "./Checkbox";
+import { Button } from "../Button/Button";
 
 export default {
   component: Checkbox,
@@ -8,60 +10,65 @@ export default {
     layout: "centered",
   },
   args: {
-    id: "checkbox",
     label: "기본 체크박스",
-  },
-  argTypes: {
-    label: {
-      control: "text",
-    },
+    tone: "brand",
+    checked: undefined,
+    defaultChecked: false,
+    disabled: false,
+    invalid: false,
+    required: false,
   },
 } satisfies Meta<typeof Checkbox>;
 
 export const Basic: StoryObj<typeof Checkbox> = {};
 
-export const Tones: StoryObj<typeof Checkbox> = {
-  render: (args) => {
-    return (
-      <div className={vstack({ gap: "16" })}>
-        <Checkbox {...args} id="brand" label="브랜드 색조" tone="brand" />
-        <Checkbox {...args} id="neutral" label="중립 색조" tone="neutral" />
-        <Checkbox {...args} id="danger" label="위험 색조" tone="danger" />
-        <Checkbox {...args} id="success" label="성공 색조" tone="success" />
-        <Checkbox {...args} id="warning" label="경고 색조" tone="warning" />
-        <Checkbox {...args} id="info" label="정보 색조" tone="info" />
-      </div>
-    );
+export const Controlled = () => {
+  const [checked, setChecked] = useState(false);
+  return (
+    <div className={vstack({ gap: "16" })}>
+      <p>{checked ? "체크됨" : "체크되지 않음"}</p>
+      <Checkbox
+        label="Controlled 체크박스"
+        checked={checked}
+        onChange={setChecked}
+      />
+      <Button size="sm" onClick={() => setChecked(!checked)}>
+        Toggle
+      </Button>
+    </div>
+  );
+};
+
+export const DefaultChecked: StoryObj<typeof Checkbox> = {
+  args: {
+    label: "기본값이 체크된 체크박스",
+    defaultChecked: true,
   },
   argTypes: {
-    label: {
+    checked: {
       control: false,
     },
-    tone: {
-      control: false,
+    defaultChecked: {
+      table: { readonly: true },
     },
   },
 };
 
-export const States: StoryObj<typeof Checkbox> = {
+export const Tones: StoryObj<typeof Checkbox> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
-        <Checkbox {...args} id="checked" label="체크된 상태" checked={true} />
-        <Checkbox
-          {...args}
-          id="unchecked"
-          label="체크되지 않은 상태"
-          checked={false}
-        />
+        <Checkbox {...args} label="브랜드 색조" tone="brand" />
+        <Checkbox {...args} label="중립 색조" tone="neutral" />
+        <Checkbox {...args} label="위험 색조" tone="danger" />
+        <Checkbox {...args} label="성공 색조" tone="success" />
+        <Checkbox {...args} label="경고 색조" tone="warning" />
+        <Checkbox {...args} label="정보 색조" tone="info" />
       </div>
     );
   },
   argTypes: {
     label: {
-      control: false,
-    },
-    checked: {
       control: false,
     },
   },
@@ -73,18 +80,12 @@ export const Disabled: StoryObj<typeof Checkbox> = {
       <div className={vstack({ gap: "16" })}>
         <Checkbox
           {...args}
-          id="disabled-checked"
           label="비활성화 & 체크된 상태"
           disabled
-          checked
+          defaultChecked
         />
-        <Checkbox
-          {...args}
-          id="disabled-unchecked"
-          label="비활성화 & 체크되지 않은 상태"
-          disabled
-        />
-        <Checkbox {...args} id="enabled" label="활성화 상태" />
+        <Checkbox {...args} label="비활성화 & 체크되지 않은 상태" disabled />
+        <Checkbox {...args} label="활성화 상태" />
       </div>
     );
   },
@@ -92,45 +93,57 @@ export const Disabled: StoryObj<typeof Checkbox> = {
     label: {
       control: false,
     },
-    disabled: {
+  },
+};
+
+export const Invalid: StoryObj<typeof Checkbox> = {
+  render: (args) => {
+    return (
+      <div className={vstack({ gap: "16" })}>
+        <Checkbox {...args} label="에러 상태 체크박스" invalid />
+        <Checkbox
+          {...args}
+          label="에러 상태 체크박스 (체크됨)"
+          invalid
+          defaultChecked
+        />
+        <Checkbox {...args} label="정상 체크박스" />
+      </div>
+    );
+  },
+  argTypes: {
+    label: {
+      control: false,
+    },
+    invalid: {
       control: false,
     },
   },
 };
 
 export const Required: StoryObj<typeof Checkbox> = {
-  render: (args) => {
-    return (
-      <div className={vstack({ gap: "16" })}>
-        <Checkbox {...args} id="required" label="필수 체크박스" required />
-        <Checkbox {...args} id="optional" label="선택 체크박스" />
-      </div>
-    );
+  args: {
+    label: "필수 체크박스",
+    required: true,
   },
   argTypes: {
+    checked: {
+      control: false,
+    },
     label: {
       control: false,
     },
-    required: {
+    defaultChecked: {
       control: false,
     },
-  },
-};
-
-export const WithValue: StoryObj<typeof Checkbox> = {
-  render: (args) => {
-    return (
-      <div className={vstack({ gap: "16" })}>
-        <Checkbox
-          {...args}
-          id="value-example"
-          label="값이 있는 체크박스"
-          value="checkbox-value"
-          onChange={(checked, value) =>
-            console.log(`체크박스 상태: ${checked}, 값: ${value}`)
-          }
-        />
-      </div>
-    );
+    invalid: {
+      control: false,
+    },
+    disabled: {
+      control: false,
+    },
+    name: {
+      control: false,
+    },
   },
 };
