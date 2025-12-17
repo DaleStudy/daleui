@@ -7,7 +7,7 @@ import { type IconName } from "../../tokens/iconography";
 type size = "sm" | "md" | "lg";
 
 /** 공통 버튼 속성 */
-interface BaseButtonProps
+export interface ButtonProps
   extends Omit<HTMLAttributes<HTMLButtonElement>, "style"> {
   /** 버튼 텍스트 */
   children: string;
@@ -31,8 +31,6 @@ interface BaseButtonProps
   /** 버튼의 스타일 종류 */
   variant?: "solid" | "outline" | "ghost";
 }
-
-export type ButtonProps = BaseButtonProps;
 
 /**
  * - `variant` 속성으로 버튼의 스타일 종류를 지정할 수 있습니다.
@@ -152,7 +150,7 @@ const styles = cva({
     },
     "&:focus-visible": {
       outlineStyle: "solid",
-      outlineWidth: "lg",
+      outlineWidth: "sm",
       outlineOffset: "3px",
     },
   },
@@ -202,7 +200,6 @@ const styles = cva({
     },
   },
   compoundVariants: [
-    // solid (brand)
     {
       variant: "solid",
       tone: "brand",
@@ -217,7 +214,6 @@ const styles = cva({
         },
       },
     },
-    // solid(neutral)
     {
       variant: "solid",
       tone: "neutral",
@@ -232,7 +228,6 @@ const styles = cva({
         },
       },
     },
-    // solid (danger)
     {
       variant: "solid",
       tone: "danger",
@@ -247,13 +242,12 @@ const styles = cva({
         },
       },
     },
-    // outline (brand)
     {
       variant: "outline",
       tone: "brand",
       css: {
         border: "brand",
-        borderWidth: "lg",
+        borderWidth: "sm",
         color: "fg.brand",
         "&:hover": {
           color: "fg.brand.hover",
@@ -265,13 +259,12 @@ const styles = cva({
         },
       },
     },
-    // outline (neutral)
     {
       variant: "outline",
       tone: "neutral",
       css: {
         border: "neutral",
-        borderWidth: "lg",
+        borderWidth: "sm",
         color: "fg.neutral",
         "&:hover": {
           color: "fg.neutral.hover",
@@ -283,13 +276,12 @@ const styles = cva({
         },
       },
     },
-    // outline (danger)
     {
       variant: "outline",
       tone: "danger",
       css: {
         border: "danger",
-        borderWidth: "lg",
+        borderWidth: "sm",
         color: "fg.danger",
         "&:hover": {
           color: "fg.danger.hover",
@@ -322,7 +314,6 @@ const styles = cva({
         px: "0.9rem",
       },
     },
-    // ghost
     {
       variant: "ghost",
       tone: "brand",
@@ -368,7 +359,6 @@ const styles = cva({
         },
       },
     },
-    // disabled
     {
       disabled: true,
       css: {
@@ -398,7 +388,7 @@ const styles = cva({
       tone: "danger",
       css: {
         "&:focus-visible": {
-          outlineColor: "border.danger.focus",
+          outlineColor: "border.danger",
         },
       },
     },

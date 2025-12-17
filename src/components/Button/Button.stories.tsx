@@ -43,10 +43,10 @@ export const Tone: StoryObj<typeof Button> = {
           브랜드 버튼
         </Button>
         <Button {...args} tone="neutral">
-          뉴트럴 버튼
+          중립 버튼
         </Button>
         <Button {...args} tone="danger">
-          데인저 버튼
+          위험 버튼
         </Button>
       </div>
     );
