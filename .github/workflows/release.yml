@@ -1,14 +1,14 @@
-name: Release & Publish
+name: Npm Publish
 
 on:
-  push:
-    tags:
-      - "v*"
+  release:
+    types: [published]
 
 jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       packages: write
       id-token: write
 
@@ -17,6 +17,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event.release.tag_name }}
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -39,7 +40,7 @@ jobs:
           fi
           echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
 
-          TAG_NAME="${GITHUB_REF#refs/tags/}"
+          TAG_NAME="${{ github.event.release.tag_name }}"
           VERSION=${TAG_NAME#v}
           echo "버전 ${VERSION} 배포를 시작합니다..."
 
