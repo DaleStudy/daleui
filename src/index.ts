@@ -1,3 +1,5 @@
+import "./index.css";
+
 export { Button, type ButtonProps } from "./components/Button/Button";
 export { Card } from "./components/Card/Card";
 export { Checkbox, type CheckboxProps } from "./components/Checkbox/Checkbox";
