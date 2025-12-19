@@ -9,62 +9,58 @@ test("텍스트와 함께 버튼이 올바르게 렌더링됨", () => {
   expect(screen.getByText("테스트")).toBeInTheDocument();
 });
 
-test("variant 속성이 올바르게 적용됨", () => {
-  render(
-    <>
-      <Button variant="solid">솔리드 버튼</Button>
-      <Button variant="outline">아웃라인 버튼</Button>
-      <Button variant="ghost">고스트 버튼</Button>
-    </>,
-  );
+const toneAndVariantCases = [
+  {
+    case: "solid - brand",
+    props: { variant: "solid", tone: "brand" },
+    expectedClass: "bg_bgSolid.brand",
+  },
+  {
+    case: "solid - neutral",
+    props: { variant: "solid", tone: "neutral" },
+    expectedClass: "bg_bgSolid.neutral",
+  },
+  {
+    case: "solid - danger",
+    props: { variant: "solid", tone: "danger" },
+    expectedClass: "bg_bgSolid.danger",
+  },
+  {
+    case: "outline - brand",
+    props: { variant: "outline", tone: "brand" },
+    expectedClass: "bd_brand",
+  },
+  {
+    case: "outline - neutral",
+    props: { variant: "outline", tone: "neutral" },
+    expectedClass: "bd_neutral",
+  },
+  {
+    case: "outline - danger",
+    props: { variant: "outline", tone: "danger" },
+    expectedClass: "bd_danger",
+  },
+  {
+    case: "ghost - brand",
+    props: { variant: "ghost", tone: "brand" },
+    expectedClass: "c_fg.brand",
+  },
+  {
+    case: "ghost - neutral",
+    props: { variant: "ghost", tone: "neutral" },
+    expectedClass: "c_fg.neutral",
+  },
+  {
+    case: "ghost - danger",
+    props: { variant: "ghost", tone: "danger" },
+    expectedClass: "c_fg.danger",
+  },
+] as const;
 
-  expect(screen.getByRole("button", { name: "솔리드 버튼" })).toHaveClass(
-    "bg_bgSolid.brand",
-  );
-  expect(screen.getByRole("button", { name: "아웃라인 버튼" })).toHaveClass(
-    "bd_brand bd-w_lg",
-  );
-  expect(screen.getByRole("button", { name: "고스트 버튼" })).toHaveClass(
-    "bg_transparent bd_none",
-  );
-});
-
-test("tone 속성이 올바르게 적용됨", () => {
-  render(
-    <>
-      <Button variant="solid" tone="brand">
-        솔리드 브랜드
-      </Button>
-      <Button variant="outline" tone="brand">
-        아웃라인 브랜드
-      </Button>
-      <Button variant="ghost" tone="neutral">
-        고스트 중립
-      </Button>
-      <Button variant="ghost" tone="danger">
-        고스트 위험
-      </Button>
-    </>,
-  );
-
-  // solid는 brand tone을 지원
-  expect(screen.getByRole("button", { name: "솔리드 브랜드" })).toHaveClass(
-    "bg_bgSolid.brand",
-  );
-
-  // outline은 brand tone을 지원
-  expect(screen.getByRole("button", { name: "아웃라인 브랜드" })).toHaveClass(
-    "bd_brand",
-  );
-
-  // ghost는 neutral tone을 지원
-  expect(screen.getByRole("button", { name: "고스트 중립" })).toHaveClass(
-    "c_fg.neutral",
-  );
-
-  // ghost는 danger tone을 지원
-  expect(screen.getByRole("button", { name: "고스트 위험" })).toHaveClass(
-    "c_fg.danger",
+test.each(toneAndVariantCases)("$case가 적용됨", ({ props, expectedClass }) => {
+  render(<Button {...props}>버튼 테스트</Button>);
+  expect(screen.getByRole("button", { name: "버튼 테스트" })).toHaveClass(
+    expectedClass,
   );
 });
 

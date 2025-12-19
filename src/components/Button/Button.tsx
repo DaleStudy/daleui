@@ -7,7 +7,7 @@ import { type IconName } from "../../tokens/iconography";
 type size = "sm" | "md" | "lg";
 
 /** 공통 버튼 속성 */
-interface BaseButtonProps
+export interface ButtonProps
   extends Omit<HTMLAttributes<HTMLButtonElement>, "style"> {
   /** 버튼 텍스트 */
   children: string;
@@ -24,32 +24,13 @@ interface BaseButtonProps
   onClick?: () => void;
   /** 버튼의 크기 */
   size?: size;
+  /** 버튼의 색상 강조 */
+  tone?: "brand" | "neutral" | "danger";
   /** 타입 */
   type?: "button" | "submit" | "reset";
+  /** 버튼의 스타일 종류 */
+  variant?: "solid" | "outline" | "ghost";
 }
-
-/** Solid 버튼 속성 (brand tone만 지원) */
-type SolidButtonProps = BaseButtonProps & {
-  variant?: "solid";
-  tone?: "brand";
-};
-
-/** Outline 버튼 속성 (brand tone만 지원) */
-type OutlineButtonProps = BaseButtonProps & {
-  variant: "outline";
-  tone?: "brand";
-};
-
-/** Ghost 버튼 속성 (neutral, danger tone 지원) */
-type GhostButtonProps = BaseButtonProps & {
-  variant: "ghost";
-  tone?: "neutral" | "danger";
-};
-
-export type ButtonProps =
-  | SolidButtonProps
-  | OutlineButtonProps
-  | GhostButtonProps;
 
 /**
  * - `variant` 속성으로 버튼의 스타일 종류를 지정할 수 있습니다.
@@ -69,7 +50,7 @@ export const Button = ({
   rightIcon,
   onClick,
   size = "md",
-  tone,
+  tone = "brand",
   type = "button",
   ...rest
 }: ButtonProps) => {
@@ -169,7 +150,7 @@ const styles = cva({
     },
     "&:focus-visible": {
       outlineStyle: "solid",
-      outlineWidth: "lg",
+      outlineWidth: "sm",
       outlineOffset: "3px",
     },
   },
@@ -219,7 +200,6 @@ const styles = cva({
     },
   },
   compoundVariants: [
-    // solid (brand만 지원)
     {
       variant: "solid",
       tone: "brand",
@@ -234,20 +214,82 @@ const styles = cva({
         },
       },
     },
-    // outline (brand만 지원)
+    {
+      variant: "solid",
+      tone: "neutral",
+      css: {
+        bg: "bgSolid.neutral",
+        color: "fgSolid.neutral",
+        "&:hover": {
+          bg: "bgSolid.neutral.hover",
+        },
+        "&:active": {
+          bg: "bgSolid.neutral.active",
+        },
+      },
+    },
+    {
+      variant: "solid",
+      tone: "danger",
+      css: {
+        bg: "bgSolid.danger",
+        color: "fgSolid.danger",
+        "&:hover": {
+          bg: "bgSolid.danger.hover",
+        },
+        "&:active": {
+          bg: "bgSolid.danger.active",
+        },
+      },
+    },
     {
       variant: "outline",
       tone: "brand",
       css: {
         border: "brand",
-        borderWidth: "lg",
+        borderWidth: "sm",
         color: "fg.brand",
         "&:hover": {
           color: "fg.brand.hover",
+          backgroundColor: "bg.brand.hover",
         },
         "&:active": {
           color: "fg.brand.active",
-          borderColor: "border.brand.active",
+          backgroundColor: "bg.brand.active",
+        },
+      },
+    },
+    {
+      variant: "outline",
+      tone: "neutral",
+      css: {
+        border: "neutral",
+        borderWidth: "sm",
+        color: "fg.neutral",
+        "&:hover": {
+          color: "fg.neutral.hover",
+          backgroundColor: "bg.neutral.hover",
+        },
+        "&:active": {
+          color: "fg.neutral.active",
+          backgroundColor: "bg.neutral.active",
+        },
+      },
+    },
+    {
+      variant: "outline",
+      tone: "danger",
+      css: {
+        border: "danger",
+        borderWidth: "sm",
+        color: "fg.danger",
+        "&:hover": {
+          color: "fg.danger.hover",
+          backgroundColor: "bg.danger.hover",
+        },
+        "&:active": {
+          color: "fg.danger.active",
+          backgroundColor: "bg.danger.active",
         },
       },
     },
@@ -272,7 +314,21 @@ const styles = cva({
         px: "0.9rem",
       },
     },
-    // ghost (neutral, danger만 지원)
+    {
+      variant: "ghost",
+      tone: "brand",
+      css: {
+        color: "fg.brand",
+        "&:hover": {
+          bg: "bg.brand.hover",
+          color: "fg.brand.hover",
+        },
+        "&:active": {
+          bg: "bg.brand.active",
+          color: "fg.brand.active",
+        },
+      },
+    },
     {
       variant: "ghost",
       tone: "neutral",
@@ -303,7 +359,6 @@ const styles = cva({
         },
       },
     },
-    // disabled
     {
       disabled: true,
       css: {
@@ -333,7 +388,7 @@ const styles = cva({
       tone: "danger",
       css: {
         "&:focus-visible": {
-          outlineColor: "border.danger.focus",
+          outlineColor: "border.danger",
         },
       },
     },

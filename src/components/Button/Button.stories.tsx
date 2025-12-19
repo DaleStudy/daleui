@@ -24,87 +24,75 @@ export default {
       description: "버튼의 스타일 종류",
     },
     tone: {
-      description:
-        "색상 강조 (⚠️ solid: brand/neutral/danger, outline: brand만, ghost: neutral/danger만 지원)",
+      description: "색상 강조",
     },
   },
 } satisfies Meta<typeof Button>;
 
 export const Basic: StoryObj<typeof Button> = {};
 
-// Brand Tone - solid, outline 지원
-export const ToneBrand: StoryObj<typeof Button> = {
+export const Tone: StoryObj<typeof Button> = {
   args: {
-    tone: "brand",
-    variant: "solid",
-  },
-  argTypes: {
-    tone: {
-      control: false,
-    },
-    variant: {
-      control: "select",
-      options: ["solid", "outline"],
-      description: "brand tone은 solid, outline을 지원합니다",
-    },
-  },
-};
-
-// Neutral Tone - solid, ghost 지원
-export const ToneNeutral: StoryObj<typeof Button> = {
-  args: {
-    tone: "neutral",
     variant: "ghost",
   },
-  argTypes: {
-    tone: {
-      control: false,
-    },
-    variant: {
-      control: "select",
-      options: ["ghost"],
-      description: "neutral tone은 ghost를 지원합니다",
-    },
-  },
-};
 
-// Danger Tone - solid, ghost 지원
-export const ToneDanger: StoryObj<typeof Button> = {
-  args: {
-    tone: "danger",
-    variant: "ghost",
+  render: (args) => {
+    return (
+      <div className={vstack({ gap: "16" })}>
+        <Button {...args} tone="brand">
+          브랜드 버튼
+        </Button>
+        <Button {...args} tone="neutral">
+          중립 버튼
+        </Button>
+        <Button {...args} tone="danger">
+          위험 버튼
+        </Button>
+      </div>
+    );
   },
+
   argTypes: {
     tone: {
       control: false,
     },
     variant: {
       control: "select",
-      options: ["ghost"],
-      description: "danger tone은 ghost를 지원합니다",
+      options: ["solid", "outline", "ghost"],
+      description: "버튼의 스타일 종류를 지정합니다",
     },
   },
 };
 
 export const Variants: StoryObj<typeof Button> = {
+  args: {
+    tone: "neutral",
+  },
+
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
-        <Button {...args} tone="brand" variant="solid">
+        <Button {...args} variant="solid">
           솔리드 버튼
         </Button>
-        <Button {...args} tone="brand" variant="outline">
+        <Button {...args} variant="outline">
           아웃라인 버튼
         </Button>
-        <Button {...args} tone="neutral" variant="ghost">
+        <Button {...args} variant="ghost">
           고스트 버튼
         </Button>
       </div>
     );
   },
+
   argTypes: {
     children: {
       control: false,
+    },
+    tone: {
+      control: "select",
+      options: ["brand", "neutral", "danger"],
+      description: "버튼의 색상 강조를 지정합니다",
     },
     variant: {
       control: false,
