@@ -24,6 +24,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/50227228?v=4",
       "profile": "https://github.com/hyoseong1994",
       "contributions": ["code"]
+    },
+    {
+      "login": "DaleSeo",
+      "name": "Dale Seo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5466341?v=4",
+      "profile": "https://www.daleseo.com/",
+      "contributions": ["code", "doc", "design", "maintenance", "infra"]
     }
   ],
   "contributorsPerLine": 7,
