@@ -1,85 +1,84 @@
 {
-  "files": ["README.md"],
-  "imageSize": 100,
+  "projectName": "daleui",
+  "projectOwner": "DaleStudy",
   "commit": true,
-  "commitConvention": "angular",
   "contributors": [
     {
       "login": "Hecklebot",
       "name": "Hansaem.so",
       "avatar_url": "https://avatars.githubusercontent.com/u/51806574?v=4",
       "profile": "https://velog.io/@hecklebot",
-      "contributions": ["code", "doc", "design", "maintenance"]
+      "contributions": ["code", "doc"]
     },
     {
       "login": "Lustellz",
       "name": "Tasha(살미)",
       "avatar_url": "https://avatars.githubusercontent.com/u/45252527?v=4",
       "profile": "https://github.com/Lustellz",
-      "contributions": ["code"]
+      "contributions": ["code", "doc"]
     },
     {
       "login": "hyoseong1994",
       "name": "hyoseong",
       "avatar_url": "https://avatars.githubusercontent.com/u/50227228?v=4",
       "profile": "https://github.com/hyoseong1994",
-      "contributions": ["code"]
+      "contributions": ["blog", "code", "doc"]
     },
     {
       "login": "DaleSeo",
       "name": "Dale Seo",
       "avatar_url": "https://avatars.githubusercontent.com/u/5466341?v=4",
       "profile": "https://www.daleseo.com/",
-      "contributions": ["code", "doc", "design", "maintenance", "infra"]
+      "contributions": ["code", "doc"]
     },
     {
       "login": "RiaOh",
       "name": "오예림 Ria Oh",
       "avatar_url": "https://avatars.githubusercontent.com/u/83909755?v=4",
       "profile": "https://github.com/RiaOh",
-      "contributions": ["code"]
+      "contributions": ["code", "doc"]
     },
     {
       "login": "sounmind",
       "name": "Evan Suhyeong Lee",
       "avatar_url": "https://avatars.githubusercontent.com/u/37020415?v=4",
       "profile": "https://github.com/sounmind",
-      "contributions": ["code"]
+      "contributions": ["code", "doc"]
     },
     {
       "login": "yolophg",
       "name": "Helena Park",
       "avatar_url": "https://avatars.githubusercontent.com/u/38199103?v=4",
       "profile": "https://github.com/yolophg",
-      "contributions": ["code"]
+      "contributions": ["code", "doc"]
     },
     {
       "login": "nhistory",
       "name": "Sehwan",
       "avatar_url": "https://avatars.githubusercontent.com/u/39740066?v=4",
       "profile": "https://sehwanlee.dev/",
-      "contributions": ["code"]
+      "contributions": ["blog", "code", "doc"]
     },
     {
       "login": "Sunjae95",
       "name": "이선재",
       "avatar_url": "https://avatars.githubusercontent.com/u/63578094?v=4",
       "profile": "https://sunjae95.github.io/",
-      "contributions": ["code"]
+      "contributions": ["blog", "code", "doc"]
     },
     {
       "login": "y00eunji",
       "name": "유은지",
       "avatar_url": "https://avatars.githubusercontent.com/u/27201591?v=4",
       "profile": "https://github.com/y00eunji",
-      "contributions": ["code"]
+      "contributions": ["code", "doc"]
     },
     {
       "login": "HowToBeAHappyBoy",
       "name": "서진혁 (Aka)",
       "avatar_url": "https://avatars.githubusercontent.com/u/30362922?v=4",
       "profile": "https://seozi.io/",
-      "contributions": ["code"]
+      "contributions": ["code", "doc"]
     },
     {
       "login": "lylaminju",
@@ -87,13 +86,16 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/50537876?v=4",
       "profile": "https://lylamin.com/",
       "contributions": ["code"]
+    },
+    {
+      "login": "boldkang",
+      "name": "mkang",
+      "avatar_url": "https://avatars.githubusercontent.com/u/202710030?v=4",
+      "profile": "https://github.com/boldkang",
+      "contributions": ["design"]
     }
   ],
-  "contributorsPerLine": 7,
-  "linkToUsage": false,
-  "projectName": "daleui",
-  "projectOwner": "DaleStudy",
-  "repoHost": "https://github.com",
-  "repoType": "github"
+  "repoType": "github",
+  "commitConvention": "angular"
 }
 
