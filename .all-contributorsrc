@@ -80,6 +80,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/30362922?v=4",
       "profile": "https://seozi.io/",
       "contributions": ["code"]
+    },
+    {
+      "login": "lylaminju",
+      "name": "Lyla (Minju) Park",
+      "avatar_url": "https://avatars.githubusercontent.com/u/50537876?v=4",
+      "profile": "https://lylamin.com/",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7,
