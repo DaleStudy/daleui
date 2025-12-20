@@ -52,6 +52,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/38199103?v=4",
       "profile": "https://github.com/yolophg",
       "contributions": ["code"]
+    },
+    {
+      "login": "nhistory",
+      "name": "Sehwan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39740066?v=4",
+      "profile": "https://sehwanlee.dev/",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7,

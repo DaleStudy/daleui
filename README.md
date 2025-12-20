@@ -30,6 +30,9 @@
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/sounmind"><img src="https://avatars.githubusercontent.com/u/37020415?v=4?s=100" width="100px;" alt="Evan Suhyeong Lee"/><br /><sub><b>Evan Suhyeong Lee</b></sub></a><br /><a href="https://github.com/DaleStudy/daleui/commits?author=sounmind" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/yolophg"><img src="https://avatars.githubusercontent.com/u/38199103?v=4?s=100" width="100px;" alt="Helena Park"/><br /><sub><b>Helena Park</b></sub></a><br /><a href="https://github.com/DaleStudy/daleui/commits?author=yolophg" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://sehwanlee.dev/"><img src="https://avatars.githubusercontent.com/u/39740066?v=4?s=100" width="100px;" alt="Sehwan"/><br /><sub><b>Sehwan</b></sub></a><br /><a href="https://github.com/DaleStudy/daleui/commits?author=nhistory" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
