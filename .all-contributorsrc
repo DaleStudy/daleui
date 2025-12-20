@@ -73,6 +73,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/27201591?v=4",
       "profile": "https://github.com/y00eunji",
       "contributions": ["code"]
+    },
+    {
+      "login": "HowToBeAHappyBoy",
+      "name": "서진혁 (Aka)",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30362922?v=4",
+      "profile": "https://seozi.io/",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7,
