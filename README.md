@@ -24,6 +24,7 @@
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://velog.io/@hecklebot"><img src="https://avatars.githubusercontent.com/u/51806574?v=4?s=100" width="100px;" alt="Hansaem.so"/><br /><sub><b>Hansaem.so</b></sub></a><br /><a href="https://github.com/DaleStudy/daleui/commits?author=Hecklebot" title="Code">💻</a> <a href="https://github.com/DaleStudy/daleui/commits?author=Hecklebot" title="Documentation">📖</a> <a href="#design-Hecklebot" title="Design">🎨</a> <a href="#maintenance-Hecklebot" title="Maintenance">🚧</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Lustellz"><img src="https://avatars.githubusercontent.com/u/45252527?v=4?s=100" width="100px;" alt="Tasha(살미)"/><br /><sub><b>Tasha(살미)</b></sub></a><br /><a href="https://github.com/DaleStudy/daleui/commits?author=Lustellz" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/hyoseong1994"><img src="https://avatars.githubusercontent.com/u/50227228?v=4?s=100" width="100px;" alt="hyoseong"/><br /><sub><b>hyoseong</b></sub></a><br /><a href="https://github.com/DaleStudy/daleui/commits?author=hyoseong1994" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
