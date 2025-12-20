@@ -2,6 +2,8 @@
   "projectName": "daleui",
   "projectOwner": "DaleStudy",
   "commit": true,
+  "repoType": "github",
+  "commitConvention": "angular",
   "contributors": [
     {
       "login": "Hecklebot",
@@ -93,9 +95,14 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/202710030?v=4",
       "profile": "https://github.com/boldkang",
       "contributions": ["design"]
+    },
+    {
+      "login": "bkidea",
+      "name": "BK LEE",
+      "avatar_url": "https://avatars.githubusercontent.com/u/201320266?v=4",
+      "profile": "https://github.com/bkidea",
+      "contributions": ["design"]
     }
-  ],
-  "repoType": "github",
-  "commitConvention": "angular"
+  ]
 }
 

@@ -37,6 +37,7 @@
       <td align="center" valign="top" width="14.28%"><a href="https://seozi.io/"><img src="https://avatars.githubusercontent.com/u/30362922?v=4?s=100" width="100px;" alt="서진혁 (Aka)"/><br /><sub><b>서진혁 (Aka)</b></sub></a><br /><a href="https://github.com/DaleStudy/daleui/commits?author=HowToBeAHappyBoy" title="Code">💻</a> <a href="https://github.com/DaleStudy/daleui/commits?author=HowToBeAHappyBoy" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://lylamin.com/"><img src="https://avatars.githubusercontent.com/u/50537876?v=4?s=100" width="100px;" alt="Lyla (Minju) Park"/><br /><sub><b>Lyla (Minju) Park</b></sub></a><br /><a href="https://github.com/DaleStudy/daleui/commits?author=lylaminju" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/boldkang"><img src="https://avatars.githubusercontent.com/u/202710030?v=4?s=100" width="100px;" alt="mkang"/><br /><sub><b>mkang</b></sub></a><br /><a href="#design-boldkang" title="Design">🎨</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/bkidea"><img src="https://avatars.githubusercontent.com/u/201320266?v=4?s=100" width="100px;" alt="BK LEE"/><br /><sub><b>BK LEE</b></sub></a><br /><a href="#design-bkidea" title="Design">🎨</a></td>
     </tr>
   </tbody>
 </table>
