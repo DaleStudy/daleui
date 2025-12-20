@@ -38,6 +38,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/83909755?v=4",
       "profile": "https://github.com/RiaOh",
       "contributions": ["code"]
+    },
+    {
+      "login": "sounmind",
+      "name": "Evan Suhyeong Lee",
+      "avatar_url": "https://avatars.githubusercontent.com/u/37020415?v=4",
+      "profile": "https://github.com/sounmind",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7,
