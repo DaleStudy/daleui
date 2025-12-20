@@ -6,45 +6,10 @@
   "commitConvention": "angular",
   "contributors": [
     {
-      "login": "Hecklebot",
-      "name": "Hansaem.so",
-      "avatar_url": "https://avatars.githubusercontent.com/u/51806574?v=4",
-      "profile": "https://velog.io/@hecklebot",
-      "contributions": ["code", "doc"]
-    },
-    {
-      "login": "Lustellz",
-      "name": "Tasha(살미)",
-      "avatar_url": "https://avatars.githubusercontent.com/u/45252527?v=4",
-      "profile": "https://github.com/Lustellz",
-      "contributions": ["code", "doc"]
-    },
-    {
-      "login": "hyoseong1994",
-      "name": "hyoseong",
-      "avatar_url": "https://avatars.githubusercontent.com/u/50227228?v=4",
-      "profile": "https://github.com/hyoseong1994",
-      "contributions": ["blog", "code", "doc"]
-    },
-    {
       "login": "DaleSeo",
       "name": "Dale Seo",
       "avatar_url": "https://avatars.githubusercontent.com/u/5466341?v=4",
       "profile": "https://www.daleseo.com/",
-      "contributions": ["code", "doc"]
-    },
-    {
-      "login": "RiaOh",
-      "name": "오예림 Ria Oh",
-      "avatar_url": "https://avatars.githubusercontent.com/u/83909755?v=4",
-      "profile": "https://github.com/RiaOh",
-      "contributions": ["code", "doc"]
-    },
-    {
-      "login": "sounmind",
-      "name": "Evan Suhyeong Lee",
-      "avatar_url": "https://avatars.githubusercontent.com/u/37020415?v=4",
-      "profile": "https://github.com/sounmind",
       "contributions": ["code", "doc"]
     },
     {
@@ -55,24 +20,45 @@
       "contributions": ["code", "doc"]
     },
     {
-      "login": "nhistory",
-      "name": "Sehwan",
-      "avatar_url": "https://avatars.githubusercontent.com/u/39740066?v=4",
-      "profile": "https://sehwanlee.dev/",
+      "login": "sounmind",
+      "name": "Evan Suhyeong Lee",
+      "avatar_url": "https://avatars.githubusercontent.com/u/37020415?v=4",
+      "profile": "https://github.com/sounmind",
+      "contributions": ["code", "doc"]
+    },
+    {
+      "login": "hyoseong1994",
+      "name": "hyoseong",
+      "avatar_url": "https://avatars.githubusercontent.com/u/50227228?v=4",
+      "profile": "https://github.com/hyoseong1994",
       "contributions": ["blog", "code", "doc"]
     },
     {
-      "login": "Sunjae95",
-      "name": "이선재",
-      "avatar_url": "https://avatars.githubusercontent.com/u/63578094?v=4",
-      "profile": "https://sunjae95.github.io/",
-      "contributions": ["blog", "code", "doc"]
+      "login": "RiaOh",
+      "name": "오예림 Ria Oh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/83909755?v=4",
+      "profile": "https://github.com/RiaOh",
+      "contributions": ["code", "doc"]
+    },
+    {
+      "login": "Lustellz",
+      "name": "Tasha(살미)",
+      "avatar_url": "https://avatars.githubusercontent.com/u/45252527?v=4",
+      "profile": "https://github.com/Lustellz",
+      "contributions": ["code", "doc"]
     },
     {
       "login": "y00eunji",
       "name": "유은지",
       "avatar_url": "https://avatars.githubusercontent.com/u/27201591?v=4",
       "profile": "https://github.com/y00eunji",
+      "contributions": ["code", "doc"]
+    },
+    {
+      "login": "Hecklebot",
+      "name": "Hansaem.so",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51806574?v=4",
+      "profile": "https://velog.io/@hecklebot",
       "contributions": ["code", "doc"]
     },
     {
@@ -83,18 +69,39 @@
       "contributions": ["code", "doc"]
     },
     {
-      "login": "lylaminju",
-      "name": "Lyla (Minju) Park",
-      "avatar_url": "https://avatars.githubusercontent.com/u/50537876?v=4",
-      "profile": "https://lylamin.com/",
-      "contributions": ["code"]
+      "login": "sseung30",
+      "name": "seunghyun",
+      "avatar_url": "https://avatars.githubusercontent.com/u/69985950?v=4",
+      "profile": "https://github.com/sseung30",
+      "contributions": ["design"]
+    },
+    {
+      "login": "jj5u",
+      "name": "Jahye",
+      "avatar_url": "https://avatars.githubusercontent.com/u/89135410?v=4",
+      "profile": "https://github.com/jj5u",
+      "contributions": ["design"]
     },
     {
       "login": "boldkang",
       "name": "mkang",
       "avatar_url": "https://avatars.githubusercontent.com/u/202710030?v=4",
       "profile": "https://github.com/boldkang",
-      "contributions": ["design"]
+      "contributions": ["blog", "design"]
+    },
+    {
+      "login": "Sunjae95",
+      "name": "이선재",
+      "avatar_url": "https://avatars.githubusercontent.com/u/63578094?v=4",
+      "profile": "https://sunjae95.github.io/",
+      "contributions": ["blog", "code", "doc"]
+    },
+    {
+      "login": "nhistory",
+      "name": "Sehwan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39740066?v=4",
+      "profile": "https://sehwanlee.dev/",
+      "contributions": ["blog", "code", "doc"]
     },
     {
       "login": "bkidea",
@@ -111,19 +118,11 @@
       "contributions": ["design"]
     },
     {
-      "login": "sseung30",
-      "name": "seunghyun",
-      "avatar_url": "https://avatars.githubusercontent.com/u/69985950?v=4",
-      "profile": "https://github.com/sseung30",
-      "contributions": ["design"]
-    },
-    {
-      "login": "jj5u",
-      "name": "Jahye",
-      "avatar_url": "https://avatars.githubusercontent.com/u/89135410?v=4",
-      "profile": "https://github.com/jj5u",
-      "contributions": ["design"]
+      "login": "lylaminju",
+      "name": "Lyla (Minju) Park",
+      "avatar_url": "https://avatars.githubusercontent.com/u/50537876?v=4",
+      "profile": "https://lylamin.com/",
+      "contributions": ["code"]
     }
   ]
 }
-
