@@ -39,6 +39,9 @@
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/boldkang"><img src="https://avatars.githubusercontent.com/u/202710030?v=4?s=100" width="100px;" alt="mkang"/><br /><sub><b>mkang</b></sub></a><br /><a href="#design-boldkang" title="Design">🎨</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/bkidea"><img src="https://avatars.githubusercontent.com/u/201320266?v=4?s=100" width="100px;" alt="BK LEE"/><br /><sub><b>BK LEE</b></sub></a><br /><a href="#design-bkidea" title="Design">🎨</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/graycrisp"><img src="https://avatars.githubusercontent.com/u/51190669?v=4?s=100" width="100px;" alt="graycrisp"/><br /><sub><b>graycrisp</b></sub></a><br /><a href="#design-graycrisp" title="Design">🎨</a></td>
+    </tr>
   </tbody>
 </table>
 
