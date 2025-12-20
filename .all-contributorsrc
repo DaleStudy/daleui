@@ -59,6 +59,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/39740066?v=4",
       "profile": "https://sehwanlee.dev/",
       "contributions": ["code"]
+    },
+    {
+      "login": "Sunjae95",
+      "name": "이선재",
+      "avatar_url": "https://avatars.githubusercontent.com/u/63578094?v=4",
+      "profile": "https://sunjae95.github.io/",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7,

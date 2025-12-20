@@ -32,6 +32,7 @@
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://sehwanlee.dev/"><img src="https://avatars.githubusercontent.com/u/39740066?v=4?s=100" width="100px;" alt="Sehwan"/><br /><sub><b>Sehwan</b></sub></a><br /><a href="https://github.com/DaleStudy/daleui/commits?author=nhistory" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://sunjae95.github.io/"><img src="https://avatars.githubusercontent.com/u/63578094?v=4?s=100" width="100px;" alt="이선재"/><br /><sub><b>이선재</b></sub></a><br /><a href="https://github.com/DaleStudy/daleui/commits?author=Sunjae95" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
