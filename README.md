@@ -41,6 +41,7 @@
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/graycrisp"><img src="https://avatars.githubusercontent.com/u/51190669?v=4?s=100" width="100px;" alt="graycrisp"/><br /><sub><b>graycrisp</b></sub></a><br /><a href="#design-graycrisp" title="Design">🎨</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/sseung30"><img src="https://avatars.githubusercontent.com/u/69985950?v=4?s=100" width="100px;" alt="seunghyun"/><br /><sub><b>seunghyun</b></sub></a><br /><a href="#design-sseung30" title="Design">🎨</a></td>
     </tr>
   </tbody>
 </table>
