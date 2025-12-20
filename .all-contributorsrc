@@ -1,0 +1,22 @@
+{
+  "files": ["README.md"],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "Hecklebot",
+      "name": "Hansaem.so",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51806574?v=4",
+      "profile": "https://velog.io/@hecklebot",
+      "contributions": ["code", "doc", "design", "maintenance"]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": false,
+  "projectName": "daleui",
+  "projectOwner": "DaleStudy",
+  "repoHost": "https://github.com",
+  "repoType": "github"
+}
+
