@@ -31,6 +31,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/5466341?v=4",
       "profile": "https://www.daleseo.com/",
       "contributions": ["code", "doc", "design", "maintenance", "infra"]
+    },
+    {
+      "login": "RiaOh",
+      "name": "오예림 Ria Oh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/83909755?v=4",
+      "profile": "https://github.com/RiaOh",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7,
