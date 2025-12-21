@@ -12,20 +12,17 @@
     "react",
     "storybook"
   ],
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.js"
     },
     "./styles.css": "./dist/index.css",
     "./*": {
       "types": "./dist/components/*/*.d.ts",
-      "import": "./dist/components/*/*.mjs",
-      "require": "./dist/components/*/*.cjs"
+      "import": "./dist/components/*/*.js"
     }
   },
   "files": [
