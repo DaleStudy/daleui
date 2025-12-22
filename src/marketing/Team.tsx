@@ -14,10 +14,12 @@ export interface TeamMember {
   name: string;
   /** 역할 */
   role: string;
-  /** 장소 (예: 🇰🇷서울) */
+  /** 국기 이모지 (예: 🇰🇷, 🇨🇦, 🇺🇸) */
+  flag?: string;
+  /** 장소 (예: 서울, 토론토) */
   location: string;
-  /** 프로필 이미지 URL (없으면 기본 아바타 표시) */
-  avatarUrl?: string;
+  /** 프로필 이미지 (없으면 기본 아바타 표시) */
+  avatar?: string;
   /** GitHub URL */
   githubUrl?: string;
   /** LinkedIn URL */
@@ -29,7 +31,7 @@ interface TeamCardProps {
 }
 
 function TeamCard({ member }: TeamCardProps) {
-  const { name, role, location, avatarUrl, githubUrl, linkedinUrl } = member;
+  const { name, role, flag, location, avatar, githubUrl, linkedinUrl } = member;
 
   return (
     <Card
@@ -37,9 +39,13 @@ function TeamCard({ member }: TeamCardProps) {
         padding: "16",
         borderRadius: "sm",
         overflow: "hidden",
-        flex: "1 0 0",
-        minWidth: "260px",
-        maxWidth: "360px",
+        width: {
+          base: "100%",
+          sm: "276px",
+          lg: "309px",
+          xl: "290px",
+        },
+        flexShrink: 0,
       })}
     >
       {/* 상단 컨텐츠 영역 */}
@@ -56,9 +62,9 @@ function TeamCard({ member }: TeamCardProps) {
             backgroundColor: "#e3e7ff",
           })}
         >
-          {avatarUrl ? (
+          {avatar ? (
             <img
-              src={avatarUrl}
+              src={avatar}
               alt={`${name}의 프로필 사진`}
               className={css({
                 width: "100%",
@@ -122,6 +128,7 @@ function TeamCard({ member }: TeamCardProps) {
                 lineHeight: "1.2",
               })}
             >
+              {flag && <span>{flag}</span>}
               {location}
             </Text>
           </Flex>
@@ -164,60 +171,84 @@ export interface TeamProps {
 
 const DEFAULT_MEMBERS: TeamMember[] = [
   {
-    name: "김들리",
-    role: "엔지니어",
-    location: "🇨🇦토론토",
-    githubUrl: "https://github.com",
-    linkedinUrl: "https://linkedin.com",
+    name: "달레",
+    role: "Engineer",
+    flag: "🇨🇦",
+    location: "Toronto",
+    githubUrl: "https://github.com/DaleSeo",
+    linkedinUrl: "https://www.linkedin.com/in/daleseo/",
   },
   {
-    name: "홍길동",
-    role: "역할",
-    location: "🇰🇷장소",
-    githubUrl: "https://github.com",
-    linkedinUrl: "https://linkedin.com",
+    name: "Helena",
+    role: "Engineer",
+    flag: "🇨🇦",
+    location: "Toronto",
+    githubUrl: "https://github.com/yolophg",
+    linkedinUrl: "https://www.linkedin.com/in/yolophg/",
   },
   {
-    name: "고길동",
-    role: "디자이너",
-    location: "🇰🇷서울",
-    githubUrl: "https://github.com",
-    linkedinUrl: "https://linkedin.com",
+    name: "Evan (에반)",
+    role: "Engineer",
+    flag: "🇰🇷",
+    location: "Seoul",
+    githubUrl: "https://github.com/EvanYJC",
   },
   {
-    name: "홍길동",
-    role: "역할",
-    location: "🇰🇷장소",
-    githubUrl: "https://github.com",
-    linkedinUrl: "https://linkedin.com",
+    name: "hyoseong",
+    role: "Engineer",
+    flag: "🇰🇷",
+    location: "Seoul",
+    githubUrl: "https://github.com/hyoseong88",
   },
   {
-    name: "홍길동",
-    role: "역할",
-    location: "🇰🇷장소",
-    githubUrl: "https://github.com",
-    linkedinUrl: "https://linkedin.com",
+    name: "Ria (리아)",
+    role: "Engineer",
+    flag: "🇰🇷",
+    location: "Seoul",
+    githubUrl: "https://github.com/parkseonup",
   },
   {
-    name: "홍길동",
-    role: "역할",
-    location: "🇰🇷장소",
-    githubUrl: "https://github.com",
-    linkedinUrl: "https://linkedin.com",
+    name: "살미",
+    role: "Engineer",
+    flag: "🇰🇷",
+    location: "Seoul",
+    githubUrl: "https://github.com/selmi1018",
   },
   {
-    name: "홍길동",
-    role: "역할",
-    location: "🇰🇷장소",
-    githubUrl: "https://github.com",
-    linkedinUrl: "https://linkedin.com",
+    name: "은지",
+    role: "Engineer",
+    flag: "🇰🇷",
+    location: "Seoul",
+    githubUrl: "https://github.com/salmonco",
   },
   {
-    name: "Name",
-    role: "역할",
-    location: "🇰🇷장소",
-    githubUrl: "https://github.com",
-    linkedinUrl: "https://linkedin.com",
+    name: "한샘",
+    role: "Engineer",
+    flag: "🇰🇷",
+    location: "Seoul",
+    githubUrl: "https://github.com/sem-hansem",
+  },
+  {
+    name: "Aka (아카)",
+    role: "Engineer",
+    flag: "🇰🇷",
+    location: "Seoul",
+    githubUrl: "https://github.com/HowToBeAHappyBoy",
+    linkedinUrl: "https://www.linkedin.com/in/seozi/",
+  },
+  {
+    name: "승현",
+    role: "Designer",
+    flag: "🇰🇷",
+    location: "Seoul",
+    githubUrl: "https://github.com/sseung30",
+  },
+  {
+    name: "자혜",
+    role: "Designer",
+    flag: "🇰🇷",
+    location: "Seoul",
+    githubUrl: "https://github.com/jj5u",
   },
 ];
 
@@ -227,8 +258,15 @@ export function Team({ members = DEFAULT_MEMBERS }: TeamProps) {
       id="team"
       className={css({
         width: "100%",
-        py: "80px",
-        px: "24",
+        py: {
+          base: "40",
+          sm: "60px",
+          md: "80px",
+        },
+        px: {
+          base: "16",
+          sm: "24",
+        },
         backgroundColor: "bg.brand",
       })}
     >
@@ -253,9 +291,16 @@ export function Team({ members = DEFAULT_MEMBERS }: TeamProps) {
         <Flex
           className={css({
             flexWrap: "wrap",
-            gap: "24",
+            gap: {
+              base: "24",
+              sm: "40px",
+              lg: "24",
+            },
             width: "100%",
-            justifyContent: "flex-start",
+            justifyContent: {
+              base: "center",
+              sm: "flex-start",
+            },
           })}
         >
           {members.map((member, index) => (
