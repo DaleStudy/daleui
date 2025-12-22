@@ -18,20 +18,23 @@ const customMembers: TeamMember[] = [
   {
     name: "김달레",
     role: "프로젝트 리드",
-    location: "🇰🇷서울",
+    flag: "🇰🇷",
+    location: "서울",
     githubUrl: "https://github.com",
     linkedinUrl: "https://linkedin.com",
   },
   {
     name: "이개발",
     role: "프론트엔드 엔지니어",
-    location: "🇰🇷부산",
+    flag: "🇰🇷",
+    location: "부산",
     githubUrl: "https://github.com",
   },
   {
     name: "박디자인",
     role: "UI/UX 디자이너",
-    location: "🇯🇵도쿄",
+    flag: "🇯🇵",
+    location: "도쿄",
     linkedinUrl: "https://linkedin.com",
   },
 ];
@@ -46,7 +49,8 @@ const singleMember: TeamMember[] = [
   {
     name: "홍길동",
     role: "풀스택 개발자",
-    location: "🇺🇸뉴욕",
+    flag: "🇺🇸",
+    location: "뉴욕",
     githubUrl: "https://github.com",
     linkedinUrl: "https://linkedin.com",
   },

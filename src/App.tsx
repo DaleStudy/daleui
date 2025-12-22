@@ -6,6 +6,7 @@ import { Header } from "./marketing/Header";
 import { How } from "./marketing/How";
 import { Mission } from "./marketing/Mission";
 import { Navigation } from "./marketing/Navigation";
+import { Team } from "./marketing/Team";
 
 function App() {
   const scrollToSection = useCallback((sectionId: string) => {
@@ -56,6 +57,7 @@ function App() {
       <How />
       <Community />
       <Contribution />
+      <Team />
       <Footer />
     </>
   );
