@@ -39,22 +39,15 @@ function TeamCard({ member }: TeamCardProps) {
         padding: "16",
         borderRadius: "sm",
         overflow: "hidden",
-        width: {
-          base: "100%",
-          sm: "276px",
-          lg: "309px",
-          xl: "290px",
-        },
-        flexShrink: 0,
       })}
     >
       {/* 상단 컨텐츠 영역 */}
-      <HStack gap="12" align="left">
+      <HStack gap="16" align="left">
         {/* 프로필 아바타 */}
         <div
           className={css({
-            width: "60px",
-            height: "60px",
+            width: "45px",
+            height: "45px",
             borderRadius: "full",
             overflow: "hidden",
             flexShrink: 0,
@@ -82,7 +75,7 @@ function TeamCard({ member }: TeamCardProps) {
                 color: "#5cb85c",
               })}
             >
-              <Icon name="codeXml" size="lg" />
+              <Icon name="codeXml" size="md" />
             </div>
           )}
         </div>
@@ -92,7 +85,7 @@ function TeamCard({ member }: TeamCardProps) {
           className={css({
             flex: 1,
             minWidth: 0,
-            gap: "2",
+            gap: "4",
           })}
         >
           <Heading
@@ -105,9 +98,8 @@ function TeamCard({ member }: TeamCardProps) {
             {name}
           </Heading>
           <Flex
-            direction="column"
-            gap="0"
-            align="start"
+            gap="4"
+            align="center"
             className={css({
               width: "100%",
             })}
@@ -119,7 +111,8 @@ function TeamCard({ member }: TeamCardProps) {
                 color: "fg.neutral",
               })}
             >
-              {role}
+              {flag && <span>{flag} </span>}
+              {location}
             </Text>
             <Text
               size="sm"
@@ -128,8 +121,16 @@ function TeamCard({ member }: TeamCardProps) {
                 lineHeight: "1.2",
               })}
             >
-              {flag && <span>{flag}</span>}
-              {location}
+              |
+            </Text>
+            <Text
+              size="sm"
+              className={css({
+                lineHeight: "1.2",
+                color: "fg.neutral",
+              })}
+            >
+              {role}
             </Text>
           </Flex>
         </Card.Body>
@@ -169,7 +170,7 @@ export interface TeamProps {
   members?: TeamMember[];
 }
 
-const DEFAULT_MEMBERS: TeamMember[] = [
+const Members: TeamMember[] = [
   {
     name: "달레",
     role: "Engineer",
@@ -189,44 +190,50 @@ const DEFAULT_MEMBERS: TeamMember[] = [
   {
     name: "Evan (에반)",
     role: "Engineer",
-    flag: "🇰🇷",
-    location: "Seoul",
-    githubUrl: "https://github.com/EvanYJC",
+    flag: "🇨🇦",
+    location: "Toronto",
+    githubUrl: "https://github.com/sounmind",
+    linkedinUrl: "https://www.linkedin.com/in/suhyeong-evan-lee/",
   },
   {
     name: "hyoseong",
     role: "Engineer",
     flag: "🇰🇷",
     location: "Seoul",
-    githubUrl: "https://github.com/hyoseong88",
+    githubUrl: "https://github.com/hyoseong1994",
+    linkedinUrl: "https://www.linkedin.com/in/hyoseong1994/",
   },
   {
     name: "Ria (리아)",
     role: "Engineer",
     flag: "🇰🇷",
     location: "Seoul",
-    githubUrl: "https://github.com/parkseonup",
+    githubUrl: "https://github.com/RiaOh",
+    linkedinUrl: "https://www.linkedin.com/in/riaoh/",
   },
   {
     name: "살미",
     role: "Engineer",
     flag: "🇰🇷",
     location: "Seoul",
-    githubUrl: "https://github.com/selmi1018",
+    githubUrl: "https://github.com/Lustellz",
+    linkedinUrl: "https://www.linkedin.com/in/tasha0417/",
   },
   {
     name: "은지",
     role: "Engineer",
     flag: "🇰🇷",
     location: "Seoul",
-    githubUrl: "https://github.com/salmonco",
+    githubUrl: "https://github.com/y00eunji",
+    linkedinUrl: "https://www.linkedin.com/in/y00eunji/",
   },
   {
     name: "한샘",
     role: "Engineer",
     flag: "🇰🇷",
     location: "Seoul",
-    githubUrl: "https://github.com/sem-hansem",
+    githubUrl: "https://github.com/Hecklebot",
+    linkedinUrl: "https://www.linkedin.com/in/hansaem-so/",
   },
   {
     name: "Aka (아카)",
@@ -242,6 +249,7 @@ const DEFAULT_MEMBERS: TeamMember[] = [
     flag: "🇰🇷",
     location: "Seoul",
     githubUrl: "https://github.com/sseung30",
+    linkedinUrl: undefined,
   },
   {
     name: "자혜",
@@ -249,10 +257,11 @@ const DEFAULT_MEMBERS: TeamMember[] = [
     flag: "🇰🇷",
     location: "Seoul",
     githubUrl: "https://github.com/jj5u",
+    linkedinUrl: undefined,
   },
 ];
 
-export function Team({ members = DEFAULT_MEMBERS }: TeamProps) {
+export function Team({ members = Members }: TeamProps) {
   return (
     <section
       id="team"
@@ -288,25 +297,27 @@ export function Team({ members = DEFAULT_MEMBERS }: TeamProps) {
         </VStack>
 
         {/* 카드 컨테이너 */}
-        <Flex
+        <div
           className={css({
-            flexWrap: "wrap",
+            display: "grid",
             gap: {
               base: "24",
               sm: "40px",
               lg: "24",
             },
             width: "100%",
-            justifyContent: {
-              base: "center",
-              sm: "flex-start",
+            gridTemplateColumns: {
+              base: "1fr",
+              sm: "repeat(2, 1fr)",
+              lg: "repeat(3, 1fr)",
+              xl: "repeat(4, 1fr)",
             },
           })}
         >
           {members.map((member, index) => (
             <TeamCard key={`${member.name}-${index}`} member={member} />
           ))}
-        </Flex>
+        </div>
       </VStack>
     </section>
   );
