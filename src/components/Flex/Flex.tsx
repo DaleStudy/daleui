@@ -14,7 +14,8 @@ type As =
   | "span";
 
 export interface FlexProps
-  extends React.HTMLAttributes<HTMLElement>,
+  extends
+    React.HTMLAttributes<HTMLElement>,
     Partial<RecipeVariant<typeof flexVariants>> {
   /** 자식 요소들 (필수) */
   children: React.ReactNode;

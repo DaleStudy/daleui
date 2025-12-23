@@ -88,8 +88,10 @@ function CardTitle({ children, ...rest }: CardTitleProps) {
     </Text>
   );
 }
-interface CardDescriptionProps
-  extends Omit<HTMLAttributes<HTMLElement>, "style"> {
+interface CardDescriptionProps extends Omit<
+  HTMLAttributes<HTMLElement>,
+  "style"
+> {
   children: ReactNode;
 }
 

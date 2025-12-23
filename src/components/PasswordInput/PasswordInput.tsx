@@ -2,8 +2,10 @@ import { type ComponentPropsWithoutRef, type Ref, useState } from "react";
 import { cva } from "../../../styled-system/css";
 import { Icon } from "../Icon/Icon";
 
-export interface PasswordInputProps
-  extends Omit<ComponentPropsWithoutRef<"input">, "size" | "type"> {
+export interface PasswordInputProps extends Omit<
+  ComponentPropsWithoutRef<"input">,
+  "size" | "type"
+> {
   /** 플레이스홀더 */
   placeholder?: string;
   /** 오류 상태 여부 (true면 위험 톤 적용 및 aria-invalid=true) */
