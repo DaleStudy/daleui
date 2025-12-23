@@ -10,7 +10,7 @@ export default {
     layout: "centered",
     design: {
       type: "figma",
-      url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/Dale-UI-Kit?node-id=1716-641&t=DTMfNzoC2d19WCiu-4",
+      url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/Dale-UI-Kit?node-id=1531-1280",
     },
   },
   args: {

@@ -8,6 +8,10 @@ export default {
   component: Checkbox,
   parameters: {
     layout: "centered",
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/Dale-UI-Kit?node-id=851-1768",
+    },
   },
   args: {
     label: "기본 체크박스",
