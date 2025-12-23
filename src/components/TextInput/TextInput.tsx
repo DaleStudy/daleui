@@ -1,8 +1,10 @@
 import { type ComponentPropsWithoutRef, type Ref } from "react";
 import { cva, cx } from "../../../styled-system/css";
 import { Icon, type IconProps } from "../Icon/Icon";
-export interface TextInputProps
-  extends Omit<ComponentPropsWithoutRef<"input">, "size"> {
+export interface TextInputProps extends Omit<
+  ComponentPropsWithoutRef<"input">,
+  "size"
+> {
   /** 오류 상태 여부 (true일 경우 danger 색상으로 표시됩니다) */
   invalid?: boolean;
   /** 앞쪽 아이콘 이름 (아이콘 컴포넌트의 name 속성에 해당) */

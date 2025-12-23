@@ -3,8 +3,10 @@ import type { FlexProps } from "../Flex/Flex";
 
 type Align = "top" | "bottom" | "center" | "between" | "around";
 
-export interface VStackProps
-  extends Omit<FlexProps, "direction" | "align" | "justify"> {
+export interface VStackProps extends Omit<
+  FlexProps,
+  "direction" | "align" | "justify"
+> {
   /** 세로 배치 방식 */
   reversed?: boolean;
   /** 주축 정렬 방식(세로 정렬) */

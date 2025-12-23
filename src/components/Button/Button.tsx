@@ -7,8 +7,10 @@ import { type IconName } from "../../tokens/iconography";
 type size = "sm" | "md" | "lg";
 
 /** 공통 버튼 속성 */
-export interface ButtonProps
-  extends Omit<HTMLAttributes<HTMLButtonElement>, "style"> {
+export interface ButtonProps extends Omit<
+  HTMLAttributes<HTMLButtonElement>,
+  "style"
+> {
   /** 버튼 텍스트 */
   children: string;
   /** 버튼 비활성화 여부 */
