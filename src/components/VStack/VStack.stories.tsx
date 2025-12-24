@@ -53,7 +53,7 @@ export const Gaps: Story = {
   render: (args) => (
     <HStack gap="24" align="center">
       <div>
-        <h4>간격 2</h4>
+        <h4>간격 4</h4>
         <VStack {...args} gap="4" />
       </div>
       <div>
