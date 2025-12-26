@@ -12,9 +12,28 @@
     "react",
     "storybook"
   ],
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/index.css",
+    "./*": {
+      "types": "./dist/components/*/*.d.ts",
+      "import": "./dist/components/*/*.js"
+    }
+  },
+  "files": [
+    "dist",
+    "styled-system",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && tsc -p tsconfig.build.json",
     "format": "prettier --check .",
     "lint": "eslint .",
     "test": "vitest",
