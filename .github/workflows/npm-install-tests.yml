@@ -1,4 +1,4 @@
-name: NPM Install Test - daleui
+name: NPM Install Test
 
 on:
   pull_request:
