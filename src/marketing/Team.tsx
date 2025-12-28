@@ -43,9 +43,7 @@ function TeamCard({ member }: TeamCardProps) {
         overflow: "hidden",
       })}
     >
-      {/* 상단 컨텐츠 영역 */}
       <HStack gap="16" align="left">
-        {/* 프로필 아바타 */}
         <div
           className={css({
             width: "45px",
@@ -54,7 +52,7 @@ function TeamCard({ member }: TeamCardProps) {
             overflow: "hidden",
             flexShrink: 0,
             position: "relative",
-            backgroundColor: "#e3e7ff",
+            backgroundColor: "bg.brand.active",
           })}
         >
           {avatar ? (
@@ -74,15 +72,39 @@ function TeamCard({ member }: TeamCardProps) {
                 left: "50%",
                 top: "50%",
                 transform: "translate(-50%, -50%)",
-                color: "#5cb85c",
               })}
             >
-              <Icon name="codeXml" size="md" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="21"
+                viewBox="0 0 25 21"
+                fill="none"
+              >
+                <path
+                  d="M19.1 15.0005L23.5 10.5005L19.1 6.00049M5.9 6.00049L1.5 10.5005L5.9 15.0005M15.25 1.50049L9.75 19.5005"
+                  stroke="url(#paint0_linear_6869_4263)"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <defs>
+                  <linearGradient
+                    id="paint0_linear_6869_4263"
+                    x1="29.3667"
+                    y1="10.8755"
+                    x2="0.0333347"
+                    y2="10.8755"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stopColor="var(--colors-border-brand-focus)" />
+                    <stop offset="1" stopColor="var(--colors-border-success)" />
+                  </linearGradient>
+                </defs>
+              </svg>
             </div>
           )}
         </div>
-
-        {/* 멤버 정보 */}
         <Card.Body
           className={css({
             flex: 1,
@@ -137,8 +159,6 @@ function TeamCard({ member }: TeamCardProps) {
           </Flex>
         </Card.Body>
       </HStack>
-
-      {/* 소셜 링크 영역 */}
       <HStack align="right" gap="20" className={css({ width: "100%" })}>
         {githubUrl && (
           <Link
@@ -168,7 +188,6 @@ function TeamCard({ member }: TeamCardProps) {
 }
 
 export interface TeamProps {
-  /** 팀원 목록 */
   members?: TeamMember[];
 }
 
@@ -292,15 +311,12 @@ export function Team({ members = Members }: TeamProps) {
           px: { base: "0", sm: "24" },
         })}
       >
-        {/* 헤더 영역 */}
         <VStack gap="12" align="center">
           <Tag tone="brand">팀 소개</Tag>
           <Heading level={4} align="center" wordBreak="cjk">
             함께 성장하고 있는 달레 UI 팀을 소개합니다.
           </Heading>
         </VStack>
-
-        {/* 카드 컨테이너 */}
         <div
           className={css({
             display: "grid",
@@ -311,10 +327,10 @@ export function Team({ members = Members }: TeamProps) {
             },
             width: "100%",
             gridTemplateColumns: {
-              base: "1fr", // Mobile: 1열
-              sm: "repeat(2, 1fr)", // Tablet (640px+): 2열
-              lg: "repeat(3, 1fr)", // Desktop (1024px+): 3열
-              xl: "repeat(4, 1fr)", // Large Desktop (1280px+): 4열
+              base: "1fr",
+              sm: "repeat(2, 1fr)",
+              lg: "repeat(3, 1fr)",
+              xl: "repeat(4, 1fr)",
             },
           })}
         >
