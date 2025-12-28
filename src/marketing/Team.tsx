@@ -1,11 +1,12 @@
 import { css } from "../../styled-system/css";
+import githubIcon from "../assets/images/marketing/team/github.webp";
 import hansaemAvatar from "../assets/images/marketing/team/hansaem.webp";
+import linkedinIcon from "../assets/images/marketing/team/linkedin.webp";
 import riaAvatar from "../assets/images/marketing/team/ria.webp";
 import { Card } from "../components/Card/Card";
 import { Flex } from "../components/Flex/Flex";
 import { Heading } from "../components/Heading/Heading";
 import { HStack } from "../components/HStack/HStack";
-import { Icon } from "../components/Icon/Icon";
 import { Link } from "../components/Link/Link";
 import { Tag } from "../components/Tag/Tag";
 import { Text } from "../components/Text/Text";
@@ -165,10 +166,16 @@ function TeamCard({ member }: TeamCardProps) {
             href={githubUrl}
             external
             underline={false}
-            tone="neutral"
             aria-label={`${name}의 GitHub 프로필`}
           >
-            <Icon name="GitHub" size="sm" />
+            <img
+              src={githubIcon}
+              alt="GitHub"
+              className={css({
+                width: "14px",
+                height: "14px",
+              })}
+            />
           </Link>
         )}
         {linkedinUrl && (
@@ -176,10 +183,16 @@ function TeamCard({ member }: TeamCardProps) {
             href={linkedinUrl}
             external
             underline={false}
-            tone="neutral"
             aria-label={`${name}의 LinkedIn 프로필`}
           >
-            <Icon name="LinkedIn" size="sm" />
+            <img
+              src={linkedinIcon}
+              alt="LinkedIn"
+              className={css({
+                width: "14px",
+                height: "14px",
+              })}
+            />
           </Link>
         )}
       </HStack>
