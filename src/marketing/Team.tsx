@@ -1,4 +1,5 @@
 import { css } from "../../styled-system/css";
+import { cq } from "../../styled-system/patterns";
 import { Card } from "../components/Card/Card";
 import { Flex } from "../components/Flex/Flex";
 import { Heading } from "../components/Heading/Heading";
@@ -281,12 +282,12 @@ export function Team({ members = Members }: TeamProps) {
     >
       <VStack
         gap="40"
-        className={css({
+        className={`${cq({ type: "inline-size" })} ${css({
           width: "100%",
           maxWidth: "1280px",
           mx: "auto",
           px: { base: "0", sm: "24" },
-        })}
+        })}`}
       >
         {/* 헤더 영역 */}
         <VStack gap="12" align="center">
@@ -296,21 +297,21 @@ export function Team({ members = Members }: TeamProps) {
           </Heading>
         </VStack>
 
-        {/* 카드 컨테이너 */}
+        {/* 카드 컨테이너 - Container Query 사용 */}
         <div
           className={css({
             display: "grid",
             gap: {
               base: "24",
-              sm: "40px",
-              lg: "24",
+              "@/3xl": "40px",
+              "@/5xl": "24",
             },
             width: "100%",
             gridTemplateColumns: {
               base: "1fr",
-              sm: "repeat(2, 1fr)",
-              lg: "repeat(3, 1fr)",
-              xl: "repeat(4, 1fr)",
+              "@/3xl": "repeat(2, 1fr)", // 768px+
+              "@/5xl": "repeat(3, 1fr)", // 1024px+
+              "@/7xl": "repeat(4, 1fr)", // 1280px+
             },
           })}
         >
