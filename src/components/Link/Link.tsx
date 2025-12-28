@@ -5,7 +5,7 @@ import { textStyles } from "../../tokens/typography";
 type LinkSize = "sm" | "md" | "lg";
 type LinkTone = "neutral" | "brand";
 
-interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /** 링크 URL (필수) */
   href: string;
   /** 링크 내용, 아이콘, 이미지 등 (필수) */
