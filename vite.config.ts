@@ -4,8 +4,7 @@ import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 import { codecovVitePlugin } from "@codecov/vite-plugin";
 
-// https://vitejs.dev/config/
-export default defineConfig({
+export const appConfig = {
   plugins: [
     react(),
     svgr(),
@@ -32,4 +31,7 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ["node_modules/.cache/storybook"],
   },
-});
+};
+
+// https://vitejs.dev/config/
+export default defineConfig(appConfig);

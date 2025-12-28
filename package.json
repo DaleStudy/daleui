@@ -15,6 +15,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:lib": "tsc -b && vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
     "format": "prettier --check .",
     "lint": "eslint .",
     "test": "vitest",
