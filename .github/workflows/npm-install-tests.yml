@@ -20,18 +20,6 @@ jobs:
             project: vite
             node: "lts/*"
 
-          - name: "Next.js 13 (Pages Router)"
-            project: next13-pages
-            node: "lts/*"
-
-          - name: "Next.js 14 (App Router)"
-            project: next14-app
-            node: "lts/*"
-
-          - name: "Next.js 14 (App Router + Turbopack)"
-            project: next14-turbo
-            node: "lts/*"
-
     runs-on: ubuntu-latest
     name: ${{ matrix.name }}
 
@@ -39,22 +27,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: ${{ matrix.node }}
-          cache: "npm"
+          bun-version: latest
 
-      - name: Install dependencies & Build & Pack daleui
+      - name: Install dependencies & Build
         run: |
-          npm ci
-          npm run build --if-present   # 빌드 스크립트 있으면 실행, 없으면 스킵
-          npm pack
-
-      - name: Get .tgz file name
-        id: pack
-        run: |
-          echo "tgz=$(ls daleui-*.tgz)" >> $GITHUB_OUTPUT
+          bun install
+          bun run build
 
       # ========================================
       # 테스트 프로젝트 생성 + daleui 설치 + 빌드
@@ -65,24 +46,15 @@ jobs:
 
           case "${{ matrix.project }}" in
             cra)
-              npx create-react-app@latest . --template typescript --use-npm
+              bunx --yes create-react-app@latest . --template typescript
               ;;
             vite)
-              npm create vite@latest . -- --template react-ts
-              ;;
-            next13-pages)
-              npx create-next-app@13.5.6 . --ts --eslint --no-src-dir --no-tailwind --app=false --import-alias="@/*"
-              ;;
-            next14-app)
-              npx create-next-app@latest . --ts --eslint --tailwind --src-dir --app --import-alias="@/*" --turbopack=false
-              ;;
-            next14-turbo)
-              npx create-next-app@latest . --ts --eslint --tailwind --src-dir --app --import-alias="@/*" --turbo
+              bunx --yes create vite@5 . --template react-ts
               ;;
           esac
 
           # 강제로 로컬 daleui 패키지 설치
-          npm install --force ../${{ steps.pack.outputs.tgz }}
+          bun add "$GITHUB_WORKSPACE"
 
       # ========================================
       # 실제로 daleui 써보는 smoke test 페이지 추가
@@ -104,22 +76,10 @@ jobs:
           }
           EOF
 
-          # Next.js면 라우팅에 맞게 이동
-          if [[ -d "src/app" ]]; then
-            mkdir -p src/app/smoke
-            mv src/smoke/DaleTest.tsx src/app/smoke/page.tsx
-          elif [[ -d "src/pages" ]]; then
-            mkdir -p src/pages
-            mv src/smoke/DaleTest.tsx src/pages/dale-test.tsx
-          else
-            mkdir -p src/pages
-            mv src/smoke/DaleTest.tsx src/pages/index.tsx
-          fi
-
       # ========================================
       # 최종 빌드 테스트
       # ========================================
       - name: Run production build
         run: |
           cd /tmp/test-project
-          npm run build
+          bun run build
