@@ -41,6 +41,7 @@ export function Community() {
     <VStack
       as="section"
       id="community"
+      gap="10"
       className={css({
         bg: "bg.brand",
         py: { base: "40", md: "60px", lg: "80px" },
