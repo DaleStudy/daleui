@@ -6,6 +6,12 @@ const meta = {
   component: Team,
   parameters: {
     layout: "fullscreen",
+    docs: {
+      story: {
+        inline: false,
+        iframeHeight: 900,
+      },
+    },
   },
 } satisfies Meta<typeof Team>;
 

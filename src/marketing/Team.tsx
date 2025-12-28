@@ -1,5 +1,6 @@
 import { css } from "../../styled-system/css";
-import { cq } from "../../styled-system/patterns";
+import hansaemAvatar from "../assets/images/marketing/team/hansaem.webp";
+import riaAvatar from "../assets/images/marketing/team/ria.webp";
 import { Card } from "../components/Card/Card";
 import { Flex } from "../components/Flex/Flex";
 import { Heading } from "../components/Heading/Heading";
@@ -209,6 +210,7 @@ const Members: TeamMember[] = [
     role: "Engineer",
     flag: "🇰🇷",
     location: "Seoul",
+    avatar: riaAvatar,
     githubUrl: "https://github.com/RiaOh",
     linkedinUrl: "https://www.linkedin.com/in/riaoh/",
   },
@@ -233,6 +235,7 @@ const Members: TeamMember[] = [
     role: "Engineer",
     flag: "🇰🇷",
     location: "Seoul",
+    avatar: hansaemAvatar,
     githubUrl: "https://github.com/Hecklebot",
     linkedinUrl: "https://www.linkedin.com/in/hansaem-so/",
   },
@@ -282,12 +285,12 @@ export function Team({ members = Members }: TeamProps) {
     >
       <VStack
         gap="40"
-        className={`${cq({ type: "inline-size" })} ${css({
+        className={css({
           width: "100%",
           maxWidth: "1280px",
           mx: "auto",
           px: { base: "0", sm: "24" },
-        })}`}
+        })}
       >
         {/* 헤더 영역 */}
         <VStack gap="12" align="center">
@@ -297,21 +300,21 @@ export function Team({ members = Members }: TeamProps) {
           </Heading>
         </VStack>
 
-        {/* 카드 컨테이너 - Container Query 사용 */}
+        {/* 카드 컨테이너 */}
         <div
           className={css({
             display: "grid",
             gap: {
               base: "24",
-              "@/3xl": "40px",
-              "@/5xl": "24",
+              sm: "40px",
+              lg: "24",
             },
             width: "100%",
             gridTemplateColumns: {
-              base: "1fr",
-              "@/3xl": "repeat(2, 1fr)", // 768px+
-              "@/5xl": "repeat(3, 1fr)", // 1024px+
-              "@/7xl": "repeat(4, 1fr)", // 1280px+
+              base: "1fr", // Mobile: 1열
+              sm: "repeat(2, 1fr)", // Tablet (640px+): 2열
+              lg: "repeat(3, 1fr)", // Desktop (1024px+): 3열
+              xl: "repeat(4, 1fr)", // Large Desktop (1280px+): 4열
             },
           })}
         >
