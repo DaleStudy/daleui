@@ -32,8 +32,8 @@
     "axe-playwright": "^2.2.2",
     "chromatic": "^13.3.0",
     "lucide-react": "^0.561.0",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.3",
