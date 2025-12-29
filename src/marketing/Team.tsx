@@ -1,8 +1,16 @@
 import { css } from "../../styled-system/css";
 import githubIcon from "../assets/images/marketing/team/github.webp";
-import hansaemAvatar from "../assets/images/marketing/team/hansaem.webp";
 import linkedinIcon from "../assets/images/marketing/team/linkedin.webp";
-import riaAvatar from "../assets/images/marketing/team/ria.webp";
+
+import akaAvatar from "../assets/images/marketing/team/members/aka.webp";
+import daleAvatar from "../assets/images/marketing/team/members/dale.webp";
+import eunjiAvatar from "../assets/images/marketing/team/members/eunji.webp";
+import evanAvatar from "../assets/images/marketing/team/members/evan.webp";
+import hansaemAvatar from "../assets/images/marketing/team/members/hansaem.webp";
+import helenaAvatar from "../assets/images/marketing/team/members/helena.webp";
+import hyoseongAvatar from "../assets/images/marketing/team/members/hyoseong.webp";
+import riaAvatar from "../assets/images/marketing/team/members/ria.webp";
+
 import { Card } from "../components/Card/Card";
 import { Flex } from "../components/Flex/Flex";
 import { Heading } from "../components/Heading/Heading";
@@ -212,6 +220,7 @@ const Members: TeamMember[] = [
     location: "Toronto",
     githubUrl: "https://github.com/DaleSeo",
     linkedinUrl: "https://www.linkedin.com/in/daleseo/",
+    avatar: daleAvatar,
   },
   {
     name: "Helena",
@@ -220,6 +229,7 @@ const Members: TeamMember[] = [
     location: "Toronto",
     githubUrl: "https://github.com/yolophg",
     linkedinUrl: "https://www.linkedin.com/in/yolophg/",
+    avatar: helenaAvatar,
   },
   {
     name: "Evan (에반)",
@@ -228,12 +238,14 @@ const Members: TeamMember[] = [
     location: "Toronto",
     githubUrl: "https://github.com/sounmind",
     linkedinUrl: "https://www.linkedin.com/in/suhyeong-evan-lee/",
+    avatar: evanAvatar,
   },
   {
     name: "hyoseong",
     role: "Engineer",
     flag: "🇰🇷",
     location: "Seoul",
+    avatar: hyoseongAvatar,
     githubUrl: "https://github.com/hyoseong1994",
     linkedinUrl: "https://www.linkedin.com/in/hyoseong1994/",
   },
@@ -261,6 +273,7 @@ const Members: TeamMember[] = [
     location: "Seoul",
     githubUrl: "https://github.com/y00eunji",
     linkedinUrl: "https://www.linkedin.com/in/y00eunji/",
+    avatar: eunjiAvatar,
   },
   {
     name: "한샘",
@@ -278,6 +291,7 @@ const Members: TeamMember[] = [
     location: "Seoul",
     githubUrl: "https://github.com/HowToBeAHappyBoy",
     linkedinUrl: "https://www.linkedin.com/in/seozi/",
+    avatar: akaAvatar,
   },
   {
     name: "승현",
