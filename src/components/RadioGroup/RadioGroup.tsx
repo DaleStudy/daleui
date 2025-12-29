@@ -140,7 +140,7 @@ const radioGroupStyles = cva({
   },
 });
 
-interface RadioProps {
+export interface RadioProps {
   /**
    * 라디오 버튼의 값입니다.
    */
