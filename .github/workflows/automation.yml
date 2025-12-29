@@ -10,4 +10,4 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - uses: toshimaru/auto-author-assign@v3.0.0
+      - uses: toshimaru/auto-author-assign@v3.0.1
