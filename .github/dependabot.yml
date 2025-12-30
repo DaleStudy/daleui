@@ -7,7 +7,10 @@ updates:
     schedule:
       interval: "weekly"
     cooldown:
-      default-days: 14
+      default-days: 14 # 일반 업데이트는 2주 대기
+      semver-major-days: 90 # Breaking Changes는 안정화를 위해 3달 대기
+      semver-minor-days: 30 # 기능 추가는 1달 대기
+      semver-patch-days: 3 # 버그/보안 수정은 가능한 빠르게
     groups:
       storybook:
         patterns:
