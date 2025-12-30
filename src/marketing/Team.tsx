@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { css } from "../../styled-system/css";
 import githubLightIcon from "../assets/images/marketing/team/github-light.webp";
 import githubDarkIcon from "../assets/images/marketing/team/github-dark.webp";
-import linkedinLightIcon from "../assets/images/marketing/team/linkedin-light.webp";
-import linkedinDarkIcon from "../assets/images/marketing/team/linkedin-dark.webp";
+import linkedInLightIcon from "../assets/images/marketing/team/linkedIn-light.webp";
+import linkedInDarkIcon from "../assets/images/marketing/team/linkedIn-dark.webp";
 
 import { Card } from "../components/Card/Card";
 import { Flex } from "../components/Flex/Flex";
@@ -189,11 +189,10 @@ function TeamCard({ member, isDark }: TeamCardProps) {
             aria-label={`${name}의 LinkedIn 프로필`}
           >
             <img
-              src={isDark ? linkedinDarkIcon : linkedinLightIcon}
+              src={isDark ? linkedInDarkIcon : linkedInLightIcon}
               alt="LinkedIn"
               className={css({
                 width: "14px",
-                height: "14px",
               })}
             />
           </Link>
