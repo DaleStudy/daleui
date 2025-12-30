@@ -42,3 +42,8 @@ jobs:
         run: |
           npm version ${{ steps.version.outputs.version }}
           git push --follow-tags
+
+      - name: Draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create v${{ steps.version.outputs.version }} --draft --generate-notes
