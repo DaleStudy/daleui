@@ -1,15 +1,9 @@
+import { useEffect, useState } from "react";
 import { css } from "../../styled-system/css";
-import githubIcon from "../assets/images/marketing/team/github.webp";
-import linkedinIcon from "../assets/images/marketing/team/linkedin.webp";
-
-import akaAvatar from "../assets/images/marketing/team/members/aka.webp";
-import daleAvatar from "../assets/images/marketing/team/members/dale.webp";
-import eunjiAvatar from "../assets/images/marketing/team/members/eunji.webp";
-import evanAvatar from "../assets/images/marketing/team/members/evan.webp";
-import hansaemAvatar from "../assets/images/marketing/team/members/hansaem.webp";
-import helenaAvatar from "../assets/images/marketing/team/members/helena.webp";
-import hyoseongAvatar from "../assets/images/marketing/team/members/hyoseong.webp";
-import riaAvatar from "../assets/images/marketing/team/members/ria.webp";
+import githubLightIcon from "../assets/images/marketing/team/github-light.webp";
+import githubDarkIcon from "../assets/images/marketing/team/github-dark.webp";
+import linkedinLightIcon from "../assets/images/marketing/team/linkedin-light.webp";
+import linkedinDarkIcon from "../assets/images/marketing/team/linkedin-dark.webp";
 
 import { Card } from "../components/Card/Card";
 import { Flex } from "../components/Flex/Flex";
@@ -39,9 +33,10 @@ export interface TeamMember {
 
 interface TeamCardProps {
   member: TeamMember;
+  isDark: boolean;
 }
 
-function TeamCard({ member }: TeamCardProps) {
+function TeamCard({ member, isDark }: TeamCardProps) {
   const { name, role, flag, location, avatar, githubUrl, linkedinUrl } = member;
 
   return (
@@ -177,7 +172,7 @@ function TeamCard({ member }: TeamCardProps) {
             aria-label={`${name}의 GitHub 프로필`}
           >
             <img
-              src={githubIcon}
+              src={isDark ? githubDarkIcon : githubLightIcon}
               alt="GitHub"
               className={css({
                 width: "14px",
@@ -194,7 +189,7 @@ function TeamCard({ member }: TeamCardProps) {
             aria-label={`${name}의 LinkedIn 프로필`}
           >
             <img
-              src={linkedinIcon}
+              src={isDark ? linkedinDarkIcon : linkedinLightIcon}
               alt="LinkedIn"
               className={css({
                 width: "14px",
@@ -220,7 +215,7 @@ const Members: TeamMember[] = [
     location: "Toronto",
     githubUrl: "https://github.com/DaleSeo",
     linkedinUrl: "https://www.linkedin.com/in/daleseo/",
-    avatar: daleAvatar,
+    avatar: "https://avatars.githubusercontent.com/u/5466341",
   },
   {
     name: "Helena",
@@ -229,7 +224,7 @@ const Members: TeamMember[] = [
     location: "Toronto",
     githubUrl: "https://github.com/yolophg",
     linkedinUrl: "https://www.linkedin.com/in/yolophg/",
-    avatar: helenaAvatar,
+    avatar: "https://avatars.githubusercontent.com/u/38199103",
   },
   {
     name: "Evan (에반)",
@@ -238,14 +233,14 @@ const Members: TeamMember[] = [
     location: "Toronto",
     githubUrl: "https://github.com/sounmind",
     linkedinUrl: "https://www.linkedin.com/in/suhyeong-evan-lee/",
-    avatar: evanAvatar,
+    avatar: "https://avatars.githubusercontent.com/u/37020415",
   },
   {
     name: "hyoseong",
     role: "Engineer",
     flag: "🇰🇷",
     location: "Seoul",
-    avatar: hyoseongAvatar,
+    avatar: "https://avatars.githubusercontent.com/u/50227228",
     githubUrl: "https://github.com/hyoseong1994",
     linkedinUrl: "https://www.linkedin.com/in/hyoseong1994/",
   },
@@ -254,7 +249,7 @@ const Members: TeamMember[] = [
     role: "Engineer",
     flag: "🇰🇷",
     location: "Seoul",
-    avatar: riaAvatar,
+    avatar: "https://avatars.githubusercontent.com/u/83909755",
     githubUrl: "https://github.com/RiaOh",
     linkedinUrl: "https://www.linkedin.com/in/riaoh/",
   },
@@ -265,6 +260,7 @@ const Members: TeamMember[] = [
     location: "Seoul",
     githubUrl: "https://github.com/Lustellz",
     linkedinUrl: "https://www.linkedin.com/in/tasha0417/",
+    avatar: "https://avatars.githubusercontent.com/u/45252527",
   },
   {
     name: "은지",
@@ -273,14 +269,14 @@ const Members: TeamMember[] = [
     location: "Seoul",
     githubUrl: "https://github.com/y00eunji",
     linkedinUrl: "https://www.linkedin.com/in/y00eunji/",
-    avatar: eunjiAvatar,
+    avatar: "https://avatars.githubusercontent.com/u/27201591",
   },
   {
     name: "한샘",
     role: "Engineer",
     flag: "🇰🇷",
     location: "Seoul",
-    avatar: hansaemAvatar,
+    avatar: "https://avatars.githubusercontent.com/u/51806574",
     githubUrl: "https://github.com/Hecklebot",
     linkedinUrl: "https://www.linkedin.com/in/hansaem-so/",
   },
@@ -291,7 +287,7 @@ const Members: TeamMember[] = [
     location: "Seoul",
     githubUrl: "https://github.com/HowToBeAHappyBoy",
     linkedinUrl: "https://www.linkedin.com/in/seozi/",
-    avatar: akaAvatar,
+    avatar: "https://avatars.githubusercontent.com/u/30362922",
   },
   {
     name: "승현",
@@ -300,6 +296,7 @@ const Members: TeamMember[] = [
     location: "Seoul",
     githubUrl: "https://github.com/sseung30",
     linkedinUrl: undefined,
+    avatar: "https://avatars.githubusercontent.com/u/69985950",
   },
   {
     name: "자혜",
@@ -308,10 +305,32 @@ const Members: TeamMember[] = [
     location: "Seoul",
     githubUrl: "https://github.com/jj5u",
     linkedinUrl: undefined,
+    avatar: "https://avatars.githubusercontent.com/u/89135410",
   },
 ];
 
 export function Team({ members = Members }: TeamProps) {
+  const [isDark, setIsDark] = useState(() => {
+    const el = document.documentElement;
+    return el.classList.contains("dark");
+  });
+
+  useEffect(() => {
+    const el = document.documentElement;
+
+    const updateThemeState = () => {
+      const hasDarkClass = el.classList.contains("dark");
+      setIsDark(hasDarkClass);
+    };
+
+    const observer = new MutationObserver(updateThemeState);
+    observer.observe(el, {
+      attributes: true,
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       id="team"
@@ -361,8 +380,8 @@ export function Team({ members = Members }: TeamProps) {
             },
           })}
         >
-          {members.map((member, index) => (
-            <TeamCard key={`${member.name}-${index}`} member={member} />
+          {members.map((member) => (
+            <TeamCard key={member.name} member={member} isDark={isDark} />
           ))}
         </div>
       </VStack>
