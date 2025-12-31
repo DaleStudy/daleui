@@ -5,6 +5,12 @@ export default {
   component: App,
   parameters: {
     layout: "fullscreen",
+    docs: {
+      story: {
+        inline: false,
+        iframeHeight: 900,
+      },
+    },
   },
 } satisfies Meta<typeof App>;
 
