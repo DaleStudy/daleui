@@ -25,13 +25,10 @@ jobs:
             exit 1
           fi
 
-      - uses: actions/checkout@v6 # package.json 파일을 읽기 위해서 사용
-      - uses: actions/setup-node@v6
-        with:
-          registry-url: "https://registry.npmjs.org" # npmrc 자동 생성을 위해서 사용
+      - uses: actions/checkout@v6
+      - uses: oven-sh/setup-bun@v2
       - name: Deprecate npm package version
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           PACKAGE_NAME=$(jq -r .name package.json)
           npm deprecate "$PACKAGE_NAME@${{ inputs.version }}" "${{ inputs.reason }}"
