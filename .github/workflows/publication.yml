@@ -1,4 +1,4 @@
-name: Npm Publish
+name: Publication 📦
 
 on:
   release:
@@ -10,9 +10,8 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
-          fetch-depth: 0
           ref: ${{ github.event.release.tag_name }}
 
       - name: Setup Bun
@@ -21,17 +20,11 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: "20"
-          registry-url: "https://registry.npmjs.org"
-
       - name: Verify tag matches package.json
         run: |
           TAG_NAME="${{ github.event.release.tag_name }}"
           TAG_VERSION="${TAG_NAME#v}"
-          PKG_VERSION=$(node -p "require('./package.json').version")
+          PKG_VERSION=$(jq -r .version package.json)
 
           if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
             echo "Error: 태그 버전과 package.json 버전이 일치하지 않습니다."
@@ -44,20 +37,13 @@ jobs:
       - name: Build package
         run: |
           bun run prepare
-          bun run build
+          bun run build:lib
 
       - name: Publish to npm
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          if [ -z "${NODE_AUTH_TOKEN}" ]; then
-            echo "Error: NPM_TOKEN이 설정되지 않았습니다."
-            exit 1
-          fi
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
 
-          TAG_NAME="${{ github.event.release.tag_name }}"
-          VERSION=${TAG_NAME#v}
-          echo "버전 ${VERSION} 배포를 시작합니다..."
-
-          npm publish --access public
+          bun publish
           echo "npm 배포가 완료되었습니다."
