@@ -1,0 +1,49 @@
+name: Publication 📦
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Verify tag matches package.json
+        run: |
+          TAG_NAME="${{ github.event.release.tag_name }}"
+          TAG_VERSION="${TAG_NAME#v}"
+          PKG_VERSION=$(jq -r .version package.json)
+
+          if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
+            echo "Error: 태그 버전과 package.json 버전이 일치하지 않습니다."
+            echo "tag version: ${TAG_VERSION}"
+            echo "package.json version: ${PKG_VERSION}"
+            exit 1
+          fi
+          echo "✅ 버전 일치 확인: ${TAG_VERSION}"
+
+      - name: Build package
+        run: |
+          bun run prepare
+          bun run build:lib
+
+      - name: Publish to npm
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+
+          bun publish
+          echo "npm 배포가 완료되었습니다."
