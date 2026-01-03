@@ -59,7 +59,7 @@ jobs:
               bunx --yes create-react-app@latest . --template typescript
               ;;
             vite)
-              bunx --yes create vite@5 . --template react-ts
+              bun create vite@5 . --template react-ts
               bun install
               ;;
           esac
