@@ -75,7 +75,6 @@ jobs:
           cd /tmp/test-project
           mkdir -p src/smoke
           cat > src/smoke/DaleTest.tsx << 'EOF'
-          import React from 'react';
           import { Button } from 'daleui';
 
           export default function DaleTest() {
