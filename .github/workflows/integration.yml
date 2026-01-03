@@ -45,7 +45,7 @@ jobs:
       - name: Install dependencies & Build
         run: |
           bun install
-          bun run build
+          bun run build:lib
 
       # ========================================
       # 테스트 프로젝트 생성 + daleui 설치
