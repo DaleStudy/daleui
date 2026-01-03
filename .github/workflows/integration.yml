@@ -19,3 +19,78 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
       - run: bun run build
+
+  install-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "Create React App (React 18)"
+            project: cra
+
+          - name: "Vite + React"
+            project: vite
+
+    runs-on: ubuntu-latest
+    name: ${{ matrix.name }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies & Build
+        run: |
+          bun install
+          bun run build
+
+      # ========================================
+      # 테스트 프로젝트 생성 + daleui 설치
+      # ========================================
+      - name: Create test project & install daleui
+        run: |
+          mkdir /tmp/test-project && cd /tmp/test-project
+
+          case "${{ matrix.project }}" in
+            cra)
+              bunx --yes create-react-app@latest . --template typescript
+              ;;
+            vite)
+              bunx --yes create vite@5 . --template react-ts
+              bun install
+              ;;
+          esac
+
+          # 로컬 daleui 패키지 설치
+          bun add "$GITHUB_WORKSPACE"
+
+      # ========================================
+      # 실제로 daleui 써보는 smoke test 페이지 추가
+      # ========================================
+      - name: Add daleui smoke test
+        run: |
+          cd /tmp/test-project
+          mkdir -p src/smoke
+          cat > src/smoke/DaleTest.tsx << 'EOF'
+          import React from 'react';
+          import { Button } from 'daleui';
+
+          export default function DaleTest() {
+            return (
+              <div data-testid="daleui-smoke">
+                <Button>daleui 성공적으로 로드됨!</Button>
+              </div>
+            );
+          }
+          EOF
+
+      # ========================================
+      # 최종 빌드 테스트
+      # ========================================
+      - name: Run production build
+        run: |
+          cd /tmp/test-project
+          bun run build
