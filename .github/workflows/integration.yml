@@ -56,7 +56,8 @@ jobs:
 
           case "${{ matrix.project }}" in
             cra)
-              bunx --yes create-react-app@latest . --template typescript
+              bun create react-app@latest . --template typescript
+              bun install
               ;;
             vite)
               bun create vite@5 . --template react-ts
