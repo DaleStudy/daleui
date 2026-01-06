@@ -38,9 +38,6 @@ jobs:
           bun install
           bun run build:lib
 
-      # ========================================
-      # 테스트 프로젝트 생성 + daleui 설치
-      # ========================================
       - name: Create test project & install daleui
         run: |
           mkdir /tmp/test-project && cd /tmp/test-project
@@ -48,9 +45,6 @@ jobs:
           bun install
           bun add "$GITHUB_WORKSPACE"
 
-      # ========================================
-      # 실제로 daleui 써보는 smoke test 페이지 추가
-      # ========================================
       - name: Add daleui smoke test
         run: |
           cd /tmp/test-project
@@ -67,9 +61,6 @@ jobs:
           }
           EOF
 
-      # ========================================
-      # 최종 빌드 테스트
-      # ========================================
       - name: Run production build
         run: |
           cd /tmp/test-project
