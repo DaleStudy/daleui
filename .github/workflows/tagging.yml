@@ -1,37 +1,26 @@
 name: Tagging 🏷️
 
 on:
-  workflow_dispatch:
-    inputs:
-      bump:
-        description: "Version bump type (patch/minor/major)"
-        required: true
-        type: choice
-        default: patch
-        options:
-          - patch
-          - minor
-          - major
+  pull_request:
+    types: [closed]
+    branches: [main]
 
 jobs:
   create-tag:
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v6
 
-      - uses: fregante/setup-git-user@v2
-
-      - name: Bump version
-        run: npm version ${{ inputs.bump }}
-
-      - name: Push changes
-        run: git push --follow-tags
-
-      - name: Draft release
+      - name: Create tag and release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          NEW_VERSION="v$(jq -r '.version' package.json)"
-          gh release create $NEW_VERSION --draft --generate-notes
+          VERSION="v$(jq -r '.version' package.json)"
+
+          git tag "$VERSION"
+          git push origin "$VERSION"
+
+          gh release create "$VERSION" --draft --generate-notes
