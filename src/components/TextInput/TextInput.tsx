@@ -25,6 +25,7 @@ export interface TextInputProps extends Omit<
  */
 export function TextInput({
   invalid,
+  required,
   className,
   leadingIcon,
   trailingIcon,
@@ -57,6 +58,7 @@ export function TextInput({
         ref={ref}
         disabled={disabled}
         aria-invalid={invalid ? true : undefined}
+        aria-required={required ? true : undefined}
         {...rest}
       />
       {trailingIcon && renderIcon(trailingIcon)}
