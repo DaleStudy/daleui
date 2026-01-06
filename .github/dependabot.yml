@@ -16,6 +16,7 @@ updates:
         patterns:
           - "storybook"
           - "@storybook/*"
+          - "eslint-plugin-storybook"
       react:
         patterns:
           - "react"
@@ -26,6 +27,7 @@ updates:
         patterns:
           - "vite"
           - "vitest"
+          - "@vitest/coverage-v8"
 
   - package-ecosystem: "github-actions"
     pull-request-branch-name:
