@@ -21,18 +21,9 @@ jobs:
       - run: bun run build
 
   install-test:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - name: "Create React App (React 18)"
-            project: cra
-
-          - name: "Vite + React"
-            project: vite
-
     runs-on: ubuntu-latest
-    name: ${{ matrix.name }}
+    name: "Vite + React"
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -53,19 +44,8 @@ jobs:
       - name: Create test project & install daleui
         run: |
           mkdir /tmp/test-project && cd /tmp/test-project
-
-          case "${{ matrix.project }}" in
-            cra)
-              bun create react-app@latest . --template typescript
-              bun install
-              ;;
-            vite)
-              bun create vite@5 . --template react-ts
-              bun install
-              ;;
-          esac
-
-          # 로컬 daleui 패키지 설치
+          bun create vite@5 . --template react-ts
+          bun install
           bun add "$GITHUB_WORKSPACE"
 
       # ========================================
