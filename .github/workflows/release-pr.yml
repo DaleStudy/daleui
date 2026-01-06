@@ -1,0 +1,46 @@
+name: Release PR ⬆️
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "Version bump type (patch/minor/major)"
+        required: true
+        type: choice
+        default: patch
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  release-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: fregante/setup-git-user@v2
+
+      - name: Bump version
+        run: npm version ${{ inputs.bump }} --no-git-tag-version
+
+      - name: Create Pull Request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(jq -r '.version' package.json)
+          BRANCH="release/v${VERSION}"
+
+          LAST_TAG=$(git describe --tags --abbrev=0)
+          BODY=$(git log ${LAST_TAG}..HEAD --oneline | grep -oE "#[0-9]+" | sort -u | sed 's/^/- /')
+
+          git checkout -b "$BRANCH"
+          git commit -am "release: v${VERSION}"
+          git push origin "$BRANCH"
+
+          gh pr create --title "release: v${VERSION}" --body "$BODY"
