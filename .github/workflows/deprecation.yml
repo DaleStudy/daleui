@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "deprecated 할 버전 (예: 1.2.3)"
+        description: "deprecated to be version (e.g., 1.2.3)"
         required: true
         type: string
       reason:
-        description: "deprecation 사유"
+        description: "deprecation reason"
         required: true
         type: string
 
@@ -26,7 +26,6 @@ jobs:
           fi
 
       - uses: actions/checkout@v6
-      - uses: oven-sh/setup-bun@v2
       - name: Deprecate npm package version
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
