@@ -19,3 +19,49 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
       - run: bun run build
+
+  install-test:
+    runs-on: ubuntu-latest
+    name: "Vite + React"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies & Build
+        run: |
+          bun install
+          bun run build:lib
+
+      - name: Create test project & install daleui
+        run: |
+          mkdir /tmp/test-project && cd /tmp/test-project
+          bun create vite@5 . --template react-ts
+          bun install
+          bun add "$GITHUB_WORKSPACE"
+
+      - name: Add daleui smoke test
+        run: |
+          cd /tmp/test-project
+          mkdir -p src/smoke
+          cat > src/smoke/DaleTest.tsx << 'EOF'
+          import { Button } from 'daleui';
+
+          export default function DaleTest() {
+            return (
+              <div data-testid="daleui-smoke">
+                <Button>daleui 성공적으로 로드됨!</Button>
+              </div>
+            );
+          }
+          EOF
+
+      - name: Run production build
+        run: |
+          cd /tmp/test-project
+          bun run build
