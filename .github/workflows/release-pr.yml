@@ -27,7 +27,7 @@ jobs:
       - uses: fregante/setup-git-user@v2
 
       - name: Bump version
-        run: npm version ${{ inputs.bump }} --no-git-tag-version
+        run: npm version ${{ inputs.bump }} --no-git-tag-version # --no-git-tag-version: skip auto commit and tag, only modify package.json
 
       - name: Create Pull Request
         id: create-pr
