@@ -40,6 +40,4 @@ jobs:
       - name: Publish to npm
         env:
           NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          bun publish
-          echo "npm 배포가 완료되었습니다."
+        run: bun publish --ignore-scripts # --ignore-scripts: skip prepare script (already ran in Build package step)
