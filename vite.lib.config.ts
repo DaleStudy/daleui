@@ -1,4 +1,3 @@
-/// <reference types="vitest/config" />
 import { readdirSync } from "fs";
 import { resolve } from "path";
 import { defineConfig } from "vite";
