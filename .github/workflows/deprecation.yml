@@ -1,0 +1,46 @@
+name: Deprecation ⚠️
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "deprecated to be version (e.g., 1.2.3)"
+        required: true
+        type: string
+      reason:
+        description: "deprecation reason"
+        required: true
+        type: string
+
+jobs:
+  deprecated:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate version format
+        run: |
+          VERSION="${{ inputs.version }}"
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "❌ Invalid version format: $VERSION"
+            echo "Version must be in format: X.Y.Z (e.g., 1.2.3)"
+            exit 1
+          fi
+
+      - uses: actions/checkout@v6
+      - name: Get package information
+        id: package-info
+        run: |
+          PACKAGE_NAME=$(jq -r .name package.json)
+          echo "package_name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
+
+      - name: Validate version exists in npm registry
+        id: validate-version
+        run: |
+          NPM_OUTPUT=$(npm view "${{ steps.package-info.outputs.package_name }}@${{ inputs.version }}" 2>&1) || {
+            echo "$NPM_OUTPUT" | grep -q "404" && echo "❌ Version does not exist in npm registry"
+            exit 1
+          }
+
+      - name: Deprecate npm package version
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          npm deprecate "${{ steps.package-info.outputs.package_name }}@${{ inputs.version }}" "${{ inputs.reason }}"
