@@ -181,6 +181,72 @@ describe("RadioGroup", () => {
     expect(option1).not.toBeChecked();
     expect(option2).toBeChecked();
   });
+
+  test("invalid prop이 없을 때 aria-invalid 속성이 올바르게 설정된다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group">
+        <Radio value="option1">Option 1</Radio>
+        <Radio value="option2">Option 2</Radio>
+      </RadioGroup>,
+    );
+    const radiogroup = screen.getByRole("radiogroup");
+    expect(radiogroup).not.toHaveAttribute("aria-invalid");
+  });
+
+  test("invalid가 true일 때 aria-invalid 속성이 올바르게 설정된다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" invalid>
+        <Radio value="option1">Option 1</Radio>
+        <Radio value="option2">Option 2</Radio>
+      </RadioGroup>,
+    );
+    const radiogroup = screen.getByRole("radiogroup");
+    expect(radiogroup).toHaveAttribute("aria-invalid", "true");
+  });
+
+  test("invalid가 false일 때 aria-invalid 속성이 올바르게 설정된다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" invalid={false}>
+        <Radio value="option1">Option 1</Radio>
+        <Radio value="option2">Option 2</Radio>
+      </RadioGroup>,
+    );
+    const radiogroup = screen.getByRole("radiogroup");
+    expect(radiogroup).not.toHaveAttribute("aria-invalid");
+  });
+
+  test("required prop이 없을 때 aria-required 속성이 올바르게 설정된다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group">
+        <Radio value="option1">Option 1</Radio>
+        <Radio value="option2">Option 2</Radio>
+      </RadioGroup>,
+    );
+    const radiogroup = screen.getByRole("radiogroup");
+    expect(radiogroup).not.toHaveAttribute("aria-required");
+  });
+
+  test("required가 true일 때 aria-required 속성이 올바르게 설정된다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" required>
+        <Radio value="option1">Option 1</Radio>
+        <Radio value="option2">Option 2</Radio>
+      </RadioGroup>,
+    );
+    const radiogroup = screen.getByRole("radiogroup");
+    expect(radiogroup).toHaveAttribute("aria-required", "true");
+  });
+
+  test("required가 false일 때 aria-required 속성이 올바르게 설정된다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" required={false}>
+        <Radio value="option1">Option 1</Radio>
+        <Radio value="option2">Option 2</Radio>
+      </RadioGroup>,
+    );
+    const radiogroup = screen.getByRole("radiogroup");
+    expect(radiogroup).not.toHaveAttribute("aria-required");
+  });
 });
 
 describe("Radio", () => {

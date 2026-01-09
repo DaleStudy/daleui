@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { css } from "../../../styled-system/css";
 import { Radio, RadioGroup } from "./RadioGroup";
+import { Flex } from "../..";
 
 export default {
   component: RadioGroup,
@@ -41,34 +42,42 @@ export const WithDefaultValue: Story = {
 };
 
 export const Orientation: Story = {
-  render: () => {
+  render: (args) => {
     return (
       <div
         className={css({ display: "flex", flexDirection: "column", gap: "32" })}
       >
         <RadioGroup
+          {...args}
           name="vertical-orientation"
           label="세로 방향 (Vertical)"
           orientation="vertical"
           defaultValue="apple"
-        >
-          <Radio value="apple">사과</Radio>
-          <Radio value="banana">바나나</Radio>
-          <Radio value="orange">오렌지</Radio>
-        </RadioGroup>
+        />
 
         <RadioGroup
+          {...args}
           name="horizontal-orientation"
           label="가로 방향 (Horizontal)"
           orientation="horizontal"
           defaultValue="banana"
-        >
-          <Radio value="apple">사과</Radio>
-          <Radio value="banana">바나나</Radio>
-          <Radio value="orange">오렌지</Radio>
-        </RadioGroup>
+        />
       </div>
     );
+  },
+  argTypes: {
+    name: {
+      control: false,
+    },
+    label: {
+      control: false,
+    },
+    orientation: {
+      control: false,
+    },
+    defaultValue: {
+      control: false,
+    },
   },
 };
 
@@ -115,78 +124,68 @@ export const ItemDisabled: Story = {
 };
 
 export const Tones: Story = {
-  render: () => {
+  render: (args) => {
     return (
       <div
         className={css({ display: "flex", flexDirection: "column", gap: "32" })}
       >
         <RadioGroup
+          {...args}
           name="neutral-tone"
           label="중립 색조 (Neutral)"
-          defaultValue="apple"
           tone="neutral"
-        >
-          <Radio value="apple">사과</Radio>
-          <Radio value="banana">바나나</Radio>
-          <Radio value="orange">오렌지</Radio>
-        </RadioGroup>
+        />
 
         <RadioGroup
+          {...args}
           name="brand-tone"
           label="브랜드 색조 (Brand)"
-          defaultValue="apple"
           tone="brand"
-        >
-          <Radio value="apple">사과</Radio>
-          <Radio value="banana">바나나</Radio>
-          <Radio value="orange">오렌지</Radio>
-        </RadioGroup>
+        />
 
         <RadioGroup
+          {...args}
           name="danger-tone"
           label="위험 색조 (Danger)"
-          defaultValue="apple"
           tone="danger"
-        >
-          <Radio value="apple">사과</Radio>
-          <Radio value="banana">바나나</Radio>
-          <Radio value="orange">오렌지</Radio>
-        </RadioGroup>
+        />
 
         <RadioGroup
+          {...args}
           name="warning-tone"
           label="경고 색조 (Warning)"
-          defaultValue="apple"
           tone="warning"
-        >
-          <Radio value="apple">사과</Radio>
-          <Radio value="banana">바나나</Radio>
-          <Radio value="orange">오렌지</Radio>
-        </RadioGroup>
+        />
 
         <RadioGroup
+          {...args}
           name="success-tone"
           label="성공 색조 (Success)"
-          defaultValue="apple"
           tone="success"
-        >
-          <Radio value="apple">사과</Radio>
-          <Radio value="banana">바나나</Radio>
-          <Radio value="orange">오렌지</Radio>
-        </RadioGroup>
+        />
 
         <RadioGroup
+          {...args}
           name="info-tone"
           label="정보 색조 (Info)"
-          defaultValue="apple"
           tone="info"
-        >
-          <Radio value="apple">사과</Radio>
-          <Radio value="banana">바나나</Radio>
-          <Radio value="orange">오렌지</Radio>
-        </RadioGroup>
+        />
       </div>
     );
+  },
+  argTypes: {
+    name: {
+      control: false,
+    },
+    label: {
+      control: false,
+    },
+    tone: {
+      control: false,
+    },
+  },
+  args: {
+    defaultValue: "apple",
   },
 };
 
@@ -211,4 +210,39 @@ export const Controlled = () => {
       </div>
     </div>
   );
+};
+
+export const Invalid: Story = {
+  render: (args) => {
+    return (
+      <Flex gap="16" direction="column">
+        <RadioGroup
+          {...args}
+          name="valid-radio-group"
+          label="유효한 상태"
+          invalid={false}
+        />
+        <RadioGroup
+          {...args}
+          name="invalid-radio-group"
+          label="유효하지 않은 상태"
+          invalid
+        />
+      </Flex>
+    );
+  },
+  args: {
+    defaultValue: "banana",
+  },
+  argTypes: {
+    invalid: {
+      control: false,
+    },
+    label: {
+      control: false,
+    },
+    name: {
+      control: false,
+    },
+  },
 };

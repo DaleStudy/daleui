@@ -23,6 +23,7 @@ export interface PasswordInputProps extends Omit<
  */
 export function PasswordInput({
   invalid = false,
+  required = false,
   disabled = false,
   placeholder = "패스워드를 입력해주세요.",
   ref,
@@ -50,6 +51,7 @@ export function PasswordInput({
         className={inputStyles()}
         aria-label="패스워드"
         aria-invalid={invalid ? true : undefined}
+        aria-required={required ? true : undefined}
         {...rest}
       />
       <button

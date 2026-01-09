@@ -64,13 +64,19 @@ describe("렌더링", () => {
     expect(checkbox).toBeChecked();
   });
 
-  test("invalid가 true이면 aria-invalid가 설정된다.", () => {
+  test("invalid prop이 없을 때 aria-invalid 속성이 올바르게 설정된다", () => {
+    render(<Checkbox label="테스트" />);
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).toHaveAttribute("aria-invalid", "false");
+  });
+
+  test("invalid가 true일 때 aria-invalid 속성이 올바르게 설정된다", () => {
     render(<Checkbox label="테스트" invalid />);
     const checkbox = screen.getByRole("checkbox");
     expect(checkbox).toHaveAttribute("aria-invalid", "true");
   });
 
-  test("invalid가 false이면 aria-invalid가 false로 설정된다.", () => {
+  test("invalid가 false일 때 aria-invalid 속성이 올바르게 설정된다", () => {
     render(<Checkbox label="테스트" invalid={false} />);
     const checkbox = screen.getByRole("checkbox");
     expect(checkbox).toHaveAttribute("aria-invalid", "false");
@@ -142,13 +148,19 @@ describe("렌더링", () => {
     ).not.toBeInTheDocument();
   });
 
-  test("required가 true이면 aria-required가 true로 설정된다.", () => {
+  test("required prop이 없을 때 aria-required 속성이 올바르게 설정된다", () => {
+    render(<Checkbox label="일반 체크박스" />);
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).not.toHaveAttribute("aria-required");
+  });
+
+  test("required가 true일 때 aria-required 속성이 올바르게 설정된다", () => {
     render(<Checkbox label="필수 체크박스" required />);
     const checkbox = screen.getByRole("checkbox");
     expect(checkbox).toHaveAttribute("aria-required", "true");
   });
 
-  test("required가 false이면 aria-required가 설정되지 않는다.", () => {
+  test("required가 false일 때 aria-required 속성이 올바르게 설정된다", () => {
     render(<Checkbox label="일반 체크박스" required={false} />);
     const checkbox = screen.getByRole("checkbox");
     expect(checkbox).not.toHaveAttribute("aria-required");

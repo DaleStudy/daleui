@@ -7,6 +7,7 @@ import type { Tone } from "../../tokens/colors";
 const RadioGroupContext = createContext<{
   tone: Tone;
   disabled?: boolean;
+  invalid?: boolean;
 } | null>(null);
 
 export interface RadioGroupProps {
@@ -60,6 +61,18 @@ export interface RadioGroupProps {
    * @default "neutral"
    */
   tone?: Tone;
+
+  /**
+   * true이면 라디오 버튼이 에러 상태가 됩니다.
+   * @default false
+   */
+  invalid?: boolean;
+
+  /**
+   * true이면 라디오 버튼이 필수 입력 상태가 됩니다.
+   * @default false
+   */
+  required?: boolean;
 }
 
 /**
@@ -87,9 +100,11 @@ export function RadioGroup({
   disabled,
   orientation,
   tone = "neutral",
+  invalid,
+  required,
 }: RadioGroupProps) {
   return (
-    <RadioGroupContext.Provider value={{ tone, disabled }}>
+    <RadioGroupContext.Provider value={{ tone, disabled, invalid }}>
       <ArkRadioGroup.Root
         name={name}
         defaultValue={defaultValue}
@@ -100,6 +115,8 @@ export function RadioGroup({
         disabled={disabled}
         orientation={orientation}
         className={radioGroupRootStyles}
+        aria-invalid={invalid ? true : undefined}
+        aria-required={required ? true : undefined}
       >
         <ArkRadioGroup.Label
           className={css({
@@ -161,18 +178,24 @@ export interface RadioProps {
    * DOM 요소에 대한 ref입니다.
    */
   ref?: React.Ref<HTMLInputElement>;
+
+  /**
+   * true이면 이 라디오 버튼이 에러 상태가 됩니다.
+   * @default false
+   */
+  invalid?: boolean;
 }
 
-export function Radio({ value, children, disabled, ref }: RadioProps) {
+export function Radio({ value, children, disabled, invalid, ref }: RadioProps) {
   const context = useContext(RadioGroupContext);
 
   if (!context) {
     throw new Error("Radio 컴포넌트는 RadioGroup 내부에서만 사용해야 합니다.");
   }
 
-  const { tone, disabled: groupDisabled } = context;
+  const { tone, disabled: groupDisabled, invalid: GroupInvalid } = context;
   const isDisabled = disabled || groupDisabled;
-
+  const isInvalid = invalid || GroupInvalid;
   return (
     <ArkRadioGroup.Item
       value={value}
@@ -185,18 +208,34 @@ export function Radio({ value, children, disabled, ref }: RadioProps) {
     >
       <ArkRadioGroup.ItemControl className={radioWrapperStyles}>
         <div
-          className={radioCircleStyles({ tone, disabled: isDisabled })}
+          className={radioCircleStyles({
+            tone,
+            disabled: isDisabled,
+            invalid: isInvalid,
+          })}
           role="presentation"
         />
         <ArkRadioGroup.Indicator
-          className={radioDotStyles({ tone, disabled: isDisabled })}
+          className={radioDotStyles({
+            disabled: isDisabled,
+            invalid: isInvalid,
+          })}
         />
-        <div className={radioHoverStyles({ tone, disabled: isDisabled })} />
+        <div
+          className={radioHoverStyles({
+            tone,
+            disabled: isDisabled,
+            invalid: isInvalid,
+          })}
+        />
         <ArkRadioGroup.ItemHiddenInput ref={ref} />
       </ArkRadioGroup.ItemControl>
       {children && (
         <ArkRadioGroup.ItemText
-          className={labelTextStyles({ disabled: isDisabled })}
+          className={labelTextStyles({
+            disabled: isDisabled,
+            invalid: isInvalid,
+          })}
         >
           {children}
         </ArkRadioGroup.ItemText>
@@ -228,55 +267,42 @@ const radioCircleStyles = cva({
     "[data-state='checked'] &": {
       borderColor: "slate.9",
     },
+    "[data-focus-visible] &, [data-active] &": {
+      outline: "solid",
+      outlineWidth: "md",
+      outlineOffset: "2",
+    },
   },
   variants: {
     tone: {
       neutral: {
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "slate.9",
-          outlineOffset: "2",
         },
       },
       brand: {
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "border.brand.focus",
-          outlineOffset: "2",
         },
       },
       danger: {
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "border.danger",
-          outlineOffset: "2",
         },
       },
       warning: {
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "border.warning",
-          outlineOffset: "2",
         },
       },
       success: {
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "border.success",
-          outlineOffset: "2",
         },
       },
       info: {
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "border.info",
-          outlineOffset: "2",
         },
       },
     },
@@ -287,6 +313,18 @@ const radioCircleStyles = cva({
         "[data-state='checked'] &": {
           borderColor: "fg.neutral.disabled!",
           backgroundColor: "bg.neutral.disabled!",
+        },
+      },
+    },
+    invalid: {
+      true: {
+        borderColor: "fg.danger!",
+        "[data-focus-visible] &, [data-active] &": {
+          outlineColor: "border.danger!",
+        },
+        "[data-state='checked'] &": {
+          borderColor: "fg.danger!",
+          backgroundColor: "bg.danger!",
         },
       },
     },
@@ -319,6 +357,11 @@ const radioHoverStyles = cva({
         display: "none",
       },
     },
+    invalid: {
+      true: {
+        backgroundColor: "fg.danger!",
+      },
+    },
   },
 });
 
@@ -330,6 +373,11 @@ const labelTextStyles = cva({
     disabled: {
       true: {
         color: "fg.neutral.disabled",
+      },
+    },
+    invalid: {
+      true: {
+        color: "fg.danger",
       },
     },
   },
@@ -352,17 +400,14 @@ const radioDotStyles = cva({
     },
   },
   variants: {
-    tone: {
-      neutral: {},
-      brand: {},
-      danger: {},
-      warning: {},
-      success: {},
-      info: {},
-    },
     disabled: {
       true: {
         backgroundColor: "fg.neutral.disabled!",
+      },
+    },
+    invalid: {
+      true: {
+        backgroundColor: "fg.danger",
       },
     },
   },
