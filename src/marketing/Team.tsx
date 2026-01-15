@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
 import { css } from "../../styled-system/css";
-import githubLightIcon from "../assets/images/marketing/team/github-light.webp";
-import githubDarkIcon from "../assets/images/marketing/team/github-dark.webp";
-import linkedInLightIcon from "../assets/images/marketing/team/linkedIn-light.webp";
-import linkedInDarkIcon from "../assets/images/marketing/team/linkedIn-dark.webp";
 
 import { Card } from "../components/Card/Card";
 import { Flex } from "../components/Flex/Flex";
@@ -13,6 +9,7 @@ import { Link } from "../components/Link/Link";
 import { Tag } from "../components/Tag/Tag";
 import { Text } from "../components/Text/Text";
 import { VStack } from "../components/VStack/VStack";
+import { Icon } from "../components/Icon/Icon";
 
 export interface TeamMember {
   /** 팀원 이름 */
@@ -164,22 +161,6 @@ function TeamCard({ member, isDark }: TeamCardProps) {
         </Card.Body>
       </HStack>
       <HStack align="right" gap="20" className={css({ width: "100%" })}>
-        {linkedinUrl && (
-          <Link
-            href={linkedinUrl}
-            external
-            underline={false}
-            aria-label={`${name}의 LinkedIn 프로필`}
-          >
-            <img
-              src={isDark ? linkedInDarkIcon : linkedInLightIcon}
-              alt="LinkedIn"
-              className={css({
-                width: "14px",
-              })}
-            />
-          </Link>
-        )}
         {githubUrl && (
           <Link
             href={githubUrl}
@@ -187,14 +168,17 @@ function TeamCard({ member, isDark }: TeamCardProps) {
             underline={false}
             aria-label={`${name}의 GitHub 프로필`}
           >
-            <img
-              src={isDark ? githubDarkIcon : githubLightIcon}
-              alt="GitHub"
-              className={css({
-                width: "14px",
-                height: "14px",
-              })}
-            />
+            <Icon name={isDark ? "GithubDark" : "GithubLight"} size="sm" />
+          </Link>
+        )}
+        {linkedinUrl && (
+          <Link
+            href={linkedinUrl}
+            external
+            underline={false}
+            aria-label={`${name}의 LinkedIn 프로필`}
+          >
+            <Icon name={isDark ? "LinkedInDark" : "LinkedInLight"} size="sm" />
           </Link>
         )}
       </HStack>

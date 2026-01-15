@@ -33,8 +33,10 @@ import type { ComponentProps, FunctionComponent, SVGProps } from "react";
 import Discord from "../assets/Discord.svg?react";
 import Figma from "../assets/Figma.svg?react";
 import GitHub from "../assets/GitHub.svg?react";
+import GitHubDark from "../assets/GitHubDark.svg?react";
 import Kr from "../assets/Kr.svg?react";
 import LinkedIn from "../assets/LinkedIn.svg?react";
+import LinkedInDark from "../assets/LinkedInDark.svg?react";
 import Medium from "../assets/Medium.svg?react";
 import Storybook from "../assets/Storybook.svg?react";
 import YouTube from "../assets/YouTube.svg?react";
@@ -82,6 +84,10 @@ export const icons = {
   YouTube: createBrandIcon(YouTube),
   Storybook: createBrandIcon(Storybook),
   Figma: createBrandIcon(Figma),
+  GithubLight: GitHub,
+  GithubDark: GitHubDark,
+  LinkedInLight: LinkedIn,
+  LinkedInDark: LinkedInDark,
 };
 
 export type IconName = keyof typeof icons;
