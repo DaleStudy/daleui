@@ -164,6 +164,22 @@ function TeamCard({ member, isDark }: TeamCardProps) {
         </Card.Body>
       </HStack>
       <HStack align="right" gap="20" className={css({ width: "100%" })}>
+        {linkedinUrl && (
+          <Link
+            href={linkedinUrl}
+            external
+            underline={false}
+            aria-label={`${name}의 LinkedIn 프로필`}
+          >
+            <img
+              src={isDark ? linkedInDarkIcon : linkedInLightIcon}
+              alt="LinkedIn"
+              className={css({
+                width: "14px",
+              })}
+            />
+          </Link>
+        )}
         {githubUrl && (
           <Link
             href={githubUrl}
@@ -177,22 +193,6 @@ function TeamCard({ member, isDark }: TeamCardProps) {
               className={css({
                 width: "14px",
                 height: "14px",
-              })}
-            />
-          </Link>
-        )}
-        {linkedinUrl && (
-          <Link
-            href={linkedinUrl}
-            external
-            underline={false}
-            aria-label={`${name}의 LinkedIn 프로필`}
-          >
-            <img
-              src={isDark ? linkedInDarkIcon : linkedInLightIcon}
-              alt="LinkedIn"
-              className={css({
-                width: "14px",
               })}
             />
           </Link>
@@ -212,27 +212,27 @@ const Members: TeamMember[] = [
     role: "Engineer",
     flag: "🇨🇦",
     location: "Toronto",
+    avatar: "https://avatars.githubusercontent.com/u/5466341",
     githubUrl: "https://github.com/DaleSeo",
     linkedinUrl: "https://www.linkedin.com/in/daleseo/",
-    avatar: "https://avatars.githubusercontent.com/u/5466341",
   },
   {
     name: "Helena",
     role: "Engineer",
     flag: "🇨🇦",
     location: "Toronto",
+    avatar: "https://avatars.githubusercontent.com/u/38199103",
     githubUrl: "https://github.com/yolophg",
     linkedinUrl: "https://www.linkedin.com/in/yolophg/",
-    avatar: "https://avatars.githubusercontent.com/u/38199103",
   },
   {
     name: "Evan (에반)",
     role: "Engineer",
     flag: "🇨🇦",
     location: "Toronto",
+    avatar: "https://avatars.githubusercontent.com/u/37020415",
     githubUrl: "https://github.com/sounmind",
     linkedinUrl: "https://www.linkedin.com/in/suhyeong-evan-lee/",
-    avatar: "https://avatars.githubusercontent.com/u/37020415",
   },
   {
     name: "hyoseong",
@@ -253,24 +253,6 @@ const Members: TeamMember[] = [
     linkedinUrl: "https://www.linkedin.com/in/riaoh/",
   },
   {
-    name: "살미",
-    role: "Engineer",
-    flag: "🇰🇷",
-    location: "Seoul",
-    githubUrl: "https://github.com/Lustellz",
-    linkedinUrl: "https://www.linkedin.com/in/tasha0417/",
-    avatar: "https://avatars.githubusercontent.com/u/45252527",
-  },
-  {
-    name: "은지",
-    role: "Engineer",
-    flag: "🇰🇷",
-    location: "Seoul",
-    githubUrl: "https://github.com/y00eunji",
-    linkedinUrl: "https://www.linkedin.com/in/y00eunji/",
-    avatar: "https://avatars.githubusercontent.com/u/27201591",
-  },
-  {
     name: "한샘",
     role: "Engineer",
     flag: "🇰🇷",
@@ -280,31 +262,22 @@ const Members: TeamMember[] = [
     linkedinUrl: "https://www.linkedin.com/in/hansaem-so/",
   },
   {
-    name: "Aka (아카)",
-    role: "Engineer",
-    flag: "🇰🇷",
-    location: "Seoul",
-    githubUrl: "https://github.com/HowToBeAHappyBoy",
-    linkedinUrl: "https://www.linkedin.com/in/seozi/",
-    avatar: "https://avatars.githubusercontent.com/u/30362922",
-  },
-  {
     name: "승현",
     role: "Designer",
     flag: "🇰🇷",
     location: "Seoul",
+    avatar: "https://avatars.githubusercontent.com/u/69985950",
     githubUrl: "https://github.com/sseung30",
     linkedinUrl: undefined,
-    avatar: "https://avatars.githubusercontent.com/u/69985950",
   },
   {
     name: "자혜",
     role: "Designer",
     flag: "🇰🇷",
     location: "Seoul",
+    avatar: "https://avatars.githubusercontent.com/u/89135410",
     githubUrl: "https://github.com/jj5u",
     linkedinUrl: undefined,
-    avatar: "https://avatars.githubusercontent.com/u/89135410",
   },
 ];
 
