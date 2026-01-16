@@ -91,7 +91,7 @@ export function CheckboxGroup({
   defaultValues,
   values,
   onChange,
-  disabled,
+  disabled = false,
   orientation,
   tone = "brand",
   invalid = false,
@@ -184,7 +184,11 @@ export interface CheckboxItemProps {
   disabled?: boolean;
 }
 
-export function CheckboxItem({ value, children, disabled }: CheckboxItemProps) {
+export function CheckboxItem({
+  value,
+  children,
+  disabled = false,
+}: CheckboxItemProps) {
   const context = useContext(CheckboxGroupContext);
 
   if (!context) {
