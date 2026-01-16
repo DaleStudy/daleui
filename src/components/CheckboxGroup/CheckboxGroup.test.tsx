@@ -18,12 +18,12 @@ describe("CheckboxGroup", () => {
     expect(screen.getByText("Option 2")).toBeInTheDocument();
   });
 
-  test("defaultValue가 제공되면 해당 값들을 선택한다", () => {
+  test("defaultValues가 제공되면 해당 값들을 선택한다", () => {
     render(
       <CheckboxGroup
         name="test"
         label="Test Checkbox Group"
-        defaultValue={["option2"]}
+        defaultValues={["option2"]}
       >
         <CheckboxItem value="option1">Option 1</CheckboxItem>
         <CheckboxItem value="option2">Option 2</CheckboxItem>
@@ -37,7 +37,7 @@ describe("CheckboxGroup", () => {
     expect(option2).toBeChecked();
   });
 
-  test("defaultValue가 제공되지 않으면 아무것도 선택하지 않는다", () => {
+  test("defaultValues가 제공되지 않으면 아무것도 선택하지 않는다", () => {
     render(
       <CheckboxGroup name="test" label="Test Checkbox Group">
         <CheckboxItem value="option1">Option 1</CheckboxItem>
@@ -52,12 +52,12 @@ describe("CheckboxGroup", () => {
     expect(option2).not.toBeChecked();
   });
 
-  test("여러 값을 defaultValue로 선택할 수 있다", () => {
+  test("여러 값을 defaultValues로 선택할 수 있다", () => {
     render(
       <CheckboxGroup
         name="test"
         label="Test Checkbox Group"
-        defaultValue={["option1", "option2"]}
+        defaultValues={["option1", "option2"]}
       >
         <CheckboxItem value="option1">Option 1</CheckboxItem>
         <CheckboxItem value="option2">Option 2</CheckboxItem>
@@ -74,13 +74,13 @@ describe("CheckboxGroup", () => {
     expect(option3).not.toBeChecked();
   });
 
-  test("value가 defaultValue보다 우선한다", () => {
+  test("values가 defaultValues보다 우선한다", () => {
     render(
       <CheckboxGroup
         name="test"
         label="Test Checkbox Group"
-        defaultValue={["option1"]}
-        value={["option2"]}
+        defaultValues={["option1"]}
+        values={["option2"]}
       >
         <CheckboxItem value="option1">Option 1</CheckboxItem>
         <CheckboxItem value="option2">Option 2</CheckboxItem>
@@ -115,7 +115,7 @@ describe("CheckboxGroup", () => {
         name="test"
         label="Test Checkbox Group"
         disabled
-        defaultValue={["option1"]}
+        defaultValues={["option1"]}
       >
         <CheckboxItem value="option1">Option 1</CheckboxItem>
         <CheckboxItem value="option2">Option 2</CheckboxItem>
@@ -205,7 +205,7 @@ describe("CheckboxGroup", () => {
       <CheckboxGroup
         name="test"
         label="Test Checkbox Group"
-        defaultValue={["option1", "option2"]}
+        defaultValues={["option1", "option2"]}
       >
         <CheckboxItem value="option1">Option 1</CheckboxItem>
         <CheckboxItem value="option2">Option 2</CheckboxItem>
@@ -236,7 +236,7 @@ describe("CheckboxGroup", () => {
         <CheckboxGroup
           name="test"
           label="Test Checkbox Group"
-          value={selectedValues}
+          values={selectedValues}
           onChange={(values) => {
             onChange(values);
             setSelectedValues(values);

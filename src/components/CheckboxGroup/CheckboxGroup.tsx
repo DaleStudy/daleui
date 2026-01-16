@@ -1,11 +1,7 @@
-import {
-  Checkbox as ArkCheckbox,
-  type CheckboxCheckedChangeDetails,
-} from "@ark-ui/react/checkbox";
-import { Check } from "lucide-react";
 import { type ReactNode, createContext, useContext, useState } from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
+import { Checkbox } from "../Checkbox/Checkbox";
 
 const CheckboxGroupContext = createContext<{
   tone: Tone;
@@ -36,19 +32,19 @@ export interface CheckboxGroupProps {
    * 컴포넌트가 처음 렌더링될 때 선택되는 값들입니다.
    * @default undefined
    */
-  defaultValue?: string[];
+  defaultValues?: string[];
 
   /**
    * 외부에서 선택 값을 직접 제어할 때 사용합니다.
    * @default undefined
    */
-  value?: string[];
+  values?: string[];
 
   /**
    * 사용자가 선택을 변경할 때 호출되는 콜백입니다.
    * @default undefined
    */
-  onChange?: (value: string[]) => void;
+  onChange?: (values: string[]) => void;
 
   /**
    * true이면 모든 체크박스가 비활성화되어 상호작용이 불가합니다.
@@ -92,20 +88,20 @@ export function CheckboxGroup({
   children,
   name,
   label,
-  defaultValue,
-  value,
+  defaultValues,
+  values,
   onChange,
   disabled,
   orientation,
   tone = "brand",
   invalid = false,
 }: CheckboxGroupProps) {
-  const isControlled = value !== undefined;
+  const isControlled = values !== undefined;
   const [internalValues, setInternalValues] = useState<string[]>(
-    defaultValue ?? [],
+    defaultValues ?? [],
   );
 
-  const selectedValues = isControlled ? value : internalValues;
+  const selectedValues = isControlled ? values : internalValues;
 
   const handleValueChange = (itemValue: string, checked: boolean) => {
     const newValues = checked
@@ -186,19 +182,9 @@ export interface CheckboxItemProps {
    * @default false
    */
   disabled?: boolean;
-
-  /**
-   * DOM 요소에 대한 ref입니다.
-   */
-  ref?: React.Ref<HTMLInputElement>;
 }
 
-export function CheckboxItem({
-  value,
-  children,
-  disabled,
-  ref,
-}: CheckboxItemProps) {
+export function CheckboxItem({ value, children, disabled }: CheckboxItemProps) {
   const context = useContext(CheckboxGroupContext);
 
   if (!context) {
@@ -219,311 +205,19 @@ export function CheckboxItem({
   const isInvalid = groupInvalid;
   const isChecked = selectedValues.includes(value);
 
-  const handleCheckedChange = (details: CheckboxCheckedChangeDetails) => {
-    const checked = details.checked === true;
+  const handleChange = (checked: boolean) => {
     onValueChange(value, checked);
   };
 
   return (
-    <ArkCheckbox.Root
+    <Checkbox
+      label={children}
       name={name}
       checked={isChecked}
       disabled={isDisabled}
       invalid={!isDisabled && isInvalid}
-      onCheckedChange={handleCheckedChange}
-      className={`group ${rootStyles({ disabled: isDisabled })}`}
-    >
-      <ArkCheckbox.Control
-        className={controlStyles({
-          tone,
-          disabled: isDisabled,
-          invalid: !isDisabled && isInvalid,
-        })}
-      >
-        <ArkCheckbox.Indicator className={indicatorStyles()}>
-          <Check size={10} absoluteStrokeWidth />
-        </ArkCheckbox.Indicator>
-      </ArkCheckbox.Control>
-      {children && (
-        <ArkCheckbox.Label
-          className={labelTextStyles({
-            disabled: isDisabled,
-            invalid: !isDisabled && isInvalid,
-          })}
-        >
-          {children}
-        </ArkCheckbox.Label>
-      )}
-      <ArkCheckbox.HiddenInput ref={ref} data-test-tone={tone} />
-    </ArkCheckbox.Root>
+      tone={tone}
+      onChange={handleChange}
+    />
   );
 }
-
-const rootStyles = cva({
-  base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8",
-    cursor: "pointer",
-    padding: "4",
-  },
-  variants: {
-    disabled: {
-      true: {
-        cursor: "not-allowed",
-      },
-    },
-  },
-});
-
-const controlStyles = cva({
-  base: {
-    position: "relative",
-    flexShrink: 0,
-    width: "16px",
-    height: "16px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "transparent",
-    borderWidth: "2px",
-    borderStyle: "solid",
-    borderColor: "fg.neutral",
-    borderRadius: "sm",
-    transition: "all 0.2s",
-    color: "transparent",
-
-    '&[data-state="checked"]': {
-      color: "fg.neutral",
-    },
-  },
-  variants: {
-    tone: {
-      brand: {
-        ".group:hover &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
-          backgroundColor: "fg.brand.hover",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
-        },
-        ".group:active &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
-          backgroundColor: "fg.brand.active",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
-        },
-        "&[data-focus-visible]": {
-          outline: "solid",
-          outlineWidth: "lg",
-          outlineColor: "border.brand.focus",
-          outlineOffset: "2",
-        },
-      },
-      success: {
-        ".group:hover &::before, .group:active &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
-          backgroundColor: "fg.success",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
-        },
-        "&[data-focus-visible]": {
-          outline: "solid",
-          outlineWidth: "lg",
-          outlineColor: "border.success",
-          outlineOffset: "2",
-        },
-      },
-      warning: {
-        ".group:hover &::before, .group:active &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
-          backgroundColor: "fg.warning",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
-        },
-        "&[data-focus-visible]": {
-          outline: "solid",
-          outlineWidth: "lg",
-          outlineColor: "border.warning",
-          outlineOffset: "2",
-        },
-      },
-      info: {
-        ".group:hover &::before, .group:active &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
-          backgroundColor: "fg.info",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
-        },
-        "&[data-focus-visible]": {
-          outline: "solid",
-          outlineWidth: "lg",
-          outlineColor: "border.info",
-          outlineOffset: "2",
-        },
-      },
-      danger: {
-        borderColor: "fg.danger",
-        ".group:hover &::before, .group:active &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
-          backgroundColor: "fg.danger",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
-        },
-        "&[data-focus-visible]": {
-          outline: "solid",
-          outlineWidth: "lg",
-          outlineColor: "border.danger",
-          outlineOffset: "2",
-        },
-      },
-      neutral: {
-        ".group:hover &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
-          backgroundColor: "fg.neutral.hover",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
-        },
-        ".group:active &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
-          backgroundColor: "fg.neutral.active",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
-        },
-        "&[data-focus-visible]": {
-          outline: "solid",
-          outlineWidth: "lg",
-          outlineColor: "border.neutral.active",
-          outlineOffset: "2",
-        },
-      },
-    },
-    disabled: {
-      true: {
-        cursor: "not-allowed",
-        borderColor: "fg.neutral.disabled",
-        backgroundColor: "bg.neutral.disabled!",
-        ".group:hover &::before": {
-          display: "none",
-        },
-        '&[data-state="checked"]': {
-          color: "fg.neutral.disabled!",
-        },
-      },
-    },
-    invalid: {
-      true: {
-        borderColor: "fg.danger",
-        ".group:hover &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
-          backgroundColor: "fg.danger",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
-        },
-        "&[data-focus-visible]": {
-          outline: "solid",
-          outlineWidth: "lg",
-          outlineColor: "border.danger",
-          outlineOffset: "2",
-        },
-        '&[data-state="checked"]': {
-          color: "fg.danger",
-        },
-      },
-    },
-  },
-});
-
-const indicatorStyles = cva({
-  base: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
-
-const labelTextStyles = cva({
-  base: {
-    fontSize: "md",
-    fontWeight: "semibold",
-    lineHeight: "1.2",
-    color: "fg.neutral",
-    userSelect: "none",
-  },
-  variants: {
-    disabled: {
-      true: {
-        color: "fg.neutral.disabled",
-      },
-    },
-    invalid: {
-      true: {
-        color: "fg.danger",
-      },
-    },
-  },
-});

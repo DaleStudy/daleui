@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { css } from "../../../styled-system/css";
+import { VStack } from "../VStack/VStack";
 import { CheckboxGroup, CheckboxItem } from "./CheckboxGroup";
 
 export default {
@@ -9,7 +10,7 @@ export default {
     layout: "centered",
     design: {
       type: "figma",
-      url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/Dale-UI-Kit?node-id=851-1768",
+      url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/Dale-UI-Kit?node-id=6814-1500",
     },
   },
   args: {
@@ -36,38 +37,28 @@ export const Basic: Story = {};
 
 export const WithDefaultValue: Story = {
   args: {
-    defaultValue: ["banana"],
+    defaultValues: ["banana"],
   },
 };
 
 export const Orientation: Story = {
-  render: () => {
+  render: (args) => {
     return (
-      <div
-        className={css({ display: "flex", flexDirection: "column", gap: "32" })}
-      >
+      <VStack gap="32">
         <CheckboxGroup
+          {...args}
           name="vertical-orientation"
-          label="좋아하는 과일을 선택하세요 (옵션 선택)"
           orientation="vertical"
-          defaultValue={["apple"]}
-        >
-          <CheckboxItem value="apple">사과</CheckboxItem>
-          <CheckboxItem value="banana">바나나</CheckboxItem>
-          <CheckboxItem value="orange">오렌지</CheckboxItem>
-        </CheckboxGroup>
+          defaultValues={["apple"]}
+        />
 
         <CheckboxGroup
+          {...args}
           name="horizontal-orientation"
-          label="좋아하는 과일을 선택하세요 (옵션 선택)"
           orientation="horizontal"
-          defaultValue={["banana"]}
-        >
-          <CheckboxItem value="apple">사과</CheckboxItem>
-          <CheckboxItem value="banana">바나나</CheckboxItem>
-          <CheckboxItem value="orange">오렌지</CheckboxItem>
-        </CheckboxGroup>
-      </div>
+          defaultValues={["banana"]}
+        />
+      </VStack>
     );
   },
 };
@@ -75,7 +66,7 @@ export const Orientation: Story = {
 export const GroupDisabled: Story = {
   args: {
     disabled: true,
-    defaultValue: ["banana"],
+    defaultValues: ["banana"],
     label: "전체 그룹 비활성화",
   },
 };
@@ -89,7 +80,7 @@ export const ItemDisabled: Story = {
         <CheckboxGroup
           name="disabled-checked"
           label="개별 아이템 비활성화 (선택됨)"
-          defaultValue={["banana"]}
+          defaultValues={["banana"]}
         >
           <CheckboxItem value="apple">사과</CheckboxItem>
           <CheckboxItem value="banana" disabled>
@@ -101,7 +92,7 @@ export const ItemDisabled: Story = {
         <CheckboxGroup
           name="disabled-unchecked"
           label="개별 아이템 비활성화 (선택 안 됨)"
-          defaultValue={["apple"]}
+          defaultValues={["apple"]}
         >
           <CheckboxItem value="apple">사과</CheckboxItem>
           <CheckboxItem value="banana" disabled>
@@ -123,7 +114,7 @@ export const Tones: Story = {
         <CheckboxGroup
           name="neutral-tone"
           label="중립 색조 (Neutral)"
-          defaultValue={["apple"]}
+          defaultValues={["apple"]}
           tone="neutral"
         >
           <CheckboxItem value="apple">사과</CheckboxItem>
@@ -134,7 +125,7 @@ export const Tones: Story = {
         <CheckboxGroup
           name="brand-tone"
           label="브랜드 색조 (Brand)"
-          defaultValue={["apple"]}
+          defaultValues={["apple"]}
           tone="brand"
         >
           <CheckboxItem value="apple">사과</CheckboxItem>
@@ -145,7 +136,7 @@ export const Tones: Story = {
         <CheckboxGroup
           name="danger-tone"
           label="위험 색조 (Danger)"
-          defaultValue={["apple"]}
+          defaultValues={["apple"]}
           tone="danger"
         >
           <CheckboxItem value="apple">사과</CheckboxItem>
@@ -156,7 +147,7 @@ export const Tones: Story = {
         <CheckboxGroup
           name="warning-tone"
           label="경고 색조 (Warning)"
-          defaultValue={["apple"]}
+          defaultValues={["apple"]}
           tone="warning"
         >
           <CheckboxItem value="apple">사과</CheckboxItem>
@@ -167,7 +158,7 @@ export const Tones: Story = {
         <CheckboxGroup
           name="success-tone"
           label="성공 색조 (Success)"
-          defaultValue={["apple"]}
+          defaultValues={["apple"]}
           tone="success"
         >
           <CheckboxItem value="apple">사과</CheckboxItem>
@@ -178,7 +169,7 @@ export const Tones: Story = {
         <CheckboxGroup
           name="info-tone"
           label="정보 색조 (Info)"
-          defaultValue={["apple"]}
+          defaultValues={["apple"]}
           tone="info"
         >
           <CheckboxItem value="apple">사과</CheckboxItem>
@@ -217,23 +208,23 @@ export const Invalid: Story = {
 };
 
 export const Controlled = () => {
-  const [value, setValue] = useState<string[]>(["apple"]);
+  const [values, setValues] = useState<string[]>(["apple"]);
   return (
     <div>
       <CheckboxGroup
         name="controlled-fruits"
         label="제어 컴포넌트 예시"
-        value={value}
-        onChange={(newValue) => setValue(newValue)}
+        values={values}
+        onChange={(newValues) => setValues(newValues)}
       >
         <CheckboxItem value="apple">사과</CheckboxItem>
         <CheckboxItem value="banana">바나나</CheckboxItem>
         <CheckboxItem value="orange">오렌지</CheckboxItem>
       </CheckboxGroup>
       <div className={css({ marginTop: "20" })}>
-        <p>현재 선택된 값: {value.join(", ")}</p>
-        <button onClick={() => setValue(["banana"])}>바나나만 선택</button>
-        <button onClick={() => setValue(["apple", "orange"])}>
+        <p>현재 선택된 값: {values.join(", ")}</p>
+        <button onClick={() => setValues(["banana"])}>바나나만 선택</button>
+        <button onClick={() => setValues(["apple", "orange"])}>
           사과와 오렌지 선택
         </button>
       </div>
