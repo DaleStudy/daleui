@@ -24,7 +24,7 @@
       "name": "Evan Suhyeong Lee",
       "avatar_url": "https://avatars.githubusercontent.com/u/37020415?v=4",
       "profile": "https://github.com/sounmind",
-      "contributions": ["code", "doc"]
+      "contributions": ["blog", "code", "doc"]
     },
     {
       "login": "hyoseong1994",
@@ -41,31 +41,10 @@
       "contributions": ["code", "doc"]
     },
     {
-      "login": "Lustellz",
-      "name": "Tasha(살미)",
-      "avatar_url": "https://avatars.githubusercontent.com/u/45252527?v=4",
-      "profile": "https://github.com/Lustellz",
-      "contributions": ["code", "doc"]
-    },
-    {
-      "login": "y00eunji",
-      "name": "유은지",
-      "avatar_url": "https://avatars.githubusercontent.com/u/27201591?v=4",
-      "profile": "https://github.com/y00eunji",
-      "contributions": ["code", "doc"]
-    },
-    {
       "login": "Hecklebot",
       "name": "Hansaem.so",
       "avatar_url": "https://avatars.githubusercontent.com/u/51806574?v=4",
       "profile": "https://velog.io/@hecklebot",
-      "contributions": ["code", "doc"]
-    },
-    {
-      "login": "HowToBeAHappyBoy",
-      "name": "서진혁 (Aka)",
-      "avatar_url": "https://avatars.githubusercontent.com/u/30362922?v=4",
-      "profile": "https://seozi.io/",
       "contributions": ["code", "doc"]
     },
     {
@@ -81,6 +60,27 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/89135410?v=4",
       "profile": "https://github.com/jj5u",
       "contributions": ["design"]
+    },
+    {
+      "login": "HowToBeAHappyBoy",
+      "name": "서진혁 (Aka)",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30362922?v=4",
+      "profile": "https://seozi.io/",
+      "contributions": ["code", "doc"]
+    },
+    {
+      "login": "y00eunji",
+      "name": "유은지",
+      "avatar_url": "https://avatars.githubusercontent.com/u/27201591?v=4",
+      "profile": "https://github.com/y00eunji",
+      "contributions": ["code", "doc"]
+    },
+    {
+      "login": "Lustellz",
+      "name": "Tasha(살미)",
+      "avatar_url": "https://avatars.githubusercontent.com/u/45252527?v=4",
+      "profile": "https://github.com/Lustellz",
+      "contributions": ["code", "doc"]
     },
     {
       "login": "boldkang",
