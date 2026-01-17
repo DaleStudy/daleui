@@ -5,11 +5,11 @@ on:
     branches:
       - main
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
+    types: [labeled, synchronize]
 
 jobs:
   pre-chromatic:
-    if: (github.event_name == 'push' || github.event.pull_request.draft == false) && github.actor != 'dependabot[bot]'
+    if: github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'ui')
     runs-on: ubuntu-latest
     steps:
       - id: gen_url
@@ -21,7 +21,7 @@ jobs:
       url: ${{ steps.gen_url.outputs.url }}
 
   chromatic:
-    if: (github.event_name == 'push' || github.event.pull_request.draft == false) && github.actor != 'dependabot[bot]'
+    if: github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'ui')
     environment:
       name: chromatic
       url: ${{ needs.pre-chromatic.outputs.url }}
