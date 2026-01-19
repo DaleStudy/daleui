@@ -52,8 +52,8 @@ export function Select({
   value,
   defaultValue,
   disabled,
-  required,
-  invalid,
+  required = false,
+  invalid = false,
   clearButtonName,
   placeholder,
   children,
@@ -165,8 +165,8 @@ export function Select({
         onChange={handleChange}
         disabled={disabled}
         required={required}
-        aria-invalid={invalid ? true : undefined}
-        aria-required={required ? true : undefined}
+        aria-invalid={invalid}
+        aria-required={required}
         className={selectStyles({ invalid, showClearButton })}
         {...rest}
       >

@@ -50,8 +50,8 @@ export function PasswordInput({
         disabled={disabled}
         className={inputStyles()}
         aria-label="패스워드"
-        aria-invalid={invalid ? true : undefined}
-        aria-required={required ? true : undefined}
+        aria-invalid={invalid}
+        aria-required={required}
         {...rest}
       />
       <button

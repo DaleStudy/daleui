@@ -45,7 +45,7 @@ export const Checkbox = ({
   checked,
   defaultChecked,
   disabled,
-  invalid,
+  invalid = false,
   tone = "brand",
   required = false,
   onChange,
@@ -111,10 +111,7 @@ export const Checkbox = ({
           )}
         </ArkCheckbox.Label>
       )}
-      <ArkCheckbox.HiddenInput
-        data-test-tone={tone}
-        aria-required={required ? true : undefined}
-      />
+      <ArkCheckbox.HiddenInput data-test-tone={tone} aria-required={required} />
     </ArkCheckbox.Root>
   );
 };

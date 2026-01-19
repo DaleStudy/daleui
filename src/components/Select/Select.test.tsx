@@ -440,7 +440,10 @@ describe("접근성 및 기타", () => {
         <option value="react">React</option>
       </Select>,
     );
-    expect(screen.getByRole("combobox")).not.toHaveAttribute("aria-invalid");
+    expect(screen.getByRole("combobox")).toHaveAttribute(
+      "aria-invalid",
+      "false",
+    );
   });
 
   test("invalid가 true일 때 aria-invalid 속성이 올바르게 설정된다", () => {
@@ -461,7 +464,10 @@ describe("접근성 및 기타", () => {
         <option value="react">React</option>
       </Select>,
     );
-    expect(screen.getByRole("combobox")).not.toHaveAttribute("aria-invalid");
+    expect(screen.getByRole("combobox")).toHaveAttribute(
+      "aria-invalid",
+      "false",
+    );
   });
 
   test("required prop이 없을 때 aria-required 속성이 올바르게 설정된다", () => {
@@ -470,7 +476,10 @@ describe("접근성 및 기타", () => {
         <option value="react">React</option>
       </Select>,
     );
-    expect(screen.getByRole("combobox")).not.toHaveAttribute("aria-required");
+    expect(screen.getByRole("combobox")).toHaveAttribute(
+      "aria-required",
+      "false",
+    );
   });
 
   test("required가 true일 때 aria-required 속성이 올바르게 설정된다", () => {
@@ -491,7 +500,10 @@ describe("접근성 및 기타", () => {
         <option value="react">React</option>
       </Select>,
     );
-    expect(screen.getByRole("combobox")).not.toHaveAttribute("aria-required");
+    expect(screen.getByRole("combobox")).toHaveAttribute(
+      "aria-required",
+      "false",
+    );
   });
 
   test("disabled 옵션이 있을 때 해당 옵션은 disabled 속성을 가진다", () => {

@@ -151,7 +151,7 @@ describe("렌더링", () => {
   test("required prop이 없을 때 aria-required 속성이 올바르게 설정된다", () => {
     render(<Checkbox label="일반 체크박스" />);
     const checkbox = screen.getByRole("checkbox");
-    expect(checkbox).not.toHaveAttribute("aria-required");
+    expect(checkbox).toHaveAttribute("aria-required", "false");
   });
 
   test("required가 true일 때 aria-required 속성이 올바르게 설정된다", () => {
@@ -163,7 +163,7 @@ describe("렌더링", () => {
   test("required가 false일 때 aria-required 속성이 올바르게 설정된다", () => {
     render(<Checkbox label="일반 체크박스" required={false} />);
     const checkbox = screen.getByRole("checkbox");
-    expect(checkbox).not.toHaveAttribute("aria-required");
+    expect(checkbox).toHaveAttribute("aria-required", "false");
   });
 });
 

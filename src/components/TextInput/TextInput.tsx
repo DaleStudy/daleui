@@ -24,8 +24,8 @@ export interface TextInputProps extends Omit<
  * - `disabled` prop으로 비활성화 상태를 제어할 수 있으며, `state` prop을 통해 'error'와 같은 특정 상태를 표현할 수 있습니다.
  */
 export function TextInput({
-  invalid,
-  required,
+  invalid = false,
+  required = false,
   className,
   leadingIcon,
   trailingIcon,
@@ -57,8 +57,8 @@ export function TextInput({
         className={inputStyles()}
         ref={ref}
         disabled={disabled}
-        aria-invalid={invalid ? true : undefined}
-        aria-required={required ? true : undefined}
+        aria-invalid={invalid}
+        aria-required={required}
         {...rest}
       />
       {trailingIcon && renderIcon(trailingIcon)}

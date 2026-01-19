@@ -58,7 +58,7 @@ describe("TextInput", () => {
   test("invalid prop이 없을 때 aria-invalid 속성이 올바르게 설정된다", () => {
     render(<TextInput />);
     const inputElement = screen.getByRole("textbox");
-    expect(inputElement).not.toHaveAttribute("aria-invalid");
+    expect(inputElement).toHaveAttribute("aria-invalid", "false");
   });
 
   test("invalid가 true일 때 aria-invalid 속성이 올바르게 설정된다", () => {
@@ -70,13 +70,13 @@ describe("TextInput", () => {
   test("invalid가 false일 때 aria-invalid 속성이 올바르게 설정된다", () => {
     render(<TextInput invalid={false} />);
     const inputElement = screen.getByRole("textbox");
-    expect(inputElement).not.toHaveAttribute("aria-invalid");
+    expect(inputElement).toHaveAttribute("aria-invalid", "false");
   });
 
   test("required prop이 없을 때 aria-required 속성이 올바르게 설정된다", () => {
     render(<TextInput />);
     const inputElement = screen.getByRole("textbox");
-    expect(inputElement).not.toHaveAttribute("aria-required");
+    expect(inputElement).toHaveAttribute("aria-required", "false");
   });
 
   test("required가 true일 때 aria-required 속성이 올바르게 설정된다", () => {
@@ -88,7 +88,7 @@ describe("TextInput", () => {
   test("required가 false일 때 aria-required 속성이 올바르게 설정된다", () => {
     render(<TextInput required={false} />);
     const inputElement = screen.getByRole("textbox");
-    expect(inputElement).not.toHaveAttribute("aria-required");
+    expect(inputElement).toHaveAttribute("aria-required", "false");
   });
 
   test("leadingIcon과 trailingIcon이 제공될 때 올바르게 렌더링되어야 한다.", () => {
