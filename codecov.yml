@@ -8,3 +8,5 @@ coverage:
       default:
         # 패치 커버리지는 1% 감소까지만 허용
         threshold: 1
+
+comment: false
