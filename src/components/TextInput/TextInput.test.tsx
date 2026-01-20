@@ -1,11 +1,11 @@
 import { createRef } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { TextInput } from "./TextInput";
 
 describe("TextInput", () => {
-  it("기본 props로 올바르게 렌더링되어야 합니다.", () => {
+  test("기본 props로 올바르게 렌더링되어야 한다.", () => {
     render(
       <TextInput placeholder="이름을 입력하세요" data-testid="text-input" />,
     );
@@ -15,7 +15,7 @@ describe("TextInput", () => {
     expect(inputElement).toBeInstanceOf(HTMLInputElement);
   });
 
-  it("사용자가 텍스트를 입력하면 value가 변경되고 onChange 핸들러가 호출되어야 합니다.", async () => {
+  test("사용자가 텍스트를 입력하면 value가 변경되고 onChange 핸들러가 호출되어야 한다.", async () => {
     const user = userEvent.setup();
     const handleChange = vi.fn();
     render(
@@ -35,7 +35,7 @@ describe("TextInput", () => {
     expect(inputElement.value).toBe("안녕하세요");
   });
 
-  it("disabled prop이 true일 때 입력이 비활성화되어야 합니다.", async () => {
+  test("disabled prop이 true일 때 입력이 비활성화되어야 한다.", async () => {
     const user = userEvent.setup();
     const handleChange = vi.fn();
     render(
@@ -55,29 +55,50 @@ describe("TextInput", () => {
     expect(handleChange).not.toHaveBeenCalled();
   });
 
-  it('invalid prop이 true일 때 aria-invalid 속성이 "true"여야 합니다.', () => {
-    render(<TextInput invalid data-testid="text-input" />);
-    const inputElement = screen.getByTestId("text-input");
+  test("invalid prop이 없을 때 aria-invalid 속성이 올바르게 설정된다", () => {
+    render(<TextInput />);
+    const inputElement = screen.getByRole("textbox");
+    expect(inputElement).toHaveAttribute("aria-invalid", "false");
+  });
+
+  test("invalid가 true일 때 aria-invalid 속성이 올바르게 설정된다", () => {
+    render(<TextInput invalid />);
+    const inputElement = screen.getByRole("textbox");
     expect(inputElement).toHaveAttribute("aria-invalid", "true");
   });
 
-  it("invalid prop이 없거나 false일 때 aria-invalid 속성을 갖지 않아야 합니다.", () => {
-    const { rerender } = render(<TextInput data-testid="text-input" />);
-    const inputElement = screen.getByTestId("text-input");
-    expect(inputElement).not.toHaveAttribute("aria-invalid");
-
-    rerender(<TextInput invalid={false} data-testid="text-input" />);
-    expect(inputElement).not.toHaveAttribute("aria-invalid");
+  test("invalid가 false일 때 aria-invalid 속성이 올바르게 설정된다", () => {
+    render(<TextInput invalid={false} />);
+    const inputElement = screen.getByRole("textbox");
+    expect(inputElement).toHaveAttribute("aria-invalid", "false");
   });
 
-  it("leadingIcon과 trailingIcon이 제공될 때 올바르게 렌더링되어야 합니다.", () => {
+  test("required prop이 없을 때 aria-required 속성이 올바르게 설정된다", () => {
+    render(<TextInput />);
+    const inputElement = screen.getByRole("textbox");
+    expect(inputElement).toHaveAttribute("aria-required", "false");
+  });
+
+  test("required가 true일 때 aria-required 속성이 올바르게 설정된다", () => {
+    render(<TextInput required />);
+    const inputElement = screen.getByRole("textbox");
+    expect(inputElement).toHaveAttribute("aria-required", "true");
+  });
+
+  test("required가 false일 때 aria-required 속성이 올바르게 설정된다", () => {
+    render(<TextInput required={false} />);
+    const inputElement = screen.getByRole("textbox");
+    expect(inputElement).toHaveAttribute("aria-required", "false");
+  });
+
+  test("leadingIcon과 trailingIcon이 제공될 때 올바르게 렌더링되어야 한다.", () => {
     render(<TextInput leadingIcon="search" trailingIcon="x" />);
 
     expect(screen.getByTestId("icon-search")).toBeInTheDocument();
     expect(screen.getByTestId("icon-x")).toBeInTheDocument();
   });
 
-  it("ref가 내부 input 엘리먼트로 전달되어야 합니다.", () => {
+  test("ref가 내부 input 엘리먼트로 전달되어야 한다.", () => {
     const ref = createRef<HTMLInputElement>();
     render(<TextInput ref={ref} />);
 
