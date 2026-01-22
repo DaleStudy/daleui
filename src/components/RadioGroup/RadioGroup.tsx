@@ -189,7 +189,7 @@ export function Radio({ value, children, disabled, ref }: RadioProps) {
           role="presentation"
         />
         <ArkRadioGroup.Indicator
-          className={radioDotStyles({ tone, disabled: isDisabled })}
+          className={radioDotStyles({ disabled: isDisabled })}
         />
         <div className={radioHoverStyles({ tone, disabled: isDisabled })} />
         <ArkRadioGroup.ItemHiddenInput ref={ref} />
@@ -228,55 +228,65 @@ const radioCircleStyles = cva({
     "[data-state='checked'] &": {
       borderColor: "slate.9",
     },
+    _focusVisible: {
+      outline: "solid",
+      outlineWidth: "md",
+      outlineOffset: "2",
+    },
+    _active: {
+      outline: "solid",
+      outlineWidth: "md",
+      outlineOffset: "2",
+    },
   },
   variants: {
     tone: {
       neutral: {
-        "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
-          outlineColor: "slate.9",
-          outlineOffset: "2",
+        _focusVisible: {
+          outlineColor: "border.neutral.focus",
+        },
+        _active: {
+          outlineColor: "border.neutral.active",
         },
       },
       brand: {
-        "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
+        _focusVisible: {
           outlineColor: "border.brand.focus",
-          outlineOffset: "2",
+        },
+        _active: {
+          outlineColor: "border.brand.active",
         },
       },
       danger: {
-        "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
-          outlineColor: "border.danger",
-          outlineOffset: "2",
+        _focusVisible: {
+          outlineColor: "border.danger.focus",
+        },
+        _active: {
+          outlineColor: "border.danger.active",
         },
       },
       warning: {
-        "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
-          outlineColor: "border.warning",
-          outlineOffset: "2",
+        _focusVisible: {
+          outlineColor: "border.warning.focus",
+        },
+        _active: {
+          outlineColor: "border.warning.active",
         },
       },
       success: {
-        "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
-          outlineColor: "border.success",
-          outlineOffset: "2",
+        _focusVisible: {
+          outlineColor: "border.success.focus",
+        },
+        _active: {
+          outlineColor: "border.success.active",
         },
       },
       info: {
-        "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
-          outlineColor: "border.info",
-          outlineOffset: "2",
+        _focusVisible: {
+          outlineColor: "border.info.focus",
+        },
+        _active: {
+          outlineColor: "border.info.active",
         },
       },
     },
@@ -284,10 +294,6 @@ const radioCircleStyles = cva({
       true: {
         borderColor: "fg.neutral.disabled!",
         backgroundColor: "bg.neutral.disabled!",
-        "[data-state='checked'] &": {
-          borderColor: "fg.neutral.disabled!",
-          backgroundColor: "bg.neutral.disabled!",
-        },
       },
     },
   },
@@ -301,8 +307,8 @@ const radioHoverStyles = cva({
     borderRadius: "full",
     pointerEvents: "none",
     opacity: 0,
-    "[data-hover] &": {
-      opacity: 0.1,
+    _hover: {
+      opacity: 0.2,
     },
   },
   variants: {
@@ -324,7 +330,7 @@ const radioHoverStyles = cva({
 
 const labelTextStyles = cva({
   base: {
-    textStyle: "label.md",
+    textStyle: "label.md.strong",
   },
   variants: {
     disabled: {
@@ -352,14 +358,6 @@ const radioDotStyles = cva({
     },
   },
   variants: {
-    tone: {
-      neutral: {},
-      brand: {},
-      danger: {},
-      warning: {},
-      success: {},
-      info: {},
-    },
     disabled: {
       true: {
         backgroundColor: "fg.neutral.disabled!",
