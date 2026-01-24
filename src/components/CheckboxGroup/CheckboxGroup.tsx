@@ -7,6 +7,7 @@ const CheckboxGroupContext = createContext<{
   tone: Tone;
   disabled?: boolean;
   invalid?: boolean;
+  required?: boolean;
   name: string;
   selectedValues: string[];
   onValueChange: (value: string, checked: boolean) => void;
@@ -69,6 +70,12 @@ export interface CheckboxGroupProps {
    * @default false
    */
   invalid?: boolean;
+
+  /**
+   * 필수 입력 여부를 지정합니다. true일 경우 라벨 옆에 * 표시가 나타납니다.
+   * @default false
+   */
+  required?: boolean;
 }
 
 /**
@@ -95,6 +102,7 @@ export function CheckboxGroup({
   orientation,
   tone = "brand",
   invalid = false,
+  required = false,
 }: CheckboxGroupProps) {
   const isControlled = values !== undefined;
   const [internalValues, setInternalValues] = useState<string[]>(
@@ -121,6 +129,7 @@ export function CheckboxGroup({
         tone,
         disabled,
         invalid,
+        required,
         name,
         selectedValues,
         onValueChange: handleValueChange,
@@ -134,6 +143,18 @@ export function CheckboxGroup({
           })}
         >
           {label}
+          {required && (
+            <span
+              aria-label="옵션 필수"
+              className={css({
+                color: disabled ? "fg.neutral.disabled" : "fg.danger",
+                display: "inline",
+              })}
+            >
+              {" "}
+              *
+            </span>
+          )}
         </label>
         <div className={checkboxGroupStyles({ orientation })}>{children}</div>
       </div>
@@ -201,6 +222,7 @@ export function CheckboxItem({
     tone,
     disabled: groupDisabled,
     invalid: groupInvalid,
+    required: groupRequired,
     name,
     selectedValues,
     onValueChange,
@@ -221,6 +243,7 @@ export function CheckboxItem({
       disabled={isDisabled}
       invalid={!isDisabled && isInvalid}
       tone={tone}
+      required={groupRequired}
       onChange={handleChange}
     />
   );
