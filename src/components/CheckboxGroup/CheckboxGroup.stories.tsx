@@ -203,10 +203,12 @@ const ControlledCheckboxGroup = (
       />
       <div className={css({ marginTop: "20" })}>
         <p>현재 선택된 값: {values.join(", ")}</p>
-        <button onClick={() => setValues(["banana"])}>바나나만 선택</button>
-        <button onClick={() => setValues(["apple", "orange"])}>
-          사과와 오렌지 선택
-        </button>
+        <div className={css({ display: "flex", gap: "8", marginTop: "8" })}>
+          <button onClick={() => setValues(["banana"])}>바나나만 선택</button>
+          <button onClick={() => setValues(["apple", "orange"])}>
+            사과와 오렌지 선택
+          </button>
+        </div>
       </div>
     </div>
   );

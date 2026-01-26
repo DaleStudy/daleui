@@ -138,7 +138,7 @@ export function CheckboxGroup({
       <div className={checkboxGroupRootStyles}>
         <label
           className={css({
-            textStyle: "body.lg",
+            textStyle: "label.md.strong",
             marginBottom: "8",
           })}
         >
