@@ -31,7 +31,8 @@ const formatAreas = (areas: Areas | undefined): string | undefined => {
 };
 
 export interface GridProps
-  extends React.HTMLAttributes<HTMLElement>,
+  extends
+    React.HTMLAttributes<HTMLElement>,
     Partial<RecipeVariant<typeof gridVariants>> {
   /** 자식 요소들 (필수) */
   children: React.ReactNode;
@@ -100,12 +101,17 @@ export const Grid = ({
         }),
         css({
           gap,
-          gridTemplateAreas: formatAreas(areas),
-          gridTemplateColumns,
-          gridTemplateRows,
+          gridTemplateAreas: "var(--grid-template-areas)",
+          gridTemplateColumns: "var(--grid-template-columns)",
+          gridTemplateRows: "var(--grid-template-rows)",
         }),
         className,
       ),
+      style: {
+        "--grid-template-areas": formatAreas(areas),
+        "--grid-template-columns": gridTemplateColumns,
+        "--grid-template-rows": gridTemplateRows,
+      },
       ...props,
     },
     children,
@@ -217,16 +223,25 @@ export const GridItem = ({
     {
       className: cx(
         css({
-          gridColumn,
-          gridRow,
-          gridColumnStart,
-          gridRowStart,
-          gridColumnEnd,
-          gridRowEnd,
-          gridArea,
+          gridColumn: "var(--grid-column)",
+          gridRow: "var(--grid-row)",
+          gridColumnStart: "var(--grid-column-start)",
+          gridRowStart: "var(--grid-row-start)",
+          gridColumnEnd: "var(--grid-column-end)",
+          gridRowEnd: "var(--grid-row-end)",
+          gridArea: "var(--grid-area)",
         }),
         className,
       ),
+      style: {
+        "--grid-column": gridColumn,
+        "--grid-row": gridRow,
+        "--grid-column-start": gridColumnStart,
+        "--grid-row-start": gridRowStart,
+        "--grid-column-end": gridColumnEnd,
+        "--grid-row-end": gridRowEnd,
+        "--grid-area": gridArea,
+      },
       ...props,
     },
     children,
