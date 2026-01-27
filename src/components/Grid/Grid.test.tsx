@@ -36,24 +36,28 @@ describe("Grid 클래스 토큰 및 스타일", () => {
     expect(screen.getByTestId("grid-default")).toHaveClass("d_grid");
   });
 
-  test("gridTemplateColumns 적용 시 알맞은 클래스가 적용된다", () => {
+  test("gridTemplateColumns 적용 시 CSS 변수가 적용된다", () => {
     render(
       <Grid data-testid="grid-cols" gridTemplateColumns="repeat(3, 1fr)">
         <GridItem>child</GridItem>
       </Grid>,
     );
     const root = screen.getByTestId("grid-cols");
-    expect(root.className).toMatch(/grid-tc_repeat\(3,_1fr\)/i);
+    expect(root.style.getPropertyValue("--grid-template-columns")).toBe(
+      "repeat(3, 1fr)",
+    );
   });
 
-  test("gridTemplateRows 적용 시 알맞은 클래스가 적용된다", () => {
+  test("gridTemplateRows 적용 시 CSS 변수가 적용된다", () => {
     render(
       <Grid data-testid="grid-rows" gridTemplateRows="100px auto 1fr">
         <GridItem>child</GridItem>
       </Grid>,
     );
     const root = screen.getByTestId("grid-rows");
-    expect(root.className).toMatch(/grid-tr_100px_auto_1fr/i);
+    expect(root.style.getPropertyValue("--grid-template-rows")).toBe(
+      "100px auto 1fr",
+    );
   });
 
   const gaps = Object.keys(spacing || {}) as Spacing[];
@@ -66,7 +70,7 @@ describe("Grid 클래스 토큰 및 스타일", () => {
     expect(screen.getByTestId(`grid-gap-${gap}`)).toHaveClass(`gap_${gap}`);
   });
 
-  test("areas가 문자열로 전달되면 gridTemplateAreas 클래스가 적용된다", () => {
+  test("areas가 문자열로 전달되면 CSS 변수가 적용된다", () => {
     render(
       <Grid
         data-testid="grid-areas-string"
@@ -76,10 +80,12 @@ describe("Grid 클래스 토큰 및 스타일", () => {
       </Grid>,
     );
     const root = screen.getByTestId("grid-areas-string");
-    expect(root.className).toMatch(/grid-template-areas/);
+    expect(root.style.getPropertyValue("--grid-template-areas")).toBe(
+      '"header header" "sidebar main"',
+    );
   });
 
-  test("areas가 2차원 배열로 전달되면 변환되어 적용된다", () => {
+  test("areas가 2차원 배열로 전달되면 변환되어 CSS 변수가 적용된다", () => {
     render(
       <Grid
         data-testid="grid-areas-array"
@@ -92,17 +98,19 @@ describe("Grid 클래스 토큰 및 스타일", () => {
       </Grid>,
     );
     const root = screen.getByTestId("grid-areas-array");
-    expect(root.className).toMatch(/grid-template-areas/);
+    expect(root.style.getPropertyValue("--grid-template-areas")).toBe(
+      '"header header" "sidebar main"',
+    );
   });
 
-  test("areas가 undefined이면 gridTemplateAreas가 적용되지 않는다", () => {
+  test("areas가 undefined이면 CSS 변수가 적용되지 않는다", () => {
     render(
       <Grid data-testid="grid-no-areas">
         <GridItem>child</GridItem>
       </Grid>,
     );
     const root = screen.getByTestId("grid-no-areas");
-    expect(root.className).not.toMatch(/grid-template-areas/);
+    expect(root.style.getPropertyValue("--grid-template-areas")).toBe("");
   });
 
   type AutoFlow = GridProps["autoFlow"];
@@ -282,7 +290,7 @@ describe("GridItem 스타일", () => {
       </Grid>,
     );
     const item = screen.getByTestId("item-col");
-    expect(item.className).toMatch(/gc_span_2|grid-c/i);
+    expect(item.style.getPropertyValue("--grid-column")).toBe("span 2");
   });
 
   test("gridRow가 적용된다", () => {
@@ -294,7 +302,7 @@ describe("GridItem 스타일", () => {
       </Grid>,
     );
     const item = screen.getByTestId("item-row");
-    expect(item.className).toMatch(/gr_span_2|grid-r/i);
+    expect(item.style.getPropertyValue("--grid-row")).toBe("span 2");
   });
 
   test("gridColumnStart가 적용된다", () => {
@@ -306,7 +314,7 @@ describe("GridItem 스타일", () => {
       </Grid>,
     );
     const item = screen.getByTestId("item-col-start");
-    expect(item.className).toMatch(/gcs_1|grid-cs/i);
+    expect(item.style.getPropertyValue("--grid-column-start")).toBe("1");
   });
 
   test("gridColumnEnd가 적용된다", () => {
@@ -318,7 +326,7 @@ describe("GridItem 스타일", () => {
       </Grid>,
     );
     const item = screen.getByTestId("item-col-end");
-    expect(item.className).toMatch(/gce_3|grid-ce/i);
+    expect(item.style.getPropertyValue("--grid-column-end")).toBe("3");
   });
 
   test("gridRowStart가 적용된다", () => {
@@ -330,7 +338,7 @@ describe("GridItem 스타일", () => {
       </Grid>,
     );
     const item = screen.getByTestId("item-row-start");
-    expect(item.className).toMatch(/grid-row-start[_-]1/i);
+    expect(item.style.getPropertyValue("--grid-row-start")).toBe("1");
   });
 
   test("gridRowEnd가 적용된다", () => {
@@ -342,7 +350,7 @@ describe("GridItem 스타일", () => {
       </Grid>,
     );
     const item = screen.getByTestId("item-row-end");
-    expect(item.className).toMatch(/grid-row-end[_-]3/i);
+    expect(item.style.getPropertyValue("--grid-row-end")).toBe("3");
   });
 
   test("gridArea가 적용된다", () => {
@@ -354,7 +362,7 @@ describe("GridItem 스타일", () => {
       </Grid>,
     );
     const item = screen.getByTestId("item-area");
-    expect(item.className).toMatch(/ga_header|grid-a/i);
+    expect(item.style.getPropertyValue("--grid-area")).toBe("header");
   });
 
   test("className prop이 병합된다", () => {
