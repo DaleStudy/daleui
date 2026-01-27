@@ -1,41 +1,32 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Grid } from "./Grid";
+import { Grid, GridItem } from "./Grid";
 import { css } from "../../../styled-system/css";
 import { grid } from "../../../styled-system/patterns";
 import { spacing } from "../../tokens/spacing";
 
-const Item = ({
-  children,
-  color = "brand",
-}: {
-  children: React.ReactNode;
-  color?: "brand" | "secondary" | "tertiary";
-}) => {
-  const bgColors = {
-    brand: "bgSolid.brand",
-    secondary: "bgSolid.secondary",
-    tertiary: "bgSolid.tertiary",
-  } as const;
-  const fgColors = {
-    brand: "fgSolid.brand",
-    secondary: "fgSolid.secondary",
-    tertiary: "fgSolid.tertiary",
-  } as const;
-
-  return (
-    <div
-      className={css({
-        padding: "16",
-        backgroundColor: bgColors[color],
-        color: fgColors[color],
-        borderRadius: "md",
-        textAlign: "center",
-      })}
-    >
-      {children}
-    </div>
-  );
-};
+const itemBox = {
+  brand: css({
+    padding: "16",
+    backgroundColor: "bgSolid.brand",
+    color: "fgSolid.brand",
+    borderRadius: "md",
+    textAlign: "center",
+  }),
+  secondary: css({
+    padding: "16",
+    backgroundColor: "bgSolid.neutral",
+    color: "fgSolid.neutral",
+    borderRadius: "md",
+    textAlign: "center",
+  }),
+  tertiary: css({
+    padding: "16",
+    backgroundColor: "bgSolid.danger",
+    color: "fgSolid.danger",
+    borderRadius: "md",
+    textAlign: "center",
+  }),
+} as const;
 
 export default {
   component: Grid,
@@ -84,18 +75,18 @@ export default {
     className: css({ width: "600" }),
     children: (
       <>
-        <Item>1</Item>
-        <Item>2</Item>
-        <Item>3</Item>
-        <Item>4</Item>
-        <Item>5</Item>
-        <Item>6</Item>
-        <Item>7</Item>
-        <Item>8</Item>
-        <Item>9</Item>
-        <Item>10</Item>
-        <Item>11</Item>
-        <Item>12</Item>
+        <GridItem className={itemBox.brand}>1</GridItem>
+        <GridItem className={itemBox.brand}>2</GridItem>
+        <GridItem className={itemBox.brand}>3</GridItem>
+        <GridItem className={itemBox.brand}>4</GridItem>
+        <GridItem className={itemBox.brand}>5</GridItem>
+        <GridItem className={itemBox.brand}>6</GridItem>
+        <GridItem className={itemBox.brand}>7</GridItem>
+        <GridItem className={itemBox.brand}>8</GridItem>
+        <GridItem className={itemBox.brand}>9</GridItem>
+        <GridItem className={itemBox.brand}>10</GridItem>
+        <GridItem className={itemBox.brand}>11</GridItem>
+        <GridItem className={itemBox.brand}>12</GridItem>
       </>
     ),
   },
@@ -133,9 +124,9 @@ export const Templates: Story = {
     className: css({ width: "500" }),
     children: (
       <>
-        <Item>1</Item>
-        <Item>2</Item>
-        <Item>3</Item>
+        <GridItem className={itemBox.brand}>1</GridItem>
+        <GridItem className={itemBox.brand}>2</GridItem>
+        <GridItem className={itemBox.brand}>3</GridItem>
       </>
     ),
   },
@@ -171,27 +162,17 @@ export const GridItemSpan: Story = {
       gap="8"
       className={css({ width: "400" })}
     >
-      <div className={css({ gridColumn: "span 2" })}>
-        <Item color="brand">gridColumn: span 2</Item>
-      </div>
-      <div>
-        <Item color="secondary">1</Item>
-      </div>
-      <div>
-        <Item color="secondary">2</Item>
-      </div>
-      <div className={css({ gridRow: "span 2" })}>
-        <Item color="tertiary">gridRow: span 2</Item>
-      </div>
-      <div>
-        <Item color="secondary">3</Item>
-      </div>
-      <div>
-        <Item color="secondary">4</Item>
-      </div>
-      <div>
-        <Item color="secondary">5</Item>
-      </div>
+      <GridItem gridColumn="span 2" className={itemBox.brand}>
+        gridColumn: span 2
+      </GridItem>
+      <GridItem className={itemBox.brand}>1</GridItem>
+      <GridItem className={itemBox.brand}>2</GridItem>
+      <GridItem gridRow="span 2" className={itemBox.brand}>
+        gridRow: span 2
+      </GridItem>
+      <GridItem className={itemBox.brand}>3</GridItem>
+      <GridItem className={itemBox.brand}>4</GridItem>
+      <GridItem className={itemBox.brand}>5</GridItem>
     </Grid>
   ),
   args: {
@@ -201,51 +182,40 @@ export const GridItemSpan: Story = {
 
 export const GridItemPosition: Story = {
   render: (args) => (
-    <Grid
-      {...args}
-      gridTemplateColumns="repeat(4, 1fr)"
-      gridTemplateRows="repeat(3, 1fr)"
-      gap="8"
-      className={css({ width: "400", height: "300" })}
-    >
-      <div
-        className={css({
-          gridColumnStart: "1",
-          gridColumnEnd: "3",
-          gridRowStart: "1",
-          gridRowEnd: "2",
-        })}
+    <Grid {...args} gap="8" className={css({ width: "400", height: "300" })}>
+      <GridItem
+        gridColumnStart="1"
+        gridColumnEnd="3"
+        gridRowStart="1"
+        gridRowEnd="2"
+        className={itemBox.brand}
       >
-        <Item color="brand">gridColumnStart: 1, gridColumnEnd: 3</Item>
-      </div>
-      <div
-        className={css({
-          gridColumnStart: "3",
-          gridColumnEnd: "5",
-          gridRowStart: "1",
-          gridRowEnd: "3",
-        })}
+        gridColumnStart: 1, gridColumnEnd: 3
+      </GridItem>
+      <GridItem
+        gridColumnStart="3"
+        gridColumnEnd="5"
+        gridRowStart="1"
+        gridRowEnd="3"
+        className={itemBox.secondary}
       >
-        <Item color="secondary">
-          gridColumnStart: 3, gridColumnEnd: 5, gridRowStart: 1, gridRowEnd: 3
-        </Item>
-      </div>
-      <div
-        className={css({
-          gridColumnStart: "1",
-          gridColumnEnd: "3",
-          gridRowStart: "2",
-          gridRowEnd: "4",
-        })}
+        gridColumnStart: 3, gridColumnEnd: 5, gridRowStart: 1, gridRowEnd: 3
+      </GridItem>
+      <GridItem
+        gridColumnStart="1"
+        gridColumnEnd="3"
+        gridRowStart="3"
+        gridRowEnd="4"
+        className={itemBox.tertiary}
       >
-        <Item color="tertiary">
-          gridColumnStart: 1, gridColumnEnd: 3, gridRowStart: 2, gridRowEnd: 4
-        </Item>
-      </div>
+        gridColumnStart: 1, gridColumnEnd: 3, gridRowStart: 3, gridRowEnd: 4
+      </GridItem>
     </Grid>
   ),
   args: {
     children: undefined,
+    gridTemplateColumns: "repeat(4, 1fr)",
+    gridTemplateRows: "repeat(3, 1fr)",
   },
 };
 
@@ -263,18 +233,18 @@ export const AreasWithArray: Story = {
       gap="8"
       className={css({ width: "400", height: "300" })}
     >
-      <div className={css({ gridArea: "header" })}>
-        <Item color="brand">Header</Item>
-      </div>
-      <div className={css({ gridArea: "sidebar" })}>
-        <Item color="secondary">Sidebar</Item>
-      </div>
-      <div className={css({ gridArea: "main" })}>
-        <Item color="tertiary">Main</Item>
-      </div>
-      <div className={css({ gridArea: "footer" })}>
-        <Item color="brand">Footer</Item>
-      </div>
+      <GridItem gridArea="header" className={itemBox.brand}>
+        Header
+      </GridItem>
+      <GridItem gridArea="sidebar" className={itemBox.secondary}>
+        Sidebar
+      </GridItem>
+      <GridItem gridArea="main" className={itemBox.tertiary}>
+        Main
+      </GridItem>
+      <GridItem gridArea="footer" className={itemBox.brand}>
+        Footer
+      </GridItem>
     </Grid>
   ),
   args: {
@@ -314,9 +284,9 @@ export const JustifyItems: Story = {
     className: css({ width: "400" }),
     children: (
       <>
-        <Item>1</Item>
-        <Item>2</Item>
-        <Item>3</Item>
+        <GridItem className={itemBox.brand}>1</GridItem>
+        <GridItem className={itemBox.brand}>2</GridItem>
+        <GridItem className={itemBox.brand}>3</GridItem>
       </>
     ),
   },
@@ -353,9 +323,9 @@ export const AlignItems: Story = {
     className: css({ width: "300", height: "120" }),
     children: (
       <>
-        <Item>1</Item>
-        <Item>2</Item>
-        <Item>3</Item>
+        <GridItem className={itemBox.brand}>1</GridItem>
+        <GridItem className={itemBox.brand}>2</GridItem>
+        <GridItem className={itemBox.brand}>3</GridItem>
       </>
     ),
   },

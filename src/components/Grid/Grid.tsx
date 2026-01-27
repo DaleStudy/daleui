@@ -101,9 +101,9 @@ export const Grid = ({
         }),
         css({
           gap,
-          gridTemplateAreas: "var(--grid-template-areas)",
-          gridTemplateColumns: "var(--grid-template-columns)",
-          gridTemplateRows: "var(--grid-template-rows)",
+          gridTemplateAreas: "var(--grid-template-areas, none)",
+          gridTemplateColumns: "var(--grid-template-columns, none)",
+          gridTemplateRows: "var(--grid-template-rows, none)",
         }),
         className,
       ),
@@ -218,30 +218,34 @@ export const GridItem = ({
 }: GridItemProps) => {
   const Component = as;
 
+  // 유효하지 않은 css 변수가 주어질 때 auto로 처리하지 않도록 null 체크
+  const placementStyle = {
+    ...(gridColumn != null && { "--grid-column": gridColumn }),
+    ...(gridRow != null && { "--grid-row": gridRow }),
+    ...(gridColumnStart != null && { "--grid-column-start": gridColumnStart }),
+    ...(gridRowStart != null && { "--grid-row-start": gridRowStart }),
+    ...(gridColumnEnd != null && { "--grid-column-end": gridColumnEnd }),
+    ...(gridRowEnd != null && { "--grid-row-end": gridRowEnd }),
+    ...(gridArea != null && { "--grid-area": gridArea }),
+  };
+
+  const placementCss = {
+    ...(gridColumn != null && { gridColumn: "var(--grid-column)" }),
+    ...(gridRow != null && { gridRow: "var(--grid-row)" }),
+    ...(gridColumnStart != null && {
+      gridColumnStart: "var(--grid-column-start)",
+    }),
+    ...(gridRowStart != null && { gridRowStart: "var(--grid-row-start)" }),
+    ...(gridColumnEnd != null && { gridColumnEnd: "var(--grid-column-end)" }),
+    ...(gridRowEnd != null && { gridRowEnd: "var(--grid-row-end)" }),
+    ...(gridArea != null && { gridArea: "var(--grid-area)" }),
+  };
+
   return React.createElement(
     Component,
     {
-      className: cx(
-        css({
-          gridColumn: "var(--grid-column)",
-          gridRow: "var(--grid-row)",
-          gridColumnStart: "var(--grid-column-start)",
-          gridRowStart: "var(--grid-row-start)",
-          gridColumnEnd: "var(--grid-column-end)",
-          gridRowEnd: "var(--grid-row-end)",
-          gridArea: "var(--grid-area)",
-        }),
-        className,
-      ),
-      style: {
-        "--grid-column": gridColumn,
-        "--grid-row": gridRow,
-        "--grid-column-start": gridColumnStart,
-        "--grid-row-start": gridRowStart,
-        "--grid-column-end": gridColumnEnd,
-        "--grid-row-end": gridRowEnd,
-        "--grid-area": gridArea,
-      },
+      className: cx(css(placementCss), className),
+      style: placementStyle,
       ...props,
     },
     children,
