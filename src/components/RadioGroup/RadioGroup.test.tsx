@@ -234,7 +234,7 @@ describe("Radio", () => {
   test.each([
     ["neutral", "bd-c_slate.9"],
     ["brand", "bd-c_slate.9"],
-    ["danger", "bd-c_slate.9"],
+    ["danger", "bd-c_fg.danger"],
     ["warning", "bd-c_slate.9"],
     ["success", "bd-c_slate.9"],
     ["info", "bd-c_slate.9"],
@@ -250,5 +250,179 @@ describe("Radio", () => {
 
     // 모든 tone에서 일반 상태에는 slate.9 사용
     expect(indicator).toHaveClass(className);
+  });
+});
+
+describe("RadioGroup invalid", () => {
+  test("invalid prop이 없을 때 aria-invalid='false'", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group">
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    const radio = screen.getByLabelText("Option 1");
+    expect(radio).toHaveAttribute("aria-invalid", "false");
+  });
+
+  test("invalid={true}일 때 aria-invalid='true'", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" invalid>
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    const radio = screen.getByLabelText("Option 1");
+    expect(radio).toHaveAttribute("aria-invalid", "true");
+  });
+
+  test("invalid={false}일 때 aria-invalid='false'", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" invalid={false}>
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    const radio = screen.getByLabelText("Option 1");
+    expect(radio).toHaveAttribute("aria-invalid", "false");
+  });
+
+  test("invalid와 disabled를 함께 사용할 수 있다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" invalid disabled>
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    const radio = screen.getByLabelText("Option 1");
+    expect(radio).toHaveAttribute("aria-invalid", "true");
+    expect(radio).toBeDisabled();
+  });
+
+  test("invalid 상태에서도 선택 기능이 정상 동작한다", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+
+    render(
+      <RadioGroup
+        name="test"
+        label="Test Radio Group"
+        invalid
+        onChange={onChange}
+      >
+        <Radio value="option1">Option 1</Radio>
+        <Radio value="option2">Option 2</Radio>
+      </RadioGroup>,
+    );
+
+    const option1 = screen.getByLabelText("Option 1");
+    await user.click(option1);
+
+    expect(onChange).toHaveBeenCalledWith("option1");
+    expect(option1).toBeChecked();
+  });
+
+  test("invalid 상태일 때 danger 색상 스타일이 적용된다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" invalid>
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    const circle = screen.getByRole("presentation", { hidden: true });
+    expect(circle).toHaveClass("bd-c_fg.danger");
+  });
+});
+
+describe("RadioGroup required", () => {
+  test("required={true}이면 필수 표시(*)가 렌더링된다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" required>
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    const indicator = screen.getByTestId("radiogroup-required-indicator");
+    expect(indicator).toBeInTheDocument();
+    expect(indicator).toHaveTextContent("*");
+  });
+
+  test("required={false}이면 필수 표시가 없다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" required={false}>
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    expect(
+      screen.queryByTestId("radiogroup-required-indicator"),
+    ).not.toBeInTheDocument();
+  });
+
+  test("required prop이 없으면 필수 표시가 없다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group">
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    expect(
+      screen.queryByTestId("radiogroup-required-indicator"),
+    ).not.toBeInTheDocument();
+  });
+
+  test("required와 disabled가 함께 있으면 비활성화 색상이 적용된다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" required disabled>
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    const indicator = screen.getByTestId("radiogroup-required-indicator");
+    expect(indicator).toHaveClass("c_fg.neutral.disabled");
+  });
+
+  test("required만 있으면 danger 색상이 적용된다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" required>
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    const indicator = screen.getByTestId("radiogroup-required-indicator");
+    expect(indicator).toHaveClass("c_fg.danger");
+  });
+
+  test("required prop이 없을 때 aria-required='false'", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group">
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    const radio = screen.getByLabelText("Option 1");
+    expect(radio).toHaveAttribute("aria-required", "false");
+  });
+
+  test("required={true}일 때 aria-required='true'", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" required>
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    const radio = screen.getByLabelText("Option 1");
+    expect(radio).toHaveAttribute("aria-required", "true");
+  });
+
+  test("required={false}일 때 aria-required='false'", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" required={false}>
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    const radio = screen.getByLabelText("Option 1");
+    expect(radio).toHaveAttribute("aria-required", "false");
   });
 });

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { css } from "../../../styled-system/css";
 import { Radio, RadioGroup } from "./RadioGroup";
+import { VStack } from "../VStack/VStack";
 
 export default {
   component: RadioGroup,
@@ -209,4 +210,85 @@ export const Controlled = () => {
       </div>
     </div>
   );
+};
+
+export const Invalid: Story = {
+  render: (args) => {
+    return (
+      <VStack gap="32">
+        <RadioGroup
+          {...args}
+          name="invalid-unselected"
+          label="에러 상태 (선택 없음)"
+          invalid
+        />
+
+        <RadioGroup
+          {...args}
+          name="invalid-selected"
+          label="에러 상태 (선택됨)"
+          invalid
+          defaultValue="banana"
+        />
+
+        <RadioGroup
+          {...args}
+          name="normal"
+          label="정상 상태 (비교용)"
+          defaultValue="apple"
+        />
+      </VStack>
+    );
+  },
+  argTypes: {
+    name: {
+      control: false,
+    },
+    label: {
+      control: false,
+    },
+    invalid: {
+      control: false,
+    },
+    defaultValue: {
+      control: false,
+    },
+  },
+};
+
+export const Required: Story = {
+  render: (args) => {
+    return (
+      <VStack gap="32">
+        <RadioGroup
+          {...args}
+          name="required-normal"
+          label="필수 입력"
+          required
+        />
+
+        <RadioGroup
+          {...args}
+          name="required-disabled"
+          label="필수 입력 (비활성화)"
+          required
+          disabled
+        />
+      </VStack>
+    );
+  },
+  argTypes: {
+    name: {
+      control: false,
+    },
+    label: {
+      control: false,
+    },
+    required: {
+      control: false,
+    },
+    disabled: {
+      control: false,
+    },
+  },
 };
