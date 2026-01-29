@@ -72,7 +72,12 @@ export const Default: Story = {};
 /**
  * `defaultValue` prop을 사용하여 초기값을 설정할 수 있습니다.
  */
-export const WithDefaultValue: Story = {
+export const Uncontrolled: Story = {
+  render: (args) => (
+    <div className={css({ w: "280px" })}>
+      <Select {...args} />
+    </div>
+  ),
   argTypes: {
     defaultValue: {
       control: false,

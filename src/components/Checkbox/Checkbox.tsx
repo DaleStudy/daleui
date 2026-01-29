@@ -24,7 +24,7 @@ export interface CheckboxProps {
   tone?: Tone;
   /** 필수 입력 표시 (라벨 옆에 * 표시) */
   required?: boolean;
-  /** 체크 상태 변경 시 호출되는 콜백 */
+  /** 체크 상태 변경 시 호출되는 콜백 (controlled 모드) */
   onChange?: (checked: boolean) => void;
 }
 
