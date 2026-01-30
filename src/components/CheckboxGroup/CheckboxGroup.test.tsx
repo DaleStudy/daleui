@@ -261,9 +261,43 @@ describe("CheckboxGroup", () => {
     expect(option1).toBeChecked();
     expect(option2).toBeChecked();
   });
+
+  test("required가 true일 때 라벨 옆에 별표를 표시한다", () => {
+    render(
+      <CheckboxGroup name="test" label="Test Checkbox Group" required>
+        <CheckboxItem value="option1">Option 1</CheckboxItem>
+      </CheckboxGroup>,
+    );
+
+    const asterisk = screen.getByLabelText("옵션 필수");
+    expect(asterisk).toBeInTheDocument();
+    expect(asterisk).toHaveTextContent("*");
+  });
+
+  test("required가 true이고 disabled가 true일 때 별표 색상이 변경된다", () => {
+    render(
+      <CheckboxGroup name="test" label="Test Checkbox Group" required disabled>
+        <CheckboxItem value="option1">Option 1</CheckboxItem>
+      </CheckboxGroup>,
+    );
+
+    const asterisk = screen.getByLabelText("옵션 필수");
+    expect(asterisk).toBeInTheDocument();
+    expect(asterisk).toHaveTextContent("*");
+  });
 });
 
 describe("CheckboxItem", () => {
+  test("CheckboxGroup 없이 사용하면 에러를 던진다", () => {
+    const renderCheckboxItemAlone = () => {
+      render(<CheckboxItem value="option1">Option 1</CheckboxItem>);
+    };
+
+    expect(renderCheckboxItemAlone).toThrow(
+      "CheckboxItem 컴포넌트는 CheckboxGroup 내부에서만 사용해야 합니다.",
+    );
+  });
+
   test("여러 체크박스를 독립적으로 선택할 수 있다", async () => {
     const user = userEvent.setup();
 
