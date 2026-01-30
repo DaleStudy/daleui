@@ -76,9 +76,7 @@ export const GroupDisabled: Story = {
 export const ItemDisabled: Story = {
   render: () => {
     return (
-      <div
-        className={css({ display: "flex", flexDirection: "column", gap: "32" })}
-      >
+      <VStack gap="32">
         <CheckboxGroup
           name="disabled-checked"
           label="개별 아이템 비활성화 (선택됨)"
@@ -102,7 +100,7 @@ export const ItemDisabled: Story = {
           </CheckboxItem>
           <CheckboxItem value="orange">오렌지</CheckboxItem>
         </CheckboxGroup>
-      </div>
+      </VStack>
     );
   },
 };
@@ -110,9 +108,7 @@ export const ItemDisabled: Story = {
 export const Tones: Story = {
   render: (args) => {
     return (
-      <div
-        className={css({ display: "flex", flexDirection: "column", gap: "32" })}
-      >
+      <VStack gap="32">
         <CheckboxGroup
           {...args}
           name="neutral-tone"
@@ -160,7 +156,7 @@ export const Tones: Story = {
           defaultValues={["apple"]}
           tone="info"
         />
-      </div>
+      </VStack>
     );
   },
 };
@@ -168,9 +164,7 @@ export const Tones: Story = {
 export const Invalid: Story = {
   render: (args) => {
     return (
-      <div
-        className={css({ display: "flex", flexDirection: "column", gap: "32" })}
-      >
+      <VStack gap="32">
         <CheckboxGroup
           {...args}
           name="invalid-group"
@@ -183,7 +177,7 @@ export const Invalid: Story = {
           name="valid-group"
           label="정상 체크박스 그룹"
         />
-      </div>
+      </VStack>
     );
   },
 };
