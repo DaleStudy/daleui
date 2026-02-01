@@ -330,7 +330,7 @@ describe("RadioGroup invalid", () => {
     );
 
     const circle = screen.getByRole("presentation", { hidden: true });
-    expect(circle).toHaveClass("bd-c_fg.danger");
+    expect(circle).toHaveClass("bd-c_fg.danger!");
   });
 });
 

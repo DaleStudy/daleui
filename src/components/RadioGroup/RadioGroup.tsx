@@ -321,7 +321,7 @@ const radioCircleStyles = cva({
     disabled: {
       true: {
         borderColor: "fg.neutral.disabled!",
-        backgroundColor: "bg.neutral.disabled!"
+        backgroundColor: "bg.neutral.disabled!",
       },
     },
     invalid: {
