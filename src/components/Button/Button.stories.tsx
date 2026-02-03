@@ -15,6 +15,8 @@ export default {
     children: "시작하기",
     variant: "solid",
     size: "md",
+    tone: "brand",
+    type: "button",
     disabled: false,
     fullWidth: false,
     loading: false,
