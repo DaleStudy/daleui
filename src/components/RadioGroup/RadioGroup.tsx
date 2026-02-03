@@ -278,59 +278,43 @@ const radioCircleStyles = cva({
     "[data-state='checked'] &": {
       borderColor: "slate.9",
     },
+    "[data-focus-visible] &, [data-active] &": {
+      outline: "solid",
+      outlineWidth: "md",
+      outlineOffset: "2",
+    },
   },
   variants: {
     tone: {
       neutral: {
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "slate.9",
-          outlineOffset: "2",
         },
       },
       brand: {
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "border.brand.focus",
-          outlineOffset: "2",
         },
       },
       danger: {
         borderColor: "fg.danger",
-        "[data-state='checked'] &": {
-          borderColor: "fg.danger",
-        },
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "border.danger",
-          outlineOffset: "2",
         },
       },
       warning: {
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "border.warning",
-          outlineOffset: "2",
         },
       },
       success: {
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "border.success",
-          outlineOffset: "2",
         },
       },
       info: {
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "border.info",
-          outlineOffset: "2",
         },
       },
     },
@@ -338,23 +322,13 @@ const radioCircleStyles = cva({
       true: {
         borderColor: "fg.neutral.disabled!",
         backgroundColor: "bg.neutral.disabled!",
-        "[data-state='checked'] &": {
-          borderColor: "fg.neutral.disabled!",
-          backgroundColor: "bg.neutral.disabled!",
-        },
       },
     },
     invalid: {
       true: {
-        borderColor: "fg.danger",
-        "[data-state='checked'] &": {
-          borderColor: "fg.danger",
-        },
+        borderColor: "fg.danger!",
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
-          outlineColor: "border.danger",
-          outlineOffset: "2",
+          outlineColor: "border.danger!",
         },
       },
     },
@@ -367,10 +341,9 @@ const radioHoverStyles = cva({
     width: "6",
     height: "6",
     borderRadius: "full",
-    pointerEvents: "none",
     opacity: 0,
-    "[data-hover] &": {
-      opacity: 0.1,
+    _hover: {
+      opacity: 0.2,
     },
   },
   variants: {
@@ -389,10 +362,7 @@ const radioHoverStyles = cva({
     },
     invalid: {
       true: {
-        backgroundColor: "fg.danger",
-        "[data-hover] &": {
-          opacity: 0.2,
-        },
+        backgroundColor: "fg.danger!",
       },
     },
   },
@@ -400,7 +370,7 @@ const radioHoverStyles = cva({
 
 const labelTextStyles = cva({
   base: {
-    textStyle: "label.md",
+    textStyle: "label.md.strong",
   },
   variants: {
     disabled: {
