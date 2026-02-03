@@ -86,6 +86,15 @@
       ]
     },
     {
+      "login": "JJinuk",
+      "name": "최진욱",
+      "avatar_url": "https://avatars.githubusercontent.com/u/74299463?v=4",
+      "profile": "https://github.com/JJinuk",
+      "contributions": [
+        "projectManagement"
+      ]
+    },
+    {
       "login": "HowToBeAHappyBoy",
       "name": "서진혁 (Aka)",
       "avatar_url": "https://avatars.githubusercontent.com/u/30362922?v=4",
@@ -170,15 +179,6 @@
       "name": "Lyla (Minju) Park",
       "avatar_url": "https://avatars.githubusercontent.com/u/50537876?v=4",
       "profile": "https://lylamin.com/",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "JJinuk",
-      "name": "최진욱",
-      "avatar_url": "https://avatars.githubusercontent.com/u/74299463?v=4",
-      "profile": "https://github.com/JJinuk",
       "contributions": [
         "code"
       ]
