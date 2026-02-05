@@ -250,8 +250,8 @@ const RequiredCheckboxGroup = (
 };
 
 /**
- * `required` prop을 `true`로 설정하면 필수 입력임을 나타냅니다.
- * 라벨 옆에 * 표시가 나타나며, 폼 제출 시 최소 하나의 옵션을 선택해야 합니다.
+ * `required`는 그룹 전체의 필수 입력을 시각적으로 표시합니다.
+ * 실제 검증은 직접 구현해야 하며, 이 예제는 그 방법 중 하나를 보여줍니다.
  */
 export const Required: Story = {
   render: (args) => <RequiredCheckboxGroup {...args} />,

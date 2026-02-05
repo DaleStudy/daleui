@@ -269,9 +269,12 @@ describe("CheckboxGroup", () => {
       </CheckboxGroup>,
     );
 
-    const asterisk = screen.getByLabelText("옵션 필수");
+    const asterisk = screen.getByText("*");
     expect(asterisk).toBeInTheDocument();
-    expect(asterisk).toHaveTextContent("*");
+    expect(asterisk).toHaveAttribute("aria-hidden", "true");
+
+    const requiredText = screen.getByText("(필수)");
+    expect(requiredText).toBeInTheDocument();
   });
 
   test("required가 true이고 disabled가 true일 때 별표 색상이 변경된다", () => {
@@ -281,9 +284,12 @@ describe("CheckboxGroup", () => {
       </CheckboxGroup>,
     );
 
-    const asterisk = screen.getByLabelText("옵션 필수");
+    const asterisk = screen.getByText("*");
     expect(asterisk).toBeInTheDocument();
-    expect(asterisk).toHaveTextContent("*");
+    expect(asterisk).toHaveAttribute("aria-hidden", "true");
+
+    const requiredText = screen.getByText("(필수)");
+    expect(requiredText).toBeInTheDocument();
   });
 });
 

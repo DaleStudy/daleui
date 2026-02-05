@@ -7,7 +7,6 @@ const CheckboxGroupContext = createContext<{
   tone: Tone;
   disabled?: boolean;
   invalid?: boolean;
-  required?: boolean;
   name: string;
   selectedValues: string[];
   onValueChange: (value: string, checked: boolean) => void;
@@ -72,7 +71,7 @@ export interface CheckboxGroupProps {
   invalid?: boolean;
 
   /**
-   * 필수 입력 여부를 지정합니다. true일 경우 라벨 옆에 * 표시가 나타납니다.
+   * 그룹 전체의 필수 입력을 표시합니다. (라벨에 * 추가)
    * @default false
    */
   required?: boolean;
@@ -129,7 +128,6 @@ export function CheckboxGroup({
         tone,
         disabled,
         invalid,
-        required,
         name,
         selectedValues,
         onValueChange: handleValueChange,
@@ -144,16 +142,33 @@ export function CheckboxGroup({
         >
           {label}
           {required && (
-            <span
-              aria-label="옵션 필수"
-              className={css({
-                color: disabled ? "fg.neutral.disabled" : "fg.danger",
-                display: "inline",
-              })}
-            >
-              {" "}
-              *
-            </span>
+            <>
+              <span
+                className={css({
+                  color: disabled ? "fg.neutral.disabled" : "fg.danger",
+                  display: "inline",
+                })}
+                aria-hidden="true"
+              >
+                {" "}
+                *
+              </span>
+              <span
+                className={css({
+                  position: "absolute",
+                  width: "1px",
+                  height: "1px",
+                  padding: "0",
+                  margin: "-1px",
+                  overflow: "hidden",
+                  clip: "rect(0, 0, 0, 0)",
+                  whiteSpace: "nowrap",
+                  border: "0",
+                })}
+              >
+                (필수)
+              </span>
+            </>
           )}
         </label>
         <div className={checkboxGroupStyles({ orientation })}>{children}</div>
@@ -222,7 +237,6 @@ export function CheckboxItem({
     tone,
     disabled: groupDisabled,
     invalid: groupInvalid,
-    required: groupRequired,
     name,
     selectedValues,
     onValueChange,
@@ -243,7 +257,6 @@ export function CheckboxItem({
       disabled={isDisabled}
       invalid={!isDisabled && isInvalid}
       tone={tone}
-      required={groupRequired}
       onChange={handleChange}
     />
   );
