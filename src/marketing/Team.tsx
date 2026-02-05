@@ -263,6 +263,15 @@ const Members: TeamMember[] = [
     githubUrl: "https://github.com/jj5u",
     linkedinUrl: undefined,
   },
+  {
+    name: "조엘",
+    role: "PM",
+    flag: "🇰🇷",
+    location: "Seoul",
+    avatar: "https://avatars.githubusercontent.com/u/74299463?v=4",
+    githubUrl: "https://github.com/JJinuk",
+    linkedinUrl: undefined,
+  },
 ];
 
 export function Team({ members = Members }: TeamProps) {
