@@ -270,7 +270,7 @@ const Members: TeamMember[] = [
     location: "Seoul",
     avatar: "https://avatars.githubusercontent.com/u/74299463?v=4",
     githubUrl: "https://github.com/JJinuk",
-    linkedinUrl: undefined,
+    linkedinUrl: "https://www.linkedin.com/in/jinuk/",
   },
 ];
 
