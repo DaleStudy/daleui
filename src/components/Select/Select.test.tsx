@@ -46,7 +46,11 @@ describe("렌더링", () => {
 
   test("value와 defaultValue가 모두 제공되면 value가 우선적으로 적용된다", () => {
     render(
-      <Select value="react" defaultValue="vue" placeholder="라이브러리를 선택하세요">
+      <Select
+        value="react"
+        defaultValue="vue"
+        placeholder="라이브러리를 선택하세요"
+      >
         <option value="react">React</option>
         <option value="vue">Vue</option>
         <option value="svelte">Svelte</option>
@@ -54,7 +58,6 @@ describe("렌더링", () => {
     );
     expect(screen.getByRole("option", { name: "React" })).toBeInTheDocument();
   });
-
 
   test('value가 "" 일 때 placeholder가 표시된다', () => {
     render(

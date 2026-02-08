@@ -24,7 +24,6 @@ type Story = StoryObj<typeof PasswordInput>;
 // 기본 상태
 export const Default: Story = {};
 
-
 // 포커스 상태
 export const Focused: Story = {
   args: {
