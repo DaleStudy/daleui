@@ -3,8 +3,9 @@ import { cva, cx } from "../../../styled-system/css";
 import { Icon, type IconProps } from "../Icon/Icon";
 export interface TextInputProps extends Omit<
   ComponentPropsWithoutRef<"input">,
-  "size"
+  "size" | "value" | "defaultValue" | "onChange"
 > {
+  /** custom props */
   /** 오류 상태 여부 (true일 경우 danger 색상으로 표시됩니다) */
   invalid?: boolean;
   /** 필수 입력 여부 */
@@ -15,7 +16,17 @@ export interface TextInputProps extends Omit<
   trailingIcon?: IconProps["name"];
   /** 플레이스홀더 텍스트 */
   placeholder?: string;
+  /** 비활성화 여부 */
+  disabled?: boolean;
   id?: string;
+
+  /** native props */
+  /** 입력값 (controlled 모드) */
+  value?: string;
+  /** 초기 입력값 (uncontrolled 모드) */
+  defaultValue?: string;
+  /** 값이 변경될 때 호출되는 함수 */
+  onChange?: (value: string) => void;
   /** DOM 요소 참조 */
   ref?: Ref<HTMLInputElement>;
 }
@@ -28,10 +39,13 @@ export interface TextInputProps extends Omit<
 export function TextInput({
   invalid = false,
   required = false,
+  disabled = false,
   className,
   leadingIcon,
   trailingIcon,
-  disabled,
+  value,
+  defaultValue,
+  onChange,
   ref,
   ...rest
 }: TextInputProps) {
@@ -49,6 +63,12 @@ export function TextInput({
     );
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(onChange && typeof onChange === "function") {
+      onChange(e.target.value);
+    }
+  };
+
   return (
     <div
       className={cx(wrapperStyles({ invalid }), className)}
@@ -58,6 +78,8 @@ export function TextInput({
       <input
         className={inputStyles()}
         ref={ref}
+        {...(value !== undefined ? { value } : { defaultValue })}
+        onChange={handleChange}
         disabled={disabled}
         aria-invalid={invalid}
         aria-required={required}
