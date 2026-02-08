@@ -123,8 +123,7 @@ const ControlledTextInput = () => {
   const [value, setValue] = useState("");
   const [hasError, setHasError] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
+  const handleChange = (newValue: string) => {
     setValue(newValue);
 
     if (newValue.length > 0 && newValue.length < 10) {
@@ -164,5 +163,20 @@ export const Controlled: Story = {
     disabled: { control: false },
     placeholder: { control: false },
     value: { control: false },
+    onChange: { control: false },
+  },
+};
+
+/**
+ * `defaultValue` prop을 사용하여 초기값을 설정할 수 있습니다.
+ */
+export const Uncontrolled: Story = {
+  args: {
+    defaultValue: "초기값입니다",
+  },
+  argTypes: {
+    value: { control: false },
+    defaultValue: { control: false },
+    onChange: { control: false },
   },
 };
