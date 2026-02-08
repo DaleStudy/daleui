@@ -7,6 +7,8 @@ import type { Tone } from "../../tokens/colors";
 const RadioGroupContext = createContext<{
   tone: Tone;
   disabled?: boolean;
+  invalid?: boolean;
+  required?: boolean;
 } | null>(null);
 
 export interface RadioGroupProps {
@@ -60,6 +62,18 @@ export interface RadioGroupProps {
    * @default "neutral"
    */
   tone?: Tone;
+
+  /**
+   * 유효하지 않은 상태를 표시합니다.
+   * @default false
+   */
+  invalid?: boolean;
+
+  /**
+   * 필수 입력 표시를 합니다.
+   * @default false
+   */
+  required?: boolean;
 }
 
 /**
@@ -87,9 +101,11 @@ export function RadioGroup({
   disabled,
   orientation,
   tone = "neutral",
+  invalid = false,
+  required = false,
 }: RadioGroupProps) {
   return (
-    <RadioGroupContext.Provider value={{ tone, disabled }}>
+    <RadioGroupContext.Provider value={{ tone, disabled, invalid, required }}>
       <ArkRadioGroup.Root
         name={name}
         defaultValue={defaultValue}
@@ -108,6 +124,17 @@ export function RadioGroup({
           })}
         >
           {label}
+          {required && (
+            <span
+              data-testid="radiogroup-required-indicator"
+              className={css({
+                color: disabled ? "fg.neutral.disabled" : "fg.danger",
+              })}
+            >
+              {" "}
+              *
+            </span>
+          )}
         </ArkRadioGroup.Label>
         <div className={radioGroupStyles({ orientation })}>{children}</div>
       </ArkRadioGroup.Root>
@@ -170,13 +197,15 @@ export function Radio({ value, children, disabled, ref }: RadioProps) {
     throw new Error("Radio 컴포넌트는 RadioGroup 내부에서만 사용해야 합니다.");
   }
 
-  const { tone, disabled: groupDisabled } = context;
+  const { tone, disabled: groupDisabled, invalid, required } = context;
   const isDisabled = disabled || groupDisabled;
+  const showInvalid = !isDisabled && invalid;
 
   return (
     <ArkRadioGroup.Item
       value={value}
       disabled={isDisabled}
+      invalid={invalid}
       className={flex({
         alignItems: "center",
         gap: "8",
@@ -185,18 +214,39 @@ export function Radio({ value, children, disabled, ref }: RadioProps) {
     >
       <ArkRadioGroup.ItemControl className={radioWrapperStyles}>
         <div
-          className={radioCircleStyles({ tone, disabled: isDisabled })}
+          className={radioCircleStyles({
+            tone,
+            disabled: isDisabled,
+            invalid: showInvalid,
+          })}
           role="presentation"
         />
         <ArkRadioGroup.Indicator
-          className={radioDotStyles({ tone, disabled: isDisabled })}
+          className={radioDotStyles({
+            tone,
+            disabled: isDisabled,
+            invalid: showInvalid,
+          })}
         />
-        <div className={radioHoverStyles({ tone, disabled: isDisabled })} />
-        <ArkRadioGroup.ItemHiddenInput ref={ref} />
+        <div
+          className={radioHoverStyles({
+            tone,
+            disabled: isDisabled,
+            invalid: showInvalid,
+          })}
+        />
+        <ArkRadioGroup.ItemHiddenInput
+          ref={ref}
+          aria-invalid={invalid}
+          aria-required={required}
+        />
       </ArkRadioGroup.ItemControl>
       {children && (
         <ArkRadioGroup.ItemText
-          className={labelTextStyles({ disabled: isDisabled })}
+          className={labelTextStyles({
+            disabled: isDisabled,
+            invalid: showInvalid,
+          })}
         >
           {children}
         </ArkRadioGroup.ItemText>
@@ -228,55 +278,43 @@ const radioCircleStyles = cva({
     "[data-state='checked'] &": {
       borderColor: "slate.9",
     },
+    "[data-focus-visible] &, [data-active] &": {
+      outline: "solid",
+      outlineWidth: "md",
+      outlineOffset: "2",
+    },
   },
   variants: {
     tone: {
       neutral: {
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "slate.9",
-          outlineOffset: "2",
         },
       },
       brand: {
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "border.brand.focus",
-          outlineOffset: "2",
         },
       },
       danger: {
+        borderColor: "fg.danger",
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "border.danger",
-          outlineOffset: "2",
         },
       },
       warning: {
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "border.warning",
-          outlineOffset: "2",
         },
       },
       success: {
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "border.success",
-          outlineOffset: "2",
         },
       },
       info: {
         "[data-focus-visible] &, [data-active] &": {
-          outline: "solid",
-          outlineWidth: "md",
           outlineColor: "border.info",
-          outlineOffset: "2",
         },
       },
     },
@@ -284,9 +322,13 @@ const radioCircleStyles = cva({
       true: {
         borderColor: "fg.neutral.disabled!",
         backgroundColor: "bg.neutral.disabled!",
-        "[data-state='checked'] &": {
-          borderColor: "fg.neutral.disabled!",
-          backgroundColor: "bg.neutral.disabled!",
+      },
+    },
+    invalid: {
+      true: {
+        borderColor: "fg.danger!",
+        "[data-focus-visible] &, [data-active] &": {
+          outlineColor: "border.danger!",
         },
       },
     },
@@ -299,10 +341,9 @@ const radioHoverStyles = cva({
     width: "6",
     height: "6",
     borderRadius: "full",
-    pointerEvents: "none",
     opacity: 0,
-    "[data-hover] &": {
-      opacity: 0.1,
+    _hover: {
+      opacity: 0.2,
     },
   },
   variants: {
@@ -319,17 +360,27 @@ const radioHoverStyles = cva({
         display: "none",
       },
     },
+    invalid: {
+      true: {
+        backgroundColor: "fg.danger!",
+      },
+    },
   },
 });
 
 const labelTextStyles = cva({
   base: {
-    textStyle: "label.md",
+    textStyle: "label.md.strong",
   },
   variants: {
     disabled: {
       true: {
         color: "fg.neutral.disabled",
+      },
+    },
+    invalid: {
+      true: {
+        color: "fg.danger",
       },
     },
   },
@@ -363,6 +414,11 @@ const radioDotStyles = cva({
     disabled: {
       true: {
         backgroundColor: "fg.neutral.disabled!",
+      },
+    },
+    invalid: {
+      true: {
+        backgroundColor: "fg.danger",
       },
     },
   },

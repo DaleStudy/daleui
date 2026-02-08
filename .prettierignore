@@ -3,3 +3,6 @@ dist/
 
 # 이미지, 폰트, 바이너리
 *.svg
+
+# All Contributors
+.all-contributorsrc

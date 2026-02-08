@@ -137,176 +137,115 @@ const controlStyles = cva({
   base: {
     position: "relative",
     flexShrink: 0,
-    width: "16px",
-    height: "16px",
+    width: "4",
+    height: "4",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "transparent",
-    borderWidth: "2px",
+    borderWidth: "md",
     borderStyle: "solid",
     borderColor: "fg.neutral",
     borderRadius: "sm",
     transition: "all 0.2s",
     color: "transparent",
 
-    '&[data-state="checked"]': {
+    _checked: {
       color: "fg.neutral",
+    },
+    _before: {
+      content: '""',
+      position: "absolute",
+      width: "6",
+      height: "6",
+      borderRadius: "8",
+      opacity: 0,
+      left: "50%",
+      top: "50%",
+      transform: "translate(-50%, -50%)",
+      zIndex: -1,
+    },
+
+    _hover: {
+      _before: {
+        opacity: 0.2,
+      },
+    },
+    _active: {
+      _before: {
+        opacity: 0.2,
+      },
+    },
+
+    _focusVisible: {
+      outline: "solid",
+      outlineWidth: "lg",
+      outlineOffset: "2",
     },
   },
   variants: {
     tone: {
       brand: {
-        ".group:hover &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
-          backgroundColor: "fg.brand.hover",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
+        _hover: {
+          _before: {
+            backgroundColor: "fg.brand.hover",
+          },
         },
-        ".group:active &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
-          backgroundColor: "fg.brand.active",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
+        _active: {
+          _before: {
+            backgroundColor: "fg.brand.active",
+          },
         },
-        "&[data-focus-visible]": {
-          outline: "solid",
-          outlineWidth: "lg",
+        _focusVisible: {
           outlineColor: "border.brand.focus",
-          outlineOffset: "2",
         },
       },
       success: {
-        ".group:hover &::before, .group:active &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
+        _before: {
           backgroundColor: "fg.success",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
         },
-        "&[data-focus-visible]": {
-          outline: "solid",
-          outlineWidth: "lg",
+        _focusVisible: {
           outlineColor: "border.success",
-          outlineOffset: "2",
         },
       },
       warning: {
-        ".group:hover &::before, .group:active &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
+        _before: {
           backgroundColor: "fg.warning",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
         },
-        "&[data-focus-visible]": {
-          outline: "solid",
-          outlineWidth: "lg",
+        _focusVisible: {
           outlineColor: "border.warning",
-          outlineOffset: "2",
         },
       },
       info: {
-        ".group:hover &::before, .group:active &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
+        _before: {
           backgroundColor: "fg.info",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
         },
-        "&[data-focus-visible]": {
-          outline: "solid",
-          outlineWidth: "lg",
+        _focusVisible: {
           outlineColor: "border.info",
-          outlineOffset: "2",
         },
       },
       danger: {
         borderColor: "fg.danger",
-        ".group:hover &::before, .group:active &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
+        _before: {
           backgroundColor: "fg.danger",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
         },
-        "&[data-focus-visible]": {
-          outline: "solid",
-          outlineWidth: "lg",
+        _focusVisible: {
           outlineColor: "border.danger",
-          outlineOffset: "2",
         },
       },
       neutral: {
-        ".group:hover &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
-          backgroundColor: "fg.neutral.hover",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
+        _hover: {
+          _before: {
+            backgroundColor: "fg.neutral.hover",
+          },
         },
-        ".group:active &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
-          backgroundColor: "fg.neutral.active",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
+        _active: {
+          _before: {
+            backgroundColor: "fg.neutral.active",
+          },
         },
-        "&[data-focus-visible]": {
-          outline: "solid",
-          outlineWidth: "lg",
-          outlineColor: "border.neutral.active",
-          outlineOffset: "2",
+        _focusVisible: {
+          outlineColor: "border.neutral.active!",
         },
       },
     },
@@ -315,10 +254,10 @@ const controlStyles = cva({
         cursor: "not-allowed",
         borderColor: "fg.neutral.disabled",
         backgroundColor: "bg.neutral.disabled!",
-        ".group:hover &::before": {
+        _before: {
           display: "none",
         },
-        '&[data-state="checked"]': {
+        _checked: {
           color: "fg.neutral.disabled!",
         },
       },
@@ -326,27 +265,14 @@ const controlStyles = cva({
     invalid: {
       true: {
         borderColor: "fg.danger",
-        ".group:hover &::before": {
-          content: '""',
-          position: "absolute",
-          width: "26px",
-          height: "26px",
-          borderRadius: "8",
-          backgroundColor: "fg.danger",
-          opacity: 0.2,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: -1,
+        _before: {
+          backgroundColor: "fg.danger!",
         },
-        "&[data-focus-visible]": {
-          outline: "solid",
-          outlineWidth: "lg",
-          outlineColor: "border.danger",
-          outlineOffset: "2",
+        _focusVisible: {
+          outlineColor: "border.danger!",
         },
-        '&[data-state="checked"]': {
-          color: "fg.danger",
+        _checked: {
+          color: "fg.danger!",
         },
       },
     },
@@ -365,11 +291,7 @@ const indicatorStyles = cva({
 
 const labelStyles = cva({
   base: {
-    fontSize: "md",
-    fontWeight: "semibold",
-    lineHeight: "1.2",
-    color: "fg.neutral",
-    userSelect: "none",
+    textStyle: "label.md.strong",
   },
   variants: {
     disabled: {
