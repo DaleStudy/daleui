@@ -124,7 +124,7 @@ describe("TextInput", () => {
     await user.type(inputElement, "test");
     expect(inputElement).toHaveValue("testtest");
   });
-  
+
   test("defaultValue와 value가 모두 제공되면 value가 우선적으로 적용된다.", () => {
     render(<TextInput defaultValue="test" value="test2" />);
     const inputElement = screen.getByRole("textbox");

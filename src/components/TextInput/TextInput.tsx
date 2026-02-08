@@ -62,7 +62,7 @@ export function TextInput({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if(onChange && typeof onChange === "function") {
+    if (onChange && typeof onChange === "function") {
       onChange(e.target.value);
     }
   };
