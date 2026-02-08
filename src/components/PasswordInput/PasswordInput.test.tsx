@@ -55,14 +55,6 @@ test("입력 값을 받는다", async () => {
   expect(input.value).toBe("test123");
 });
 
-test("기본 값을 렌더링한다", () => {
-  render(<PasswordInput defaultValue="defaultPassword" />);
-  const input = screen.getByLabelText(/패스워드/, {
-    selector: "input",
-  }) as HTMLInputElement;
-  expect(input.value).toBe("defaultPassword");
-});
-
 test("disabled 상태를 올바르게 반영한다", () => {
   render(<PasswordInput disabled />);
   const input = screen.getByLabelText(/패스워드/, { selector: "input" });
@@ -132,4 +124,30 @@ test("키보드(Space/Enter)로 가시성을 토글할 수 있다", async () => 
   expect(input).toHaveAttribute("type", "text");
   await user.keyboard("{Enter}");
   expect(input).toHaveAttribute("type", "password");
+});
+
+test("제어 모드: value가 제공되면 올바르게 렌더링된다", () => {
+  render(<PasswordInput value="test123" />);
+  const input = screen.getByLabelText(/패스워드/, { selector: "input" });
+  expect(input).toHaveValue("test123");
+});
+
+test("비제어 모드: defaultValue 제공 후 올바르게 렌더링된다", () => {
+  render(<PasswordInput defaultValue="defaultPassword" />);
+  const input = screen.getByLabelText(/패스워드/, { selector: "input" });
+  expect(input).toHaveValue("defaultPassword");
+});
+
+test("비제어 모드: defaultValue 제공 후 사용자가 텍스트를 입력하면 value가 변경된다", async () => {
+  const user = userEvent.setup();
+  render(<PasswordInput defaultValue="test" />);
+  const input = screen.getByLabelText(/패스워드/, { selector: "input" });
+  await user.type(input, "123");
+  expect(input).toHaveValue("test123");
+});
+
+test("defaultValue와 value가 모두 제공되면 value가 우선적으로 적용된다", () => {
+  render(<PasswordInput defaultValue="default" value="controlled" />);
+  const input = screen.getByLabelText(/패스워드/, { selector: "input" });
+  expect(input).toHaveValue("controlled");
 });

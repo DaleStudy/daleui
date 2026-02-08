@@ -4,8 +4,9 @@ import { Icon } from "../Icon/Icon";
 
 export interface PasswordInputProps extends Omit<
   ComponentPropsWithoutRef<"input">,
-  "size" | "type"
+  "size" | "type" | "value" | "defaultValue" | "onChange"
 > {
+  /** custom props */
   /** 플레이스홀더 */
   placeholder?: string;
   /** 오류 상태 여부 (true면 위험 톤 적용 및 aria-invalid=true) */
@@ -14,6 +15,15 @@ export interface PasswordInputProps extends Omit<
   required?: boolean;
   /** 비활성화 여부 */
   disabled?: boolean;
+  id?: string;
+
+  /** native props */
+  /** 입력값 (controlled 모드) */
+  value?: string;
+  /** 초기 입력값 (uncontrolled 모드) */
+  defaultValue?: string;
+  /** 값이 변경될 때 호출되는 함수 */
+  onChange?: (value: string) => void;
   /** DOM 요소 참조 */
   ref?: Ref<HTMLInputElement>;
 }
@@ -28,6 +38,9 @@ export function PasswordInput({
   required = false,
   disabled = false,
   placeholder = "패스워드를 입력해주세요.",
+  value,
+  defaultValue,
+  onChange,
   ref,
   ...rest
 }: PasswordInputProps) {
@@ -36,6 +49,12 @@ export function PasswordInput({
   const toggleVisibility = () => {
     if (!disabled) {
       setIsVisible(!isVisible);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(onChange && typeof onChange === "function") {
+      onChange(e.target.value);
     }
   };
 
@@ -51,6 +70,8 @@ export function PasswordInput({
         placeholder={placeholder}
         disabled={disabled}
         className={inputStyles()}
+        {...(value !== undefined ? { value } : { defaultValue })}
+        onChange={handleChange}
         aria-label="패스워드"
         aria-invalid={invalid}
         aria-required={required}

@@ -24,12 +24,6 @@ type Story = StoryObj<typeof PasswordInput>;
 // 기본 상태
 export const Default: Story = {};
 
-// 패스워드가 입력된 상태
-export const WithPassword: Story = {
-  args: {
-    defaultValue: "password123",
-  },
-};
 
 // 포커스 상태
 export const Focused: Story = {
@@ -57,8 +51,7 @@ const ControlledPasswordInput = () => {
   const [value, setValue] = useState("");
   const [hasError, setHasError] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
+  const handleChange = (newValue: string) => {
     setValue(newValue);
 
     // 8자 미만이면 에러
@@ -104,5 +97,20 @@ export const Controlled: Story = {
     disabled: { control: false },
     placeholder: { control: false },
     value: { control: false },
+    onChange: { control: false },
+  },
+};
+
+/**
+ * `defaultValue` prop을 사용하여 초기값을 설정할 수 있습니다.
+ */
+export const Uncontrolled: Story = {
+  args: {
+    defaultValue: "password123",
+  },
+  argTypes: {
+    value: { control: false },
+    defaultValue: { control: false },
+    onChange: { control: false },
   },
 };
