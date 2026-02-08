@@ -20,9 +20,11 @@ export interface SelectProps extends HTMLAttributes<HTMLSelectElement> {
   defaultValue?: string;
 
   /** native props */
-  /** 선택된 값 */
+  /** 선택된 값 (controlled 모드) */
   value?: string;
-  /** 값이 변경될 때 호출되는 함수 */
+  /** 초기 선택값 (uncontrolled 모드) */
+  defaultValue?: string;
+  /** 값이 변경될 때 호출되는 함수 (controlled 모드) */
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   /** 비활성화 상태 */
   disabled?: boolean;
