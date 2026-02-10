@@ -46,7 +46,9 @@ export const Disabled: Story = {
   },
 };
 
-const ControlledPasswordInput = (args: React.ComponentProps<typeof PasswordInput>) => {
+const ControlledPasswordInput = (
+  args: React.ComponentProps<typeof PasswordInput>,
+) => {
   const [value, setValue] = useState("");
   const [hasError, setHasError] = useState(false);
 
