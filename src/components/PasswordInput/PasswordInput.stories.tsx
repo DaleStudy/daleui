@@ -46,7 +46,7 @@ export const Disabled: Story = {
   },
 };
 
-const ControlledPasswordInput = () => {
+const ControlledPasswordInput = (args: React.ComponentProps<typeof PasswordInput>) => {
   const [value, setValue] = useState("");
   const [hasError, setHasError] = useState(false);
 
@@ -66,8 +66,8 @@ const ControlledPasswordInput = () => {
       <PasswordInput
         value={value}
         onChange={handleChange}
-        placeholder="8자 이상 입력하세요..."
         invalid={hasError}
+        {...args}
       />
       <div className={css({ mt: "16", fontSize: "sm" })}>
         <p>현재 값 길이: {value.length}자</p>
@@ -90,13 +90,11 @@ const ControlledPasswordInput = () => {
  * `useState`와 함께 `value`, `onChange` prop을 사용하여 제어 컴포넌트로 만들 수 있습니다.
  */
 export const Controlled: Story = {
-  render: () => <ControlledPasswordInput />,
+  render: (args) => <ControlledPasswordInput {...args} />,
   argTypes: {
-    invalid: { control: false },
-    disabled: { control: false },
-    placeholder: { control: false },
     value: { control: false },
     onChange: { control: false },
+    defaultValue: { control: false },
   },
 };
 
