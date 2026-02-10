@@ -4,27 +4,27 @@ import { css } from "../../../styled-system/css";
 import { grid } from "../../../styled-system/patterns";
 import { spacing } from "../../tokens/spacing";
 
+const commonStyles = {
+  padding: "16",
+  borderRadius: "md",
+  textAlign: "center",
+};
+
 const itemBox = {
   brand: css({
-    padding: "16",
+    ...commonStyles,
     backgroundColor: "bgSolid.brand",
     color: "fgSolid.brand",
-    borderRadius: "md",
-    textAlign: "center",
   }),
   secondary: css({
-    padding: "16",
+    ...commonStyles,
     backgroundColor: "bgSolid.neutral",
     color: "fgSolid.neutral",
-    borderRadius: "md",
-    textAlign: "center",
   }),
   tertiary: css({
-    padding: "16",
+    ...commonStyles,
     backgroundColor: "bgSolid.danger",
     color: "fgSolid.danger",
-    borderRadius: "md",
-    textAlign: "center",
   }),
 } as const;
 
@@ -37,32 +37,13 @@ export default {
     children: { control: false },
     gridTemplateColumns: {
       control: "text",
-      description:
-        "열 템플릿 (예: 'repeat(3, 1fr)', '1fr 2fr 1fr', '100px auto 1fr')",
     },
     gridTemplateRows: {
       control: "text",
-      description: "행 템플릿 (예: 'repeat(2, 100px)', 'auto 1fr auto')",
     },
     gap: {
       control: "select",
       options: [undefined, ...Object.keys(spacing || {})],
-      description: "요소 간 간격",
-    },
-    autoFlow: {
-      description: "grid-auto-flow 설정",
-    },
-    justifyItems: {
-      description: "그리드 아이템의 인라인 축 정렬",
-    },
-    alignItems: {
-      description: "그리드 아이템의 블록 축 정렬",
-    },
-    justifyContent: {
-      description: "그리드 컨테이너의 인라인 축 정렬",
-    },
-    alignContent: {
-      description: "그리드 컨테이너의 블록 축 정렬",
     },
     areas: { control: false },
     className: { control: false },
@@ -75,18 +56,11 @@ export default {
     className: css({ width: "600" }),
     children: (
       <>
-        <GridItem className={itemBox.brand}>1</GridItem>
-        <GridItem className={itemBox.brand}>2</GridItem>
-        <GridItem className={itemBox.brand}>3</GridItem>
-        <GridItem className={itemBox.brand}>4</GridItem>
-        <GridItem className={itemBox.brand}>5</GridItem>
-        <GridItem className={itemBox.brand}>6</GridItem>
-        <GridItem className={itemBox.brand}>7</GridItem>
-        <GridItem className={itemBox.brand}>8</GridItem>
-        <GridItem className={itemBox.brand}>9</GridItem>
-        <GridItem className={itemBox.brand}>10</GridItem>
-        <GridItem className={itemBox.brand}>11</GridItem>
-        <GridItem className={itemBox.brand}>12</GridItem>
+        {Array.from({ length: 12 }, (_, index) => (
+          <GridItem key={index} className={itemBox.brand}>
+            {index + 1}
+          </GridItem>
+        ))}
       </>
     ),
   },
