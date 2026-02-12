@@ -52,3 +52,23 @@
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+## 후원하기 💖
+
+달레 UI가 여러분 프로젝트의 도움이 된다면, 후원을 고려해주세요.
+
+[![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-❤️-red?style=for-the-badge&logo=github)](https://github.com/sponsors/DaleStudy)
+
+### 왜 후원해야 하나요?
+
+- 활발한 개발 유지
+- 후원자를 위한 우선 지원
+- 로드맵 및 기능에 영향력 행사
+- 무료 오픈소스 유지 지원
+
+### 다른 도움 방법
+
+- ⭐ 리포지토리에 Star 주기
+- 🐛 버그 리포트
+- 💡 기능 제안
+- 📝 코드 기여
