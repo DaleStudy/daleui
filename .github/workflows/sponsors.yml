@@ -1,6 +1,9 @@
 name: Sponsors 💖
 
 on:
+  push:
+    branches:
+      - add-sponsor-section
   schedule:
     - cron: "0 0 * * 1"
   workflow_dispatch:
