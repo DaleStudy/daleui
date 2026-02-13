@@ -73,7 +73,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/69985950?v=4",
       "profile": "https://github.com/sseung30",
       "contributions": [
-        "design"
+        "design",
+        "doc"
       ]
     },
     {
@@ -82,7 +83,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/89135410?v=4",
       "profile": "https://github.com/jj5u",
       "contributions": [
-        "design"
+        "design",
+        "doc"
       ]
     },
     {
@@ -92,6 +94,16 @@
       "profile": "https://github.com/JJinuk",
       "contributions": [
         "projectManagement"
+      ]
+    },
+    {
+      "login": "SimYunSup",
+      "name": "Yunsup Sim(심윤섭)",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47362439?v=4",
+      "profile": "https://ones-to-watch.ethansup.net/",
+      "contributions": [
+        "code",
+        "doc"
       ]
     },
     {
@@ -179,15 +191,6 @@
       "name": "Lyla (Minju) Park",
       "avatar_url": "https://avatars.githubusercontent.com/u/50537876?v=4",
       "profile": "https://lylamin.com/",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "SimYunSup",
-      "name": "Yunsup Sim(심윤섭)",
-      "avatar_url": "https://avatars.githubusercontent.com/u/47362439?v=4",
-      "profile": "https://ones-to-watch.ethansup.net/",
       "contributions": [
         "code"
       ]
