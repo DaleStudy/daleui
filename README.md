@@ -44,6 +44,7 @@
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/bkidea"><img src="https://avatars.githubusercontent.com/u/201320266?v=4?s=100" width="100px;" alt="BK LEE"/><br /><sub><b>BK LEE</b></sub></a><br /><a href="#design-bkidea" title="Design">🎨</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/graycrisp"><img src="https://avatars.githubusercontent.com/u/51190669?v=4?s=100" width="100px;" alt="graycrisp"/><br /><sub><b>graycrisp</b></sub></a><br /><a href="#design-graycrisp" title="Design">🎨</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://lylamin.com/"><img src="https://avatars.githubusercontent.com/u/50537876?v=4?s=100" width="100px;" alt="Lyla (Minju) Park"/><br /><sub><b>Lyla (Minju) Park</b></sub></a><br /><a href="https://github.com/DaleStudy/daleui/commits?author=lylaminju" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://ones-to-watch.ethansup.net/"><img src="https://avatars.githubusercontent.com/u/47362439?v=4?s=100" width="100px;" alt="Yunsup Sim(심윤섭)"/><br /><sub><b>Yunsup Sim(심윤섭)</b></sub></a><br /><a href="https://github.com/DaleStudy/daleui/commits?author=SimYunSup" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
