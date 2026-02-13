@@ -57,8 +57,6 @@
 
 달레 UI가 여러분 프로젝트의 도움이 된다면, 후원을 고려해주세요.
 
-[![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-❤️-red?style=for-the-badge&logo=github)](https://github.com/sponsors/DaleStudy)
-
 <p align="center">
   <a href="https://github.com/sponsors/DaleStudy">
     <img src="./sponsorkit/sponsors.svg" alt="Sponsors" />
