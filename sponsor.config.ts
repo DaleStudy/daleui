@@ -9,16 +9,26 @@ export default defineConfig({
     {
       title: "Past Sponsors",
       monthlyDollars: -1,
-      preset: tierPresets.xs,
-    },
-    {
-      title: "Backers",
       preset: tierPresets.base,
     },
     {
       title: "Sponsors",
-      monthlyDollars: 10,
       preset: tierPresets.medium,
+    },
+    {
+      title: "Silver Sponsors",
+      monthlyDollars: 5,
+      preset: tierPresets.large,
+    },
+    {
+      title: "Silver Sponsors",
+      monthlyDollars: 10,
+      preset: tierPresets.large,
+    },
+    {
+      title: "Gold Sponsors",
+      monthlyDollars: 50,
+      preset: tierPresets.xl,
     },
   ],
   formats: ["svg"],
