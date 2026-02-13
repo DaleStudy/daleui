@@ -59,6 +59,12 @@
 
 [![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-❤️-red?style=for-the-badge&logo=github)](https://github.com/sponsors/DaleStudy)
 
+<p align="center">
+  <a href="https://github.com/sponsors/DaleStudy">
+    <img src="./sponsorkit/sponsors.svg" alt="Sponsors" />
+  </a>
+</p>
+
 ### 왜 후원해야 하나요?
 
 - 활발한 개발 유지

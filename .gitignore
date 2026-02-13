@@ -39,3 +39,7 @@ storybook-static
 ## Coverage
 coverage
 
+## SponsorKit
+sponsorkit/*.json
+sponsorkit/*.png
+
