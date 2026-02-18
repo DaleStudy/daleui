@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./public/newLogoWithText.svg" alt="달레 UI 로고" width="280" />
+</p>
+
 [![NPM Version](https://img.shields.io/npm/v/daleui)](https://www.npmjs.com/package/daleui)
 [![Chromatic 🎨](https://github.com/DaleStudy/daleui/actions/workflows/chromatic.yml/badge.svg)](https://github.com/DaleStudy/daleui/actions/workflows/chromatic.yml)
 [![Integration 🔀](https://github.com/DaleStudy/daleui/actions/workflows/integration.yml/badge.svg)](https://github.com/DaleStudy/daleui/actions/workflows/integration.yml)
@@ -11,6 +15,43 @@
 
 - [스토리북](https://main--675790d317ba346348aa3490.chromatic.com)
 - [위키](https://github.com/DaleStudy/daleui/wiki)
+
+## 설치 (Installation)
+
+React 18 또는 19 프로젝트에서 다음 패키지 매니저 중 하나로 설치합니다.
+
+```sh
+# with Bun
+$ bun add daleui
+
+# with npm
+$ npm install daleui
+
+# with Yarn
+$ yarn add daleui
+
+```
+
+앱 진입점(예: `main.tsx`, `App.tsx`)에서 스타일을 한 번에 불러옵니다.
+
+```tsx
+import "daleui/styles.css";
+```
+
+## Usage
+
+```tsx
+import { Button } from "daleui";
+
+export default () => (
+  <>
+    <Button size="md" tone="brand" type="button" variant="solid">
+      시작하기
+    </Button>
+    <TextInput placeholder="텍스트를 입력해주세요." />
+  </>
+);
+```
 
 ## Contributors ✨
 
