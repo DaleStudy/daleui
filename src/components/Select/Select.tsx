@@ -36,6 +36,7 @@ export interface SelectProps extends HTMLAttributes<HTMLSelectElement> {
 }
 
 /**
+ * 셀렉트는 미리 정의된 여러 옵션 중 하나를 사용자가 선택하도록 하기 위한 컴포넌트입니다.
  * - 네이티브 select 태그를 사용하는 Select 컴포넌트입니다.
  * - 여러 선택지 중 하나를 고를 때 사용하며, 화면 공간을 절약하고 옵션 목록을 펼쳤을 때만 표시하고 싶을 때 적합합니다.
  * - 선택지가 적은 경우(5개 이하)에는 대신 [RadioGroup](?path=/docs/components-radiogroup--docs) 컴포넌트 사용을 권장합니다.
