@@ -17,6 +17,8 @@ export interface SelectProps extends HTMLAttributes<HTMLSelectElement> {
   clearButtonName?: string;
   /** placeholder 텍스트 */
   placeholder?: string;
+  /** 초기 선택값 (비제어 모드) */
+  defaultValue?: string;
 
   /** native props */
   /** 선택된 값 */
@@ -63,22 +65,25 @@ export function Select({
   ...rest
 }: SelectProps) {
   const selectRef = useRef<HTMLSelectElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [hasValue, setHasValue] = useState<boolean>(!!(value || defaultValue));
-  const [overflowed, setOverflowed] = useState<boolean>(false);
   const [titleText, setTitleText] = useState<string>("");
+  const overflowed = titleText !== "";
 
   /**
    * 내부 ref(overflowed 상태를 확인)와 외부에서 ref를 주입할 경우 덮어쓰기 방지를 위한 함수입니다.
    */
-  const setRef = (node: HTMLSelectElement | null) => {
-    selectRef.current = node;
-    if (typeof ref === "function") {
-      ref(node);
-    } else if (ref) {
-      ref.current = node;
-    }
-  };
+  const setRef = useCallback(
+    (node: HTMLSelectElement | null) => {
+      selectRef.current = node;
+      if (typeof ref === "function") {
+        ref(node);
+      } else if (ref) {
+        ref.current = node;
+      }
+    },
+    [ref],
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (onChange) onChange(e);
@@ -99,16 +104,16 @@ export function Select({
     const availableWidth =
       selectElement.clientWidth - paddingLeft - paddingRight;
 
-    const canvas = canvasRef.current;
-    const context = canvas?.getContext("2d");
+    if (!canvasRef.current) {
+      canvasRef.current = document.createElement("canvas");
+    }
+    const context = canvasRef.current.getContext("2d");
     if (!context) return;
 
     context.font = `${computedStyle.fontSize} ${computedStyle.fontFamily}`;
     const textWidth = context.measureText(optionText).width;
 
-    const overflow = textWidth > availableWidth;
-    setOverflowed(overflow);
-    setTitleText(overflow ? optionText : "");
+    setTitleText(textWidth > availableWidth ? optionText : "");
   }, []);
 
   const handleClear = () => {
@@ -130,10 +135,6 @@ export function Select({
       checkOverflow();
     });
   };
-
-  useEffect(() => {
-    canvasRef.current = document.createElement("canvas");
-  }, []);
 
   useEffect(() => {
     const rafId = requestAnimationFrame(() => {
