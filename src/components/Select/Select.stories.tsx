@@ -179,11 +179,7 @@ const RequiredSelect = (args: React.ComponentProps<typeof Select>) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      noValidate
-      className={css({ spaceY: "16" })}
-    >
+    <form onSubmit={handleSubmit} noValidate className={css({ spaceY: "16" })}>
       <Select {...args} invalid={isInvalid} />
       {isInvalid && (
         <div className={css({ mt: "16", fontSize: "sm", color: "fg.danger" })}>
