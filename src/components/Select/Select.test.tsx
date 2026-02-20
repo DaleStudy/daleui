@@ -20,16 +20,6 @@ describe("렌더링", () => {
     expect(screen.getByText("라이브러리를 선택하세요")).toBeInTheDocument();
   });
 
-  test("placeholder가 올바르게 표시된다", () => {
-    render(
-      <Select placeholder="라이브러리를 선택하세요">
-        <option value="react">React</option>
-      </Select>,
-    );
-
-    expect(screen.getByText("라이브러리를 선택하세요")).toBeInTheDocument();
-  });
-
   test("defaultValue가 제공되면 해당 값을 선택한다", () => {
     render(
       <Select defaultValue="vue" placeholder="라이브러리를 선택하세요">
@@ -39,7 +29,8 @@ describe("렌더링", () => {
       </Select>,
     );
 
-    expect(screen.getByRole("option", { name: "Vue" })).toBeInTheDocument();
+    const select: HTMLSelectElement = screen.getByRole("combobox");
+    expect(select.value).toBe("vue");
   });
 
   test('value가 "" 일 때 placeholder가 표시된다', () => {
@@ -131,10 +122,10 @@ describe("사용자 액션", () => {
       </Select>,
     );
 
-    const select = screen.getByRole("combobox");
+    const select: HTMLSelectElement = screen.getByRole("combobox");
     await user.selectOptions(select, "react");
 
-    expect(screen.getByRole("option", { name: "React" })).toBeInTheDocument();
+    expect(select.value).toBe("react");
   });
 
   test("옵션 선택 시 onChange를 호출한다", async () => {
@@ -179,26 +170,6 @@ describe("사용자 액션", () => {
     expect(handleChange).not.toHaveBeenCalled();
   });
 
-  test("키보드로 옵션을 탐색할 수 있다", async () => {
-    const user = userEvent.setup();
-
-    render(
-      <Select placeholder="라이브러리를 선택하세요">
-        <option value="react">React</option>
-        <option value="vue">Vue</option>
-        <option value="svelte">Svelte</option>
-      </Select>,
-    );
-
-    const select = screen.getByRole("combobox");
-    select.focus();
-
-    await user.keyboard("{ArrowDown}");
-    await user.keyboard("{Enter}");
-
-    expect(screen.getByRole("option", { name: "React" })).toBeInTheDocument();
-  });
-
   test("여러 옵션을 순차적으로 선택할 수 있다", async () => {
     const user = userEvent.setup();
 
@@ -210,13 +181,13 @@ describe("사용자 액션", () => {
       </Select>,
     );
 
-    const select = screen.getByRole("combobox");
+    const select: HTMLSelectElement = screen.getByRole("combobox");
 
     await user.selectOptions(select, "react");
-    expect(screen.getByRole("option", { name: "React" })).toBeInTheDocument();
+    expect(select.value).toBe("react");
 
     await user.selectOptions(select, "vue");
-    expect(screen.getByRole("option", { name: "Vue" })).toBeInTheDocument();
+    expect(select.value).toBe("vue");
   });
 
   test("clear 버튼을 클릭하면 값이 초기화된다", async () => {
@@ -270,7 +241,8 @@ describe("사용자 액션", () => {
 
     render(<ControlledSelectTest />);
 
-    expect(screen.getByRole("option", { name: "React" })).toBeInTheDocument();
+    const select: HTMLSelectElement = screen.getByRole("combobox");
+    expect(select.value).toBe("react");
 
     const clearButton = screen.getByRole("button", {
       name: "clear",
@@ -278,7 +250,6 @@ describe("사용자 액션", () => {
     await user.click(clearButton);
 
     await waitFor(() => {
-      const select: HTMLSelectElement = screen.getByRole("combobox");
       expect(select.value).toBe("");
     });
     expect(screen.getByText("라이브러리를 선택하세요")).toBeInTheDocument();
@@ -364,13 +335,13 @@ describe("상태 관리", () => {
 
     render(<ControlledSelectTest />);
 
-    expect(screen.getByRole("option", { name: "React" })).toBeInTheDocument();
+    const select: HTMLSelectElement = screen.getByRole("combobox");
+    expect(select.value).toBe("react");
 
-    const select = screen.getByRole("combobox");
     await user.selectOptions(select, "vue");
 
     expect(handleChange).toHaveBeenCalledWith("vue");
-    expect(screen.getByRole("option", { name: "Vue" })).toBeInTheDocument();
+    expect(select.value).toBe("vue");
   });
 
   test("비제어 모드에서 정상적으로 동작한다", async () => {
@@ -384,12 +355,12 @@ describe("상태 관리", () => {
       </Select>,
     );
 
-    expect(screen.getByRole("option", { name: "React" })).toBeInTheDocument();
+    const select: HTMLSelectElement = screen.getByRole("combobox");
+    expect(select.value).toBe("react");
 
-    const select = screen.getByRole("combobox");
     await user.selectOptions(select, "vue");
 
-    expect(screen.getByRole("option", { name: "Vue" })).toBeInTheDocument();
+    expect(select.value).toBe("vue");
   });
 
   test("여러 Select 인스턴스가 독립적으로 동작한다", async () => {
@@ -416,15 +387,15 @@ describe("상태 관리", () => {
       </>,
     );
 
-    expect(screen.getByRole("option", { name: "React" })).toBeInTheDocument();
-    expect(screen.getByRole("option", { name: "Svelte" })).toBeInTheDocument();
-
     const select1: HTMLSelectElement = screen.getByRole("combobox", {
       name: "첫 번째 선택",
     });
     const select2: HTMLSelectElement = screen.getByRole("combobox", {
       name: "두 번째 선택",
     });
+
+    expect(select1.value).toBe("react");
+    expect(select2.value).toBe("svelte");
 
     await user.selectOptions(select1, "vue");
 
@@ -523,17 +494,6 @@ describe("접근성 및 기타", () => {
     );
     expect(vueOption).toBeDefined();
     expect(vueOption?.disabled).toBe(true);
-  });
-
-  test("select 엘리먼트가 렌더링된다", () => {
-    render(
-      <Select placeholder="라이브러리를 선택하세요">
-        <option value="react">React</option>
-      </Select>,
-    );
-
-    const select = screen.getByRole("combobox");
-    expect(select).toBeInstanceOf(HTMLSelectElement);
   });
 
   test("name이 제공되면 form 제출 시 올바른 값이 전달된다", () => {

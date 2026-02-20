@@ -2,7 +2,6 @@ import {
   type HTMLAttributes,
   type Ref,
   useCallback,
-  useEffect,
   useRef,
   useState,
 } from "react";
@@ -17,6 +16,8 @@ export interface SelectProps extends HTMLAttributes<HTMLSelectElement> {
   clearButtonName?: string;
   /** placeholder 텍스트 */
   placeholder?: string;
+  /** 초기 선택값 (비제어 모드) */
+  defaultValue?: string;
 
   /** native props */
   /** 선택된 값 */
@@ -36,6 +37,7 @@ export interface SelectProps extends HTMLAttributes<HTMLSelectElement> {
 }
 
 /**
+ * 셀렉트는 미리 정의된 여러 옵션 중 하나를 사용자가 선택하도록 하기 위한 컴포넌트입니다.
  * - 네이티브 select 태그를 사용하는 Select 컴포넌트입니다.
  * - 여러 선택지 중 하나를 고를 때 사용하며, 화면 공간을 절약하고 옵션 목록을 펼쳤을 때만 표시하고 싶을 때 적합합니다.
  * - 선택지가 적은 경우(5개 이하)에는 대신 [RadioGroup](?path=/docs/components-radiogroup--docs) 컴포넌트 사용을 권장합니다.
@@ -62,28 +64,10 @@ export function Select({
   ...rest
 }: SelectProps) {
   const selectRef = useRef<HTMLSelectElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [hasValue, setHasValue] = useState<boolean>(!!(value || defaultValue));
-  const [overflowed, setOverflowed] = useState<boolean>(false);
   const [titleText, setTitleText] = useState<string>("");
-
-  /**
-   * 내부 ref(overflowed 상태를 확인)와 외부에서 ref를 주입할 경우 덮어쓰기 방지를 위한 함수입니다.
-   */
-  const setRef = (node: HTMLSelectElement | null) => {
-    selectRef.current = node;
-    if (typeof ref === "function") {
-      ref(node);
-    } else if (ref) {
-      ref.current = node;
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (onChange) onChange(e);
-    setHasValue(!!e.target.value);
-    checkOverflow();
-  };
+  const overflowed = titleText !== "";
 
   const checkOverflow = useCallback(() => {
     const selectElement = selectRef.current;
@@ -98,17 +82,48 @@ export function Select({
     const availableWidth =
       selectElement.clientWidth - paddingLeft - paddingRight;
 
-    const canvas = canvasRef.current;
-    const context = canvas?.getContext("2d");
+    if (!canvasRef.current) {
+      canvasRef.current = document.createElement("canvas");
+    }
+    const context = canvasRef.current.getContext("2d");
     if (!context) return;
 
     context.font = `${computedStyle.fontSize} ${computedStyle.fontFamily}`;
     const textWidth = context.measureText(optionText).width;
 
-    const overflow = textWidth > availableWidth;
-    setOverflowed(overflow);
-    setTitleText(overflow ? optionText : "");
+    setTitleText(textWidth > availableWidth ? optionText : "");
   }, []);
+
+  /**
+   * 내부 ref(overflowed 상태를 확인)와 외부에서 ref를 주입할 경우 덮어쓰기 방지를 위한 함수입니다.
+   */
+  const setRef = useCallback(
+    (node: HTMLSelectElement) => {
+      let cleanup: () => void = () => {};
+      selectRef.current = node;
+      const observer = new ResizeObserver(() => {
+        checkOverflow();
+      });
+      observer.observe(node);
+      if (typeof ref === "function") {
+        // React 19+ cleanup support
+        cleanup = ref(node) ?? (() => {});
+      } else if (ref) {
+        ref.current = node;
+      }
+      return () => {
+        cleanup();
+        observer.disconnect();
+      };
+    },
+    [ref, checkOverflow],
+  );
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (onChange) onChange(e);
+    setHasValue(!!e.target.value);
+    checkOverflow();
+  };
 
   const handleClear = () => {
     const selectElement = selectRef.current;
@@ -129,25 +144,6 @@ export function Select({
       checkOverflow();
     });
   };
-
-  useEffect(() => {
-    canvasRef.current = document.createElement("canvas");
-  }, []);
-
-  useEffect(() => {
-    const rafId = requestAnimationFrame(() => {
-      checkOverflow();
-    });
-
-    const handleResize = () => {
-      checkOverflow();
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      cancelAnimationFrame(rafId);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [checkOverflow]);
 
   const showClearButton = !!(clearButtonName && !disabled && hasValue);
   const isUncontrolled = value === undefined;

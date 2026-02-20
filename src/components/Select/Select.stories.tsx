@@ -15,11 +15,17 @@ export default {
       url: "https://www.figma.com/design/mQ2ETYC6LXGOwVETov3CgO/Dale-UI-Kit?node-id=5152-7407&m=dev",
     },
   },
+  decorators: [
+    (Story) => (
+      <div className={css({ w: "280px" })}>
+        <Story />
+      </div>
+    ),
+  ],
   args: {
     disabled: false,
     required: false,
     invalid: false,
-    clearButtonName: undefined,
     placeholder: "국가를 선택하세요",
     "aria-label": "국가를 선택하세요",
     children: (
@@ -61,23 +67,12 @@ type Story = StoryObj<typeof Select>;
  * 가장 기본적인 Select 컴포넌트입니다.
  * placeholder를 통해 사용자에게 안내할 수 있습니다.
  */
-export const Default: Story = {
-  render: (args) => (
-    <div className={css({ w: "280px" })}>
-      <Select {...args} />
-    </div>
-  ),
-};
+export const Default: Story = {};
 
 /**
  * `defaultValue` prop을 사용하여 초기값을 설정할 수 있습니다.
  */
 export const WithDefaultValue: Story = {
-  render: (args) => (
-    <div className={css({ w: "280px" })}>
-      <Select {...args} />
-    </div>
-  ),
   argTypes: {
     defaultValue: {
       control: false,
@@ -90,7 +85,7 @@ export const WithDefaultValue: Story = {
     },
   },
   args: {
-    defaultValue: "vue",
+    defaultValue: "us",
   },
 };
 
@@ -98,7 +93,7 @@ const ControlledSelect = (args: React.ComponentProps<typeof Select>) => {
   const [value, setValue] = useState<string>("");
 
   return (
-    <div className={css({ w: "280px" })}>
+    <>
       <Select
         {...args}
         value={value}
@@ -107,7 +102,7 @@ const ControlledSelect = (args: React.ComponentProps<typeof Select>) => {
       <div className={css({ mt: "16", fontSize: "sm" })}>
         <p>선택된 값: {value || "없음"}</p>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -131,8 +126,8 @@ export const Controlled: Story = {
  */
 export const Disabled: Story = {
   render: (args) => (
-    <VStack gap="16" className={css({ w: "280px" })}>
-      <Select {...args} defaultValue="react" />
+    <VStack gap="16">
+      <Select {...args} defaultValue="kr" />
       <Select {...args} placeholder="비활성화된 선택" />
       <Select {...args} disabled={false} placeholder="일부 옵션을 disabled">
         <option value="ko">대한민국</option>
@@ -165,11 +160,6 @@ export const Invalid: Story = {
   args: {
     invalid: true,
   },
-  render: (args) => (
-    <div className={css({ w: "280px" })}>
-      <Select {...args} />
-    </div>
-  ),
   argTypes: {
     invalid: {
       control: false,
@@ -189,11 +179,7 @@ const RequiredSelect = (args: React.ComponentProps<typeof Select>) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      noValidate
-      className={css({ w: "280px", spaceY: "16" })}
-    >
+    <form onSubmit={handleSubmit} noValidate className={css({ spaceY: "16" })}>
       <Select {...args} invalid={isInvalid} />
       {isInvalid && (
         <div className={css({ mt: "16", fontSize: "sm", color: "fg.danger" })}>
@@ -226,11 +212,6 @@ export const Required: Story = {
  * `clearable` prop을 `true`로 설정하면 선택된 값이 있을 때 지우기 버튼이 표시됩니다.
  */
 export const Clearable: Story = {
-  render: (args) => (
-    <div className={css({ w: "280px" })}>
-      <Select {...args} />
-    </div>
-  ),
   argTypes: {
     clearButtonName: {
       control: false,
@@ -246,20 +227,18 @@ export const Clearable: Story = {
  * 텍스트가 너무 길 때 ellipsis 처리됩니다.
  */
 export const OverflowText: Story = {
-  render: (args) => (
-    <div className={css({ w: "280px" })}>
-      <Select {...args}>
+  args: {
+    placeholder: "오버플로우 처리가 제대로 되는지 확인할 수 있습니다.",
+    clearButtonName: "clear",
+    children: (
+      <>
         <option value="ko">
           대한민국은 동아시아에 위치한 국가로 수도는 서울입니다.
         </option>
         <option value="ca">
           캐나다는 북미 대륙에 위치한 국가로 수도는 오타와입니다.
         </option>
-      </Select>
-    </div>
-  ),
-  args: {
-    placeholder: "오버플로우 처리가 제대로 되는지 확인할 수 있습니다.",
-    clearButtonName: "clear",
+      </>
+    ),
   },
 };
