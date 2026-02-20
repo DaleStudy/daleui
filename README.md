@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./public/newLogoWithText.svg" alt="달레 UI 로고" width="280" />
+</p>
+
 [![NPM Version](https://img.shields.io/npm/v/daleui)](https://www.npmjs.com/package/daleui)
 [![Chromatic 🎨](https://github.com/DaleStudy/daleui/actions/workflows/chromatic.yml/badge.svg)](https://github.com/DaleStudy/daleui/actions/workflows/chromatic.yml)
 [![Integration 🔀](https://github.com/DaleStudy/daleui/actions/workflows/integration.yml/badge.svg)](https://github.com/DaleStudy/daleui/actions/workflows/integration.yml)
@@ -9,8 +13,59 @@
 
 🎨 달레 스터디의 디자인 시스템
 
+## 핵심가치 (Core values)
+
+- **모두를 위한 경험 설계** — 초보자부터 전문가까지 쉽게 채택할 수 있는 온보딩 경험
+- **명확성과 투명성** — 기술적 개념과 의사결정 과정을 명확하고 투명하게 전달
+- **일관성과 신뢰성** — 예측 가능하고 신뢰할 수 있는 컴포넌트와 패턴
+- **한국어 사용자 중심 설계** — 한국어 타이포그래피와 문화적 맥락에 최적화
+- **적응적 유연성** — 다양한 사용 시나리오에 맞는 유연한 아키텍처
+- **커뮤니티 중심 발전** — 오픈소스 정신에 입각한 참여와 기여
+
+## 문서 (Documentation)
+
 - [스토리북](https://main--675790d317ba346348aa3490.chromatic.com)
 - [위키](https://github.com/DaleStudy/daleui/wiki)
+
+## 설치 (Installation)
+
+React 프로젝트에서 다음 패키지 매니저 중 하나로 설치합니다.
+
+```sh
+# with Bun
+$ bun add daleui
+
+# with npm
+$ npm install daleui
+
+# with Yarn
+$ yarn add daleui
+
+# with pnpm
+$ pnpm add daleui
+
+```
+
+앱 진입점(예: `main.tsx`, `App.tsx`)에서 스타일을 한 번에 불러옵니다.
+
+```tsx
+import "daleui/styles.css";
+```
+
+## Usage
+
+```tsx
+import { Button } from "daleui";
+
+export default () => (
+  <>
+    <Button size="md" tone="brand" type="button" variant="solid">
+      시작하기
+    </Button>
+    <TextInput placeholder="텍스트를 입력해주세요." />
+  </>
+);
+```
 
 ## Contributors ✨
 
