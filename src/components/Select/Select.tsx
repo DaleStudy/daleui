@@ -2,7 +2,6 @@ import {
   type HTMLAttributes,
   type Ref,
   useCallback,
-  useEffect,
   useRef,
   useState,
 } from "react";
@@ -70,27 +69,6 @@ export function Select({
   const [titleText, setTitleText] = useState<string>("");
   const overflowed = titleText !== "";
 
-  /**
-   * 내부 ref(overflowed 상태를 확인)와 외부에서 ref를 주입할 경우 덮어쓰기 방지를 위한 함수입니다.
-   */
-  const setRef = useCallback(
-    (node: HTMLSelectElement | null) => {
-      selectRef.current = node;
-      if (typeof ref === "function") {
-        ref(node);
-      } else if (ref) {
-        ref.current = node;
-      }
-    },
-    [ref],
-  );
-
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (onChange) onChange(e);
-    setHasValue(!!e.target.value);
-    checkOverflow();
-  };
-
   const checkOverflow = useCallback(() => {
     const selectElement = selectRef.current;
     if (!selectElement) return;
@@ -116,6 +94,37 @@ export function Select({
     setTitleText(textWidth > availableWidth ? optionText : "");
   }, []);
 
+  /**
+   * 내부 ref(overflowed 상태를 확인)와 외부에서 ref를 주입할 경우 덮어쓰기 방지를 위한 함수입니다.
+   */
+  const setRef = useCallback(
+    (node: HTMLSelectElement) => {
+      let cleanup: () => void = () => {};
+      selectRef.current = node;
+      const observer = new ResizeObserver(() => {
+        checkOverflow();
+      });
+      observer.observe(node);
+      if (typeof ref === "function") {
+        // React 19+ cleanup support
+        cleanup = ref(node) ?? (() => {});
+      } else if (ref) {
+        ref.current = node;
+      }
+      return () => {
+        cleanup();
+        observer.disconnect();
+      };
+    },
+    [ref, checkOverflow],
+  );
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (onChange) onChange(e);
+    setHasValue(!!e.target.value);
+    checkOverflow();
+  };
+
   const handleClear = () => {
     const selectElement = selectRef.current;
     if (disabled || !selectElement) return;
@@ -135,21 +144,6 @@ export function Select({
       checkOverflow();
     });
   };
-
-  useEffect(() => {
-    const rafId = requestAnimationFrame(() => {
-      checkOverflow();
-    });
-
-    const handleResize = () => {
-      checkOverflow();
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      cancelAnimationFrame(rafId);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [checkOverflow]);
 
   const showClearButton = !!(clearButtonName && !disabled && hasValue);
   const isUncontrolled = value === undefined;
