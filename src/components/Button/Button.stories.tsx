@@ -31,7 +31,16 @@ export default {
   },
 } satisfies Meta<typeof Button>;
 
-export const Basic: StoryObj<typeof Button> = {};
+export const Basic: StoryObj<typeof Button> = {
+  render: (args) => {
+    return (
+      // full width를 명확히 보여주기 위해, 버튼을 감싸는 div에 테두리를 추가했습니다.
+      <div style={{ border: "2px dashed #ccc", width: "300px" }}>
+        <Button {...args} />
+      </div>
+    )
+  },
+};
 
 export const Tone: StoryObj<typeof Button> = {
   args: {
