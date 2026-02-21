@@ -82,7 +82,7 @@ export function Community() {
           })}
         >
           {communityCards.map((card) => (
-            <Card key={card.title} tone="brand">
+            <Card.Root key={card.title} tone="brand">
               <Card.Icon name={card.icon} />
               <Card.Body>
                 <Card.Title>{card.title}</Card.Title>
@@ -91,7 +91,7 @@ export function Community() {
               <Card.Link href={card.href} external>
                 {card.linkText}
               </Card.Link>
-            </Card>
+            </Card.Root>
           ))}
         </div>
       </VStack>

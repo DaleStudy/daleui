@@ -72,7 +72,7 @@ export function How() {
           })}
         >
           {CARDS.map((card) => (
-            <Card
+            <Card.Root
               key={card.title}
               tone="brand"
               className={css({
@@ -87,7 +87,7 @@ export function How() {
               <Card.Link href={card.link} external>
                 {card.linkText}
               </Card.Link>
-            </Card>
+            </Card.Root>
           ))}
         </div>
       </VStack>

@@ -75,7 +75,7 @@ export function Contribution() {
           })}
         >
           {contributionCards.map((card) => (
-            <Card
+            <Card.Root
               key={card.title}
               tone="brand"
               className={css({
@@ -90,7 +90,7 @@ export function Contribution() {
               <Card.Link href={card.href} external>
                 {card.linkText}
               </Card.Link>
-            </Card>
+            </Card.Root>
           ))}
         </div>
       </div>
