@@ -95,7 +95,7 @@ export default {
     },
   },
   render: (args) => (
-    <Card tone={args.tone} outline={args.outline}>
+    <Card.Root tone={args.tone} outline={args.outline}>
       <Card.Icon name={args.iconName} />
       <Card.Body>
         <Card.Title>{args.title}</Card.Title>
@@ -106,7 +106,7 @@ export default {
           {args.linkText}
         </Card.Link>
       )}
-    </Card>
+    </Card.Root>
   ),
 } satisfies Meta<CardStoryArgs>;
 
