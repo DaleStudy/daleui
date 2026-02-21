@@ -38,12 +38,11 @@ $ bun add daleui
 # with npm
 $ npm install daleui
 
-# with Yarn
-$ yarn add daleui
-
 # with pnpm
 $ pnpm add daleui
 
+# with Yarn
+$ yarn add daleui
 ```
 
 앱 진입점(예: `main.tsx`, `App.tsx`)에서 스타일을 한 번에 불러옵니다.
@@ -52,7 +51,7 @@ $ pnpm add daleui
 import "daleui/styles.css";
 ```
 
-## Usage
+## 사용법 (Usage)
 
 ```tsx
 import { Button } from "daleui";
@@ -67,7 +66,7 @@ export default () => (
 );
 ```
 
-## Contributors ✨
+## 기여 (Contribution)
 
 본 프로젝트는 [All Contributors](https://github.com/all-contributors/all-contributors) 관례에 따라 기여자분들의 공헌를 인정하고 감사를 표현하고 있습니다.
 
@@ -109,26 +108,13 @@ export default () => (
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-## 후원하기 💖
+## 응원 (Support)
 
-달레 UI가 여러분 프로젝트의 도움이 된다면, 후원을 고려해주세요.
+달레 UI가 여러분의 프로젝트에 도움이 되신다면 후원을 고려해주시면 감사하겠습니다. 💝
+저장소에 스타를 주시는 것도 더 많은 분들이 저희 커뮤니티를 찾는데 도움이 됩니다. ⭐
 
 <p align="center">
   <a href="https://github.com/sponsors/DaleStudy">
-    <img src="./sponsorkit/sponsors.svg" alt="Sponsors" />
+    <img src="https://raw.githubusercontent.com/DaleStudy/.github/main/sponsorkit/sponsors.svg" alt="Sponsors" />
   </a>
 </p>
-
-### 왜 후원해야 하나요?
-
-- 활발한 개발 유지
-- 후원자를 위한 우선 지원
-- 로드맵 및 기능에 영향력 행사
-- 무료 오픈소스 유지 지원
-
-### 다른 도움 방법
-
-- ⭐ 리포지토리에 Star 주기
-- 🐛 버그 리포트
-- 💡 기능 제안
-- 📝 코드 기여
