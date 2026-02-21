@@ -1,4 +1,4 @@
-import { existsSync, readdirSync } from "fs";
+import { readdirSync } from "fs";
 import { resolve } from "path";
 import { defineConfig } from "vite";
 import type { LibraryFormats } from "vite";
