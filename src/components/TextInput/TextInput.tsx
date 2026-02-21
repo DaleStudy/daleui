@@ -7,6 +7,8 @@ export interface TextInputProps extends Omit<
 > {
   /** 오류 상태 여부 (true일 경우 danger 색상으로 표시됩니다) */
   invalid?: boolean;
+  /** 필수 입력 여부 */
+  required?: boolean;
   /** 앞쪽 아이콘 이름 (아이콘 컴포넌트의 name 속성에 해당) */
   leadingIcon?: IconProps["name"];
   /** 뒤쪽 아이콘 이름 (아이콘 컴포넌트의 name 속성에 해당) */

@@ -10,6 +10,8 @@ export interface PasswordInputProps extends Omit<
   placeholder?: string;
   /** 오류 상태 여부 (true면 위험 톤 적용 및 aria-invalid=true) */
   invalid?: boolean;
+  /** 필수 입력 여부 */
+  required?: boolean;
   /** 비활성화 여부 */
   disabled?: boolean;
   /** DOM 요소 참조 */
