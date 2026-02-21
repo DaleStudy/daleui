@@ -1,11 +1,4 @@
-export {
-  Root,
-  Body,
-  Icon,
-  Title,
-  Description,
-  Link,
-} from "./Card.part";
+export { Root, Body, Icon, Title, Description, Link } from "./Card.part";
 
 export type {
   CardRootProps as RootProps,

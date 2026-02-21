@@ -16,7 +16,6 @@ export {
   type CardLinkProps,
 } from "./Card.part";
 
-
 /**
  * Card dot-notation export
  * - Card 컴포넌트의 하위 컴포넌트들을 dot-notation 방식으로 사용할 수 있도록 export하는 구문입니다.

@@ -25,7 +25,10 @@ const useCardContext = () => {
   }
   return context;
 };
-export interface CardRootProps extends Omit<HTMLAttributes<HTMLElement>, "style"> {
+export interface CardRootProps extends Omit<
+  HTMLAttributes<HTMLElement>,
+  "style"
+> {
   /** 색조 */
   tone?: Extract<Tone, "neutral" | "brand">;
   /** border 여부 */
@@ -51,7 +54,10 @@ export function Root({
     </CardContext.Provider>
   );
 }
-export interface CardBodyProps extends Omit<HTMLAttributes<HTMLDivElement>, "style"> {
+export interface CardBodyProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "style"
+> {
   children: ReactNode;
 }
 
@@ -73,11 +79,20 @@ export function Icon({ name, size = "lg", ...rest }: CardIconProps) {
   const { tone } = useCardContext();
   return (
     <div className={cx(iconContainerStyles())}>
-      <InnerIcon name={name} size={size} tone={tone} aria-label={name} {...rest} />
+      <InnerIcon
+        name={name}
+        size={size}
+        tone={tone}
+        aria-label={name}
+        {...rest}
+      />
     </div>
   );
 }
-export interface CardTitleProps extends Omit<HTMLAttributes<HTMLElement>, "style"> {
+export interface CardTitleProps extends Omit<
+  HTMLAttributes<HTMLElement>,
+  "style"
+> {
   children: ReactNode;
 }
 
