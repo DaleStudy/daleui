@@ -38,7 +38,7 @@ export const Basic: StoryObj<typeof Button> = {
       <div style={{ border: "2px dashed #ccc", width: "300px" }}>
         <Button {...args} />
       </div>
-    )
+    );
   },
 };
 
