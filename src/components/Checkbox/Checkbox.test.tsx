@@ -276,13 +276,19 @@ describe("상태 관리", () => {
     expect(checkbox).toBeChecked();
   });
 
-  test("비제어 모드: onChange가 없어도 체크박스가 동작한다.", async () => {
+  test("비제어 모드: defaultChecked가 없어도 체크박스가 동작한다.", async () => {
     const user = userEvent.setup();
     render(<Checkbox label="테스트" />);
     const checkbox = screen.getByRole("checkbox");
 
     expect(checkbox).not.toBeChecked();
     await user.click(checkbox);
+    expect(checkbox).toBeChecked();
+  });
+
+  test("defaultChecked와 checked가 모두 제공되면 checked가 우선적으로 적용된다.", () => {
+    render(<Checkbox label="테스트" defaultChecked={false} checked={true} />);
+    const checkbox = screen.getByRole("checkbox");
     expect(checkbox).toBeChecked();
   });
 });
