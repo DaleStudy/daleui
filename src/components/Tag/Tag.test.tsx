@@ -29,8 +29,7 @@ test("tone 속성을 올바르게 적용한다", () => {
 
 test("href가 있으면 a 태그로 렌더링된다", () => {
   render(<Tag href="https://example.com">링크 태그</Tag>);
-  const linkTag = screen.getByText("링크 태그");
-  expect(linkTag.tagName).toBe("A");
+  const linkTag = screen.getByRole("link", { name: "링크 태그" });
   expect(linkTag).toHaveAttribute("href", "https://example.com");
 });
 
@@ -42,12 +41,25 @@ test("link 태그에 href 속성을 올바르게 적용한다", () => {
   };
 
   render(<Tag {...tagProps} />);
-  const linkTag = screen.getByText("외부 링크 태그");
-  expect(linkTag.tagName).toBe("A");
+  const linkTag = screen.getByRole("link", { name: "외부 링크 태그" });
   expect(linkTag).toHaveAttribute("href", "https://example.com");
   expect(linkTag).toHaveAttribute("target", "_blank");
   // target=_blank일 때 보안 속성 자동 추가 확인
   expect(linkTag).toHaveAttribute("rel", "noopener noreferrer");
+});
+
+test("href + removable일 때 button이 a 태그 안에 중첩되지 않는다", () => {
+  render(
+    <Tag href="https://example.com" removable>
+      링크 + 제거 태그
+    </Tag>,
+  );
+
+  const link = screen.getByRole("link", { name: "링크 + 제거 태그" });
+  const removeButton = screen.getByLabelText("제거");
+
+  // button이 a 태그의 자식이 아닌 형제여야 한다
+  expect(link.contains(removeButton)).toBe(false);
 });
 
 test("removable 속성을 올바르게 적용한다", () => {
@@ -92,7 +104,7 @@ test("링크 태그가 올바르게 동작한다", async () => {
     </Tag>,
   );
 
-  const tag = screen.getByText("클릭 가능한 태그");
+  const tag = screen.getByRole("link", { name: "클릭 가능한 태그" });
   await user.click(tag);
   expect(handleClick).toHaveBeenCalledTimes(1);
 });

@@ -6,7 +6,7 @@ import {
   type ReactNode,
   useState,
 } from "react";
-import { cva } from "../../../styled-system/css";
+import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 import { Icon } from "../Icon/Icon";
 
@@ -76,26 +76,28 @@ export function Tag({
       target === "_blank" ? (propRel ?? "noopener noreferrer") : propRel;
 
     return (
-      <a
-        href={href}
-        target={target}
-        rel={rel}
-        className={styles({ tone, link: true })}
-        {...anchorRest}
-      >
-        {children}
+      <span className={styles({ tone, link: true })}>
+        <a
+          href={href}
+          target={target}
+          rel={rel}
+          className={linkOverlayStyles}
+          {...anchorRest}
+        >
+          {children}
+        </a>
         {removable && (
           <button
             type="button"
             onClick={handleRemoveClick}
             onKeyDown={handleRemoveKeyDown}
-            className={removeButtonStyles({ tone })}
+            className={removeButtonStyles({ tone, elevated: true })}
             aria-label="제거"
           >
             <Icon name="x" size="xs" />
           </button>
         )}
-      </a>
+      </span>
     );
   }
 
@@ -131,11 +133,6 @@ const styles = cva({
     textStyle: "label.sm",
     cursor: "default",
     transition: "0.2s",
-    "&:focus-visible": {
-      outlineWidth: "{borderWidths.lg}",
-      outlineColor: "border.brand.focus",
-      outlineOffset: "2",
-    },
   },
   variants: {
     tone: {
@@ -145,7 +142,7 @@ const styles = cva({
         "&:hover": {
           bg: "bgSolid.neutral.hover",
         },
-        "&:active": {
+        "&:has(a:active)": {
           bg: "bgSolid.neutral.active",
         },
       },
@@ -155,7 +152,7 @@ const styles = cva({
         "&:hover": {
           bg: "bgSolid.brand.hover",
         },
-        "&:active": {
+        "&:has(a:active)": {
           bg: "bgSolid.brand.active",
         },
       },
@@ -165,7 +162,7 @@ const styles = cva({
         "&:hover": {
           bg: "bgSolid.danger.hover",
         },
-        "&:active": {
+        "&:has(a:active)": {
           bg: "bgSolid.danger.active",
         },
       },
@@ -175,7 +172,7 @@ const styles = cva({
         "&:hover": {
           bg: "bgSolid.warning.hover",
         },
-        "&:active": {
+        "&:has(a:active)": {
           bg: "bgSolid.warning.active",
         },
       },
@@ -185,7 +182,7 @@ const styles = cva({
         "&:hover": {
           bg: "bgSolid.success.hover",
         },
-        "&:active": {
+        "&:has(a:active)": {
           bg: "bgSolid.success.active",
         },
       },
@@ -195,18 +192,40 @@ const styles = cva({
         "&:hover": {
           bg: "bgSolid.info.hover",
         },
-        "&:active": {
+        "&:has(a:active)": {
           bg: "bgSolid.info.active",
         },
       },
     },
     link: {
       true: {
+        position: "relative",
         cursor: "pointer",
         "&:hover": {
           textDecoration: "underline",
         },
       },
+    },
+  },
+});
+
+const linkOverlayStyles = css({
+  color: "inherit",
+  textDecoration: "inherit",
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    inset: "0",
+    borderRadius: "inherit",
+  },
+  "&:focus-visible": {
+    outline: "none",
+    "&::after": {
+      borderRadius: "full",
+      outlineWidth: "{borderWidths.lg}",
+      outlineColor: "border.brand.focus",
+      outlineOffset: "1px",
+      outlineStyle: "solid",
     },
   },
 });
@@ -226,7 +245,7 @@ const removeButtonStyles = cva({
     transition: "0.2s",
     "&:focus-visible": {
       outlineWidth: "{borderWidths.lg}",
-      outlineOffset: "2",
+      outlineOffset: "1px",
       outlineStyle: "solid",
     },
   },
@@ -238,6 +257,13 @@ const removeButtonStyles = cva({
       success: { "&:focus-visible": { outlineColor: "border.neutral.focus" } },
       info: { "&:focus-visible": { outlineColor: "border.neutral.focus" } },
       warning: { "&:focus-visible": { outlineColor: "border.brand.focus" } },
+    },
+    // elevated는 focus-visible 시 제거 버튼이 태그 뒤에 가려지는 문제를 해결하기 위한 스타일입니다.
+    elevated: {
+      true: {
+        position: "relative",
+        zIndex: 1,
+      },
     },
   },
 });
