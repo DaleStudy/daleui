@@ -68,7 +68,6 @@ export function PasswordInput({
         placeholder={placeholder}
         disabled={disabled}
         className={inputStyles()}
-        {...(value !== undefined ? { value } : { defaultValue })}
         onChange={handleChange}
         aria-label="패스워드"
         aria-invalid={invalid}
