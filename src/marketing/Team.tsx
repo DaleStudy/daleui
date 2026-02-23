@@ -166,7 +166,7 @@ function TeamCard({ member, isDark }: TeamCardProps) {
             href={githubUrl}
             external
             underline={false}
-            aria-label={`${name}의 GitHub 프로필`}
+            aria-label={`${name}의 깃허브 프로필`}
           >
             <Icon name={isDark ? "GithubDark" : "GithubLight"} size="sm" />
           </Link>
