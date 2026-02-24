@@ -3,7 +3,7 @@ import {
   type CheckboxCheckedChangeDetails,
 } from "@ark-ui/react/checkbox";
 import { Check } from "lucide-react";
-import React, { useState } from "react";
+import React from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 
@@ -50,32 +50,15 @@ export const Checkbox = ({
   required = false,
   onChange,
 }: CheckboxProps) => {
-  const isControlled = checked !== undefined;
-
-  // uncontrolled일 때만 내부 state 사용
-  const [internalChecked, setInternalChecked] = useState(
-    defaultChecked ?? false,
-  );
-
-  // 실제 사용할 값 (controlled면 prop, 아니면 내부 state)
-  const currentChecked = isControlled ? checked : internalChecked;
-
   const handleCheckedChange = (details: CheckboxCheckedChangeDetails) => {
-    const newChecked = details.checked === true;
-    if (!isControlled) {
-      setInternalChecked(newChecked);
-    }
-
-    if (onChange && typeof onChange === "function") {
-      onChange(newChecked);
-    }
+    onChange?.(details.checked === true);
   };
 
   return (
     <ArkCheckbox.Root
       name={name}
-      checked={currentChecked}
-      defaultChecked={isControlled ? undefined : defaultChecked}
+      checked={checked}
+      defaultChecked={defaultChecked}
       disabled={disabled}
       invalid={invalid}
       required={required}
