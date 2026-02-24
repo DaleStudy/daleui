@@ -18,6 +18,10 @@ export default {
   args: {
     name: "fruits",
     label: "좋아하는 과일을 선택하세요 (옵션 선택)",
+    disabled: false,
+    tone: "brand",
+    invalid: false,
+    required: false,
     children: (
       <>
         <CheckboxItem value="apple">사과</CheckboxItem>
@@ -213,6 +217,13 @@ const ControlledCheckboxGroup = (
  */
 export const Controlled: Story = {
   render: (args) => <ControlledCheckboxGroup {...args} />,
+  argTypes: {
+    name: { control: false },
+    label: { control: false },
+    defaultValues: { control: false },
+    values: { control: false },
+    onChange: { control: false },
+  },
 };
 
 const RequiredCheckboxGroup = (
