@@ -76,7 +76,8 @@ export function TextInput({
       <input
         className={inputStyles()}
         ref={ref}
-        {...(value !== undefined ? { value } : { defaultValue })}
+        value={value}
+        defaultValue={defaultValue}
         onChange={handleChange}
         disabled={disabled}
         aria-invalid={invalid}
