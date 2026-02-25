@@ -16,8 +16,6 @@ export interface SelectProps extends HTMLAttributes<HTMLSelectElement> {
   clearButtonName?: string;
   /** placeholder 텍스트 */
   placeholder?: string;
-  /** 초기 선택값 (비제어 모드) */
-  defaultValue?: string;
 
   /** native props */
   /** 선택된 값 (controlled 모드) */
