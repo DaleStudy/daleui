@@ -4,7 +4,6 @@ import {
   type KeyboardEvent,
   type MouseEvent,
   type ReactNode,
-  useState,
 } from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
@@ -15,13 +14,14 @@ type BaseTagProps = {
   children: ReactNode;
   /** 태그의 색조 */
   tone?: Tone;
-  /** 제거 가능 여부 */
-  removable?: boolean;
+  /** `onRemove` 핸들러가 설정되면 제거 버튼(X)이 표시됩니다. */
+  onRemove?: () => void;
 };
 
 /** href가 있으면 자동으로 <a> 로 렌더링 */
 type TagAsLink = BaseTagProps &
   Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "style" | "children"> & {
+    /* 링크 태그(`<a>`) 또는 일반 태그(`<span>`)로 자동 선택됩니다. */
     href: string;
   };
 
@@ -33,34 +33,26 @@ type TagAsSpan = BaseTagProps &
 
 export type TagProps = TagAsLink | TagAsSpan;
 
-/**
- * - `tone` 색조를 지정합니다.
- * - `removable` 로 제거 가능한 태그를 만들 수 있습니다.
- * - `href` 유무로 링크 태그(`<a>`) 또는 일반 태그(`<span>`)로 자동 선택됩니다.
- */
 export function Tag({
   children,
   tone = "neutral",
-  removable = false,
   href,
+  onRemove,
   ...rest
 }: TagProps) {
-  const [isRemoved, setIsRemoved] = useState(false);
-
-  if (isRemoved) return null;
 
   const handleRemoveClick = (e: MouseEvent<HTMLButtonElement>) => {
     // 링크 클릭/네비게이션과 충돌 방지
     e.preventDefault();
     e.stopPropagation();
-    setIsRemoved(true);
+    onRemove?.();
   };
 
   const handleRemoveKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       e.stopPropagation();
-      setIsRemoved(true);
+      onRemove?.();
     }
   };
 
@@ -86,7 +78,7 @@ export function Tag({
         >
           {children}
         </a>
-        {removable && (
+        {onRemove && (
           <button
             type="button"
             onClick={handleRemoveClick}
@@ -106,7 +98,7 @@ export function Tag({
   return (
     <span className={styles({ tone, link: false })} {...spanRest}>
       {children}
-      {removable && (
+      {onRemove && (
         <button
           type="button"
           onClick={handleRemoveClick}
@@ -212,6 +204,7 @@ const styles = cva({
 const linkOverlayStyles = css({
   color: "inherit",
   textDecoration: "inherit",
+  // 링크 전체 영역을 클릭할 수 있도록 하는 오버레이 스타일
   "&::after": {
     content: '""',
     position: "absolute",
