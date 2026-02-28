@@ -40,7 +40,6 @@ export function Tag({
   onRemove,
   ...rest
 }: TagProps) {
-
   const handleRemoveClick = (e: MouseEvent<HTMLButtonElement>) => {
     // 링크 클릭/네비게이션과 충돌 방지
     e.preventDefault();

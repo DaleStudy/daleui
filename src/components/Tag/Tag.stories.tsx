@@ -46,7 +46,7 @@ export default {
     },
     onRemove: {
       control: false,
-    }
+    },
   },
   render: ({ removable, ...args }) => (
     <Tag {...args} onRemove={removable ? action("remove") : undefined} />
