@@ -37,6 +37,16 @@ export default defineConfig({
       output: {
         // 모든 CSS 자산을 하나의 파일로 만듭니다. (PandaCSS는 빌드타임에 css를 생성하기 떄문에)
         assetFileNames: "index.css",
+        // .part 파일이 포함된 chunk를 해당 컴포넌트 폴더 안에 배치합니다. (예: Card.part → components/Card/Card.part-[hash].js)
+        chunkFileNames(chunkInfo) {
+          for (const moduleId of chunkInfo.moduleIds) {
+            const match = moduleId.match(/src\/components\/(\w+)\/.*\.part\./);
+            if (match) {
+              return `components/${match[1]}/[name]-[hash].js`;
+            }
+          }
+          return "[name]-[hash].js";
+        },
       },
     },
     // public 디렉토리를 빌드 결과물에 복사하지 않습니다.

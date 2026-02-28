@@ -73,7 +73,7 @@ export function Mission() {
           })}
         >
           {CARDS.map((card) => (
-            <Card
+            <Card.Root
               key={card.title}
               tone="brand"
               className={css({
@@ -85,7 +85,7 @@ export function Mission() {
                 <Card.Title>{card.title}</Card.Title>
                 <Card.Description>{card.description}</Card.Description>
               </Card.Body>
-            </Card>
+            </Card.Root>
           ))}
         </div>
       </VStack>
