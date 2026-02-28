@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { vstack } from "../../../styled-system/patterns";
 import { Button } from "./Button";
+import { Icon } from "../Icon/Icon";
 
 export default {
   component: Button,
@@ -174,21 +175,27 @@ export const FullWidth: StoryObj<typeof Button> = {
   },
 };
 
-export const WithIcons: StoryObj<typeof Button> = {
+export const WithIcon: StoryObj<typeof Button> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
-        <Button {...args} leftIcon="star">
+        <Button {...args}>
+          <Icon name="star" size={args.size} />
           좌측 아이콘
         </Button>
-        <Button {...args} rightIcon="search">
+        <Button {...args}>
           우측 아이콘
+          <Icon name="search" size={args.size} />
         </Button>
-        <Button {...args} leftIcon="star" rightIcon="search">
+        <Button {...args}>
+          <Icon name="star" size={args.size} />
           양쪽 아이콘
+          <Icon name="search" size={args.size} />
         </Button>
-        <Button {...args} leftIcon="star" rightIcon="search" disabled>
+        <Button {...args} disabled>
+          <Icon name="star" size={args.size} />
           양쪽 아이콘 비활성화
+          <Icon name="search" size={args.size} />
         </Button>
       </div>
     );
