@@ -1,11 +1,11 @@
+import type React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { useState } from "react";
+import { action } from "storybook/actions";
+import type { TagProps } from "./Tag";
 import { css } from "../../../styled-system/css";
 import { hstack, vstack } from "../../../styled-system/patterns";
 import { Tag } from "./Tag";
-import type { TagProps } from "./Tag";
-import type React from "react";
-import { useState } from "react";
-import { action } from "storybook/actions";
 
 type StoryTagProps = {
   children: React.ReactNode;
@@ -138,54 +138,57 @@ export const Link: StoryObj<StoryTagProps> = {
   },
 };
 
-export const Removable: StoryObj<typeof Tag> = {
-  render: (args) => {
-    const [tags, setTags] = useState([
-      { id: 1, tone: "neutral", label: "제거 가능 태그" },
-      { id: 2, tone: "success", label: "제거 가능 + 성공 톤" },
-      { id: 3, tone: "danger", label: "제거 가능 + 위험 톤" },
-    ]);
+function RemovableExample(args: StoryTagProps) {
+  const [tags, setTags] = useState([
+    { id: 1, tone: "neutral", label: "제거 가능 태그" },
+    { id: 2, tone: "success", label: "제거 가능 + 성공 톤" },
+    { id: 3, tone: "danger", label: "제거 가능 + 위험 톤" },
+  ]);
 
-    const handleRemove = (id: number) => {
-      setTags((prev) => prev.filter((tag) => tag.id !== id));
-    };
-    return (
-      <div className={vstack({ gap: "16" })}>
-        <div>
-          <h3
-            className={css({
-              marginBottom: "8",
-              fontSize: "sm",
-              fontWeight: "semibold",
-            })}
-          >
-            제거 가능한 태그들 (X 버튼 클릭 시 제거됨)
-          </h3>
-          <div className={hstack({ gap: "8" })}>
-            {tags.map((tag) => (
-              <Tag
-                key={tag.id}
-                {...args}
-                tone={tag.tone as any}
-                onRemove={() => handleRemove(tag.id)}
-              >
-                {tag.label}
-              </Tag>
-            ))}
-          </div>
-          <p
-            className={css({
-              fontSize: "sm",
-              color: "fg.neutral",
-              marginTop: "8",
-            })}
-          >
-            각 태그의 X 버튼을 클릭하면 해당 태그가 제거됩니다.
-          </p>
+  const handleRemove = (id: number) => {
+    setTags((prev) => prev.filter((tag) => tag.id !== id));
+  };
+
+  return (
+    <div className={vstack({ gap: "16" })}>
+      <div>
+        <h3
+          className={css({
+            marginBottom: "8",
+            fontSize: "sm",
+            fontWeight: "semibold",
+          })}
+        >
+          제거 가능한 태그들 (X 버튼 클릭 시 제거됨)
+        </h3>
+        <div className={hstack({ gap: "8" })}>
+          {tags.map((tag) => (
+            <Tag
+              key={tag.id}
+              {...args}
+              tone={tag.tone as TagProps["tone"]}
+              onRemove={() => handleRemove(tag.id)}
+            >
+              {tag.label}
+            </Tag>
+          ))}
         </div>
+        <p
+          className={css({
+            fontSize: "sm",
+            color: "fg.neutral",
+            marginTop: "8",
+          })}
+        >
+          각 태그의 X 버튼을 클릭하면 해당 태그가 제거됩니다.
+        </p>
       </div>
-    );
-  },
+    </div>
+  );
+}
+
+export const Removable: StoryObj<typeof Tag> = {
+  render: (args) => <RemovableExample {...args} />,
   argTypes: {
     children: {
       control: false,
