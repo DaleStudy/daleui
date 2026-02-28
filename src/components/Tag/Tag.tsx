@@ -4,9 +4,8 @@ import {
   type KeyboardEvent,
   type MouseEvent,
   type ReactNode,
-  useState,
 } from "react";
-import { cva } from "../../../styled-system/css";
+import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 import { Icon } from "../Icon/Icon";
 
@@ -15,13 +14,14 @@ type BaseTagProps = {
   children: ReactNode;
   /** 태그의 색조 */
   tone?: Tone;
-  /** 제거 가능 여부 */
-  removable?: boolean;
+  /** `onRemove` 핸들러가 설정되면 제거 버튼(X)이 표시됩니다. */
+  onRemove?: () => void;
 };
 
 /** href가 있으면 자동으로 <a> 로 렌더링 */
 type TagAsLink = BaseTagProps &
   Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "style" | "children"> & {
+    /* 링크 태그(`<a>`) 또는 일반 태그(`<span>`)로 자동 선택됩니다. */
     href: string;
   };
 
@@ -33,34 +33,25 @@ type TagAsSpan = BaseTagProps &
 
 export type TagProps = TagAsLink | TagAsSpan;
 
-/**
- * - `tone` 색조를 지정합니다.
- * - `removable` 로 제거 가능한 태그를 만들 수 있습니다.
- * - `href` 유무로 링크 태그(`<a>`) 또는 일반 태그(`<span>`)로 자동 선택됩니다.
- */
 export function Tag({
   children,
   tone = "neutral",
-  removable = false,
   href,
+  onRemove,
   ...rest
 }: TagProps) {
-  const [isRemoved, setIsRemoved] = useState(false);
-
-  if (isRemoved) return null;
-
   const handleRemoveClick = (e: MouseEvent<HTMLButtonElement>) => {
     // 링크 클릭/네비게이션과 충돌 방지
     e.preventDefault();
     e.stopPropagation();
-    setIsRemoved(true);
+    onRemove?.();
   };
 
   const handleRemoveKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       e.stopPropagation();
-      setIsRemoved(true);
+      onRemove?.();
     }
   };
 
@@ -76,26 +67,28 @@ export function Tag({
       target === "_blank" ? (propRel ?? "noopener noreferrer") : propRel;
 
     return (
-      <a
-        href={href}
-        target={target}
-        rel={rel}
-        className={styles({ tone, link: true })}
-        {...anchorRest}
-      >
-        {children}
-        {removable && (
+      <span className={styles({ tone, link: true })}>
+        <a
+          href={href}
+          target={target}
+          rel={rel}
+          className={linkOverlayStyles}
+          {...anchorRest}
+        >
+          {children}
+        </a>
+        {onRemove && (
           <button
             type="button"
             onClick={handleRemoveClick}
             onKeyDown={handleRemoveKeyDown}
-            className={removeButtonStyles({ tone })}
+            className={removeButtonStyles({ tone, elevated: true })}
             aria-label="제거"
           >
             <Icon name="x" size="xs" />
           </button>
         )}
-      </a>
+      </span>
     );
   }
 
@@ -104,7 +97,7 @@ export function Tag({
   return (
     <span className={styles({ tone, link: false })} {...spanRest}>
       {children}
-      {removable && (
+      {onRemove && (
         <button
           type="button"
           onClick={handleRemoveClick}
@@ -131,11 +124,6 @@ const styles = cva({
     textStyle: "label.sm",
     cursor: "default",
     transition: "0.2s",
-    "&:focus-visible": {
-      outlineWidth: "{borderWidths.lg}",
-      outlineColor: "border.brand.focus",
-      outlineOffset: "2",
-    },
   },
   variants: {
     tone: {
@@ -145,7 +133,7 @@ const styles = cva({
         "&:hover": {
           bg: "bgSolid.neutral.hover",
         },
-        "&:active": {
+        "&:has(a:active)": {
           bg: "bgSolid.neutral.active",
         },
       },
@@ -155,7 +143,7 @@ const styles = cva({
         "&:hover": {
           bg: "bgSolid.brand.hover",
         },
-        "&:active": {
+        "&:has(a:active)": {
           bg: "bgSolid.brand.active",
         },
       },
@@ -165,7 +153,7 @@ const styles = cva({
         "&:hover": {
           bg: "bgSolid.danger.hover",
         },
-        "&:active": {
+        "&:has(a:active)": {
           bg: "bgSolid.danger.active",
         },
       },
@@ -175,7 +163,7 @@ const styles = cva({
         "&:hover": {
           bg: "bgSolid.warning.hover",
         },
-        "&:active": {
+        "&:has(a:active)": {
           bg: "bgSolid.warning.active",
         },
       },
@@ -185,7 +173,7 @@ const styles = cva({
         "&:hover": {
           bg: "bgSolid.success.hover",
         },
-        "&:active": {
+        "&:has(a:active)": {
           bg: "bgSolid.success.active",
         },
       },
@@ -195,18 +183,41 @@ const styles = cva({
         "&:hover": {
           bg: "bgSolid.info.hover",
         },
-        "&:active": {
+        "&:has(a:active)": {
           bg: "bgSolid.info.active",
         },
       },
     },
     link: {
       true: {
+        position: "relative",
         cursor: "pointer",
         "&:hover": {
           textDecoration: "underline",
         },
       },
+    },
+  },
+});
+
+const linkOverlayStyles = css({
+  color: "inherit",
+  textDecoration: "inherit",
+  // 링크 전체 영역을 클릭할 수 있도록 하는 오버레이 스타일
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    inset: "0",
+    borderRadius: "inherit",
+  },
+  "&:focus-visible": {
+    outline: "none",
+    "&::after": {
+      borderRadius: "full",
+      outlineWidth: "{borderWidths.lg}",
+      outlineColor: "border.brand.focus",
+      outlineOffset: "1px",
+      outlineStyle: "solid",
     },
   },
 });
@@ -226,7 +237,7 @@ const removeButtonStyles = cva({
     transition: "0.2s",
     "&:focus-visible": {
       outlineWidth: "{borderWidths.lg}",
-      outlineOffset: "2",
+      outlineOffset: "1px",
       outlineStyle: "solid",
     },
   },
@@ -238,6 +249,13 @@ const removeButtonStyles = cva({
       success: { "&:focus-visible": { outlineColor: "border.neutral.focus" } },
       info: { "&:focus-visible": { outlineColor: "border.neutral.focus" } },
       warning: { "&:focus-visible": { outlineColor: "border.brand.focus" } },
+    },
+    // elevated는 focus-visible 시 제거 버튼이 태그 뒤에 가려지는 문제를 해결하기 위한 스타일입니다.
+    elevated: {
+      true: {
+        position: "relative",
+        zIndex: 1,
+      },
     },
   },
 });

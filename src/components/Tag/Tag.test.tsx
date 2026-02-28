@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { useState } from "react";
 import { expect, test, vi } from "vitest";
 import { Tag } from "./Tag";
 import type { TagProps } from "./Tag";
@@ -29,8 +30,7 @@ test("tone 속성을 올바르게 적용한다", () => {
 
 test("href가 있으면 a 태그로 렌더링된다", () => {
   render(<Tag href="https://example.com">링크 태그</Tag>);
-  const linkTag = screen.getByText("링크 태그");
-  expect(linkTag.tagName).toBe("A");
+  const linkTag = screen.getByRole("link", { name: "링크 태그" });
   expect(linkTag).toHaveAttribute("href", "https://example.com");
 });
 
@@ -42,20 +42,33 @@ test("link 태그에 href 속성을 올바르게 적용한다", () => {
   };
 
   render(<Tag {...tagProps} />);
-  const linkTag = screen.getByText("외부 링크 태그");
-  expect(linkTag.tagName).toBe("A");
+  const linkTag = screen.getByRole("link", { name: "외부 링크 태그" });
   expect(linkTag).toHaveAttribute("href", "https://example.com");
   expect(linkTag).toHaveAttribute("target", "_blank");
   // target=_blank일 때 보안 속성 자동 추가 확인
   expect(linkTag).toHaveAttribute("rel", "noopener noreferrer");
 });
 
-test("removable 속성을 올바르게 적용한다", () => {
+test("href + onRemove일 때 button이 a 태그 안에 중첩되지 않는다", () => {
+  render(
+    <Tag href="https://example.com" onRemove={() => {}}>
+      링크 + 제거 태그
+    </Tag>,
+  );
+
+  const link = screen.getByRole("link", { name: "링크 + 제거 태그" });
+  const removeButton = screen.getByLabelText("제거");
+
+  // button이 a 태그의 자식이 아닌 형제여야 한다
+  expect(link.contains(removeButton)).toBe(false);
+});
+
+test("onRemove가 있으면 제거 버튼이 렌더링된다", () => {
   render(
     <div>
-      <Tag removable>제거 가능 태그 1</Tag>
-      <Tag removable>제거 가능 태그 2</Tag>
-      <Tag removable>제거 가능 태그 3</Tag>
+      <Tag onRemove={() => {}}>제거 가능 태그 1</Tag>
+      <Tag onRemove={() => {}}>제거 가능 태그 2</Tag>
+      <Tag onRemove={() => {}}>제거 가능 태그 3</Tag>
     </div>,
   );
 
@@ -68,10 +81,11 @@ test("removable 속성을 올바르게 적용한다", () => {
   });
 });
 
-test("제거 버튼이 올바르게 렌더링된다", async () => {
+test("제거 버튼 클릭 시 onRemove가 호출된다", async () => {
+  const handleRemove = vi.fn();
   const user = userEvent.setup();
   render(
-    <Tag tone="brand" removable>
+    <Tag tone="brand" onRemove={handleRemove}>
       제거 가능한 태그
     </Tag>,
   );
@@ -80,6 +94,7 @@ test("제거 버튼이 올바르게 렌더링된다", async () => {
   expect(removeButton).toBeInTheDocument();
   expect(removeButton).not.toHaveAttribute("tabIndex", "-1");
   await user.click(removeButton);
+  expect(handleRemove).toHaveBeenCalledTimes(1);
 });
 
 test("링크 태그가 올바르게 동작한다", async () => {
@@ -92,7 +107,7 @@ test("링크 태그가 올바르게 동작한다", async () => {
     </Tag>,
   );
 
-  const tag = screen.getByText("클릭 가능한 태그");
+  const tag = screen.getByRole("link", { name: "클릭 가능한 태그" });
   await user.click(tag);
   expect(handleClick).toHaveBeenCalledTimes(1);
 });
@@ -103,7 +118,7 @@ test("제거 버튼 클릭 시 이벤트 전파를 중단한다", async () => {
 
   render(
     <div onClick={handleClick}>
-      <Tag tone="warning" href="#" removable>
+      <Tag tone="warning" href="#" onRemove={() => {}}>
         링크 + 제거 가능 태그
       </Tag>
     </div>,
@@ -114,14 +129,25 @@ test("제거 버튼 클릭 시 이벤트 전파를 중단한다", async () => {
   expect(handleClick).not.toHaveBeenCalled();
 });
 
+function RemovableTag({
+  children,
+  ...props
+}: Omit<TagProps, "onRemove"> & { children: React.ReactNode }) {
+  const [visible, setVisible] = useState(true);
+  if (!visible) return null;
+  return (
+    <Tag {...props} onRemove={() => setVisible(false)}>
+      {children}
+    </Tag>
+  );
+}
+
 test("제거 버튼 클릭 시 Tag 엘리먼트를 제거한다", async () => {
   const user = userEvent.setup();
 
   render(
     <div>
-      <Tag tone="danger" removable>
-        제거될 태그
-      </Tag>
+      <RemovableTag tone="danger">제거될 태그</RemovableTag>
       <Tag tone="success">남아있을 태그</Tag>
     </div>,
   );
@@ -136,12 +162,12 @@ test("제거 버튼 클릭 시 Tag 엘리먼트를 제거한다", async () => {
   expect(screen.getByText("남아있을 태그")).toBeInTheDocument();
 });
 
-test("X 버튼만 클릭했을 때만 제거되고, 태그 자체 클릭으로는 제거되지 않는다", async () => {
-  const handleClick = vi.fn();
+test("X 버튼만 클릭했을 때만 onRemove가 호출되고, 태그 자체 클릭으로는 호출되지 않는다", async () => {
+  const handleRemove = vi.fn();
   const user = userEvent.setup();
 
   render(
-    <Tag tone="brand" removable onClick={handleClick}>
+    <Tag tone="brand" onRemove={handleRemove}>
       테스트 태그
     </Tag>,
   );
@@ -149,20 +175,19 @@ test("X 버튼만 클릭했을 때만 제거되고, 태그 자체 클릭으로�
   const tag = screen.getByText("테스트 태그");
   const removeButton = screen.getByLabelText("제거");
 
-  // 태그 클릭 - 제거되지 않아야 함
+  // 태그 클릭 - onRemove가 호출되지 않아야 함
   await user.click(tag);
-  expect(handleClick).toHaveBeenCalledTimes(1);
-  expect(screen.getByText("테스트 태그")).toBeInTheDocument();
+  expect(handleRemove).not.toHaveBeenCalled();
 
-  // X 버튼 클릭 - 제거되어야 함
+  // X 버튼 클릭 - onRemove가 호출되어야 함
   await user.click(removeButton);
-  expect(screen.queryByText("테스트 태그")).not.toBeInTheDocument();
+  expect(handleRemove).toHaveBeenCalledTimes(1);
 });
 
 test("제거 버튼에 focus가 가능하다", async () => {
   const user = userEvent.setup();
 
-  render(<Tag removable>Focus 테스트 태그</Tag>);
+  render(<Tag onRemove={() => {}}>Focus 테스트 태그</Tag>);
 
   const removeButton = screen.getByLabelText("제거");
 
@@ -172,9 +197,10 @@ test("제거 버튼에 focus가 가능하다", async () => {
 });
 
 test("제거 버튼이 키보드로 동작한다", async () => {
+  const handleRemove = vi.fn();
   const user = userEvent.setup();
 
-  render(<Tag removable>키보드 테스트 태그</Tag>);
+  render(<Tag onRemove={handleRemove}>키보드 테스트 태그</Tag>);
 
   const removeButton = screen.getByLabelText("제거");
 
@@ -184,13 +210,14 @@ test("제거 버튼이 키보드로 동작한다", async () => {
 
   // Enter 키로 제거
   await user.keyboard("{Enter}");
-  expect(screen.queryByText("키보드 테스트 태그")).not.toBeInTheDocument();
+  expect(handleRemove).toHaveBeenCalledTimes(1);
 });
 
 test("제거 버튼이 Space 키로 동작한다", async () => {
+  const handleRemove = vi.fn();
   const user = userEvent.setup();
 
-  render(<Tag removable>Space 키 테스트 태그</Tag>);
+  render(<Tag onRemove={handleRemove}>Space 키 테스트 태그</Tag>);
 
   const removeButton = screen.getByLabelText("제거");
 
@@ -200,15 +227,16 @@ test("제거 버튼이 Space 키로 동작한다", async () => {
 
   // Space 키로 제거
   await user.keyboard(" ");
-  expect(screen.queryByText("Space 키 테스트 태그")).not.toBeInTheDocument();
+  expect(handleRemove).toHaveBeenCalledTimes(1);
 });
 
 test("링크 + 제거 가능 태그에서 제거 버튼 키보드 동작 시 링크가 클릭되지 않는다", async () => {
   const handleClick = vi.fn();
+  const handleRemove = vi.fn();
   const user = userEvent.setup();
 
   render(
-    <Tag href="#" removable onClick={handleClick}>
+    <Tag href="#" onRemove={handleRemove} onClick={handleClick}>
       링크 + 제거 가능 태그
     </Tag>,
   );
@@ -223,15 +251,16 @@ test("링크 + 제거 가능 태그에서 제거 버튼 키보드 동작 시 링
   // Enter 키로 제거 - 링크 클릭 핸들러가 호출되지 않아야 함
   await user.keyboard("{Enter}");
   expect(handleClick).not.toHaveBeenCalled();
-  expect(screen.queryByText("링크 + 제거 가능 태그")).not.toBeInTheDocument();
+  expect(handleRemove).toHaveBeenCalledTimes(1);
 });
 
 test("링크 + 제거 가능 태그에서 제거 버튼 Space 키 동작 시 링크가 클릭되지 않는다", async () => {
   const handleClick = vi.fn();
+  const handleRemove = vi.fn();
   const user = userEvent.setup();
 
   render(
-    <Tag href="#" removable onClick={handleClick}>
+    <Tag href="#" onRemove={handleRemove} onClick={handleClick}>
       링크 + 제거 가능 태그 Space
     </Tag>,
   );
@@ -246,7 +275,5 @@ test("링크 + 제거 가능 태그에서 제거 버튼 Space 키 동작 시 링
   // Space 키로 제거 - 링크 클릭 핸들러가 호출되지 않아야 함
   await user.keyboard(" ");
   expect(handleClick).not.toHaveBeenCalled();
-  expect(
-    screen.queryByText("링크 + 제거 가능 태그 Space"),
-  ).not.toBeInTheDocument();
+  expect(handleRemove).toHaveBeenCalledTimes(1);
 });
