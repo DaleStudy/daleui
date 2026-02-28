@@ -54,6 +54,9 @@ export function Root({
     </CardContext.Provider>
   );
 }
+
+Root.displayName = "Card.Root";
+
 export interface CardBodyProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   "style"
@@ -68,6 +71,9 @@ export function Body({ className, children, ...rest }: CardBodyProps) {
     </div>
   );
 }
+
+Body.displayName = "Card.Body";
+
 export interface CardIconProps extends SVGProps<SVGSVGElement> {
   /** 아이콘 이름 */
   name: IconName;
@@ -89,6 +95,9 @@ export function Icon({ name, size = "lg", ...rest }: CardIconProps) {
     </div>
   );
 }
+
+Icon.displayName = "Card.Icon";
+
 export interface CardTitleProps extends Omit<
   HTMLAttributes<HTMLElement>,
   "style"
@@ -103,6 +112,9 @@ export function Title({ children, ...rest }: CardTitleProps) {
     </Text>
   );
 }
+
+Title.displayName = "Card.Title";
+
 export interface CardDescriptionProps extends Omit<
   HTMLAttributes<HTMLElement>,
   "style"
@@ -117,6 +129,9 @@ export function Description({ children, ...rest }: CardDescriptionProps) {
     </Text>
   );
 }
+
+Description.displayName = "Card.Description";
+
 export interface CardLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   children: ReactNode;
   /** 링크 URL */
@@ -141,6 +156,8 @@ export function Link({ children, href, external, ...rest }: CardLinkProps) {
     </InnerLink>
   );
 }
+
+Link.displayName = "Card.Link";
 
 const rootStyles = cva({
   base: {
