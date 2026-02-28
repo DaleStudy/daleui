@@ -27,7 +27,7 @@ export default {
 **Card** 컴포넌트는 아이콘, 제목, 설명을 포함한 카드 형태의 UI 요소입니다.
 
 컴파운드 컴포넌트 패턴을 사용하여 구성됩니다:
-- \`Card\`: 카드 컨테이너 (tone, outline 설정)
+- \`Card.Root\`: 카드 컨테이너 (tone, outline 설정)
 - \`Card.Icon\`: 아이콘 (Root 바로 아래 배치)
 - \`Card.Body\`: 제목과 설명을 감싸는 컨테이너
 - \`Card.Title\`: 제목
@@ -36,6 +36,31 @@ export default {
 
 **tone** 속성은 Root에서 설정하며, Icon과 Link에 자동으로 전달됩니다.
 **outline** 속성을 사용하여 카드에 테두리를 추가할 수 있습니다.
+
+Tree-shaking이 가능한 개별 컴포넌트와 dot-notation 방식의 Card 컴포넌트를 모두 지원합니다.
+\`\`\`tsx
+// dot-notation 방식 사용 예시
+<Card.Root tone="neutral">
+  <Card.Icon name="info" />
+  <Card.Body>
+    <Card.Title>카드 제목</Card.Title>
+    <Card.Description>카드 설명을 여기에 작성합니다.</Card.Description>
+  </Card.Body>
+</Card.Root>
+\`\`\`
+
+\`\`\`tsx
+
+// Tree-shaking 가능한 개별 컴포넌트 사용 예시
+<CardRoot tone="brand" outline>
+  <CardIcon name="star" />
+  <CardBody>
+    <CardTitle>카드 제목</CardTitle>
+    <CardDescription>카드 설명을 여기에 작성합니다.</CardDescription>
+  </CardBody>
+</CardRoot>
+\`\`\`
+
         `,
       },
     },
