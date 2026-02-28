@@ -2,7 +2,6 @@ import { type HTMLAttributes } from "react";
 import { css, cva, cx } from "../../../styled-system/css";
 import { Icon } from "../Icon/Icon";
 import { hstack } from "../../../styled-system/patterns";
-import { type IconName } from "../../tokens/iconography";
 
 type size = "sm" | "md" | "lg";
 
@@ -12,16 +11,12 @@ export interface ButtonProps extends Omit<
   "style"
 > {
   /** 버튼 텍스트 */
-  children: string;
+  children: React.ReactNode;
   /** 버튼 비활성화 여부 */
   disabled?: boolean;
   /** 버튼 너비 100% */
   fullWidth?: boolean;
   loading?: boolean;
-  /** 좌측 아이콘 */
-  leftIcon?: IconName;
-  /** 우측 아이콘 */
-  rightIcon?: IconName;
   /** 클릭 시 실행함수 */
   onClick?: () => void;
   /** 버튼의 크기 */
@@ -49,8 +44,6 @@ export const Button = ({
   disabled,
   fullWidth,
   loading,
-  leftIcon,
-  rightIcon,
   onClick,
   size = "md",
   tone = "brand",
@@ -76,36 +69,15 @@ export const Button = ({
       <div
         className={cx(
           hstack({ gap: "4" }),
-          css({ visibility: loading ? "hidden" : "visible" }),
-        )}
-      >
-        {leftIcon && (
-          <span className={css({ flexShrink: 0 })}>
-            <Icon
-              data-testid={`icon-${leftIcon}`}
-              name={leftIcon}
-              size={size}
-            />
-          </span>
-        )}
-        <span
-          className={css({
+          css({
+            visibility: loading ? "hidden" : "visible",
             whiteSpace: "normal",
             wordBreak: "keep-all",
             overflowWrap: "anywhere",
-          })}
-        >
-          {children}
-        </span>
-        {rightIcon && (
-          <span className={css({ flexShrink: 0 })}>
-            <Icon
-              data-testid={`icon-${rightIcon}`}
-              name={rightIcon}
-              size={size}
-            />
-          </span>
+          }),
         )}
+      >
+        {children}
       </div>
       {loading && (
         <div
