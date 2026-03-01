@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
+import { css } from "../../../styled-system/css";
 import { PasswordInput } from "./PasswordInput";
 
 export default {
@@ -22,13 +24,6 @@ type Story = StoryObj<typeof PasswordInput>;
 // 기본 상태
 export const Default: Story = {};
 
-// 패스워드가 입력된 상태
-export const WithPassword: Story = {
-  args: {
-    defaultValue: "password123",
-  },
-};
-
 // 포커스 상태
 export const Focused: Story = {
   args: {
@@ -48,5 +43,73 @@ export const Error: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
+  },
+};
+
+const ControlledPasswordInput = (
+  args: React.ComponentProps<typeof PasswordInput>,
+) => {
+  const [value, setValue] = useState("");
+  const [hasError, setHasError] = useState(false);
+
+  const handleChange = (newValue: string) => {
+    setValue(newValue);
+
+    // 8자 미만이면 에러
+    if (newValue.length > 0 && newValue.length < 8) {
+      setHasError(true);
+    } else {
+      setHasError(false);
+    }
+  };
+
+  return (
+    <div className={css({ w: "320px" })}>
+      <PasswordInput
+        value={value}
+        onChange={handleChange}
+        invalid={hasError}
+        {...args}
+      />
+      <div className={css({ mt: "16", fontSize: "sm" })}>
+        <p>현재 값 길이: {value.length}자</p>
+        {hasError && (
+          <p className={css({ color: "fg.danger" })}>
+            비밀번호는 8자 이상이어야 합니다.
+          </p>
+        )}
+        {value.length >= 8 && (
+          <p className={css({ color: "fg.success" })}>
+            사용 가능한 비밀번호입니다.
+          </p>
+        )}
+      </div>
+    </div>
+  );
+};
+
+/**
+ * `useState`와 함께 `value`, `onChange` prop을 사용하여 제어 컴포넌트로 만들 수 있습니다.
+ */
+export const Controlled: Story = {
+  render: (args) => <ControlledPasswordInput {...args} />,
+  argTypes: {
+    value: { control: false },
+    onChange: { control: false },
+    defaultValue: { control: false },
+  },
+};
+
+/**
+ * `defaultValue` prop을 사용하여 초기값을 설정할 수 있습니다.
+ */
+export const Uncontrolled: Story = {
+  args: {
+    defaultValue: "password123",
+  },
+  argTypes: {
+    value: { control: false },
+    defaultValue: { control: false },
+    onChange: { control: false },
   },
 };

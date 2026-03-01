@@ -104,4 +104,30 @@ describe("TextInput", () => {
 
     expect(ref.current).toBeInstanceOf(HTMLInputElement);
   });
+
+  test("제어 모드: value가 제공되면 올바르게 렌더링된다.", () => {
+    render(<TextInput value="test" />);
+    const inputElement = screen.getByRole("textbox");
+    expect(inputElement).toHaveValue("test");
+  });
+
+  test("제어 모드: value가 제공되지 않으면 defaultValue가 올바르게 렌더링된다.", () => {
+    render(<TextInput defaultValue="test" />);
+    const inputElement = screen.getByRole("textbox");
+    expect(inputElement).toHaveValue("test");
+  });
+
+  test("비제어 모드: defaultValue 제공 후 사용자가 텍스트를 입력하면 value가 변경된다.", async () => {
+    const user = userEvent.setup();
+    render(<TextInput defaultValue="test" />);
+    const inputElement = screen.getByRole("textbox");
+    await user.type(inputElement, "test");
+    expect(inputElement).toHaveValue("testtest");
+  });
+
+  test("defaultValue와 value가 모두 제공되면 value가 우선적으로 적용된다.", () => {
+    render(<TextInput defaultValue="test" value="test2" />);
+    const inputElement = screen.getByRole("textbox");
+    expect(inputElement).toHaveValue("test2");
+  });
 });

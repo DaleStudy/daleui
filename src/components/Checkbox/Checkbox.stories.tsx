@@ -26,12 +26,13 @@ export default {
 
 export const Basic: StoryObj<typeof Checkbox> = {};
 
-export const Controlled = () => {
+const ControlledCheckbox = (args: React.ComponentProps<typeof Checkbox>) => {
   const [checked, setChecked] = useState(false);
   return (
     <div className={vstack({ gap: "16" })}>
       <p>{checked ? "체크됨" : "체크되지 않음"}</p>
       <Checkbox
+        {...args}
         label="Controlled 체크박스"
         checked={checked}
         onChange={setChecked}
@@ -43,7 +44,19 @@ export const Controlled = () => {
   );
 };
 
-export const DefaultChecked: StoryObj<typeof Checkbox> = {
+export const Controlled: StoryObj<typeof Checkbox> = {
+  render: (args) => <ControlledCheckbox {...args} />,
+  argTypes: {
+    checked: {
+      control: false,
+    },
+    onChange: {
+      control: false,
+    },
+  },
+};
+
+export const Uncontrolled: StoryObj<typeof Checkbox> = {
   args: {
     label: "기본값이 체크된 체크박스",
     defaultChecked: true,
