@@ -1,10 +1,5 @@
-import {
-  type AnchorHTMLAttributes,
-  type HTMLAttributes,
-  type KeyboardEvent,
-  type MouseEvent,
-  type ReactNode,
-} from "react";
+import type React from "react";
+import type { AnchorHTMLAttributes, HTMLAttributes, ReactNode } from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 import { Icon } from "../Icon/Icon";
@@ -15,7 +10,7 @@ type BaseTagProps = {
   /** 태그의 색조 */
   tone?: Tone;
   /** `onRemove` 핸들러가 설정되면 제거 버튼(X)이 표시됩니다. */
-  onRemove?: () => void;
+  onRemove?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 /** href가 있으면 자동으로 <a> 로 렌더링 */
@@ -40,8 +35,8 @@ export function Tag({
   onRemove,
   ...rest
 }: TagProps) {
-  const handleRemoveClick = (e: MouseEvent<HTMLButtonElement>) => {
-    onRemove?.();
+  const handleRemoveClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    onRemove?.(e);
   };
 
   if (href) {
