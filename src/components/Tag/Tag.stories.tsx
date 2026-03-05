@@ -140,7 +140,7 @@ export const Link: StoryObj<StoryTagProps> = {
 
 function RemovableExample(args: StoryTagProps) {
   const [tags, setTags] = useState([
-    { id: 1, tone: "neutral", label: "제거 가능 태그" },
+    { id: 1, tone: "brand", label: "제거 가능 태그" },
     { id: 2, tone: "success", label: "제거 가능 + 성공 톤" },
     { id: 3, tone: "danger", label: "제거 가능 + 위험 톤" },
   ]);
