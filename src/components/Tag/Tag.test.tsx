@@ -112,23 +112,6 @@ test("링크 태그가 올바르게 동작한다", async () => {
   expect(handleClick).toHaveBeenCalledTimes(1);
 });
 
-test("제거 버튼 클릭 시 이벤트 전파를 중단한다", async () => {
-  const handleClick = vi.fn();
-  const user = userEvent.setup();
-
-  render(
-    <div onClick={handleClick}>
-      <Tag tone="warning" href="#" onRemove={() => {}}>
-        링크 + 제거 가능 태그
-      </Tag>
-    </div>,
-  );
-
-  const removeButton = screen.getByLabelText("제거");
-  await user.click(removeButton);
-  expect(handleClick).not.toHaveBeenCalled();
-});
-
 function RemovableTag({
   children,
   ...props

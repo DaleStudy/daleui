@@ -11,7 +11,7 @@ type StoryTagProps = {
   children: React.ReactNode;
   tone?: TagProps["tone"];
   href?: string;
-  onRemove?: () => void;
+  onRemove?: TagProps["onRemove"];
   removable?: boolean;
 };
 
