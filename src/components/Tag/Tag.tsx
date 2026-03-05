@@ -41,18 +41,7 @@ export function Tag({
   ...rest
 }: TagProps) {
   const handleRemoveClick = (e: MouseEvent<HTMLButtonElement>) => {
-    // 링크 클릭/네비게이션과 충돌 방지
-    e.preventDefault();
-    e.stopPropagation();
     onRemove?.();
-  };
-
-  const handleRemoveKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      e.stopPropagation();
-      onRemove?.();
-    }
   };
 
   if (href) {
@@ -81,7 +70,6 @@ export function Tag({
           <button
             type="button"
             onClick={handleRemoveClick}
-            onKeyDown={handleRemoveKeyDown}
             className={removeButtonStyles({ tone, elevated: true })}
             aria-label="제거"
           >
@@ -101,7 +89,6 @@ export function Tag({
         <button
           type="button"
           onClick={handleRemoveClick}
-          onKeyDown={handleRemoveKeyDown}
           className={removeButtonStyles({ tone })}
           aria-label="제거"
         >
