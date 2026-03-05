@@ -17,8 +17,6 @@ export interface ButtonProps extends Omit<
   /** 버튼 너비 100% */
   fullWidth?: boolean;
   loading?: boolean;
-  /** 클릭 시 실행함수 */
-  onClick?: () => void;
   /** 버튼의 크기 */
   size?: size;
   /** 버튼의 색상 강조 */
@@ -39,12 +37,11 @@ export interface ButtonProps extends Omit<
  * - `loading` 속성을 사용하여 버튼을 로딩 상태로 지정할 수 있습니다.
  */
 export const Button = ({
+  className,
   children,
   variant = "solid",
-  disabled,
   fullWidth,
   loading,
-  onClick,
   size = "md",
   tone = "brand",
   type = "button",
@@ -54,17 +51,17 @@ export const Button = ({
 
   return (
     <button
-      className={styles({
-        tone: defaultTone,
-        variant,
-        size,
-        disabled,
-        fullWidth,
-      })}
       type={type}
-      onClick={onClick}
-      disabled={disabled}
       {...rest}
+      className={cx(
+        styles({
+          tone: defaultTone,
+          variant,
+          size,
+          fullWidth,
+        }),
+        className,
+      )}
     >
       <div
         className={cx(
@@ -115,38 +112,44 @@ const styles = cva({
     width: "auto",
     borderRadius: "sm",
     cursor: "pointer",
-    transition: "0.2s",
+    transitionProperty: "background-color, color, border-color",
+    transitionDuration: "0.2s",
     lineHeight: "1",
     outline: "0",
     position: "relative",
     boxSizing: "border-box",
-    "&:disabled": {
+    "&:disabled, &:disabled:hover": {
       cursor: "not-allowed",
+      bg: "bg.neutral.disabled",
+      color: "fg.neutral.disabled",
+      border: "none",
     },
     "&:focus-visible": {
       outlineStyle: "solid",
       outlineWidth: "sm",
       outlineOffset: "3px",
     },
+    // 버튼 내부의 아이콘이 텍스트보다 클 때 아이콘이 텍스트를 침범하는 것을 방지
+    "& > svg": {
+      maxBlockSize: "100%",
+      flexShrink: 0,
+    },
   },
   variants: {
     size: {
       sm: {
-        px: "8",
-        py: "4",
-        height: "32px",
+        p: "8",
+        lineHeight: "1rem",
         fontSize: "sm",
       },
       md: {
-        px: "12",
-        py: "4",
-        height: "40px",
+        p: "0.625rem",
+        lineHeight: "1.25rem",
         fontSize: "md",
       },
       lg: {
-        px: "16",
-        py: "8",
-        height: "48px",
+        p: "12",
+        lineHeight: "1.5rem",
         fontSize: "lg",
       },
     },
@@ -162,10 +165,6 @@ const styles = cva({
       brand: {},
       neutral: {},
       danger: {},
-    },
-    disabled: {
-      true: {},
-      false: {},
     },
     fullWidth: {
       true: {
@@ -272,21 +271,21 @@ const styles = cva({
       variant: "outline",
       size: "sm",
       css: {
-        px: "0.4rem",
+        p: "calc(0.5rem - 1px)",
       },
     },
     {
       variant: "outline",
       size: "md",
       css: {
-        px: "0.65rem",
+        p: "calc(0.625rem - 1px)",
       },
     },
     {
       variant: "outline",
       size: "lg",
       css: {
-        px: "0.9rem",
+        p: "calc(0.75rem - 1px)",
       },
     },
     {
@@ -332,14 +331,6 @@ const styles = cva({
           bg: "bg.danger.active",
           color: "fg.danger.active",
         },
-      },
-    },
-    {
-      disabled: true,
-      css: {
-        bg: "bg.neutral.disabled!",
-        color: "fg.neutral.disabled!",
-        border: "none!",
       },
     },
     // borders 토큰과 스타일이 달라 별도로 설정

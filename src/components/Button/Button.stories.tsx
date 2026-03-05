@@ -23,11 +23,18 @@ export default {
     loading: false,
   },
   argTypes: {
-    variant: {
-      description: "버튼의 스타일 종류",
+    children: {
+      control: "text",
+    },
+    disabled: {
+      description: "버튼의 비활성화 여부",
     },
     tone: {
       description: "색상 강조",
+    },
+    onClick: {
+      description: "버튼 클릭 시 실행되는 함수",
+      control: false,
     },
   },
 } satisfies Meta<typeof Button>;
