@@ -37,7 +37,7 @@ function TeamCard({ member, isDark }: TeamCardProps) {
   const { name, role, flag, location, avatar, githubUrl, linkedinUrl } = member;
 
   return (
-    <Card
+    <Card.Root
       className={css({
         padding: "16",
         borderRadius: "sm",
@@ -182,7 +182,7 @@ function TeamCard({ member, isDark }: TeamCardProps) {
           </Link>
         )}
       </HStack>
-    </Card>
+    </Card.Root>
   );
 }
 
