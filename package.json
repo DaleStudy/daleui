@@ -75,7 +75,7 @@
     "@vitest/coverage-v8": "^4.0.18",
     "axe-playwright": "^2.2.2",
     "chromatic": "^13.3.5",
-    "eslint": "^9.39.2",
+    "eslint": "^9.39.3",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.26",
