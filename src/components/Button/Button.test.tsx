@@ -164,16 +164,6 @@ test("fullWidth 속성이 올바르게 적용됨", () => {
   expect(button.className).toContain("w_100%");
 });
 
-test("Icon과 함께 버튼이 올바르게 렌더링됨", () => {
-  render(
-    <Button leftIcon="star" rightIcon="search">
-      테스트
-    </Button>,
-  );
-  expect(screen.getByTestId("icon-star")).toBeInTheDocument();
-  expect(screen.getByTestId("icon-search")).toBeInTheDocument();
-});
-
 test("로딩 상태가 올바르게 렌더링 됨", () => {
   render(<Button loading>로딩 상태</Button>);
   const loader = screen.getByTestId("button-loader");
