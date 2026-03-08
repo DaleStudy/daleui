@@ -198,7 +198,7 @@ const linkOverlayStyles = css({
       borderRadius: "full",
       outlineWidth: "{borderWidths.lg}",
       outlineColor: "border.brand.focus",
-      outlineOffset: "1px",
+      outlineOffset: "2",
       outlineStyle: "solid",
     },
   },

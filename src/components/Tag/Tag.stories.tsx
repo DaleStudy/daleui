@@ -1,7 +1,6 @@
 import type React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import { action } from "storybook/actions";
 import type { TagProps } from "./Tag";
 import { css } from "../../../styled-system/css";
 import { hstack, vstack } from "../../../styled-system/patterns";
@@ -12,7 +11,6 @@ type StoryTagProps = {
   tone?: TagProps["tone"];
   href?: string;
   onRemove?: TagProps["onRemove"];
-  removable?: boolean;
 };
 
 export default {
@@ -28,7 +26,6 @@ export default {
     children: "태그",
     tone: "neutral",
     href: undefined,
-    removable: false,
   },
   argTypes: {
     children: {
@@ -39,46 +36,37 @@ export default {
       description: "링크 URL. 설정 시 `<a>` 태그로 렌더링됩니다.",
       type: { name: "string" },
     },
-    removable: {
-      control: "boolean",
-      description:
-        "활성화 시 `onRemove` 핸들러가 연결됩니다(가상 props입니다).",
-    },
     onRemove: {
       control: false,
     },
   },
-  render: ({ removable, ...args }) => (
-    <Tag {...args} onRemove={removable ? action("remove") : undefined} />
-  ),
 } satisfies Meta<StoryTagProps>;
 
 export const Basic: StoryObj<StoryTagProps> = {};
 
 export const Tones: StoryObj<StoryTagProps> = {
-  render: ({ removable, ...args }) => {
-    const onRemove = removable ? action("remove") : undefined;
+  render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
         <div className={hstack({ gap: "8" })}>
-          <Tag {...args} tone="neutral" onRemove={onRemove}>
+          <Tag {...args} tone="neutral">
             Neutral
           </Tag>
-          <Tag {...args} tone="brand" onRemove={onRemove}>
+          <Tag {...args} tone="brand">
             Brand
           </Tag>
-          <Tag {...args} tone="danger" onRemove={onRemove}>
+          <Tag {...args} tone="danger">
             Danger
           </Tag>
         </div>
         <div className={hstack({ gap: "8" })}>
-          <Tag {...args} tone="warning" onRemove={onRemove}>
+          <Tag {...args} tone="warning">
             Warning
           </Tag>
-          <Tag {...args} tone="success" onRemove={onRemove}>
+          <Tag {...args} tone="success">
             Success
           </Tag>
-          <Tag {...args} tone="info" onRemove={onRemove}>
+          <Tag {...args} tone="info">
             Info
           </Tag>
         </div>
@@ -96,23 +84,15 @@ export const Tones: StoryObj<StoryTagProps> = {
 };
 
 export const Link: StoryObj<StoryTagProps> = {
-  render: ({ removable, ...args }) => {
-    const onRemove = removable ? action("remove") : undefined;
+  render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
         <div className={hstack({ gap: "8" })}>
-          <Tag {...args} onRemove={onRemove}>
-            기본 태그
-          </Tag>
-          <Tag {...args} href="#" onRemove={onRemove}>
+          <Tag {...args}>기본 태그</Tag>
+          <Tag {...args} href="#">
             링크 태그 (호버 해보세요)
           </Tag>
-          <Tag
-            {...args}
-            href="https://example.com"
-            target="_blank"
-            onRemove={onRemove}
-          >
+          <Tag {...args} href="https://example.com" target="_blank">
             외부 링크 태그
           </Tag>
         </div>
