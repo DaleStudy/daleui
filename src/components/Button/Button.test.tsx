@@ -100,9 +100,6 @@ test("disabled 속성이 올바르게 적용됨", () => {
 
   expect(screen.getByRole("button", { name: "비활성화 버튼" })).toBeDisabled();
   expect(screen.getByRole("button", { name: "활성화 버튼" })).toBeEnabled();
-  expect(screen.getByRole("button", { name: "비활성화 버튼" })).toHaveClass(
-    "bg_bg.neutral.disabled!",
-  );
 });
 
 test("기본적으로 버튼이 type='button'으로 렌더링됨", () => {

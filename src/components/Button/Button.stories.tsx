@@ -182,7 +182,7 @@ export const FullWidth: StoryObj<typeof Button> = {
   },
 };
 
-export const WithIcon: StoryObj<typeof Button> = {
+export const WithIcons: StoryObj<typeof Button> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
