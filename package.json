@@ -50,7 +50,7 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
-    "@ark-ui/react": "^5.30.0",
+    "@ark-ui/react": "^5.31.0",
     "lucide-react": "^0.563.0"
   },
   "devDependencies": {
