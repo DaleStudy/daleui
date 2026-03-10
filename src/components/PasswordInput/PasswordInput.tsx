@@ -4,9 +4,8 @@ import { Icon } from "../Icon/Icon";
 
 export interface PasswordInputProps extends Omit<
   ComponentPropsWithoutRef<"input">,
-  "size" | "type" | "value" | "defaultValue" | "onChange"
+  "size" | "type" | "value" | "defaultValue" | "onChange" | "disabled"
 > {
-  /** custom props */
   /** 플레이스홀더 */
   placeholder?: string;
   /** 오류 상태 여부 (true면 위험 톤 적용 및 aria-invalid=true) */
@@ -15,7 +14,6 @@ export interface PasswordInputProps extends Omit<
   required?: boolean;
   /** 비활성화 여부 */
   disabled?: boolean;
-  id?: string;
 
   /** native props */
   /** 입력값 (controlled 모드) */
