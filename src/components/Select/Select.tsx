@@ -23,7 +23,7 @@ export interface SelectProps extends HTMLAttributes<HTMLSelectElement> {
   /** 초기 선택값 (uncontrolled 모드) */
   defaultValue?: string;
   /** 값이 변경될 때 호출되는 함수 (controlled 모드) */
-  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange?: (value: string) => void;
   /** 비활성화 상태 */
   disabled?: boolean;
   /** 필수 입력 여부 */
@@ -120,7 +120,7 @@ export function Select({
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (onChange) onChange(e);
+    onChange?.(e.target.value);
     setHasValue(!!e.target.value);
     checkOverflow();
   };
@@ -131,15 +131,7 @@ export function Select({
 
     selectElement.value = "";
     setHasValue(false);
-    if (onChange) {
-      const syntheticEvent = {
-        target: {
-          ...selectElement,
-          value: "",
-        },
-      } as React.ChangeEvent<HTMLSelectElement>;
-      onChange(syntheticEvent);
-    }
+    onChange?.("");
     requestAnimationFrame(() => {
       checkOverflow();
     });
