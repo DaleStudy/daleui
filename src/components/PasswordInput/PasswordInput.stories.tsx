@@ -66,10 +66,10 @@ const ControlledPasswordInput = (
   return (
     <div className={css({ w: "320px" })}>
       <PasswordInput
+        {...args}
         value={value}
         onChange={handleChange}
         invalid={hasError}
-        {...args}
       />
       <div className={css({ mt: "16", fontSize: "sm" })}>
         <p>현재 값 길이: {value.length}자</p>
