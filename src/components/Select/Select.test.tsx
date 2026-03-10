@@ -56,7 +56,8 @@ describe("렌더링", () => {
         <option value="svelte">Svelte</option>
       </Select>,
     );
-    expect(screen.getByRole("option", { name: "React" })).toBeInTheDocument();
+    const select: HTMLSelectElement = screen.getByRole("combobox");
+    expect(select.value).toBe("react");
   });
 
   test('value가 "" 일 때 placeholder가 표시된다', () => {
