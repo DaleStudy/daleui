@@ -8,7 +8,10 @@ import {
 import { cva } from "../../../styled-system/css";
 import { Icon } from "../Icon/Icon";
 
-export interface SelectProps extends HTMLAttributes<HTMLSelectElement> {
+export interface SelectProps extends Omit<
+  HTMLAttributes<HTMLSelectElement>,
+  "onChange"
+> {
   /** custom props */
   /** 오류 상태 */
   invalid?: boolean;
