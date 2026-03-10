@@ -219,7 +219,7 @@ const removeButtonStyles = cva({
     transition: "0.2s",
     "&:focus-visible": {
       outlineWidth: "{borderWidths.lg}",
-      outlineOffset: "1px",
+      outlineOffset: "2",
       outlineStyle: "solid",
     },
   },
