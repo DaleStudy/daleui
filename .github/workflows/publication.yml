@@ -42,4 +42,4 @@ jobs:
           bun run build:lib
 
       - name: Publish to npm
-        run: bunx npm publish --provenance --ignore-scripts # --provenance: OIDC 인증 및 출처 증명, --ignore-scripts: skip prepare script (already ran in Build package step)
+        run: npm publish --provenance --ignore-scripts # --provenance: OIDC 인증 및 출처 증명, --ignore-scripts: skip prepare script (already ran in Build package step)
