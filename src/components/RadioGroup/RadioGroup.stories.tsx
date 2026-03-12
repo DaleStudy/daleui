@@ -256,6 +256,40 @@ export const Invalid: Story = {
   },
 };
 
+export const Hint: Story = {
+  render: (args) => {
+    return (
+      <VStack gap="32">
+        <RadioGroup
+          {...args}
+          name="hint-basic"
+          label="좋아하는 과일을 선택하세요"
+          hint="(옵션 선택)"
+        />
+
+        <RadioGroup
+          {...args}
+          name="hint-required"
+          label="좋아하는 과일을 선택하세요"
+          hint="(옵션 선택)"
+          required
+        />
+      </VStack>
+    );
+  },
+  argTypes: {
+    name: {
+      control: false,
+    },
+    label: {
+      control: false,
+    },
+    required: {
+      control: false,
+    },
+  },
+};
+
 export const Required: Story = {
   render: (args) => {
     return (

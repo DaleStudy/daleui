@@ -59,7 +59,7 @@ export interface RadioGroupProps {
 
   /**
    * 색상 강조를 지정합니다.
-   * @default "neutral"
+   * @default "brand"
    */
   tone?: Tone;
 
@@ -74,6 +74,12 @@ export interface RadioGroupProps {
    * @default false
    */
   required?: boolean;
+
+  /**
+   * 라벨 옆에 표시되는 보조 텍스트입니다.
+   * @default undefined
+   */
+  hint?: string;
 }
 
 /**
@@ -100,9 +106,10 @@ export function RadioGroup({
   onChange,
   disabled,
   orientation,
-  tone = "neutral",
+  tone = "brand",
   invalid = false,
   required = false,
+  hint,
 }: RadioGroupProps) {
   return (
     <RadioGroupContext.Provider value={{ tone, disabled, invalid, required }}>
@@ -135,6 +142,17 @@ export function RadioGroup({
               *
             </span>
           )}
+          {hint && (
+            <span
+              className={css({
+                textStyle: "body.lg",
+                fontWeight: "medium",
+              })}
+            >
+              {" "}
+              {hint}
+            </span>
+          )}
         </ArkRadioGroup.Label>
         <div className={radioGroupStyles({ orientation })}>{children}</div>
       </ArkRadioGroup.Root>
@@ -150,15 +168,16 @@ const radioGroupRootStyles = css({
 const radioGroupStyles = cva({
   base: {
     display: "flex",
-    gap: "8",
   },
   variants: {
     orientation: {
       horizontal: {
         flexDirection: "row",
+        gap: "8",
       },
       vertical: {
         flexDirection: "column",
+        gap: "[9px]",
       },
     },
   },
@@ -209,6 +228,7 @@ export function Radio({ value, children, disabled, ref }: RadioProps) {
       className={flex({
         alignItems: "center",
         gap: "8",
+        padding: "4",
         cursor: isDisabled ? "not-allowed" : "pointer",
       })}
     >
@@ -275,9 +295,6 @@ const radioCircleStyles = cva({
     position: "absolute",
     pointerEvents: "none",
     borderColor: "slate.9",
-    "[data-state='checked'] &": {
-      borderColor: "slate.9",
-    },
     "[data-focus-visible] &, [data-active] &": {
       outline: "solid",
       outlineWidth: "md",
@@ -287,32 +304,50 @@ const radioCircleStyles = cva({
   variants: {
     tone: {
       neutral: {
+        "[data-state='checked'] &": {
+          borderColor: "slate.9",
+        },
         "[data-focus-visible] &, [data-active] &": {
           outlineColor: "slate.9",
         },
       },
       brand: {
+        "[data-state='checked'] &": {
+          borderColor: "fg.brand",
+        },
         "[data-focus-visible] &, [data-active] &": {
           outlineColor: "border.brand.focus",
         },
       },
       danger: {
         borderColor: "fg.danger",
+        "[data-state='checked'] &": {
+          borderColor: "fg.danger",
+        },
         "[data-focus-visible] &, [data-active] &": {
           outlineColor: "border.danger",
         },
       },
       warning: {
+        "[data-state='checked'] &": {
+          borderColor: "fg.warning",
+        },
         "[data-focus-visible] &, [data-active] &": {
           outlineColor: "border.warning",
         },
       },
       success: {
+        "[data-state='checked'] &": {
+          borderColor: "fg.success",
+        },
         "[data-focus-visible] &, [data-active] &": {
           outlineColor: "border.success",
         },
       },
       info: {
+        "[data-state='checked'] &": {
+          borderColor: "fg.info",
+        },
         "[data-focus-visible] &, [data-active] &": {
           outlineColor: "border.info",
         },
@@ -397,19 +432,18 @@ const radioDotStyles = cva({
     borderRadius: "full",
     pointerEvents: "none",
     opacity: 0,
-    backgroundColor: "slate.9",
     "[data-scope='radio-group'][data-part='item'][data-state='checked'] &": {
       opacity: 1,
     },
   },
   variants: {
     tone: {
-      neutral: {},
-      brand: {},
-      danger: {},
-      warning: {},
-      success: {},
-      info: {},
+      neutral: { backgroundColor: "slate.9" },
+      brand: { backgroundColor: "fg.brand" },
+      danger: { backgroundColor: "fg.danger" },
+      warning: { backgroundColor: "fg.warning" },
+      success: { backgroundColor: "fg.success" },
+      info: { backgroundColor: "fg.info" },
     },
     disabled: {
       true: {

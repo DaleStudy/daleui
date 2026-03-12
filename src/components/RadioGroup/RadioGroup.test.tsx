@@ -253,6 +253,46 @@ describe("Radio", () => {
   });
 });
 
+describe("RadioGroup hint", () => {
+  test("hint가 제공되면 라벨 옆에 보조 텍스트가 렌더링된다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group" hint="(옵션 선택)">
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    expect(screen.getByText("(옵션 선택)")).toBeInTheDocument();
+  });
+
+  test("hint가 없으면 보조 텍스트가 렌더링되지 않는다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group">
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    expect(screen.queryByText("(옵션 선택)")).not.toBeInTheDocument();
+  });
+
+  test("hint와 required가 함께 렌더링된다", () => {
+    render(
+      <RadioGroup
+        name="test"
+        label="Test Radio Group"
+        hint="(옵션 선택)"
+        required
+      >
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    expect(screen.getByText("(옵션 선택)")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("radiogroup-required-indicator"),
+    ).toBeInTheDocument();
+  });
+});
+
 describe("RadioGroup invalid", () => {
   test("invalid prop이 없을 때 aria-invalid='false'", () => {
     render(
