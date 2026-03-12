@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { expect, test } from "vitest";
 import { Label } from "./Label";
 
@@ -26,23 +26,19 @@ test("disabled 속성이 올바르게 적용됨", () => {
   expect(screen.getByTestId("label")).toHaveClass("c_fg.neutral.disabled");
 });
 
+test("required가 없을 때 별표가 렌더링되지 않음", () => {
+  render(<Label labelText="일반 라벨" />);
+  expect(screen.queryByLabelText("옵션 필수")).not.toBeInTheDocument();
+});
+
 test("required일 때 별표가 렌더링됨", () => {
-  render(<Label required labelText="필수 라벨" data-testid="label" />);
-  const label = within(screen.getByTestId("label"));
-  const asterisk = label.getByLabelText("옵션 필수");
+  render(<Label required labelText="필수 라벨" />);
+  const asterisk = screen.getByLabelText("옵션 필수");
   expect(asterisk).toHaveClass("c_fg.danger");
 });
 
 test("required + disabled일 때 별표가 비활성화 색상으로 렌더링됨", () => {
-  render(
-    <Label
-      required
-      disabled
-      labelText="필수 비활성화 라벨"
-      data-testid="label"
-    />,
-  );
-  const label = within(screen.getByTestId("label"));
-  const asterisk = label.getByLabelText("옵션 필수");
+  render(<Label required disabled labelText="필수 비활성화 라벨" />);
+  const asterisk = screen.getByLabelText("옵션 필수");
   expect(asterisk).toHaveClass("c_fg.neutral.disabled");
 });
