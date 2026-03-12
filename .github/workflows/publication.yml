@@ -7,6 +7,10 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - name: Checkout code
@@ -38,6 +42,4 @@ jobs:
           bun run build:lib
 
       - name: Publish to npm
-        env:
-          NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: bun publish --ignore-scripts # --ignore-scripts: skip prepare script (already ran in Build package step)
+        run: bunx npm publish --provenance --ignore-scripts # --provenance: OIDC 인증 및 출처 증명, --ignore-scripts: skip prepare script (already ran in Build package step)
