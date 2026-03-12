@@ -1,7 +1,17 @@
+import type React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { useState } from "react";
+import type { TagProps } from "./Tag";
 import { css } from "../../../styled-system/css";
 import { hstack, vstack } from "../../../styled-system/patterns";
 import { Tag } from "./Tag";
+
+type StoryTagProps = {
+  children: React.ReactNode;
+  tone?: TagProps["tone"];
+  href?: string;
+  onRemove?: TagProps["onRemove"];
+};
 
 export default {
   component: Tag,
@@ -15,7 +25,6 @@ export default {
   args: {
     children: "태그",
     tone: "neutral",
-    removable: false,
     href: undefined,
   },
   argTypes: {
@@ -27,12 +36,15 @@ export default {
       description: "링크 URL. 설정 시 `<a>` 태그로 렌더링됩니다.",
       type: { name: "string" },
     },
+    onRemove: {
+      control: false,
+    },
   },
-} satisfies Meta<typeof Tag>;
+} satisfies Meta<StoryTagProps>;
 
-export const Basic: StoryObj<typeof Tag> = {};
+export const Basic: StoryObj<StoryTagProps> = {};
 
-export const Tones: StoryObj<typeof Tag> = {
+export const Tones: StoryObj<StoryTagProps> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
@@ -71,7 +83,7 @@ export const Tones: StoryObj<typeof Tag> = {
   },
 };
 
-export const Link: StoryObj<typeof Tag> = {
+export const Link: StoryObj<StoryTagProps> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
@@ -106,44 +118,57 @@ export const Link: StoryObj<typeof Tag> = {
   },
 };
 
-export const Removable: StoryObj<typeof Tag> = {
-  render: (args) => {
-    return (
-      <div className={vstack({ gap: "16" })}>
-        <div>
-          <h3
-            className={css({
-              marginBottom: "8",
-              fontSize: "sm",
-              fontWeight: "semibold",
-            })}
-          >
-            제거 가능한 태그들 (X 버튼 클릭 시 제거됨)
-          </h3>
-          <div className={hstack({ gap: "8" })}>
-            <Tag {...args} tone="brand" removable>
-              제거 가능 태그
+function RemovableExample(args: StoryTagProps) {
+  const [tags, setTags] = useState([
+    { id: 1, tone: "brand", label: "제거 가능 태그" },
+    { id: 2, tone: "success", label: "제거 가능 + 성공 톤" },
+    { id: 3, tone: "danger", label: "제거 가능 + 위험 톤" },
+  ]);
+
+  const handleRemove = (id: number) => {
+    setTags((prev) => prev.filter((tag) => tag.id !== id));
+  };
+
+  return (
+    <div className={vstack({ gap: "16" })}>
+      <div>
+        <h3
+          className={css({
+            marginBottom: "8",
+            fontSize: "sm",
+            fontWeight: "semibold",
+          })}
+        >
+          제거 가능한 태그들 (X 버튼 클릭 시 제거됨)
+        </h3>
+        <div className={hstack({ gap: "8" })}>
+          {tags.map((tag) => (
+            <Tag
+              key={tag.id}
+              {...args}
+              tone={tag.tone as TagProps["tone"]}
+              onRemove={() => handleRemove(tag.id)}
+            >
+              {tag.label}
             </Tag>
-            <Tag {...args} tone="success" removable>
-              제거 가능 + 성공 톤
-            </Tag>
-            <Tag {...args} tone="danger" removable>
-              제거 가능 + 위험 톤
-            </Tag>
-          </div>
-          <p
-            className={css({
-              fontSize: "sm",
-              color: "fg.neutral",
-              marginTop: "8",
-            })}
-          >
-            각 태그의 X 버튼을 클릭하면 해당 태그가 제거됩니다.
-          </p>
+          ))}
         </div>
+        <p
+          className={css({
+            fontSize: "sm",
+            color: "fg.neutral",
+            marginTop: "8",
+          })}
+        >
+          각 태그의 X 버튼을 클릭하면 해당 태그가 제거됩니다.
+        </p>
       </div>
-    );
-  },
+    </div>
+  );
+}
+
+export const Removable: StoryObj<typeof Tag> = {
+  render: (args) => <RemovableExample {...args} />,
   argTypes: {
     children: {
       control: false,
@@ -151,7 +176,7 @@ export const Removable: StoryObj<typeof Tag> = {
     tone: {
       control: false,
     },
-    removable: {
+    onRemove: {
       control: false,
     },
   },
