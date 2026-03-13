@@ -41,5 +41,10 @@ jobs:
           bun run prepare
           bun run build:lib
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          registry-url: https://registry.npmjs.org
+
       - name: Publish to npm
         run: npm publish --provenance --ignore-scripts # --provenance: OIDC 인증 및 출처 증명, --ignore-scripts: skip prepare script (already ran in Build package step)
