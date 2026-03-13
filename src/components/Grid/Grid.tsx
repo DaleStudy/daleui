@@ -13,6 +13,7 @@ type As =
   | "nav"
   | "span";
 
+/** grid-template-areas 영역 이름 (문자열 또는 string[][]) */
 type Areas = string | string[][];
 
 /**
@@ -38,37 +39,35 @@ export interface GridProps
   children: React.ReactNode;
   /** 렌더링할 HTML 요소 */
   as?: As;
-  /** 열 템플릿 정의 (예: "repeat(3, 1fr)", "1fr 2fr 1fr", "100px auto 1fr") */
+  /** 열 템플릿 (예: "repeat(3, 1fr)", "1fr 2fr 1fr", "repeat(auto-fit, minmax(200px, 1fr))") */
   gridTemplateColumns?: string;
-  /** 행 템플릿 정의 (예: "repeat(2, 100px)", "auto 1fr auto") */
+  /** 행 템플릿 (예: "repeat(2, 100px)", "auto 1fr auto") */
   gridTemplateRows?: string;
   /** 요소 간 간격 */
   gap?: Spacing;
-  /** grid-template-areas 설정 (문자열 또는 2차원 배열) */
+  /** grid-template-areas 영역 이름 (예: "\"header header\" \"sidebar main\"", [["header", "header"], ["sidebar", "main"]]). GridItem의 gridArea와 함께 사용 */
   areas?: Areas;
+  /** grid-auto-flow (row | column | rowDense | columnDense, 기본값: row) */
+  autoFlow?: RecipeVariant<typeof gridVariants>["autoFlow"];
+  /** 그리드 아이템 인라인 축 정렬 (start | center | end | stretch, 기본값: stretch) */
+  justifyItems?: RecipeVariant<typeof gridVariants>["justifyItems"];
+  /** 그리드 아이템 블록 축 정렬 (start | center | end | stretch, 기본값: stretch) */
+  alignItems?: RecipeVariant<typeof gridVariants>["alignItems"];
+  /** 그리드 컨테이너 인라인 축 정렬 (start | center | end | between | around | stretch) */
+  justifyContent?: RecipeVariant<typeof gridVariants>["justifyContent"];
+  /** 그리드 컨테이너 블록 축 정렬 (start | center | end | between | around | stretch) */
+  alignContent?: RecipeVariant<typeof gridVariants>["alignContent"];
 }
 
 /**
  * CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
- *
  * - `children` 속성을 통해서 자식 요소들을 전달할 수 있습니다.
  * - `as` 속성을 통해서 렌더링할 HTML 요소를 지정할 수 있습니다. 기본값은 `div`입니다.
- * - `gridTemplateColumns` 속성을 통해서 열 템플릿을 지정할 수 있습니다.
- *   - 예: `"repeat(3, 1fr)"`, `"1fr 2fr 1fr"`, `"100px auto 1fr"`, `"repeat(auto-fit, minmax(200px, 1fr))"`
- * - `gridTemplateRows` 속성을 통해서 행 템플릿을 지정할 수 있습니다.
- *   - 예: `"repeat(2, 100px)"`, `"auto 1fr auto"`
- * - `gap` 속성을 통해서 요소 간 간격을 지정할 수 있습니다.
- * - `autoFlow` 속성을 통해서 grid-auto-flow를 지정할 수 있습니다. `row`, `column`, `rowDense`, `columnDense` 중 선택 가능하며 기본값은 `row`입니다.
- * - `justifyItems` 속성을 통해서 그리드 아이템의 인라인 축 정렬을 지정할 수 있습니다. `start`, `center`, `end`, `stretch` 중 선택 가능하며 기본값은 `stretch`입니다.
- * - `alignItems` 속성을 통해서 그리드 아이템의 블록 축 정렬을 지정할 수 있습니다. `start`, `center`, `end`, `stretch` 중 선택 가능하며 기본값은 `stretch`입니다.
- * - `justifyContent` 속성을 통해서 그리드 컨테이너의 인라인 축 정렬을 지정할 수 있습니다. `start`, `center`, `end`, `between`, `around`, `stretch` 중 선택 가능합니다.
- * - `alignContent` 속성을 통해서 그리드 컨테이너의 블록 축 정렬을 지정할 수 있습니다. `start`, `center`, `end`, `between`, `around`, `stretch` 중 선택 가능합니다.
- * - `areas` 속성을 통해서 grid-template-areas를 지정할 수 있습니다. 문자열 또는 2차원 배열 형태로 전달할 수 있습니다.
- *   - 문자열: `'"header header" "sidebar main" "footer footer"'`
- *   - 2차원 배열: `[["header", "header"], ["sidebar", "main"], ["footer", "footer"]]`
+ * - `role` 속성을 통해서 역할을 지정할 수 있습니다.
+ * - `gridTemplateColumns`, `gridTemplateRows`, `gap`, `areas` 등 CSS Grid 관련 props를 통해 레이아웃을 설정할 수 있습니다.
  *
  * ### 접근성(Accessibility) 안내
- * - 이미 시맨틱 태그를 쓰면(as=`nav` | `main` | `aside` | `footer` 등) 중복 role 지정은 피하시길 바랍니다.
+ * - 이미 시맨틱 태그를 쓰면(as=nav | main | aside | footer 등) 중복 role 지정은 피하시길 바랍니다.
  * - 접근성을 위해 기본적으로 적절한 HTML 시맨틱 요소를 사용하고 필요시 ARIA 속성을 활용하여 접근성을 향상시킵니다.
  */
 export const Grid = ({
