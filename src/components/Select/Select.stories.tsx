@@ -102,7 +102,7 @@ const ControlledSelect = (args: React.ComponentProps<typeof Select>) => {
       <Select
         {...args}
         value={value}
-        onChange={(newValue) => setValue(newValue)}
+        onChange={(e) => setValue(e.target.value)}
       />
       <div className={css({ mt: "16", fontSize: "sm" })}>
         <p>선택된 값: {value || "없음"}</p>

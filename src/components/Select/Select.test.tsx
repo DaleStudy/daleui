@@ -171,7 +171,11 @@ describe("사용자 액션", () => {
     await user.selectOptions(select, "react");
 
     expect(handleChange).toHaveBeenCalledTimes(1);
-    expect(handleChange).toHaveBeenCalledWith("react");
+    expect(handleChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.objectContaining({ value: "react" }),
+      }),
+    );
   });
 
   test("disabled가 true일 때 사용자 액션이 차단된다", () => {
@@ -234,7 +238,11 @@ describe("사용자 액션", () => {
     });
     await user.click(clearButton);
 
-    expect(handleChange).toHaveBeenCalledWith("");
+    expect(handleChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.objectContaining({ value: "" }),
+      }),
+    );
   });
 
   test("clear 버튼 클릭 시 placeholder가 다시 표시된다", async () => {
@@ -247,8 +255,8 @@ describe("사용자 액션", () => {
         <Select
           value={selectedValue}
           clearButtonName="clear"
-          onChange={(value) => {
-            setSelectedValue(value);
+          onChange={(e) => {
+            setSelectedValue(e.target.value);
           }}
           placeholder="라이브러리를 선택하세요"
         >
@@ -320,7 +328,11 @@ describe("사용자 액션", () => {
     });
     await user.click(clearButton);
 
-    expect(handleChange).toHaveBeenCalledWith("");
+    expect(handleChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.objectContaining({ value: "" }),
+      }),
+    );
   });
 });
 
@@ -335,9 +347,9 @@ describe("상태 관리", () => {
       return (
         <Select
           value={selectedValue}
-          onChange={(value) => {
-            handleChange(value);
-            setSelectedValue(value);
+          onChange={(e) => {
+            handleChange(e.target.value);
+            setSelectedValue(e.target.value);
           }}
           placeholder="라이브러리를 선택하세요"
         >
