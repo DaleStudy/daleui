@@ -52,7 +52,8 @@ const ControlledPasswordInput = (
   const [value, setValue] = useState("");
   const [hasError, setHasError] = useState(false);
 
-  const handleChange = (newValue: string) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
     setValue(newValue);
 
     // 8자 미만이면 에러

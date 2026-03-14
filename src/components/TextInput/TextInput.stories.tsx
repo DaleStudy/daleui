@@ -123,7 +123,8 @@ const ControlledTextInput = () => {
   const [value, setValue] = useState("");
   const [hasError, setHasError] = useState(false);
 
-  const handleChange = (newValue: string) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
     setValue(newValue);
 
     if (newValue.length > 0 && newValue.length < 10) {

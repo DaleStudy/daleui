@@ -21,7 +21,7 @@ export interface PasswordInputProps extends Omit<
   /** 초기 입력값 (uncontrolled 모드) */
   defaultValue?: string;
   /** 값이 변경될 때 호출되는 함수 */
-  onChange?: (value: string) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /** DOM 요소 참조 */
   ref?: Ref<HTMLInputElement>;
 }
@@ -51,7 +51,7 @@ export function PasswordInput({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e.target.value);
+    onChange?.(e);
   };
 
   return (

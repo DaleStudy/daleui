@@ -3,7 +3,7 @@ import { cva, cx } from "../../../styled-system/css";
 import { Icon, type IconProps } from "../Icon/Icon";
 export interface TextInputProps extends Omit<
   ComponentPropsWithoutRef<"input">,
-  "size" | "value" | "defaultValue" | "onChange"
+  "size" | "value" | "defaultValue" | "onChange" | "disabled"
 > {
   /** custom props */
   /** 오류 상태 여부 (true일 경우 danger 색상으로 표시됩니다) */
@@ -26,7 +26,7 @@ export interface TextInputProps extends Omit<
   /** 초기 입력값 (uncontrolled 모드) */
   defaultValue?: string;
   /** 값이 변경될 때 호출되는 함수 */
-  onChange?: (value: string) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /** DOM 요소 참조 */
   ref?: Ref<HTMLInputElement>;
 }
@@ -64,7 +64,7 @@ export function TextInput({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e.target.value);
+    onChange?.(e);
   };
 
   return (
