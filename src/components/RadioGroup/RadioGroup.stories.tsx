@@ -142,34 +142,6 @@ export const Tones: Story = {
           label="브랜드 색조 (Brand)"
           tone="brand"
         />
-
-        <RadioGroup
-          {...args}
-          name="danger-tone"
-          label="위험 색조 (Danger)"
-          tone="danger"
-        />
-
-        <RadioGroup
-          {...args}
-          name="warning-tone"
-          label="경고 색조 (Warning)"
-          tone="warning"
-        />
-
-        <RadioGroup
-          {...args}
-          name="success-tone"
-          label="성공 색조 (Success)"
-          tone="success"
-        />
-
-        <RadioGroup
-          {...args}
-          name="info-tone"
-          label="정보 색조 (Info)"
-          tone="info"
-        />
       </div>
     );
   },
@@ -221,6 +193,7 @@ export const Invalid: Story = {
           name="invalid-unselected"
           label="에러 상태 (선택 없음)"
           invalid
+          helperText="필수 값을 선택해주세요."
         />
 
         <RadioGroup
@@ -228,6 +201,7 @@ export const Invalid: Story = {
           name="invalid-selected"
           label="에러 상태 (선택됨)"
           invalid
+          helperText="올바른 옵션을 선택해주세요."
           defaultValue="banana"
         />
 
@@ -282,6 +256,46 @@ export const Hint: Story = {
       control: false,
     },
     label: {
+      control: false,
+    },
+    required: {
+      control: false,
+    },
+  },
+};
+
+export const HelperText: Story = {
+  render: (args) => {
+    return (
+      <VStack gap="32">
+        <RadioGroup
+          {...args}
+          name="helper-text-basic"
+          label="좋아하는 과일을 선택하세요"
+          invalid
+          required
+          helperText="필수 값을 선택해주세요."
+        />
+
+        <RadioGroup
+          {...args}
+          name="helper-text-horizontal"
+          label="좋아하는 과일을 선택하세요"
+          orientation="horizontal"
+          invalid
+          helperText="필수 값을 선택해주세요."
+        />
+      </VStack>
+    );
+  },
+  argTypes: {
+    name: {
+      control: false,
+    },
+    label: {
+      control: false,
+    },
+    invalid: {
       control: false,
     },
     required: {

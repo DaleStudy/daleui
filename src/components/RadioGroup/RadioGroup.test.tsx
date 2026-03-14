@@ -234,10 +234,6 @@ describe("Radio", () => {
   test.each([
     ["neutral", "bd-c_slate.9"],
     ["brand", "bd-c_slate.9"],
-    ["danger", "bd-c_fg.danger"],
-    ["warning", "bd-c_slate.9"],
-    ["success", "bd-c_slate.9"],
-    ["info", "bd-c_slate.9"],
   ] as const)("%s 톤을 올바르게 렌더링한다", (tone, className) => {
     render(
       <RadioGroup name="test" label="Test Radio Group" tone={tone}>
@@ -464,5 +460,50 @@ describe("RadioGroup required", () => {
 
     const radio = screen.getByLabelText("Option 1");
     expect(radio).toHaveAttribute("aria-required", "false");
+  });
+});
+
+describe("RadioGroup helperText", () => {
+  test("helperText가 제공되면 도움말 텍스트가 렌더링된다", () => {
+    render(
+      <RadioGroup
+        name="test"
+        label="Test Radio Group"
+        helperText="필수 값을 선택해주세요."
+      >
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    expect(screen.getByText("필수 값을 선택해주세요.")).toBeInTheDocument();
+  });
+
+  test("helperText가 없으면 도움말 텍스트가 렌더링되지 않는다", () => {
+    render(
+      <RadioGroup name="test" label="Test Radio Group">
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    expect(
+      screen.queryByText("필수 값을 선택해주세요."),
+    ).not.toBeInTheDocument();
+  });
+
+  test("helperText와 invalid가 함께 렌더링된다", () => {
+    render(
+      <RadioGroup
+        name="test"
+        label="Test Radio Group"
+        helperText="필수 값을 선택해주세요."
+        invalid
+      >
+        <Radio value="option1">Option 1</Radio>
+      </RadioGroup>,
+    );
+
+    expect(screen.getByText("필수 값을 선택해주세요.")).toBeInTheDocument();
+    const radio = screen.getByLabelText("Option 1");
+    expect(radio).toHaveAttribute("aria-invalid", "true");
   });
 });
