@@ -1,11 +1,13 @@
 import { RadioGroup as ArkRadioGroup } from "@ark-ui/react/radio-group";
-import { type ReactNode, createContext, useContext } from "react";
+import { type ReactNode, createContext, useContext, useId } from "react";
 import { css, cva } from "../../../styled-system/css";
 import { flex } from "../../../styled-system/patterns";
-import type { Tone } from "../../tokens/colors";
+import { Icon } from "../Icon/Icon";
+
+type RadioGroupTone = "brand" | "neutral";
 
 const RadioGroupContext = createContext<{
-  tone: Tone;
+  tone: RadioGroupTone;
   disabled?: boolean;
   invalid?: boolean;
   required?: boolean;
@@ -61,7 +63,7 @@ export interface RadioGroupProps {
    * 색상 강조를 지정합니다.
    * @default "brand"
    */
-  tone?: Tone;
+  tone?: RadioGroupTone;
 
   /**
    * 유효하지 않은 상태를 표시합니다.
@@ -80,6 +82,12 @@ export interface RadioGroupProps {
    * @default undefined
    */
   hint?: string;
+
+  /**
+   * 옵션 목록 아래에 표시되는 도움말 텍스트입니다.
+   * @default undefined
+   */
+  helperText?: string;
 }
 
 /**
@@ -110,7 +118,10 @@ export function RadioGroup({
   invalid = false,
   required = false,
   hint,
+  helperText,
 }: RadioGroupProps) {
+  const helperTextId = `${useId()}-helper-text`;
+
   return (
     <RadioGroupContext.Provider value={{ tone, disabled, invalid, required }}>
       <ArkRadioGroup.Root
@@ -123,6 +134,7 @@ export function RadioGroup({
         disabled={disabled}
         orientation={orientation}
         className={radioGroupRootStyles}
+        aria-describedby={helperText ? helperTextId : undefined}
       >
         <ArkRadioGroup.Label
           className={css({
@@ -145,8 +157,7 @@ export function RadioGroup({
           {hint && (
             <span
               className={css({
-                textStyle: "body.lg",
-                fontWeight: "medium",
+                textStyle: "label.sm",
               })}
             >
               {" "}
@@ -155,6 +166,27 @@ export function RadioGroup({
           )}
         </ArkRadioGroup.Label>
         <div className={radioGroupStyles({ orientation })}>{children}</div>
+        {helperText && (
+          <div
+            id={helperTextId}
+            className={flex({
+              alignItems: "center",
+              gap: "4",
+              paddingLeft: "4",
+              marginTop: "4",
+            })}
+          >
+            <Icon name="circleAlert" tone="danger" size="sm" />
+            <span
+              className={css({
+                color: "fg.danger",
+                textStyle: "body.sm",
+              })}
+            >
+              {helperText}
+            </span>
+          </div>
+        )}
       </ArkRadioGroup.Root>
     </RadioGroupContext.Provider>
   );
@@ -168,16 +200,15 @@ const radioGroupRootStyles = css({
 const radioGroupStyles = cva({
   base: {
     display: "flex",
+    gap: "8",
   },
   variants: {
     orientation: {
       horizontal: {
         flexDirection: "row",
-        gap: "8",
       },
       vertical: {
         flexDirection: "column",
-        gap: "[9px]",
       },
     },
   },
@@ -265,7 +296,6 @@ export function Radio({ value, children, disabled, ref }: RadioProps) {
         <ArkRadioGroup.ItemText
           className={labelTextStyles({
             disabled: isDisabled,
-            invalid: showInvalid,
           })}
         >
           {children}
@@ -319,39 +349,6 @@ const radioCircleStyles = cva({
           outlineColor: "border.brand.focus",
         },
       },
-      danger: {
-        borderColor: "fg.danger",
-        "[data-state='checked'] &": {
-          borderColor: "fg.danger",
-        },
-        "[data-focus-visible] &, [data-active] &": {
-          outlineColor: "border.danger",
-        },
-      },
-      warning: {
-        "[data-state='checked'] &": {
-          borderColor: "fg.warning",
-        },
-        "[data-focus-visible] &, [data-active] &": {
-          outlineColor: "border.warning",
-        },
-      },
-      success: {
-        "[data-state='checked'] &": {
-          borderColor: "fg.success",
-        },
-        "[data-focus-visible] &, [data-active] &": {
-          outlineColor: "border.success",
-        },
-      },
-      info: {
-        "[data-state='checked'] &": {
-          borderColor: "fg.info",
-        },
-        "[data-focus-visible] &, [data-active] &": {
-          outlineColor: "border.info",
-        },
-      },
     },
     disabled: {
       true: {
@@ -377,7 +374,7 @@ const radioHoverStyles = cva({
     height: "6",
     borderRadius: "full",
     opacity: 0,
-    _hover: {
+    "[data-scope='radio-group'][data-part='item']:hover &": {
       opacity: 0.2,
     },
   },
@@ -385,10 +382,6 @@ const radioHoverStyles = cva({
     tone: {
       neutral: { backgroundColor: "fg.neutral" },
       brand: { backgroundColor: "fg.brand" },
-      danger: { backgroundColor: "fg.danger" },
-      warning: { backgroundColor: "fg.warning" },
-      success: { backgroundColor: "fg.success" },
-      info: { backgroundColor: "fg.info" },
     },
     disabled: {
       true: {
@@ -413,11 +406,6 @@ const labelTextStyles = cva({
         color: "fg.neutral.disabled",
       },
     },
-    invalid: {
-      true: {
-        color: "fg.danger",
-      },
-    },
   },
 });
 
@@ -440,10 +428,6 @@ const radioDotStyles = cva({
     tone: {
       neutral: { backgroundColor: "slate.9" },
       brand: { backgroundColor: "fg.brand" },
-      danger: { backgroundColor: "fg.danger" },
-      warning: { backgroundColor: "fg.warning" },
-      success: { backgroundColor: "fg.success" },
-      info: { backgroundColor: "fg.info" },
     },
     disabled: {
       true: {

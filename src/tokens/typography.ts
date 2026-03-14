@@ -80,7 +80,7 @@ export const textStyles = {
       value: {
         fontFamily: "sans",
         fontSize: "sm",
-        fontWeight: "semibold",
+        fontWeight: "normal",
         lineHeight: "balanced",
         letterSpacing: "balanced",
       },
