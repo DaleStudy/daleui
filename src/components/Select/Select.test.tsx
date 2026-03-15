@@ -41,7 +41,8 @@ describe("렌더링", () => {
         <option value="svelte">Svelte</option>
       </Select>,
     );
-    expect(screen.getByRole("option", { name: "React" })).toBeInTheDocument();
+    const select: HTMLSelectElement = screen.getByRole("combobox");
+    expect(select.value).toBe("react");
   });
 
   test("value와 defaultValue가 모두 제공되면 value가 우선적으로 적용된다", () => {
