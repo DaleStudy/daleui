@@ -15,7 +15,6 @@ export interface PasswordInputProps extends Omit<
   /** 비활성화 여부 */
   disabled?: boolean;
 
-  /** native props */
   /** 입력값 (controlled 모드) */
   value?: string;
   /** 초기 입력값 (uncontrolled 모드) */

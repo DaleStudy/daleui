@@ -5,7 +5,6 @@ export interface TextInputProps extends Omit<
   ComponentPropsWithoutRef<"input">,
   "size" | "value" | "defaultValue" | "onChange" | "disabled"
 > {
-  /** custom props */
   /** 오류 상태 여부 (true일 경우 danger 색상으로 표시됩니다) */
   invalid?: boolean;
   /** 필수 입력 여부 */
@@ -20,7 +19,6 @@ export interface TextInputProps extends Omit<
   disabled?: boolean;
   id?: string;
 
-  /** native props */
   /** 입력값 (controlled 모드) */
   value?: string;
   /** 초기 입력값 (uncontrolled 모드) */

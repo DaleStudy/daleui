@@ -12,7 +12,6 @@ export interface SelectProps extends Omit<
   HTMLAttributes<HTMLSelectElement>,
   "onChange"
 > {
-  /** custom props */
   /** 오류 상태 */
   invalid?: boolean;
   /** 지우기 버튼의 aria-label */
@@ -20,7 +19,6 @@ export interface SelectProps extends Omit<
   /** placeholder 텍스트 */
   placeholder?: string;
 
-  /** native props */
   /** 선택된 값 (controlled 모드) */
   value?: string;
   /** 초기 선택값 (uncontrolled 모드) */
