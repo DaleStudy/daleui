@@ -42,3 +42,13 @@ test("required + disabled일 때 별표가 비활성화 색상으로 렌더링�
   const asterisk = screen.getByLabelText("옵션 필수");
   expect(asterisk).toHaveClass("c_fg.neutral.disabled");
 });
+
+test("children이 있을 때 label 안에 렌더링됨", () => {
+  render(
+    <Label labelText="라벨" data-testid="label">
+      <input placeholder="입력" />
+    </Label>,
+  );
+  const label = screen.getByTestId("label");
+  expect(label).toContainElement(screen.getByPlaceholderText("입력"));
+});
