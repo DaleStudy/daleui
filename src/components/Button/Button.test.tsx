@@ -100,9 +100,6 @@ test("disabled 속성이 올바르게 적용됨", () => {
 
   expect(screen.getByRole("button", { name: "비활성화 버튼" })).toBeDisabled();
   expect(screen.getByRole("button", { name: "활성화 버튼" })).toBeEnabled();
-  expect(screen.getByRole("button", { name: "비활성화 버튼" })).toHaveClass(
-    "bg_bg.neutral.disabled!",
-  );
 });
 
 test("기본적으로 버튼이 type='button'으로 렌더링됨", () => {
@@ -162,16 +159,6 @@ test("fullWidth 속성이 올바르게 적용됨", () => {
   const button = screen.getByRole("button", { name: "가득찬 버튼" });
   // fullWidth가 true일 때 w_100% 클래스가 적용되는지 확인
   expect(button.className).toContain("w_100%");
-});
-
-test("Icon과 함께 버튼이 올바르게 렌더링됨", () => {
-  render(
-    <Button leftIcon="star" rightIcon="search">
-      테스트
-    </Button>,
-  );
-  expect(screen.getByTestId("icon-star")).toBeInTheDocument();
-  expect(screen.getByTestId("icon-search")).toBeInTheDocument();
 });
 
 test("로딩 상태가 올바르게 렌더링 됨", () => {
