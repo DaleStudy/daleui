@@ -4,7 +4,7 @@ import { Icon } from "../Icon/Icon";
 
 export interface PasswordInputProps extends Omit<
   ComponentPropsWithoutRef<"input">,
-  "size" | "type"
+  "size" | "type" | "value" | "defaultValue" | "onChange" | "disabled"
 > {
   /** 플레이스홀더 */
   placeholder?: string;
@@ -14,6 +14,13 @@ export interface PasswordInputProps extends Omit<
   required?: boolean;
   /** 비활성화 여부 */
   disabled?: boolean;
+
+  /** 입력값 (controlled 모드) */
+  value?: string;
+  /** 초기 입력값 (uncontrolled 모드) */
+  defaultValue?: string;
+  /** 값이 변경될 때 호출되는 함수 */
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /** DOM 요소 참조 */
   ref?: Ref<HTMLInputElement>;
 }
@@ -28,6 +35,9 @@ export function PasswordInput({
   required = false,
   disabled = false,
   placeholder = "패스워드를 입력해주세요.",
+  value,
+  defaultValue,
+  onChange,
   ref,
   ...rest
 }: PasswordInputProps) {
@@ -51,6 +61,9 @@ export function PasswordInput({
         placeholder={placeholder}
         disabled={disabled}
         className={inputStyles()}
+        value={value}
+        defaultValue={defaultValue}
+        onChange={onChange}
         aria-label="패스워드"
         aria-invalid={invalid}
         aria-required={required}

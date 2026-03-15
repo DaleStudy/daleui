@@ -33,6 +33,34 @@ describe("렌더링", () => {
     expect(select.value).toBe("vue");
   });
 
+  test("value가 제공되면 해당 값을 선택한다", () => {
+    render(
+      <Select value="react" placeholder="라이브러리를 선택하세요">
+        <option value="react">React</option>
+        <option value="vue">Vue</option>
+        <option value="svelte">Svelte</option>
+      </Select>,
+    );
+    const select: HTMLSelectElement = screen.getByRole("combobox");
+    expect(select.value).toBe("react");
+  });
+
+  test("value와 defaultValue가 모두 제공되면 value가 우선적으로 적용된다", () => {
+    render(
+      <Select
+        value="react"
+        defaultValue="vue"
+        placeholder="라이브러리를 선택하세요"
+      >
+        <option value="react">React</option>
+        <option value="vue">Vue</option>
+        <option value="svelte">Svelte</option>
+      </Select>,
+    );
+    const select: HTMLSelectElement = screen.getByRole("combobox");
+    expect(select.value).toBe("react");
+  });
+
   test('value가 "" 일 때 placeholder가 표시된다', () => {
     render(
       <Select
