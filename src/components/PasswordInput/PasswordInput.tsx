@@ -49,10 +49,6 @@ export function PasswordInput({
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e);
-  };
-
   return (
     <div
       className={containerStyles({
@@ -67,7 +63,7 @@ export function PasswordInput({
         className={inputStyles()}
         value={value}
         defaultValue={defaultValue}
-        onChange={handleChange}
+        onChange={onChange}
         aria-label="패스워드"
         aria-invalid={invalid}
         aria-required={required}

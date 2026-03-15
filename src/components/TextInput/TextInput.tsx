@@ -60,10 +60,6 @@ export function TextInput({
     );
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e);
-  };
-
   return (
     <div
       className={cx(wrapperStyles({ invalid }), className)}
@@ -75,7 +71,7 @@ export function TextInput({
         ref={ref}
         value={value}
         defaultValue={defaultValue}
-        onChange={handleChange}
+        onChange={onChange}
         disabled={disabled}
         aria-invalid={invalid}
         aria-required={required}
