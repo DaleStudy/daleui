@@ -98,6 +98,7 @@ export const Controlled: Story = {
     value: { control: false },
     onChange: { control: false },
     defaultValue: { control: false },
+    invalid: { control: false },
   },
 };
 
