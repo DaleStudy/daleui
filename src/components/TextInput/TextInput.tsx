@@ -17,7 +17,6 @@ export interface TextInputProps extends Omit<
   placeholder?: string;
   /** 비활성화 여부 */
   disabled?: boolean;
-  id?: string;
 
   /** 입력값 (controlled 모드) */
   value?: string;
