@@ -15,9 +15,8 @@ export default {
   args: {
     labelText: "타이틀",
     tone: "neutral",
-    variant: "default",
+    required: false,
     disabled: false,
-    description: "",
   },
 } satisfies Meta<typeof Label>;
 
@@ -67,13 +66,12 @@ export const Disabled: StoryObj<typeof Label> = {
   },
 };
 
-export const Variants: StoryObj<typeof Label> = {
+export const Required: StoryObj<typeof Label> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
-        <Label {...args} variant="default" labelText="기본 라벨"></Label>
-        <Label {...args} variant="required" labelText="필수 라벨"></Label>
-        <Label {...args} variant="optional" labelText="선택 라벨"></Label>
+        <Label {...args} labelText="기본 라벨"></Label>
+        <Label {...args} required labelText="필수 라벨"></Label>
       </div>
     );
   },
@@ -81,33 +79,7 @@ export const Variants: StoryObj<typeof Label> = {
     labelText: {
       control: false,
     },
-    variant: {
-      control: false,
-    },
-    children: {
-      control: false,
-    },
-  },
-};
-
-export const Description: StoryObj<typeof Label> = {
-  render: (args) => {
-    return (
-      <div className={vstack({ gap: "16" })}>
-        <Label
-          {...args}
-          labelText="보조설명문 있는 라벨"
-          description="보조설명문"
-        ></Label>
-        <Label {...args} labelText="보조설명문 없는 라벨"></Label>
-      </div>
-    );
-  },
-  argTypes: {
-    labelText: {
-      control: false,
-    },
-    description: {
+    required: {
       control: false,
     },
     children: {
@@ -117,14 +89,10 @@ export const Description: StoryObj<typeof Label> = {
 };
 
 export const WithTextInput: StoryObj<typeof Label> = {
-  args: {
-    description: "보조 설명문",
-  },
-
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
-        <Label {...args}>
+        <Label {...args} labelText="타이틀">
           <TextInput placeholder="내용을 입력해주세요"></TextInput>
         </Label>
       </div>
