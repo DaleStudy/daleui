@@ -140,6 +140,7 @@ const containerStyles = cva({
 const inputStyles = cva({
   base: {
     flex: "1",
+    minWidth: 0,
     border: "none",
     outline: "none",
     color: "fg.neutral.default",
