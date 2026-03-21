@@ -138,20 +138,20 @@ const styles = cva({
   variants: {
     size: {
       sm: {
-        px: "8",
-        py: "4",
+        px: "12",
+        py: "8",
         lineHeight: "1rem",
         fontSize: "sm",
       },
       md: {
         px: "12",
-        py: "4",
+        py: "0.625rem",
         lineHeight: "1.25rem",
         fontSize: "md",
       },
       lg: {
-        px: "16",
-        py: "8",
+        px: "20",
+        py: "12",
         lineHeight: "1.5rem",
         fontSize: "lg",
       },
@@ -274,24 +274,24 @@ const styles = cva({
       variant: "outline",
       size: "sm",
       css: {
-        px: "calc(0.5rem - 1px)",
-        py: "calc(0.25rem - 1px)",
+        px: "calc(0.75rem - 1px)",
+        py: "calc(0.5rem - 1px)",
       },
     },
     {
       variant: "outline",
       size: "md",
       css: {
-        px: "calc(0.75rem - 1px)",
-        py: "calc(0.25rem - 1px)",
+        px: "calc(1rem - 1px)",
+        py: "calc(0.625rem - 1px)",
       },
     },
     {
       variant: "outline",
       size: "lg",
       css: {
-        px: "calc(1rem - 1px)",
-        py: "calc(0.5rem - 1px)",
+        px: "calc(1.25rem - 1px)",
+        py: "calc(0.75rem - 1px)",
       },
     },
     {
