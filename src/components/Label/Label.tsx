@@ -1,13 +1,11 @@
 import type { HTMLAttributes, ReactElement } from "react";
 import { css, cva } from "../../../styled-system/css";
-import { Text } from "../Text/Text";
 import type { ButtonProps } from "../Button/Button";
 import type { TextInputProps } from "../TextInput/TextInput";
 import type { CheckboxProps } from "../Checkbox/Checkbox";
 import type { RadioGroupProps } from "../RadioGroup/RadioGroup";
 
 type LabelTone = "danger" | "neutral";
-type LabelVariant = "default" | "required" | "optional";
 
 // Label태그와 연결 가능한 요소들
 export type LabelFormChild =
@@ -17,51 +15,51 @@ export type LabelFormChild =
   | ReactElement<TextInputProps>;
 
 export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
-  /** 라벨과 연결된 요소 */
+  /** 라벨과 연결할 입력 요소 (TextInput, Checkbox, RadioGroup, Button 등) */
   children?: LabelFormChild;
-  /** 라벨 텍스트 */
+  /** 라벨 텍스트 (필수) */
   labelText: string;
-  /** 색조 */
+  /** 라벨의 색조 */
   tone?: LabelTone;
   /** 라벨 비활성화 여부 */
   disabled?: boolean;
-  /** 라벨 종류 (기본/필수/옵션선택) */
-  variant?: LabelVariant;
-  /** 보조설명문 텍스트 */
-  description?: string;
-  /** 라벨과 연결된 요소의 id */
+  /** 필수 입력 여부 (true일 경우 별표(*) 표시) */
+  required?: boolean;
+  /** 라벨과 연결할 입력 요소의 id */
   htmlFor?: string;
 }
 
 /**
- * - `children` 속성을 통해서 자식 요소는 `Button`, `Checkbox`, `RadioGroup`, `TextInput` 컴포넌트가 올 수 있습니다. (form요소 컴포넌트 추가 개발 시, 업데이트 예정)
- * - `labelText` 속성을 통해서 라벨의 텍스트를 지정할 수 있습니다.
- * - `tone` 속성을 통해서 색상 강조를 지정할 수 있습니다.
- * - `disabled` 속성을 통해서 라벨의 비활성화 여부를 설정할 수 있습니다.
- * - `variant` 속성을 통해서 라벨의 종류(기본/필수/옵션선택)를 선택할 수 있습니다.
- * - `description` 속성을 통해서 보조설명문을 추가할 수 있습니다.
- * - `htmlFor` 속성을 통해서 라벨과 연결할 요소의 id를 지정할 수 있습니다.
+ * 라벨(Label)은 입력 요소(TextInput, Select, Checkbox 등)에 이름을 부여해 사용자가 해당 필드의 목적을 명확하게 이해하도록 돕는 텍스트 컴포넌트입니다.
+ *
+ * 입력 요소 없이 단독으로 사용할 수도 있고, `children`으로 입력 요소를 전달하여 라벨과 연결할 수도 있습니다.
+ *
+ * `htmlFor` 속성을 사용하면 라벨 외부에 있는 입력 요소와도 연결할 수 있습니다.
+ *
+ * ### 접근성(Accessibility) 안내
+ * - 이 컴포넌트는 `<label>` 태그를 사용하여 시맨틱하게 구현되어 있습니다.
+ * - `required`를 true로 설정하면 별표(*)와 함께 `aria-label="옵션 필수"`가 자동으로 추가됩니다.
+ * - `disabled` 상태에서도 `required` 별표는 표시되지만, 비활성화 색상으로 변경됩니다.
+ * - `htmlFor` 속성을 사용해 라벨과 입력 요소를 명시적으로 연결하면, 라벨을 클릭했을 때 해당 입력 요소로 포커스가 이동합니다. 또한 `<label>` 내부에 입력 요소를 직접 포함하는 방식으로도 동일하게 연결할 수 있습니다.
  */
 export function Label({
   children,
   labelText,
   tone = "neutral",
-  variant = "default",
+  required = false,
   disabled = false,
-  description,
   ...rest
 }: LabelProps) {
   return (
     <label
       className={styles({
         tone: disabled ? undefined : tone,
-        variant,
         disabled,
       })}
       {...rest}
     >
       <span className={css({ textStyle: "label.md.strong" })}>{labelText}</span>
-      {variant === "required" && (
+      {required && (
         <span
           aria-label="옵션 필수"
           className={css({
@@ -72,26 +70,13 @@ export function Label({
           *
         </span>
       )}
-      {variant === "optional" && (
-        <span aria-label="옵션 선택"> (옵션 선택)</span>
-      )}
-      {description && (
-        <Text as="div" size="sm">
-          {description}
-        </Text>
-      )}
-      {children && <div style={{ marginTop: "8px" }}>{children}</div>}
+      {children && <div className={css({ marginTop: "8" })}>{children}</div>}
     </label>
   );
 }
 
 const styles = cva({
   variants: {
-    variant: {
-      default: {},
-      required: {},
-      optional: {},
-    },
     tone: {
       danger: {
         color: "fg.danger",
@@ -104,10 +89,6 @@ const styles = cva({
       true: {
         color: "fg.neutral.disabled",
       },
-      false: {},
-    },
-    isDescription: {
-      true: {},
       false: {},
     },
   },
