@@ -38,6 +38,24 @@ export default {
 
 **tone** 속성은 Root에서 설정하며, Icon과 Link에 자동으로 전달됩니다.
 **outline** 속성을 사용하여 카드에 테두리를 추가할 수 있습니다.
+
+### RSC 지원 안내
+
+이 컴포넌트는 named-export방식으로 React Server Components(RSC)를 지원합니다. RSC를 사용할 때는 \`import { Card, CardBody, CardTitle, CardDescription, CardIcon, CardLink } from "daleui"\`와 같이 named-import 방식으로 가져와야 합니다. default-export 방식으로는 RSC 지원이 불가능하므로, RSC 환경에서는 반드시 named-export 방식을 사용해 주세요.
+
+\`\`\`tsx
+import { Card, CardBody, CardTitle } from "daleui";
+
+export default function MyCard() {
+  return (
+    <Card tone="brand" outline>
+      <CardBody>
+        <CardTitle>카드 제목</CardTitle>
+      </CardBody>
+    </Card>
+  );
+}
+\`\`\`
         `,
       },
     },

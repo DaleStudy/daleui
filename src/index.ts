@@ -2,7 +2,20 @@ import "./index.css";
 
 export { Box, type BoxProps } from "./components/Box/Box";
 export { Button, type ButtonProps } from "./components/Button/Button";
-export { Card } from "./components/Card/Card";
+export {
+  Card,
+  CardBody,
+  CardTitle,
+  CardDescription,
+  CardIcon,
+  CardLink,
+  type CardRootProps,
+  type CardBodyProps,
+  type CardTitleProps,
+  type CardDescriptionProps,
+  type CardIconProps,
+  type CardLinkProps,
+} from "./components/Card/Card";
 export { Checkbox, type CheckboxProps } from "./components/Checkbox/Checkbox";
 export { Flex, type FlexProps } from "./components/Flex/Flex";
 export { Heading, type HeadingProps } from "./components/Heading/Heading";
