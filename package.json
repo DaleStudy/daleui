@@ -81,7 +81,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "eslint-plugin-storybook": "^10.2.19",
-    "eslint-plugin-testing-library": "^7.15.4",
+    "eslint-plugin-testing-library": "^7.16.0",
     "globals": "^16.5.0",
     "happy-dom": "^20.7.0",
     "prettier": "^3.8.1",
