@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@ark-ui/react": "^5.31.0",
-    "lucide-react": "^0.563.0"
+    "lucide-react": "^0.575.0"
   },
   "devDependencies": {
     "react": "^19.2.4",
