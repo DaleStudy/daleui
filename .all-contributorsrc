@@ -58,16 +58,6 @@
       ]
     },
     {
-      "login": "Hecklebot",
-      "name": "Hansaem.so",
-      "avatar_url": "https://avatars.githubusercontent.com/u/51806574?v=4",
-      "profile": "https://velog.io/@hecklebot",
-      "contributions": [
-        "code",
-        "doc"
-      ]
-    },
-    {
       "login": "sseung30",
       "name": "seunghyun",
       "avatar_url": "https://avatars.githubusercontent.com/u/69985950?v=4",
@@ -101,6 +91,16 @@
       "name": "Yunsup Sim(심윤섭)",
       "avatar_url": "https://avatars.githubusercontent.com/u/47362439?v=4",
       "profile": "https://ones-to-watch.ethansup.net/",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "Hecklebot",
+      "name": "Hansaem.so",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51806574?v=4",
+      "profile": "https://velog.io/@hecklebot",
       "contributions": [
         "code",
         "doc"
