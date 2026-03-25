@@ -258,6 +258,9 @@ export const Hint: Story = {
     label: {
       control: false,
     },
+    hint: {
+      control: false,
+    },
     required: {
       control: false,
     },
