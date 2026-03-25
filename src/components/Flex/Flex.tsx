@@ -47,7 +47,7 @@ export interface FlexProps
  *
  * - **HStack** — 가로 한 줄. 내부적으로 `direction="row"`, 기본 `justify="left"`, `align="center"`.
  * - **VStack** — 세로 한 열. 내부적으로 `direction="column"`, 기본 `justify="top"`, `align="center"`.
- * - **Flex** — `direction` 전환, Stack은 교차축 `align`(CSS `align-items`) 기본이 `center`이므로, **교차축이 가운데가 아닐 때**(`stretch`·`start`·`end` 등)나 `start`·`end` 토큰으로 맞출 때 사용합니다.
+ * - **Flex** — `direction` 전환이 필요하거나, VStack/Hstack은 교차축 `align`(CSS `align-items`) 기본이 `center`이므로, **교차축이 가운데가 아닐 때**(`stretch`·`start`·`end` 등)나 `start`·`end` 토큰으로 맞출 때 사용합니다.
  */
 export const Flex = ({
   children,

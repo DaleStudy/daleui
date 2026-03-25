@@ -1,8 +1,22 @@
 import { Flex } from "../Flex/Flex";
 import type { FlexProps } from "../Flex/Flex";
 
-type Justify = "left" | "right" | "center" | "between" | "around";
-type Align = "top" | "bottom" | "center" | "stretch";
+const justifyVariants = {
+  left: "start",
+  center: "center",
+  right: "end",
+  between: "between",
+  around: "around",
+} as const;
+const alignVariants = {
+  top: "start",
+  center: "center",
+  bottom: "end",
+  stretch: "stretch",
+} as const;
+
+type Justify = keyof typeof justifyVariants;
+type Align = keyof typeof alignVariants;
 export interface HStackProps extends Omit<
   FlexProps,
   "direction" | "align" | "justify"
@@ -35,20 +49,7 @@ export const HStack = ({
   ...rest
 }: HStackProps) => {
   const direction = reversed ? "rowReverse" : "row";
-  const justifyVariants: Record<Justify, FlexProps["justify"]> = {
-    left: "start",
-    center: "center",
-    right: "end",
-    between: "between",
-    around: "around",
-  };
   const justifyContent = justifyVariants[justify];
-  const alignVariants: Record<Align, FlexProps["align"]> = {
-    top: "start",
-    center: "center",
-    bottom: "end",
-    stretch: "stretch",
-  };
   const alignContent = alignVariants[align];
   return (
     <Flex

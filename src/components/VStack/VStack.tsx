@@ -1,8 +1,23 @@
 import { Flex } from "../Flex/Flex";
 import type { FlexProps } from "../Flex/Flex";
 
-type Justify = "top" | "bottom" | "center" | "between" | "around";
-type Align = "left" | "right" | "center" | "stretch";
+const justifyVariants = {
+  top: "start",
+  center: "center",
+  bottom: "end",
+  between: "between",
+  around: "around",
+} as const;
+
+const alignVariants = {
+  left: "start",
+  center: "center",
+  right: "end",
+  stretch: "stretch",
+} as const;
+
+type Justify = keyof typeof justifyVariants;
+type Align = keyof typeof alignVariants;
 
 export interface VStackProps extends Omit<
   FlexProps,
@@ -36,20 +51,7 @@ export const VStack = ({
   ...rest
 }: VStackProps) => {
   const direction = reversed ? "columnReverse" : "column";
-  const justifyVariants: Record<Justify, FlexProps["justify"]> = {
-    top: "start",
-    center: "center",
-    bottom: "end",
-    between: "between",
-    around: "around",
-  };
   const justifyContent = justifyVariants[justify];
-  const alignVariants: Record<Align, FlexProps["align"]> = {
-    left: "start",
-    center: "center",
-    right: "end",
-    stretch: "stretch",
-  };
   const alignContent = alignVariants[align];
 
   return (
