@@ -138,7 +138,7 @@ export function RadioGroup({
       >
         <ArkRadioGroup.Label
           className={css({
-            textStyle: "body.lg",
+            textStyle: "label.md.strong",
             marginBottom: "8",
           })}
         >
@@ -157,7 +157,7 @@ export function RadioGroup({
           {hint && (
             <span
               className={css({
-                textStyle: "label.sm",
+                textStyle: "label.md",
               })}
             >
               {" "}
