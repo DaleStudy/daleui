@@ -41,11 +41,13 @@ export interface FlexProps
  * - 접근성을 위해 기본적으로 적절한 HTML 시맨틱 요소를 사용하고 필요시 ARIA 속성을 활용하여 접근성을 향상시킵니다.
  * - reverse 방향(rowReverse, columnReverse)을 사용할 경우, 화면에 보여지는 시각적 순서와 DOM의 순서가 다를 수 있습니다.
  *
- * ### 레이아웃 컴포넌트 사용 가이드
+ * ### 레이아웃 컴포넌트 사용 가이드 (Flex · HStack · VStack)
  *
- * - HStack은 Flex의 `Flex + direction="row" + align="center"` 조합입니다. 수평 배치에 사용합니다.
- * - VStack은 Flex의 `Flex + direction="column" + align="center"` 조합입니다. 수직 배치에 사용합니다.
- * - Flex는 추가적으로 세밀한 레이아웃 제어가 필요할 때 사용합니다.
+ * **HStack**과 **VStack**은 `Flex`에서 **자주 쓰는 한 줄·한 열 패턴**을 전용 컴포넌트로 추상화한 것입니다. 둘 다 **`align` 기본값이 `center`**이고, **`Flex`의 `align` 기본(`stretch`)**과 다릅니다. 교차축 가운데 정렬이 필요한 UI를 기본값만으로 맞추기 쉽습니다.
+ *
+ * - **HStack** — 가로 한 줄. 내부적으로 `direction="row"`, 기본 `justify="left"`, `align="center"`.
+ * - **VStack** — 세로 한 열. 내부적으로 `direction="column"`, 기본 `justify="top"`, `align="center"`.
+ * - **Flex** — `direction` 전환, Stack은 교차축 `align`(CSS `align-items`) 기본이 `center`이므로, **교차축이 가운데가 아닐 때**(`stretch`·`start`·`end` 등)나 `start`·`end` 토큰으로 맞출 때 사용합니다.
  */
 export const Flex = ({
   children,

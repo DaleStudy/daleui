@@ -17,7 +17,9 @@ export interface VStackProps extends Omit<
 }
 
 /**
- * - 수직 가운데 정렬을 위한 추상화 컴포넌트로, 정렬 방식 변경이 필요하면 Flex or HStack 컴포넌트를 권장합니다.
+ * Flex의 자주 쓰는 세로 배치 패턴(`flex-direction="column"`,`justify-content="start"`, `align-items="center"`)을 의미 있는 이름과 기본값으로 묶은 컴포넌트입니다.
+ *
+ * 한 컨테이너에서 `direction`을 바꿔 쓸 때, 교차축 정렬이 가운데가 아닐 때, **[Flex](?path=/docs/components-flex--docs) 컴포넌트**를 권장합니다.
  *
  * ### 접근성(Accessibility) 안내
  * - 이미 시맨틱 태그를 쓰면(as=`nav` | `main` | `aside` | `footer` 등) 중복 role 지정은 피하시길 바랍니다.

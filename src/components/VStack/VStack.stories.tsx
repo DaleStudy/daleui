@@ -4,6 +4,7 @@ import { css } from "../../../styled-system/css";
 import { grid } from "../../../styled-system/patterns";
 import { spacing } from "../../tokens/spacing";
 import { HStack } from "../HStack/HStack";
+import { Flex } from "../Flex/Flex";
 
 const Item = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -148,4 +149,38 @@ export const Align: Story = {
   argTypes: {
     align: { control: false },
   },
+};
+
+export const FlexOrVStackGuide: Story = {
+  render: (args) => (
+    <Flex direction="column" gap="24">
+      <p>
+        VStack은 Flex의 자주 쓰는 세로 배치 패턴(`flex-direction="column"`,
+        `justify-content="start"`, `align-items="center"`)을 의미 있는 이름과
+        기본값으로 묶은 컴포넌트입니다.
+        <br />
+        단순 세로 스택은 `VStack`을, 방향 전환이나 세밀한 정렬 제어가 필요하면
+        `Flex`를 사용하세요.
+        <br />
+        아래 예시처럼 같은 결과를 만들 수 있지만, 전달해야 하는 props가
+        줄어듭니다.
+      </p>
+      <div className={css({ border: "1px solid", padding: "16" })}>
+        <h4>Flex</h4>
+        <p>direction="column" justify="start" align="center" gap="8"</p>
+        <Flex
+          direction="column"
+          justify="start"
+          align="center"
+          gap="8"
+          children={args.children}
+        />
+      </div>
+      <div className={css({ border: "1px solid", padding: "16" })}>
+        <h4>VStack</h4>
+        <p>gap="8"</p>
+        <VStack gap="8" children={args.children} />
+      </div>
+    </Flex>
+  ),
 };
