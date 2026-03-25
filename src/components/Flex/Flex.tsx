@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type AriaRole } from "react";
 import { type RecipeVariant, css, cva, cx } from "../../../styled-system/css";
 import type { Spacing } from "../../tokens/spacing";
 
@@ -23,6 +23,8 @@ export interface FlexProps
   as?: As;
   /** 요소 간 간격 */
   gap?: Spacing;
+  /** 요소 속성 */
+  role?: AriaRole;
 }
 
 /**

@@ -30,11 +30,13 @@ export default {
     children: { control: false },
     gap: { control: "select", options: Object.keys(spacing || {}) },
     className: { control: false },
+    role: { control: "text" },
   },
   args: {
     as: "div",
     reversed: false,
-    align: "top",
+    justify: "top",
+    align: "center",
     gap: "8",
     children: (
       <>
@@ -42,7 +44,7 @@ export default {
         <Item>아이템 2</Item>
       </>
     ),
-    className: css({ height: "160" }),
+    className: css({ width: "120", height: "160" }),
   },
 } satisfies Meta<typeof VStack>;
 
@@ -51,7 +53,7 @@ export const Default: Story = {};
 
 export const Gaps: Story = {
   render: (args) => (
-    <HStack gap="24" align="center">
+    <HStack gap="24">
       <div>
         <h4>간격 4</h4>
         <VStack {...args} gap="4" />
@@ -73,7 +75,7 @@ export const Gaps: Story = {
 
 export const Reverse: Story = {
   render: (args) => (
-    <HStack gap="24" align="center">
+    <HStack gap="24">
       <div>
         <h4>false</h4>
         <VStack {...args} reversed={false} />
@@ -89,31 +91,57 @@ export const Reverse: Story = {
   },
 };
 
-export const Align: Story = {
+export const Justify: Story = {
   render: (args) => (
     <div className={grid({ gridTemplateColumns: "repeat(3, 1fr)", gap: "16" })}>
       <div>
         <h4>top - 위쪽 정렬</h4>
-        <VStack {...args} align="top" />
+        <VStack {...args} justify="top" />
       </div>
 
       <div>
         <h4>bottom - 아래쪽 정렬</h4>
-        <VStack {...args} align="bottom" />
+        <VStack {...args} justify="bottom" />
       </div>
 
       <div>
         <h4>center - 중앙 정렬</h4>
-        <VStack {...args} align="center" />
+        <VStack {...args} justify="center" />
       </div>
 
       <div>
         <h4>between - 양 끝 정렬</h4>
-        <VStack {...args} align="between" />
+        <VStack {...args} justify="between" />
       </div>
       <div>
         <h4>around - 균등 분산</h4>
-        <VStack {...args} align="around" />
+        <VStack {...args} justify="around" />
+      </div>
+    </div>
+  ),
+  argTypes: {
+    justify: { control: false },
+  },
+};
+
+export const Align: Story = {
+  render: (args) => (
+    <div className={grid({ gridTemplateColumns: "repeat(2, 1fr)", gap: "16" })}>
+      <div>
+        <h4>left - 왼쪽 정렬</h4>
+        <VStack {...args} align="left" />
+      </div>
+      <div>
+        <h4>center - 중앙 정렬</h4>
+        <VStack {...args} align="center" />
+      </div>
+      <div>
+        <h4>right - 오른쪽 정렬</h4>
+        <VStack {...args} align="right" />
+      </div>
+      <div>
+        <h4>stretch - 늘리기</h4>
+        <VStack {...args} align="stretch" />
       </div>
     </div>
   ),
