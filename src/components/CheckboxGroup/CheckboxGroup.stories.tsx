@@ -186,46 +186,6 @@ export const Invalid: Story = {
   },
 };
 
-const ControlledCheckboxGroup = (
-  args: React.ComponentProps<typeof CheckboxGroup>,
-) => {
-  const [values, setValues] = useState<string[]>(["apple"]);
-  return (
-    <div>
-      <CheckboxGroup
-        {...args}
-        name="controlled-fruits"
-        label="제어 컴포넌트 예시"
-        values={values}
-        onChange={(newValues) => setValues(newValues)}
-      />
-      <div className={css({ marginTop: "20" })}>
-        <p>현재 선택된 값: {values.join(", ")}</p>
-        <div className={css({ display: "flex", gap: "8", marginTop: "8" })}>
-          <button onClick={() => setValues(["banana"])}>바나나만 선택</button>
-          <button onClick={() => setValues(["apple", "orange"])}>
-            사과와 오렌지 선택
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-/**
- * `useState`와 함께 `values`, `onChange` prop을 사용하여 제어 컴포넌트로 만들 수 있습니다.
- */
-export const Controlled: Story = {
-  render: (args) => <ControlledCheckboxGroup {...args} />,
-  argTypes: {
-    name: { control: false },
-    label: { control: false },
-    defaultValues: { control: false },
-    values: { control: false },
-    onChange: { control: false },
-  },
-};
-
 const RequiredCheckboxGroup = (
   args: React.ComponentProps<typeof CheckboxGroup>,
 ) => {

@@ -70,63 +70,6 @@ type Story = StoryObj<typeof Select>;
 export const Default: Story = {};
 
 /**
- * `defaultValue` prop을 사용하여 초기값을 설정할 수 있습니다.
- */
-export const Uncontrolled: Story = {
-  render: (args) => (
-    <div className={css({ w: "280px" })}>
-      <Select {...args} />
-    </div>
-  ),
-  argTypes: {
-    defaultValue: {
-      control: false,
-    },
-    value: {
-      control: false,
-    },
-    onChange: {
-      control: false,
-    },
-  },
-  args: {
-    defaultValue: "us",
-  },
-};
-
-const ControlledSelect = (args: React.ComponentProps<typeof Select>) => {
-  const [value, setValue] = useState<string>("");
-
-  return (
-    <>
-      <Select
-        {...args}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-      <div className={css({ mt: "16", fontSize: "sm" })}>
-        <p>선택된 값: {value || "없음"}</p>
-      </div>
-    </>
-  );
-};
-
-/**
- * `useState`와 함께 `value`, `onChange` prop을 사용하여 제어 컴포넌트로 만들 수 있습니다.
- */
-export const Controlled: Story = {
-  render: (args) => <ControlledSelect {...args} />,
-  argTypes: {
-    value: { control: false },
-    onChange: { control: false },
-    defaultValue: { control: false },
-  },
-  args: {
-    clearButtonName: "clear",
-  },
-};
-
-/**
  * `disabled` prop을 `true`로 설정하면 선택이 비활성화됩니다.
  */
 export const Disabled: Story = {

@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { useState } from "react";
 import { css } from "../../../styled-system/css";
 import { Radio, RadioGroup } from "./RadioGroup";
 import { VStack } from "../VStack/VStack";
@@ -187,29 +186,6 @@ export const Tones: Story = {
   args: {
     defaultValue: "apple",
   },
-};
-
-export const Controlled = () => {
-  const [value, setValue] = useState("apple");
-  return (
-    <div>
-      <RadioGroup
-        name="controlled-fruits"
-        label="제어 컴포넌트 예시"
-        value={value}
-        onChange={(newValue) => setValue(newValue)}
-      >
-        <Radio value="apple">사과</Radio>
-        <Radio value="banana">바나나</Radio>
-        <Radio value="orange">오렌지</Radio>
-      </RadioGroup>
-      <div className={css({ marginTop: "20" })}>
-        <p>현재 선택된 값: {value}</p>
-        <button onClick={() => setValue("banana")}>바나나 선택</button>
-        <button onClick={() => setValue("orange")}>오렌지 선택</button>
-      </div>
-    </div>
-  );
 };
 
 export const Invalid: Story = {
