@@ -237,15 +237,6 @@ const Members: TeamMember[] = [
     linkedinUrl: "https://www.linkedin.com/in/riaoh/",
   },
   {
-    name: "한샘",
-    role: "Engineer",
-    flag: "🇰🇷",
-    location: "Seoul",
-    avatar: "https://avatars.githubusercontent.com/u/51806574",
-    githubUrl: "https://github.com/Hecklebot",
-    linkedinUrl: "https://www.linkedin.com/in/hansaem-so/",
-  },
-  {
     name: "승현",
     role: "Designer",
     flag: "🇰🇷",
