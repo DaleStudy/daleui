@@ -27,6 +27,7 @@ describe("클래스 토큰 및 스타일", () => {
     expect(root.className).toMatch(/d_flex/);
     expect(root.className).toMatch(/flex-d_row/);
     expect(root.className).toMatch(/ai_center/);
+    expect(root.className).toMatch(/jc_flex-start/);
   });
 
   test.each([
@@ -46,23 +47,36 @@ describe("클래스 토큰 및 스타일", () => {
 
   type Align = HStackProps["align"];
   const aligns: [Align, string][] = [
+    ["top", "ai_flex-start"],
+    ["center", "ai_center"],
+    ["bottom", "ai_flex-end"],
+    ["stretch", "ai_stretch"],
+  ];
+  test.each(aligns)("align=%s이면 %s 클래스가 적용된다", (align, className) => {
+    render(
+      <HStack data-testid="align" align={align}>
+        <span>child</span>
+      </HStack>,
+    );
+    expect(screen.getByTestId("align").className).toMatch(className);
+  });
+  type Justify = HStackProps["justify"];
+  const justifies: [Justify, string][] = [
     ["left", "jc_flex-start"],
-    ["center", "jc_center"],
     ["right", "jc_flex-end"],
+    ["center", "jc_center"],
     ["between", "jc_space-between"],
     ["around", "jc_space-around"],
   ];
-  test.each(aligns)(
-    "align=%s이면 jc_%s 클래스가 적용된다",
-    (align, className) => {
+  test.each(justifies)(
+    "justify=%s이면 %s 클래스가 적용된다",
+    (justify, className) => {
       render(
-        <HStack data-testid="align" align={align}>
+        <HStack data-testid="justify" justify={justify}>
           <span>child</span>
         </HStack>,
       );
-      expect(screen.getByTestId("align").className).toMatch(
-        new RegExp(className.replace("-", "[-_]"), "i"),
-      );
+      expect(screen.getByTestId("justify").className).toMatch(className);
     },
   );
 
