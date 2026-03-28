@@ -153,24 +153,6 @@ export const WithOutline: StoryObj<CardStoryArgs> = {
   },
 };
 
-export const WithLink: StoryObj<CardStoryArgs> = {
-  args: {
-    iconName: "info",
-    title: "링크 있는 카드",
-    description: "링크가 포함된 Card입니다.",
-    linkHref: "#",
-    linkText: "자세히 보기",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "**Card.Link**를 사용하여 카드 하단에 링크를 추가할 수 있습니다. 링크는 자동으로 Card의 tone을 따릅니다.",
-      },
-    },
-  },
-};
-
 export const WithExternalLink: StoryObj<CardStoryArgs> = {
   args: {
     iconName: "externalLink",

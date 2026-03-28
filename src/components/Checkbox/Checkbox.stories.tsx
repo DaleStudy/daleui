@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
 import { vstack } from "../../../styled-system/patterns";
 import { Checkbox } from "./Checkbox";
-import { Button } from "../Button/Button";
 
 export default {
   component: Checkbox,
@@ -25,51 +23,6 @@ export default {
 } satisfies Meta<typeof Checkbox>;
 
 export const Basic: StoryObj<typeof Checkbox> = {};
-
-const ControlledCheckbox = (args: React.ComponentProps<typeof Checkbox>) => {
-  const [checked, setChecked] = useState(false);
-  return (
-    <div className={vstack({ gap: "16" })}>
-      <p>{checked ? "체크됨" : "체크되지 않음"}</p>
-      <Checkbox
-        {...args}
-        label="Controlled 체크박스"
-        checked={checked}
-        onChange={setChecked}
-      />
-      <Button size="sm" onClick={() => setChecked(!checked)}>
-        Toggle
-      </Button>
-    </div>
-  );
-};
-
-export const Controlled: StoryObj<typeof Checkbox> = {
-  render: (args) => <ControlledCheckbox {...args} />,
-  argTypes: {
-    checked: {
-      control: false,
-    },
-    onChange: {
-      control: false,
-    },
-  },
-};
-
-export const Uncontrolled: StoryObj<typeof Checkbox> = {
-  args: {
-    label: "기본값이 체크된 체크박스",
-    defaultChecked: true,
-  },
-  argTypes: {
-    checked: {
-      control: false,
-    },
-    defaultChecked: {
-      table: { readonly: true },
-    },
-  },
-};
 
 export const Tones: StoryObj<typeof Checkbox> = {
   render: (args) => {
