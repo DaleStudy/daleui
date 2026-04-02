@@ -1,22 +1,20 @@
 import { type ComponentPropsWithoutRef, type Ref } from "react";
 import { cva, cx } from "../../../styled-system/css";
+import type { FieldProps } from "../shared/types";
 import { Icon, type IconProps } from "../Icon/Icon";
-export interface TextInputProps extends Omit<
-  ComponentPropsWithoutRef<"input">,
-  "size" | "value" | "defaultValue" | "onChange" | "disabled"
-> {
-  /** 오류 상태 여부 (true일 경우 danger 색상으로 표시됩니다) */
-  invalid?: boolean;
-  /** 필수 입력 여부 */
-  required?: boolean;
+export interface TextInputProps
+  extends
+    Omit<
+      ComponentPropsWithoutRef<"input">,
+      "size" | "value" | "defaultValue" | "onChange" | "disabled"
+    >,
+    FieldProps {
   /** 앞쪽 아이콘 이름 (아이콘 컴포넌트의 name 속성에 해당) */
   leadingIcon?: IconProps["name"];
   /** 뒤쪽 아이콘 이름 (아이콘 컴포넌트의 name 속성에 해당) */
   trailingIcon?: IconProps["name"];
   /** 플레이스홀더 텍스트 */
   placeholder?: string;
-  /** 비활성화 여부 */
-  disabled?: boolean;
 
   /** 입력값 (controlled 모드) */
   value?: string;

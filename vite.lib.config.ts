@@ -7,7 +7,7 @@ import { appConfig } from "./vite.config";
 const componentsDir = resolve(__dirname, "src/components");
 const componentEntries = Object.fromEntries(
   readdirSync(componentsDir, { withFileTypes: true })
-    .filter((d) => d.isDirectory())
+    .filter((d) => d.isDirectory() && d.name !== "shared")
     .map((d) => [
       `components/${d.name}/${d.name}`,
       resolve(componentsDir, d.name, `${d.name}.tsx`),

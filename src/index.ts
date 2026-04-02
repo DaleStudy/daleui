@@ -1,5 +1,6 @@
 import "./index.css";
 
+export type { FieldProps } from "./components/shared/types";
 export { Box, type BoxProps } from "./components/Box/Box";
 export { Button, type ButtonProps } from "./components/Button/Button";
 export { Card } from "./components/Card/Card";

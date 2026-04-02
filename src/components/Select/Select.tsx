@@ -6,14 +6,11 @@ import {
   useState,
 } from "react";
 import { cva } from "../../../styled-system/css";
+import type { FieldProps } from "../shared/types";
 import { Icon } from "../Icon/Icon";
 
-export interface SelectProps extends Omit<
-  HTMLAttributes<HTMLSelectElement>,
-  "onChange"
-> {
-  /** 오류 상태 */
-  invalid?: boolean;
+export interface SelectProps
+  extends Omit<HTMLAttributes<HTMLSelectElement>, "onChange">, FieldProps {
   /** 지우기 버튼의 aria-label */
   clearButtonName?: string;
   /** placeholder 텍스트 */
@@ -25,10 +22,6 @@ export interface SelectProps extends Omit<
   defaultValue?: string;
   /** 값이 변경될 때 호출되는 함수 (controlled 모드) */
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  /** 비활성화 상태 */
-  disabled?: boolean;
-  /** 필수 입력 여부 */
-  required?: boolean;
   /** 역할을 설명하는 레이블 */
   "aria-label"?: string;
   /** DOM 요소 참조 */
@@ -66,8 +59,11 @@ export function Select({
 }: SelectProps) {
   const selectRef = useRef<HTMLSelectElement>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [hasValue, setHasValue] = useState<boolean>(!!(value || defaultValue));
+  const [internalHasValue, setInternalHasValue] =
+    useState<boolean>(!!defaultValue);
   const [titleText, setTitleText] = useState<string>("");
+  const isUncontrolled = value === undefined;
+  const hasValue = isUncontrolled ? internalHasValue : !!value;
   const overflowed = titleText !== "";
 
   const checkOverflow = useCallback(() => {
@@ -122,7 +118,7 @@ export function Select({
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (onChange) onChange(e);
-    setHasValue(!!e.target.value);
+    setInternalHasValue(!!e.target.value);
     checkOverflow();
   };
 
@@ -131,7 +127,7 @@ export function Select({
     if (disabled || !selectElement) return;
 
     selectElement.value = "";
-    setHasValue(false);
+    setInternalHasValue(false);
     if (onChange) {
       const syntheticEvent = {
         target: {
@@ -147,7 +143,6 @@ export function Select({
   };
 
   const showClearButton = !!(clearButtonName && !disabled && hasValue);
-  const isUncontrolled = value === undefined;
   const defaultValueStr = defaultValue || "";
 
   return (

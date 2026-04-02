@@ -2,18 +2,19 @@ import { RadioGroup as ArkRadioGroup } from "@ark-ui/react/radio-group";
 import { type ReactNode, createContext, useContext, useId } from "react";
 import { css, cva } from "../../../styled-system/css";
 import { flex } from "../../../styled-system/patterns";
+import type { FieldProps } from "../shared/types";
 import { Icon } from "../Icon/Icon";
 
 type RadioGroupTone = "brand" | "neutral";
 
-const RadioGroupContext = createContext<{
-  tone: RadioGroupTone;
-  disabled?: boolean;
-  invalid?: boolean;
-  required?: boolean;
-} | null>(null);
+const RadioGroupContext = createContext<
+  | ({
+      tone: RadioGroupTone;
+    } & Pick<FieldProps, "disabled" | "invalid" | "required">)
+  | null
+>(null);
 
-export interface RadioGroupProps {
+export interface RadioGroupProps extends FieldProps {
   /**
    * 라디오 버튼 요소들
    */
@@ -48,12 +49,6 @@ export interface RadioGroupProps {
   onChange?: (value: string) => void;
 
   /**
-   * true이면 모든 라디오 버튼이 비활성화되어 상호작용이 불가합니다.
-   * @default false
-   */
-  disabled?: boolean;
-
-  /**
    * 라디오 버튼의 배치 방향입니다. 'horizontal'은 가로, 'vertical'은 세로입니다.
    * @default undefined
    */
@@ -64,18 +59,6 @@ export interface RadioGroupProps {
    * @default "brand"
    */
   tone?: RadioGroupTone;
-
-  /**
-   * 유효하지 않은 상태를 표시합니다.
-   * @default false
-   */
-  invalid?: boolean;
-
-  /**
-   * 필수 입력 표시를 합니다.
-   * @default false
-   */
-  required?: boolean;
 
   /**
    * 라벨 옆에 표시되는 보조 텍스트입니다.
