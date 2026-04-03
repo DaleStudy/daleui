@@ -17,7 +17,7 @@ describe("VStack 렌더링", () => {
 });
 
 describe("클래스 토큰 및 스타일", () => {
-  test("기본값으로 column 방향, center 정렬, gap_8 클래스가 적용된다", () => {
+  test("기본값으로 column 방향, center 정렬 클래스가 적용된다", () => {
     render(
       <VStack data-testid="root">
         <span>child</span>
@@ -27,6 +27,7 @@ describe("클래스 토큰 및 스타일", () => {
     expect(root.className).toMatch(/d_flex/);
     expect(root.className).toMatch(/flex-d_column/);
     expect(root.className).toMatch(/ai_center/);
+    expect(root.className).toMatch(/jc_flex-start/);
   });
 
   test.each([
@@ -49,11 +50,10 @@ describe("클래스 토큰 및 스타일", () => {
 
   type Align = VStackProps["align"];
   const aligns: [Align, string][] = [
-    ["top", "jc_flex-start"],
-    ["center", "jc_center"],
-    ["bottom", "jc_flex-end"],
-    ["between", "jc_space-between"],
-    ["around", "jc_space-around"],
+    ["left", "ai_flex-start"],
+    ["center", "ai_center"],
+    ["right", "ai_flex-end"],
+    ["stretch", "ai_stretch"],
   ];
   test.each(aligns)(
     "alignItems=%s이면 ai_%s 클래스가 적용된다",
@@ -64,6 +64,25 @@ describe("클래스 토큰 및 스타일", () => {
         </VStack>,
       );
       expect(screen.getByTestId("align").className).toMatch(className);
+    },
+  );
+  type Justify = VStackProps["justify"];
+  const justifies: [Justify, string][] = [
+    ["top", "jc_flex-start"],
+    ["center", "jc_center"],
+    ["bottom", "jc_flex-end"],
+    ["between", "jc_space-between"],
+    ["around", "jc_space-around"],
+  ];
+  test.each(justifies)(
+    "justify=%s이면 jc_%s 클래스가 적용된다",
+    (justify, className) => {
+      render(
+        <VStack data-testid="justify" justify={justify}>
+          <span>child</span>
+        </VStack>,
+      );
+      expect(screen.getByTestId("justify").className).toMatch(className);
     },
   );
 

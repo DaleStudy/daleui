@@ -44,7 +44,7 @@ function TeamCard({ member, isDark }: TeamCardProps) {
         overflow: "hidden",
       })}
     >
-      <HStack gap="16" align="left">
+      <HStack gap="16" justify="left">
         <div
           className={css({
             width: "45px",
@@ -160,7 +160,7 @@ function TeamCard({ member, isDark }: TeamCardProps) {
           </Flex>
         </Card.Body>
       </HStack>
-      <HStack align="right" gap="20" className={css({ width: "100%" })}>
+      <HStack justify="right" gap="20" className={css({ width: "100%" })}>
         {githubUrl && (
           <Link
             href={githubUrl}
