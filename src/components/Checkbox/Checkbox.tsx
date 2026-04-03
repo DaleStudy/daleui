@@ -6,8 +6,9 @@ import { Check } from "lucide-react";
 import React from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
+import type { FieldProps } from "../shared/types";
 
-export interface CheckboxProps {
+export interface CheckboxProps extends FieldProps {
   /** 체크박스 라벨 텍스트 */
   label?: React.ReactNode;
   /** 체크박스의 name 속성 */
@@ -16,14 +17,8 @@ export interface CheckboxProps {
   checked?: boolean;
   /** 초기 체크 상태 (uncontrolled 모드) */
   defaultChecked?: boolean;
-  /** 비활성화 상태 */
-  disabled?: boolean;
-  /** 에러 상태 (테두리 + 체크 아이콘 + 라벨 모두 붉은색) */
-  invalid?: boolean;
   /** 체크박스의 색조 */
   tone?: Tone;
-  /** 필수 입력 표시 (라벨 옆에 * 표시) */
-  required?: boolean;
   /** 체크 상태 변경 시 호출되는 콜백 (controlled 모드) */
   onChange?: (checked: boolean) => void;
 }

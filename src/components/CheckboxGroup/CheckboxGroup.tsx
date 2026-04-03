@@ -1,18 +1,20 @@
 import { type ReactNode, createContext, useContext, useState } from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
+import type { FieldProps } from "../shared/types";
 import { Checkbox } from "../Checkbox/Checkbox";
 
-const CheckboxGroupContext = createContext<{
-  tone: Tone;
-  disabled?: boolean;
-  invalid?: boolean;
-  name: string;
-  selectedValues: string[];
-  onValueChange: (value: string, checked: boolean) => void;
-} | null>(null);
+const CheckboxGroupContext = createContext<
+  | ({
+      tone: Tone;
+      name: string;
+      selectedValues: string[];
+      onValueChange: (value: string, checked: boolean) => void;
+    } & Pick<FieldProps, "disabled" | "invalid">)
+  | null
+>(null);
 
-export interface CheckboxGroupProps {
+export interface CheckboxGroupProps extends FieldProps {
   /**
    * 체크박스 요소들
    */
@@ -47,12 +49,6 @@ export interface CheckboxGroupProps {
   onChange?: (values: string[]) => void;
 
   /**
-   * true이면 모든 체크박스가 비활성화되어 상호작용이 불가합니다.
-   * @default false
-   */
-  disabled?: boolean;
-
-  /**
    * 체크박스의 배치 방향입니다. 'horizontal'은 가로, 'vertical'은 세로입니다.
    * @default undefined
    */
@@ -63,18 +59,6 @@ export interface CheckboxGroupProps {
    * @default "brand"
    */
   tone?: Tone;
-
-  /**
-   * 에러 상태를 지정합니다.
-   * @default false
-   */
-  invalid?: boolean;
-
-  /**
-   * 그룹 전체의 필수 입력을 표시합니다. (라벨에 * 추가)
-   * @default false
-   */
-  required?: boolean;
 }
 
 /**

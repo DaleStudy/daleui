@@ -1,19 +1,24 @@
 import { type ComponentPropsWithoutRef, type Ref, useState } from "react";
 import { cva } from "../../../styled-system/css";
+import type { FieldProps } from "../shared/types";
 import { Icon } from "../Icon/Icon";
 
-export interface PasswordInputProps extends Omit<
-  ComponentPropsWithoutRef<"input">,
-  "size" | "type" | "value" | "defaultValue" | "onChange" | "disabled"
-> {
+export interface PasswordInputProps
+  extends
+    Omit<
+      ComponentPropsWithoutRef<"input">,
+      | "size"
+      | "type"
+      | "value"
+      | "defaultValue"
+      | "onChange"
+      | "disabled"
+      | "required"
+      // TODO: readOnly도 Omit 대상 (#935)
+    >,
+    FieldProps {
   /** 플레이스홀더 */
   placeholder?: string;
-  /** 오류 상태 여부 (true면 위험 톤 적용 및 aria-invalid=true) */
-  invalid?: boolean;
-  /** 필수 입력 여부 */
-  required?: boolean;
-  /** 비활성화 여부 */
-  disabled?: boolean;
 
   /** 입력값 (controlled 모드) */
   value?: string;
@@ -45,7 +50,7 @@ export function PasswordInput({
 
   const toggleVisibility = () => {
     if (!disabled) {
-      setIsVisible(!isVisible);
+      setIsVisible((prev) => !prev);
     }
   };
 
