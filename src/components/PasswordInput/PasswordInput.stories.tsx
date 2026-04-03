@@ -16,6 +16,7 @@ export default {
     placeholder: "패스워드를 입력해주세요.",
     disabled: false,
     invalid: false,
+    required: false,
   },
 } satisfies Meta<typeof PasswordInput>;
 

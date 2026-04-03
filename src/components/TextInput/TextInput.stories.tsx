@@ -17,6 +17,7 @@ export default {
     placeholder: "텍스트를 입력해주세요.",
     disabled: false,
     invalid: false,
+    required: false,
   },
 } satisfies Meta<typeof TextInput>;
 

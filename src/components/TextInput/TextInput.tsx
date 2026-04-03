@@ -6,7 +6,8 @@ export interface TextInputProps
   extends
     Omit<
       ComponentPropsWithoutRef<"input">,
-      "size" | "value" | "defaultValue" | "onChange" | "disabled"
+      "size" | "value" | "defaultValue" | "onChange" | "disabled" | "required"
+      // TODO: readOnly도 Omit 대상 (#935)
     >,
     FieldProps {
   /** 앞쪽 아이콘 이름 (아이콘 컴포넌트의 name 속성에 해당) */

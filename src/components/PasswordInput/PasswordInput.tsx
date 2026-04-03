@@ -7,7 +7,14 @@ export interface PasswordInputProps
   extends
     Omit<
       ComponentPropsWithoutRef<"input">,
-      "size" | "type" | "value" | "defaultValue" | "onChange" | "disabled"
+      | "size"
+      | "type"
+      | "value"
+      | "defaultValue"
+      | "onChange"
+      | "disabled"
+      | "required"
+      // TODO: readOnly도 Omit 대상 (#935)
     >,
     FieldProps {
   /** 플레이스홀더 */
