@@ -82,6 +82,11 @@ describe("렌더링", () => {
     expect(checkbox).toHaveAttribute("data-test-tone", "brand");
   });
 
+  test("invalid 상태에서도 라벨 텍스트는 기본 색상을 유지한다.", () => {
+    render(<Checkbox label="테스트" invalid />);
+    expect(screen.getByText("테스트")).not.toHaveClass("c_fg.danger");
+  });
+
   test("모든 props를 함께 사용할 수 있다.", () => {
     const handleChange = vi.fn();
     render(
@@ -89,7 +94,7 @@ describe("렌더링", () => {
         label="전체 테스트"
         name="full-test"
         defaultChecked={true}
-        tone="success"
+        tone="neutral"
         onChange={handleChange}
       />,
     );
@@ -99,6 +104,17 @@ describe("렌더링", () => {
     expect(checkbox).toHaveAttribute("name", "full-test");
     expect(checkbox).toBeChecked();
   });
+
+  test.each(["brand", "neutral"] as const)(
+    "%s tone을 올바르게 설정한다.",
+    (tone) => {
+      render(<Checkbox label={`${tone} tone`} tone={tone} />);
+      expect(screen.getByRole("checkbox")).toHaveAttribute(
+        "data-test-tone",
+        tone,
+      );
+    },
+  );
 
   test("required가 true이면 필수 표시(*)가 렌더링된다.", () => {
     render(<Checkbox label="필수 체크박스" required />);

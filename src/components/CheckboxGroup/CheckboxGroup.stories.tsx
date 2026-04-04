@@ -22,6 +22,7 @@ export default {
     tone: "brand",
     invalid: false,
     required: false,
+    helperText: undefined,
     children: (
       <>
         <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
@@ -40,12 +41,6 @@ export default {
 type Story = StoryObj<typeof CheckboxGroup>;
 
 export const Basic: Story = {};
-
-export const WithDefaultValue: Story = {
-  args: {
-    defaultValues: ["banana"],
-  },
-};
 
 export const Orientation: Story = {
   render: (args) => {
@@ -128,38 +123,6 @@ export const Tones: Story = {
           defaultValues={["apple"]}
           tone="brand"
         />
-
-        <CheckboxGroup
-          {...args}
-          name="danger-tone"
-          label="위험 색조 (Danger)"
-          defaultValues={["apple"]}
-          tone="danger"
-        />
-
-        <CheckboxGroup
-          {...args}
-          name="warning-tone"
-          label="경고 색조 (Warning)"
-          defaultValues={["apple"]}
-          tone="warning"
-        />
-
-        <CheckboxGroup
-          {...args}
-          name="success-tone"
-          label="성공 색조 (Success)"
-          defaultValues={["apple"]}
-          tone="success"
-        />
-
-        <CheckboxGroup
-          {...args}
-          name="info-tone"
-          label="정보 색조 (Info)"
-          defaultValues={["apple"]}
-          tone="info"
-        />
       </VStack>
     );
   },
@@ -172,7 +135,7 @@ export const Invalid: Story = {
         <CheckboxGroup
           {...args}
           name="invalid-group"
-          label="에러 상태 체크박스 그룹"
+          label="좋아하는 과일을 선택하세요"
           invalid
           errorMessage="하나 이상 선택해주세요."
         />
@@ -181,6 +144,8 @@ export const Invalid: Story = {
           {...args}
           name="valid-group"
           label="정상 체크박스 그룹"
+          required
+          helperText="helper text"
         />
       </VStack>
     );
@@ -238,12 +203,11 @@ const RequiredCheckboxGroup = (
       noValidate
       className={css({ w: "280px", spaceY: "16" })}
     >
-      <CheckboxGroup {...args} invalid={isInvalid} />
-      {isInvalid && (
-        <div className={css({ mt: "16", fontSize: "sm", color: "fg.danger" })}>
-          <p>필수 항목을 선택해주세요.</p>
-        </div>
-      )}
+      <CheckboxGroup
+        {...args}
+        helperText={isInvalid ? "필수 항목을 선택해주세요." : undefined}
+        invalid={isInvalid}
+      />
       <Button type="submit">제출</Button>
     </form>
   );

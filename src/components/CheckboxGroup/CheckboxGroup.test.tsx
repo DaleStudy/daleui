@@ -306,6 +306,36 @@ describe("CheckboxGroup", () => {
     expect(root).not.toBeNull();
     expect(root).toHaveAccessibleDescription("도움말입니다.");
   });
+
+  test("helperText가 있으면 invalid 여부와 관계없이 노출한다", () => {
+    render(
+      <CheckboxGroup
+        name="test"
+        label="Test Checkbox Group"
+        helperText="도움말 텍스트"
+      >
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
+      </CheckboxGroup>,
+    );
+
+    expect(screen.getByText("도움말 텍스트")).toBeInTheDocument();
+  });
+
+  test("invalid 상태에서도 option text는 기본 색상을 유지한다", () => {
+    render(
+      <CheckboxGroup
+        name="test"
+        label="Test Checkbox Group"
+        invalid
+        helperText="에러 메시지"
+      >
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
+      </CheckboxGroup>,
+    );
+
+    expect(screen.getByText("에러 메시지")).toBeInTheDocument();
+    expect(screen.getByText("Option 1")).not.toHaveClass("c_fg.danger");
+  });
 });
 
 describe("CheckboxGroup.Item", () => {
@@ -366,22 +396,18 @@ describe("CheckboxGroup.Item", () => {
     },
   );
 
-  test.each([
-    "neutral",
-    "brand",
-    "danger",
-    "warning",
-    "success",
-    "info",
-  ] as const)("%s 톤을 올바르게 렌더링한다", (tone) => {
-    render(
-      <CheckboxGroup name="test" label="Test Checkbox Group" tone={tone}>
-        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
-      </CheckboxGroup>,
-    );
+  test.each(["neutral", "brand"] as const)(
+    "%s 톤을 올바르게 렌더링한다",
+    (tone) => {
+      render(
+        <CheckboxGroup name="test" label="Test Checkbox Group" tone={tone}>
+          <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
+        </CheckboxGroup>,
+      );
 
-    const checkbox = screen.getByLabelText("Option 1");
-    expect(checkbox).toBeInTheDocument();
-    expect(checkbox).toHaveAttribute("data-test-tone", tone);
-  });
+      const checkbox = screen.getByLabelText("Option 1");
+      expect(checkbox).toBeInTheDocument();
+      expect(checkbox).toHaveAttribute("data-test-tone", tone);
+    },
+  );
 });
