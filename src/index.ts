@@ -5,7 +5,19 @@ export { Box, type BoxProps } from "./components/Box/Box";
 export { Button, type ButtonProps } from "./components/Button/Button";
 export { Card } from "./components/Card/Card";
 export { Checkbox, type CheckboxProps } from "./components/Checkbox/Checkbox";
+export {
+  CheckboxGroup,
+  type CheckboxGroupProps,
+  CheckboxItem,
+  type CheckboxItemProps,
+} from "./components/CheckboxGroup/CheckboxGroup";
 export { Flex, type FlexProps } from "./components/Flex/Flex";
+export {
+  Grid,
+  type GridProps,
+  GridItem,
+  type GridItemProps,
+} from "./components/Grid/Grid";
 export { Heading, type HeadingProps } from "./components/Heading/Heading";
 export { HStack, type HStackProps } from "./components/HStack/HStack";
 export { Icon, type IconProps } from "./components/Icon/Icon";
