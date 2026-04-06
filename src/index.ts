@@ -3,7 +3,20 @@ import "./index.css";
 export type { FieldProps } from "./components/shared/types";
 export { Box, type BoxProps } from "./components/Box/Box";
 export { Button, type ButtonProps } from "./components/Button/Button";
-export { Card } from "./components/Card/Card";
+export {
+  Card,
+  CardBody,
+  CardTitle,
+  CardDescription,
+  CardIcon,
+  CardLink,
+  type CardProps,
+  type CardBodyProps,
+  type CardTitleProps,
+  type CardDescriptionProps,
+  type CardIconProps,
+  type CardLinkProps,
+} from "./components/Card/Card";
 export { Checkbox, type CheckboxProps } from "./components/Checkbox/Checkbox";
 export {
   CheckboxGroup,

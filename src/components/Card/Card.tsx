@@ -25,7 +25,10 @@ const useCardContext = () => {
   }
   return context;
 };
-interface CardRootProps extends Omit<HTMLAttributes<HTMLElement>, "style"> {
+export interface CardProps extends Omit<
+  HTMLAttributes<HTMLElement>,
+  "style"
+> {
   /** 색조 */
   tone?: Extract<Tone, "neutral" | "brand">;
   /** border 여부 */
@@ -39,7 +42,7 @@ function CardRoot({
   className,
   children,
   ...rest
-}: CardRootProps) {
+}: CardProps) {
   return (
     <CardContext.Provider value={{ tone }}>
       <article
@@ -51,25 +54,28 @@ function CardRoot({
     </CardContext.Provider>
   );
 }
-interface CardBodyProps extends Omit<HTMLAttributes<HTMLDivElement>, "style"> {
+export interface CardBodyProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "style"
+> {
   children: ReactNode;
 }
 
-function CardBody({ className, children, ...rest }: CardBodyProps) {
+export function CardBody({ className, children, ...rest }: CardBodyProps) {
   return (
     <div className={cx(bodyStyles(), className)} {...rest}>
       {children}
     </div>
   );
 }
-interface CardIconProps extends SVGProps<SVGSVGElement> {
+export interface CardIconProps extends SVGProps<SVGSVGElement> {
   /** 아이콘 이름 */
   name: IconName;
   /** 아이콘 크기 */
   size?: "sm" | "md" | "lg";
 }
 
-function CardIcon({ name, size = "lg", ...rest }: CardIconProps) {
+export function CardIcon({ name, size = "lg", ...rest }: CardIconProps) {
   const { tone } = useCardContext();
   return (
     <div className={cx(iconContainerStyles())}>
@@ -77,32 +83,35 @@ function CardIcon({ name, size = "lg", ...rest }: CardIconProps) {
     </div>
   );
 }
-interface CardTitleProps extends Omit<HTMLAttributes<HTMLElement>, "style"> {
-  children: ReactNode;
-}
-
-function CardTitle({ children, ...rest }: CardTitleProps) {
-  return (
-    <Text size="lg" weight="semibold" as="p" {...rest}>
-      {children}
-    </Text>
-  );
-}
-interface CardDescriptionProps extends Omit<
+export interface CardTitleProps extends Omit<
   HTMLAttributes<HTMLElement>,
   "style"
 > {
   children: ReactNode;
 }
 
-function CardDescription({ children, ...rest }: CardDescriptionProps) {
+export function CardTitle({ children, ...rest }: CardTitleProps) {
+  return (
+    <Text size="lg" weight="semibold" as="p" {...rest}>
+      {children}
+    </Text>
+  );
+}
+export interface CardDescriptionProps extends Omit<
+  HTMLAttributes<HTMLElement>,
+  "style"
+> {
+  children: ReactNode;
+}
+
+export function CardDescription({ children, ...rest }: CardDescriptionProps) {
   return (
     <Text size="md" as="p" {...rest}>
       {children}
     </Text>
   );
 }
-interface CardLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface CardLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   children: ReactNode;
   /** 링크 URL */
   href: string;
@@ -110,7 +119,7 @@ interface CardLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   external?: boolean;
 }
 
-function CardLink({ children, href, external, ...rest }: CardLinkProps) {
+export function CardLink({ children, href, external, ...rest }: CardLinkProps) {
   const { tone } = useCardContext();
   return (
     <Link
