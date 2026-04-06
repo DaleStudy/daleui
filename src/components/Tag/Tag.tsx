@@ -7,16 +7,16 @@ import { Icon } from "../Icon/Icon";
 type BaseTagProps = {
   /** 태그 내용 */
   children: ReactNode;
-  /** 태그의 색조 */
+  /** 색조 */
   tone?: Tone;
-  /** `onRemove` 핸들러가 설정되면 제거 버튼(X)이 표시됩니다. */
+  /** 제거 핸들러 (설정 시 제거 버튼 표시) */
   onRemove?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 /** href가 있으면 자동으로 <a> 로 렌더링 */
 type TagAsLink = BaseTagProps &
   Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "style" | "children"> & {
-    /* 링크 태그(`<a>`) 또는 일반 태그(`<span>`)로 자동 선택됩니다. */
+    /** 링크 모드 대상 URL */
     href: string;
   };
 

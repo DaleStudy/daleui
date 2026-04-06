@@ -6,15 +6,15 @@ import type { FontSize, FontWeight } from "../../tokens/typography";
 export interface TextProps extends HTMLAttributes<HTMLElement> {
   /** 텍스트 내용 */
   children: ReactNode;
-  /** HTML 태그 */
+  /** 렌더링 태그 */
   as?: "span" | "div" | "p" | "strong" | "em" | "small";
-  /** 텍스트의 색조 */
+  /** 색조 */
   tone?: Tone;
-  /** 텍스트의 크기 */
+  /** 글자 크기 */
   size?: FontSize;
-  /** 텍스트의 굵기 */
+  /** 글자 굵기 */
   weight?: FontWeight;
-  /** 명암비 낮출지 */
+  /** 흐린 톤(muted) 적용 여부 */
   muted?: boolean;
 }
 

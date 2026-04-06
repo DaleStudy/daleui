@@ -4,11 +4,11 @@ import type { Tone } from "../../tokens/colors";
 import { type IconName, icons } from "../../tokens/iconography";
 
 export interface IconProps extends SVGProps<SVGSVGElement> {
-  /** 이름 */
+  /** 아이콘 이름 */
   name: IconName;
-  /** 아이콘의 색조 */
+  /** 색조 */
   tone?: Tone;
-  /** 아이콘의 크기 */
+  /** 크기 */
   size?: "xs" | "sm" | "md" | "lg";
   /** 솔리드 여부 */
   solid?: boolean;

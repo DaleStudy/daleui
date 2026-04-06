@@ -17,13 +17,13 @@ export interface FlexProps
   extends
     React.HTMLAttributes<HTMLElement>,
     Partial<RecipeVariant<typeof flexVariants>> {
-  /** 자식 요소들 (필수) */
+  /** 자식 요소 */
   children: React.ReactNode;
-  /** 렌더링할 HTML 요소 */
+  /** 렌더링 태그 */
   as?: As;
-  /** 요소 간 간격 */
+  /** 자식 간 간격 */
   gap?: Spacing;
-  /** 요소 속성 */
+  /** ARIA 역할 */
   role?: AriaRole;
 }
 

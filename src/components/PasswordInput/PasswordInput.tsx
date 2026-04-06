@@ -20,13 +20,13 @@ export interface PasswordInputProps
   /** 플레이스홀더 */
   placeholder?: string;
 
-  /** 입력값 (controlled 모드) */
+  /** 제어 모드 입력 값 */
   value?: string;
-  /** 초기 입력값 (uncontrolled 모드) */
+  /** 비제어 모드 초기 입력값 */
   defaultValue?: string;
-  /** 값이 변경될 때 호출되는 함수 */
+  /** 변경 이벤트 핸들러 */
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  /** DOM 요소 참조 */
+  /** 입력 요소 참조 */
   ref?: Ref<HTMLInputElement>;
 }
 

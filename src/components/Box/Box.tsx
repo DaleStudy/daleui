@@ -16,13 +16,13 @@ type As =
 type CSSLength = `${number}px` | `${number}em` | `${number}rem` | `${number}%`;
 
 export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
-  /** 자식 요소들 */
+  /** 자식 요소 */
   children?: React.ReactNode;
-  /** 렌더링할 HTML 요소 */
+  /** 렌더링 태그 */
   as?: As;
-  /** padding */
+  /** 안쪽 여백 */
   padding?: Spacing;
-  /** margin */
+  /** 바깥 여백 */
   margin?: Spacing;
   /** 너비 (예: "100px", "2rem", "2em", "50%") */
   width?: CSSLength;

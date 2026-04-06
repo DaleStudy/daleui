@@ -15,17 +15,17 @@ export type LabelFormChild =
   | ReactElement<TextInputProps>;
 
 export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
-  /** 라벨과 연결할 입력 요소 (TextInput, Checkbox, RadioGroup, Button 등) */
+  /** 연결할 폼 자식 요소 */
   children?: LabelFormChild;
-  /** 라벨 텍스트 (필수) */
+  /** 라벨 문구 */
   labelText: string;
-  /** 라벨의 색조 */
+  /** 색조 */
   tone?: LabelTone;
-  /** 라벨 비활성화 여부 */
+  /** 비활성화 여부 */
   disabled?: boolean;
   /** 필수 입력 여부 (true일 경우 별표(*) 표시) */
   required?: boolean;
-  /** 라벨과 연결할 입력 요소의 id */
+  /** 연결 대상 요소 id */
   htmlFor?: string;
 }
 

@@ -11,22 +11,22 @@ import { Icon } from "../Icon/Icon";
 
 export interface SelectProps
   extends Omit<HTMLAttributes<HTMLSelectElement>, "onChange">, FieldProps {
-  /** 지우기 버튼의 aria-label */
+  /** 지우기 버튼 접근성 이름 (aria-label) */
   clearButtonName?: string;
-  /** placeholder 텍스트 */
+  /** 플레이스홀더 */
   placeholder?: string;
 
-  /** 선택된 값 (controlled 모드) */
+  /** 제어 모드 선택 값 */
   value?: string;
-  /** 초기 선택값 (uncontrolled 모드) */
+  /** 비제어 모드 초기 선택 값 */
   defaultValue?: string;
-  /** 값이 변경될 때 호출되는 함수 (controlled 모드) */
+  /** 변경 이벤트 핸들러 */
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  /** 역할을 설명하는 레이블 */
+  /** 접근성 레이블 (aria-label) */
   "aria-label"?: string;
-  /** DOM 요소 참조 */
+  /** select 요소 참조 */
   ref?: Ref<HTMLSelectElement>;
-  /** 이름 */
+  /** 폼 name */
   name?: string;
 }
 

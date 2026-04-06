@@ -21,11 +21,11 @@ export interface HStackProps extends Omit<
   FlexProps,
   "direction" | "align" | "justify"
 > {
-  /** 가로 배치 방식 */
+  /** 가로 역방향 배치 여부 */
   reversed?: boolean;
-  /** 가로 정렬 방식 */
+  /** 가로 정렬 */
   justify?: Justify;
-  /** 세로 정렬 방식 */
+  /** 세로 정렬 */
   align?: Align;
 }
 

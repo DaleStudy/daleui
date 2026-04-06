@@ -23,11 +23,11 @@ export interface VStackProps extends Omit<
   FlexProps,
   "direction" | "align" | "justify"
 > {
-  /** 세로 배치 방식 */
+  /** 세로 역방향 배치 여부 */
   reversed?: boolean;
-  /** 세로 정렬 방식 */
+  /** 세로 정렬 */
   justify?: Justify;
-  /** 가로 정렬 방식 */
+  /** 가로 정렬 */
   align?: Align;
 }
 

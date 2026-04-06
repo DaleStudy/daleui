@@ -10,20 +10,21 @@ export interface ButtonProps extends Omit<
   HTMLAttributes<HTMLButtonElement>,
   "style"
 > {
-  /** 버튼 텍스트 */
+  /** 버튼 내용 */
   children: React.ReactNode;
-  /** 버튼 비활성화 여부 */
+  /** 비활성화 여부 */
   disabled?: boolean;
-  /** 버튼 너비 100% */
+  /** 전체 너비 여부 */
   fullWidth?: boolean;
+  /** 로딩 표시 여부 */
   loading?: boolean;
-  /** 버튼의 크기 */
+  /** 크기 */
   size?: size;
-  /** 버튼의 색상 강조 */
+  /** 색조 */
   tone?: "brand" | "neutral" | "danger";
-  /** 타입 */
+  /** 네이티브 button 타입 */
   type?: "button" | "submit" | "reset";
-  /** 버튼의 스타일 종류 */
+  /** 스타일 변형 */
   variant?: "solid" | "outline" | "ghost";
 }
 

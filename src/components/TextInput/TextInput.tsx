@@ -10,20 +10,20 @@ export interface TextInputProps
       // TODO: readOnly도 Omit 대상 (#935)
     >,
     FieldProps {
-  /** 앞쪽 아이콘 이름 (아이콘 컴포넌트의 name 속성에 해당) */
+  /** 선행 아이콘 이름 (Icon.name) */
   leadingIcon?: IconProps["name"];
-  /** 뒤쪽 아이콘 이름 (아이콘 컴포넌트의 name 속성에 해당) */
+  /** 후행 아이콘 이름 (Icon.name) */
   trailingIcon?: IconProps["name"];
-  /** 플레이스홀더 텍스트 */
+  /** 플레이스홀더 */
   placeholder?: string;
 
-  /** 입력값 (controlled 모드) */
+  /** 제어 모드 입력 값 */
   value?: string;
-  /** 초기 입력값 (uncontrolled 모드) */
+  /** 비제어 모드 초기 입력값 */
   defaultValue?: string;
-  /** 값이 변경될 때 호출되는 함수 */
+  /** 변경 이벤트 핸들러 */
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  /** DOM 요소 참조 */
+  /** 입력 요소 참조 */
   ref?: Ref<HTMLInputElement>;
 }
 

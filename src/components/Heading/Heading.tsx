@@ -8,17 +8,17 @@ type Align = "left" | "center" | "right";
 type WordBreak = "eng" | "cjk";
 
 export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
-  /** 제목 텍스트 */
+  /** 제목 내용 */
   children: ReactNode;
-  /** 제목 단계 */
+  /** 제목 단계 (h1–h5) */
   level: Level;
-  /** 제목 크기 */
+  /** 표시 크기 */
   size?: HeadingSize;
-  /** 제목의 색조 */
+  /** 색조 */
   tone?: HeadingTone;
   /** 텍스트 정렬 */
   align?: Align;
-  /** 단어 줄바꿈 */
+  /** 줄바꿈 규칙 */
   wordBreak?: WordBreak;
 }
 

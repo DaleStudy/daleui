@@ -6,17 +6,17 @@ type LinkSize = "sm" | "md" | "lg";
 type LinkTone = "neutral" | "brand";
 
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  /** 링크 URL (필수) */
+  /** 대상 URL */
   href: string;
-  /** 링크 내용, 아이콘, 이미지 등 (필수) */
+  /** 링크 내용 */
   children: React.ReactNode;
-  /** 링크의 색조 */
+  /** 색조 */
   tone?: LinkTone;
-  /** 링크의 크기 */
+  /** 크기 */
   size?: LinkSize;
-  /** 링크에 밑줄 표시 여부 */
+  /** 밑줄 표시 여부 */
   underline?: boolean;
-  /** 새창에서 열지 여부 */
+  /** 외부 링크·새 탭 열기 여부 */
   external?: boolean;
 }
 

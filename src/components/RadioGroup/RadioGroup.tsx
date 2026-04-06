@@ -15,61 +15,34 @@ const RadioGroupContext = createContext<
 >(null);
 
 export interface RadioGroupProps extends FieldProps {
-  /**
-   * 라디오 버튼 요소들
-   */
+  /** 자식 요소 */
   children: ReactNode;
 
-  /**
-   * 동일 그룹의 라디오 버튼들이 공유하는 이름입니다.
-   */
+  /** 그룹 공유 name */
   name: string;
 
-  /**
-   * 라디오 그룹을 설명하는 텍스트입니다.
-   */
+  /** 그룹 레이블 */
   label: string;
 
-  /**
-   * 컴포넌트가 처음 렌더링될 때 선택되는 값입니다.
-   * @default undefined
-   */
+  /** 비제어 모드 초기 선택 값 */
   defaultValue?: string;
 
-  /**
-   * 외부에서 선택 값을 직접 제어할 때 사용합니다.
-   * @default undefined
-   */
+  /** 제어 모드 선택 값 */
   value?: string;
 
-  /**
-   * 사용자가 선택을 변경할 때 호출되는 콜백입니다.
-   * @default undefined
-   */
+  /** 선택 값 변경 핸들러 */
   onChange?: (value: string) => void;
 
-  /**
-   * 라디오 버튼의 배치 방향입니다. 'horizontal'은 가로, 'vertical'은 세로입니다.
-   * @default undefined
-   */
+  /** 배치 방향 (horizontal | vertical) */
   orientation?: "horizontal" | "vertical";
 
-  /**
-   * 색상 강조를 지정합니다.
-   * @default "brand"
-   */
+  /** 색조 */
   tone?: RadioGroupTone;
 
-  /**
-   * 라벨 옆에 표시되는 보조 텍스트입니다.
-   * @default undefined
-   */
+  /** 레이블 보조 텍스트 */
   hint?: string;
 
-  /**
-   * 옵션 목록 아래에 표시되는 도움말 텍스트입니다.
-   * @default undefined
-   */
+  /** 옵션 하단 도움말 */
   helperText?: string;
 }
 
@@ -201,25 +174,16 @@ const radioGroupStyles = cva({
 });
 
 export interface RadioProps {
-  /**
-   * 라디오 버튼의 값입니다.
-   */
+  /** 옵션 값 */
   value: string;
 
-  /**
-   * 라벨 등 자식 요소를 표시합니다.
-   */
+  /** 자식 요소 */
   children?: ReactNode;
 
-  /**
-   * true이면 이 라디오 버튼이 비활성화됩니다.
-   * @default false
-   */
+  /** 비활성화 여부 */
   disabled?: boolean;
 
-  /**
-   * DOM 요소에 대한 ref입니다.
-   */
+  /** 입력 요소 참조 */
   ref?: React.Ref<HTMLInputElement>;
 }
 
