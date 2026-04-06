@@ -25,7 +25,7 @@ const useCardContext = () => {
   }
   return context;
 };
-export interface CardRootProps extends Omit<
+export interface CardProps extends Omit<
   HTMLAttributes<HTMLElement>,
   "style"
 > {
@@ -42,7 +42,7 @@ function CardRoot({
   className,
   children,
   ...rest
-}: CardRootProps) {
+}: CardProps) {
   return (
     <CardContext.Provider value={{ tone }}>
       <article

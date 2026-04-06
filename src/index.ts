@@ -9,7 +9,7 @@ export {
   CardDescription,
   CardIcon,
   CardLink,
-  type CardRootProps,
+  type CardProps,
   type CardBodyProps,
   type CardTitleProps,
   type CardDescriptionProps,
