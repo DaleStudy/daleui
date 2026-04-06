@@ -25,10 +25,7 @@ const useCardContext = () => {
   }
   return context;
 };
-export interface CardProps extends Omit<
-  HTMLAttributes<HTMLElement>,
-  "style"
-> {
+export interface CardProps extends Omit<HTMLAttributes<HTMLElement>, "style"> {
   /** 색조 */
   tone?: Extract<Tone, "neutral" | "brand">;
   /** border 여부 */
