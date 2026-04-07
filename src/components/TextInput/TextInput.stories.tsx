@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
 import { css } from "../../../styled-system/css";
 import { vstack } from "../../../styled-system/patterns";
 import { TextInput } from "./TextInput";
@@ -117,68 +116,5 @@ export const Disabled: Story = {
     placeholder: {
       control: false,
     },
-  },
-};
-
-const ControlledTextInput = () => {
-  const [value, setValue] = useState("");
-  const [hasError, setHasError] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setValue(newValue);
-
-    if (newValue.length > 0 && newValue.length < 10) {
-      setHasError(true);
-    } else {
-      setHasError(false);
-    }
-  };
-
-  return (
-    <div className={css({ w: "320px" })}>
-      <TextInput
-        value={value}
-        onChange={handleChange}
-        placeholder="10자 이상 입력하세요..."
-        invalid={hasError}
-        trailingIcon={value.length > 0 ? "x" : undefined}
-      />
-      <div className={css({ mt: "16", fontSize: "sm" })}>
-        <p>현재 값: {value}</p>
-        <p>글자 수: {value.length}</p>
-        {hasError && (
-          <p className={css({ color: "danger" })}>10자 이상 입력해야 합니다.</p>
-        )}
-      </div>
-    </div>
-  );
-};
-
-/**
- * `useState`와 함께 `value`, `onChange` prop을 사용하여 제어 컴포넌트로 만들 수 있습니다.
- */
-export const Controlled: Story = {
-  render: () => <ControlledTextInput />,
-  argTypes: {
-    invalid: { control: false },
-    disabled: { control: false },
-    placeholder: { control: false },
-    value: { control: false },
-    onChange: { control: false },
-  },
-};
-
-/**
- * `defaultValue` prop을 사용하여 초기값을 설정할 수 있습니다.
- */
-export const Uncontrolled: Story = {
-  args: {
-    defaultValue: "초기값입니다",
-  },
-  argTypes: {
-    value: { control: false },
-    defaultValue: { control: false },
-    onChange: { control: false },
   },
 };

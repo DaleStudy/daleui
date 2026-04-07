@@ -66,11 +66,6 @@ export const Tone: StoryObj<typeof Button> = {
     tone: {
       control: false,
     },
-    variant: {
-      control: "select",
-      options: ["solid", "outline", "ghost"],
-      description: "버튼의 스타일 종류를 지정합니다",
-    },
   },
 };
 
@@ -98,11 +93,6 @@ export const Variants: StoryObj<typeof Button> = {
   argTypes: {
     children: {
       control: false,
-    },
-    tone: {
-      control: "select",
-      options: ["brand", "neutral", "danger"],
-      description: "버튼의 색상 강조를 지정합니다",
     },
     variant: {
       control: false,
