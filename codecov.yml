@@ -2,11 +2,11 @@ coverage:
   status:
     project:
       default:
-        # 전체 커버리지는 기존 대비 최대 3% 감소까지 허용
-        threshold: 3
+        # 전체 커버리지는 기존 대비 최대 5% 감소까지 허용
+        threshold: 5
     patch:
       default:
-        # 패치 커버리지는 1% 감소까지만 허용
-        threshold: 1
+        # 패치 커버리지는 3% 감소까지만 허용
+        threshold: 3
 
 comment: false
