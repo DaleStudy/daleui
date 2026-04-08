@@ -38,9 +38,9 @@ export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
  *
  * ### 접근성(Accessibility) 안내
  * - 이 컴포넌트는 `<label>` 태그를 사용하여 시맨틱하게 구현되어 있습니다.
- * - `required`를 true로 설정하면 별표(*)와 함께 `aria-label="옵션 필수"`가 자동으로 추가됩니다.
+ * - `required`를 true로 설정하면 별표(*)와 함께 스크린 리더용 `aria-label="옵션 필수"` 텍스트가 자동으로 추가됩니다.
  * - `disabled` 상태에서도 `required` 별표는 표시되지만, 비활성화 색상으로 변경됩니다.
- * - `htmlFor` 속성을 사용해 라벨과 입력 요소를 명시적으로 연결하면, 라벨을 클릭했을 때 해당 입력 요소로 포커스가 이동합니다. 또한 `<label>` 내부에 입력 요소를 직접 포함하는 방식으로도 동일하게 연결할 수 있습니다.
+ * - `htmlFor` 또는 `children`으로 입력 요소를 연결하면, 라벨 클릭 시 해당 입력 요소로 포커스가 이동합니다.
  */
 export function Label({
   children,

@@ -185,8 +185,7 @@ const iconContainerStyles = cva({
 });
 
 /**
- * Card의 최상위 컨테이너입니다. tone과 outline 속성을 설정하며,
- * tone은 하위의 Icon과 Link 컴포넌트에 자동으로 전달됩니다.
+ * Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.Link`에 자동으로 전달됩니다.
  */
 export const Card = Object.assign(CardRoot, {
   /**

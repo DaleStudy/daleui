@@ -32,7 +32,7 @@ export interface VStackProps extends Omit<
 }
 
 /**
- * Flex의 자주 쓰는 세로 배치 패턴(`flex-direction="column"`,`justify-content="start"`, `align-items="center"`)을 의미 있는 이름과 기본값으로 묶은 컴포넌트입니다.
+ * Flex의 세로 배치 패턴(`direction="column"`, `align="center"`)을 의미 있는 이름과 기본값으로 묶은 컴포넌트입니다.
  *
  * 한 컨테이너에서 `direction`을 바꿔 쓸 때, 교차축 정렬이 가운데가 아닐 때, **[Flex](?path=/docs/components-flex--docs) 컴포넌트**를 권장합니다.
  *

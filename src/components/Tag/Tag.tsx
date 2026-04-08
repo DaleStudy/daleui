@@ -28,6 +28,11 @@ type TagAsSpan = BaseTagProps &
 
 export type TagProps = TagAsLink | TagAsSpan;
 
+/**
+ * 콘텐츠의 속성, 카테고리, 상태(성공, 경고 등)를 키워드 형태로 식별하고 분류하여 시각적으로 강조하는 컴포넌트이다. 필요에 따라 링크 이동이나 삭제와 같은 상호작용 기능을 제공합니다.
+ *
+ * - `href`를 전달하면 자동으로 `<a>` 태그로 렌더링됩니다.
+ */
 export function Tag({
   children,
   tone = "neutral",

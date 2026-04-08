@@ -19,6 +19,7 @@ export interface TextProps extends HTMLAttributes<HTMLElement> {
 }
 
 /**
+ * 텍스트 컴포넌트입니다.
  * - `as` 속성으로 어떤 HTML 태그를 사용할지 지정할 수 있습니다.
  * - `muted` 속성을 주시면 글자색이 옅어집니다. 명암비가 낮아지므로 접근성 측면에서 주의해서 사용하세요.
  */

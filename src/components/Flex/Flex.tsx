@@ -28,13 +28,11 @@ export interface FlexProps
 }
 
 /**
- * - `children` 속성을 통해서 자식 요소들을 전달할 수 있습니다.
- * - `as` 속성을 통해서 렌더링할 HTML 요소를 지정할 수 있습니다. 기본값은 `div`입니다.
- * - `role` 속성을 통해서 역할을 지정할 수 있습니다.
- * - `direction` 속성을 통해서 flex 방향을 지정할 수 있습니다. `row`, `rowReverse`, `column`, `columnReverse` 중 선택 가능하며 기본값은 `row`입니다.
- * - `justify` 속성을 통해서 주축 정렬 방식을 지정할 수 있습니다. `start`, `center`, `end`, `between`, `around` 중 선택 가능하며 기본값은 `start`입니다.
- * - `align` 속성을 통해서 교차축 정렬 방식을 지정할 수 있습니다. `start`, `center`, `end`, `stretch` 중 선택 가능하며 기본값은 `stretch`입니다.
- * - `gap` 속성을 통해서 요소 간 간격을 지정할 수 있습니다.
+ * CSS Flexbox 레이아웃을 위한 컨테이너 컴포넌트입니다.
+ *
+ * - `direction`: `row`(기본값) | `rowReverse` | `column` | `columnReverse`
+ * - `justify`: `start`(기본값) | `center` | `end` | `between` | `around`
+ * - `align`: `stretch`(기본값) | `start` | `center` | `end`
  *
  * ### 접근성(Accessibility) 안내
  * - 이미 시맨틱 태그를 쓰면(as=`nav` | `main` | `aside` | `footer` 등) 중복 role 지정은 피하시길 바랍니다.
@@ -47,7 +45,7 @@ export interface FlexProps
  *
  * - **HStack** — 가로 한 줄. 내부적으로 `direction="row"`, 기본 `justify="left"`, `align="center"`.
  * - **VStack** — 세로 한 열. 내부적으로 `direction="column"`, 기본 `justify="top"`, `align="center"`.
- * - **Flex** — `direction` 전환이 필요하거나, VStack/Hstack은 교차축 `align`(CSS `align-items`) 기본이 `center`이므로, **교차축이 가운데가 아닐 때**(`stretch`·`start`·`end` 등)나 `start`·`end` 토큰으로 맞출 때 사용합니다.
+ * - **Flex** — `direction` 전환이 필요하거나, 교차축 정렬이 가운데가 아닐 때(`stretch`·`start`·`end` 등) 사용합니다.
  */
 export const Flex = ({
   children,
