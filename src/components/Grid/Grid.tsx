@@ -45,6 +45,8 @@ export interface GridProps
   gridTemplateRows?: string;
   /** 자식 간 간격 */
   gap?: Spacing;
+  /** 안쪽 여백 */
+  padding?: Spacing;
   /** 영역 이름 (grid-template-areas, GridItem.gridArea와 함께 사용) */
   areas?: Areas;
   /** 자동 배치 흐름 (grid-auto-flow) */
@@ -73,6 +75,7 @@ export const Grid = ({
   gridTemplateColumns,
   gridTemplateRows,
   gap,
+  padding,
   areas,
   autoFlow = "row",
   justifyItems = "stretch",
@@ -97,6 +100,7 @@ export const Grid = ({
         }),
         css({
           gap,
+          padding,
           gridTemplateAreas: "var(--grid-template-areas, none)",
           gridTemplateColumns: "var(--grid-template-columns, none)",
           gridTemplateRows: "var(--grid-template-rows, none)",

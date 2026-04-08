@@ -30,6 +30,7 @@ export default {
   argTypes: {
     children: { control: false },
     gap: { control: "select", options: Object.keys(spacing || {}) },
+    padding: { control: "select", options: Object.keys(spacing || {}) },
     className: { control: false },
     role: { control: "text" },
   },
@@ -72,6 +73,25 @@ export const Gaps: Story = {
   argTypes: {
     children: { control: false },
     gap: { control: false },
+  },
+};
+
+export const Padding: Story = {
+  render: (args) => (
+    <VStack gap="24">
+      <div>
+        <h4>padding: 16</h4>
+        <HStack {...args} padding="16" className={css({ width: "400" })} />
+      </div>
+      <div>
+        <h4>padding: 32</h4>
+        <HStack {...args} padding="32" className={css({ width: "400" })} />
+      </div>
+    </VStack>
+  ),
+  argTypes: {
+    children: { control: false },
+    padding: { control: false },
   },
 };
 

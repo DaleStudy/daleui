@@ -23,6 +23,8 @@ export interface FlexProps
   as?: As;
   /** 자식 간 간격 */
   gap?: Spacing;
+  /** 안쪽 여백 */
+  padding?: Spacing;
   /** ARIA 역할 */
   role?: AriaRole;
 }
@@ -54,6 +56,7 @@ export const Flex = ({
   justify = "start",
   align = "stretch",
   gap,
+  padding,
   className,
   ...rest
 }: FlexProps) => {
@@ -68,7 +71,7 @@ export const Flex = ({
           justify,
           align,
         }),
-        css({ gap }),
+        css({ gap, padding }),
         className,
       ),
       ...rest,
