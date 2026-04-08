@@ -15,17 +15,17 @@ export type LabelFormChild =
   | ReactElement<TextInputProps>;
 
 export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
-  /** 라벨과 연결할 입력 요소 (TextInput, Checkbox, RadioGroup, Button 등) */
+  /** 연결할 폼 자식 요소 */
   children?: LabelFormChild;
-  /** 라벨 텍스트 (필수) */
+  /** 라벨 문구 */
   labelText: string;
-  /** 라벨의 색조 */
+  /** 색조 */
   tone?: LabelTone;
-  /** 라벨 비활성화 여부 */
+  /** 비활성화 여부 */
   disabled?: boolean;
   /** 필수 입력 여부 (true일 경우 별표(*) 표시) */
   required?: boolean;
-  /** 라벨과 연결할 입력 요소의 id */
+  /** 연결 대상 요소 id */
   htmlFor?: string;
 }
 
@@ -38,9 +38,9 @@ export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
  *
  * ### 접근성(Accessibility) 안내
  * - 이 컴포넌트는 `<label>` 태그를 사용하여 시맨틱하게 구현되어 있습니다.
- * - `required`를 true로 설정하면 별표(*)와 함께 `aria-label="옵션 필수"`가 자동으로 추가됩니다.
+ * - `required`를 true로 설정하면 별표(*)와 함께 스크린 리더용 `aria-label="옵션 필수"` 텍스트가 자동으로 추가됩니다.
  * - `disabled` 상태에서도 `required` 별표는 표시되지만, 비활성화 색상으로 변경됩니다.
- * - `htmlFor` 속성을 사용해 라벨과 입력 요소를 명시적으로 연결하면, 라벨을 클릭했을 때 해당 입력 요소로 포커스가 이동합니다. 또한 `<label>` 내부에 입력 요소를 직접 포함하는 방식으로도 동일하게 연결할 수 있습니다.
+ * - `htmlFor` 또는 `children`으로 입력 요소를 연결하면, 라벨 클릭 시 해당 입력 요소로 포커스가 이동합니다.
  */
 export function Label({
   children,

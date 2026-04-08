@@ -35,39 +35,36 @@ export interface GridProps
   extends
     React.HTMLAttributes<HTMLElement>,
     Partial<RecipeVariant<typeof gridVariants>> {
-  /** 자식 요소들 (필수) */
+  /** 자식 요소 */
   children: React.ReactNode;
-  /** 렌더링할 HTML 요소 */
+  /** 렌더링 태그 */
   as?: As;
-  /** 열 템플릿 (예: "repeat(3, 1fr)", "1fr 2fr 1fr", "repeat(auto-fit, minmax(200px, 1fr))") */
+  /** 열 템플릿 (grid-template-columns) */
   gridTemplateColumns?: string;
-  /** 행 템플릿 (예: "repeat(2, 100px)", "auto 1fr auto") */
+  /** 행 템플릿 (grid-template-rows) */
   gridTemplateRows?: string;
-  /** 요소 간 간격 */
+  /** 자식 간 간격 */
   gap?: Spacing;
-  /** grid-template-areas 영역 이름 (예: "\"header header\" \"sidebar main\"", [["header", "header"], ["sidebar", "main"]]). GridItem의 gridArea와 함께 사용 */
+  /** 영역 이름 (grid-template-areas, GridItem.gridArea와 함께 사용) */
   areas?: Areas;
-  /** grid-auto-flow (row | column | rowDense | columnDense, 기본값: row) */
+  /** 자동 배치 흐름 (grid-auto-flow) */
   autoFlow?: RecipeVariant<typeof gridVariants>["autoFlow"];
-  /** 그리드 아이템 인라인 축 정렬 (start | center | end | stretch, 기본값: stretch) */
+  /** 아이템 주축 정렬 (justify-items) */
   justifyItems?: RecipeVariant<typeof gridVariants>["justifyItems"];
-  /** 그리드 아이템 블록 축 정렬 (start | center | end | stretch, 기본값: stretch) */
+  /** 아이템 교차축 정렬 (align-items) */
   alignItems?: RecipeVariant<typeof gridVariants>["alignItems"];
-  /** 그리드 컨테이너 인라인 축 정렬 (start | center | end | between | around | stretch) */
+  /** 컨테이너 주축 정렬 (justify-content) */
   justifyContent?: RecipeVariant<typeof gridVariants>["justifyContent"];
-  /** 그리드 컨테이너 블록 축 정렬 (start | center | end | between | around | stretch) */
+  /** 컨테이너 교차축 정렬 (align-content) */
   alignContent?: RecipeVariant<typeof gridVariants>["alignContent"];
 }
 
 /**
  * CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
- * - `children` 속성을 통해서 자식 요소들을 전달할 수 있습니다.
- * - `as` 속성을 통해서 렌더링할 HTML 요소를 지정할 수 있습니다. 기본값은 `div`입니다.
- * - `role` 속성을 통해서 역할을 지정할 수 있습니다.
  * - `gridTemplateColumns`, `gridTemplateRows`, `gap`, `areas` 등 CSS Grid 관련 props를 통해 레이아웃을 설정할 수 있습니다.
  *
  * ### 접근성(Accessibility) 안내
- * - 이미 시맨틱 태그를 쓰면(as=nav | main | aside | footer 등) 중복 role 지정은 피하시길 바랍니다.
+ * - 이미 시맨틱 태그를 쓰면(as=`nav` | `main` | `aside` | `footer` 등) 중복 role 지정은 피하시길 바랍니다.
  * - 접근성을 위해 기본적으로 적절한 HTML 시맨틱 요소를 사용하고 필요시 ARIA 속성을 활용하여 접근성을 향상시킵니다.
  */
 export const Grid = ({
@@ -165,38 +162,28 @@ const gridVariants = cva({
 });
 
 export interface GridItemProps extends React.HTMLAttributes<HTMLElement> {
-  /** 자식 요소들 (필수) */
+  /** 자식 요소 */
   children: React.ReactNode;
-  /** 렌더링할 HTML 요소 */
+  /** 렌더링 태그 */
   as?: As;
-  /** grid-column (예: "span 2", "1 / 3", "1 / -1") */
+  /** 열 범위 (grid-column) */
   gridColumn?: string;
-  /** grid-row (예: "span 2", "1 / 3", "1 / -1") */
+  /** 행 범위 (grid-row) */
   gridRow?: string;
-  /** grid-column-start (예: "1", "2") */
+  /** 열 시작 선 (grid-column-start) */
   gridColumnStart?: string;
-  /** grid-row-start (예: "1", "2") */
+  /** 행 시작 선 (grid-row-start) */
   gridRowStart?: string;
-  /** grid-column-end (예: "3", "-1") */
+  /** 열 끝 선 (grid-column-end) */
   gridColumnEnd?: string;
-  /** grid-row-end (예: "3", "-1") */
+  /** 행 끝 선 (grid-row-end) */
   gridRowEnd?: string;
-  /** grid-area 이름 */
+  /** 영역 이름 (grid-area) */
   gridArea?: string;
 }
 
 /**
  * CSS Grid 레이아웃 내의 아이템 컴포넌트입니다.
- *
- * - `children` 속성을 통해서 자식 요소들을 전달할 수 있습니다.
- * - `as` 속성을 통해서 렌더링할 HTML 요소를 지정할 수 있습니다. 기본값은 `div`입니다.
- * - `gridColumn` 속성을 통해서 열 위치를 지정할 수 있습니다.
- * - `gridRow` 속성을 통해서 행 위치를 지정할 수 있습니다.
- * - `gridColumnStart` 속성을 통해서 열 시작 위치를 지정할 수 있습니다.
- * - `gridRowStart` 속성을 통해서 행 시작 위치를 지정할 수 있습니다.
- * - `gridColumnEnd` 속성을 통해서 열 끝 위치를 지정할 수 있습니다.
- * - `gridRowEnd` 속성을 통해서 행 끝 위치를 지정할 수 있습니다.
- * - `gridArea` 속성을 통해서 grid-area 이름을 지정할 수 있습니다.
  *
  * ### 접근성(Accessibility) 안내
  * - 이미 시맨틱 태그를 쓰면(as=`nav` | `main` | `aside` | `footer` 등) 중복 role 지정은 피하시길 바랍니다.

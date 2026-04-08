@@ -9,30 +9,23 @@ import type { Tone } from "../../tokens/colors";
 import type { FieldProps } from "../shared/types";
 
 export interface CheckboxProps extends FieldProps {
-  /** 체크박스 라벨 텍스트 */
+  /** 라벨 내용 */
   label?: React.ReactNode;
-  /** 체크박스의 name 속성 */
+  /** 폼 name */
   name?: string;
-  /** 체크 상태 (controlled 모드) */
+  /** 제어 모드 체크 여부 */
   checked?: boolean;
-  /** 초기 체크 상태 (uncontrolled 모드) */
+  /** 비제어 모드 초기 체크 여부 */
   defaultChecked?: boolean;
-  /** 체크박스의 색조 */
+  /** 색조 */
   tone?: Tone;
-  /** 체크 상태 변경 시 호출되는 콜백 (controlled 모드) */
+  /** 체크 변경 핸들러 */
   onChange?: (checked: boolean) => void;
 }
 
 /**
- * - `label` 속성으로 체크박스의 라벨을 지정할 수 있습니다.
- * - `name` 속성으로 체크박스의 form에서 사용할 name 속성을 지정할 수 있습니다.
- * - `checked` 속성으로 체크박스의 체크 상태를 제어할 수 있습니다.
- * - `defaultChecked` 속성으로 체크박스의 초기 체크 상태를 설정할 수 있습니다.
- * - `disabled` 속성으로 체크박스를 비활성화할 수 있습니다.
- * - `invalid` 속성으로 체크박스의 에러 상태를 지정할 수 있습니다.
- * - `tone` 속성으로 체크박스의 색상 강조를 지정할 수 있습니다.
- * - `required` 속성으로 체크박스의 필수 입력 여부를 지정할 수 있습니다.
- * - `onChange` 속성으로 체크박스의 체크 상태 변경 시 호출되는 콜백을 지정할 수 있습니다.
+ * 체크박스(Checkbox)는 사용자가 하나 이상을 중복 선택할 수 있도록 지원하는 인터페이스 구성 요소입니다.
+ * 개별 항목의 상태를 '선택(Checked)' 또는 '해제(Unchecked)'로 변경하는 기능을 수행합니다.
  */
 export const Checkbox = ({
   label,

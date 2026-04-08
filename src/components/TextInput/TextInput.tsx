@@ -10,27 +10,25 @@ export interface TextInputProps
       // TODO: readOnly도 Omit 대상 (#935)
     >,
     FieldProps {
-  /** 앞쪽 아이콘 이름 (아이콘 컴포넌트의 name 속성에 해당) */
+  /** 선행 아이콘 이름 (Icon.name) */
   leadingIcon?: IconProps["name"];
-  /** 뒤쪽 아이콘 이름 (아이콘 컴포넌트의 name 속성에 해당) */
+  /** 후행 아이콘 이름 (Icon.name) */
   trailingIcon?: IconProps["name"];
-  /** 플레이스홀더 텍스트 */
+  /** 플레이스홀더 */
   placeholder?: string;
 
-  /** 입력값 (controlled 모드) */
+  /** 제어 모드 입력 값 */
   value?: string;
-  /** 초기 입력값 (uncontrolled 모드) */
+  /** 비제어 모드 초기 입력값 */
   defaultValue?: string;
-  /** 값이 변경될 때 호출되는 함수 */
+  /** 변경 이벤트 핸들러 */
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  /** DOM 요소 참조 */
+  /** 입력 요소 참조 */
   ref?: Ref<HTMLInputElement>;
 }
 
 /**
- * - 사용자가 텍스트를 입력할 수 있는 기본적인 입력 필드 컴포넌트입니다.
- * - `leadingIcon`과 `trailingIcon` prop을 통해 아이콘을 앞뒤에 추가할 수 있습니다.
- * - `disabled` prop으로 비활성화 상태를 제어할 수 있으며, `state` prop을 통해 'error'와 같은 특정 상태를 표현할 수 있습니다.
+ * 텍스트 인풋은 사용자가 이름, 이메일, 검색어 등 텍스트 정보를 직접 입력할 수 있도록 제공되는 입력 컴포넌트입니다.
  */
 export function TextInput({
   invalid = false,

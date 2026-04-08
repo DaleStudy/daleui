@@ -10,31 +10,26 @@ export interface ButtonProps extends Omit<
   HTMLAttributes<HTMLButtonElement>,
   "style"
 > {
-  /** 버튼 텍스트 */
+  /** 버튼 내용 */
   children: React.ReactNode;
-  /** 버튼 비활성화 여부 */
+  /** 비활성화 여부 */
   disabled?: boolean;
-  /** 버튼 너비 100% */
+  /** 전체 너비 여부 */
   fullWidth?: boolean;
+  /** 로딩 표시 여부 */
   loading?: boolean;
-  /** 버튼의 크기 */
+  /** 크기 */
   size?: size;
-  /** 버튼의 색상 강조 */
+  /** 색조 */
   tone?: "brand" | "neutral" | "danger";
-  /** 타입 */
+  /** 네이티브 button 타입 */
   type?: "button" | "submit" | "reset";
-  /** 버튼의 스타일 종류 */
+  /** 스타일 변형 */
   variant?: "solid" | "outline" | "ghost";
 }
 
 /**
  * 버튼은 사용자의 명확한 작업 실행을 위해 사용되는 컴포넌트로, 완료, 저장, 제출과 같은 액션에 사용합니다.
- * - `variant` 속성으로 버튼의 스타일 종류를 지정할 수 있습니다.
- * - `tone` 속성으로 버튼의 색상 강조를 지정할 수 있습니다.
- * - `size` 속성으로 버튼의 크기를 지정할 수 있습니다.
- * - `type` 속성으로 버튼의 타입을 지정할 수 있습니다.
- * - `disabled` 속성을 사용하여 버튼을 비활성화할 수 있습니다.
- * - `loading` 속성을 사용하여 버튼을 로딩 상태로 지정할 수 있습니다.
  */
 export const Button = ({
   className,

@@ -11,22 +11,22 @@ import { Icon } from "../Icon/Icon";
 
 export interface SelectProps
   extends Omit<HTMLAttributes<HTMLSelectElement>, "onChange">, FieldProps {
-  /** 지우기 버튼의 aria-label */
+  /** 지우기 버튼 접근성 이름 (aria-label) */
   clearButtonName?: string;
-  /** placeholder 텍스트 */
+  /** 플레이스홀더 */
   placeholder?: string;
 
-  /** 선택된 값 (controlled 모드) */
+  /** 제어 모드 선택 값 */
   value?: string;
-  /** 초기 선택값 (uncontrolled 모드) */
+  /** 비제어 모드 초기 선택 값 */
   defaultValue?: string;
-  /** 값이 변경될 때 호출되는 함수 (controlled 모드) */
+  /** 변경 이벤트 핸들러 */
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  /** 역할을 설명하는 레이블 */
+  /** 접근성 레이블 (aria-label) */
   "aria-label"?: string;
-  /** DOM 요소 참조 */
+  /** select 요소 참조 */
   ref?: Ref<HTMLSelectElement>;
-  /** 이름 */
+  /** 폼 name */
   name?: string;
 }
 
@@ -34,15 +34,12 @@ export interface SelectProps
  * 셀렉트는 미리 정의된 여러 옵션 중 하나를 사용자가 선택하도록 하기 위한 컴포넌트입니다.
  * - 네이티브 select 태그를 사용하는 Select 컴포넌트입니다.
  * - 여러 선택지 중 하나를 고를 때 사용하며, 화면 공간을 절약하고 옵션 목록을 펼쳤을 때만 표시하고 싶을 때 적합합니다.
- * - 선택지가 적은 경우(5개 이하)에는 대신 [RadioGroup](?path=/docs/components-radiogroup--docs) 컴포넌트 사용을 권장합니다.
- * - `children`으로 `<option>` 요소를 직접 전달할 수 있습니다.
- * - `disabled` 속성으로 비활성화 상태를 제어할 수 있으며, `invalid` 속성을 통해 오류 상태를 표현할 수 있습니다.
- * - `clearButtonName` 속성을 통해 선택된 값을 지울 수 있는 버튼을 표시할 수 있습니다.
+ * - 선택지가 적은 경우(5개 이하)에는 [RadioGroup](?path=/docs/components-radiogroup--docs) 컴포넌트 사용을 권장합니다.
+ * - `children`으로 `<option>` 요소를 직접 전달합니다.
  *
  * ### 접근성(Accessibility) 안내
- * - label을 사용하거나 aria-label 속성을 설정하여 Select 컴포넌트의 역할을 명시적으로 설명해주세요.
- * - invalid 속성을 true로 설정하면 오류 상태를 표시하며 aria-invalid 속성을 true로 설정합니다.
- * - required 속성을 true로 설정하면 필수 입력 여부를 표시하며 aria-required 속성을 true로 설정합니다.
+ * - `Label` 컴포넌트를 연결하거나 `aria-label`을 설정하여 역할을 명시적으로 설명해주세요.
+ * - `invalid`를 true로 설정하면 `aria-invalid`, `required`를 true로 설정하면 `aria-required`가 자동으로 추가됩니다.
  */
 export function Select({
   value,

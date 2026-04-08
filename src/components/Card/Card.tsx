@@ -28,8 +28,9 @@ const useCardContext = () => {
 export interface CardProps extends Omit<HTMLAttributes<HTMLElement>, "style"> {
   /** 색조 */
   tone?: Extract<Tone, "neutral" | "brand">;
-  /** border 여부 */
+  /** 테두리 표시 여부 */
   outline?: boolean;
+  /** 자식 요소 */
   children: ReactNode;
 }
 
@@ -68,7 +69,7 @@ export function CardBody({ className, children, ...rest }: CardBodyProps) {
 export interface CardIconProps extends SVGProps<SVGSVGElement> {
   /** 아이콘 이름 */
   name: IconName;
-  /** 아이콘 크기 */
+  /** 크기 */
   size?: "sm" | "md" | "lg";
 }
 
@@ -84,6 +85,7 @@ export interface CardTitleProps extends Omit<
   HTMLAttributes<HTMLElement>,
   "style"
 > {
+  /** 설명 내용 */
   children: ReactNode;
 }
 
@@ -110,9 +112,9 @@ export function CardDescription({ children, ...rest }: CardDescriptionProps) {
 }
 export interface CardLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   children: ReactNode;
-  /** 링크 URL */
+  /** 대상 URL */
   href: string;
-  /** 외부 링크 여부 (true일 경우 새 탭에서 열리며 아이콘 추가) */
+  /** 외부 링크 여부 */
   external?: boolean;
 }
 
@@ -183,8 +185,7 @@ const iconContainerStyles = cva({
 });
 
 /**
- * Card의 최상위 컨테이너입니다. tone과 outline 속성을 설정하며,
- * tone은 하위의 Icon과 Link 컴포넌트에 자동으로 전달됩니다.
+ * Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.Link`에 자동으로 전달됩니다.
  */
 export const Card = Object.assign(CardRoot, {
   /**
