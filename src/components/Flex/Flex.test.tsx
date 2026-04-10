@@ -109,6 +109,20 @@ describe("클래스 토큰 및 스타일", () => {
       screen.getByRole("navigation", { name: `flex-gap-${gap}` }).className,
     ).toMatch(`gap_${gap}`);
   });
+
+  const paddings = Object.keys(spacing || {}) as Spacing[];
+  test.each(paddings)("padding=%s이면 p_%s 클래스가 적용된다", (padding) => {
+    render(
+      <Flex as="nav" aria-label={`flex-padding-${padding}`} padding={padding}>
+        <span>child</span>
+      </Flex>,
+    );
+
+    expect(
+      screen.getByRole("navigation", { name: `flex-padding-${padding}` })
+        .className,
+    ).toMatch(`p_${padding}`);
+  });
 });
 
 describe("Flex 접근성", () => {
