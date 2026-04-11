@@ -1,0 +1,77 @@
+name: Create Weekly Meeting Issue
+
+on:
+  schedule:
+    # 금요일 9:30pm EDT (UTC-4) = 토요일 01:30 UTC = 토요일 10:30am KST (UTC+9)
+    - cron: "30 1 * * 6"
+  workflow_dispatch: # 수동 테스트용
+
+permissions:
+  issues: write
+
+jobs:
+  create-meeting-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determine meeting type and sprint number
+        id: meeting-info
+        env:
+          SPRINT_WEEK1_FRIDAY: ${{ vars.SPRINT_WEEK1_FRIDAY }}
+          SPRINT_START_NUMBER: ${{ vars.SPRINT_START_NUMBER }}
+          MEETING_OVERRIDE: ${{ vars.MEETING_OVERRIDE }}
+        run: |
+          # 비정규 스프린트(3주 등) 특수 주: MEETING_OVERRIDE=skip 이면 이슈 생성 안 함
+          if [ "$MEETING_OVERRIDE" = "skip" ]; then
+            echo "type=skip" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # cron이 UTC 기준 토요일 새벽에 실행되므로 NY 시간으로 변환하면 금요일 날짜
+          TODAY=$(TZ="America/New_York" date +%Y-%m-%d)
+          TODAY_EPOCH=$(date -d "$TODAY" +%s)
+          REF_EPOCH=$(date -d "$SPRINT_WEEK1_FRIDAY" +%s)
+          DAYS_DIFF=$(( (TODAY_EPOCH - REF_EPOCH) / 86400 ))
+
+          SPRINT_NUMBER=$(( SPRINT_START_NUMBER + (DAYS_DIFF / 14) ))
+          WEEK_IN_CYCLE=$(( (DAYS_DIFF % 14) / 7 ))
+
+          if [ "$WEEK_IN_CYCLE" -eq 0 ]; then
+            echo "type=mid" >> $GITHUB_OUTPUT
+            echo "title=Sprint ${SPRINT_NUMBER} 중간 회의" >> $GITHUB_OUTPUT
+          else
+            echo "type=end" >> $GITHUB_OUTPUT
+            echo "title=Sprint ${SPRINT_NUMBER} 종료 회의" >> $GITHUB_OUTPUT
+          fi
+          echo "sprint_number=$SPRINT_NUMBER" >> $GITHUB_OUTPUT
+
+      - name: Prepare issue body
+        if: steps.meeting-info.outputs.type != 'skip'
+        env:
+          MEETING_TYPE: ${{ steps.meeting-info.outputs.type }}
+          SPRINT_NUMBER: ${{ steps.meeting-info.outputs.sprint_number }}
+          PROJECT_BOARD_URL: ${{ vars.PROJECT_BOARD_URL }}
+          RETRO_BOARD_URL: ${{ vars.RETRO_BOARD_URL }}
+        run: |
+          if [ "$MEETING_TYPE" = "mid" ]; then
+            TEMPLATE=".github/meeting-templates/mid-sprint.md"
+          else
+            TEMPLATE=".github/meeting-templates/end-sprint.md"
+          fi
+
+          sed \
+            -e "s|{{SPRINT_NUMBER}}|$SPRINT_NUMBER|g" \
+            -e "s|{{PROJECT_BOARD_URL}}|$PROJECT_BOARD_URL|g" \
+            -e "s|{{RETRO_BOARD_URL}}|$RETRO_BOARD_URL|g" \
+            "$TEMPLATE" > /tmp/issue-body.md
+
+      - name: Create GitHub issue
+        if: steps.meeting-info.outputs.type != 'skip'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TITLE: ${{ steps.meeting-info.outputs.title }}
+        run: |
+          gh issue create \
+            --title "$TITLE" \
+            --body-file /tmp/issue-body.md
