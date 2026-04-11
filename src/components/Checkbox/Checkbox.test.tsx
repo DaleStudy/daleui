@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { userEvent } from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import { Checkbox } from "./Checkbox";
 
@@ -106,7 +106,7 @@ describe("렌더링", () => {
   });
 
   test.each(["brand", "neutral"] as const)(
-    "%s tone을 올바르게 설정한다.",
+    "%s 톤을 올바르게 설정한다.",
     (tone) => {
       render(<Checkbox label={`${tone} tone`} tone={tone} />);
       expect(screen.getByRole("checkbox")).toHaveAttribute(
