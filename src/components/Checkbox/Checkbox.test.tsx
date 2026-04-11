@@ -108,7 +108,7 @@ describe("렌더링", () => {
   test.each(["brand", "neutral"] as const)(
     "%s 톤을 올바르게 설정한다.",
     (tone) => {
-      render(<Checkbox label={`${tone} tone`} tone={tone} />);
+      render(<Checkbox label={`${tone} 톤`} tone={tone} />);
       expect(screen.getByRole("checkbox")).toHaveAttribute(
         "data-test-tone",
         tone,

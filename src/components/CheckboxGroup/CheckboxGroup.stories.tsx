@@ -145,7 +145,7 @@ export const Invalid: Story = {
           name="valid-group"
           label="정상 체크박스 그룹"
           required
-          helperText="helper text"
+          helperText="과일을 선택해주세요."
         />
       </VStack>
     );
