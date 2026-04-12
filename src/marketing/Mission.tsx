@@ -6,28 +6,22 @@ import { Text } from "../components/Text/Text";
 
 const CARDS = [
   {
-    icon: "globe",
-    title: "모두를 위한 경험 설계",
-    description:
-      "누구나 쉽게 시작할 수 있도록, 디자인 시스템의 진입 장벽을 낮춥니다.",
-  },
-  {
     icon: "kr",
-    title: "한국어 최적화",
+    title: "한국어 사용자 중심 설계",
     description:
-      "글로벌 기준을 참고하되, 한국어에 최적화된 현지화 경험을 제공합니다.",
+      "한국어 타이포그래피의 특성과 국내 사용 패턴을 깊이 이해하고 반영합니다. 글로벌 디자인 시스템의 좋은 사례를 따르되 한국어 환경에서 가독성과 사용성이 떨어지지 않도록 신경 씁니다.",
   },
   {
     icon: "award",
-    title: "믿고 쓰는 컴포넌트",
+    title: "신뢰할 수 있는 시스템",
     description:
-      "엄격한 품질 기준을 준수하며, 시스템 전반에 걸쳐 일관된 동작과 외관을 유지합니다.",
+      "접근성(WCAG) 준수, 디자인과 구현 간 일치, 예측 가능한 API로 믿고 쓰는 경험을 만듭니다. 검증된 Headless UI 코어 위에 완성도 높은 기본 스타일을 제공하되, 필요하면 스타일을 걷어내고 자유롭게 확장할 수 있습니다.",
   },
   {
     icon: "users",
-    title: "함께 만드는 시스템",
+    title: "커뮤니티 중심 발전",
     description:
-      "커뮤니티의 피드백과 기여로 함께 성장하는 오픈소스 디자인 시스템입니다.",
+      "오픈소스 정신에 따라 커뮤니티 참여와 기여를 환영합니다. 모든 설계 결정의 근거를 공개하고 누구나 같은 방향으로 기여하도록 문서화와 기여 가이드를 꾸준히 관리합니다.",
   },
 ] as const;
 
@@ -55,10 +49,12 @@ export function Mission() {
         })}
       >
         <Heading align="center" wordBreak="cjk" level={2}>
-          달레 UI는 <Text tone="brand">한국어 친화적 디자인 시스템</Text>
+          달레 UI는{" "}
+          <Text tone="brand">한국어 환경에 맞는 오픈소스 디자인 시스템</Text>
           으로,
           <br />
-          모두가 쉽게 협업하고 기여할 수 있도록 돕습니다.
+          디자이너와 개발자가 접근성 높은 프로덕트를 쉽고 빠르게 함께 만들도록
+          돕습니다.
         </Heading>
 
         <div
@@ -68,7 +64,7 @@ export function Mission() {
             gridTemplateColumns: {
               base: "1fr", // 320-640
               sm: "repeat(2, 1fr)", // 640-1024
-              lg: "repeat(4, 1fr)", // 1024+
+              lg: "repeat(3, 1fr)", // 1024+
             },
           })}
         >
