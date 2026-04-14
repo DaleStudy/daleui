@@ -98,6 +98,18 @@ describe("TextInput", () => {
     expect(screen.getByTestId("icon-x")).toBeInTheDocument();
   });
 
+  test("invalid가 true면 아이콘 tone이 danger로 적용된다", () => {
+    render(<TextInput invalid leadingIcon="search" />);
+    const icon = screen.getByTestId("icon-search");
+    expect(icon.className).toMatch(/fg\.danger|danger/);
+  });
+
+  test("disabled가 true면 invalid와 무관하게 아이콘 tone이 neutral로 적용된다", () => {
+    render(<TextInput disabled invalid leadingIcon="search" />);
+    const icon = screen.getByTestId("icon-search");
+    expect(icon.className).toMatch(/fg\.neutral|neutral/);
+  });
+
   test("ref가 내부 input 엘리먼트로 전달되어야 한다.", () => {
     const ref = createRef<HTMLInputElement>();
     render(<TextInput ref={ref} />);
