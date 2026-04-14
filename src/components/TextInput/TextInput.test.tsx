@@ -130,4 +130,62 @@ describe("TextInput", () => {
     const inputElement = screen.getByRole("textbox");
     expect(inputElement).toHaveValue("test2");
   });
+
+  test("helpText가 있으면 하단에 표시하고 aria-describedby로 연결한다", () => {
+    render(<TextInput helpText="필수 항목입니다." />);
+    expect(screen.getByText("필수 항목입니다.")).toBeInTheDocument();
+    const input = screen.getByLabelText("텍스트 입력", { selector: "input" });
+    const helpId = input.getAttribute("aria-describedby");
+    expect(helpId).toBeTruthy();
+  });
+
+  test("id prop을 넘기면 입력 요소에 그대로 적용된다", () => {
+    render(<TextInput id="user-name" />);
+    expect(screen.getByLabelText("텍스트 입력")).toHaveAttribute(
+      "id",
+      "user-name",
+    );
+  });
+
+  test("helpText가 빈 문자열이면 도움말을 렌더하지 않고 aria-describedby를 두지 않는다", () => {
+    render(<TextInput helpText="" />);
+    const input = screen.getByRole("textbox");
+    expect(screen.queryByText("도움말을 입력하세요")).not.toBeInTheDocument();
+    expect(input).not.toHaveAttribute("aria-describedby");
+  });
+
+  test("aria-describedby prop과 helpText를 함께 쓰면 두 id를 공백으로 이어 붙인다", () => {
+    render(<TextInput aria-describedby="extra-desc" helpText="힌트입니다." />);
+    const input = screen.getByRole("textbox");
+    const help = screen.getByText("힌트입니다.");
+    const describedBy = input.getAttribute("aria-describedby");
+    expect(describedBy).toMatch(/extra-desc/);
+    expect(describedBy).toContain(help.id);
+  });
+
+  test("aria-describedby prop만 있고 helpText가 빈 문자열이면 해당 id만 aria-describedby에 넣는다", () => {
+    render(<TextInput aria-describedby="only-extra" helpText="" />);
+    const input = screen.getByRole("textbox");
+    expect(input).toHaveAttribute("aria-describedby", "only-extra");
+  });
+
+  test("errorMessage가 있으면 하단에 표시하고 aria-describedby로 연결한다", () => {
+    render(<TextInput errorMessage="이메일 형식이 올바르지 않습니다." />);
+    const error = screen.getByText("이메일 형식이 올바르지 않습니다.");
+    expect(error).toBeInTheDocument();
+    const input = screen.getByRole("textbox");
+    expect(input.getAttribute("aria-describedby")).toBeTruthy();
+  });
+
+  test("invalid일 때 errorMessage는 danger 스타일을 사용한다", () => {
+    render(<TextInput invalid errorMessage="오류 메시지입니다." />);
+    const error = screen.getByText("오류 메시지입니다.");
+    expect(error.className).toMatch(/fg\.danger|danger/);
+  });
+
+  test("errorMessage와 helpText가 모두 있으면 errorMessage를 표시한다", () => {
+    render(<TextInput errorMessage="오류입니다." helpText="도움말입니다." />);
+    expect(screen.getByText("오류입니다.")).toBeInTheDocument();
+    expect(screen.queryByText("도움말입니다.")).not.toBeInTheDocument();
+  });
 });

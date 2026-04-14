@@ -87,6 +87,7 @@ export const Invalid: Story = {
   ),
   args: {
     invalid: true,
+    errorMessage: "오류 메시지",
   },
   argTypes: {
     invalid: {
@@ -116,5 +117,11 @@ export const Disabled: Story = {
     placeholder: {
       control: false,
     },
+  },
+};
+
+export const HelpText: Story = {
+  args: {
+    helpText: "도움말 메시지",
   },
 };

@@ -1,5 +1,10 @@
-import { type ComponentPropsWithoutRef, type Ref, useState } from "react";
-import { cva } from "../../../styled-system/css";
+import {
+  type ComponentPropsWithoutRef,
+  type Ref,
+  useId,
+  useState,
+} from "react";
+import { css, cva } from "../../../styled-system/css";
 import type { FieldProps } from "../shared/types";
 import { Icon } from "../Icon/Icon";
 
@@ -17,9 +22,12 @@ export interface PasswordInputProps
       // TODO: readOnly도 Omit 대상 (#935)
     >,
     FieldProps {
+  /** 필드 하단 도움말·검증 메시지 */
+  helpText?: string;
+  /** 오류 메시지 (helpText보다 우선 표시되며 항상 위험 색조 스타일을 사용한다) */
+  errorMessage?: string;
   /** 플레이스홀더 */
   placeholder?: string;
-
   /** 제어 모드 입력 값 */
   value?: string;
   /** 비제어 모드 초기 입력값 */
@@ -44,51 +52,103 @@ export function PasswordInput({
   defaultValue,
   onChange,
   ref,
+  helpText,
+  errorMessage,
+  id: idProp,
+  "aria-describedby": ariaDescribedByProp,
   ...rest
 }: PasswordInputProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const reactId = useId();
+  const inputId = idProp ?? reactId;
+  const helpTextId = `${reactId}-help-text`;
+  const bottomText = errorMessage || helpText;
+  const showBottomText = !!bottomText;
+
+  const ariaDescribedBy = [
+    ariaDescribedByProp,
+    showBottomText ? helpTextId : undefined,
+  ]
+    .filter((segment): segment is string => Boolean(segment))
+    .join(" ");
 
   const toggleVisibility = () => {
-    if (!disabled) {
-      setIsVisible((prev) => !prev);
-    }
+    setIsVisible((prev) => !prev);
   };
 
   return (
-    <div
-      className={containerStyles({
-        state: invalid ? "error" : undefined,
-      })}
-    >
-      <input
-        ref={ref}
-        type={isVisible ? "text" : "password"}
-        placeholder={placeholder}
-        disabled={disabled}
-        className={inputStyles()}
-        value={value}
-        defaultValue={defaultValue}
-        onChange={onChange}
-        aria-label="패스워드"
-        aria-invalid={invalid}
-        aria-required={required}
-        {...rest}
-      />
-      <button
-        type="button"
-        onClick={toggleVisibility}
-        disabled={disabled}
-        className={iconButtonStyles({ disabled })}
-        aria-pressed={isVisible}
-        aria-label={isVisible ? "패스워드 숨기기" : "패스워드 보기"}
+    <div className={css({ width: "100%" })}>
+      <div
+        className={inputContainerStyles({
+          state: invalid ? "error" : undefined,
+        })}
       >
-        <Icon name={isVisible ? "eye" : "eyeOff"} size="md" tone="neutral" />
-      </button>
+        <input
+          id={inputId}
+          ref={ref}
+          type={isVisible ? "text" : "password"}
+          placeholder={placeholder}
+          disabled={disabled}
+          className={inputStyles()}
+          value={value}
+          defaultValue={defaultValue}
+          onChange={onChange}
+          aria-label="패스워드"
+          aria-invalid={invalid}
+          aria-required={required}
+          aria-describedby={ariaDescribedBy || undefined}
+          {...rest}
+        />
+        <button
+          type="button"
+          onClick={toggleVisibility}
+          disabled={disabled}
+          className={iconButtonStyles({ disabled })}
+          aria-pressed={isVisible}
+          aria-label={isVisible ? "패스워드 숨기기" : "패스워드 보기"}
+        >
+          <Icon name={isVisible ? "eye" : "eyeOff"} size="md" tone="neutral" />
+        </button>
+      </div>
+      {showBottomText && (
+        <div
+          id={helpTextId}
+          className={helpTextStyles({
+            invalid: invalid && !!errorMessage,
+            disabled,
+          })}
+        >
+          {bottomText}
+        </div>
+      )}
     </div>
   );
 }
 
-const containerStyles = cva({
+const helpTextStyles = cva({
+  base: {
+    textStyle: "body.sm",
+    marginBottom: "6px",
+  },
+  variants: {
+    invalid: {
+      true: {
+        color: "fg.danger",
+      },
+      false: {
+        color: "fg.neutral",
+      },
+    },
+    disabled: {
+      true: {
+        color: "!fg.neutral.disabled",
+      },
+      false: {},
+    },
+  },
+});
+
+const inputContainerStyles = cva({
   base: {
     position: "relative",
     display: "flex",

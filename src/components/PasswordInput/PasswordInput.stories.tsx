@@ -31,9 +31,10 @@ export const Focused: Story = {
 };
 
 // 에러 상태
-export const Error: Story = {
+export const Invalid: Story = {
   args: {
     invalid: true,
+    errorMessage: "오류 메시지",
     defaultValue: "123",
   },
 };
@@ -42,5 +43,11 @@ export const Error: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
+  },
+};
+
+export const HelpText: Story = {
+  args: {
+    helpText: "도움말 메시지",
   },
 };
