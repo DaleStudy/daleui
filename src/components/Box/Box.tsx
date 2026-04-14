@@ -28,6 +28,8 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   width?: CSSLength;
   /** 높이 (예: "100px", "2rem", "2em", "50%") */
   height?: CSSLength;
+  /** 요소 참조 */
+  ref?: React.Ref<HTMLElement>;
 }
 
 /**
@@ -41,6 +43,7 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
  */
 
 export const Box = ({
+  ref,
   children,
   as = "div",
   padding,
@@ -50,8 +53,6 @@ export const Box = ({
   className,
   ...rest
 }: BoxProps) => {
-  const Component = as;
-
   const baseStyle = css({
     padding,
     margin,
@@ -62,13 +63,14 @@ export const Box = ({
     ...(height !== undefined && { height }),
   };
 
-  return (
-    <Component
-      className={cx(baseStyle, className)}
-      style={inlineStyle}
-      {...rest}
-    >
-      {children}
-    </Component>
+  return React.createElement(
+    as,
+    {
+      ref,
+      className: cx(baseStyle, className),
+      style: inlineStyle,
+      ...rest,
+    },
+    children,
   );
 };

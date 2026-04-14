@@ -25,6 +25,8 @@ export interface FlexProps
   gap?: Spacing;
   /** ARIA 역할 */
   role?: AriaRole;
+  /** 요소 참조 */
+  ref?: React.Ref<HTMLElement>;
 }
 
 /**
@@ -48,6 +50,7 @@ export interface FlexProps
  * - **Flex** — `direction` 전환이 필요하거나, 교차축 정렬이 가운데가 아닐 때(`stretch`·`start`·`end` 등) 사용합니다.
  */
 export const Flex = ({
+  ref,
   children,
   as = "div",
   direction = "row",
@@ -57,11 +60,10 @@ export const Flex = ({
   className,
   ...rest
 }: FlexProps) => {
-  const Component = as;
-
   return React.createElement(
-    Component,
+    as,
     {
+      ref,
       className: cx(
         flexVariants({
           direction,

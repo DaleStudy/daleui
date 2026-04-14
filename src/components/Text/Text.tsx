@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import React, { type HTMLAttributes, type ReactNode } from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 import type { FontSize, FontWeight } from "../../tokens/typography";
@@ -16,6 +16,8 @@ export interface TextProps extends HTMLAttributes<HTMLElement> {
   weight?: FontWeight;
   /** 흐린 톤(muted) 적용 여부 */
   muted?: boolean;
+  /** 요소 참조 */
+  ref?: React.Ref<HTMLElement>;
 }
 
 /**
@@ -24,6 +26,7 @@ export interface TextProps extends HTMLAttributes<HTMLElement> {
  * - `muted` 속성을 주시면 글자색이 옅어집니다. 명암비가 낮아지므로 접근성 측면에서 주의해서 사용하세요.
  */
 export const Text = ({
+  ref,
   children,
   as: Tag = "span",
   tone = "neutral",
@@ -32,19 +35,20 @@ export const Text = ({
   muted = false,
   ...rest
 }: TextProps) => {
-  return (
-    <Tag
-      className={css(
+  return React.createElement(
+    Tag,
+    {
+      ref,
+      className: css(
         styles.raw({ tone, muted }),
         css.raw({
           fontSize: size,
           fontWeight: weight,
         }),
-      )}
-      {...rest}
-    >
-      {children}
-    </Tag>
+      ),
+      ...rest,
+    },
+    children,
   );
 };
 

@@ -1,4 +1,10 @@
-import { type ReactNode, createContext, useContext, useState } from "react";
+import {
+  type ReactNode,
+  type Ref,
+  createContext,
+  useContext,
+  useState,
+} from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 import type { FieldProps } from "../shared/types";
@@ -38,6 +44,9 @@ export interface CheckboxGroupProps extends FieldProps {
 
   /** 색조 */
   tone?: Tone;
+
+  /** 요소 참조 */
+  ref?: Ref<HTMLDivElement>;
 }
 
 /**
@@ -54,6 +63,7 @@ export interface CheckboxGroupProps extends FieldProps {
  * </CheckboxGroup>
  */
 export function CheckboxGroup({
+  ref,
   children,
   name,
   label,
@@ -96,7 +106,7 @@ export function CheckboxGroup({
         onValueChange: handleValueChange,
       }}
     >
-      <div className={checkboxGroupRootStyles}>
+      <div ref={ref} className={checkboxGroupRootStyles}>
         <label
           className={css({
             textStyle: "label.md.strong",
