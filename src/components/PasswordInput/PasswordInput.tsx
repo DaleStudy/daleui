@@ -23,8 +23,8 @@ export interface PasswordInputProps
     >,
     FieldProps {
   /** 필드 하단 도움말·검증 메시지 */
-  helpText?: string;
-  /** 오류 메시지 (helpText보다 우선 표시되며 항상 위험 색조 스타일을 사용한다) */
+  helperText?: string;
+  /** 오류 메시지 (helperText보다 우선 표시되며 항상 위험 색조 스타일을 사용한다) */
   errorMessage?: string;
   /** 플레이스홀더 */
   placeholder?: string;
@@ -52,7 +52,7 @@ export function PasswordInput({
   defaultValue,
   onChange,
   ref,
-  helpText,
+  helperText,
   errorMessage,
   id: idProp,
   "aria-describedby": ariaDescribedByProp,
@@ -61,13 +61,13 @@ export function PasswordInput({
   const [isVisible, setIsVisible] = useState(false);
   const reactId = useId();
   const inputId = idProp ?? reactId;
-  const helpTextId = `${reactId}-help-text`;
-  const bottomText = errorMessage || helpText;
+  const helperTextId = `${reactId}-help-text`;
+  const bottomText = errorMessage || helperText;
   const showBottomText = !!bottomText;
 
   const ariaDescribedBy = [
     ariaDescribedByProp,
-    showBottomText ? helpTextId : undefined,
+    showBottomText ? helperTextId : undefined,
   ]
     .filter((segment): segment is string => Boolean(segment))
     .join(" ");
@@ -112,8 +112,8 @@ export function PasswordInput({
       </div>
       {showBottomText && (
         <div
-          id={helpTextId}
-          className={helpTextStyles({
+          id={helperTextId}
+          className={helperTextStyles({
             invalid: invalid && !!errorMessage,
             disabled,
           })}
@@ -125,7 +125,7 @@ export function PasswordInput({
   );
 }
 
-const helpTextStyles = cva({
+const helperTextStyles = cva({
   base: {
     textStyle: "body.sm",
     marginBottom: "6px",

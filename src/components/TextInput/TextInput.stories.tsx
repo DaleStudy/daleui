@@ -120,8 +120,8 @@ export const Disabled: Story = {
   },
 };
 
-export const HelpText: Story = {
+export const HelperText: Story = {
   args: {
-    helpText: "도움말 메시지",
+    helperText: "도움말 메시지",
   },
 };

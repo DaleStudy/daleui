@@ -143,8 +143,8 @@ describe("TextInput", () => {
     expect(inputElement).toHaveValue("test2");
   });
 
-  test("helpText가 있으면 하단에 표시하고 aria-describedby로 연결한다", () => {
-    render(<TextInput helpText="필수 항목입니다." />);
+  test("helperText가 있으면 하단에 표시하고 aria-describedby로 연결한다", () => {
+    render(<TextInput helperText="필수 항목입니다." />);
     expect(screen.getByText("필수 항목입니다.")).toBeInTheDocument();
     const input = screen.getByLabelText("텍스트 입력", { selector: "input" });
     const helpId = input.getAttribute("aria-describedby");
@@ -159,15 +159,17 @@ describe("TextInput", () => {
     );
   });
 
-  test("helpText가 빈 문자열이면 도움말을 렌더하지 않고 aria-describedby를 두지 않는다", () => {
-    render(<TextInput helpText="" />);
+  test("helperText가 빈 문자열이면 도움말을 렌더하지 않고 aria-describedby를 두지 않는다", () => {
+    render(<TextInput helperText="" />);
     const input = screen.getByRole("textbox");
     expect(screen.queryByText("도움말을 입력하세요")).not.toBeInTheDocument();
     expect(input).not.toHaveAttribute("aria-describedby");
   });
 
-  test("aria-describedby prop과 helpText를 함께 쓰면 두 id를 공백으로 이어 붙인다", () => {
-    render(<TextInput aria-describedby="extra-desc" helpText="힌트입니다." />);
+  test("aria-describedby prop과 helperText를 함께 쓰면 두 id를 공백으로 이어 붙인다", () => {
+    render(
+      <TextInput aria-describedby="extra-desc" helperText="힌트입니다." />,
+    );
     const input = screen.getByRole("textbox");
     const help = screen.getByText("힌트입니다.");
     const describedBy = input.getAttribute("aria-describedby");
@@ -175,8 +177,8 @@ describe("TextInput", () => {
     expect(describedBy).toContain(help.id);
   });
 
-  test("aria-describedby prop만 있고 helpText가 빈 문자열이면 해당 id만 aria-describedby에 넣는다", () => {
-    render(<TextInput aria-describedby="only-extra" helpText="" />);
+  test("aria-describedby prop만 있고 helperText가 빈 문자열이면 해당 id만 aria-describedby에 넣는다", () => {
+    render(<TextInput aria-describedby="only-extra" helperText="" />);
     const input = screen.getByRole("textbox");
     expect(input).toHaveAttribute("aria-describedby", "only-extra");
   });
@@ -195,8 +197,8 @@ describe("TextInput", () => {
     expect(error.className).toMatch(/fg\.danger|danger/);
   });
 
-  test("errorMessage와 helpText가 모두 있으면 errorMessage를 표시한다", () => {
-    render(<TextInput errorMessage="오류입니다." helpText="도움말입니다." />);
+  test("errorMessage와 helperText가 모두 있으면 errorMessage를 표시한다", () => {
+    render(<TextInput errorMessage="오류입니다." helperText="도움말입니다." />);
     expect(screen.getByText("오류입니다.")).toBeInTheDocument();
     expect(screen.queryByText("도움말입니다.")).not.toBeInTheDocument();
   });

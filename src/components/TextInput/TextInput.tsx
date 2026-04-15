@@ -12,8 +12,8 @@ export interface TextInputProps
     >,
     FieldProps {
   /** 필드 하단 도움말·검증 메시지 */
-  helpText?: string;
-  /** 오류 메시지 (helpText보다 우선 표시되며 항상 위험 색조 스타일을 사용한다) */
+  helperText?: string;
+  /** 오류 메시지 (helperText보다 우선 표시되며 항상 위험 색조 스타일을 사용한다) */
   errorMessage?: string;
   /** 선행 아이콘 이름 (Icon.name) */
   leadingIcon?: IconProps["name"];
@@ -46,7 +46,7 @@ export function TextInput({
   defaultValue,
   onChange,
   ref,
-  helpText,
+  helperText,
   errorMessage,
   id: idProp,
   "aria-describedby": ariaDescribedByProp,
@@ -54,13 +54,13 @@ export function TextInput({
 }: TextInputProps) {
   const reactId = useId();
   const inputId = idProp ?? reactId;
-  const helpTextId = `${reactId}-help-text`;
-  const bottomText = errorMessage || helpText;
+  const helperTextId = `${reactId}-help-text`;
+  const bottomText = errorMessage || helperText;
   const showBottomText = !!bottomText;
 
   const ariaDescribedBy = [
     ariaDescribedByProp,
-    showBottomText ? helpTextId : undefined,
+    showBottomText ? helperTextId : undefined,
   ]
     .filter((segment): segment is string => Boolean(segment))
     .join(" ");
@@ -104,8 +104,8 @@ export function TextInput({
       </div>
       {showBottomText && (
         <div
-          id={helpTextId}
-          className={helpTextStyles({
+          id={helperTextId}
+          className={helperTextStyles({
             invalid: invalid && !!errorMessage,
             disabled,
           })}
@@ -117,7 +117,7 @@ export function TextInput({
   );
 }
 
-const helpTextStyles = cva({
+const helperTextStyles = cva({
   base: {
     marginTop: "6px",
     textStyle: "body.sm",
