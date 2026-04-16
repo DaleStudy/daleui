@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, readdirSync } from "fs";
+import { readFileSync, readdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { defineConfig } from "vite";
 import type { LibraryFormats, Plugin } from "vite";
