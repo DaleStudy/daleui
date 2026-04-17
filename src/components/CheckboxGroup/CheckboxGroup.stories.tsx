@@ -22,7 +22,6 @@ export default {
     tone: "brand",
     invalid: false,
     required: false,
-    helperText: undefined,
     children: (
       <>
         <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
@@ -34,6 +33,9 @@ export default {
   argTypes: {
     children: {
       control: false,
+    },
+    helperText: {
+      control: "text",
     },
   },
 } satisfies Meta<typeof CheckboxGroup>;

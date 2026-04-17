@@ -321,7 +321,7 @@ describe("CheckboxGroup", () => {
     expect(screen.getByText("도움말 텍스트")).toBeInTheDocument();
   });
 
-  test("invalid 상태에서도 옵션 텍스트는 기본 색상을 유지한다", () => {
+  test("invalid 상태에서도 option text는 기본 색상을 유지한다", () => {
     render(
       <CheckboxGroup
         name="test"
