@@ -169,7 +169,7 @@ export const Invalid: Story = {
           name="invalid-unselected"
           label="에러 상태 (선택 없음)"
           invalid
-          helperText="필수 값을 선택해주세요."
+          errorMessage="필수 값을 선택해주세요."
         />
 
         <RadioGroup
@@ -177,7 +177,7 @@ export const Invalid: Story = {
           name="invalid-selected"
           label="에러 상태 (선택됨)"
           invalid
-          helperText="올바른 옵션을 선택해주세요."
+          errorMessage="올바른 옵션을 선택해주세요."
           defaultValue="banana"
         />
 

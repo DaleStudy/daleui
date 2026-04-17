@@ -1,9 +1,10 @@
 import { RadioGroup as ArkRadioGroup } from "@ark-ui/react/radio-group";
-import { type ReactNode, createContext, useContext, useId } from "react";
+import { type ReactNode, createContext, useContext } from "react";
 import { css, cva } from "../../../styled-system/css";
 import { flex } from "../../../styled-system/patterns";
+import { HelperText } from "../shared/HelperText";
+import { useHelperText } from "../shared/useHelperText";
 import type { FieldProps } from "../shared/types";
-import { Icon } from "../Icon/Icon";
 
 type RadioGroupTone = "brand" | "neutral";
 
@@ -41,9 +42,6 @@ export interface RadioGroupProps extends FieldProps {
 
   /** 레이블 보조 텍스트 */
   hint?: string;
-
-  /** 옵션 하단 도움말 */
-  helperText?: string;
 }
 
 /**
@@ -75,8 +73,10 @@ export function RadioGroup({
   required = false,
   hint,
   helperText,
+  errorMessage,
 }: RadioGroupProps) {
-  const helperTextId = `${useId()}-helper-text`;
+  const { helperTextId, bottomText, showBottomText, ariaDescribedBy, isError } =
+    useHelperText({ helperText, errorMessage, invalid });
 
   return (
     <RadioGroupContext.Provider value={{ tone, disabled, invalid, required }}>
@@ -90,7 +90,7 @@ export function RadioGroup({
         disabled={disabled}
         orientation={orientation}
         className={radioGroupRootStyles}
-        aria-describedby={helperText ? helperTextId : undefined}
+        aria-describedby={ariaDescribedBy}
       >
         <ArkRadioGroup.Label
           className={css({
@@ -122,26 +122,10 @@ export function RadioGroup({
           )}
         </ArkRadioGroup.Label>
         <div className={radioGroupStyles({ orientation })}>{children}</div>
-        {helperText && (
-          <div
-            id={helperTextId}
-            className={flex({
-              alignItems: "center",
-              gap: "4",
-              paddingLeft: "4",
-              marginTop: "4",
-            })}
-          >
-            <Icon name="circleAlert" tone="danger" size="sm" />
-            <span
-              className={css({
-                color: "fg.danger",
-                textStyle: "body.sm",
-              })}
-            >
-              {helperText}
-            </span>
-          </div>
+        {showBottomText && (
+          <HelperText id={helperTextId} invalid={isError} disabled={disabled}>
+            {bottomText}
+          </HelperText>
         )}
       </ArkRadioGroup.Root>
     </RadioGroupContext.Provider>

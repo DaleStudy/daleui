@@ -125,3 +125,33 @@ export const HelperText: Story = {
     helperText: "도움말 메시지",
   },
 };
+
+/**
+ * `label` prop으로 레이블을 표시하고 입력 요소와 연결합니다.
+ * `required`와 함께 사용하면 필수 표시(*)가 추가되고, `disabled`이면 레이블도 비활성화 스타일로 바뀝니다.
+ */
+export const WithLabel: Story = {
+  render: (args) => (
+    <div className={vstack({ gap: "16", w: "320px" })}>
+      <TextInput {...args} label="이름" placeholder="이름을 입력하세요" />
+      <TextInput
+        {...args}
+        label="이름"
+        required
+        placeholder="필수 항목입니다"
+      />
+      <TextInput
+        {...args}
+        label="이름"
+        disabled
+        placeholder="수정할 수 없습니다"
+      />
+    </div>
+  ),
+  argTypes: {
+    label: { control: false },
+    placeholder: { control: false },
+    required: { control: false },
+    disabled: { control: false },
+  },
+};

@@ -6,17 +6,20 @@ import {
   useState,
 } from "react";
 import { css, cva } from "../../../styled-system/css";
+import { HelperText } from "../shared/HelperText";
+import { useHelperText } from "../shared/useHelperText";
 import type { Tone } from "../../tokens/colors";
 import type { FieldProps } from "../shared/types";
 import { Checkbox } from "../Checkbox/Checkbox";
 
 const CheckboxGroupContext = createContext<
   | ({
-      tone: Tone;
-      name: string;
-      selectedValues: string[];
-      onValueChange: (value: string, checked: boolean) => void;
-    } & Pick<FieldProps, "disabled" | "invalid">)
+
+    tone: Tone;
+    name: string;
+    selectedValues: string[];
+    onValueChange: (value: string, checked: boolean) => void;
+  } & Pick<FieldProps, "disabled" | "invalid">)
   | null
 >(null);
 
@@ -75,7 +78,11 @@ export function CheckboxGroup({
   tone = "brand",
   invalid = false,
   required = false,
+  helperText,
+  errorMessage,
 }: CheckboxGroupProps) {
+  const { helperTextId, bottomText, showBottomText, ariaDescribedBy, isError } =
+    useHelperText({ helperText, errorMessage, invalid });
   const isControlled = values !== undefined;
   const [internalValues, setInternalValues] = useState<string[]>(
     defaultValues ?? [],
@@ -106,7 +113,11 @@ export function CheckboxGroup({
         onValueChange: handleValueChange,
       }}
     >
-      <div ref={ref} className={checkboxGroupRootStyles}>
+      <div
+        ref={ref}
+        className={checkboxGroupRootStyles}
+        aria-describedby={ariaDescribedBy}
+      >
         <label
           className={css({
             textStyle: "label.md.strong",
@@ -145,6 +156,11 @@ export function CheckboxGroup({
           )}
         </label>
         <div className={checkboxGroupStyles({ orientation })}>{children}</div>
+        {showBottomText && (
+          <HelperText id={helperTextId} invalid={isError} disabled={disabled}>
+            {bottomText}
+          </HelperText>
+        )}
       </div>
     </CheckboxGroupContext.Provider>
   );

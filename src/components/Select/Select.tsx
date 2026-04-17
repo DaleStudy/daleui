@@ -2,12 +2,16 @@ import {
   type HTMLAttributes,
   type Ref,
   useCallback,
+  useId,
   useRef,
   useState,
 } from "react";
-import { cva } from "../../../styled-system/css";
+import { css, cva } from "../../../styled-system/css";
 import type { FieldProps } from "../shared/types";
+import { HelperText } from "../shared/HelperText";
+import { useHelperText } from "../shared/useHelperText";
 import { Icon } from "../Icon/Icon";
+import { Label } from "../Label/Label";
 
 export interface SelectProps
   extends Omit<HTMLAttributes<HTMLSelectElement>, "onChange">, FieldProps {
@@ -52,8 +56,23 @@ export function Select({
   children,
   onChange,
   ref,
+  label,
+  helperText,
+  errorMessage,
+  id: idProp,
+  "aria-describedby": ariaDescribedByProp,
   ...rest
 }: SelectProps) {
+  const reactId = useId();
+  const selectId = idProp ?? reactId;
+  const { helperTextId, bottomText, showBottomText, ariaDescribedBy, isError } =
+    useHelperText({
+      helperText,
+      errorMessage,
+      invalid,
+      externalAriaDescribedBy: ariaDescribedByProp,
+    });
+
   const selectRef = useRef<HTMLSelectElement>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [internalHasValue, setInternalHasValue] =
@@ -143,43 +162,62 @@ export function Select({
   const defaultValueStr = defaultValue || "";
 
   return (
-    <div
-      data-tooltip={overflowed ? titleText : undefined}
-      className={wrapperStyles({ overflowed })}
-    >
-      <select
-        ref={setRef}
-        value={value}
-        defaultValue={isUncontrolled ? defaultValueStr : undefined}
-        onChange={handleChange}
-        disabled={disabled}
-        required={required}
-        aria-invalid={invalid}
-        aria-required={required}
-        className={selectStyles({ invalid, showClearButton })}
-        {...rest}
-      >
-        {placeholder && (
-          <option value="" disabled hidden>
-            {placeholder}
-          </option>
-        )}
-        {children}
-      </select>
-
-      {showClearButton && (
-        <button
-          type="button"
-          aria-label={clearButtonName}
-          onClick={handleClear}
-          className={clearButtonStyles()}
-        >
-          <Icon name="x" size="md" tone="neutral" />
-        </button>
+    <div className={css({ width: "100%" })}>
+      {label && (
+        <div className={css({ marginBottom: "8" })}>
+          <Label
+            labelText={label}
+            htmlFor={selectId}
+            required={required}
+            disabled={disabled}
+          />
+        </div>
       )}
-      <div className={chevronDownIconStyles()}>
-        <Icon name="chevronDown" size="md" tone="neutral" />
+      <div
+        data-tooltip={overflowed ? titleText : undefined}
+        className={wrapperStyles({ overflowed })}
+      >
+        <select
+          id={selectId}
+          ref={setRef}
+          value={value}
+          defaultValue={isUncontrolled ? defaultValueStr : undefined}
+          onChange={handleChange}
+          disabled={disabled}
+          required={required}
+          aria-invalid={invalid}
+          aria-required={required}
+          aria-describedby={ariaDescribedBy || undefined}
+          className={selectStyles({ invalid, showClearButton })}
+          {...rest}
+        >
+          {placeholder && (
+            <option value="" disabled hidden>
+              {placeholder}
+            </option>
+          )}
+          {children}
+        </select>
+
+        {showClearButton && (
+          <button
+            type="button"
+            aria-label={clearButtonName}
+            onClick={handleClear}
+            className={clearButtonStyles()}
+          >
+            <Icon name="x" size="md" tone="neutral" />
+          </button>
+        )}
+        <div className={chevronDownIconStyles()}>
+          <Icon name="chevronDown" size="md" tone="neutral" />
+        </div>
       </div>
+      {showBottomText && (
+        <HelperText id={helperTextId} invalid={isError} disabled={disabled}>
+          {bottomText}
+        </HelperText>
+      )}
     </div>
   );
 }

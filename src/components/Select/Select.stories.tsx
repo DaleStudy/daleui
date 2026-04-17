@@ -102,11 +102,12 @@ export const Disabled: Story = {
 };
 
 /**
- * `invalid` prop을 `true`로 설정하여 오류 상태를 시각적으로 표현할 수 있습니다.
+ * `invalid` prop을 `true`로, `errorMessage`로 오류 메시지를 표시할 수 있습니다.
  */
 export const Invalid: Story = {
   args: {
     invalid: true,
+    errorMessage: "올바른 국가를 선택해주세요.",
   },
   argTypes: {
     invalid: {
@@ -168,6 +169,33 @@ export const Clearable: Story = {
   args: {
     clearButtonName: "clear",
     placeholder: "값이 없을 때는 버튼이 안 보입니다",
+  },
+};
+
+/**
+ * `helperText` prop으로 입력 도움말을 표시합니다.
+ */
+export const HelperText: Story = {
+  args: {
+    helperText: "거주하는 국가를 선택해주세요.",
+  },
+};
+
+/**
+ * `label` prop으로 레이블을 표시하고 select와 연결합니다.
+ */
+export const WithLabel: Story = {
+  render: (args) => (
+    <VStack gap="16">
+      <Select {...args} label="국가" />
+      <Select {...args} label="국가" required />
+      <Select {...args} label="국가" disabled />
+    </VStack>
+  ),
+  argTypes: {
+    label: { control: false },
+    required: { control: false },
+    disabled: { control: false },
   },
 };
 

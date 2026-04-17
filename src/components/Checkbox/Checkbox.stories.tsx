@@ -70,12 +70,18 @@ export const Invalid: StoryObj<typeof Checkbox> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
-        <Checkbox {...args} label="에러 상태 체크박스" invalid />
+        <Checkbox
+          {...args}
+          label="에러 상태 체크박스"
+          invalid
+          errorMessage="필수 항목입니다."
+        />
         <Checkbox
           {...args}
           label="에러 상태 체크박스 (체크됨)"
           invalid
           defaultChecked
+          errorMessage="필수 항목입니다."
         />
         <Checkbox {...args} label="정상 체크박스" />
       </div>
@@ -88,6 +94,29 @@ export const Invalid: StoryObj<typeof Checkbox> = {
     invalid: {
       control: false,
     },
+  },
+};
+
+export const HelperText: StoryObj<typeof Checkbox> = {
+  render: (args) => {
+    return (
+      <div className={vstack({ gap: "16" })}>
+        <Checkbox
+          {...args}
+          label="서비스 이용약관에 동의합니다"
+          helperText="동의하지 않으면 서비스를 이용할 수 없습니다."
+        />
+        <Checkbox
+          {...args}
+          label="마케팅 정보 수신에 동의합니다"
+          helperText="선택 사항입니다."
+        />
+      </div>
+    );
+  },
+  argTypes: {
+    label: { control: false },
+    helperText: { control: false },
   },
 };
 

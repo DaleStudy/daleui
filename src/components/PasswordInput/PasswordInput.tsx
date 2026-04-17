@@ -6,7 +6,10 @@ import {
 } from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { FieldProps } from "../shared/types";
+import { HelperText } from "../shared/HelperText";
+import { useHelperText } from "../shared/useHelperText";
 import { Icon } from "../Icon/Icon";
+import { Label } from "../Label/Label";
 
 export interface PasswordInputProps
   extends
@@ -22,10 +25,6 @@ export interface PasswordInputProps
       // TODO: readOnly도 Omit 대상 (#935)
     >,
     FieldProps {
-  /** 필드 하단 도움말·검증 메시지 */
-  helperText?: string;
-  /** 오류 메시지 (helperText보다 우선 표시되며 항상 위험 색조 스타일을 사용한다) */
-  errorMessage?: string;
   /** 플레이스홀더 */
   placeholder?: string;
   /** 제어 모드 입력 값 */
@@ -52,6 +51,7 @@ export function PasswordInput({
   defaultValue,
   onChange,
   ref,
+  label,
   helperText,
   errorMessage,
   id: idProp,
@@ -61,16 +61,13 @@ export function PasswordInput({
   const [isVisible, setIsVisible] = useState(false);
   const reactId = useId();
   const inputId = idProp ?? reactId;
-  const helperTextId = `${reactId}-help-text`;
-  const bottomText = errorMessage || helperText;
-  const showBottomText = !!bottomText;
-
-  const ariaDescribedBy = [
-    ariaDescribedByProp,
-    showBottomText ? helperTextId : undefined,
-  ]
-    .filter((segment): segment is string => Boolean(segment))
-    .join(" ");
+  const { helperTextId, bottomText, showBottomText, ariaDescribedBy, isError } =
+    useHelperText({
+      helperText,
+      errorMessage,
+      invalid,
+      externalAriaDescribedBy: ariaDescribedByProp,
+    });
 
   const toggleVisibility = () => {
     setIsVisible((prev) => !prev);
@@ -78,6 +75,16 @@ export function PasswordInput({
 
   return (
     <div className={css({ width: "100%" })}>
+      {label && (
+        <div className={css({ marginBottom: "8" })}>
+          <Label
+            labelText={label}
+            htmlFor={inputId}
+            required={required}
+            disabled={disabled}
+          />
+        </div>
+      )}
       <div
         className={inputContainerStyles({
           state: invalid ? "error" : undefined,
@@ -110,42 +117,13 @@ export function PasswordInput({
         </button>
       </div>
       {showBottomText && (
-        <div
-          id={helperTextId}
-          className={helperTextStyles({
-            invalid: invalid && !!errorMessage,
-            disabled,
-          })}
-        >
+        <HelperText id={helperTextId} invalid={isError} disabled={disabled}>
           {bottomText}
-        </div>
+        </HelperText>
       )}
     </div>
   );
 }
-
-const helperTextStyles = cva({
-  base: {
-    textStyle: "body.sm",
-    marginTop: "6px",
-  },
-  variants: {
-    invalid: {
-      true: {
-        color: "fg.danger",
-      },
-      false: {
-        color: "fg.neutral",
-      },
-    },
-    disabled: {
-      true: {
-        color: "!fg.neutral.disabled",
-      },
-      false: {},
-    },
-  },
-});
 
 const inputContainerStyles = cva({
   base: {

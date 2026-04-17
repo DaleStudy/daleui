@@ -1,7 +1,10 @@
 import { type ComponentPropsWithoutRef, type Ref, useId } from "react";
 import { css, cva, cx } from "../../../styled-system/css";
 import type { FieldProps } from "../shared/types";
+import { HelperText } from "../shared/HelperText";
+import { useHelperText } from "../shared/useHelperText";
 import { Icon, type IconProps } from "../Icon/Icon";
+import { Label } from "../Label/Label";
 
 export interface TextInputProps
   extends
@@ -11,10 +14,6 @@ export interface TextInputProps
       // TODO: readOnly도 Omit 대상 (#935)
     >,
     FieldProps {
-  /** 필드 하단 도움말·검증 메시지 */
-  helperText?: string;
-  /** 오류 메시지 (helperText보다 우선 표시되며 항상 위험 색조 스타일을 사용한다) */
-  errorMessage?: string;
   /** 선행 아이콘 이름 (Icon.name) */
   leadingIcon?: IconProps["name"];
   /** 후행 아이콘 이름 (Icon.name) */
@@ -46,6 +45,7 @@ export function TextInput({
   defaultValue,
   onChange,
   ref,
+  label,
   helperText,
   errorMessage,
   id: idProp,
@@ -54,16 +54,13 @@ export function TextInput({
 }: TextInputProps) {
   const reactId = useId();
   const inputId = idProp ?? reactId;
-  const helperTextId = `${reactId}-help-text`;
-  const bottomText = errorMessage || helperText;
-  const showBottomText = !!bottomText;
-
-  const ariaDescribedBy = [
-    ariaDescribedByProp,
-    showBottomText ? helperTextId : undefined,
-  ]
-    .filter((segment): segment is string => Boolean(segment))
-    .join(" ");
+  const { helperTextId, bottomText, showBottomText, ariaDescribedBy, isError } =
+    useHelperText({
+      helperText,
+      errorMessage,
+      invalid,
+      externalAriaDescribedBy: ariaDescribedByProp,
+    });
 
   const renderIcon = (name: IconProps["name"]) => {
     let tone: IconProps["tone"];
@@ -81,6 +78,16 @@ export function TextInput({
 
   return (
     <div className={css({ width: "100%" })}>
+      {label && (
+        <div className={css({ marginBottom: "8" })}>
+          <Label
+            labelText={label}
+            htmlFor={inputId}
+            required={required}
+            disabled={disabled}
+          />
+        </div>
+      )}
       <div
         className={cx(fieldStyles({ invalid }), className)}
         data-disabled={disabled ? "" : undefined}
@@ -102,42 +109,13 @@ export function TextInput({
         {trailingIcon && renderIcon(trailingIcon)}
       </div>
       {showBottomText && (
-        <div
-          id={helperTextId}
-          className={helperTextStyles({
-            invalid: invalid && !!errorMessage,
-            disabled,
-          })}
-        >
+        <HelperText id={helperTextId} invalid={isError} disabled={disabled}>
           {bottomText}
-        </div>
+        </HelperText>
       )}
     </div>
   );
 }
-
-const helperTextStyles = cva({
-  base: {
-    marginTop: "6px",
-    textStyle: "body.sm",
-  },
-  variants: {
-    invalid: {
-      true: {
-        color: "fg.danger",
-      },
-      false: {
-        color: "fg.neutral",
-      },
-    },
-    disabled: {
-      true: {
-        color: "!fg.neutral.disabled",
-      },
-      false: {},
-    },
-  },
-});
 
 const fieldStyles = cva({
   base: {
