@@ -1,5 +1,10 @@
 import type React from "react";
-import type { AnchorHTMLAttributes, HTMLAttributes, ReactNode } from "react";
+import type {
+  AnchorHTMLAttributes,
+  HTMLAttributes,
+  ReactNode,
+  Ref,
+} from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 import { Icon } from "../Icon/Icon";
@@ -11,6 +16,8 @@ type BaseTagProps = {
   tone?: Tone;
   /** 제거 핸들러 (설정 시 제거 버튼 표시) */
   onRemove?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  /** 요소 참조 */
+  ref?: Ref<HTMLSpanElement>;
 };
 
 /** href가 있으면 자동으로 <a> 로 렌더링 */
@@ -34,6 +41,7 @@ export type TagProps = TagAsLink | TagAsSpan;
  * - `href`를 전달하면 자동으로 `<a>` 태그로 렌더링됩니다.
  */
 export function Tag({
+  ref,
   children,
   tone = "neutral",
   href,
@@ -56,7 +64,7 @@ export function Tag({
       target === "_blank" ? (propRel ?? "noopener noreferrer") : propRel;
 
     return (
-      <span className={styles({ tone, link: true })}>
+      <span ref={ref} className={styles({ tone, link: true })}>
         <a
           href={href}
           target={target}
@@ -83,7 +91,7 @@ export function Tag({
   const spanRest = rest as HTMLAttributes<HTMLSpanElement>;
 
   return (
-    <span className={styles({ tone, link: false })} {...spanRest}>
+    <span ref={ref} className={styles({ tone, link: false })} {...spanRest}>
       {children}
       {onRemove && (
         <button

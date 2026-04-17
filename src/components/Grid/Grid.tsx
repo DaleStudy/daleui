@@ -57,6 +57,8 @@ export interface GridProps
   justifyContent?: RecipeVariant<typeof gridVariants>["justifyContent"];
   /** 컨테이너 교차축 정렬 (align-content) */
   alignContent?: RecipeVariant<typeof gridVariants>["alignContent"];
+  /** 요소 참조 */
+  ref?: React.Ref<HTMLElement>;
 }
 
 /**
@@ -68,6 +70,7 @@ export interface GridProps
  * - 접근성을 위해 기본적으로 적절한 HTML 시맨틱 요소를 사용하고 필요시 ARIA 속성을 활용하여 접근성을 향상시킵니다.
  */
 export const Grid = ({
+  ref,
   children,
   as = "div",
   gridTemplateColumns,
@@ -82,11 +85,10 @@ export const Grid = ({
   className,
   ...props
 }: GridProps) => {
-  const Component = as;
-
   return React.createElement(
-    Component,
+    as,
     {
+      ref,
       className: cx(
         gridVariants({
           autoFlow,
@@ -180,6 +182,8 @@ export interface GridItemProps extends React.HTMLAttributes<HTMLElement> {
   gridRowEnd?: string;
   /** 영역 이름 (grid-area) */
   gridArea?: string;
+  /** 요소 참조 */
+  ref?: React.Ref<HTMLElement>;
 }
 
 /**
@@ -190,6 +194,7 @@ export interface GridItemProps extends React.HTMLAttributes<HTMLElement> {
  * - 접근성을 위해 기본적으로 적절한 HTML 시맨틱 요소를 사용하고 필요시 ARIA 속성을 활용하여 접근성을 향상시킵니다.
  */
 export const GridItem = ({
+  ref,
   children,
   as = "div",
   gridColumn,
@@ -202,8 +207,6 @@ export const GridItem = ({
   className,
   ...props
 }: GridItemProps) => {
-  const Component = as;
-
   // 유효하지 않은 css 변수가 주어질 때 auto로 처리하지 않도록 null 체크
   const placementStyle = {
     ...(gridColumn != null && { "--grid-column": gridColumn }),
@@ -228,8 +231,9 @@ export const GridItem = ({
   };
 
   return React.createElement(
-    Component,
+    as,
     {
+      ref,
       className: cx(css(placementCss), className),
       style: placementStyle,
       ...props,

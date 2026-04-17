@@ -1,3 +1,4 @@
+import React from "react";
 import { Flex } from "../Flex/Flex";
 import type { FlexProps } from "../Flex/Flex";
 
@@ -29,6 +30,8 @@ export interface VStackProps extends Omit<
   justify?: Justify;
   /** 가로 정렬 */
   align?: Align;
+  /** 요소 참조 */
+  ref?: React.Ref<HTMLElement>;
 }
 
 /**
@@ -48,6 +51,7 @@ export const VStack = ({
   reversed = false,
   gap,
   className,
+  ref,
   ...rest
 }: VStackProps) => {
   const direction = reversed ? "columnReverse" : "column";
@@ -56,6 +60,7 @@ export const VStack = ({
 
   return (
     <Flex
+      ref={ref}
       as={as}
       direction={direction}
       justify={justifyContent}

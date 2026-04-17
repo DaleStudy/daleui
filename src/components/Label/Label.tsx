@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactElement } from "react";
+import type { HTMLAttributes, ReactElement, Ref } from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { ButtonProps } from "../Button/Button";
 import type { TextInputProps } from "../TextInput/TextInput";
@@ -27,6 +27,8 @@ export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
   required?: boolean;
   /** 연결 대상 요소 id */
   htmlFor?: string;
+  /** 요소 참조 */
+  ref?: Ref<HTMLLabelElement>;
 }
 
 /**
@@ -43,6 +45,7 @@ export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
  * - `htmlFor` 또는 `children`으로 입력 요소를 연결하면, 라벨 클릭 시 해당 입력 요소로 포커스가 이동합니다.
  */
 export function Label({
+  ref,
   children,
   labelText,
   tone = "neutral",
@@ -52,6 +55,7 @@ export function Label({
 }: LabelProps) {
   return (
     <label
+      ref={ref}
       className={styles({
         tone: disabled ? undefined : tone,
         disabled,

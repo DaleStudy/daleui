@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import React, { type HTMLAttributes, type ReactNode } from "react";
 import { css, cva } from "../../../styled-system/css";
 
 type Level = 1 | 2 | 3 | 4 | 5;
@@ -20,6 +20,8 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   align?: Align;
   /** 줄바꿈 규칙 */
   wordBreak?: WordBreak;
+  /** 요소 참조 */
+  ref?: React.Ref<HTMLHeadingElement>;
 }
 
 /**
@@ -31,6 +33,7 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
  * - 반응형 폰트를 지원하여 뷰포트에 따라 글꼴 크기가 자동으로 전환됩니다.
  */
 export const Heading = ({
+  ref,
   children,
   level,
   size,
@@ -47,9 +50,11 @@ export const Heading = ({
 
   const Tag = `h${level}` as const;
 
-  return (
-    <Tag
-      className={css(
+  return React.createElement(
+    Tag,
+    {
+      ref,
+      className: css(
         styles.raw({
           level: size ? undefined : level,
           tone,
@@ -60,11 +65,10 @@ export const Heading = ({
           css.raw({
             textStyle: `heading.${size}`,
           }),
-      )}
-      {...rest}
-    >
-      {children}
-    </Tag>
+      ),
+      ...rest,
+    },
+    children,
   );
 };
 

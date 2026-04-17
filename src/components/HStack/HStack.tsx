@@ -1,3 +1,4 @@
+import React from "react";
 import { Flex } from "../Flex/Flex";
 import type { FlexProps } from "../Flex/Flex";
 
@@ -27,6 +28,8 @@ export interface HStackProps extends Omit<
   justify?: Justify;
   /** 세로 정렬 */
   align?: Align;
+  /** 요소 참조 */
+  ref?: React.Ref<HTMLElement>;
 }
 
 /**
@@ -45,6 +48,7 @@ export const HStack = ({
   reversed = false,
   gap,
   className,
+  ref,
   ...rest
 }: HStackProps) => {
   const direction = reversed ? "rowReverse" : "row";
@@ -52,6 +56,7 @@ export const HStack = ({
   const alignContent = alignVariants[align];
   return (
     <Flex
+      ref={ref}
       as={as}
       direction={direction}
       justify={justifyContent}

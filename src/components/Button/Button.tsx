@@ -1,4 +1,4 @@
-import { type HTMLAttributes } from "react";
+import { type HTMLAttributes, type Ref } from "react";
 import { css, cva, cx } from "../../../styled-system/css";
 import { Icon } from "../Icon/Icon";
 import { hstack } from "../../../styled-system/patterns";
@@ -26,12 +26,15 @@ export interface ButtonProps extends Omit<
   type?: "button" | "submit" | "reset";
   /** 스타일 변형 */
   variant?: "solid" | "outline" | "ghost";
+  /** 요소 참조 */
+  ref?: Ref<HTMLButtonElement>;
 }
 
 /**
  * 버튼은 사용자의 명확한 작업 실행을 위해 사용되는 컴포넌트로, 완료, 저장, 제출과 같은 액션에 사용합니다.
  */
 export const Button = ({
+  ref,
   className,
   children,
   variant = "solid",
@@ -46,6 +49,7 @@ export const Button = ({
 
   return (
     <button
+      ref={ref}
       type={type}
       {...rest}
       className={cx(
