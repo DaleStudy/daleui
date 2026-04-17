@@ -2,6 +2,7 @@ import type {
   AnchorHTMLAttributes,
   HTMLAttributes,
   ReactNode,
+  Ref,
   SVGProps,
 } from "react";
 import { createContext, useContext } from "react";
@@ -32,9 +33,12 @@ export interface CardProps extends Omit<HTMLAttributes<HTMLElement>, "style"> {
   outline?: boolean;
   /** 자식 요소 */
   children: ReactNode;
+  /** 요소 참조 */
+  ref?: Ref<HTMLElement>;
 }
 
 function CardRoot({
+  ref,
   tone = "neutral",
   outline = false,
   className,
@@ -44,6 +48,7 @@ function CardRoot({
   return (
     <CardContext.Provider value={{ tone }}>
       <article
+        ref={ref}
         className={cx(rootStyles({ tone, outline }), className)}
         {...rest}
       >
@@ -57,11 +62,13 @@ export interface CardBodyProps extends Omit<
   "style"
 > {
   children: ReactNode;
+  /** 요소 참조 */
+  ref?: Ref<HTMLDivElement>;
 }
 
-export function CardBody({ className, children, ...rest }: CardBodyProps) {
+export function CardBody({ ref, className, children, ...rest }: CardBodyProps) {
   return (
-    <div className={cx(bodyStyles(), className)} {...rest}>
+    <div ref={ref} className={cx(bodyStyles(), className)} {...rest}>
       {children}
     </div>
   );

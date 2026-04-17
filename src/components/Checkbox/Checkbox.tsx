@@ -21,6 +21,8 @@ export interface CheckboxProps extends FieldProps {
   tone?: Tone;
   /** 체크 변경 핸들러 */
   onChange?: (checked: boolean) => void;
+  /** 입력 요소 참조 */
+  ref?: React.Ref<HTMLInputElement>;
 }
 
 /**
@@ -28,6 +30,7 @@ export interface CheckboxProps extends FieldProps {
  * 개별 항목의 상태를 '선택(Checked)' 또는 '해제(Unchecked)'로 변경하는 기능을 수행합니다.
  */
 export const Checkbox = ({
+  ref,
   label,
   name,
   checked,
@@ -82,7 +85,11 @@ export const Checkbox = ({
           )}
         </ArkCheckbox.Label>
       )}
-      <ArkCheckbox.HiddenInput data-test-tone={tone} aria-required={required} />
+      <ArkCheckbox.HiddenInput
+        ref={ref}
+        data-test-tone={tone}
+        aria-required={required}
+      />
     </ArkCheckbox.Root>
   );
 };

@@ -38,12 +38,15 @@ jobs:
           bun install
           bun run build:lib
 
+      - name: Pack library
+        run: npm pack
+
       - name: Create test project & install daleui
         run: |
           mkdir /tmp/test-project && cd /tmp/test-project
-          bun create vite@5 . --template react-ts
+          bun create vite@latest . --template react-ts
           bun install
-          bun add "$GITHUB_WORKSPACE"
+          bun add "$GITHUB_WORKSPACE"/daleui-*.tgz
 
       - name: Add daleui smoke test
         run: |

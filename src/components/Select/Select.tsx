@@ -24,10 +24,10 @@ export interface SelectProps
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   /** 접근성 레이블 (aria-label) */
   "aria-label"?: string;
-  /** select 요소 참조 */
-  ref?: Ref<HTMLSelectElement>;
   /** 폼 name */
   name?: string;
+  /** select 요소 참조 */
+  ref?: Ref<HTMLSelectElement>;
 }
 
 /**

@@ -1,4 +1,4 @@
-import { type AnchorHTMLAttributes } from "react";
+import { type AnchorHTMLAttributes, type Ref } from "react";
 import { css, cva } from "../../../styled-system/css";
 import { textStyles } from "../../tokens/typography";
 
@@ -18,6 +18,8 @@ export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   underline?: boolean;
   /** 외부 링크·새 탭 열기 여부 */
   external?: boolean;
+  /** 요소 참조 */
+  ref?: Ref<HTMLAnchorElement>;
 }
 
 /**
@@ -34,6 +36,7 @@ export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
  * - `external`이 true일 때, 외부 링크 아이콘(`externalLink`)을 함께 제공하지 않으면 시각적 안내 부족으로 접근성 문제가 발생할 수 있습니다.
  */
 export function Link({
+  ref,
   href,
   children,
   tone = "brand",
@@ -47,6 +50,7 @@ export function Link({
 
   return (
     <a
+      ref={ref}
       className={css(
         styles.raw({ tone, underline, size }),
         textStyles.label[size].DEFAULT.value,
