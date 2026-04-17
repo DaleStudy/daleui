@@ -93,7 +93,6 @@ export function PasswordInput({
           value={value}
           defaultValue={defaultValue}
           onChange={onChange}
-          aria-label="패스워드"
           aria-invalid={invalid}
           aria-required={required}
           aria-describedby={ariaDescribedBy || undefined}
@@ -128,7 +127,7 @@ export function PasswordInput({
 const helperTextStyles = cva({
   base: {
     textStyle: "body.sm",
-    marginBottom: "6px",
+    marginTop: "6px",
   },
   variants: {
     invalid: {

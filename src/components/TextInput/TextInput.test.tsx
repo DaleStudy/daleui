@@ -145,18 +145,17 @@ describe("TextInput", () => {
 
   test("helperText가 있으면 하단에 표시하고 aria-describedby로 연결한다", () => {
     render(<TextInput helperText="필수 항목입니다." />);
-    expect(screen.getByText("필수 항목입니다.")).toBeInTheDocument();
-    const input = screen.getByLabelText("텍스트 입력", { selector: "input" });
+    const help = screen.getByText("필수 항목입니다.");
+    expect(help).toBeInTheDocument();
+    const input = screen.getByRole("textbox");
     const helpId = input.getAttribute("aria-describedby");
     expect(helpId).toBeTruthy();
+    expect(helpId).toContain(help.id);
   });
 
   test("id prop을 넘기면 입력 요소에 그대로 적용된다", () => {
     render(<TextInput id="user-name" />);
-    expect(screen.getByLabelText("텍스트 입력")).toHaveAttribute(
-      "id",
-      "user-name",
-    );
+    expect(screen.getByRole("textbox")).toHaveAttribute("id", "user-name");
   });
 
   test("helperText가 빈 문자열이면 도움말을 렌더하지 않고 aria-describedby를 두지 않는다", () => {
@@ -201,5 +200,10 @@ describe("TextInput", () => {
     render(<TextInput errorMessage="오류입니다." helperText="도움말입니다." />);
     expect(screen.getByText("오류입니다.")).toBeInTheDocument();
     expect(screen.queryByText("도움말입니다.")).not.toBeInTheDocument();
+  });
+
+  test("aria-label prop을 입력 요소에 전달한다", () => {
+    render(<TextInput aria-label="이메일 주소" />);
+    expect(screen.getByLabelText("이메일 주소")).toBeInTheDocument();
   });
 });

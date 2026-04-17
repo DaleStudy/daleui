@@ -94,7 +94,6 @@ export function TextInput({
           defaultValue={defaultValue}
           onChange={onChange}
           disabled={disabled}
-          aria-label="텍스트 입력"
           aria-invalid={invalid}
           aria-required={required}
           aria-describedby={ariaDescribedBy || undefined}
