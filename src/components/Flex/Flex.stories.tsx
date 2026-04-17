@@ -124,7 +124,6 @@ export const Padding: Story = {
     children: { control: false },
     padding: { control: false },
   },
-  args: {},
 };
 
 export const Justify: Story = {
