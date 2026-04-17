@@ -47,6 +47,8 @@
     "prepare": "panda codegen"
   },
   "peerDependencies": {
+    "@fontsource-variable/jetbrains-mono": "^5.2.8",
+    "pretendard": "^1.3.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
