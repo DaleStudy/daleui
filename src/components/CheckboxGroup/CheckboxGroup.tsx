@@ -14,12 +14,11 @@ import { Checkbox } from "../Checkbox/Checkbox";
 
 const CheckboxGroupContext = createContext<
   | ({
-
-    tone: Tone;
-    name: string;
-    selectedValues: string[];
-    onValueChange: (value: string, checked: boolean) => void;
-  } & Pick<FieldProps, "disabled" | "invalid">)
+      tone: Tone;
+      name: string;
+      selectedValues: string[];
+      onValueChange: (value: string, checked: boolean) => void;
+    } & Pick<FieldProps, "disabled" | "invalid">)
   | null
 >(null);
 

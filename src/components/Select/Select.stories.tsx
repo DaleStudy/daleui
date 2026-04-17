@@ -108,6 +108,7 @@ export const Invalid: Story = {
   args: {
     invalid: true,
     errorMessage: "올바른 국가를 선택해주세요.",
+    defaultValue: "kr",
   },
   argTypes: {
     invalid: {

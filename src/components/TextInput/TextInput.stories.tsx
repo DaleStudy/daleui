@@ -41,7 +41,7 @@ export const WithIcons: Story = {
       />
       <TextInput
         {...args}
-        trailingIcon="x"
+        trailingIcon="user"
         placeholder="아이디"
         defaultValue="storybook_user"
       />
