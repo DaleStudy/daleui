@@ -75,7 +75,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.2.0",
-    "@vitest/coverage-v8": "^4.1.0",
+    "@vitest/coverage-v8": "^4.1.4",
     "axe-playwright": "^2.2.2",
     "chromatic": "^13.3.5",
     "eslint": "^9.39.4",
@@ -92,7 +92,7 @@
     "typescript-eslint": "^8.56.1",
     "vite": "^7.3.2",
     "vite-plugin-svgr": "^4.5.0",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.4"
   },
   "eslintConfig": {
     "extends": [
