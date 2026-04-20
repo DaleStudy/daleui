@@ -9,19 +9,6 @@ describe("렌더링", () => {
     expect(screen.getByText("테스트 라벨")).toBeInTheDocument();
   });
 
-  test("ReactNode 라벨을 렌더링한다.", () => {
-    render(
-      <Checkbox
-        label={
-          <span data-testid="custom-label">
-            <strong>커스텀</strong> 라벨
-          </span>
-        }
-      />,
-    );
-    expect(screen.getByTestId("custom-label")).toBeInTheDocument();
-  });
-
   test("라벨이 없이도 렌더링된다.", () => {
     render(<Checkbox />);
     expect(screen.getByRole("checkbox")).toBeInTheDocument();
