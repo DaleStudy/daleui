@@ -103,7 +103,7 @@ export function TextInput({
           disabled={disabled}
           aria-invalid={invalid}
           aria-required={required}
-          aria-describedby={ariaDescribedBy || undefined}
+          aria-describedby={ariaDescribedBy}
           {...rest}
         />
         {trailingIcon && renderIcon(trailingIcon)}

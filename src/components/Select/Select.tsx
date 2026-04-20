@@ -187,7 +187,7 @@ export function Select({
           required={required}
           aria-invalid={invalid}
           aria-required={required}
-          aria-describedby={ariaDescribedBy || undefined}
+          aria-describedby={ariaDescribedBy}
           className={selectStyles({ invalid, showClearButton })}
           {...rest}
         >

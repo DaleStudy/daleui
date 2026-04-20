@@ -171,9 +171,7 @@ describe("렌더링", () => {
     const help = screen.getByText("도움말입니다.");
     expect(help).toBeInTheDocument();
     const checkbox = screen.getByRole("checkbox");
-    const describedBy = checkbox.getAttribute("aria-describedby");
-    expect(describedBy).toBeTruthy();
-    expect(describedBy).toContain(help.id);
+    expect(checkbox).toHaveAccessibleDescription("도움말입니다.");
   });
 });
 

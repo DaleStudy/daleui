@@ -589,9 +589,7 @@ describe("접근성 및 기타", () => {
     const help = screen.getByText("필수 항목입니다.");
     expect(help).toBeInTheDocument();
     const select = screen.getByRole("combobox");
-    const describedBy = select.getAttribute("aria-describedby");
-    expect(describedBy).toBeTruthy();
-    expect(describedBy).toContain(help.id);
+    expect(select).toHaveAccessibleDescription("필수 항목입니다.");
   });
 });
 

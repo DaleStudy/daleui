@@ -148,9 +148,7 @@ describe("TextInput", () => {
     const help = screen.getByText("필수 항목입니다.");
     expect(help).toBeInTheDocument();
     const input = screen.getByRole("textbox");
-    const describedBy = input.getAttribute("aria-describedby");
-    expect(describedBy).toBeTruthy();
-    expect(describedBy).toContain(help.id);
+    expect(input).toHaveAccessibleDescription("필수 항목입니다.");
   });
 
   test("id prop을 넘기면 입력 요소에 그대로 적용된다", () => {

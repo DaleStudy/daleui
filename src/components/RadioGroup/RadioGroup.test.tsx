@@ -477,8 +477,6 @@ describe("RadioGroup helperText", () => {
     const help = screen.getByText("필수 값을 선택해주세요.");
     expect(help).toBeInTheDocument();
     const group = screen.getByRole("radiogroup");
-    const describedBy = group.getAttribute("aria-describedby");
-    expect(describedBy).toBeTruthy();
-    expect(describedBy).toContain(help.id);
+    expect(group).toHaveAccessibleDescription("필수 값을 선택해주세요.");
   });
 });

@@ -304,9 +304,7 @@ describe("CheckboxGroup", () => {
     // eslint-disable-next-line testing-library/no-node-access
     const root = help.parentElement;
     expect(root).not.toBeNull();
-    const describedBy = root?.getAttribute("aria-describedby");
-    expect(describedBy).toBeTruthy();
-    expect(describedBy).toContain(help.id);
+    expect(root).toHaveAccessibleDescription("도움말입니다.");
   });
 });
 
