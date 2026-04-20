@@ -70,6 +70,21 @@ describe("Grid 클래스 토큰 및 스타일", () => {
     expect(screen.getByTestId(`grid-gap-${gap}`)).toHaveClass(`gap_${gap}`);
   });
 
+  const paddings = Object.keys(spacing || {}) as Spacing[];
+  test.each(paddings)(
+    `padding=%s 적용 시 알맞은 클래스가 적용된다`,
+    (padding) => {
+      render(
+        <Grid data-testid={`grid-padding-${padding}`} padding={padding}>
+          <GridItem>child</GridItem>
+        </Grid>,
+      );
+      expect(screen.getByTestId(`grid-padding-${padding}`)).toHaveClass(
+        `p_${padding}`,
+      );
+    },
+  );
+
   test("areas가 문자열로 전달되면 CSS 변수가 적용된다", () => {
     render(
       <Grid

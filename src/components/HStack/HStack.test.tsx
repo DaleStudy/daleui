@@ -92,6 +92,19 @@ describe("클래스 토큰 및 스타일", () => {
       expect(screen.getByTestId("gap").className).toMatch(className);
     },
   );
+
+  const paddings = Object.keys(spacing || {}) as Spacing[];
+  test.each(paddings.map((padding) => [padding, `p_${padding}`]))(
+    "padding=%s이면 %s 클래스가 적용된다",
+    (padding, className) => {
+      render(
+        <HStack data-testid="padding" padding={padding}>
+          <span>child</span>
+        </HStack>,
+      );
+      expect(screen.getByTestId("padding").className).toMatch(className);
+    },
+  );
 });
 
 describe("HStack 접근성", () => {

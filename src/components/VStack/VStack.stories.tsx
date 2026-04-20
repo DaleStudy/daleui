@@ -30,6 +30,7 @@ export default {
   argTypes: {
     children: { control: false },
     gap: { control: "select", options: Object.keys(spacing || {}) },
+    padding: { control: "select", options: Object.keys(spacing || {}) },
     className: { control: false },
     role: { control: "text" },
   },
@@ -45,7 +46,7 @@ export default {
         <Item>아이템 2</Item>
       </>
     ),
-    className: css({ width: "120", height: "160" }),
+    className: css({ height: "160" }),
   },
 } satisfies Meta<typeof VStack>;
 
@@ -71,6 +72,24 @@ export const Gaps: Story = {
   ),
   argTypes: {
     gap: { control: false },
+  },
+};
+
+export const Padding: Story = {
+  render: (args) => (
+    <HStack gap="24">
+      <div>
+        <h4>padding: 16</h4>
+        <VStack {...args} padding="16" />
+      </div>
+      <div>
+        <h4>padding: 32</h4>
+        <VStack {...args} padding="32" />
+      </div>
+    </HStack>
+  ),
+  argTypes: {
+    padding: { control: false },
   },
 };
 

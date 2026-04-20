@@ -47,6 +47,7 @@ export const HStack = ({
   align = "center",
   reversed = false,
   gap,
+  padding,
   className,
   ref,
   ...rest
@@ -62,6 +63,7 @@ export const HStack = ({
       justify={justifyContent}
       align={alignContent}
       gap={gap}
+      padding={padding}
       className={className}
       {...rest}
     >

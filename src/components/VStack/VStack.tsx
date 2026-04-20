@@ -50,6 +50,7 @@ export const VStack = ({
   align = "center",
   reversed = false,
   gap,
+  padding,
   className,
   ref,
   ...rest
@@ -66,6 +67,7 @@ export const VStack = ({
       justify={justifyContent}
       align={alignContent}
       gap={gap}
+      padding={padding}
       className={className}
       {...rest}
     >

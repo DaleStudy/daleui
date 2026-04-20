@@ -37,6 +37,7 @@ export default {
       description: "교차축 정렬 방식",
     },
     gap: { control: "select", options: Object.keys(spacing || {}) },
+    padding: { control: "select", options: Object.keys(spacing || {}) },
     className: { control: false },
   },
   args: {
@@ -104,6 +105,25 @@ export const Gaps: Story = {
     gap: { control: false },
   },
   args: {},
+};
+
+export const Padding: Story = {
+  render: (args) => (
+    <div>
+      <div>
+        <h4>padding: 16</h4>
+        <Flex {...args} padding="16" />
+      </div>
+      <div>
+        <h4>padding: 32</h4>
+        <Flex {...args} padding="32" />
+      </div>
+    </div>
+  ),
+  argTypes: {
+    children: { control: false },
+    padding: { control: false },
+  },
 };
 
 export const Justify: Story = {

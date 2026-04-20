@@ -45,6 +45,10 @@ export default {
       control: "select",
       options: [undefined, ...Object.keys(spacing || {})],
     },
+    padding: {
+      control: "select",
+      options: Object.keys(spacing || {}),
+    },
     areas: { control: false },
     className: { control: false },
   },
@@ -125,6 +129,24 @@ export const Gaps: Story = {
   ),
   argTypes: {
     gap: { control: false },
+  },
+};
+
+export const Padding: Story = {
+  render: (args) => (
+    <div className={grid({ gridTemplateColumns: "1fr", gap: "16" })}>
+      <div>
+        <h4>padding: 16</h4>
+        <Grid {...args} padding="16" />
+      </div>
+      <div>
+        <h4>padding: 32</h4>
+        <Grid {...args} padding="32" />
+      </div>
+    </div>
+  ),
+  argTypes: {
+    padding: { control: false },
   },
 };
 
