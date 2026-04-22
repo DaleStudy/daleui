@@ -6,6 +6,8 @@ import {
   useState,
 } from "react";
 import { css, cva } from "../../../styled-system/css";
+import { HelperText } from "../shared/HelperText";
+import { useHelperText } from "../shared/useHelperText";
 import type { Tone } from "../../tokens/colors";
 import type { FieldProps } from "../shared/types";
 import { Checkbox } from "../Checkbox/Checkbox";
@@ -75,7 +77,11 @@ export function CheckboxGroup({
   tone = "brand",
   invalid = false,
   required = false,
+  helperText,
+  errorMessage,
 }: CheckboxGroupProps) {
+  const { fieldProps, helpTextProps, bottomText, showBottomText } =
+    useHelperText({ helperText, errorMessage, invalid });
   const isControlled = values !== undefined;
   const [internalValues, setInternalValues] = useState<string[]>(
     defaultValues ?? [],
@@ -106,7 +112,7 @@ export function CheckboxGroup({
         onValueChange: handleValueChange,
       }}
     >
-      <div ref={ref} className={checkboxGroupRootStyles}>
+      <div ref={ref} className={checkboxGroupRootStyles} {...fieldProps}>
         <label
           className={css({
             textStyle: "label.md.strong",
@@ -145,6 +151,11 @@ export function CheckboxGroup({
           )}
         </label>
         <div className={checkboxGroupStyles({ orientation })}>{children}</div>
+        {showBottomText && (
+          <HelperText {...helpTextProps} disabled={disabled}>
+            {bottomText}
+          </HelperText>
+        )}
       </div>
     </CheckboxGroupContext.Provider>
   );

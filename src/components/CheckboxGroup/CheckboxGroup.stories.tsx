@@ -174,6 +174,7 @@ export const Invalid: Story = {
           name="invalid-group"
           label="에러 상태 체크박스 그룹"
           invalid
+          errorMessage="하나 이상 선택해주세요."
         />
 
         <CheckboxGroup
@@ -183,6 +184,34 @@ export const Invalid: Story = {
         />
       </VStack>
     );
+  },
+};
+
+export const HelperText: Story = {
+  render: (args) => {
+    return (
+      <VStack gap="32">
+        <CheckboxGroup
+          {...args}
+          name="helper-text-basic"
+          label="좋아하는 과일을 선택하세요"
+          helperText="여러 개를 선택할 수 있습니다."
+        />
+
+        <CheckboxGroup
+          {...args}
+          name="helper-text-required"
+          label="좋아하는 과일을 선택하세요"
+          required
+          helperText="최소 하나 이상 선택해주세요."
+        />
+      </VStack>
+    );
+  },
+  argTypes: {
+    name: { control: false },
+    label: { control: false },
+    required: { control: false },
   },
 };
 

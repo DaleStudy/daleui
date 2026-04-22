@@ -169,7 +169,7 @@ export const Invalid: Story = {
           name="invalid-unselected"
           label="에러 상태 (선택 없음)"
           invalid
-          helperText="필수 값을 선택해주세요."
+          errorMessage="필수 값을 선택해주세요."
         />
 
         <RadioGroup
@@ -177,7 +177,7 @@ export const Invalid: Story = {
           name="invalid-selected"
           label="에러 상태 (선택됨)"
           invalid
-          helperText="올바른 옵션을 선택해주세요."
+          errorMessage="올바른 옵션을 선택해주세요."
           defaultValue="banana"
         />
 
@@ -251,9 +251,8 @@ export const HelperText: Story = {
           {...args}
           name="helper-text-basic"
           label="좋아하는 과일을 선택하세요"
-          invalid
           required
-          helperText="필수 값을 선택해주세요."
+          helperText="모두 다 좋아한다면 가장 좋아하는 과일을 골라주세요"
         />
 
         <RadioGroup
@@ -261,8 +260,7 @@ export const HelperText: Story = {
           name="helper-text-horizontal"
           label="좋아하는 과일을 선택하세요"
           orientation="horizontal"
-          invalid
-          helperText="필수 값을 선택해주세요."
+          helperText="모두 다 좋아한다면 가장 좋아하는 과일을 골라주세요"
         />
       </VStack>
     );

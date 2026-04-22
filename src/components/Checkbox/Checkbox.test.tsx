@@ -152,6 +152,14 @@ describe("렌더링", () => {
     const checkbox = screen.getByRole("checkbox");
     expect(checkbox).toHaveAttribute("aria-required", "false");
   });
+
+  test("helperText가 있으면 하단에 표시하고 aria-describedby로 연결한다", () => {
+    render(<Checkbox label="테스트" helperText="도움말입니다." />);
+    const help = screen.getByText("도움말입니다.");
+    expect(help).toBeInTheDocument();
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).toHaveAccessibleDescription("도움말입니다.");
+  });
 });
 
 describe("사용자 동작", () => {

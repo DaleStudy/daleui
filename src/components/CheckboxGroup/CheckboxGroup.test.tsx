@@ -291,6 +291,21 @@ describe("CheckboxGroup", () => {
     const requiredText = screen.getByText("(필수)");
     expect(requiredText).toBeInTheDocument();
   });
+
+  test("helperText가 있으면 하단에 표시하고 aria-describedby로 연결한다", () => {
+    render(
+      <CheckboxGroup name="test" label="Test Group" helperText="도움말입니다.">
+        <CheckboxItem value="option1">Option 1</CheckboxItem>
+      </CheckboxGroup>,
+    );
+    const help = screen.getByText("도움말입니다.");
+    expect(help).toBeInTheDocument();
+    /** TODO: CheckboxGroup ArkUI 컴포넌트 구조 변경 후 수정 필요 */
+    // eslint-disable-next-line testing-library/no-node-access
+    const root = help.parentElement;
+    expect(root).not.toBeNull();
+    expect(root).toHaveAccessibleDescription("도움말입니다.");
+  });
 });
 
 describe("CheckboxItem", () => {

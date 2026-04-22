@@ -579,4 +579,63 @@ describe("접근성 및 기타", () => {
     expect(ref.current).toBeInstanceOf(HTMLSelectElement);
     expect(ref.current?.value).toBe("react");
   });
+
+  test("helperText가 있으면 하단에 표시하고 aria-describedby로 연결한다", () => {
+    render(
+      <Select helperText="필수 항목입니다.">
+        <option value="react">React</option>
+      </Select>,
+    );
+    const help = screen.getByText("필수 항목입니다.");
+    expect(help).toBeInTheDocument();
+    const select = screen.getByRole("combobox");
+    expect(select).toHaveAccessibleDescription("필수 항목입니다.");
+  });
+});
+
+describe("Select label", () => {
+  test("label prop이 있으면 레이블을 렌더링하고 select와 연결된다", () => {
+    render(
+      <Select label="프레임워크">
+        <option value="react">React</option>
+      </Select>,
+    );
+    expect(screen.getByLabelText("프레임워크")).toBeInstanceOf(
+      HTMLSelectElement,
+    );
+  });
+
+  test("label prop이 없으면 레이블을 렌더링하지 않는다", () => {
+    render(
+      <Select>
+        <option value="react">React</option>
+      </Select>,
+    );
+    // label prop이 없으면 레이블로 조회되지 않는다
+    expect(screen.queryByLabelText("프레임워크")).not.toBeInTheDocument();
+  });
+
+  test("label + required이면 * 표시가 렌더링된다", () => {
+    render(
+      <Select label="프레임워크" required>
+        <option value="react">React</option>
+      </Select>,
+    );
+    expect(screen.getByText("프레임워크")).toBeInTheDocument();
+    expect(screen.getByText("*")).toBeInTheDocument();
+  });
+
+  test("label + disabled이면 레이블이 비활성화 스타일이 된다", () => {
+    render(
+      <Select label="프레임워크" disabled>
+        <option value="react">React</option>
+      </Select>,
+    );
+    expect(
+      screen.getByText(
+        (_, el) =>
+          el?.tagName === "LABEL" && el.textContent?.trim() === "프레임워크",
+      ),
+    ).toHaveClass("c_fg.neutral.disabled");
+  });
 });

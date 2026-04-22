@@ -464,7 +464,7 @@ describe("RadioGroup required", () => {
 });
 
 describe("RadioGroup helperText", () => {
-  test("helperText가 제공되면 도움말 텍스트가 렌더링된다", () => {
+  test("helperText가 있으면 하단에 표시하고 aria-describedby로 연결한다", () => {
     render(
       <RadioGroup
         name="test"
@@ -474,44 +474,9 @@ describe("RadioGroup helperText", () => {
         <Radio value="option1">Option 1</Radio>
       </RadioGroup>,
     );
-
-    expect(
-      screen.getByRole("radiogroup", {
-        description: "필수 값을 선택해주세요.",
-      }),
-    ).toBeInTheDocument();
-  });
-
-  test("helperText가 없으면 도움말 텍스트가 렌더링되지 않는다", () => {
-    render(
-      <RadioGroup name="test" label="Test Radio Group">
-        <Radio value="option1">Option 1</Radio>
-      </RadioGroup>,
-    );
-
-    expect(
-      screen.queryByText("필수 값을 선택해주세요."),
-    ).not.toBeInTheDocument();
-  });
-
-  test("helperText와 invalid가 함께 렌더링된다", () => {
-    render(
-      <RadioGroup
-        name="test"
-        label="Test Radio Group"
-        helperText="필수 값을 선택해주세요."
-        invalid
-      >
-        <Radio value="option1">Option 1</Radio>
-      </RadioGroup>,
-    );
-
-    expect(
-      screen.getByRole("radiogroup", {
-        description: "필수 값을 선택해주세요.",
-      }),
-    ).toBeInTheDocument();
-    const radio = screen.getByLabelText("Option 1");
-    expect(radio).toHaveAttribute("aria-invalid", "true");
+    const help = screen.getByText("필수 값을 선택해주세요.");
+    expect(help).toBeInTheDocument();
+    const group = screen.getByRole("radiogroup");
+    expect(group).toHaveAccessibleDescription("필수 값을 선택해주세요.");
   });
 });

@@ -7,7 +7,7 @@ import testingLibrary from "eslint-plugin-testing-library";
 import importPlugin from "eslint-plugin-import";
 
 export default tseslint.config(
-  { ignores: ["dist", "styled-system"] },
+  { ignores: ["dist", "styled-system", "coverage"] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ["**/*.{ts,tsx}"],

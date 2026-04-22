@@ -1,7 +1,11 @@
-import { type ComponentPropsWithoutRef, type Ref } from "react";
-import { cva, cx } from "../../../styled-system/css";
+import { type ComponentPropsWithoutRef, type Ref, useId } from "react";
+import { css, cva, cx } from "../../../styled-system/css";
 import type { FieldProps } from "../shared/types";
+import { HelperText } from "../shared/HelperText";
+import { useHelperText } from "../shared/useHelperText";
 import { Icon, type IconProps } from "../Icon/Icon";
+import { Label } from "../Label/Label";
+
 export interface TextInputProps
   extends
     Omit<
@@ -41,8 +45,23 @@ export function TextInput({
   defaultValue,
   onChange,
   ref,
+  label,
+  helperText,
+  errorMessage,
+  id: idProp,
+  "aria-describedby": ariaDescribedByProp,
   ...rest
 }: TextInputProps) {
+  const reactId = useId();
+  const inputId = idProp ?? reactId;
+  const { fieldProps, helpTextProps, bottomText, showBottomText } =
+    useHelperText({
+      helperText,
+      errorMessage,
+      invalid,
+      externalAriaDescribedBy: ariaDescribedByProp,
+    });
+
   const renderIcon = (name: IconProps["name"]) => {
     let tone: IconProps["tone"];
 
@@ -58,28 +77,47 @@ export function TextInput({
   };
 
   return (
-    <div
-      className={cx(wrapperStyles({ invalid }), className)}
-      data-disabled={disabled ? "" : undefined}
-    >
-      {leadingIcon && renderIcon(leadingIcon)}
-      <input
-        className={inputStyles()}
-        ref={ref}
-        value={value}
-        defaultValue={defaultValue}
-        onChange={onChange}
-        disabled={disabled}
-        aria-invalid={invalid}
-        aria-required={required}
-        {...rest}
-      />
-      {trailingIcon && renderIcon(trailingIcon)}
+    <div className={css({ width: "100%" })}>
+      {label && (
+        <div className={css({ marginBottom: "8" })}>
+          <Label
+            labelText={label}
+            htmlFor={inputId}
+            required={required}
+            disabled={disabled}
+          />
+        </div>
+      )}
+      <div
+        className={cx(fieldStyles({ invalid }), className)}
+        data-disabled={disabled ? "" : undefined}
+      >
+        {leadingIcon && renderIcon(leadingIcon)}
+        <input
+          id={inputId}
+          className={inputStyles()}
+          ref={ref}
+          value={value}
+          defaultValue={defaultValue}
+          onChange={onChange}
+          disabled={disabled}
+          aria-invalid={invalid}
+          aria-required={required}
+          {...rest}
+          {...fieldProps}
+        />
+        {trailingIcon && renderIcon(trailingIcon)}
+      </div>
+      {showBottomText && (
+        <HelperText {...helpTextProps} disabled={disabled}>
+          {bottomText}
+        </HelperText>
+      )}
     </div>
   );
 }
 
-const wrapperStyles = cva({
+const fieldStyles = cva({
   base: {
     display: "inline-flex",
     alignItems: "center",

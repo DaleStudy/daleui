@@ -1,7 +1,15 @@
-import { type ComponentPropsWithoutRef, type Ref, useState } from "react";
-import { cva } from "../../../styled-system/css";
+import {
+  type ComponentPropsWithoutRef,
+  type Ref,
+  useId,
+  useState,
+} from "react";
+import { css, cva } from "../../../styled-system/css";
 import type { FieldProps } from "../shared/types";
+import { HelperText } from "../shared/HelperText";
+import { useHelperText } from "../shared/useHelperText";
 import { Icon } from "../Icon/Icon";
+import { Label } from "../Label/Label";
 
 export interface PasswordInputProps
   extends
@@ -19,7 +27,6 @@ export interface PasswordInputProps
     FieldProps {
   /** 플레이스홀더 */
   placeholder?: string;
-
   /** 제어 모드 입력 값 */
   value?: string;
   /** 비제어 모드 초기 입력값 */
@@ -44,51 +51,81 @@ export function PasswordInput({
   defaultValue,
   onChange,
   ref,
+  label,
+  helperText,
+  errorMessage,
+  id: idProp,
+  "aria-describedby": ariaDescribedByProp,
   ...rest
 }: PasswordInputProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const reactId = useId();
+  const inputId = idProp ?? reactId;
+  const { fieldProps, helpTextProps, bottomText, showBottomText } =
+    useHelperText({
+      helperText,
+      errorMessage,
+      invalid,
+      externalAriaDescribedBy: ariaDescribedByProp,
+    });
 
   const toggleVisibility = () => {
-    if (!disabled) {
-      setIsVisible((prev) => !prev);
-    }
+    setIsVisible((prev) => !prev);
   };
 
   return (
-    <div
-      className={containerStyles({
-        state: invalid ? "error" : undefined,
-      })}
-    >
-      <input
-        ref={ref}
-        type={isVisible ? "text" : "password"}
-        placeholder={placeholder}
-        disabled={disabled}
-        className={inputStyles()}
-        value={value}
-        defaultValue={defaultValue}
-        onChange={onChange}
-        aria-label="패스워드"
-        aria-invalid={invalid}
-        aria-required={required}
-        {...rest}
-      />
-      <button
-        type="button"
-        onClick={toggleVisibility}
-        disabled={disabled}
-        className={iconButtonStyles({ disabled })}
-        aria-pressed={isVisible}
-        aria-label={isVisible ? "패스워드 숨기기" : "패스워드 보기"}
+    <div className={css({ width: "100%" })}>
+      {label && (
+        <div className={css({ marginBottom: "8" })}>
+          <Label
+            labelText={label}
+            htmlFor={inputId}
+            required={required}
+            disabled={disabled}
+          />
+        </div>
+      )}
+      <div
+        className={inputContainerStyles({
+          state: invalid ? "error" : undefined,
+        })}
       >
-        <Icon name={isVisible ? "eye" : "eyeOff"} size="md" tone="neutral" />
-      </button>
+        <input
+          id={inputId}
+          ref={ref}
+          type={isVisible ? "text" : "password"}
+          placeholder={placeholder}
+          disabled={disabled}
+          className={inputStyles()}
+          value={value}
+          defaultValue={defaultValue}
+          onChange={onChange}
+          aria-invalid={invalid}
+          aria-required={required}
+          {...rest}
+          {...fieldProps}
+        />
+        <button
+          type="button"
+          onClick={toggleVisibility}
+          disabled={disabled}
+          className={iconButtonStyles({ disabled })}
+          aria-pressed={isVisible}
+          aria-label={isVisible ? "패스워드 숨기기" : "패스워드 보기"}
+        >
+          <Icon name={isVisible ? "eye" : "eyeOff"} size="md" tone="neutral" />
+        </button>
+      </div>
+      {showBottomText && (
+        <HelperText {...helpTextProps} disabled={disabled}>
+          {bottomText}
+        </HelperText>
+      )}
     </div>
   );
 }
 
-const containerStyles = cva({
+const inputContainerStyles = cva({
   base: {
     position: "relative",
     display: "flex",

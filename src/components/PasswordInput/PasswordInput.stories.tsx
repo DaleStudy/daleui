@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { VStack } from "../VStack/VStack";
 import { PasswordInput } from "./PasswordInput";
 
 export default {
@@ -31,9 +32,10 @@ export const Focused: Story = {
 };
 
 // 에러 상태
-export const Error: Story = {
+export const Invalid: Story = {
   args: {
     invalid: true,
+    errorMessage: "오류 메시지",
     defaultValue: "123",
   },
 };
@@ -42,5 +44,29 @@ export const Error: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
+  },
+};
+
+export const HelperText: Story = {
+  args: {
+    helperText: "도움말 메시지",
+  },
+};
+
+/**
+ * `label` prop으로 레이블을 표시하고 입력 요소와 연결합니다.
+ */
+export const WithLabel: Story = {
+  render: (args) => (
+    <VStack gap="16" style={{ width: "320px" }}>
+      <PasswordInput {...args} label="비밀번호" />
+      <PasswordInput {...args} label="비밀번호" required />
+      <PasswordInput {...args} label="비밀번호" disabled />
+    </VStack>
+  ),
+  argTypes: {
+    label: { control: false },
+    required: { control: false },
+    disabled: { control: false },
   },
 };
