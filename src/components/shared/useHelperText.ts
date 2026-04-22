@@ -7,14 +7,22 @@ interface UseHelperTextOptions {
   externalAriaDescribedBy?: string;
 }
 
+/** 인풋·셀렉트·필드 그룹 루트 등에 spread */
+export interface UseHelperTextFieldProps {
+  "aria-describedby"?: string;
+}
+
+/** HelperText에 spread */
+export interface UseHelperTextHelpTextProps {
+  id: string;
+  invalid: boolean;
+}
+
 export interface UseHelperTextResult {
-  helperTextId: string;
+  fieldProps: UseHelperTextFieldProps;
+  helpTextProps: UseHelperTextHelpTextProps;
   bottomText: string | undefined;
   showBottomText: boolean;
-  /** 외부 aria-describedby와 helperTextId를 병합한 값 */
-  ariaDescribedBy: string | undefined;
-  /** invalid이면서 errorMessage가 있을 때 true — HelperText의 invalid prop으로 전달한다 */
-  isError: boolean;
 }
 
 export function useHelperText({
@@ -35,5 +43,15 @@ export function useHelperText({
       .filter((s): s is string => Boolean(s))
       .join(" ") || undefined;
 
-  return { helperTextId, bottomText, showBottomText, ariaDescribedBy, isError };
+  const fieldProps: UseHelperTextFieldProps =
+    ariaDescribedBy !== undefined
+      ? { "aria-describedby": ariaDescribedBy }
+      : {};
+
+  const helpTextProps: UseHelperTextHelpTextProps = {
+    id: helperTextId,
+    invalid: isError,
+  };
+
+  return { fieldProps, helpTextProps, bottomText, showBottomText };
 }

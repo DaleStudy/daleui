@@ -61,7 +61,7 @@ export function PasswordInput({
   const [isVisible, setIsVisible] = useState(false);
   const reactId = useId();
   const inputId = idProp ?? reactId;
-  const { helperTextId, bottomText, showBottomText, ariaDescribedBy, isError } =
+  const { fieldProps, helpTextProps, bottomText, showBottomText } =
     useHelperText({
       helperText,
       errorMessage,
@@ -102,8 +102,8 @@ export function PasswordInput({
           onChange={onChange}
           aria-invalid={invalid}
           aria-required={required}
-          aria-describedby={ariaDescribedBy}
           {...rest}
+          {...fieldProps}
         />
         <button
           type="button"
@@ -117,7 +117,7 @@ export function PasswordInput({
         </button>
       </div>
       {showBottomText && (
-        <HelperText id={helperTextId} invalid={isError} disabled={disabled}>
+        <HelperText {...helpTextProps} disabled={disabled}>
           {bottomText}
         </HelperText>
       )}

@@ -75,7 +75,7 @@ export function RadioGroup({
   helperText,
   errorMessage,
 }: RadioGroupProps) {
-  const { helperTextId, bottomText, showBottomText, ariaDescribedBy, isError } =
+  const { fieldProps, helpTextProps, bottomText, showBottomText } =
     useHelperText({ helperText, errorMessage, invalid });
 
   return (
@@ -90,7 +90,7 @@ export function RadioGroup({
         disabled={disabled}
         orientation={orientation}
         className={radioGroupRootStyles}
-        aria-describedby={ariaDescribedBy}
+        {...fieldProps}
       >
         <ArkRadioGroup.Label
           className={css({
@@ -123,7 +123,7 @@ export function RadioGroup({
         </ArkRadioGroup.Label>
         <div className={radioGroupStyles({ orientation })}>{children}</div>
         {showBottomText && (
-          <HelperText id={helperTextId} invalid={isError} disabled={disabled}>
+          <HelperText {...helpTextProps} disabled={disabled}>
             {bottomText}
           </HelperText>
         )}

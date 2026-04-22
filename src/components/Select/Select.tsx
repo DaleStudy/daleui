@@ -65,7 +65,7 @@ export function Select({
 }: SelectProps) {
   const reactId = useId();
   const selectId = idProp ?? reactId;
-  const { helperTextId, bottomText, showBottomText, ariaDescribedBy, isError } =
+  const { fieldProps, helpTextProps, bottomText, showBottomText } =
     useHelperText({
       helperText,
       errorMessage,
@@ -187,9 +187,9 @@ export function Select({
           required={required}
           aria-invalid={invalid}
           aria-required={required}
-          aria-describedby={ariaDescribedBy}
           className={selectStyles({ invalid, showClearButton })}
           {...rest}
+          {...fieldProps}
         >
           {placeholder && (
             <option value="" disabled hidden>
@@ -214,7 +214,7 @@ export function Select({
         </div>
       </div>
       {showBottomText && (
-        <HelperText id={helperTextId} invalid={isError} disabled={disabled}>
+        <HelperText {...helpTextProps} disabled={disabled}>
           {bottomText}
         </HelperText>
       )}

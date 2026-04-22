@@ -45,7 +45,7 @@ export const Checkbox = ({
   helperText,
   errorMessage,
 }: CheckboxProps) => {
-  const { helperTextId, bottomText, showBottomText, ariaDescribedBy, isError } =
+  const { fieldProps, helpTextProps, bottomText, showBottomText } =
     useHelperText({ helperText, errorMessage, invalid });
 
   const handleCheckedChange = (details: CheckboxCheckedChangeDetails) => {
@@ -76,9 +76,7 @@ export const Checkbox = ({
           </ArkCheckbox.Indicator>
         </ArkCheckbox.Control>
         {label && (
-          <ArkCheckbox.Label
-            className={labelStyles({ disabled })}
-          >
+          <ArkCheckbox.Label className={labelStyles({ disabled })}>
             {label}
             {required && (
               <span
@@ -96,12 +94,12 @@ export const Checkbox = ({
         <ArkCheckbox.HiddenInput
           data-test-tone={tone}
           aria-required={required}
-          aria-describedby={ariaDescribedBy}
+          {...fieldProps}
           ref={ref}
         />
       </ArkCheckbox.Root>
       {showBottomText && (
-        <HelperText id={helperTextId} invalid={isError} disabled={disabled}>
+        <HelperText {...helpTextProps} disabled={disabled}>
           {bottomText}
         </HelperText>
       )}

@@ -80,7 +80,7 @@ export function CheckboxGroup({
   helperText,
   errorMessage,
 }: CheckboxGroupProps) {
-  const { helperTextId, bottomText, showBottomText, ariaDescribedBy, isError } =
+  const { fieldProps, helpTextProps, bottomText, showBottomText } =
     useHelperText({ helperText, errorMessage, invalid });
   const isControlled = values !== undefined;
   const [internalValues, setInternalValues] = useState<string[]>(
@@ -112,11 +112,7 @@ export function CheckboxGroup({
         onValueChange: handleValueChange,
       }}
     >
-      <div
-        ref={ref}
-        className={checkboxGroupRootStyles}
-        aria-describedby={ariaDescribedBy}
-      >
+      <div ref={ref} className={checkboxGroupRootStyles} {...fieldProps}>
         <label
           className={css({
             textStyle: "label.md.strong",
@@ -156,7 +152,7 @@ export function CheckboxGroup({
         </label>
         <div className={checkboxGroupStyles({ orientation })}>{children}</div>
         {showBottomText && (
-          <HelperText id={helperTextId} invalid={isError} disabled={disabled}>
+          <HelperText {...helpTextProps} disabled={disabled}>
             {bottomText}
           </HelperText>
         )}

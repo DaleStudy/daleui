@@ -54,7 +54,7 @@ export function TextInput({
 }: TextInputProps) {
   const reactId = useId();
   const inputId = idProp ?? reactId;
-  const { helperTextId, bottomText, showBottomText, ariaDescribedBy, isError } =
+  const { fieldProps, helpTextProps, bottomText, showBottomText } =
     useHelperText({
       helperText,
       errorMessage,
@@ -103,13 +103,13 @@ export function TextInput({
           disabled={disabled}
           aria-invalid={invalid}
           aria-required={required}
-          aria-describedby={ariaDescribedBy}
           {...rest}
+          {...fieldProps}
         />
         {trailingIcon && renderIcon(trailingIcon)}
       </div>
       {showBottomText && (
-        <HelperText id={helperTextId} invalid={isError} disabled={disabled}>
+        <HelperText {...helpTextProps} disabled={disabled}>
           {bottomText}
         </HelperText>
       )}
