@@ -180,7 +180,7 @@ export interface CheckboxItemProps {
   value: string;
 
   /** 자식 요소 */
-  children?: ReactNode;
+  children?: string;
 
   /** 비활성화 여부 */
   disabled?: boolean;

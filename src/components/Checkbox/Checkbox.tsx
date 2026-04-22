@@ -10,7 +10,7 @@ import type { FieldProps } from "../shared/types";
 
 export interface CheckboxProps extends FieldProps {
   /** 라벨 내용 */
-  label?: React.ReactNode;
+  label?: string;
   /** 폼 name */
   name?: string;
   /** 제어 모드 체크 여부 */
