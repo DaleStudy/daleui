@@ -77,7 +77,7 @@ export const Checkbox = ({
         </ArkCheckbox.Control>
         {label && (
           <ArkCheckbox.Label
-            className={labelStyles({ disabled, invalid: !disabled && invalid })}
+            className={labelStyles({ disabled })}
           >
             {label}
             {required && (
@@ -290,11 +290,6 @@ const labelStyles = cva({
     disabled: {
       true: {
         color: "fg.neutral.disabled",
-      },
-    },
-    invalid: {
-      true: {
-        color: "fg.danger",
       },
     },
   },
