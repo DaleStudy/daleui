@@ -54,12 +54,12 @@ export interface RadioGroupProps extends FieldProps {
  *
  * @example
  * <RadioGroup name="fruits" label="좋아하는 과일을 선택하세요">
- *   <Radio value="apple">사과</Radio>
- *   <Radio value="banana">바나나</Radio>
- *   <Radio value="orange">오렌지</Radio>
+ *   <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+ *   <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+ *   <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
  * </RadioGroup>
  */
-export function RadioGroup({
+function RadioGroupRoot({
   children,
   name,
   label,
@@ -157,7 +157,7 @@ const radioGroupStyles = cva({
   },
 });
 
-export interface RadioProps {
+export interface RadioGroupItemProps {
   /** 옵션 값 */
   value: string;
 
@@ -171,11 +171,18 @@ export interface RadioProps {
   ref?: React.Ref<HTMLInputElement>;
 }
 
-export function Radio({ value, children, disabled, ref }: RadioProps) {
+export function RadioGroupItem({
+  value,
+  children,
+  disabled,
+  ref,
+}: RadioGroupItemProps) {
   const context = useContext(RadioGroupContext);
 
   if (!context) {
-    throw new Error("Radio 컴포넌트는 RadioGroup 내부에서만 사용해야 합니다.");
+    throw new Error(
+      "RadioGroup.Item 컴포넌트는 RadioGroup 내부에서만 사용해야 합니다.",
+    );
   }
 
   const { tone, disabled: groupDisabled, invalid, required } = context;
@@ -371,4 +378,12 @@ const radioDotStyles = cva({
       },
     },
   },
+});
+
+export const RadioGroup = Object.assign(RadioGroupRoot, {
+  /**
+   * RadioGroup의 개별 라디오 항목입니다.
+   * RadioGroup 내부에서만 사용 가능하며, 그룹의 tone과 disabled 상태를 자동으로 상속받습니다.
+   */
+  Item: RadioGroupItem,
 });

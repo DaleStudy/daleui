@@ -2,14 +2,14 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { describe, expect, test, vi } from "vitest";
-import { CheckboxGroup, CheckboxItem } from "./CheckboxGroup";
+import { CheckboxGroup } from "./CheckboxGroup";
 
 describe("CheckboxGroup", () => {
   test("라벨과 자식 요소들을 렌더링한다", () => {
     render(
       <CheckboxGroup name="test" label="Test Checkbox Group">
-        <CheckboxItem value="option1">Option 1</CheckboxItem>
-        <CheckboxItem value="option2">Option 2</CheckboxItem>
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
+        <CheckboxGroup.Item value="option2">Option 2</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 
@@ -25,8 +25,8 @@ describe("CheckboxGroup", () => {
         label="Test Checkbox Group"
         defaultValues={["option2"]}
       >
-        <CheckboxItem value="option1">Option 1</CheckboxItem>
-        <CheckboxItem value="option2">Option 2</CheckboxItem>
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
+        <CheckboxGroup.Item value="option2">Option 2</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 
@@ -40,8 +40,8 @@ describe("CheckboxGroup", () => {
   test("defaultValues가 제공되지 않으면 아무것도 선택하지 않는다", () => {
     render(
       <CheckboxGroup name="test" label="Test Checkbox Group">
-        <CheckboxItem value="option1">Option 1</CheckboxItem>
-        <CheckboxItem value="option2">Option 2</CheckboxItem>
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
+        <CheckboxGroup.Item value="option2">Option 2</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 
@@ -59,9 +59,9 @@ describe("CheckboxGroup", () => {
         label="Test Checkbox Group"
         defaultValues={["option1", "option2"]}
       >
-        <CheckboxItem value="option1">Option 1</CheckboxItem>
-        <CheckboxItem value="option2">Option 2</CheckboxItem>
-        <CheckboxItem value="option3">Option 3</CheckboxItem>
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
+        <CheckboxGroup.Item value="option2">Option 2</CheckboxGroup.Item>
+        <CheckboxGroup.Item value="option3">Option 3</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 
@@ -82,8 +82,8 @@ describe("CheckboxGroup", () => {
         defaultValues={["option1"]}
         values={["option2"]}
       >
-        <CheckboxItem value="option1">Option 1</CheckboxItem>
-        <CheckboxItem value="option2">Option 2</CheckboxItem>
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
+        <CheckboxGroup.Item value="option2">Option 2</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 
@@ -97,8 +97,8 @@ describe("CheckboxGroup", () => {
   test("disabled가 true일 때 모든 체크박스를 비활성화한다", () => {
     render(
       <CheckboxGroup name="test" label="Test Checkbox Group" disabled>
-        <CheckboxItem value="option1">Option 1</CheckboxItem>
-        <CheckboxItem value="option2">Option 2</CheckboxItem>
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
+        <CheckboxGroup.Item value="option2">Option 2</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 
@@ -109,7 +109,7 @@ describe("CheckboxGroup", () => {
     expect(option2).toBeDisabled();
   });
 
-  test("그룹 disabled가 하위 CheckboxItem의 disabled 스타일을 적용한다", () => {
+  test("그룹 disabled가 하위 CheckboxGroup.Item의 disabled 스타일을 적용한다", () => {
     render(
       <CheckboxGroup
         name="test"
@@ -117,8 +117,8 @@ describe("CheckboxGroup", () => {
         disabled
         defaultValues={["option1"]}
       >
-        <CheckboxItem value="option1">Option 1</CheckboxItem>
-        <CheckboxItem value="option2">Option 2</CheckboxItem>
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
+        <CheckboxGroup.Item value="option2">Option 2</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 
@@ -132,10 +132,10 @@ describe("CheckboxGroup", () => {
   test("그룹 disabled와 개별 disabled가 모두 적용된다", () => {
     render(
       <CheckboxGroup name="test" label="Test Checkbox Group" disabled>
-        <CheckboxItem value="option1" disabled>
+        <CheckboxGroup.Item value="option1" disabled>
           Option 1
-        </CheckboxItem>
-        <CheckboxItem value="option2">Option 2</CheckboxItem>
+        </CheckboxGroup.Item>
+        <CheckboxGroup.Item value="option2">Option 2</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 
@@ -156,8 +156,8 @@ describe("CheckboxGroup", () => {
         label="Test Checkbox Group"
         onChange={onChange}
       >
-        <CheckboxItem value="option1">Option 1</CheckboxItem>
-        <CheckboxItem value="option2">Option 2</CheckboxItem>
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
+        <CheckboxGroup.Item value="option2">Option 2</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 
@@ -172,9 +172,9 @@ describe("CheckboxGroup", () => {
 
     render(
       <CheckboxGroup name="test" label="Test Checkbox Group">
-        <CheckboxItem value="option1">Option 1</CheckboxItem>
-        <CheckboxItem value="option2">Option 2</CheckboxItem>
-        <CheckboxItem value="option3">Option 3</CheckboxItem>
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
+        <CheckboxGroup.Item value="option2">Option 2</CheckboxGroup.Item>
+        <CheckboxGroup.Item value="option3">Option 3</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 
@@ -207,8 +207,8 @@ describe("CheckboxGroup", () => {
         label="Test Checkbox Group"
         defaultValues={["option1", "option2"]}
       >
-        <CheckboxItem value="option1">Option 1</CheckboxItem>
-        <CheckboxItem value="option2">Option 2</CheckboxItem>
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
+        <CheckboxGroup.Item value="option2">Option 2</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 
@@ -242,8 +242,8 @@ describe("CheckboxGroup", () => {
             setSelectedValues(values);
           }}
         >
-          <CheckboxItem value="option1">Option 1</CheckboxItem>
-          <CheckboxItem value="option2">Option 2</CheckboxItem>
+          <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
+          <CheckboxGroup.Item value="option2">Option 2</CheckboxGroup.Item>
         </CheckboxGroup>
       );
     };
@@ -265,7 +265,7 @@ describe("CheckboxGroup", () => {
   test("required가 true일 때 라벨 옆에 별표를 표시한다", () => {
     render(
       <CheckboxGroup name="test" label="Test Checkbox Group" required>
-        <CheckboxItem value="option1">Option 1</CheckboxItem>
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 
@@ -280,7 +280,7 @@ describe("CheckboxGroup", () => {
   test("required가 true이고 disabled가 true일 때 별표 색상이 변경된다", () => {
     render(
       <CheckboxGroup name="test" label="Test Checkbox Group" required disabled>
-        <CheckboxItem value="option1">Option 1</CheckboxItem>
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 
@@ -295,7 +295,7 @@ describe("CheckboxGroup", () => {
   test("helperText가 있으면 하단에 표시하고 aria-describedby로 연결한다", () => {
     render(
       <CheckboxGroup name="test" label="Test Group" helperText="도움말입니다.">
-        <CheckboxItem value="option1">Option 1</CheckboxItem>
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
     const help = screen.getByText("도움말입니다.");
@@ -308,14 +308,14 @@ describe("CheckboxGroup", () => {
   });
 });
 
-describe("CheckboxItem", () => {
+describe("CheckboxGroup.Item", () => {
   test("CheckboxGroup 없이 사용하면 에러를 던진다", () => {
-    const renderCheckboxItemAlone = () => {
-      render(<CheckboxItem value="option1">Option 1</CheckboxItem>);
+    const renderItemAlone = () => {
+      render(<CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>);
     };
 
-    expect(renderCheckboxItemAlone).toThrow(
-      "CheckboxItem 컴포넌트는 CheckboxGroup 내부에서만 사용해야 합니다.",
+    expect(renderItemAlone).toThrow(
+      "CheckboxGroup.Item 컴포넌트는 CheckboxGroup 내부에서만 사용해야 합니다.",
     );
   });
 
@@ -324,8 +324,8 @@ describe("CheckboxItem", () => {
 
     render(
       <CheckboxGroup name="test" label="Test Checkbox Group">
-        <CheckboxItem value="option1">Option 1</CheckboxItem>
-        <CheckboxItem value="option2">Option 2</CheckboxItem>
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
+        <CheckboxGroup.Item value="option2">Option 2</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 
@@ -349,10 +349,10 @@ describe("CheckboxItem", () => {
     (optionName, isDisabled) => {
       render(
         <CheckboxGroup name="test" label="Test Checkbox Group">
-          <CheckboxItem value="option1">Option 1</CheckboxItem>
-          <CheckboxItem value="option2" disabled>
+          <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
+          <CheckboxGroup.Item value="option2" disabled>
             Option 2
-          </CheckboxItem>
+          </CheckboxGroup.Item>
         </CheckboxGroup>,
       );
 
@@ -376,7 +376,7 @@ describe("CheckboxItem", () => {
   ] as const)("%s 톤을 올바르게 렌더링한다", (tone) => {
     render(
       <CheckboxGroup name="test" label="Test Checkbox Group" tone={tone}>
-        <CheckboxItem value="option1">Option 1</CheckboxItem>
+        <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 

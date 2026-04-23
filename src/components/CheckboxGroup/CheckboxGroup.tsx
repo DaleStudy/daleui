@@ -59,12 +59,12 @@ export interface CheckboxGroupProps extends FieldProps {
  *
  * @example
  * <CheckboxGroup name="fruits" label="좋아하는 과일을 선택하세요 (옵션 선택)">
- *   <CheckboxItem value="apple">사과</CheckboxItem>
- *   <CheckboxItem value="banana">바나나</CheckboxItem>
- *   <CheckboxItem value="orange">오렌지</CheckboxItem>
+ *   <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+ *   <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
+ *   <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
  * </CheckboxGroup>
  */
-export function CheckboxGroup({
+function CheckboxGroupRoot({
   ref,
   children,
   name,
@@ -186,7 +186,7 @@ const checkboxGroupStyles = cva({
   },
 });
 
-export interface CheckboxItemProps {
+export interface CheckboxGroupItemProps {
   /** 옵션 값 */
   value: string;
 
@@ -197,16 +197,16 @@ export interface CheckboxItemProps {
   disabled?: boolean;
 }
 
-export function CheckboxItem({
+export function CheckboxGroupItem({
   value,
   children,
   disabled = false,
-}: CheckboxItemProps) {
+}: CheckboxGroupItemProps) {
   const context = useContext(CheckboxGroupContext);
 
   if (!context) {
     throw new Error(
-      "CheckboxItem 컴포넌트는 CheckboxGroup 내부에서만 사용해야 합니다.",
+      "CheckboxGroup.Item 컴포넌트는 CheckboxGroup 내부에서만 사용해야 합니다.",
     );
   }
 
@@ -238,3 +238,11 @@ export function CheckboxItem({
     />
   );
 }
+
+export const CheckboxGroup = Object.assign(CheckboxGroupRoot, {
+  /**
+   * CheckboxGroup의 개별 체크박스 항목입니다.
+   * CheckboxGroup 내부에서만 사용 가능하며, 그룹의 tone, disabled, invalid 상태를 자동으로 상속받습니다.
+   */
+  Item: CheckboxGroupItem,
+});

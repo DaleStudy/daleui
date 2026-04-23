@@ -2,14 +2,14 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { describe, expect, test, vi } from "vitest";
-import { Radio, RadioGroup } from "./RadioGroup";
+import { RadioGroup } from "./RadioGroup";
 
 describe("RadioGroup", () => {
   test("라벨과 자식 요소들을 렌더링한다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group">
-        <Radio value="option1">Option 1</Radio>
-        <Radio value="option2">Option 2</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
+        <RadioGroup.Item value="option2">Option 2</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -21,8 +21,8 @@ describe("RadioGroup", () => {
   test("defaultValue가 제공되면 해당 값을 선택한다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" defaultValue="option2">
-        <Radio value="option1">Option 1</Radio>
-        <Radio value="option2">Option 2</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
+        <RadioGroup.Item value="option2">Option 2</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -36,8 +36,8 @@ describe("RadioGroup", () => {
   test("defaultValue가 제공되지 않으면 아무것도 선택하지 않는다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group">
-        <Radio value="option1">Option 1</Radio>
-        <Radio value="option2">Option 2</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
+        <RadioGroup.Item value="option2">Option 2</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -56,8 +56,8 @@ describe("RadioGroup", () => {
         defaultValue="option1"
         value="option2"
       >
-        <Radio value="option1">Option 1</Radio>
-        <Radio value="option2">Option 2</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
+        <RadioGroup.Item value="option2">Option 2</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -71,8 +71,8 @@ describe("RadioGroup", () => {
   test("disabled가 true일 때 모든 라디오를 비활성화한다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" disabled>
-        <Radio value="option1">Option 1</Radio>
-        <Radio value="option2">Option 2</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
+        <RadioGroup.Item value="option2">Option 2</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -83,7 +83,7 @@ describe("RadioGroup", () => {
     expect(option2).toBeDisabled();
   });
 
-  test("그룹 disabled가 하위 Radio의 disabled 스타일을 적용한다", () => {
+  test("그룹 disabled가 하위 RadioGroup.Item의 disabled 스타일을 적용한다", () => {
     render(
       <RadioGroup
         name="test"
@@ -91,8 +91,8 @@ describe("RadioGroup", () => {
         disabled
         defaultValue="option1"
       >
-        <Radio value="option1">Option 1</Radio>
-        <Radio value="option2">Option 2</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
+        <RadioGroup.Item value="option2">Option 2</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -113,10 +113,10 @@ describe("RadioGroup", () => {
   test("그룹 disabled와 개별 disabled가 모두 적용된다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" disabled>
-        <Radio value="option1" disabled>
+        <RadioGroup.Item value="option1" disabled>
           Option 1
-        </Radio>
-        <Radio value="option2">Option 2</Radio>
+        </RadioGroup.Item>
+        <RadioGroup.Item value="option2">Option 2</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -134,8 +134,8 @@ describe("RadioGroup", () => {
 
     render(
       <RadioGroup name="test" label="Test Radio Group" onChange={onChange}>
-        <Radio value="option1">Option 1</Radio>
-        <Radio value="option2">Option 2</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
+        <RadioGroup.Item value="option2">Option 2</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -162,8 +162,8 @@ describe("RadioGroup", () => {
             setSelectedValue(value);
           }}
         >
-          <Radio value="option1">Option 1</Radio>
-          <Radio value="option2">Option 2</Radio>
+          <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
+          <RadioGroup.Item value="option2">Option 2</RadioGroup.Item>
         </RadioGroup>
       );
     };
@@ -183,14 +183,22 @@ describe("RadioGroup", () => {
   });
 });
 
-describe("Radio", () => {
+describe("RadioGroup.Item", () => {
+  test("RadioGroup 없이 사용하면 에러를 던진다", () => {
+    const renderItemAlone = () => {
+      render(<RadioGroup.Item value="option1">Option 1</RadioGroup.Item>);
+    };
+
+    expect(renderItemAlone).toThrow();
+  });
+
   test("다른 값들을 선택할 수 있다", async () => {
     const user = userEvent.setup();
 
     render(
       <RadioGroup name="test" label="Test Radio Group">
-        <Radio value="option1">Option 1</Radio>
-        <Radio value="option2">Option 2</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
+        <RadioGroup.Item value="option2">Option 2</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -214,10 +222,10 @@ describe("Radio", () => {
     (optionName, isDisabled) => {
       render(
         <RadioGroup name="test" label="Test Radio Group">
-          <Radio value="option1">Option 1</Radio>
-          <Radio value="option2" disabled>
+          <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
+          <RadioGroup.Item value="option2" disabled>
             Option 2
-          </Radio>
+          </RadioGroup.Item>
         </RadioGroup>,
       );
 
@@ -237,7 +245,7 @@ describe("Radio", () => {
   ] as const)("%s 톤을 올바르게 렌더링한다", (tone, className) => {
     render(
       <RadioGroup name="test" label="Test Radio Group" tone={tone}>
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -253,7 +261,7 @@ describe("RadioGroup hint", () => {
   test("hint가 제공되면 라벨 옆에 보조 텍스트가 렌더링된다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" hint="(옵션 선택)">
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -263,7 +271,7 @@ describe("RadioGroup hint", () => {
   test("hint가 없으면 보조 텍스트가 렌더링되지 않는다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group">
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -278,7 +286,7 @@ describe("RadioGroup hint", () => {
         hint="(옵션 선택)"
         required
       >
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -293,7 +301,7 @@ describe("RadioGroup invalid", () => {
   test("invalid prop이 없을 때 aria-invalid='false'", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group">
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -304,7 +312,7 @@ describe("RadioGroup invalid", () => {
   test("invalid={true}일 때 aria-invalid='true'", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" invalid>
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -315,7 +323,7 @@ describe("RadioGroup invalid", () => {
   test("invalid={false}일 때 aria-invalid='false'", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" invalid={false}>
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -326,7 +334,7 @@ describe("RadioGroup invalid", () => {
   test("invalid와 disabled를 함께 사용할 수 있다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" invalid disabled>
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -346,8 +354,8 @@ describe("RadioGroup invalid", () => {
         invalid
         onChange={onChange}
       >
-        <Radio value="option1">Option 1</Radio>
-        <Radio value="option2">Option 2</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
+        <RadioGroup.Item value="option2">Option 2</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -361,7 +369,7 @@ describe("RadioGroup invalid", () => {
   test("invalid 상태일 때 danger 색상 스타일이 적용된다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" invalid>
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -374,7 +382,7 @@ describe("RadioGroup required", () => {
   test("required={true}이면 필수 표시(*)가 렌더링된다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" required>
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -386,7 +394,7 @@ describe("RadioGroup required", () => {
   test("required={false}이면 필수 표시가 없다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" required={false}>
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -398,7 +406,7 @@ describe("RadioGroup required", () => {
   test("required prop이 없으면 필수 표시가 없다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group">
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -410,7 +418,7 @@ describe("RadioGroup required", () => {
   test("required와 disabled가 함께 있으면 비활성화 색상이 적용된다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" required disabled>
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -421,7 +429,7 @@ describe("RadioGroup required", () => {
   test("required만 있으면 danger 색상이 적용된다", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" required>
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -432,7 +440,7 @@ describe("RadioGroup required", () => {
   test("required prop이 없을 때 aria-required='false'", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group">
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -443,7 +451,7 @@ describe("RadioGroup required", () => {
   test("required={true}일 때 aria-required='true'", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" required>
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -454,7 +462,7 @@ describe("RadioGroup required", () => {
   test("required={false}일 때 aria-required='false'", () => {
     render(
       <RadioGroup name="test" label="Test Radio Group" required={false}>
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
@@ -471,7 +479,7 @@ describe("RadioGroup helperText", () => {
         label="Test Radio Group"
         helperText="필수 값을 선택해주세요."
       >
-        <Radio value="option1">Option 1</Radio>
+        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
     const help = screen.getByText("필수 값을 선택해주세요.");
