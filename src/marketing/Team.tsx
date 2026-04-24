@@ -210,15 +210,6 @@ const Members: TeamMember[] = [
     linkedinUrl: "https://www.linkedin.com/in/yolophg/",
   },
   {
-    name: "Evan (에반)",
-    role: "Engineer",
-    flag: "🇨🇦",
-    location: "Toronto",
-    avatar: "https://avatars.githubusercontent.com/u/37020415",
-    githubUrl: "https://github.com/sounmind",
-    linkedinUrl: "https://www.linkedin.com/in/suhyeong-evan-lee/",
-  },
-  {
     name: "hyoseong",
     role: "Engineer",
     flag: "🇰🇷",
@@ -253,15 +244,6 @@ const Members: TeamMember[] = [
     avatar: "https://avatars.githubusercontent.com/u/89135410",
     githubUrl: "https://github.com/jj5u",
     linkedinUrl: undefined,
-  },
-  {
-    name: "조엘",
-    role: "PM",
-    flag: "🇰🇷",
-    location: "Seoul",
-    avatar: "https://avatars.githubusercontent.com/u/74299463?v=4",
-    githubUrl: "https://github.com/JJinuk",
-    linkedinUrl: "https://www.linkedin.com/in/jinuk/",
   },
   {
     name: "윤섭",
