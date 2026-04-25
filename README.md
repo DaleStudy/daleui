@@ -27,6 +27,7 @@
 
 - [스토리북](https://main--675790d317ba346348aa3490.chromatic.com)
 - [위키](https://github.com/DaleStudy/daleui/wiki)
+- [Figma UI Kit](https://www.figma.com/community/file/1559487636467651573)
 
 ## 설치 (Installation)
 
