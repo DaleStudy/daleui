@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { css } from "../../../styled-system/css";
-import { Radio, RadioGroup } from "./RadioGroup";
+import { RadioGroup } from "./RadioGroup";
 import { VStack } from "../VStack/VStack";
 
 export default {
@@ -17,9 +17,9 @@ export default {
     label: "좋아하는 과일을 선택하세요",
     children: (
       <>
-        <Radio value="apple">사과</Radio>
-        <Radio value="banana">바나나</Radio>
-        <Radio value="orange">오렌지</Radio>
+        <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+        <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+        <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
       </>
     ),
   },
@@ -99,11 +99,11 @@ export const ItemDisabled: Story = {
           label="개별 아이템 비활성화 (선택됨)"
           defaultValue="banana"
         >
-          <Radio value="apple">사과</Radio>
-          <Radio value="banana" disabled>
+          <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+          <RadioGroup.Item value="banana" disabled>
             바나나 (disabled)
-          </Radio>
-          <Radio value="orange">오렌지</Radio>
+          </RadioGroup.Item>
+          <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
         </RadioGroup>
 
         <RadioGroup
@@ -111,11 +111,11 @@ export const ItemDisabled: Story = {
           label="개별 아이템 비활성화 (선택 안 됨)"
           defaultValue="apple"
         >
-          <Radio value="apple">사과</Radio>
-          <Radio value="banana" disabled>
+          <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+          <RadioGroup.Item value="banana" disabled>
             바나나 (disabled)
-          </Radio>
-          <Radio value="orange">오렌지</Radio>
+          </RadioGroup.Item>
+          <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
         </RadioGroup>
       </div>
     );

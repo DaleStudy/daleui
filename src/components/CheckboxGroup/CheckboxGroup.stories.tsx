@@ -4,7 +4,7 @@ import { useState } from "react";
 import { css } from "../../../styled-system/css";
 import { Button } from "../Button/Button";
 import { VStack } from "../VStack/VStack";
-import { CheckboxGroup, CheckboxItem } from "./CheckboxGroup";
+import { CheckboxGroup } from "./CheckboxGroup";
 
 export default {
   component: CheckboxGroup,
@@ -24,9 +24,9 @@ export default {
     required: false,
     children: (
       <>
-        <CheckboxItem value="apple">사과</CheckboxItem>
-        <CheckboxItem value="banana">바나나</CheckboxItem>
-        <CheckboxItem value="orange">오렌지</CheckboxItem>
+        <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+        <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
+        <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
       </>
     ),
   },
@@ -86,11 +86,11 @@ export const ItemDisabled: Story = {
           label="개별 아이템 비활성화 (선택됨)"
           defaultValues={["banana"]}
         >
-          <CheckboxItem value="apple">사과</CheckboxItem>
-          <CheckboxItem value="banana" disabled>
+          <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+          <CheckboxGroup.Item value="banana" disabled>
             바나나 (disabled)
-          </CheckboxItem>
-          <CheckboxItem value="orange">오렌지</CheckboxItem>
+          </CheckboxGroup.Item>
+          <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
         </CheckboxGroup>
 
         <CheckboxGroup
@@ -98,11 +98,11 @@ export const ItemDisabled: Story = {
           label="개별 아이템 비활성화 (선택 안 됨)"
           defaultValues={["apple"]}
         >
-          <CheckboxItem value="apple">사과</CheckboxItem>
-          <CheckboxItem value="banana" disabled>
+          <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+          <CheckboxGroup.Item value="banana" disabled>
             바나나 (disabled)
-          </CheckboxItem>
-          <CheckboxItem value="orange">오렌지</CheckboxItem>
+          </CheckboxGroup.Item>
+          <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
         </CheckboxGroup>
       </VStack>
     );

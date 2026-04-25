@@ -21,8 +21,8 @@ export { Checkbox, type CheckboxProps } from "./components/Checkbox/Checkbox";
 export {
   CheckboxGroup,
   type CheckboxGroupProps,
-  CheckboxItem,
-  type CheckboxItemProps,
+  CheckboxGroupItem,
+  type CheckboxGroupItemProps,
 } from "./components/CheckboxGroup/CheckboxGroup";
 export { Flex, type FlexProps } from "./components/Flex/Flex";
 export {
@@ -43,8 +43,8 @@ export {
 export {
   RadioGroup,
   type RadioGroupProps,
-  Radio,
-  type RadioProps,
+  RadioGroupItem,
+  type RadioGroupItemProps,
 } from "./components/RadioGroup/RadioGroup";
 export { Select, type SelectProps } from "./components/Select/Select";
 export { Tag, type TagProps } from "./components/Tag/Tag";
