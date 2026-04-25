@@ -10,6 +10,8 @@ import { HelperText } from "../shared/HelperText";
 import { useHelperText } from "../shared/useHelperText";
 import type { FieldProps } from "../shared/types";
 
+type CheckboxTone = Extract<Tone, "brand" | "neutral">;
+
 export interface CheckboxProps extends Omit<FieldProps, "label"> {
   /** 라벨 내용 */
   label?: string;
@@ -19,9 +21,9 @@ export interface CheckboxProps extends Omit<FieldProps, "label"> {
   checked?: boolean;
   /** 비제어 모드 초기 체크 여부 */
   defaultChecked?: boolean;
-  /** 색조 */
-  tone?: Tone;
-  /** 체크 변경 핸들러 */
+  /** 체크박스의 색조 */
+  tone?: CheckboxTone;
+  /** 체크 상태 변경 시 호출되는 콜백 (controlled 모드) */
   onChange?: (checked: boolean) => void;
   /** 입력 요소 참조 */
   ref?: React.Ref<HTMLInputElement>;
@@ -189,39 +191,6 @@ const controlStyles = cva({
         },
         _focusVisible: {
           outlineColor: "border.brand.focus",
-        },
-      },
-      success: {
-        _before: {
-          backgroundColor: "fg.success",
-        },
-        _focusVisible: {
-          outlineColor: "border.success",
-        },
-      },
-      warning: {
-        _before: {
-          backgroundColor: "fg.warning",
-        },
-        _focusVisible: {
-          outlineColor: "border.warning",
-        },
-      },
-      info: {
-        _before: {
-          backgroundColor: "fg.info",
-        },
-        _focusVisible: {
-          outlineColor: "border.info",
-        },
-      },
-      danger: {
-        borderColor: "fg.danger",
-        _before: {
-          backgroundColor: "fg.danger",
-        },
-        _focusVisible: {
-          outlineColor: "border.danger",
         },
       },
       neutral: {

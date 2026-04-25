@@ -12,9 +12,11 @@ import type { Tone } from "../../tokens/colors";
 import type { FieldProps } from "../shared/types";
 import { Checkbox } from "../Checkbox/Checkbox";
 
+type CheckboxGroupTone = Extract<Tone, "brand" | "neutral">;
+
 const CheckboxGroupContext = createContext<
   | ({
-      tone: Tone;
+      tone: CheckboxGroupTone;
       name: string;
       selectedValues: string[];
       onValueChange: (value: string, checked: boolean) => void;
@@ -44,11 +46,20 @@ export interface CheckboxGroupProps extends FieldProps {
   /** 배치 방향 (horizontal | vertical) */
   orientation?: "horizontal" | "vertical";
 
-  /** 색조 */
-  tone?: Tone;
+  /**
+   * 색상 강조를 지정합니다.
+   * @default "brand"
+   */
+  tone?: CheckboxGroupTone;
 
   /** 요소 참조 */
   ref?: Ref<HTMLDivElement>;
+
+  /**
+   * 그룹 하단에 표시할 보조 또는 에러 메시지입니다.
+   * @default undefined
+   */
+  helperText?: string;
 }
 
 /**

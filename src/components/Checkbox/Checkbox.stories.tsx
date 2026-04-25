@@ -28,12 +28,8 @@ export const Tones: StoryObj<typeof Checkbox> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
-        <Checkbox {...args} label="브랜드 색조" tone="brand" />
-        <Checkbox {...args} label="중립 색조" tone="neutral" />
-        <Checkbox {...args} label="위험 색조" tone="danger" />
-        <Checkbox {...args} label="성공 색조" tone="success" />
-        <Checkbox {...args} label="경고 색조" tone="warning" />
-        <Checkbox {...args} label="정보 색조" tone="info" />
+        <Checkbox {...args} label="중립 톤" tone="neutral" />
+        <Checkbox {...args} label="브랜드 톤" tone="brand" />
       </div>
     );
   },
@@ -50,12 +46,10 @@ export const Disabled: StoryObj<typeof Checkbox> = {
       <div className={vstack({ gap: "16" })}>
         <Checkbox
           {...args}
-          label="비활성화 & 체크된 상태"
+          label="체크할 수 없습니다."
           disabled
           defaultChecked
         />
-        <Checkbox {...args} label="비활성화 & 체크되지 않은 상태" disabled />
-        <Checkbox {...args} label="활성화 상태" />
       </div>
     );
   },
@@ -84,6 +78,7 @@ export const Invalid: StoryObj<typeof Checkbox> = {
           errorMessage="필수 항목입니다."
         />
         <Checkbox {...args} label="정상 체크박스" />
+        <Checkbox {...args} label="체크해주세요." invalid />
       </div>
     );
   },
