@@ -1,10 +1,10 @@
-name: Create Weekly Meeting Issue
+name: Create Weekly Meeting Issue 📋
 
 on:
   schedule:
     # 금요일 9:30pm EDT (UTC-4) = 토요일 01:30 UTC = 토요일 10:30am KST (UTC+9)
     - cron: "30 1 * * 6"
-  workflow_dispatch: # 수동 테스트용
+  workflow_dispatch:
 
 permissions:
   issues: write
@@ -14,7 +14,7 @@ jobs:
   create-meeting-issue:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Determine meeting type and sprint number
         id: meeting-info
@@ -40,7 +40,7 @@ jobs:
 
           if [ "$WEEK_IN_CYCLE" -eq 0 ]; then
             echo "type=mid" >> $GITHUB_OUTPUT
-            echo "title=Sprint ${SPRINT_NUMBER} 중간 회의" >> $GITHUB_OUTPUT
+            echo "title=Sprint ${SPRINT_NUMBER} 협업 세션" >> $GITHUB_OUTPUT
           else
             echo "type=end" >> $GITHUB_OUTPUT
             echo "title=Sprint ${SPRINT_NUMBER} 종료 회의" >> $GITHUB_OUTPUT
