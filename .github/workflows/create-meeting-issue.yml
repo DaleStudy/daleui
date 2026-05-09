@@ -19,17 +19,17 @@ jobs:
       - name: Determine meeting type and sprint number
         id: meeting-info
         env:
-          SPRINT_WEEK1_FRIDAY: ${{ vars.SPRINT_WEEK1_FRIDAY }}
-          SPRINT_START_NUMBER: ${{ vars.SPRINT_START_NUMBER }}
-          MEETING_OVERRIDE: ${{ vars.MEETING_OVERRIDE }}
+          SKIP_NEXT_RUN: ${{ vars.SKIP_NEXT_RUN }}
         run: |
-          # 비정규 스프린트(3주 등) 특수 주: MEETING_OVERRIDE=skip 이면 이슈 생성 안 함
-          if [ "$MEETING_OVERRIDE" = "skip" ]; then
+          # 비정규 스프린트(3주 등) 특수 주: SKIP_NEXT_RUN=true 이면 이슈 생성 안 함
+          if [ "$SKIP_NEXT_RUN" = "true" ]; then
             echo "type=skip" >> $GITHUB_OUTPUT
             exit 0
           fi
 
           # cron이 UTC 기준 토요일 새벽에 실행되므로 NY 시간으로 변환하면 금요일 날짜
+          SPRINT_WEEK1_FRIDAY="2026-04-24"
+          SPRINT_START_NUMBER=1
           TODAY=$(TZ="America/New_York" date +%Y-%m-%d)
           TODAY_EPOCH=$(date -d "$TODAY" +%s)
           REF_EPOCH=$(date -d "$SPRINT_WEEK1_FRIDAY" +%s)
@@ -52,8 +52,6 @@ jobs:
         env:
           MEETING_TYPE: ${{ steps.meeting-info.outputs.type }}
           SPRINT_NUMBER: ${{ steps.meeting-info.outputs.sprint_number }}
-          PROJECT_BOARD_URL: ${{ vars.PROJECT_BOARD_URL }}
-          RETRO_BOARD_URL: ${{ vars.RETRO_BOARD_URL }}
         run: |
           if [ "$MEETING_TYPE" = "mid" ]; then
             TEMPLATE=".github/meeting-templates/mid-sprint.md"
@@ -63,8 +61,6 @@ jobs:
 
           sed \
             -e "s|{{SPRINT_NUMBER}}|$SPRINT_NUMBER|g" \
-            -e "s|{{PROJECT_BOARD_URL}}|$PROJECT_BOARD_URL|g" \
-            -e "s|{{RETRO_BOARD_URL}}|$RETRO_BOARD_URL|g" \
             "$TEMPLATE" > /tmp/issue-body.md
 
       - name: Create GitHub issue

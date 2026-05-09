@@ -11,18 +11,12 @@
 
 > 미완료 티켓 이관, 백로그 우선순위 정립, 다음 목표 수립
 
-- 보드: {{PROJECT_BOARD_URL}}
+- 보드: https://github.com/orgs/DaleStudy/projects/18
 -
 
 ## 회고 (30분)
 
 > 프로세스 개선 논의 (실시간 의견 수렴)
 
-- 회고보드: {{RETRO_BOARD_URL}}
--
-
-## 비전 레트로 (미정)
-
-> 중장기 방향성 상기 및 조정 (팀원들이 필요를 느낄 때)
-
+- 회고보드: https://www.figma.com/board/ih9UMQURdnckAA52IBOtKV/DaleUI-Retro?node-id=1347-464&t=BEkcgmD0gNsMB8dq-1
 -
