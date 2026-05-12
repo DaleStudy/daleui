@@ -27,7 +27,7 @@
         "@vitejs/plugin-react": "^5.2.0",
         "@vitest/coverage-v8": "^4.1.5",
         "axe-playwright": "^2.2.2",
-        "chromatic": "^15.0.0",
+        "chromatic": "^15.3.1",
         "eslint": "^9.39.4",
         "eslint-plugin-import": "^2.32.0",
         "eslint-plugin-react-hooks": "^7.0.1",
@@ -751,7 +751,7 @@
 
     "chokidar": ["chokidar@4.0.3", "", { "dependencies": { "readdirp": "^4.0.1" } }, "sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA=="],
 
-    "chromatic": ["chromatic@15.0.0", "", { "peerDependencies": { "@chromatic-com/cypress": "^0.*.* || ^1.0.0", "@chromatic-com/playwright": "^0.*.* || ^1.0.0" }, "optionalPeers": ["@chromatic-com/cypress", "@chromatic-com/playwright"], "bin": { "chroma": "dist/bin.js", "chromatic": "dist/bin.js", "chromatic-cli": "dist/bin.js" } }, "sha512-C86WhlURE/YwyHe6w443Dd+nqGelfI2uTIr4QNj1hByxZ71kGsOyHkiA3DmSol6sMVfrQYuhfmXgpd4oN26qzA=="],
+    "chromatic": ["chromatic@15.3.1", "", { "peerDependencies": { "@chromatic-com/cypress": "^0.*.* || ^1.0.0", "@chromatic-com/playwright": "^0.*.* || ^1.0.0" }, "optionalPeers": ["@chromatic-com/cypress", "@chromatic-com/playwright"], "bin": { "chroma": "dist/bin.js", "chromatic": "dist/bin.js", "chromatic-cli": "dist/bin.js" } }, "sha512-2u4ow+Hf2xNusaTj9xkfp7pHMJ2pMnmOQxZPWyB+4SNEqjrMz813E6CJJzczBSlZzeY0waYq56uvpK/CkiUNvQ=="],
 
     "code-block-writer": ["code-block-writer@13.0.3", "", {}, "sha512-Oofo0pq3IKnsFtuHqSF7TqBfr71aeyZDVJ0HpmqB7FBM2qEigL0iPONSCZSO9pE9dZTAxANe5XHG9Uy0YMv8cg=="],
 
