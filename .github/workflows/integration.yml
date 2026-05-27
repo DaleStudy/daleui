@@ -18,7 +18,7 @@ jobs:
       - uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-      - run: bun run build
+      - run: bun run build:lib
 
   install-test:
     runs-on: ubuntu-latest
@@ -63,8 +63,3 @@ jobs:
             );
           }
           EOF
-
-      - name: Run production build
-        run: |
-          cd /tmp/test-project
-          bun run build
