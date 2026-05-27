@@ -39,7 +39,7 @@ jobs:
         run: |
           bun install --frozen-lockfile
           bun run prepare
-          bun run build:lib
+          bun run build
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
