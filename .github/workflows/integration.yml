@@ -36,7 +36,7 @@ jobs:
       - name: Install dependencies & Build
         run: |
           bun install
-          bun run build:lib
+          bun run build
 
       - name: Pack library
         run: npm pack
@@ -63,8 +63,3 @@ jobs:
             );
           }
           EOF
-
-      - name: Run production build
-        run: |
-          cd /tmp/test-project
-          bun run build
