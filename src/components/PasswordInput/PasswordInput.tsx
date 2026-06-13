@@ -7,7 +7,7 @@ import {
 import { css, cva } from "../../../styled-system/css";
 import type { FieldProps } from "../shared/types";
 import { HelperText } from "../shared/HelperText";
-import { useHelperText } from "../shared/useHelperText";
+import { useField } from "../shared/useField";
 import { Icon } from "../Icon/Icon";
 import { Label } from "../Label/Label";
 
@@ -22,7 +22,7 @@ export interface PasswordInputProps
       | "onChange"
       | "disabled"
       | "required"
-      // TODO: readOnly도 Omit 대상 (#935)
+      | "readOnly"
     >,
     FieldProps {
   /** 플레이스홀더 */
@@ -46,6 +46,7 @@ export function PasswordInput({
   invalid = false,
   required = false,
   disabled = false,
+  readOnly = false,
   placeholder = "패스워드를 입력해주세요.",
   value,
   defaultValue,
@@ -61,13 +62,22 @@ export function PasswordInput({
   const [isVisible, setIsVisible] = useState(false);
   const reactId = useId();
   const inputId = idProp ?? reactId;
-  const { fieldProps, helpTextProps, bottomText, showBottomText } =
-    useHelperText({
-      helperText,
-      errorMessage,
-      invalid,
-      externalAriaDescribedBy: ariaDescribedByProp,
-    });
+  const {
+    fieldProps,
+    helpTextProps,
+    bottomText,
+    showBottomText,
+    isReadOnly,
+    isDisabled,
+  } = useField({
+    helperText,
+    errorMessage,
+    invalid,
+    disabled,
+    readOnly,
+    required,
+    externalAriaDescribedBy: ariaDescribedByProp,
+  });
 
   const toggleVisibility = () => {
     setIsVisible((prev) => !prev);
@@ -81,7 +91,7 @@ export function PasswordInput({
             labelText={label}
             htmlFor={inputId}
             required={required}
-            disabled={disabled}
+            disabled={isDisabled}
           />
         </div>
       )}
@@ -89,27 +99,27 @@ export function PasswordInput({
         className={inputContainerStyles({
           state: invalid ? "error" : undefined,
         })}
+        data-readonly={isReadOnly ? "" : undefined}
       >
         <input
           id={inputId}
           ref={ref}
           type={isVisible ? "text" : "password"}
           placeholder={placeholder}
-          disabled={disabled}
+          disabled={isDisabled}
+          readOnly={isReadOnly}
           className={inputStyles()}
           value={value}
           defaultValue={defaultValue}
           onChange={onChange}
-          aria-invalid={invalid}
-          aria-required={required}
           {...rest}
           {...fieldProps}
         />
         <button
           type="button"
           onClick={toggleVisibility}
-          disabled={disabled}
-          className={iconButtonStyles({ disabled })}
+          disabled={isDisabled || isReadOnly}
+          className={iconButtonStyles({ disabled: isDisabled || isReadOnly })}
           aria-pressed={isVisible}
           aria-label={isVisible ? "패스워드 숨기기" : "패스워드 보기"}
         >
@@ -117,7 +127,7 @@ export function PasswordInput({
         </button>
       </div>
       {showBottomText && (
-        <HelperText {...helpTextProps} disabled={disabled}>
+        <HelperText {...helpTextProps} disabled={isDisabled}>
           {bottomText}
         </HelperText>
       )}
@@ -159,6 +169,12 @@ const inputContainerStyles = cva({
       borderTopWidth: "md",
       borderTopColor: "border.neutral.disabled",
       color: "fg.neutral.disabled",
+    },
+    "&[data-readonly]": {
+      cursor: "default",
+      "& input": { cursor: "default" },
+      "&:hover": { borderColor: "border.neutral" },
+      "&:active": { borderColor: "border.neutral" },
     },
   },
   variants: {

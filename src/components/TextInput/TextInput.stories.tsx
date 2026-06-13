@@ -100,18 +100,33 @@ export const Invalid: Story = {
 };
 
 /**
- * `disabled` prop을 true로 설정하면 입력이 비활성화됩니다.
- * 아이콘이 있을 경우, 아이콘도 비활성화 스타일이 적용됩니다.
+ * `disabled`와 `readOnly` 상태를 비교합니다.
+ * `disabled`는 입력이 비활성화되고 흐려지며 아이콘도 비활성화 스타일이 적용됩니다.
+ * `readOnly`는 값은 보이지만 편집할 수 없고, 흐려지지 않고 커서만 기본값으로 바뀝니다.
  */
 export const Disabled: Story = {
-  args: {
-    disabled: true,
-    defaultValue: "수정할 수 없습니다.",
-    leadingIcon: "star",
-    "aria-label": "수정할 수 없는 입력 필드",
-  },
+  render: (args) => (
+    <div className={vstack({ gap: "16", w: "320px" })}>
+      <TextInput
+        {...args}
+        disabled
+        defaultValue="수정할 수 없습니다"
+        leadingIcon="star"
+        label="비활성화"
+      />
+      <TextInput
+        {...args}
+        readOnly
+        defaultValue="읽기 전용 값"
+        label="읽기 전용"
+      />
+    </div>
+  ),
   argTypes: {
     disabled: {
+      control: false,
+    },
+    readOnly: {
       control: false,
     },
     placeholder: {

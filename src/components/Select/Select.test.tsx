@@ -1,5 +1,5 @@
 import { createRef, useState } from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import { Select } from "./Select";
@@ -590,6 +590,31 @@ describe("접근성 및 기타", () => {
     expect(help).toBeInTheDocument();
     const select = screen.getByRole("combobox");
     expect(select).toHaveAccessibleDescription("필수 항목입니다.");
+  });
+
+  test("readOnly이면 aria-readonly가 설정되고 값 변경이 차단되며 지우기 버튼이 없다", () => {
+    const handleChange = vi.fn();
+    render(
+      <Select
+        defaultValue="b"
+        readOnly
+        clearButtonName="지우기"
+        onChange={handleChange}
+        aria-label="과일"
+      >
+        <option value="a">사과</option>
+        <option value="b">바나나</option>
+      </Select>,
+    );
+    const select = screen.getByRole("combobox", { name: "과일" });
+    expect(select).toHaveAttribute("aria-readonly", "true");
+    expect(select).not.toBeDisabled();
+    expect(
+      screen.queryByRole("button", { name: "지우기" }),
+    ).not.toBeInTheDocument();
+    // 변경 이벤트가 발생해도 onChange가 전파되지 않는다 (handleChange early-return)
+    fireEvent.change(select, { target: { value: "a" } });
+    expect(handleChange).not.toHaveBeenCalled();
   });
 });
 

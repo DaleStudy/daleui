@@ -3,7 +3,7 @@ import { type ReactNode, createContext, useContext } from "react";
 import { css, cva } from "../../../styled-system/css";
 import { flex } from "../../../styled-system/patterns";
 import { HelperText } from "../shared/HelperText";
-import { useHelperText } from "../shared/useHelperText";
+import { useField } from "../shared/useField";
 import type { FieldProps } from "../shared/types";
 
 type RadioGroupTone = "brand" | "neutral";
@@ -11,7 +11,7 @@ type RadioGroupTone = "brand" | "neutral";
 const RadioGroupContext = createContext<
   | ({
       tone: RadioGroupTone;
-    } & Pick<FieldProps, "disabled" | "invalid" | "required">)
+    } & Pick<FieldProps, "disabled" | "invalid" | "required" | "readOnly">)
   | null
 >(null);
 
@@ -67,6 +67,7 @@ function RadioGroupRoot({
   value,
   onChange,
   disabled,
+  readOnly = false,
   orientation,
   tone = "brand",
   invalid = false,
@@ -75,11 +76,25 @@ function RadioGroupRoot({
   helperText,
   errorMessage,
 }: RadioGroupProps) {
-  const { fieldProps, helpTextProps, bottomText, showBottomText } =
-    useHelperText({ helperText, errorMessage, invalid });
+  const {
+    fieldProps,
+    helpTextProps,
+    bottomText,
+    showBottomText,
+    isReadOnly,
+    isDisabled,
+  } = useField({ helperText, errorMessage, invalid, disabled, readOnly });
 
   return (
-    <RadioGroupContext.Provider value={{ tone, disabled, invalid, required }}>
+    <RadioGroupContext.Provider
+      value={{
+        tone,
+        disabled: isDisabled,
+        invalid,
+        required,
+        readOnly: isReadOnly,
+      }}
+    >
       <ArkRadioGroup.Root
         name={name}
         defaultValue={defaultValue}
@@ -87,10 +102,11 @@ function RadioGroupRoot({
         onValueChange={(details) => {
           if (details.value) onChange?.(details.value);
         }}
-        disabled={disabled}
+        disabled={isDisabled}
+        readOnly={isReadOnly}
         orientation={orientation}
         className={radioGroupRootStyles}
-        {...fieldProps}
+        aria-describedby={fieldProps["aria-describedby"]}
       >
         <ArkRadioGroup.Label
           className={css({
@@ -103,7 +119,7 @@ function RadioGroupRoot({
             <span
               data-testid="radiogroup-required-indicator"
               className={css({
-                color: disabled ? "fg.neutral.disabled" : "fg.danger",
+                color: isDisabled ? "fg.neutral.disabled" : "fg.danger",
               })}
             >
               {" "}
@@ -123,7 +139,7 @@ function RadioGroupRoot({
         </ArkRadioGroup.Label>
         <div className={radioGroupStyles({ orientation })}>{children}</div>
         {showBottomText && (
-          <HelperText {...helpTextProps} disabled={disabled}>
+          <HelperText {...helpTextProps} disabled={isDisabled}>
             {bottomText}
           </HelperText>
         )}
@@ -185,9 +201,20 @@ export function RadioGroupItem({
     );
   }
 
-  const { tone, disabled: groupDisabled, invalid, required } = context;
+  const {
+    tone,
+    disabled: groupDisabled,
+    invalid,
+    required,
+    readOnly: groupReadOnly,
+  } = context;
   const isDisabled = disabled || groupDisabled;
   const showInvalid = !isDisabled && invalid;
+  const cursor = isDisabled
+    ? "not-allowed"
+    : groupReadOnly
+      ? "default"
+      : "pointer";
 
   return (
     <ArkRadioGroup.Item
@@ -198,7 +225,7 @@ export function RadioGroupItem({
         alignItems: "center",
         gap: "8",
         padding: "4",
-        cursor: isDisabled ? "not-allowed" : "pointer",
+        cursor,
       })}
     >
       <ArkRadioGroup.ItemControl className={radioWrapperStyles}>

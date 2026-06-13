@@ -55,6 +55,33 @@ describe("TextInput", () => {
     expect(handleChange).not.toHaveBeenCalled();
   });
 
+  test("readOnly가 true이면 input에 readonly 속성이 설정되고 값이 변경되지 않는다", async () => {
+    const user = userEvent.setup();
+    const handleChange = vi.fn();
+    render(
+      <TextInput
+        defaultValue="고정값"
+        readOnly
+        onChange={handleChange}
+        data-testid="ti"
+      />,
+    );
+    const input = screen.getByTestId("ti") as HTMLInputElement;
+    expect(input).toHaveAttribute("readonly");
+    await user.type(input, "추가");
+    expect(input.value).toBe("고정값");
+    expect(handleChange).not.toHaveBeenCalled();
+  });
+
+  test("disabled와 readOnly가 모두 true면 disabled가 우선한다", () => {
+    vi.spyOn(console, "warn").mockImplementation(() => {});
+    render(<TextInput disabled readOnly data-testid="ti" />);
+    const input = screen.getByTestId("ti");
+    expect(input).toBeDisabled();
+    expect(input).not.toHaveAttribute("readonly");
+    vi.restoreAllMocks();
+  });
+
   test("invalid prop이 없을 때 aria-invalid 속성이 올바르게 설정된다", () => {
     render(<TextInput />);
     const inputElement = screen.getByRole("textbox");
