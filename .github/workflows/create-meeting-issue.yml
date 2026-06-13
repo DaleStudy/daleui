@@ -40,7 +40,7 @@ jobs:
 
           if [ "$WEEK_IN_CYCLE" -eq 0 ]; then
             echo "type=mid" >> $GITHUB_OUTPUT
-            echo "title=Sprint ${SPRINT_NUMBER} 협업 세션" >> $GITHUB_OUTPUT
+            echo "title=Sprint ${SPRINT_NUMBER} 중간 회의" >> $GITHUB_OUTPUT
           else
             echo "type=end" >> $GITHUB_OUTPUT
             echo "title=Sprint ${SPRINT_NUMBER} 종료 회의" >> $GITHUB_OUTPUT
