@@ -11,7 +11,7 @@ test("tone=neutral일 때 올바른 클래스가 적용됨", () => {
   render(
     <Label tone="neutral" labelText="중립 색조 라벨" data-testid="label" />,
   );
-  expect(screen.getByTestId("label")).toHaveClass("c_fg.neutral.DEFAULT");
+  expect(screen.getByTestId("label")).toHaveClass("c_fg.neutral");
 });
 
 test("tone=danger일 때 올바른 클래스가 적용됨", () => {

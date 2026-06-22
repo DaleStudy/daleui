@@ -86,7 +86,7 @@ const styles = cva({
         color: "fg.danger",
       },
       neutral: {
-        color: "fg.neutral.DEFAULT",
+        color: "fg.neutral",
       },
     },
     disabled: {

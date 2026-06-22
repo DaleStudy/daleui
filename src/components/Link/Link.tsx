@@ -72,7 +72,8 @@ const styles = cva({
     justifyContent: "center",
     alignItems: "center",
     "&:focus": {
-      outline: "borderWidths.lg solid",
+      outlineWidth: "lg",
+      outlineStyle: "solid",
       borderRadius: "md",
       outlineColor: "border.brand.focus",
     },

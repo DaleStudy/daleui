@@ -185,7 +185,7 @@ const inputStyles = cva({
     minWidth: 0,
     border: "none",
     outline: "none",
-    color: "fg.neutral.default",
+    color: "fg.neutral",
     fontSize: "md",
     fontWeight: "medium",
     lineHeight: "tight",
