@@ -53,7 +53,7 @@ export function useField({
   const isDisabled = disabled;
   const isReadOnly = readOnly && !disabled;
 
-  if (import.meta.env.DEV && disabled && readOnly) {
+  if (process.env.NODE_ENV !== "production" && disabled && readOnly) {
     console.warn(
       "[daleui] `disabled`와 `readOnly`가 동시에 설정되었습니다. `disabled`가 우선 적용됩니다.",
     );

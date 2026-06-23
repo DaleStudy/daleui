@@ -108,7 +108,6 @@ function CheckboxGroupRoot({
   const selectedValues = isControlled ? values : internalValues;
 
   const handleValueChange = (itemValue: string, checked: boolean) => {
-    if (isReadOnly) return;
     const newValues = checked
       ? [...selectedValues, itemValue]
       : selectedValues.filter((v) => v !== itemValue);

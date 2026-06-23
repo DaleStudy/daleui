@@ -80,11 +80,7 @@ export const GroupDisabled: Story = {
         label="비활성화"
         disabled
         defaultValues={["banana"]}
-      >
-        <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
-        <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
-        <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
-      </CheckboxGroup>
+      />
 
       <CheckboxGroup
         {...args}
@@ -92,11 +88,7 @@ export const GroupDisabled: Story = {
         label="읽기 전용"
         readOnly
         defaultValues={["banana"]}
-      >
-        <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
-        <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
-        <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
-      </CheckboxGroup>
+      />
     </VStack>
   ),
   argTypes: {
