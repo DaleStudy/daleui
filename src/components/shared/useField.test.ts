@@ -14,9 +14,7 @@ describe("useField", () => {
   });
 
   test("helperText만 있으면 bottomText에 반영하고 helperTextId를 aria-describedby에 넣는다", () => {
-    const { result } = renderHook(() =>
-      useField({ helperText: "도움말" }),
-    );
+    const { result } = renderHook(() => useField({ helperText: "도움말" }));
 
     expect(result.current.bottomText).toBe("도움말");
     expect(result.current.showBottomText).toBe(true);

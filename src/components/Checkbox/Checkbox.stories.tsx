@@ -49,18 +49,8 @@ export const Disabled: StoryObj<typeof Checkbox> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
-        <Checkbox
-          {...args}
-          label="비활성화(체크됨)"
-          disabled
-          defaultChecked
-        />
-        <Checkbox
-          {...args}
-          label="읽기 전용(체크됨)"
-          readOnly
-          defaultChecked
-        />
+        <Checkbox {...args} label="비활성화(체크됨)" disabled defaultChecked />
+        <Checkbox {...args} label="읽기 전용(체크됨)" readOnly defaultChecked />
       </div>
     );
   },
