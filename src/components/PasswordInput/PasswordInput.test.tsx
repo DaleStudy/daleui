@@ -13,6 +13,7 @@ test("입력 필드를 패스워드 타입으로 렌더링한다", () => {
   const input = screen.getByPlaceholderText("패스워드를 입력해주세요.");
   expect(input).toBeInTheDocument();
   expect(input).toHaveAttribute("type", "password");
+  expect(input).toHaveClass("c_fg.neutral");
 });
 
 test("placeholder를 표시한다", () => {

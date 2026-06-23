@@ -72,7 +72,8 @@ const styles = cva({
     justifyContent: "center",
     alignItems: "center",
     "&:focus": {
-      outline: "borderWidths.lg solid",
+      outlineWidth: "lg",
+      outlineStyle: "solid",
       borderRadius: "md",
       outlineColor: "border.brand.focus",
     },
@@ -87,18 +88,12 @@ const styles = cva({
     tone: {
       brand: {
         color: "fg.brand",
-        "&:focus": {
-          color: "fg.brand.focus",
-        },
         "&:active, &:hover": {
           color: "fg.brand.hover",
         },
       },
       neutral: {
         color: "fg.neutral",
-        "&:focus": {
-          color: "fg.neutral.focus",
-        },
         "&:active, &:hover": {
           color: "fg.neutral.hover",
         },

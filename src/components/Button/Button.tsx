@@ -260,11 +260,9 @@ const styles = cva({
         borderWidth: "sm",
         color: "fg.danger",
         "&:hover": {
-          color: "fg.danger.hover",
           backgroundColor: "bg.danger.hover",
         },
         "&:active": {
-          color: "fg.danger.active",
           backgroundColor: "bg.danger.active",
         },
       },
@@ -330,11 +328,9 @@ const styles = cva({
         color: "fg.danger",
         "&:hover": {
           bg: "bg.danger.hover",
-          color: "fg.danger.hover",
         },
         "&:active": {
           bg: "bg.danger.active",
-          color: "fg.danger.active",
         },
       },
     },

@@ -13,6 +13,15 @@ describe("렌더링 테스트", () => {
 });
 
 describe("스타일 테스트", () => {
+  test("포커스 아웃라인에 유효한 너비와 스타일 클래스를 적용한다", () => {
+    render(<Link href="#">포커스 링크</Link>);
+
+    expect(screen.getByRole("link", { name: "포커스 링크" })).toHaveClass(
+      "[&:focus]:ring-w_lg",
+      "[&:focus]:outline-style_solid",
+    );
+  });
+
   test.each([
     ["중립 링크", "c_fg.neutral"],
     ["브랜드 링크", "c_fg.brand"],

@@ -16,6 +16,7 @@ describe("렌더링", () => {
 
     const select = screen.getByRole("combobox");
     expect(select).toBeInTheDocument();
+    expect(select).toHaveClass("textStyle_label.md");
     // native select는 placeholder를 지원하지 않아 getByText로 테스트
     expect(screen.getByText("라이브러리를 선택하세요")).toBeInTheDocument();
   });
