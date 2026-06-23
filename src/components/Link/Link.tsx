@@ -88,18 +88,12 @@ const styles = cva({
     tone: {
       brand: {
         color: "fg.brand",
-        "&:focus": {
-          color: "fg.brand.focus",
-        },
         "&:active, &:hover": {
           color: "fg.brand.hover",
         },
       },
       neutral: {
         color: "fg.neutral",
-        "&:focus": {
-          color: "fg.neutral.focus",
-        },
         "&:active, &:hover": {
           color: "fg.neutral.hover",
         },
