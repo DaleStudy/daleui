@@ -134,5 +134,5 @@ jobs:
             -H "Authorization: Bot ${DISCORD_MEETING_BOT_TOKEN}" \
             -H "Content-Type: application/json" \
             -d "{
-              \"content\": \"<@&${DISCORD_DALEUI_ROLE_ID}>\n\n📅 **${TITLE}** 일정이 등록되었습니다.\n🕗 금 8:30 PM EDT / 토 9:30 AM KST\n📋 회의록: ${ISSUE_URL}\n\n참석 여부를 이벤트에서 알려주세요 👉 ${EVENT_LINK}\"
+              \"content\": \"<@&${DISCORD_DALEUI_ROLE_ID}>\n\n📅 **${TITLE}** 일정이 등록되었습니다.\n\n🇨🇦 금 8:30 PM (EDT) · 🇰🇷 토 9:30 AM (KST)\n📋 [회의록](${ISSUE_URL})\n\n[이벤트](${EVENT_LINK})에서 **Interested** 눌러 참석 여부를 알려주세요!\n불참 시에는 이 메시지 쓰레드에 남겨주세요 🙏\"
             }"
