@@ -94,11 +94,7 @@ export const GroupDisabled: Story = {
         label="비활성화"
         disabled
         defaultValue="banana"
-      >
-        <RadioGroup.Item value="apple">사과</RadioGroup.Item>
-        <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
-        <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
-      </RadioGroup>
+      />
 
       <RadioGroup
         {...args}
@@ -106,11 +102,7 @@ export const GroupDisabled: Story = {
         label="읽기 전용"
         readOnly
         defaultValue="banana"
-      >
-        <RadioGroup.Item value="apple">사과</RadioGroup.Item>
-        <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
-        <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
-      </RadioGroup>
+      />
     </VStack>
   ),
   argTypes: {
