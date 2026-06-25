@@ -241,6 +241,23 @@ describe("사용자 동작", () => {
     await user.click(checkbox);
     expect(handleChange).toHaveBeenCalledWith(false);
   });
+
+  test("readOnly이면 토글이 차단되고 aria-readonly가 설정된다", async () => {
+    const user = userEvent.setup();
+    const handleChange = vi.fn();
+    render(<Checkbox label="동의" readOnly onChange={handleChange} />);
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).toHaveAttribute("aria-readonly", "true");
+    expect(checkbox).not.toBeChecked();
+    await user.click(screen.getByText("동의"));
+    expect(handleChange).not.toHaveBeenCalled();
+    expect(checkbox).not.toBeChecked();
+  });
+
+  test("readOnly여도 hidden input은 disabled가 아니다(값 제출 가능)", () => {
+    render(<Checkbox label="동의" readOnly defaultChecked />);
+    expect(screen.getByRole("checkbox")).not.toBeDisabled();
+  });
 });
 
 describe("상태 관리", () => {

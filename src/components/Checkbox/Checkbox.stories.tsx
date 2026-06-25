@@ -40,21 +40,28 @@ export const Tones: StoryObj<typeof Checkbox> = {
   },
 };
 
+/**
+ * `disabled`와 `readOnly` 상태를 비교합니다.
+ * `disabled`는 체크박스가 비활성화되고 흐려집니다.
+ * `readOnly`는 값은 보이지만 변경할 수 없고, 흐려지지 않고 커서만 기본값으로 바뀝니다.
+ */
 export const Disabled: StoryObj<typeof Checkbox> = {
   render: (args) => {
     return (
       <div className={vstack({ gap: "16" })}>
-        <Checkbox
-          {...args}
-          label="체크할 수 없습니다."
-          disabled
-          defaultChecked
-        />
+        <Checkbox {...args} label="비활성화(체크됨)" disabled defaultChecked />
+        <Checkbox {...args} label="읽기 전용(체크됨)" readOnly defaultChecked />
       </div>
     );
   },
   argTypes: {
     label: {
+      control: false,
+    },
+    disabled: {
+      control: false,
+    },
+    readOnly: {
       control: false,
     },
   },

@@ -36,6 +36,17 @@ test("아이콘 버튼 클릭 시 가시성을 토글한다", async () => {
   expect(input).toHaveAttribute("type", "password");
 });
 
+test("readOnly이면 input에 readonly가 설정되고 눈 토글 버튼이 비활성화된다", async () => {
+  const user = userEvent.setup();
+  render(<PasswordInput defaultValue="secret" readOnly />);
+  const input = screen.getByDisplayValue("secret");
+  expect(input).toHaveAttribute("readonly");
+  const toggle = screen.getByRole("button", { name: "패스워드 보기" });
+  expect(toggle).toBeDisabled();
+  await user.type(input, "x");
+  expect((input as HTMLInputElement).value).toBe("secret");
+});
+
 test("disabled일 때 토글되지 않는다", async () => {
   const user = userEvent.setup();
   render(<PasswordInput disabled />);

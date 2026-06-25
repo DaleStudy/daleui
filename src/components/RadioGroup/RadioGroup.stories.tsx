@@ -80,11 +80,47 @@ export const Orientation: Story = {
   },
 };
 
+/**
+ * `disabled`와 `readOnly` 상태를 비교합니다.
+ * `disabled`는 그룹 전체가 비활성화되고 흐려집니다.
+ * `readOnly`는 값은 보이지만 변경할 수 없고, 흐려지지 않고 커서만 기본값으로 바뀝니다.
+ */
 export const GroupDisabled: Story = {
-  args: {
-    disabled: true,
-    defaultValue: "banana",
-    label: "전체 그룹 비활성화",
+  render: (args) => (
+    <VStack gap="32">
+      <RadioGroup
+        {...args}
+        name="disabled-group"
+        label="비활성화"
+        disabled
+        defaultValue="banana"
+      />
+
+      <RadioGroup
+        {...args}
+        name="readonly-group"
+        label="읽기 전용"
+        readOnly
+        defaultValue="banana"
+      />
+    </VStack>
+  ),
+  argTypes: {
+    name: {
+      control: false,
+    },
+    label: {
+      control: false,
+    },
+    disabled: {
+      control: false,
+    },
+    readOnly: {
+      control: false,
+    },
+    defaultValue: {
+      control: false,
+    },
   },
 };
 

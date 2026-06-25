@@ -336,6 +336,23 @@ describe("CheckboxGroup", () => {
     expect(screen.getByText("에러 메시지")).toBeInTheDocument();
     expect(screen.getByText("Option 1")).not.toHaveClass("c_fg.danger");
   });
+
+  test("그룹 readOnly이면 모든 항목이 readOnly로 전파되어 토글이 차단된다", async () => {
+    const user = userEvent.setup();
+    const handleChange = vi.fn();
+    render(
+      <CheckboxGroup name="f" label="과일" readOnly onChange={handleChange}>
+        <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+        <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
+      </CheckboxGroup>,
+    );
+    const checkboxes = screen.getAllByRole("checkbox");
+    checkboxes.forEach((cb) =>
+      expect(cb).toHaveAttribute("aria-readonly", "true"),
+    );
+    await user.click(screen.getByText("사과"));
+    expect(handleChange).not.toHaveBeenCalled();
+  });
 });
 
 describe("CheckboxGroup.Item", () => {

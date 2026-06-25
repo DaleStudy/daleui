@@ -7,7 +7,7 @@ import React from "react";
 import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 import { HelperText } from "../shared/HelperText";
-import { useHelperText } from "../shared/useHelperText";
+import { useField } from "../shared/useField";
 import type { FieldProps } from "../shared/types";
 
 type CheckboxTone = Extract<Tone, "brand" | "neutral">;
@@ -43,12 +43,26 @@ export const Checkbox = ({
   invalid = false,
   tone = "brand",
   required = false,
+  readOnly = false,
   onChange,
   helperText,
   errorMessage,
 }: CheckboxProps) => {
-  const { fieldProps, helpTextProps, bottomText, showBottomText } =
-    useHelperText({ helperText, errorMessage, invalid });
+  const {
+    fieldProps,
+    helpTextProps,
+    bottomText,
+    showBottomText,
+    isReadOnly,
+    isDisabled,
+  } = useField({
+    helperText,
+    errorMessage,
+    invalid,
+    disabled,
+    readOnly,
+    required,
+  });
 
   const handleCheckedChange = (details: CheckboxCheckedChangeDetails) => {
     onChange?.(details.checked === true);
@@ -60,17 +74,18 @@ export const Checkbox = ({
         name={name}
         checked={checked}
         defaultChecked={defaultChecked}
-        disabled={disabled}
+        disabled={isDisabled}
+        readOnly={isReadOnly}
         invalid={invalid}
         required={required}
         onCheckedChange={handleCheckedChange}
-        className={`group ${rootStyles({ disabled })}`}
+        className={`group ${rootStyles({ disabled: isDisabled, readOnly: isReadOnly })}`}
       >
         <ArkCheckbox.Control
           className={controlStyles({
             tone,
-            disabled,
-            invalid: !disabled && invalid,
+            disabled: isDisabled,
+            invalid: !isDisabled && invalid,
           })}
         >
           <ArkCheckbox.Indicator className={indicatorStyles()}>
@@ -78,13 +93,13 @@ export const Checkbox = ({
           </ArkCheckbox.Indicator>
         </ArkCheckbox.Control>
         {label && (
-          <ArkCheckbox.Label className={labelStyles({ disabled })}>
+          <ArkCheckbox.Label className={labelStyles({ disabled: isDisabled })}>
             {label}
             {required && (
               <span
                 data-testid="checkbox-required-indicator"
                 className={css({
-                  color: disabled ? "fg.neutral.disabled" : "fg.danger",
+                  color: isDisabled ? "fg.neutral.disabled" : "fg.danger",
                 })}
               >
                 {" "}
@@ -95,13 +110,13 @@ export const Checkbox = ({
         )}
         <ArkCheckbox.HiddenInput
           data-test-tone={tone}
-          aria-required={required}
+          aria-readonly={isReadOnly || undefined}
           {...fieldProps}
           ref={ref}
         />
       </ArkCheckbox.Root>
       {showBottomText && (
-        <HelperText {...helpTextProps} disabled={disabled}>
+        <HelperText {...helpTextProps} disabled={isDisabled}>
           {bottomText}
         </HelperText>
       )}
@@ -121,6 +136,11 @@ const rootStyles = cva({
     disabled: {
       true: {
         cursor: "not-allowed",
+      },
+    },
+    readOnly: {
+      true: {
+        cursor: "default",
       },
     },
   },

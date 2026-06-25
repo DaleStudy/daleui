@@ -70,29 +70,22 @@ type Story = StoryObj<typeof Select>;
 export const Default: Story = {};
 
 /**
- * `disabled` prop을 `true`로 설정하면 선택이 비활성화됩니다.
+ * `disabled`와 `readOnly` 상태를 비교합니다.
+ * `disabled`는 선택이 비활성화되고 흐려집니다.
+ * `readOnly`는 값은 보이지만 변경할 수 없고, 흐려지지 않으며 포커스와 폼 제출은 가능합니다.
  */
 export const Disabled: Story = {
   render: (args) => (
     <VStack gap="16">
-      <Select {...args} defaultValue="kr" />
-      <Select {...args} placeholder="비활성화된 선택" />
-      <Select {...args} disabled={false} placeholder="일부 옵션을 disabled">
-        <option value="ko">대한민국</option>
-        <option value="ca">캐나다</option>
-        <option value="us" disabled>
-          미국
-        </option>
-        <option value="jp" disabled>
-          일본
-        </option>
-        <option value="cn">중국</option>
-        <option value="gb">영국</option>
-      </Select>
+      <Select {...args} disabled defaultValue="kr" label="비활성화" />
+      <Select {...args} readOnly defaultValue="us" label="읽기 전용" />
     </VStack>
   ),
   argTypes: {
     disabled: {
+      control: false,
+    },
+    readOnly: {
       control: false,
     },
   },

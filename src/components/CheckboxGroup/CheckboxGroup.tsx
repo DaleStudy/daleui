@@ -7,7 +7,7 @@ import {
 } from "react";
 import { css, cva } from "../../../styled-system/css";
 import { HelperText } from "../shared/HelperText";
-import { useHelperText } from "../shared/useHelperText";
+import { useField } from "../shared/useField";
 import type { Tone } from "../../tokens/colors";
 import type { FieldProps } from "../shared/types";
 import { Checkbox } from "../Checkbox/Checkbox";
@@ -20,7 +20,7 @@ const CheckboxGroupContext = createContext<
       name: string;
       selectedValues: string[];
       onValueChange: (value: string, checked: boolean) => void;
-    } & Pick<FieldProps, "disabled" | "invalid">)
+    } & Pick<FieldProps, "disabled" | "invalid" | "readOnly">)
   | null
 >(null);
 
@@ -88,11 +88,18 @@ function CheckboxGroupRoot({
   tone = "brand",
   invalid = false,
   required = false,
+  readOnly = false,
   helperText,
   errorMessage,
 }: CheckboxGroupProps) {
-  const { fieldProps, helpTextProps, bottomText, showBottomText } =
-    useHelperText({ helperText, errorMessage, invalid });
+  const {
+    fieldProps,
+    helpTextProps,
+    bottomText,
+    showBottomText,
+    isReadOnly,
+    isDisabled,
+  } = useField({ helperText, errorMessage, invalid, disabled, readOnly });
   const isControlled = values !== undefined;
   const [internalValues, setInternalValues] = useState<string[]>(
     defaultValues ?? [],
@@ -116,14 +123,19 @@ function CheckboxGroupRoot({
     <CheckboxGroupContext.Provider
       value={{
         tone,
-        disabled,
+        disabled: isDisabled,
         invalid,
+        readOnly: isReadOnly,
         name,
         selectedValues,
         onValueChange: handleValueChange,
       }}
     >
-      <div ref={ref} className={checkboxGroupRootStyles} {...fieldProps}>
+      <div
+        ref={ref}
+        className={checkboxGroupRootStyles}
+        aria-describedby={fieldProps["aria-describedby"]}
+      >
         <label
           className={css({
             textStyle: "label.md.strong",
@@ -135,7 +147,7 @@ function CheckboxGroupRoot({
             <>
               <span
                 className={css({
-                  color: disabled ? "fg.neutral.disabled" : "fg.danger",
+                  color: isDisabled ? "fg.neutral.disabled" : "fg.danger",
                   display: "inline",
                 })}
                 aria-hidden="true"
@@ -163,7 +175,7 @@ function CheckboxGroupRoot({
         </label>
         <div className={checkboxGroupStyles({ orientation })}>{children}</div>
         {showBottomText && (
-          <HelperText {...helpTextProps} disabled={disabled}>
+          <HelperText {...helpTextProps} disabled={isDisabled}>
             {bottomText}
           </HelperText>
         )}
@@ -225,6 +237,7 @@ export function CheckboxGroupItem({
     tone,
     disabled: groupDisabled,
     invalid: groupInvalid,
+    readOnly: groupReadOnly,
     name,
     selectedValues,
     onValueChange,
@@ -243,6 +256,7 @@ export function CheckboxGroupItem({
       name={name}
       checked={isChecked}
       disabled={isDisabled}
+      readOnly={groupReadOnly}
       invalid={!isDisabled && isInvalid}
       tone={tone}
       onChange={handleChange}

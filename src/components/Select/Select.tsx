@@ -9,7 +9,7 @@ import {
 import { css, cva } from "../../../styled-system/css";
 import type { FieldProps } from "../shared/types";
 import { HelperText } from "../shared/HelperText";
-import { useHelperText } from "../shared/useHelperText";
+import { useField } from "../shared/useField";
 import { Icon } from "../Icon/Icon";
 import { Label } from "../Label/Label";
 
@@ -49,6 +49,7 @@ export function Select({
   value,
   defaultValue,
   disabled,
+  readOnly = false,
   required = false,
   invalid = false,
   clearButtonName,
@@ -65,13 +66,22 @@ export function Select({
 }: SelectProps) {
   const reactId = useId();
   const selectId = idProp ?? reactId;
-  const { fieldProps, helpTextProps, bottomText, showBottomText } =
-    useHelperText({
-      helperText,
-      errorMessage,
-      invalid,
-      externalAriaDescribedBy: ariaDescribedByProp,
-    });
+  const {
+    fieldProps,
+    helpTextProps,
+    bottomText,
+    showBottomText,
+    isReadOnly,
+    isDisabled,
+  } = useField({
+    helperText,
+    errorMessage,
+    invalid,
+    disabled,
+    readOnly,
+    required,
+    externalAriaDescribedBy: ariaDescribedByProp,
+  });
 
   const selectRef = useRef<HTMLSelectElement>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -133,6 +143,7 @@ export function Select({
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (isReadOnly) return;
     if (onChange) onChange(e);
     setInternalHasValue(!!e.target.value);
     checkOverflow();
@@ -140,7 +151,7 @@ export function Select({
 
   const handleClear = () => {
     const selectElement = selectRef.current;
-    if (disabled || !selectElement) return;
+    if (isDisabled || !selectElement) return;
 
     selectElement.value = "";
     setInternalHasValue(false);
@@ -158,7 +169,12 @@ export function Select({
     });
   };
 
-  const showClearButton = !!(clearButtonName && !disabled && hasValue);
+  const showClearButton = !!(
+    clearButtonName &&
+    !isDisabled &&
+    !isReadOnly &&
+    hasValue
+  );
   const defaultValueStr = defaultValue || "";
 
   return (
@@ -169,7 +185,7 @@ export function Select({
             labelText={label}
             htmlFor={selectId}
             required={required}
-            disabled={disabled}
+            disabled={isDisabled}
           />
         </div>
       )}
@@ -183,11 +199,20 @@ export function Select({
           value={value}
           defaultValue={isUncontrolled ? defaultValueStr : undefined}
           onChange={handleChange}
-          disabled={disabled}
+          disabled={isDisabled}
           required={required}
-          aria-invalid={invalid}
-          aria-required={required}
-          className={selectStyles({ invalid, showClearButton })}
+          aria-readonly={isReadOnly || undefined}
+          onMouseDown={(e) => {
+            if (isReadOnly) e.preventDefault();
+          }}
+          onKeyDown={(e) => {
+            if (isReadOnly && e.key !== "Tab") e.preventDefault();
+          }}
+          className={selectStyles({
+            invalid,
+            showClearButton,
+            readOnly: isReadOnly,
+          })}
           {...rest}
           {...fieldProps}
         >
@@ -214,7 +239,7 @@ export function Select({
         </div>
       </div>
       {showBottomText && (
-        <HelperText {...helpTextProps} disabled={disabled}>
+        <HelperText {...helpTextProps} disabled={isDisabled}>
           {bottomText}
         </HelperText>
       )}
@@ -308,9 +333,18 @@ const selectStyles = cva({
         paddingRight: "2.375rem", // 38px
       },
     },
+    readOnly: {
+      true: {
+        cursor: "default",
+        "&:hover:not(:disabled)": { borderColor: "border.neutral" },
+        "&:active:not(:disabled)": { borderColor: "border.neutral" },
+      },
+      false: {},
+    },
   },
   defaultVariants: {
     invalid: false,
+    readOnly: false,
   },
 });
 

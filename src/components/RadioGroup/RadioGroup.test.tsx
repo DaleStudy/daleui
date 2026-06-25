@@ -488,3 +488,20 @@ describe("RadioGroup helperText", () => {
     expect(group).toHaveAccessibleDescription("필수 값을 선택해주세요.");
   });
 });
+
+describe("RadioGroup readOnly", () => {
+  test("readOnly이면 그룹 루트에 aria-readonly가 설정되고 선택이 차단된다", async () => {
+    const user = userEvent.setup();
+    const handleChange = vi.fn();
+    render(
+      <RadioGroup name="f" label="과일" readOnly onChange={handleChange}>
+        <RadioGroup.Item value="a">사과</RadioGroup.Item>
+        <RadioGroup.Item value="b">바나나</RadioGroup.Item>
+      </RadioGroup>,
+    );
+    const group = screen.getByRole("radiogroup");
+    expect(group).toHaveAttribute("aria-readonly", "true");
+    await user.click(screen.getByText("사과"));
+    expect(handleChange).not.toHaveBeenCalled();
+  });
+});

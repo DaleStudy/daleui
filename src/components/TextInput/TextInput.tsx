@@ -2,7 +2,7 @@ import { type ComponentPropsWithoutRef, type Ref, useId } from "react";
 import { css, cva, cx } from "../../../styled-system/css";
 import type { FieldProps } from "../shared/types";
 import { HelperText } from "../shared/HelperText";
-import { useHelperText } from "../shared/useHelperText";
+import { useField } from "../shared/useField";
 import { Icon, type IconProps } from "../Icon/Icon";
 import { Label } from "../Label/Label";
 
@@ -10,8 +10,13 @@ export interface TextInputProps
   extends
     Omit<
       ComponentPropsWithoutRef<"input">,
-      "size" | "value" | "defaultValue" | "onChange" | "disabled" | "required"
-      // TODO: readOnly도 Omit 대상 (#935)
+      | "size"
+      | "value"
+      | "defaultValue"
+      | "onChange"
+      | "disabled"
+      | "required"
+      | "readOnly"
     >,
     FieldProps {
   /** 선행 아이콘 이름 (Icon.name) */
@@ -38,6 +43,7 @@ export function TextInput({
   invalid = false,
   required = false,
   disabled = false,
+  readOnly = false,
   className,
   leadingIcon,
   trailingIcon,
@@ -54,18 +60,27 @@ export function TextInput({
 }: TextInputProps) {
   const reactId = useId();
   const inputId = idProp ?? reactId;
-  const { fieldProps, helpTextProps, bottomText, showBottomText } =
-    useHelperText({
-      helperText,
-      errorMessage,
-      invalid,
-      externalAriaDescribedBy: ariaDescribedByProp,
-    });
+  const {
+    fieldProps,
+    helpTextProps,
+    bottomText,
+    showBottomText,
+    isReadOnly,
+    isDisabled,
+  } = useField({
+    helperText,
+    errorMessage,
+    invalid,
+    disabled,
+    readOnly,
+    required,
+    externalAriaDescribedBy: ariaDescribedByProp,
+  });
 
   const renderIcon = (name: IconProps["name"]) => {
     let tone: IconProps["tone"];
 
-    if (disabled) {
+    if (isDisabled) {
       tone = "neutral";
     } else if (invalid) {
       tone = "danger";
@@ -84,13 +99,14 @@ export function TextInput({
             labelText={label}
             htmlFor={inputId}
             required={required}
-            disabled={disabled}
+            disabled={isDisabled}
           />
         </div>
       )}
       <div
         className={cx(fieldStyles({ invalid }), className)}
-        data-disabled={disabled ? "" : undefined}
+        data-disabled={isDisabled ? "" : undefined}
+        data-readonly={isReadOnly ? "" : undefined}
       >
         {leadingIcon && renderIcon(leadingIcon)}
         <input
@@ -100,16 +116,15 @@ export function TextInput({
           value={value}
           defaultValue={defaultValue}
           onChange={onChange}
-          disabled={disabled}
-          aria-invalid={invalid}
-          aria-required={required}
+          disabled={isDisabled}
+          readOnly={isReadOnly}
           {...rest}
           {...fieldProps}
         />
         {trailingIcon && renderIcon(trailingIcon)}
       </div>
       {showBottomText && (
-        <HelperText {...helpTextProps} disabled={disabled}>
+        <HelperText {...helpTextProps} disabled={isDisabled}>
           {bottomText}
         </HelperText>
       )}
@@ -145,6 +160,13 @@ const fieldStyles = cva({
       cursor: "not-allowed",
       backgroundColor: "bg.neutral.disabled",
       borderColor: "border.neutral.disabled",
+    },
+
+    "&[data-readonly]": {
+      cursor: "default",
+      "& input": { cursor: "default" },
+      "&:hover": { borderColor: "border.neutral" },
+      "&:active": { borderColor: "border.neutral" },
     },
   },
   variants: {
