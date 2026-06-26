@@ -25,6 +25,10 @@ describe("isSafeHref", () => {
   ])("위험한 href를 차단한다: %s", (href) => {
     expect(isSafeHref(href)).toBe(false);
   });
+
+  test("파싱할 수 없는 href는 안전하지 않은 것으로 간주한다", () => {
+    expect(isSafeHref("https://exa mple.com")).toBe(false);
+  });
 });
 
 describe("sanitizeHref", () => {
@@ -41,6 +45,20 @@ describe("sanitizeHref", () => {
     );
 
     warn.mockRestore();
+  });
+
+  test("production 모드에서는 경고 없이 #로 치환한다", () => {
+    const original = process.env.NODE_ENV;
+    process.env.NODE_ENV = "production";
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+    try {
+      expect(sanitizeHref("javascript:alert(1)")).toBe("#");
+      expect(warn).not.toHaveBeenCalled();
+    } finally {
+      process.env.NODE_ENV = original;
+      warn.mockRestore();
+    }
   });
 });
 
