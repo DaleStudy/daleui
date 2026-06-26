@@ -8,6 +8,7 @@ import type {
 import { css, cva } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 import { Icon } from "../Icon/Icon";
+import { mergeRel, sanitizeHref } from "../shared/anchorSafety";
 
 type BaseTagProps = {
   /** 태그 내용 */
@@ -39,6 +40,8 @@ export type TagProps = TagAsLink | TagAsSpan;
  * 콘텐츠의 속성, 카테고리, 상태(성공, 경고 등)를 키워드 형태로 식별하고 분류하여 시각적으로 강조하는 컴포넌트이다. 필요에 따라 링크 이동이나 삭제와 같은 상호작용 기능을 제공합니다.
  *
  * - `href`를 전달하면 자동으로 `<a>` 태그로 렌더링됩니다.
+ * - `target="_blank"`인 경우 reverse tabnabbing 방지를 위해 `rel`에 `noopener noreferrer`가 항상 병합됩니다.
+ * - `javascript:`, `data:` 등 안전하지 않은 `href`는 자동으로 차단되어 `#`로 대체됩니다.
  */
 export function Tag({
   ref,
@@ -61,12 +64,14 @@ export function Tag({
 
     const target = propTarget;
     const rel =
-      target === "_blank" ? (propRel ?? "noopener noreferrer") : propRel;
+      target === "_blank"
+        ? mergeRel(propRel, ["noopener", "noreferrer"])
+        : propRel;
 
     return (
       <span ref={ref} className={styles({ tone, link: true })}>
         <a
-          href={href}
+          href={sanitizeHref(href)}
           target={target}
           rel={rel}
           className={linkOverlayStyles}
