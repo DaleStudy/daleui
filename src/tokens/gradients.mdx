@@ -1,0 +1,64 @@
+import { colors } from "./colors";
+
+# Gradients
+
+달레 UI의 브랜드 그라데이션입니다. Panda CSS에는 그라데이션 토큰 카테고리가 없으므로,
+그라데이션은 `globalCss`의 `:root`에 정의된 테마 가능한 CSS 커스텀 속성으로 노출됩니다.
+어떤 컴포넌트에서든 `var(--gradient-brand)`로 재사용할 수 있습니다.
+
+## `--gradient-brand`
+
+청록에서 보라로 흐르는 풀컬러 달레 브랜드 그라데이션입니다. 브랜드 마크(`</>` 로고)와 동일한
+청록·보라 브랜드 색을 사용합니다(중간에 파랑이 자연스럽게 지나갑니다). 버튼·헤딩 등 어디서든
+재사용할 수 있는 시스템 토큰입니다.
+
+`Skeleton`의 브랜드 플레이버(`dalepulse`/`dalewave`)는 이 풀컬러 그라데이션을 그대로 쓰지 않고,
+같은 청록·보라 색을 **옅게 씻어낸 톤**(`bg.skeleton.brand` / `bg.skeleton.brandHighlight`, 테마 인지)으로
+사용합니다. 스켈레톤은 낮은 대비의 플레이스홀더여야 하기 때문입니다.
+
+<div
+  style={{
+    background: "var(--gradient-brand)",
+    width: "100%",
+    height: "120px",
+    borderRadius: "8px",
+  }}
+/>
+
+| 항목   | 값                                                            |
+| ------ | ------------------------------------------------------------- |
+| 변수   | `--gradient-brand`                                            |
+| 정의   | `linear-gradient(135deg, {colors.teal.9}, {colors.violet.9})` |
+| 시작색 | `colors.teal.9` (`{colors.teal[9].value}`)                    |
+| 끝색   | `colors.violet.9` (`{colors.violet[9].value}`)                |
+| 각도   | `135deg`                                                      |
+
+### 사용법
+
+```css
+.my-element {
+  background: var(--gradient-brand);
+}
+```
+
+```tsx
+import { Skeleton } from "daleui";
+
+// 달레 브랜드(청록·보라) 플레이버는 animation 이름만으로 선택됩니다.
+<Skeleton variant="rounded" animation="dalepulse" width={280} height={48} />; // 그라데이션 일렁임
+<Skeleton variant="rounded" animation="dalewave" width={280} height={48} />; // 보라 바탕 위 청록 웨이브
+```
+
+### 테마 안정성
+
+브랜드 마크(`</>` 로고)는 하나의 정적 자산으로 라이트/다크에서 동일합니다. 이 그라데이션도 같은
+브랜드 폴인 청록 `teal.9`(`{colors.teal[9].value}`)와 보라 `violet.9`(`{colors.violet[9].value}`)를
+고정값으로 사용하므로 테마와 무관하게 동일하며 별도의 `_dark` 재정의가 필요하지 않습니다.
+(`teal.9`는 다크 모드 단계 `darkTeal.9`와 값이 같습니다.)
+
+### 모션 안내
+
+그라데이션 자체는 정적인 채움이며, 움직임은 `Skeleton`의 브랜드 플레이버가 부여합니다.
+`dalepulse`는 옅은 브랜드 그라데이션이 제자리에서 일렁이고, `dalewave`는 옅은 보라 바탕 위로
+옅은 청록 웨이브가 흐릅니다(둘 다 풀컬러 `--gradient-brand`가 아니라 씻어낸 톤을 씁니다).
+두 애니메이션 모두 `prefers-reduced-motion: reduce` 환경에서 자동으로 멈추고 정적 채움으로 남습니다.

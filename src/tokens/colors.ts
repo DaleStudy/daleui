@@ -70,6 +70,24 @@ export const semanticColors: SemanticTokens["colors"] = {
       value: { base: "{colors.amber.1}", _dark: "{colors.darkAmber.1}" },
     },
     info: { value: { base: "{colors.blue.2}", _dark: "{colors.darkBlue.3}" } },
+    skeleton: {
+      // 스켈레톤 플레이스홀더의 기본 채움색
+      DEFAULT: {
+        value: { base: "{colors.slate.3}", _dark: "{colors.darkSage.4}" },
+      },
+      // wave 애니메이션이 훑고 지나가는 밝은 강조색 (두 테마 모두 기본색보다 밝음)
+      highlight: {
+        value: { base: "{colors.slate.1}", _dark: "{colors.darkSage.6}" },
+      },
+      // 브랜드 플레이버(dale*)의 옅게 씻어낸 보라 바탕. 회색 스켈레톤과 같은 무게감을 유지합니다.
+      brand: {
+        value: { base: "{colors.violet.4}", _dark: "{colors.darkViolet.4}" },
+      },
+      // 브랜드 플레이버의 옅게 씻어낸 청록 강조색 (dalewave 광택 / dalepulse 그라데이션의 청록 끝)
+      brandHighlight: {
+        value: { base: "{colors.teal.3}", _dark: "{colors.darkTeal.6}" },
+      },
+    },
   },
   border: {
     brand: {
