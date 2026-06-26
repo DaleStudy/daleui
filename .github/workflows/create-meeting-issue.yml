@@ -65,7 +65,7 @@ jobs:
 
       - name: Create GitHub issue
         if: steps.meeting-info.outputs.type != 'skip'
-        id: create-issue  # 다음 스텝에서 issue_url 참조하기 위해 id 부여
+        id: create-issue # 다음 스텝에서 issue_url 참조하기 위해 id 부여
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TITLE: ${{ steps.meeting-info.outputs.title }}
@@ -79,7 +79,7 @@ jobs:
 
       - name: Create Discord scheduled event
         if: steps.meeting-info.outputs.type != 'skip'
-        id: create-event  # 다음 스텝에서 event_id 참조하기 위해 id 부여
+        id: create-event # 다음 스텝에서 event_id 참조하기 위해 id 부여
         env:
           DISCORD_MEETING_BOT_TOKEN: ${{ secrets.DISCORD_MEETING_BOT_TOKEN }}
           DISCORD_SERVER_ID: ${{ vars.DISCORD_SERVER_ID }}
