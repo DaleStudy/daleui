@@ -3,6 +3,9 @@ name: Integration 🔀
 on:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   format:
     runs-on: ubuntu-latest
