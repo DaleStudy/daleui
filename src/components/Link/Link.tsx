@@ -1,6 +1,7 @@
 import { type AnchorHTMLAttributes, type Ref } from "react";
 import { css, cva } from "../../../styled-system/css";
 import { textStyles } from "../../tokens/typography";
+import { mergeRel, sanitizeHref } from "../shared/anchorSafety";
 
 type LinkSize = "sm" | "md" | "lg";
 type LinkTone = "neutral" | "brand";
@@ -30,7 +31,8 @@ export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
  *
  * ### 접근성(Accessibility) 안내
  * - 이 컴포넌트는 `<a>` 태그를 사용하여 시맨틱하게 구현되어 있습니다.
- * - `external`을 true로 설정하면 `target="_blank"`와 `rel="noopener noreferrer"`가 자동으로 추가됩니다. 직접 `target`, `rel`을 지정하면 override됩니다.
+ * - `external`을 true로 설정하면 `target="_blank"`가 적용됩니다. `target`이 `"_blank"`인 경우 reverse tabnabbing 방지를 위해 직접 지정한 `rel` 값과 무관하게 `noopener noreferrer`가 항상 병합되어 적용됩니다.
+ * - `javascript:`, `data:` 등 안전하지 않은 URL scheme의 `href`는 자동으로 차단되어 `#`로 대체됩니다.
  * - 키보드 포커스 시 명확한 아웃라인이 표시됩니다.
  * - 텍스트가 없는 이미지나 아이콘만 사용하는 경우, 반드시 `aria-label` 속성을 추가하여 대체 텍스트를 제공하는 것을 권장합니다.
  * - `external`이 true일 때, 외부 링크 아이콘(`externalLink`)을 함께 제공하지 않으면 시각적 안내 부족으로 접근성 문제가 발생할 수 있습니다.
@@ -43,10 +45,15 @@ export function Link({
   size = "md",
   underline = true,
   external = false,
+  target: targetProp,
+  rel: relProp,
   ...props
 }: LinkProps) {
-  const target = external ? "_blank" : undefined;
-  const rel = external ? "noopener noreferrer" : undefined;
+  const target = targetProp ?? (external ? "_blank" : undefined);
+  const rel =
+    target === "_blank"
+      ? mergeRel(relProp, ["noopener", "noreferrer"])
+      : relProp;
 
   return (
     <a
@@ -55,7 +62,7 @@ export function Link({
         styles.raw({ tone, underline, size }),
         textStyles.label[size].DEFAULT.value,
       )}
-      href={href}
+      href={sanitizeHref(href)}
       target={target}
       rel={rel}
       {...props}

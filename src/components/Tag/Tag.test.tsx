@@ -49,6 +49,33 @@ test("link 태그에 href 속성을 올바르게 적용한다", () => {
   expect(linkTag).toHaveAttribute("rel", "noopener noreferrer");
 });
 
+test("target=_blank에 rel='opener'를 주입해도 noopener noreferrer가 강제된다", () => {
+  render(
+    <Tag href="https://example.com" target="_blank" rel="opener">
+      보안 우회 시도
+    </Tag>,
+  );
+
+  const rel =
+    screen.getByRole("link", { name: "보안 우회 시도" }).getAttribute("rel") ??
+    "";
+  expect(rel).toContain("noopener");
+  expect(rel).toContain("noreferrer");
+});
+
+test("안전하지 않은 href는 #로 치환된다", () => {
+  const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+  render(<Tag href="javascript:alert(document.domain)">위험 태그</Tag>);
+
+  expect(screen.getByRole("link", { name: "위험 태그" })).toHaveAttribute(
+    "href",
+    "#",
+  );
+
+  warn.mockRestore();
+});
+
 test("href + onRemove일 때 button이 a 태그 안에 중첩되지 않는다", () => {
   render(
     <Tag href="https://example.com" onRemove={() => {}}>

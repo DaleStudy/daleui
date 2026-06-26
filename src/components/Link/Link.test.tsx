@@ -149,6 +149,34 @@ describe("동작 테스트", () => {
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
   });
 
+  test("external 링크에 rel='opener'를 주입해도 noopener noreferrer가 강제된다", () => {
+    render(
+      <Link href="#" external rel="opener">
+        보안 우회 시도
+      </Link>,
+    );
+
+    const rel =
+      screen
+        .getByRole("link", { name: "보안 우회 시도" })
+        .getAttribute("rel") ?? "";
+    expect(rel).toContain("noopener");
+    expect(rel).toContain("noreferrer");
+  });
+
+  test("안전하지 않은 href는 #로 치환된다", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+    render(<Link href="javascript:alert(document.domain)">위험 링크</Link>);
+
+    expect(screen.getByRole("link", { name: "위험 링크" })).toHaveAttribute(
+      "href",
+      "#",
+    );
+
+    warn.mockRestore();
+  });
+
   test("aria-label 속성을 올바르게 전달한다", () => {
     render(
       <Link href="#" aria-label="링크">
