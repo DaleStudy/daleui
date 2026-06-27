@@ -65,10 +65,78 @@ jobs:
 
       - name: Create GitHub issue
         if: steps.meeting-info.outputs.type != 'skip'
+        id: create-issue # 다음 스텝에서 issue_url 참조하기 위해 id 부여
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TITLE: ${{ steps.meeting-info.outputs.title }}
         run: |
-          gh issue create \
+          # gh issue create는 생성된 이슈 URL을 stdout으로 출력함
+          ISSUE_URL=$(gh issue create \
             --title "$TITLE" \
-            --body-file /tmp/issue-body.md
+            --body-file /tmp/issue-body.md)
+          # GITHUB_OUTPUT에 저장해 다음 스텝에서 ${{ steps.create-issue.outputs.issue_url }}로 사용
+          echo "issue_url=$ISSUE_URL" >> $GITHUB_OUTPUT
+
+      - name: Create Discord scheduled event
+        if: steps.meeting-info.outputs.type != 'skip'
+        id: create-event # 다음 스텝에서 event_id 참조하기 위해 id 부여
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          DISCORD_SERVER_ID: ${{ vars.DISCORD_SERVER_ID }}
+          TITLE: ${{ steps.meeting-info.outputs.title }}
+          ISSUE_URL: ${{ steps.create-issue.outputs.issue_url }}
+        run: |
+          # 워크플로우는 현재 회의 종료 시점(토 01:30 UTC)에 실행됨
+          # Discord 이벤트는 7일 후 다음 회의(토 00:30 UTC = 금 8:30 PM EDT / 토 9:30 AM KST)로 설정
+          NEXT_SAT=$(date -d "+7 days" +%Y-%m-%d)
+          START_TIME="${NEXT_SAT}T00:30:00+00:00"  # 금 8:30 PM EDT / 토 9:30 AM KST
+          END_TIME="${NEXT_SAT}T01:30:00+00:00"    # 금 9:30 PM EDT / 토 10:30 AM KST (1시간 회의)
+
+          # Discord API: Scheduled Event 생성
+          # entity_type 3 = EXTERNAL (외부 링크 기반, RSVP 지원, 타임존별 시간 자동 표시)
+          # privacy_level 2 = GUILD_ONLY (서버 멤버만 볼 수 있음)
+          # entity_metadata.location = 회의록 이슈 URL (이벤트 상세에서 클릭 가능)
+          START_UNIX=$(date -d "${NEXT_SAT}T00:30:00+00:00" +%s)
+
+          RESPONSE=$(curl -sf --show-error -X POST \
+            "https://discord.com/api/v10/guilds/${DISCORD_SERVER_ID}/scheduled-events" \
+            -H "Authorization: Bot ${DISCORD_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"name\": \"${TITLE}\",
+              \"entity_type\": 3,
+              \"privacy_level\": 2,
+              \"scheduled_start_time\": \"${START_TIME}\",
+              \"scheduled_end_time\": \"${END_TIME}\",
+              \"entity_metadata\": {
+                \"location\": \"${ISSUE_URL}\"
+              }
+            }")
+
+          # 생성된 이벤트 ID 추출 → 채널 공지 스텝에서 이벤트 링크 생성에 사용
+          EVENT_ID=$(echo "$RESPONSE" | python3 -c "import json,sys; print(json.load(sys.stdin)['id'])")
+          echo "event_id=$EVENT_ID" >> $GITHUB_OUTPUT
+          echo "start_unix=$START_UNIX" >> $GITHUB_OUTPUT
+
+      - name: Send channel announcement
+        if: steps.meeting-info.outputs.type != 'skip'
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          DISCORD_SERVER_ID: ${{ vars.DISCORD_SERVER_ID }}
+          DISCORD_DALEUI_CHAT_CHANNEL_ID: ${{ vars.DISCORD_DALEUI_CHAT_CHANNEL_ID }}
+          DISCORD_DALEUI_ROLE_ID: ${{ vars.DISCORD_DALEUI_ROLE_ID }}
+          TITLE: ${{ steps.meeting-info.outputs.title }}
+          ISSUE_URL: ${{ steps.create-issue.outputs.issue_url }}
+          EVENT_ID: ${{ steps.create-event.outputs.event_id }}
+          START_UNIX: ${{ steps.create-event.outputs.start_unix }}
+        run: |
+          EVENT_LINK="https://discord.com/events/${DISCORD_SERVER_ID}/${EVENT_ID}"
+
+          # 디자인시스템-채팅 채널에 회의 일정 공지 및 RSVP 유도 메시지 전송
+          curl -sf --show-error -X POST \
+            "https://discord.com/api/v10/channels/${DISCORD_DALEUI_CHAT_CHANNEL_ID}/messages" \
+            -H "Authorization: Bot ${DISCORD_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"content\": \"<@&${DISCORD_DALEUI_ROLE_ID}>\n\n📅 **${TITLE}** 일정이 등록되었습니다.\n\n<t:${START_UNIX}:F> (<t:${START_UNIX}:R>)\n📋 [회의록](${ISSUE_URL})\n\n[이벤트](${EVENT_LINK})에서 **Interested** 눌러 참석 여부를 알려주세요!\n불참 시에는 이 메시지 쓰레드에 남겨주세요 🙏\"
+            }"
