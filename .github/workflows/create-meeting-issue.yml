@@ -96,7 +96,9 @@ jobs:
           # entity_type 3 = EXTERNAL (외부 링크 기반, RSVP 지원, 타임존별 시간 자동 표시)
           # privacy_level 2 = GUILD_ONLY (서버 멤버만 볼 수 있음)
           # entity_metadata.location = 회의록 이슈 URL (이벤트 상세에서 클릭 가능)
-          RESPONSE=$(curl -sf -X POST \
+          START_UNIX=$(date -d "${NEXT_SAT}T00:30:00+00:00" +%s)
+
+          RESPONSE=$(curl -sf --show-error -X POST \
             "https://discord.com/api/v10/guilds/${DISCORD_SERVER_ID}/scheduled-events" \
             -H "Authorization: Bot ${DISCORD_DALEUI_MEETING_BOT_TOKEN}" \
             -H "Content-Type: application/json" \
@@ -114,6 +116,7 @@ jobs:
           # 생성된 이벤트 ID 추출 → 채널 공지 스텝에서 이벤트 링크 생성에 사용
           EVENT_ID=$(echo "$RESPONSE" | python3 -c "import json,sys; print(json.load(sys.stdin)['id'])")
           echo "event_id=$EVENT_ID" >> $GITHUB_OUTPUT
+          echo "start_unix=$START_UNIX" >> $GITHUB_OUTPUT
 
       - name: Send channel announcement
         if: steps.meeting-info.outputs.type != 'skip'
@@ -125,14 +128,15 @@ jobs:
           TITLE: ${{ steps.meeting-info.outputs.title }}
           ISSUE_URL: ${{ steps.create-issue.outputs.issue_url }}
           EVENT_ID: ${{ steps.create-event.outputs.event_id }}
+          START_UNIX: ${{ steps.create-event.outputs.start_unix }}
         run: |
           EVENT_LINK="https://discord.com/events/${DISCORD_SERVER_ID}/${EVENT_ID}"
 
           # 디자인시스템-채팅 채널에 회의 일정 공지 및 RSVP 유도 메시지 전송
-          curl -sf -X POST \
+          curl -sf --show-error -X POST \
             "https://discord.com/api/v10/channels/${DISCORD_DALEUI_CHAT_CHANNEL_ID}/messages" \
             -H "Authorization: Bot ${DISCORD_DALEUI_MEETING_BOT_TOKEN}" \
             -H "Content-Type: application/json" \
             -d "{
-              \"content\": \"<@&${DISCORD_DALEUI_ROLE_ID}>\n\n📅 **${TITLE}** 일정이 등록되었습니다.\n\n🇨🇦 금 8:30 PM (EDT) · 🇰🇷 토 9:30 AM (KST)\n📋 [회의록](${ISSUE_URL})\n\n[이벤트](${EVENT_LINK})에서 **Interested** 눌러 참석 여부를 알려주세요!\n불참 시에는 이 메시지 쓰레드에 남겨주세요 🙏\"
+              \"content\": \"<@&${DISCORD_DALEUI_ROLE_ID}>\n\n📅 **${TITLE}** 일정이 등록되었습니다.\n\n<t:${START_UNIX}:F> (<t:${START_UNIX}:R>)\n📋 [회의록](${ISSUE_URL})\n\n[이벤트](${EVENT_LINK})에서 **Interested** 눌러 참석 여부를 알려주세요!\n불참 시에는 이 메시지 쓰레드에 남겨주세요 🙏\"
             }"
