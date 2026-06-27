@@ -17,6 +17,8 @@ export interface CheckboxProps extends Omit<FieldProps, "label"> {
   label?: string;
   /** 폼 name */
   name?: string;
+  /** 폼 제출 값. CheckboxGroup 내부에서 항목을 식별하는 데 사용됩니다. */
+  value?: string;
   /** 제어 모드 체크 여부 */
   checked?: boolean;
   /** 비제어 모드 초기 체크 여부 */
@@ -37,6 +39,7 @@ export const Checkbox = ({
   ref,
   label,
   name,
+  value,
   checked,
   defaultChecked,
   disabled,
@@ -72,6 +75,7 @@ export const Checkbox = ({
     <div>
       <ArkCheckbox.Root
         name={name}
+        value={value}
         checked={checked}
         defaultChecked={defaultChecked}
         disabled={isDisabled}
