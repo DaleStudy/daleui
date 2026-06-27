@@ -87,13 +87,3 @@ jobs:
             );
           }
           EOF
-
-  ci-ok:
-    runs-on: ubuntu-latest
-    if: ${{ always() }}
-    needs: [format, lint, coverage, build]
-    steps:
-      - name: Fail if any required job did not succeed
-        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
-        run: exit 1
-      - run: echo "all green"
