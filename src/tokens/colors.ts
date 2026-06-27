@@ -70,6 +70,16 @@ export const semanticColors: SemanticTokens["colors"] = {
       value: { base: "{colors.amber.1}", _dark: "{colors.darkAmber.1}" },
     },
     info: { value: { base: "{colors.blue.2}", _dark: "{colors.darkBlue.3}" } },
+    skeleton: {
+      // 스켈레톤 플레이스홀더의 기본 채움색
+      DEFAULT: {
+        value: { base: "{colors.slate.3}", _dark: "{colors.darkSage.4}" },
+      },
+      // wave 애니메이션이 훑고 지나가는 밝은 강조색 (두 테마 모두 기본색보다 밝음)
+      highlight: {
+        value: { base: "{colors.slate.1}", _dark: "{colors.darkSage.6}" },
+      },
+    },
   },
   border: {
     brand: {
