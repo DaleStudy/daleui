@@ -3,10 +3,6 @@ import { defineGlobalStyles } from "@pandacss/dev";
 export const globalCss = defineGlobalStyles({
   ":root": {
     "--global-font-body": "var(--fonts-sans)",
-    // 달레 브랜드 그라데이션 (청록 -> 보라). 브랜드 마크(</> 로고)와 동일하게 청록(teal.9)과
-    // 보라(violet.9) 브랜드 폴을 고정값으로 사용하므로 라이트/다크 테마에서 동일합니다.
-    "--gradient-brand":
-      "linear-gradient(135deg, var(--colors-teal-9), var(--colors-violet-9))",
   },
   body: {
     backgroundColor: "appBg",

@@ -113,7 +113,6 @@ describe("Skeleton 애니메이션", () => {
     const className = getPlaceholder(container)?.className ?? "";
     expect(className).toContain("bg-c_bg.skeleton");
     expect(className).toContain("anim_pulse");
-    expect(className).not.toContain("gradient-brand");
   });
 
   test("wave 애니메이션은 회색 ::after 광택 오버레이를 사용함", () => {
@@ -121,7 +120,6 @@ describe("Skeleton 애니메이션", () => {
     const className = getPlaceholder(container)?.className ?? "";
     expect(className).toContain("::after]:anim_wave");
     expect(className).toContain("bg.skeleton.highlight");
-    expect(className).not.toContain("gradient-brand");
     expect(className).not.toContain("skeleton.brand");
   });
 

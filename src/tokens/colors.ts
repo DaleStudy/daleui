@@ -79,14 +79,6 @@ export const semanticColors: SemanticTokens["colors"] = {
       highlight: {
         value: { base: "{colors.slate.1}", _dark: "{colors.darkSage.6}" },
       },
-      // 브랜드 플레이버(dale*)의 옅게 씻어낸 보라 바탕. 회색 스켈레톤과 같은 무게감을 유지합니다.
-      brand: {
-        value: { base: "{colors.violet.4}", _dark: "{colors.darkViolet.4}" },
-      },
-      // 브랜드 플레이버의 옅게 씻어낸 청록 강조색 (dalewave 광택 / dalepulse 그라데이션의 청록 끝)
-      brandHighlight: {
-        value: { base: "{colors.teal.3}", _dark: "{colors.darkTeal.6}" },
-      },
     },
   },
   border: {
