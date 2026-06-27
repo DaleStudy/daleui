@@ -1,7 +1,4 @@
-import {
-  CheckboxGroup as ArkCheckboxGroup,
-  useCheckboxGroupContext,
-} from "@ark-ui/react/checkbox";
+import { CheckboxGroup as ArkCheckboxGroup } from "@ark-ui/react/checkbox";
 import {
   type ReactNode,
   type Ref,
@@ -19,13 +16,13 @@ import { Checkbox } from "../Checkbox/Checkbox";
 type CheckboxGroupTone = Extract<Tone, "brand" | "neutral">;
 
 /**
- * 항목 스타일링에만 필요한 값(tone, invalid)을 전달하는 컨텍스트입니다.
- * 선택 상태·disabled·readOnly·name은 ArkUI CheckboxGroup 컨텍스트가 관리합니다.
+ * 항목 스타일링에 필요한 값을 전달하는 컨텍스트입니다.
+ * 선택 상태와 name은 ArkUI CheckboxGroup 컨텍스트가 관리합니다.
  */
 const CheckboxGroupContext = createContext<
   | ({
       tone: CheckboxGroupTone;
-    } & Pick<FieldProps, "invalid">)
+    } & Pick<FieldProps, "invalid" | "disabled" | "readOnly">)
   | null
 >(null);
 
@@ -108,7 +105,9 @@ function CheckboxGroupRoot({
   } = useField({ helperText, errorMessage, invalid, disabled, readOnly });
 
   return (
-    <CheckboxGroupContext.Provider value={{ tone, invalid }}>
+    <CheckboxGroupContext.Provider
+      value={{ tone, invalid, disabled: isDisabled, readOnly: isReadOnly }}
+    >
       <ArkCheckboxGroup
         ref={ref}
         name={name}
@@ -213,7 +212,6 @@ export function CheckboxGroupItem({
   disabled = false,
 }: CheckboxGroupItemProps) {
   const context = useContext(CheckboxGroupContext);
-  const group = useCheckboxGroupContext();
 
   if (!context) {
     throw new Error(
@@ -221,17 +219,16 @@ export function CheckboxGroupItem({
     );
   }
 
-  const { tone, invalid } = context;
-  const isDisabled = disabled || (group?.disabled ?? false);
-  const isReadOnly = group?.readOnly ?? false;
+  const { tone, invalid, disabled: groupDisabled, readOnly } = context;
+  const isDisabled = disabled || groupDisabled;
 
   return (
     <Checkbox
       label={children}
       value={value}
       disabled={isDisabled}
-      readOnly={isReadOnly}
-      invalid={!isDisabled && !!invalid}
+      readOnly={readOnly}
+      invalid={!isDisabled && invalid}
       tone={tone}
     />
   );
