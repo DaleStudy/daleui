@@ -1,9 +1,13 @@
 import {
+  CheckboxGroup as ArkCheckboxGroup,
+  useCheckboxGroupContext,
+} from "@ark-ui/react/checkbox";
+import {
   type ReactNode,
   type Ref,
   createContext,
   useContext,
-  useState,
+  useId,
 } from "react";
 import { css, cva } from "../../../styled-system/css";
 import { HelperText } from "../shared/HelperText";
@@ -14,13 +18,14 @@ import { Checkbox } from "../Checkbox/Checkbox";
 
 type CheckboxGroupTone = Extract<Tone, "brand" | "neutral">;
 
+/**
+ * 항목 스타일링에만 필요한 값(tone, invalid)을 전달하는 컨텍스트입니다.
+ * 선택 상태·disabled·readOnly·name은 ArkUI CheckboxGroup 컨텍스트가 관리합니다.
+ */
 const CheckboxGroupContext = createContext<
   | ({
       tone: CheckboxGroupTone;
-      name: string;
-      selectedValues: string[];
-      onValueChange: (value: string, checked: boolean) => void;
-    } & Pick<FieldProps, "disabled" | "invalid" | "readOnly">)
+    } & Pick<FieldProps, "invalid">)
   | null
 >(null);
 
@@ -92,6 +97,7 @@ function CheckboxGroupRoot({
   helperText,
   errorMessage,
 }: CheckboxGroupProps) {
+  const labelId = useId();
   const {
     fieldProps,
     helpTextProps,
@@ -100,43 +106,24 @@ function CheckboxGroupRoot({
     isReadOnly,
     isDisabled,
   } = useField({ helperText, errorMessage, invalid, disabled, readOnly });
-  const isControlled = values !== undefined;
-  const [internalValues, setInternalValues] = useState<string[]>(
-    defaultValues ?? [],
-  );
-
-  const selectedValues = isControlled ? values : internalValues;
-
-  const handleValueChange = (itemValue: string, checked: boolean) => {
-    const newValues = checked
-      ? [...selectedValues, itemValue]
-      : selectedValues.filter((v) => v !== itemValue);
-
-    if (!isControlled) {
-      setInternalValues(newValues);
-    }
-
-    onChange?.(newValues);
-  };
 
   return (
-    <CheckboxGroupContext.Provider
-      value={{
-        tone,
-        disabled: isDisabled,
-        invalid,
-        readOnly: isReadOnly,
-        name,
-        selectedValues,
-        onValueChange: handleValueChange,
-      }}
-    >
-      <div
+    <CheckboxGroupContext.Provider value={{ tone, invalid }}>
+      <ArkCheckboxGroup
         ref={ref}
-        className={checkboxGroupRootStyles}
+        name={name}
+        value={values}
+        defaultValue={defaultValues}
+        onValueChange={(value) => onChange?.(value)}
+        disabled={isDisabled}
+        readOnly={isReadOnly}
+        invalid={invalid}
+        aria-labelledby={labelId}
         aria-describedby={fieldProps["aria-describedby"]}
+        className={checkboxGroupRootStyles}
       >
-        <label
+        <span
+          id={labelId}
           className={css({
             textStyle: "label.md.strong",
             marginBottom: "8",
@@ -172,14 +159,14 @@ function CheckboxGroupRoot({
               </span>
             </>
           )}
-        </label>
+        </span>
         <div className={checkboxGroupStyles({ orientation })}>{children}</div>
         {showBottomText && (
           <HelperText {...helpTextProps} disabled={isDisabled}>
             {bottomText}
           </HelperText>
         )}
-      </div>
+      </ArkCheckboxGroup>
     </CheckboxGroupContext.Provider>
   );
 }
@@ -226,6 +213,7 @@ export function CheckboxGroupItem({
   disabled = false,
 }: CheckboxGroupItemProps) {
   const context = useContext(CheckboxGroupContext);
+  const group = useCheckboxGroupContext();
 
   if (!context) {
     throw new Error(
@@ -233,33 +221,18 @@ export function CheckboxGroupItem({
     );
   }
 
-  const {
-    tone,
-    disabled: groupDisabled,
-    invalid: groupInvalid,
-    readOnly: groupReadOnly,
-    name,
-    selectedValues,
-    onValueChange,
-  } = context;
-  const isDisabled = disabled || groupDisabled;
-  const isInvalid = groupInvalid;
-  const isChecked = selectedValues.includes(value);
-
-  const handleChange = (checked: boolean) => {
-    onValueChange(value, checked);
-  };
+  const { tone, invalid } = context;
+  const isDisabled = disabled || (group?.disabled ?? false);
+  const isReadOnly = group?.readOnly ?? false;
 
   return (
     <Checkbox
       label={children}
-      name={name}
-      checked={isChecked}
+      value={value}
       disabled={isDisabled}
-      readOnly={groupReadOnly}
-      invalid={!isDisabled && isInvalid}
+      readOnly={isReadOnly}
+      invalid={!isDisabled && !!invalid}
       tone={tone}
-      onChange={handleChange}
     />
   );
 }

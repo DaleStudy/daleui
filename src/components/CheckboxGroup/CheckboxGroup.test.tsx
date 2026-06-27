@@ -292,6 +292,16 @@ describe("CheckboxGroup", () => {
     expect(requiredText).toBeInTheDocument();
   });
 
+  test("그룹을 role=group으로 노출하고 label을 접근 가능한 이름으로 연결한다", () => {
+    render(
+      <CheckboxGroup name="test" label="좋아하는 과일">
+        <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+      </CheckboxGroup>,
+    );
+    const group = screen.getByRole("group", { name: "좋아하는 과일" });
+    expect(group).toBeInTheDocument();
+  });
+
   test("helperText가 있으면 하단에 표시하고 aria-describedby로 연결한다", () => {
     render(
       <CheckboxGroup name="test" label="Test Group" helperText="도움말입니다.">
@@ -300,11 +310,8 @@ describe("CheckboxGroup", () => {
     );
     const help = screen.getByText("도움말입니다.");
     expect(help).toBeInTheDocument();
-    /** TODO: CheckboxGroup ArkUI 컴포넌트 구조 변경 후 수정 필요 */
-    // eslint-disable-next-line testing-library/no-node-access
-    const root = help.parentElement;
-    expect(root).not.toBeNull();
-    expect(root).toHaveAccessibleDescription("도움말입니다.");
+    const group = screen.getByRole("group");
+    expect(group).toHaveAccessibleDescription("도움말입니다.");
   });
 
   test("helperText가 있으면 invalid 여부와 관계없이 노출한다", () => {
