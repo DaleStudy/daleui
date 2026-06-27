@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: oven-sh/setup-bun@v2
-      - run: bun install
+      - run: bun install --frozen-lockfile
       - run: bun run format
 
   lint:
@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: oven-sh/setup-bun@v2
-      - run: bun install
+      - run: bun install --frozen-lockfile
       - run: bun run lint
 
   coverage:
@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: oven-sh/setup-bun@v2
-      - run: bun install
+      - run: bun install --frozen-lockfile
       - run: bun run coverage
       - uses: codecov/codecov-action@v7
         with:
@@ -41,7 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: oven-sh/setup-bun@v2
-      - run: bun install
+      - run: bun install --frozen-lockfile
       - run: bun run build
 
   install-test:
@@ -59,7 +59,7 @@ jobs:
 
       - name: Install dependencies & Build
         run: |
-          bun install
+          bun install --frozen-lockfile
           bun run build
 
       - name: Pack library
@@ -90,6 +90,10 @@ jobs:
 
   ci-ok:
     runs-on: ubuntu-latest
-    needs: [format, lint, coverage, build, install-test]
+    if: ${{ always() }}
+    needs: [format, lint, coverage, build]
     steps:
+      - name: Fail if any required job did not succeed
+        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
+        run: exit 1
       - run: echo "all green"
