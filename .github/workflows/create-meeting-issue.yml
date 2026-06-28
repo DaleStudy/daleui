@@ -82,7 +82,7 @@ jobs:
         id: create-event # 다음 스텝에서 event_id 참조하기 위해 id 부여
         env:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-          DISCORD_SERVER_ID: ${{ vars.DISCORD_SERVER_ID }}
+          DISCORD_GUILD_ID: ${{ vars.DISCORD_GUILD_ID }}
           TITLE: ${{ steps.meeting-info.outputs.title }}
           ISSUE_URL: ${{ steps.create-issue.outputs.issue_url }}
         run: |
@@ -99,7 +99,7 @@ jobs:
           START_UNIX=$(date -d "${NEXT_SAT}T00:30:00+00:00" +%s)
 
           RESPONSE=$(curl -sf --show-error -X POST \
-            "https://discord.com/api/v10/guilds/${DISCORD_SERVER_ID}/scheduled-events" \
+            "https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/scheduled-events" \
             -H "Authorization: Bot ${DISCORD_TOKEN}" \
             -H "Content-Type: application/json" \
             -d "{
@@ -122,7 +122,7 @@ jobs:
         if: steps.meeting-info.outputs.type != 'skip'
         env:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-          DISCORD_SERVER_ID: ${{ vars.DISCORD_SERVER_ID }}
+          DISCORD_GUILD_ID: ${{ vars.DISCORD_GUILD_ID }}
           DISCORD_DALEUI_CHAT_CHANNEL_ID: ${{ vars.DISCORD_DALEUI_CHAT_CHANNEL_ID }}
           DISCORD_DALEUI_ROLE_ID: ${{ vars.DISCORD_DALEUI_ROLE_ID }}
           TITLE: ${{ steps.meeting-info.outputs.title }}
@@ -130,7 +130,7 @@ jobs:
           EVENT_ID: ${{ steps.create-event.outputs.event_id }}
           START_UNIX: ${{ steps.create-event.outputs.start_unix }}
         run: |
-          EVENT_LINK="https://discord.com/events/${DISCORD_SERVER_ID}/${EVENT_ID}"
+          EVENT_LINK="https://discord.com/events/${DISCORD_GUILD_ID}/${EVENT_ID}"
 
           # 디자인시스템-채팅 채널에 회의 일정 공지 및 RSVP 유도 메시지 전송
           curl -sf --show-error -X POST \
