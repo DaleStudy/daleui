@@ -28,12 +28,14 @@
   "files": [
     "dist",
     "styled-system",
+    "llms.txt",
     "README.md",
     "LICENSE"
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "tsc -b && vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
+    "build": "bun run generate:llms && tsc -b && vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
+    "generate:llms": "bun scripts/generate-llms-txt.ts",
     "format": "prettier --check .",
     "lint": "eslint .",
     "test": "vitest",
