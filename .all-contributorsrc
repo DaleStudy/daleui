@@ -6,16 +6,6 @@
   "commitConvention": "angular",
   "contributors": [
     {
-      "login": "DaleSeo",
-      "name": "Dale Seo",
-      "avatar_url": "https://avatars.githubusercontent.com/u/5466341?v=4",
-      "profile": "https://www.daleseo.com/",
-      "contributions": [
-        "code",
-        "doc"
-      ]
-    },
-    {
       "login": "yolophg",
       "name": "Helena Park",
       "avatar_url": "https://avatars.githubusercontent.com/u/38199103?v=4",
@@ -71,6 +61,16 @@
       "name": "Yunsup Sim(심윤섭)",
       "avatar_url": "https://avatars.githubusercontent.com/u/47362439?v=4",
       "profile": "https://ones-to-watch.ethansup.net/",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "DaleSeo",
+      "name": "Dale Seo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5466341?v=4",
+      "profile": "https://www.daleseo.com/",
       "contributions": [
         "code",
         "doc"
