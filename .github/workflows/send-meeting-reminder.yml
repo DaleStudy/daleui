@@ -9,9 +9,10 @@ on:
   workflow_dispatch:
     inputs:
       days_before:
-        description: "리마인드 시점 (테스트용, cron 매칭 없이 강제 지정)"
+        description: "리마인드 시점 (테스트용, 실제 이벤트 시각 계산 대신 강제 지정)"
         type: choice
         options: ["3", "1"]
+        default: "3"
 
 permissions:
   issues: read
@@ -20,25 +21,6 @@ jobs:
   send-reminder:
     runs-on: ubuntu-latest
     steps:
-      - name: Determine days-before
-        id: reminder-info
-        env:
-          SCHEDULE: ${{ github.event.schedule }}
-          MANUAL_DAYS_BEFORE: ${{ inputs.days_before }}
-        run: |
-          # 아래 cron 문자열은 위 on.schedule 값과 반드시 동일하게 유지해야 함
-          if [ -n "$MANUAL_DAYS_BEFORE" ]; then
-            DAYS_BEFORE="$MANUAL_DAYS_BEFORE"
-          elif [ "$SCHEDULE" = "30 0 * * 3" ]; then
-            DAYS_BEFORE=3
-          elif [ "$SCHEDULE" = "30 0 * * 5" ]; then
-            DAYS_BEFORE=1
-          else
-            echo "Unrecognized schedule: $SCHEDULE" >&2
-            exit 1
-          fi
-          echo "days_before=$DAYS_BEFORE" >> "$GITHUB_OUTPUT"
-
       - name: Find current meeting issue
         id: find-issue
         env:
@@ -117,7 +99,7 @@ jobs:
           DISCORD_GUILD_ID: ${{ vars.DISCORD_GUILD_ID }}
           DISCORD_DALEUI_CHAT_CHANNEL_ID: ${{ vars.DISCORD_DALEUI_CHAT_CHANNEL_ID }}
           DISCORD_DALEUI_ROLE_ID: ${{ vars.DISCORD_DALEUI_ROLE_ID }}
-          DAYS_BEFORE: ${{ steps.reminder-info.outputs.days_before }}
+          MANUAL_DAYS_BEFORE: ${{ inputs.days_before }}
           TITLE: ${{ steps.find-issue.outputs.title }}
           ISSUE_URL: ${{ steps.find-issue.outputs.issue_url }}
           EVENT_ID: ${{ steps.find-event.outputs.event_id }}
@@ -125,12 +107,20 @@ jobs:
         run: |
           EVENT_LINK="https://discord.com/events/${DISCORD_GUILD_ID}/${EVENT_ID}"
 
-          if [ "$DAYS_BEFORE" = "3" ]; then
-            HEADER="⏰ **${TITLE}**가 3일 후로 다가왔어요!"
-            CTA="아직 참석 여부를 남기지 않으셨다면 [이벤트](${EVENT_LINK})에서 **Interested** 를 눌러주세요. 데모/안건이 있으면 회의록에 미리 남겨주세요!"
+          if [ -n "$MANUAL_DAYS_BEFORE" ]; then
+            DAYS_LEFT="$MANUAL_DAYS_BEFORE"
           else
+            NOW=$(date +%s)
+            SECONDS_LEFT=$(( START_UNIX - NOW ))
+            DAYS_LEFT=$(( (SECONDS_LEFT + 86399) / 86400 ))   # 올림 처리로 "몇 밤 남았나" 계산
+          fi
+
+          if [ "$DAYS_LEFT" -le 1 ]; then
             HEADER="🔔 **${TITLE}**가 내일이에요!"
             CTA="데모/안건이 있으면 회의록에 미리 남겨주세요. [이벤트](${EVENT_LINK})에서 참석 여부도 꼭 확인해주세요!"
+          else
+            HEADER="⏰ **${TITLE}**가 ${DAYS_LEFT}일 후로 다가왔어요!"
+            CTA="아직 참석 여부를 남기지 않으셨다면 [이벤트](${EVENT_LINK})에서 **Interested** 를 눌러주세요. 데모/안건이 있으면 회의록에 미리 남겨주세요!"
           fi
 
           curl -sf --show-error -X POST \
