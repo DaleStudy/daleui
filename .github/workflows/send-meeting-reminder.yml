@@ -1,0 +1,132 @@
+name: Send Meeting Reminder 🔔
+
+on:
+  schedule:
+    # 수요일 00:30 UTC = 화요일 8:30pm EDT = 수요일 9:30am KST → 회의 3일 전
+    - cron: "30 0 * * 3"
+    # 금요일 00:30 UTC = 목요일 8:30pm EDT = 금요일 9:30am KST → 회의 1일 전
+    - cron: "30 0 * * 5"
+  workflow_dispatch:
+    inputs:
+      days_before:
+        description: "리마인드 시점 (테스트용, 실제 이벤트 시각 계산 대신 강제 지정)"
+        type: choice
+        options: ["3", "1"]
+        default: "3"
+
+permissions:
+  issues: read
+
+jobs:
+  send-reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find current meeting issue
+        id: find-issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          ISSUES=$(gh issue list --search "회의 in:title" --state open \
+            --json number,title,url,createdAt --limit 20)
+
+          MATCH=$(echo "$ISSUES" | python3 -c '
+          import json, re, sys
+
+          data = json.load(sys.stdin)
+          pattern = re.compile(r"^Sprint \d+ (중간|종료) 회의$")
+          matches = sorted(
+              (issue for issue in data if pattern.match(issue["title"])),
+              key=lambda issue: issue["createdAt"],
+              reverse=True,
+          )
+          print(json.dumps(matches[0]) if matches else "")
+          ')
+
+          if [ -z "$MATCH" ]; then
+            echo "No open meeting issue matched — assuming a skipped week"
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "found=true" >> "$GITHUB_OUTPUT"
+          echo "$MATCH" | python3 -c '
+          import json, sys
+
+          issue = json.load(sys.stdin)
+          print("title=" + issue["title"])
+          print("issue_url=" + issue["url"])
+          ' >> "$GITHUB_OUTPUT"
+
+      - name: Find Discord scheduled event
+        if: steps.find-issue.outputs.found == 'true'
+        id: find-event
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          DISCORD_GUILD_ID: ${{ vars.DISCORD_GUILD_ID }}
+          TITLE: ${{ steps.find-issue.outputs.title }}
+        run: |
+          RESPONSE=$(curl -sf --show-error \
+            "https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/scheduled-events" \
+            -H "Authorization: Bot ${DISCORD_TOKEN}")
+
+          MATCH=$(echo "$RESPONSE" | python3 -c '
+          import json, os, sys
+
+          events = json.load(sys.stdin)
+          title = os.environ["TITLE"]
+          matches = sorted(
+              (event for event in events if event["name"] == title and event["status"] == 1),
+              key=lambda event: event["scheduled_start_time"],
+          )
+          print(json.dumps(matches[0]) if matches else "")
+          ')
+
+          if [ -z "$MATCH" ]; then
+            echo "No scheduled Discord event found for: $TITLE" >&2
+            exit 1
+          fi
+
+          EVENT_ID=$(echo "$MATCH" | python3 -c 'import json,sys; print(json.load(sys.stdin)["id"])')
+          START_ISO=$(echo "$MATCH" | python3 -c 'import json,sys; print(json.load(sys.stdin)["scheduled_start_time"])')
+          echo "event_id=$EVENT_ID" >> "$GITHUB_OUTPUT"
+          echo "start_unix=$(date -d "$START_ISO" +%s)" >> "$GITHUB_OUTPUT"
+
+      - name: Send reminder message
+        if: steps.find-issue.outputs.found == 'true'
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          DISCORD_GUILD_ID: ${{ vars.DISCORD_GUILD_ID }}
+          DISCORD_DALEUI_CHAT_CHANNEL_ID: ${{ vars.DISCORD_DALEUI_CHAT_CHANNEL_ID }}
+          DISCORD_DALEUI_ROLE_ID: ${{ vars.DISCORD_DALEUI_ROLE_ID }}
+          MANUAL_DAYS_BEFORE: ${{ inputs.days_before }}
+          TITLE: ${{ steps.find-issue.outputs.title }}
+          ISSUE_URL: ${{ steps.find-issue.outputs.issue_url }}
+          EVENT_ID: ${{ steps.find-event.outputs.event_id }}
+          START_UNIX: ${{ steps.find-event.outputs.start_unix }}
+        run: |
+          EVENT_LINK="https://discord.com/events/${DISCORD_GUILD_ID}/${EVENT_ID}"
+
+          if [ -n "$MANUAL_DAYS_BEFORE" ]; then
+            DAYS_LEFT="$MANUAL_DAYS_BEFORE"
+          else
+            NOW=$(date +%s)
+            SECONDS_LEFT=$(( START_UNIX - NOW ))
+            DAYS_LEFT=$(( (SECONDS_LEFT + 86399) / 86400 ))   # 올림 처리로 "몇 밤 남았나" 계산
+          fi
+
+          if [ "$DAYS_LEFT" -le 1 ]; then
+            HEADER="🔔 **${TITLE}**가 내일이에요!"
+            CTA="데모/안건이 있으면 회의록에 미리 남겨주세요. [이벤트](${EVENT_LINK})에서 참석 여부도 꼭 확인해주세요!"
+          else
+            HEADER="⏰ **${TITLE}**가 ${DAYS_LEFT}일 후로 다가왔어요!"
+            CTA="아직 참석 여부를 남기지 않으셨다면 [이벤트](${EVENT_LINK})에서 **Interested** 를 눌러주세요. 데모/안건이 있으면 회의록에 미리 남겨주세요!"
+          fi
+
+          curl -sf --show-error -X POST \
+            "https://discord.com/api/v10/channels/${DISCORD_DALEUI_CHAT_CHANNEL_ID}/messages" \
+            -H "Authorization: Bot ${DISCORD_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"content\": \"<@&${DISCORD_DALEUI_ROLE_ID}>\n\n${HEADER}\n\n<t:${START_UNIX}:F> (<t:${START_UNIX}:R>)\n📋 [회의록](${ISSUE_URL})\n\n${CTA}\"
+            }"
