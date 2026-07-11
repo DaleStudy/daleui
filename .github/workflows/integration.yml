@@ -44,6 +44,18 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun run build
 
+  llms-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run generate:llms
+      - name: Fail if generated files differ from committed files
+        run: |
+          git diff --exit-code llms.txt skills/daleui/components.md skills/daleui/tokens.md \
+            || (echo "❌ 생성 파일이 소스와 다릅니다. 로컬에서 'bun run generate:llms'를 실행 후 커밋하세요." && exit 1)
+
   install-test:
     runs-on: ubuntu-latest
     name: "Vite + React"

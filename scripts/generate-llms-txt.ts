@@ -1,270 +1,425 @@
 /**
- * `llms.txt` 생성 스크립트
+ * scripts/generate-llms-txt.ts
  *
- * `src/index.ts`가 공개하는 컴포넌트를 소스 오브 트루스로 삼아, 각 컴포넌트의
- * 설명(JSDoc)과 속성(props)을 TypeScript 타입 체커로 추출한 뒤 llmstxt.org
- * 형식의 `llms.txt`를 저장소 루트에 생성한다.
+ * 산출물:
+ *   skills/daleui/components.md  — 컴포넌트 props 표 (자동 생성)
+ *   skills/daleui/tokens.md      — 토큰 이름·값·용도 표 (자동 생성)
+ *   public/llms.txt              — AI 인덱스 (npm 패키지에 포함)
  *
- * 실행: `bun scripts/generate-llms-txt.ts`
+ * 실행: bun run generate:llms
  */
-import ts from "typescript";
-import { readFileSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { Project, SyntaxKind } from "ts-morph";
+
+import { spacing } from "../src/tokens/spacing";
+import { radii } from "../src/tokens/radii";
+import { borderWidths, borders } from "../src/tokens/borders";
+import {
+  fontSizes,
+  fontWeights,
+  letterSpacings,
+  lineHeights,
+} from "../src/tokens/typography";
+import { semanticColors } from "../src/tokens/colors";
+import { icons } from "../src/tokens/iconography";
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
-const root = join(scriptDir, "..");
-const indexPath = join(root, "src", "index.ts");
-const pkgPath = join(root, "package.json");
-const outPath = join(root, "llms.txt");
+const root = `${scriptDir}/..`;
 
-const pkg = JSON.parse(readFileSync(pkgPath, "utf8")) as {
-  name: string;
-  version: string;
-  homepage?: string;
+const OUT = {
+  components: `${root}/skills/daleui/components.md`,
+  tokens: `${root}/skills/daleui/tokens.md`,
+  llms: `${root}/llms.txt`,
 };
 
-interface PropInfo {
+const GITHUB = "https://github.com/DaleStudy/daleui/blob/main";
+const CHROMATIC = "https://main--675790d317ba346348aa3490.chromatic.com";
+
+// ── 유틸 ─────────────────────────────────────────────────────
+
+function write(path: string, content: string) {
+  mkdirSync(dirname(path), { recursive: true });
+  writeFileSync(
+    path,
+    content.endsWith("\n") ? content : content + "\n",
+    "utf8",
+  );
+}
+
+function github(path: string) {
+  return `${GITHUB}/${path}`;
+}
+
+function mdTable(headers: string[], rows: string[][]) {
+  const head = `| ${headers.join(" | ")} |`;
+  const sep = `| ${headers.map(() => "---").join(" | ")} |`;
+  const body = rows.map((r) => `| ${r.join(" | ")} |`).join("\n");
+  return [head, sep, body].join("\n");
+}
+
+function escapeCell(s: string) {
+  return s.replace(/\|/g, "\\|").replace(/\n/g, " ");
+}
+
+// ── 컴포넌트 추출 ─────────────────────────────────────────────
+
+type PropRow = {
   name: string;
-  optional: boolean;
   type: string;
+  required: boolean;
+  defaultValue?: string;
   description: string;
-}
+};
 
-interface ComponentInfo {
+type ComponentDoc = {
   name: string;
   description: string;
-  props: PropInfo[];
+  props: PropRow[];
+};
+
+const project = new Project({
+  tsConfigFilePath: `${root}/tsconfig.app.json`,
+  skipAddingFilesFromTsConfig: true,
+});
+project.addSourceFilesAtPaths(`${root}/src/index.ts`);
+project.addSourceFilesAtPaths(`${root}/src/components/**/*.tsx`);
+project.addSourceFilesAtPaths(`${root}/src/components/shared/types.ts`);
+
+const indexFile = project.getSourceFileOrThrow(`${root}/src/index.ts`);
+
+function extractDefaults(
+  sourceFile: ReturnType<typeof project.getSourceFile>,
+  exportName: string,
+): Record<string, string> {
+  if (!sourceFile) return {};
+  const defaults: Record<string, string> = {};
+
+  // function declaration 또는 variable declaration (const Foo = (...) => ...) 둘 다 처리
+  const fn =
+    sourceFile.getFunction(exportName) ??
+    sourceFile
+      .getVariableDeclarations()
+      .find((v) => v.getName() === exportName);
+
+  if (!fn) return defaults;
+
+  const binding = fn.getFirstDescendantByKind(SyntaxKind.ObjectBindingPattern);
+  if (!binding) return defaults;
+
+  for (const el of binding.getElements()) {
+    const init = el.getInitializer();
+    if (init) defaults[el.getName()] = init.getText();
+  }
+  return defaults;
 }
 
-/** 저장소 소스(`src/`)에서 선언된 심볼만 통과시켜 상속된 HTML/스타일 props를 제외한다. */
-function isDeclaredInSrc(symbol: ts.Symbol): boolean {
-  const decl = symbol.valueDeclaration ?? symbol.declarations?.[0];
-  if (!decl) return false;
-  const fileName = decl.getSourceFile().fileName.replace(/\\/g, "/");
-  return fileName.includes("/src/") && !fileName.includes("/node_modules/");
-}
+function extractComponentDocs(): ComponentDoc[] {
+  const docs: ComponentDoc[] = [];
 
-/** JSDoc 설명을 llms.txt에 넣기 좋게 정리한다. */
-function cleanDescription(text: string): string {
-  return text
-    // Storybook 내부 링크(`[텍스트](?path=...)`)는 daleui.com에서 무의미하므로 텍스트만 남긴다.
-    .replace(/\[([^\]]+)\]\(\?path=[^)]*\)/g, "$1")
-    // 내부용 TODO 주석은 공개 문서에서 제거한다.
-    .replace(/\s*TODO:.*$/gm, "")
-    // 컴포넌트별 `###` 헤딩과 충돌하지 않도록 설명 내부 헤딩은 굵은 텍스트로 강등한다.
-    .replace(/^#{1,6}\s+(.*)$/gm, "**$1**")
-    .trim();
-}
+  for (const exp of indexFile.getExportDeclarations()) {
+    for (const named of exp.getNamedExports()) {
+      if (named.isTypeOnly()) continue;
+      const name = named.getName();
+      if (!name || name.endsWith("Props") || name === "FieldProps") continue;
 
-/** 파일마다 다른 React import 방식으로 생기는 네임스페이스 접두사를 제거해 타입 표기를 통일한다. */
-function normalizeType(typeString: string): string {
-  return typeString
-    .replace(/import\("[^"]*"\)\./g, "")
-    .replace(/\bReact\./g, "")
-    .replace(/\s+/g, " ");
-}
+      const sourcePath = `${root}/src/components/${name}/${name}.tsx`;
+      const sourceFile = project.getSourceFile(sourcePath);
+      if (!sourceFile) continue;
 
-function getSymbolDescription(
-  symbol: ts.Symbol,
-  checker: ts.TypeChecker,
-): string {
-  return cleanDescription(
-    ts.displayPartsToString(symbol.getDocumentationComment(checker)),
-  );
-}
+      const propsInterface = sourceFile.getInterface(`${name}Props`);
+      if (!propsInterface) continue;
 
-function getPropsFromComponent(
-  symbol: ts.Symbol,
-  checker: ts.TypeChecker,
-): PropInfo[] {
-  const decl = symbol.valueDeclaration ?? symbol.declarations?.[0];
-  if (!decl) return [];
+      const defaults = extractDefaults(sourceFile, name);
 
-  const type = checker.getTypeOfSymbolAtLocation(symbol, decl);
-  const signatures = type.getCallSignatures();
-  if (signatures.length === 0) return [];
+      const fnDecl = sourceFile.getFunction(name);
+      const varDecl = sourceFile
+        .getVariableDeclarations()
+        .find((v) => v.getName() === name);
+      const rawDesc =
+        fnDecl?.getJsDocs()[0]?.getDescription() ??
+        varDecl
+          ?.getFirstAncestorByKind(SyntaxKind.VariableStatement)
+          ?.getJsDocs()[0]
+          ?.getDescription() ??
+        "";
+      const description = rawDesc
+        .replace(/^#{1,6}\s+(.*)$/gm, "**$1**")
+        .replace(/\[([^\]]+)\]\(\?path=[^)]*\)/g, "$1")
+        .replace(/\s*TODO:.*$/gm, "")
+        .trim();
 
-  const params = signatures[0].getParameters();
-  if (params.length === 0) return [];
+      const props: PropRow[] = propsInterface.getProperties().map((prop) => ({
+        name: prop.getName(),
+        type: prop.getType().getText(prop).replace(/\s+/g, " "),
+        required: !prop.hasQuestionToken(),
+        defaultValue: defaults[prop.getName()],
+        description:
+          prop
+            .getJsDocs()[0]
+            ?.getDescription()
+            ?.replace(/\s*TODO:.*$/gm, "")
+            .trim() ?? "",
+      }));
 
-  const propsParam = params[0];
-  const propsDecl = propsParam.valueDeclaration ?? propsParam.declarations?.[0];
-  if (!propsDecl) return [];
-
-  const propsType = checker.getTypeOfSymbolAtLocation(propsParam, propsDecl);
-
-  const props: PropInfo[] = [];
-  for (const prop of propsType.getProperties()) {
-    if (!isDeclaredInSrc(prop)) continue;
-
-    const propDecl = prop.valueDeclaration ?? prop.declarations?.[0];
-    if (!propDecl) continue;
-
-    const propType = checker.getTypeOfSymbolAtLocation(prop, propDecl);
-    const typeString = checker.typeToString(
-      propType,
-      propDecl,
-      ts.TypeFormatFlags.NoTruncation,
-    );
-
-    props.push({
-      name: prop.getName(),
-      optional: (prop.flags & ts.SymbolFlags.Optional) !== 0,
-      type: normalizeType(typeString),
-      description: getSymbolDescription(prop, checker),
-    });
+      docs.push({ name, description, props });
+    }
   }
 
-  return props;
+  return docs.sort((a, b) => a.name.localeCompare(b.name));
 }
 
-/** `src/index.ts`의 값(value) export 이름을 파일 등장 순서대로 수집한다(타입 전용 export 제외). */
-function getPublicComponentNames(sourceFile: ts.SourceFile): string[] {
-  const names: string[] = [];
-  sourceFile.forEachChild((node) => {
-    if (!ts.isExportDeclaration(node) || !node.exportClause) return;
-    if (node.isTypeOnly) return;
-    if (!ts.isNamedExports(node.exportClause)) return;
-    for (const element of node.exportClause.elements) {
-      if (element.isTypeOnly) continue;
-      names.push(element.name.text);
-    }
+// ── components.md ─────────────────────────────────────────────
+
+function renderComponentsMd(components: ComponentDoc[]): string {
+  const sections = components.map((c) => {
+    const rows = c.props.map((p) => [
+      p.required ? `**${p.name}**` : p.name,
+      `\`${escapeCell(p.type)}\``,
+      p.defaultValue ? `\`${p.defaultValue}\`` : "-",
+      escapeCell(p.description),
+    ]);
+
+    return [
+      `## ${c.name}`,
+      "",
+      c.description ? `${c.description}\n` : "",
+      `\`import { ${c.name} } from "daleui"\``,
+      "",
+      mdTable(["prop", "타입", "기본값", "설명"], rows),
+      "",
+    ].join("\n");
   });
-  return names;
+
+  return [
+    "# daleui 컴포넌트 레퍼런스",
+    "",
+    "> 자동 생성 — 수동 편집하지 마세요.",
+    "",
+    ...sections,
+  ].join("\n");
 }
 
-function collectComponents(): ComponentInfo[] {
-  const program = ts.createProgram([indexPath], {
-    target: ts.ScriptTarget.ES2020,
-    module: ts.ModuleKind.ESNext,
-    moduleResolution: ts.ModuleResolutionKind.Bundler,
-    jsx: ts.JsxEmit.ReactJSX,
-    skipLibCheck: true,
-    strict: false,
-    noEmit: true,
-    esModuleInterop: true,
+// ── tokens.md ─────────────────────────────────────────────────
+
+function flattenSemanticColors(
+  obj: Record<string, unknown>,
+  prefix = "",
+): Array<{ path: string; light: string; dark: string }> {
+  const rows: Array<{ path: string; light: string; dark: string }> = [];
+
+  for (const [key, val] of Object.entries(obj)) {
+    const path = prefix ? `${prefix}.${key}` : key;
+    if (!val || typeof val !== "object") continue;
+
+    if ("value" in val) {
+      const token = val as { value: unknown };
+      if (token.value && typeof token.value === "object") {
+        const v = token.value as Record<string, string>;
+        rows.push({ path, light: v.base ?? "-", dark: v._dark ?? "-" });
+      } else if (typeof token.value === "string") {
+        rows.push({ path, light: token.value, dark: token.value });
+      }
+    } else {
+      rows.push(
+        ...flattenSemanticColors(val as Record<string, unknown>, path),
+      );
+    }
+  }
+  return rows;
+}
+
+function semanticColorUsage(path: string): string {
+  if (path === "appBg") return "앱 전체 배경";
+  if (path.startsWith("fgSolid.")) return "solid 배경 위 전경색";
+  if (path.startsWith("fg.")) return "전경색 (텍스트·아이콘)";
+  if (path.startsWith("bgSolid.")) return "solid 컴포넌트 배경";
+  if (path.startsWith("bg.")) return "배경색";
+  if (path.startsWith("border.")) return "테두리·아웃라인";
+  return "시맨틱 색상";
+}
+
+function renderTokensMd(): string {
+  const colorRows = flattenSemanticColors(
+    semanticColors as Record<string, unknown>,
+  ).map((r) => [
+    r.path,
+    escapeCell(r.light),
+    escapeCell(r.dark),
+    semanticColorUsage(r.path),
+  ]);
+
+  return [
+    "# daleui 토큰 레퍼런스",
+    "",
+    "> 자동 생성 — 수동 편집하지 마세요.  ",
+    "> `css()` 또는 Panda 스타일 속성에서 시맨틱 토큰 키를 사용한다. raw hex/px 금지.",
+    "",
+    "## spacing",
+    "",
+    "> margin, padding, gap, top, right, bottom, left, outlineOffset",
+    "",
+    mdTable(
+      ["토큰", "값", "용도"],
+      Object.entries(spacing).map(([k, t]) => [k, t.value, "간격·여백"]),
+    ),
+    "",
+    "## radii",
+    "",
+    "> borderRadius",
+    "",
+    mdTable(
+      ["토큰", "값", "용도"],
+      Object.entries(radii as Record<string, { value: string }>).map(([k, t]) => [
+        k,
+        t.value,
+        k === "full" ? "원형(pill)" : "모서리 둥글기",
+      ]),
+    ),
+    "",
+    "## borderWidths",
+    "",
+    "> borderWidth, outlineWidth",
+    "",
+    mdTable(
+      ["토큰", "값", "용도"],
+      Object.entries(borderWidths as Record<string, { value: string }>).map(([k, t]) => [
+        k,
+        t.value,
+        "테두리·포커스 링 두께",
+      ]),
+    ),
+    "",
+    "## borders",
+    "",
+    "> tone별 border shorthand",
+    "",
+    mdTable(
+      ["토큰", "용도"],
+      Object.keys(borders as Record<string, unknown>).map((k) => [k, `${k} 톤 테두리`]),
+    ),
+    "",
+    "## semanticColors",
+    "",
+    "> 다크모드 자동 대응. `css({ color: \"fg.brand\" })` 형태로 사용.",
+    "",
+    mdTable(
+      ["토큰", "light", "dark", "용도"],
+      colorRows,
+    ),
+    "",
+    "## fontSizes",
+    "",
+    mdTable(
+      ["토큰", "값", "용도"],
+      Object.entries(fontSizes).map(([k, t]) => [k, t.value, "fontSize"]),
+    ),
+    "",
+    "## fontWeights",
+    "",
+    mdTable(
+      ["토큰", "값", "용도"],
+      Object.entries(fontWeights).map(([k, t]) => [
+        k,
+        String(t.value),
+        "fontWeight",
+      ]),
+    ),
+    "",
+    "## lineHeights",
+    "",
+    mdTable(
+      ["토큰", "값", "용도"],
+      Object.entries(lineHeights).map(([k, t]) => [k, t.value, "lineHeight"]),
+    ),
+    "",
+    "## letterSpacings",
+    "",
+    mdTable(
+      ["토큰", "값", "용도"],
+      Object.entries(letterSpacings).map(([k, t]) => [
+        k,
+        t.value,
+        "letterSpacing",
+      ]),
+    ),
+    "",
+    "## icons",
+    "",
+    "> `Icon` 컴포넌트 `name` prop에 사용.",
+    "",
+    mdTable(
+      ["이름", "용도"],
+      Object.keys(icons).map((name) => [name, "Icon name"]),
+    ),
+    "",
+  ].join("\n");
+}
+
+// ── public/llms.txt (AI 인덱스) ──────────────────────────────
+
+function renderLlmsTxt(components: ComponentDoc[]): string {
+  const componentLinks = components.map((c) => {
+    const summary = c.description.split("\n")[0]?.replace(/\*\*/g, "") ?? "";
+    const url = `${github("skills/daleui/components.md")}#${c.name.toLowerCase()}`;
+    return `- [${c.name}](${url}): \`import { ${c.name} } from "daleui"\`. ${summary}`;
   });
-  const checker = program.getTypeChecker();
 
-  const indexSource = program.getSourceFile(indexPath);
-  if (!indexSource) {
-    throw new Error(`엔트리 파일을 찾을 수 없습니다: ${indexPath}`);
-  }
-
-  const moduleSymbol = checker.getSymbolAtLocation(indexSource);
-  if (!moduleSymbol) {
-    throw new Error("index.ts의 모듈 심볼을 해석할 수 없습니다.");
-  }
-
-  const exportsByName = new Map<string, ts.Symbol>();
-  for (const exportSymbol of checker.getExportsOfModule(moduleSymbol)) {
-    exportsByName.set(exportSymbol.getName(), exportSymbol);
-  }
-
-  const components: ComponentInfo[] = [];
-  for (const name of getPublicComponentNames(indexSource)) {
-    let symbol = exportsByName.get(name);
-    if (!symbol) continue;
-    if (symbol.flags & ts.SymbolFlags.Alias) {
-      symbol = checker.getAliasedSymbol(symbol);
-    }
-
-    components.push({
-      name,
-      description: getSymbolDescription(symbol, checker),
-      props: getPropsFromComponent(symbol, checker),
-    });
-  }
-
-  return components;
+  return [
+    "# daleui",
+    "",
+    "> 한국어 우선 React 디자인 시스템. Panda CSS 시맨틱 토큰과 접근성 높은 컴포넌트를 제공한다.",
+    "",
+    "## 규칙",
+    "",
+    '- `import "daleui/styles.css"` 필수',
+    "- 시맨틱 토큰만 사용 (raw hex/px 금지)",
+    "- 폼 필드는 label 또는 aria-label 필수",
+    "",
+    "## AI 에이전트",
+    "",
+    `- [SKILL.md](${github("skills/daleui/SKILL.md")}): 사용 규칙·컴포넌트 선택 가이드`,
+    `- [components.md](${github("skills/daleui/components.md")}): 컴포넌트 props 표`,
+    `- [tokens.md](${github("skills/daleui/tokens.md")}): 토큰 이름·값·용도 표`,
+    `- [examples.md](${github("skills/daleui/examples.md")}): 조합 예시`,
+    "",
+    "## 설치",
+    "",
+    "- npm: `npm install daleui pretendard @fontsource-variable/jetbrains-mono`",
+    "- GitHub: https://github.com/DaleStudy/daleui",
+    "",
+    "## 컴포넌트",
+    "",
+    `상세 props → [components.md](${github("skills/daleui/components.md")})`,
+    "",
+    ...componentLinks,
+    "",
+    "## 토큰",
+    "",
+    `상세 표 → [tokens.md](${github("skills/daleui/tokens.md")})`,
+    "",
+    "- spacing, radii, borderWidths, borders, semanticColors, fontSizes, fontWeights, lineHeights, letterSpacings, icons",
+    "",
+    "## Optional",
+    "",
+    `- [Storybook (Chromatic)](${CHROMATIC}): 사람용 시각 문서`,
+    `- [웹사이트](https://www.daleui.com)`,
+    "",
+  ].join("\n");
 }
 
-function renderProps(props: PropInfo[]): string[] {
-  if (props.length === 0) return [];
-  const lines = ["", "**Props**", ""];
-  for (const prop of props) {
-    const optional = prop.optional ? "?" : "";
-    const description = prop.description ? ` — ${prop.description}` : "";
-    lines.push(`- \`${prop.name}${optional}\`: \`${prop.type}\`${description}`);
-  }
-  return lines;
-}
+// ── 실행 ─────────────────────────────────────────────────────
 
-function render(components: ComponentInfo[]): string {
-  const lines: string[] = [];
+const components = extractComponentDocs();
 
-  lines.push("# 달레 UI (daleui)");
-  lines.push("");
-  lines.push(
-    "> 한국어 사용자 중심으로 설계된 접근성 높은 오픈소스 React 디자인 시스템입니다. Panda CSS 기반의 디자인 토큰과 컴포넌트를 제공합니다.",
-  );
-  lines.push("");
-  lines.push(
-    `이 문서는 \`daleui\` npm 패키지 v${pkg.version} 기준으로 자동 생성되었습니다. 공개 컴포넌트와 각 컴포넌트의 속성(props), 디자인 토큰, 참고 문서 링크를 담고 있습니다.`,
-  );
-  lines.push("");
+write(OUT.components, renderComponentsMd(components));
+write(OUT.tokens, renderTokensMd());
+write(OUT.llms, renderLlmsTxt(components));
 
-  lines.push("## 설치");
-  lines.push("");
-  lines.push("```sh");
-  lines.push("npm install daleui pretendard @fontsource-variable/jetbrains-mono");
-  lines.push("```");
-  lines.push("");
-  lines.push("앱 진입점에서 스타일을 한 번 불러옵니다.");
-  lines.push("");
-  lines.push("```tsx");
-  lines.push('import "daleui/styles.css";');
-  lines.push("```");
-  lines.push("");
-  lines.push("컴포넌트는 이름 있는 export로 가져옵니다.");
-  lines.push("");
-  lines.push("```tsx");
-  lines.push('import { Button } from "daleui";');
-  lines.push("```");
-  lines.push("");
-
-  lines.push("## 컴포넌트");
-  lines.push("");
-  for (const component of components) {
-    lines.push(`### ${component.name}`);
-    lines.push("");
-    if (component.description) {
-      lines.push(component.description);
-    }
-    lines.push(...renderProps(component.props));
-    lines.push("");
-  }
-
-  lines.push("## 디자인 토큰");
-  lines.push("");
-  lines.push(
-    "달레 UI는 Panda CSS 기반의 디자인 토큰을 사용합니다. 컴포넌트의 `tone`, `size` 등 속성 값은 아래 토큰 체계를 따릅니다.",
-  );
-  lines.push("");
-  lines.push("- **Colors**: 의미 기반(semantic) 색상과 원시(primitive) 팔레트. 색조는 `brand`, `neutral`, `danger`, `warning`, `success`, `info`로 구성됩니다.");
-  lines.push("- **Typography**: Pretendard Variable 웹폰트 기반의 글자 크기·굵기·행간·자간 토큰.");
-  lines.push("- **Spacing**: 여백과 간격에 사용하는 간격 토큰.");
-  lines.push("- **Radii**: 모서리 둥글기(border-radius) 토큰.");
-  lines.push("- **Borders**: 테두리 두께·색상 토큰.");
-  lines.push("- **Iconography**: Lucide 기반 아이콘 세트.");
-  lines.push("");
-
-  lines.push("## 문서");
-  lines.push("");
-  lines.push(`- [웹사이트](${pkg.homepage ?? "https://www.daleui.com"})`);
-  lines.push("- [Storybook](https://main--675790d317ba346348aa3490.chromatic.com)");
-  lines.push("- [GitHub 저장소](https://github.com/DaleStudy/daleui)");
-  lines.push("- [위키](https://github.com/DaleStudy/daleui/wiki)");
-  lines.push("- [Figma UI Kit](https://www.figma.com/community/file/1559487636467651573)");
-  lines.push("");
-
-  return lines.join("\n");
-}
-
-const components = collectComponents();
-const output = render(components);
-writeFileSync(outPath, output, "utf8");
 console.log(
-  `llms.txt 생성 완료: ${components.length}개 컴포넌트 (${outPath})`,
+  `생성 완료 (${components.length}개 컴포넌트):`,
+  Object.values(OUT)
+    .map((p) => p.replace(root + "/", ""))
+    .join(", "),
 );
