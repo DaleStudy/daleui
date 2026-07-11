@@ -60,7 +60,7 @@ function mdTable(headers: string[], rows: string[][]) {
 }
 
 function escapeCell(s: string) {
-  return s.replace(/\|/g, "\\|").replace(/\n/g, " ");
+  return s.replace(/\\/g, "\\\\").replace(/\|/g, "\\|").replace(/\n/g, " ");
 }
 
 // ── 컴포넌트 추출 ─────────────────────────────────────────────
@@ -222,9 +222,7 @@ function flattenSemanticColors(
         rows.push({ path, light: token.value, dark: token.value });
       }
     } else {
-      rows.push(
-        ...flattenSemanticColors(val as Record<string, unknown>, path),
-      );
+      rows.push(...flattenSemanticColors(val as Record<string, unknown>, path));
     }
   }
   return rows;
@@ -271,11 +269,9 @@ function renderTokensMd(): string {
     "",
     mdTable(
       ["토큰", "값", "용도"],
-      Object.entries(radii as Record<string, { value: string }>).map(([k, t]) => [
-        k,
-        t.value,
-        k === "full" ? "원형(pill)" : "모서리 둥글기",
-      ]),
+      Object.entries(radii as Record<string, { value: string }>).map(
+        ([k, t]) => [k, t.value, k === "full" ? "원형(pill)" : "모서리 둥글기"],
+      ),
     ),
     "",
     "## borderWidths",
@@ -284,11 +280,9 @@ function renderTokensMd(): string {
     "",
     mdTable(
       ["토큰", "값", "용도"],
-      Object.entries(borderWidths as Record<string, { value: string }>).map(([k, t]) => [
-        k,
-        t.value,
-        "테두리·포커스 링 두께",
-      ]),
+      Object.entries(borderWidths as Record<string, { value: string }>).map(
+        ([k, t]) => [k, t.value, "테두리·포커스 링 두께"],
+      ),
     ),
     "",
     "## borders",
@@ -297,17 +291,17 @@ function renderTokensMd(): string {
     "",
     mdTable(
       ["토큰", "용도"],
-      Object.keys(borders as Record<string, unknown>).map((k) => [k, `${k} 톤 테두리`]),
+      Object.keys(borders as Record<string, unknown>).map((k) => [
+        k,
+        `${k} 톤 테두리`,
+      ]),
     ),
     "",
     "## semanticColors",
     "",
-    "> 다크모드 자동 대응. `css({ color: \"fg.brand\" })` 형태로 사용.",
+    '> 다크모드 자동 대응. `css({ color: "fg.brand" })` 형태로 사용.',
     "",
-    mdTable(
-      ["토큰", "light", "dark", "용도"],
-      colorRows,
-    ),
+    mdTable(["토큰", "light", "dark", "용도"], colorRows),
     "",
     "## fontSizes",
     "",

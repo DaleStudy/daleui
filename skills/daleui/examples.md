@@ -6,18 +6,22 @@
 
 ```tsx
 import "daleui/styles.css";
-import { VStack, Heading, TextInput, PasswordInput, Button, Link, Text } from "daleui";
+import {
+  VStack,
+  Heading,
+  TextInput,
+  PasswordInput,
+  Button,
+  Link,
+  Text,
+} from "daleui";
 
 export function LoginForm() {
   return (
     <VStack gap="24" align="stretch">
       <Heading level={2}>로그인</Heading>
 
-      <TextInput
-        label="이메일"
-        type="email"
-        placeholder="example@daleui.com"
-      />
+      <TextInput label="이메일" type="email" placeholder="example@daleui.com" />
       <PasswordInput label="비밀번호" />
 
       <Button type="submit" fullWidth>
@@ -25,8 +29,7 @@ export function LoginForm() {
       </Button>
 
       <Text>
-        계정이 없으신가요?{" "}
-        <Link href="/signup">회원가입</Link>
+        계정이 없으신가요? <Link href="/signup">회원가입</Link>
       </Text>
     </VStack>
   );
@@ -39,10 +42,16 @@ export function LoginForm() {
 import { HStack, Button } from "daleui";
 
 <HStack gap="8">
-  <Button tone="brand" variant="solid">저장</Button>
-  <Button tone="brand" variant="outline">취소</Button>
-  <Button tone="danger" variant="ghost">삭제</Button>
-</HStack>
+  <Button tone="brand" variant="solid">
+    저장
+  </Button>
+  <Button tone="brand" variant="outline">
+    취소
+  </Button>
+  <Button tone="danger" variant="ghost">
+    삭제
+  </Button>
+</HStack>;
 ```
 
 ## 3. 토스트·알림 카드
@@ -55,7 +64,7 @@ import { Card, HStack, Icon, Text } from "daleui";
     <Icon name="checkCircle" />
     <Text>저장이 완료되었습니다.</Text>
   </HStack>
-</Card>
+</Card>;
 ```
 
 ## 4. 폼 + 라디오 그룹
@@ -74,7 +83,7 @@ import { VStack, Label, RadioGroup, Button } from "daleui";
     ]}
   />
   <Button type="submit">결제하기</Button>
-</VStack>
+</VStack>;
 ```
 
 ## 5. 그리드 카드 목록
@@ -91,7 +100,7 @@ import { Grid, GridItem, Card, Heading, Text } from "daleui";
       </Card>
     </GridItem>
   ))}
-</Grid>
+</Grid>;
 ```
 
 ## 6. 검색 인풋 + 버튼 조합
@@ -100,12 +109,11 @@ import { Grid, GridItem, Card, Heading, Text } from "daleui";
 import { HStack, TextInput, Button } from "daleui";
 
 <HStack gap="8" align="flex-end">
-  <TextInput
-    label="검색어"
-    placeholder="컴포넌트 이름으로 검색"
-  />
-  <Button type="submit" tone="brand">검색</Button>
-</HStack>
+  <TextInput label="검색어" placeholder="컴포넌트 이름으로 검색" />
+  <Button type="submit" tone="brand">
+    검색
+  </Button>
+</HStack>;
 ```
 
 ## 7. 아이콘 버튼
@@ -118,5 +126,5 @@ import { HStack, Icon, Button } from "daleui";
     <Icon name="download" />
     다운로드
   </HStack>
-</Button>
+</Button>;
 ```
