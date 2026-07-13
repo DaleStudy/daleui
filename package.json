@@ -36,7 +36,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "bun run generate:llms && tsc -b && vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
-    "generate:llms": "bun scripts/generate-llms-txt.ts",
+    "generate:llms": "bun scripts/generate-llms-txt.ts && bunx prettier --write --parser markdown llms.txt skills/daleui/components.md skills/daleui/tokens.md",
     "format": "prettier --check .",
     "lint": "eslint .",
     "test": "vitest",
