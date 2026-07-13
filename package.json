@@ -41,7 +41,7 @@
     "sb": "storybook dev -p 6006",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "panda codegen"
+    "prepare": "panda codegen && lefthook install"
   },
   "peerDependencies": {
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
@@ -54,8 +54,6 @@
     "lucide-react": "^1.21.0"
   },
   "devDependencies": {
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
     "@chromatic-com/storybook": "^5.2.1",
     "@codecov/vite-plugin": "^2.0.1",
     "@eslint/js": "^10.0.1",
@@ -83,7 +81,10 @@
     "eslint-plugin-testing-library": "^7.16.2",
     "globals": "^17.7.0",
     "happy-dom": "^20.10.6",
+    "lefthook": "^2.1.10",
     "prettier": "^3.8.5",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "storybook": "^10.4.6",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.62.1",
