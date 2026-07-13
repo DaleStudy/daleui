@@ -42,3 +42,6 @@ coverage
 # Source maps
 *.map
 
+# Lefthook 로컬 오버라이드
+lefthook-local.yml
+
