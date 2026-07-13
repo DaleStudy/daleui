@@ -15,7 +15,7 @@
         "@faker-js/faker": "^10.5.0",
         "@pandacss/dev": "^1.11.4",
         "@storybook/addon-a11y": "^10.4.6",
-        "@storybook/addon-designs": "^11.1.3",
+        "@storybook/addon-designs": "^11.1.4",
         "@storybook/addon-docs": "^10.4.6",
         "@storybook/addon-themes": "^10.4.6",
         "@storybook/react-vite": "^10.4.6",
@@ -477,7 +477,7 @@
 
     "@storybook/addon-a11y": ["@storybook/addon-a11y@10.4.6", "", { "dependencies": { "@storybook/global": "^5.0.0", "axe-core": "^4.2.0" }, "peerDependencies": { "storybook": "^10.4.6" } }, "sha512-XCJy+f0DFOiCgUU9knRDlLDxVFI+AAQ3/wE/NF85zB9iDPPS2DwkSN+mas3zDgHt66zhN8Cq3/UiyCDUweV9Zw=="],
 
-    "@storybook/addon-designs": ["@storybook/addon-designs@11.1.3", "", { "dependencies": { "@figspec/react": "^2.0.0" }, "peerDependencies": { "@storybook/addon-docs": "^10.0.0 || ^10.0.0-0 || ^10.1.0-0 || ^10.2.0-0", "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "storybook": "^10.0.0 || ^10.0.0-0 || ^10.1.0-0 || ^10.2.0-0" }, "optionalPeers": ["@storybook/addon-docs", "react", "react-dom"] }, "sha512-AK+ij478Y6S16TCNPwm7H90OipVe2wZApOlHjC6qDvMW61zyd4yP1icrRtjehSadw5SCoz8HcAmIYfQCOY6E4A=="],
+    "@storybook/addon-designs": ["@storybook/addon-designs@11.1.4", "", { "dependencies": { "@figspec/react": "^2.0.0" }, "peerDependencies": { "@storybook/addon-docs": "^0.0.0-0 || ^10.0.0 || ^10.0.0-0 || ^10.1.0-0 || ^10.2.0-0 || ^10.5.0-0 || ^10.6.0-0", "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "storybook": "^0.0.0-0 || ^10.0.0 || ^10.0.0-0 || ^10.1.0-0 || ^10.2.0-0 || ^10.5.0-0 || ^10.6.0-0" }, "optionalPeers": ["@storybook/addon-docs", "react", "react-dom"] }, "sha512-4NWq8iiCbAODyfbMXKlOmMcz+xLcfIKzxC0UMdWq2M4W9SkTwzX7qr/m+2+a0dqddAaZvOZ9zfIrZa5suHC1ow=="],
 
     "@storybook/addon-docs": ["@storybook/addon-docs@10.4.6", "", { "dependencies": { "@mdx-js/react": "^3.0.0", "@storybook/csf-plugin": "10.4.6", "@storybook/icons": "^2.0.2", "@storybook/react-dom-shim": "10.4.6", "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "ts-dedent": "^2.0.0" }, "peerDependencies": { "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "storybook": "^10.4.6" }, "optionalPeers": ["@types/react"] }, "sha512-aWAfP5JMiT5a3zBJizwroCRzOCqZwDTJmvsYvwMD3ilIEa/kT1vhf6Xrbk4XIPhDwbh8Hpb/Gfnka1xBYEISWg=="],
 
