@@ -1,0 +1,11 @@
+# 화면에 영향을 주는 파일이 바뀌면 ui 라벨을 자동으로 단다.
+ui:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "src/components/**"
+          - "src/examples/**"
+          - "**/*.stories.@(ts|tsx|js|jsx|mdx)"
+          - ".storybook/**"
+          - "src/tokens/**"
+          - "src/styles/**"
+          - "panda.config.ts"
