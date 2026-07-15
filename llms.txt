@@ -39,6 +39,7 @@
 - [PasswordInput](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#passwordinput): `import { PasswordInput } from "daleui"`. 패스워드 인풋은 로그인이나 계정 인증 과정에서 사용자의 비밀번호를 안전하게 입력하도록 지원하는 보안 입력 필드입니다.
 - [RadioGroup](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#radiogroup): `import { RadioGroup } from "daleui"`.
 - [Select](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#select): `import { Select } from "daleui"`. 셀렉트는 미리 정의된 여러 옵션 중 하나를 사용자가 선택하도록 하기 위한 컴포넌트입니다.
+- [Tag](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#tag): `import { Tag } from "daleui"`. 콘텐츠의 속성, 카테고리, 상태(성공, 경고 등)를 키워드 형태로 식별하고 분류하여 시각적으로 강조하는 컴포넌트이다. 필요에 따라 링크 이동이나 삭제와 같은 상호작용 기능을 제공합니다.
 - [Text](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#text): `import { Text } from "daleui"`. 텍스트 컴포넌트입니다.
 - [TextInput](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#textinput): `import { TextInput } from "daleui"`. 텍스트 인풋은 사용자가 이름, 이메일, 검색어 등 텍스트 정보를 직접 입력할 수 있도록 제공되는 입력 컴포넌트입니다.
 - [VStack](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#vstack): `import { VStack } from "daleui"`. Flex의 세로 배치 패턴(`direction="column"`, `align="center"`)을 의미 있는 이름과 기본값으로 묶은 컴포넌트입니다.

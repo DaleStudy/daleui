@@ -4,26 +4,26 @@
  * 산출물:
  *   skills/daleui/components.md  — 컴포넌트 props 표 (자동 생성)
  *   skills/daleui/tokens.md      — 토큰 이름·값·용도 표 (자동 생성)
- *   public/llms.txt              — AI 인덱스 (npm 패키지에 포함)
+ *   llms.txt                     — AI 인덱스 (npm 패키지에 포함)
  *
  * 실행: bun run generate:llms
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { Project, SyntaxKind } from "ts-morph";
+import ts from "typescript";
 
-import { spacing } from "../src/tokens/spacing";
-import { radii } from "../src/tokens/radii";
 import { borderWidths, borders } from "../src/tokens/borders";
+import { semanticColors } from "../src/tokens/colors";
+import { icons } from "../src/tokens/iconography";
+import { radii } from "../src/tokens/radii";
+import { spacing } from "../src/tokens/spacing";
 import {
   fontSizes,
   fontWeights,
   letterSpacings,
   lineHeights,
 } from "../src/tokens/typography";
-import { semanticColors } from "../src/tokens/colors";
-import { icons } from "../src/tokens/iconography";
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const root = `${scriptDir}/..`;
@@ -77,95 +77,375 @@ type ComponentDoc = {
   name: string;
   description: string;
   props: PropRow[];
+  examples: StoryExample[];
 };
 
-const project = new Project({
-  tsConfigFilePath: `${root}/tsconfig.app.json`,
-  skipAddingFilesFromTsConfig: true,
+const configFile = ts.readConfigFile(
+  `${root}/tsconfig.app.json`,
+  ts.sys.readFile,
+);
+const parsedConfig = ts.parseJsonConfigFileContent(
+  configFile.config,
+  ts.sys,
+  root,
+);
+const program = ts.createProgram({
+  rootNames: parsedConfig.fileNames,
+  options: { ...parsedConfig.options, noEmit: true },
 });
-project.addSourceFilesAtPaths(`${root}/src/index.ts`);
-project.addSourceFilesAtPaths(`${root}/src/components/**/*.tsx`);
-project.addSourceFilesAtPaths(`${root}/src/components/shared/types.ts`);
+const checker = program.getTypeChecker();
 
-const indexFile = project.getSourceFileOrThrow(`${root}/src/index.ts`);
+function getJsDocDescription(node: ts.Node): string {
+  for (const jsDoc of ts.getJSDocCommentsAndTags(node)) {
+    if (ts.isJSDoc(jsDoc) && jsDoc.comment) {
+      return typeof jsDoc.comment === "string"
+        ? jsDoc.comment
+        : jsDoc.comment
+            .map((c) => ("text" in c ? (c.text as string) : ""))
+            .join("");
+    }
+  }
+  return "";
+}
+
+function normalizeType(typeStr: string): string {
+  return typeStr
+    .replace(/import\("[^"]*"\)\./g, "")
+    .replace(/\bReact\./g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
 function extractDefaults(
-  sourceFile: ReturnType<typeof project.getSourceFile>,
-  exportName: string,
+  sourceFile: ts.SourceFile,
+  componentName: string,
 ): Record<string, string> {
-  if (!sourceFile) return {};
   const defaults: Record<string, string> = {};
 
-  // function declaration 또는 variable declaration (const Foo = (...) => ...) 둘 다 처리
-  const fn =
-    sourceFile.getFunction(exportName) ??
-    sourceFile
-      .getVariableDeclarations()
-      .find((v) => v.getName() === exportName);
-
-  if (!fn) return defaults;
-
-  const binding = fn.getFirstDescendantByKind(SyntaxKind.ObjectBindingPattern);
-  if (!binding) return defaults;
-
-  for (const el of binding.getElements()) {
-    const init = el.getInitializer();
-    if (init) defaults[el.getName()] = init.getText();
+  function extractFromParams(params: ts.NodeArray<ts.ParameterDeclaration>) {
+    const firstParam = params[0];
+    if (!firstParam || !ts.isObjectBindingPattern(firstParam.name)) return;
+    for (const el of firstParam.name.elements) {
+      if (!el.initializer) continue;
+      const propName = el.propertyName
+        ? ts.isIdentifier(el.propertyName)
+          ? el.propertyName.text
+          : ""
+        : ts.isIdentifier(el.name)
+          ? el.name.text
+          : "";
+      if (propName) defaults[propName] = el.initializer.getText(sourceFile);
+    }
   }
+
+  ts.forEachChild(sourceFile, (node) => {
+    if (ts.isFunctionDeclaration(node) && node.name?.text === componentName) {
+      extractFromParams(node.parameters);
+    }
+    if (ts.isVariableStatement(node)) {
+      for (const decl of node.declarationList.declarations) {
+        if (
+          ts.isIdentifier(decl.name) &&
+          decl.name.text === componentName &&
+          decl.initializer &&
+          (ts.isArrowFunction(decl.initializer) ||
+            ts.isFunctionExpression(decl.initializer))
+        ) {
+          extractFromParams(decl.initializer.parameters);
+        }
+      }
+    }
+  });
+
   return defaults;
+}
+
+type StoryExample = {
+  storyName: string;
+  code: string;
+};
+
+function getObjectArgs(
+  obj: ts.ObjectLiteralExpression,
+  sourceFile: ts.SourceFile,
+): Record<string, string> {
+  const result: Record<string, string> = {};
+  for (const prop of obj.properties) {
+    if (
+      ts.isPropertyAssignment(prop) &&
+      ts.isIdentifier(prop.name) &&
+      prop.name.text !== "children"
+    ) {
+      result[prop.name.text] = prop.initializer.getText(sourceFile);
+    }
+  }
+  return result;
+}
+
+function argsToPropsString(args: Record<string, string>): string {
+  return Object.entries(args)
+    .filter(([, val]) => val !== "false" && val !== "undefined")
+    .map(([key, val]) => {
+      if (val === "true") return key;
+      if (val.startsWith('"') || val.startsWith("'")) return `${key}=${val}`;
+      return `${key}={${val}}`;
+    })
+    .join(" ");
+}
+
+function extractStoryExamples(componentName: string): StoryExample[] {
+  const storiesPath = `${root}/src/components/${componentName}/${componentName}.stories.tsx`;
+  const sourceFile = program.getSourceFile(storiesPath);
+  if (!sourceFile) return [];
+
+  // meta default args
+  let metaArgs: Record<string, string> = {};
+  ts.forEachChild(sourceFile, (node) => {
+    if (
+      ts.isExportAssignment(node) &&
+      ts.isObjectLiteralExpression(node.expression)
+    ) {
+      const argsProp = node.expression.properties.find(
+        (p) =>
+          ts.isPropertyAssignment(p) &&
+          ts.isIdentifier(p.name) &&
+          p.name.text === "args",
+      );
+      if (
+        argsProp &&
+        ts.isPropertyAssignment(argsProp) &&
+        ts.isObjectLiteralExpression(argsProp.initializer)
+      ) {
+        metaArgs = getObjectArgs(argsProp.initializer, sourceFile);
+      }
+    }
+  });
+
+  const examples: StoryExample[] = [];
+
+  ts.forEachChild(sourceFile, (node) => {
+    if (!ts.isVariableStatement(node)) return;
+    const isExported = node.modifiers?.some(
+      (m) => m.kind === ts.SyntaxKind.ExportKeyword,
+    );
+    if (!isExported) return;
+
+    for (const decl of node.declarationList.declarations) {
+      if (!ts.isIdentifier(decl.name)) continue;
+      const storyName = decl.name.text;
+      if (!decl.initializer || !ts.isObjectLiteralExpression(decl.initializer))
+        continue;
+
+      // story-specific args (overrides)
+      const storyArgsProp = decl.initializer.properties.find(
+        (p) =>
+          ts.isPropertyAssignment(p) &&
+          ts.isIdentifier(p.name) &&
+          p.name.text === "args",
+      );
+      const storyArgs =
+        storyArgsProp &&
+        ts.isPropertyAssignment(storyArgsProp) &&
+        ts.isObjectLiteralExpression(storyArgsProp.initializer)
+          ? getObjectArgs(storyArgsProp.initializer, sourceFile)
+          : {};
+
+      // merge: story args override meta args, then replace {…args}
+      const mergedArgs = { ...metaArgs, ...storyArgs };
+      const propsStr = argsToPropsString(mergedArgs);
+
+      const renderProp = decl.initializer.properties.find(
+        (p) =>
+          ts.isPropertyAssignment(p) &&
+          ts.isIdentifier(p.name) &&
+          p.name.text === "render",
+      );
+      if (!renderProp || !ts.isPropertyAssignment(renderProp)) continue;
+
+      const renderFn = renderProp.initializer;
+      if (!ts.isArrowFunction(renderFn) && !ts.isFunctionExpression(renderFn))
+        continue;
+
+      const body = renderFn.body;
+      let code: string;
+
+      if (ts.isBlock(body)) {
+        const returnStmt = body.statements.find(ts.isReturnStatement);
+        if (!returnStmt?.expression) continue;
+        code = returnStmt.expression.getText(sourceFile).trim();
+      } else {
+        code = body.getText(sourceFile).trim();
+      }
+
+      // {…args} → inlined props
+      code = code.replace(/\{\.\.\.args\}/g, propsStr);
+
+      // attr={args.X} → attr="value" or remove the whole attribute if undefined
+      code = code.replace(
+        /([\w-]+)=\{args\.(\w+)\}/g,
+        (_match, attr: string, key: string) => {
+          const val = mergedArgs[key];
+          if (val === undefined) return "";
+          if (val.startsWith('"') || val.startsWith("'"))
+            return `${attr}=${val}`;
+          return `${attr}={${val}}`;
+        },
+      );
+
+      // {args.X} as JSX children → unwrapped text value or expression
+      code = code.replace(/\{args\.(\w+)\}/g, (_match, key: string) => {
+        const val = mergedArgs[key];
+        if (val === undefined) return "";
+        if (val.startsWith('"') || val.startsWith("'"))
+          return val.slice(1, -1);
+        return val;
+      });
+
+      // remaining args.X in expressions
+      code = code.replace(/args\.(\w+)/g, (_match, key: string) => {
+        const val = mergedArgs[key];
+        if (val === undefined) return '""';
+        return val;
+      });
+
+      examples.push({ storyName, code });
+    }
+  });
+
+  return examples;
 }
 
 function extractComponentDocs(): ComponentDoc[] {
   const docs: ComponentDoc[] = [];
+  const indexFile = program.getSourceFile(`${root}/src/index.ts`);
+  if (!indexFile) return docs;
 
-  for (const exp of indexFile.getExportDeclarations()) {
-    for (const named of exp.getNamedExports()) {
-      if (named.isTypeOnly()) continue;
-      const name = named.getName();
-      if (!name || name.endsWith("Props") || name === "FieldProps") continue;
+  ts.forEachChild(indexFile, (node) => {
+    if (
+      !ts.isExportDeclaration(node) ||
+      !node.exportClause ||
+      !ts.isNamedExports(node.exportClause)
+    )
+      return;
+
+    for (const element of node.exportClause.elements) {
+      if (element.isTypeOnly) continue;
+      const name = element.name.text;
+      if (name.endsWith("Props") || name === "FieldProps") continue;
 
       const sourcePath = `${root}/src/components/${name}/${name}.tsx`;
-      const sourceFile = project.getSourceFile(sourcePath);
+      const sourceFile = program.getSourceFile(sourcePath);
       if (!sourceFile) continue;
 
-      const propsInterface = sourceFile.getInterface(`${name}Props`);
-      if (!propsInterface) continue;
-
+      let propsNode: ts.InterfaceDeclaration | ts.TypeAliasDeclaration | undefined;
+      let description = "";
       const defaults = extractDefaults(sourceFile, name);
 
-      const fnDecl = sourceFile.getFunction(name);
-      const varDecl = sourceFile
-        .getVariableDeclarations()
-        .find((v) => v.getName() === name);
-      const rawDesc =
-        fnDecl?.getJsDocs()[0]?.getDescription() ??
-        varDecl
-          ?.getFirstAncestorByKind(SyntaxKind.VariableStatement)
-          ?.getJsDocs()[0]
-          ?.getDescription() ??
-        "";
-      const description = rawDesc
-        .replace(/^#{1,6}\s+(.*)$/gm, "**$1**")
-        .replace(/\[([^\]]+)\]\(\?path=[^)]*\)/g, "$1")
-        .replace(/\s*TODO:.*$/gm, "")
-        .trim();
+      ts.forEachChild(sourceFile, (child) => {
+        if (
+          ts.isInterfaceDeclaration(child) &&
+          child.name.text === `${name}Props`
+        ) {
+          propsNode = child;
+        }
+        if (
+          ts.isTypeAliasDeclaration(child) &&
+          child.name.text === `${name}Props`
+        ) {
+          propsNode = child;
+        }
+        if (ts.isFunctionDeclaration(child) && child.name?.text === name) {
+          description = getJsDocDescription(child);
+        }
+        if (ts.isVariableStatement(child)) {
+          for (const decl of child.declarationList.declarations) {
+            if (ts.isIdentifier(decl.name) && decl.name.text === name) {
+              description = getJsDocDescription(child);
+            }
+          }
+        }
+      });
 
-      const props: PropRow[] = propsInterface.getProperties().map((prop) => ({
-        name: prop.getName(),
-        type: prop.getType().getText(prop).replace(/\s+/g, " "),
-        required: !prop.hasQuestionToken(),
-        defaultValue: defaults[prop.getName()],
-        description:
-          prop
-            .getJsDocs()[0]
-            ?.getDescription()
-            ?.replace(/\s*TODO:.*$/gm, "")
-            .trim() ?? "",
-      }));
+      if (!propsNode) continue;
 
-      docs.push({ name, description, props });
+      // interface면 멤버 직접 순회, type alias(union 등)면 타입 체커로 프로퍼티 추출
+      let props: PropRow[];
+      if (ts.isInterfaceDeclaration(propsNode)) {
+        props = propsNode.members
+          .filter(ts.isPropertySignature)
+          .map((prop) => {
+            const propName = ts.isIdentifier(prop.name) ? prop.name.text : "";
+            const typeStr = normalizeType(
+              checker.typeToString(
+                checker.getTypeAtLocation(prop),
+                prop,
+                ts.TypeFormatFlags.NoTruncation,
+              ),
+            );
+            return {
+              name: propName,
+              type: typeStr,
+              required: !prop.questionToken,
+              defaultValue: defaults[propName],
+              description: getJsDocDescription(prop)
+                .replace(/\s*TODO:.*$/gm, "")
+                .trim(),
+            };
+          });
+      } else {
+        // 소스 파일 내 모든 type/interface 선언에서 직접 선언된 property signature 수집
+        const localProps = new Map<string, ts.PropertySignature>();
+        function collectLocalProps(node: ts.Node) {
+          if (
+            (ts.isInterfaceDeclaration(node) ||
+              ts.isTypeLiteralNode(node)) &&
+            ts.isPropertySignature
+          ) {
+            for (const member of node.members ?? []) {
+              if (
+                ts.isPropertySignature(member) &&
+                ts.isIdentifier(member.name)
+              ) {
+                localProps.set(member.name.text, member);
+              }
+            }
+          }
+          ts.forEachChild(node, collectLocalProps);
+        }
+        collectLocalProps(sourceFile);
+
+        props = [...localProps.entries()].map(([propName, propDecl]) => {
+          const typeStr = normalizeType(
+            checker.typeToString(
+              checker.getTypeAtLocation(propDecl),
+              propDecl,
+              ts.TypeFormatFlags.NoTruncation,
+            ),
+          );
+          return {
+            name: propName,
+            type: typeStr,
+            required: !propDecl.questionToken,
+            defaultValue: defaults[propName],
+            description: getJsDocDescription(propDecl)
+              .replace(/\s*TODO:.*$/gm, "")
+              .trim(),
+          };
+        });
+      }
+
+      docs.push({
+        name,
+        description: description
+          .replace(/^#{1,6}\s+(.*)$/gm, "**$1**")
+          .replace(/\[([^\]]+)\]\(\?path=[^)]*\)/g, "$1")
+          .replace(/\s*TODO:.*$/gm, "")
+          .trim(),
+        props,
+        examples: extractStoryExamples(name),
+      });
     }
-  }
+  });
 
   return docs.sort((a, b) => a.name.localeCompare(b.name));
 }
@@ -181,6 +461,22 @@ function renderComponentsMd(components: ComponentDoc[]): string {
       escapeCell(p.description),
     ]);
 
+    const exampleLines =
+      c.examples.length > 0
+        ? [
+            "### 예시",
+            "",
+            ...c.examples.flatMap((ex) => [
+              `**${ex.storyName}**`,
+              "",
+              "```tsx",
+              ex.code,
+              "```",
+              "",
+            ]),
+          ]
+        : [];
+
     return [
       `## ${c.name}`,
       "",
@@ -189,6 +485,7 @@ function renderComponentsMd(components: ComponentDoc[]): string {
       "",
       mdTable(["prop", "타입", "기본값", "설명"], rows),
       "",
+      ...exampleLines,
     ].join("\n");
   });
 
@@ -351,7 +648,7 @@ function renderTokensMd(): string {
   ].join("\n");
 }
 
-// ── public/llms.txt (AI 인덱스) ──────────────────────────────
+// ── llms.txt (AI 인덱스) ──────────────────────────────────────
 
 function renderLlmsTxt(components: ComponentDoc[]): string {
   const componentLinks = components.map((c) => {
