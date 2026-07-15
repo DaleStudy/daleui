@@ -296,8 +296,7 @@ function extractStoryExamples(componentName: string): StoryExample[] {
       code = code.replace(/\{args\.(\w+)\}/g, (_match, key: string) => {
         const val = mergedArgs[key];
         if (val === undefined) return "";
-        if (val.startsWith('"') || val.startsWith("'"))
-          return val.slice(1, -1);
+        if (val.startsWith('"') || val.startsWith("'")) return val.slice(1, -1);
         return val;
       });
 
@@ -337,7 +336,10 @@ function extractComponentDocs(): ComponentDoc[] {
       const sourceFile = program.getSourceFile(sourcePath);
       if (!sourceFile) continue;
 
-      let propsNode: ts.InterfaceDeclaration | ts.TypeAliasDeclaration | undefined;
+      let propsNode:
+        | ts.InterfaceDeclaration
+        | ts.TypeAliasDeclaration
+        | undefined;
       let description = "";
       const defaults = extractDefaults(sourceFile, name);
 
@@ -371,34 +373,31 @@ function extractComponentDocs(): ComponentDoc[] {
       // interface면 멤버 직접 순회, type alias(union 등)면 타입 체커로 프로퍼티 추출
       let props: PropRow[];
       if (ts.isInterfaceDeclaration(propsNode)) {
-        props = propsNode.members
-          .filter(ts.isPropertySignature)
-          .map((prop) => {
-            const propName = ts.isIdentifier(prop.name) ? prop.name.text : "";
-            const typeStr = normalizeType(
-              checker.typeToString(
-                checker.getTypeAtLocation(prop),
-                prop,
-                ts.TypeFormatFlags.NoTruncation,
-              ),
-            );
-            return {
-              name: propName,
-              type: typeStr,
-              required: !prop.questionToken,
-              defaultValue: defaults[propName],
-              description: getJsDocDescription(prop)
-                .replace(/\s*TODO:.*$/gm, "")
-                .trim(),
-            };
-          });
+        props = propsNode.members.filter(ts.isPropertySignature).map((prop) => {
+          const propName = ts.isIdentifier(prop.name) ? prop.name.text : "";
+          const typeStr = normalizeType(
+            checker.typeToString(
+              checker.getTypeAtLocation(prop),
+              prop,
+              ts.TypeFormatFlags.NoTruncation,
+            ),
+          );
+          return {
+            name: propName,
+            type: typeStr,
+            required: !prop.questionToken,
+            defaultValue: defaults[propName],
+            description: getJsDocDescription(prop)
+              .replace(/\s*TODO:.*$/gm, "")
+              .trim(),
+          };
+        });
       } else {
         // 소스 파일 내 모든 type/interface 선언에서 직접 선언된 property signature 수집
         const localProps = new Map<string, ts.PropertySignature>();
         function collectLocalProps(node: ts.Node) {
           if (
-            (ts.isInterfaceDeclaration(node) ||
-              ts.isTypeLiteralNode(node)) &&
+            (ts.isInterfaceDeclaration(node) || ts.isTypeLiteralNode(node)) &&
             ts.isPropertySignature
           ) {
             for (const member of node.members ?? []) {
