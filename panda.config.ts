@@ -1,4 +1,5 @@
 import { defineConfig } from "@pandacss/dev";
+import pandaPreset from "@pandacss/dev/presets";
 import { globalCss } from "./src/styles/globalCss";
 import { borderWidths, borders } from "./src/tokens/borders";
 import { colors, semanticColors } from "./src/tokens/colors";
@@ -14,6 +15,18 @@ import {
 } from "./src/tokens/typography";
 
 export default defineConfig({
+  // 기본 프리셋의 serif 토큰은 상용 시스템 폰트(Cambria 등)를 참조하므로
+  // fonts 카테고리를 달레UI가 지원하는 폰트(sans, mono)로 대체한다
+  presets: [
+    {
+      ...pandaPreset,
+      theme: {
+        ...pandaPreset.theme,
+        tokens: { ...pandaPreset.theme.tokens, fonts },
+      },
+    },
+  ],
+
   // Whether to use css reset
   preflight: true,
 
@@ -62,7 +75,6 @@ export default defineConfig({
         borders,
         borderWidths,
         colors,
-        fonts,
         fontWeights,
         fontSizes,
         letterSpacings,
