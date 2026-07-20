@@ -22,7 +22,7 @@ jobs:
       ui: ${{ steps.filter.outputs.ui }}
     steps:
       # 바뀐 파일이 아래 필터에 걸리는지 검사해 ui 출력값(true/false)을 내보낸다
-      - uses: dorny/paths-filter@v3
+      - uses: dorny/paths-filter@v4
         id: filter
         with:
           filters: |
