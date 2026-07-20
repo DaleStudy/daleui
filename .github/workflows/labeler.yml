@@ -11,7 +11,7 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/labeler@v5
+      - uses: actions/labeler@v6
         with:
           # 수동으로 단 다른 라벨은 건드리지 않는다.
           sync-labels: false
