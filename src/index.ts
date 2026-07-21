@@ -47,6 +47,14 @@ export {
   type RadioGroupItemProps,
 } from "./components/RadioGroup/RadioGroup";
 export { Select, type SelectProps } from "./components/Select/Select";
+export {
+  Skeleton,
+  type SkeletonProps,
+  type SkeletonTextProps,
+  type SkeletonAvatarProps,
+  type SkeletonVariant,
+  type SkeletonAnimation,
+} from "./components/Skeleton/Skeleton";
 export { Tag, type TagProps } from "./components/Tag/Tag";
 export { Text, type TextProps } from "./components/Text/Text";
 export {
