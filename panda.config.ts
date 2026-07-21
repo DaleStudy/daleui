@@ -73,6 +73,21 @@ export default defineConfig({
             transform: "rotate(360deg)",
           },
         },
+        // 스켈레톤 - 중성 회색 펄스 (불투명도 깜빡임)
+        pulse: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.4" },
+        },
+        // 스켈레톤 - 중성 회색 웨이브 (::after 광택이 가로질러 흐름)
+        wave: {
+          "0%": { transform: "translateX(-100%)" },
+          "60%, 100%": { transform: "translateX(100%)" },
+        },
+        // 스켈레톤 - 브랜드 그라데이션 펄스 (그라데이션이 제자리에서 일렁임)
+        dalepulse: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
       },
       tokens: {
         borders,
