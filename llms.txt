@@ -1,0 +1,56 @@
+# daleui
+
+> 한국어 우선 React 디자인 시스템. Panda CSS 시맨틱 토큰과 접근성 높은 컴포넌트를 제공한다.
+
+## 규칙
+
+- `import "daleui/styles.css"` 필수
+- 시맨틱 토큰만 사용 (raw hex/px 금지)
+- 폼 필드는 label 또는 aria-label 필수
+
+## AI 에이전트
+
+- [SKILL.md](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/SKILL.md): 사용 규칙·컴포넌트 선택 가이드
+- [components.md](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md): 컴포넌트 props 표
+- [tokens.md](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/tokens.md): 토큰 이름·값·용도 표
+- [examples.md](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/examples.md): 조합 예시
+
+## 설치
+
+- npm: `npm install daleui pretendard @fontsource-variable/jetbrains-mono`
+- GitHub: https://github.com/DaleStudy/daleui
+
+## 컴포넌트
+
+상세 props → [components.md](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md)
+
+- [Box](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#box): `import { Box } from "daleui"`. Box는 가장 기본적인 레이아웃 컴포넌트입니다.
+- [Button](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#button): `import { Button } from "daleui"`. 버튼은 사용자의 명확한 작업 실행을 위해 사용되는 컴포넌트로, 완료, 저장, 제출과 같은 액션에 사용합니다.
+- [Card](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#card): `import { Card } from "daleui"`. Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.Link`에 자동으로 전달됩니다.
+- [Checkbox](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#checkbox): `import { Checkbox } from "daleui"`. 체크박스(Checkbox)는 사용자가 하나 이상을 중복 선택할 수 있도록 지원하는 인터페이스 구성 요소입니다.
+- [CheckboxGroup](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#checkboxgroup): `import { CheckboxGroup } from "daleui"`.
+- [Flex](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#flex): `import { Flex } from "daleui"`. CSS Flexbox 레이아웃을 위한 컨테이너 컴포넌트입니다.
+- [Grid](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#grid): `import { Grid } from "daleui"`. CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
+- [Heading](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#heading): `import { Heading } from "daleui"`. 페이지의 제목이나 섹션의 구조를 표현하기 위해 사용하는 컴포넌트입니다.
+- [HStack](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#hstack): `import { HStack } from "daleui"`. Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있는 이름과 기본값으로 묶은 컴포넌트입니다.
+- [Icon](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#icon): `import { Icon } from "daleui"`. 아이콘은 사용자의 이해를 돕고 행동을 유도하기 위해 사용하는 시각적 언어입니다.
+- [Label](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#label): `import { Label } from "daleui"`. 라벨(Label)은 입력 요소(TextInput, Select, Checkbox 등)에 이름을 부여해 사용자가 해당 필드의 목적을 명확하게 이해하도록 돕는 텍스트 컴포넌트입니다.
+- [Link](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#link): `import { Link } from "daleui"`. 링크는 사용자를 다른 페이지, 동일 페이지 내의 특정 위치, 또는 외부 리소스로 이동시키는 네비게이션(Navigation) 요소입니다.
+- [PasswordInput](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#passwordinput): `import { PasswordInput } from "daleui"`. 패스워드 인풋은 로그인이나 계정 인증 과정에서 사용자의 비밀번호를 안전하게 입력하도록 지원하는 보안 입력 필드입니다.
+- [RadioGroup](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#radiogroup): `import { RadioGroup } from "daleui"`.
+- [Select](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#select): `import { Select } from "daleui"`. 셀렉트는 미리 정의된 여러 옵션 중 하나를 사용자가 선택하도록 하기 위한 컴포넌트입니다.
+- [Tag](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#tag): `import { Tag } from "daleui"`. 콘텐츠의 속성, 카테고리, 상태(성공, 경고 등)를 키워드 형태로 식별하고 분류하여 시각적으로 강조하는 컴포넌트이다. 필요에 따라 링크 이동이나 삭제와 같은 상호작용 기능을 제공합니다.
+- [Text](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#text): `import { Text } from "daleui"`. 텍스트 컴포넌트입니다.
+- [TextInput](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#textinput): `import { TextInput } from "daleui"`. 텍스트 인풋은 사용자가 이름, 이메일, 검색어 등 텍스트 정보를 직접 입력할 수 있도록 제공되는 입력 컴포넌트입니다.
+- [VStack](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md#vstack): `import { VStack } from "daleui"`. Flex의 세로 배치 패턴(`direction="column"`, `align="center"`)을 의미 있는 이름과 기본값으로 묶은 컴포넌트입니다.
+
+## 토큰
+
+상세 표 → [tokens.md](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/tokens.md)
+
+- spacing, radii, borderWidths, borders, semanticColors, fontSizes, fontWeights, lineHeights, letterSpacings, icons
+
+## Optional
+
+- [Storybook (Chromatic)](https://main--675790d317ba346348aa3490.chromatic.com): 사람용 시각 문서
+- [웹사이트](https://www.daleui.com)

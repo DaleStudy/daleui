@@ -28,12 +28,15 @@
   "files": [
     "dist",
     "styled-system",
+    "llms.txt",
+    "skills",
     "README.md",
     "LICENSE"
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "tsc -b && vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
+    "build": "bun run generate:llms && tsc -b && vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
+    "generate:llms": "bun scripts/generate-llms-txt.ts && bunx prettier --write --parser markdown llms.txt skills/daleui/components.md skills/daleui/tokens.md",
     "format": "prettier --check .",
     "lint": "eslint .",
     "test": "vitest",
@@ -54,8 +57,6 @@
     "lucide-react": "^1.21.0"
   },
   "devDependencies": {
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
     "@chromatic-com/storybook": "^5.2.1",
     "@codecov/vite-plugin": "^2.0.1",
     "@eslint/js": "^10.0.1",
@@ -84,6 +85,8 @@
     "globals": "^17.7.0",
     "happy-dom": "^20.10.6",
     "prettier": "^3.8.5",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "storybook": "^10.4.6",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.62.1",
