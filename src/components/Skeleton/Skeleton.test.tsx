@@ -122,7 +122,6 @@ describe("Skeleton 애니메이션", () => {
     expect(className).toContain("bg.skeleton.highlight");
     expect(className).not.toContain("skeleton.brand");
   });
-
 });
 
 describe("Skeleton 접근성", () => {
