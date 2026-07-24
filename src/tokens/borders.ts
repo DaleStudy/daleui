@@ -52,6 +52,7 @@ export const borders: Tokens["borders"] = {
  * borderWidth, outlineWidth
  */
 export const borderWidths: Tokens["borderWidths"] = {
+  xs: { value: "0.5px" },
   sm: { value: "1px" },
   md: { value: "1.5px" },
   lg: { value: "2px" },

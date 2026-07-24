@@ -24,6 +24,7 @@ export {
   CheckboxGroupItem,
   type CheckboxGroupItemProps,
 } from "./components/CheckboxGroup/CheckboxGroup";
+export { Divider, type DividerProps } from "./components/Divider/Divider";
 export { Flex, type FlexProps } from "./components/Flex/Flex";
 export {
   Grid,
