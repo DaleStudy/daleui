@@ -75,10 +75,6 @@ export const semanticColors: SemanticTokens["colors"] = {
       DEFAULT: {
         value: { base: "{colors.slate.3}", _dark: "{colors.darkSage.4}" },
       },
-      // wave 애니메이션이 훑고 지나가는 밝은 강조색 (두 테마 모두 기본색보다 밝음)
-      highlight: {
-        value: { base: "{colors.slate.1}", _dark: "{colors.darkSage.6}" },
-      },
     },
   },
   border: {

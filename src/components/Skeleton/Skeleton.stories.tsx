@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { useState } from "react";
 import { css } from "../../../styled-system/css";
-import { Button } from "../Button/Button";
 import { Skeleton } from "./Skeleton";
 import type { SkeletonAnimation, SkeletonVariant } from "./Skeleton";
 
@@ -12,7 +10,7 @@ interface SkeletonStoryArgs {
   height: string | number;
 }
 
-const animations: SkeletonAnimation[] = ["pulse", "wave", false];
+const animations: SkeletonAnimation[] = ["pulse", false];
 
 const row = css({ display: "flex", gap: "24", alignItems: "center" });
 const col = css({ display: "flex", flexDirection: "column", gap: "16" });
@@ -34,12 +32,11 @@ export default {
         component: `
 콘텐츠가 로딩되는 동안 자리를 표시하는 플레이스홀더(스켈레톤) 컴포넌트입니다.
 
-- **variant**: \`text\`(기본) · \`circular\` · \`rectangular\` · \`rounded\`
-- **animation**: \`pulse\` · \`wave\`(중성 회색), \`false\`(정적)
-- **loading**: \`false\`로 두면 실제 \`children\`이 렌더링됩니다. 자식을 전달하면 그 크기에 맞춰 레이아웃을 예약합니다.
+- **variant**: \`text\`(기본) · \`circular\` · \`rounded\`
+- **animation**: \`pulse\`(기본) · \`false\`(정적)
 
 컴파운드 컴포넌트로 구성됩니다:
-- \`Skeleton\`: 기본 플레이스홀더 (variant, animation, width/height, loading)
+- \`Skeleton\`: 기본 플레이스홀더 (variant, animation, width/height)
 - \`Skeleton.Text\`: 여러 줄 텍스트 플레이스홀더 (lines, lastLineWidth)
 - \`Skeleton.Avatar\`: 원형 아바타 플레이스홀더 (size)
 
@@ -59,7 +56,7 @@ export default {
   argTypes: {
     variant: {
       control: "radio",
-      options: ["text", "circular", "rectangular", "rounded"],
+      options: ["text", "circular", "rounded"],
       description: "모양",
     },
     animation: {
@@ -103,10 +100,6 @@ export const Variants: StoryObj<SkeletonStoryArgs> = {
         <Skeleton variant="circular" width={56} height={56} />
       </div>
       <div className={cell}>
-        <span className={label}>rectangular</span>
-        <Skeleton variant="rectangular" width={120} height={56} />
-      </div>
-      <div className={cell}>
         <span className={label}>rounded</span>
         <Skeleton variant="rounded" width={120} height={56} />
       </div>
@@ -116,7 +109,7 @@ export const Variants: StoryObj<SkeletonStoryArgs> = {
     docs: {
       description: {
         story:
-          "네 가지 모양 변형입니다. `rectangular`는 직각 모서리(MUI 패리티), `rounded`는 `md` 반경, `text`는 둘러싼 글자 크기에 맞춰 높이가 자동 조절됩니다.",
+          "세 가지 모양 변형입니다. `rounded`는 `md` 반경, `text`는 둘러싼 글자 크기에 맞춰 높이가 자동 조절됩니다.",
       },
     },
   },
@@ -141,8 +134,7 @@ export const Animations: StoryObj<SkeletonStoryArgs> = {
   parameters: {
     docs: {
       description: {
-        story:
-          "`pulse`/`wave`는 중성 회색 모션이고, `false`는 정적 채움입니다.",
+        story: "`pulse`는 기본 중성 회색 모션이고, `false`는 정적 채움입니다.",
       },
     },
   },
@@ -200,63 +192,9 @@ export const MediaObject: StoryObj<SkeletonStoryArgs> = {
   },
 };
 
-function LoadingToggleDemo() {
-  const [loading, setLoading] = useState(true);
-  return (
-    <div
-      className={css({
-        display: "flex",
-        flexDirection: "column",
-        gap: "16",
-        width: "320px",
-      })}
-    >
-      <Button onClick={() => setLoading((value) => !value)}>
-        {loading ? "콘텐츠 보이기" : "다시 로딩"}
-      </Button>
-      <div className={css({ display: "flex", gap: "16" })}>
-        <Skeleton.Avatar size={48} loading={loading}>
-          <img
-            src="https://avatars.githubusercontent.com/u/52685259"
-            alt="DaleStudy"
-            width={48}
-            height={48}
-            className={css({ borderRadius: "full" })}
-          />
-        </Skeleton.Avatar>
-        <div className={css({ flex: "1" })}>
-          <Skeleton.Text lines={3} loading={loading}>
-            <p>
-              실제 콘텐츠가 여기에 표시됩니다. 로딩이 끝나면 스켈레톤이 실제
-              콘텐츠로 교체됩니다.
-            </p>
-          </Skeleton.Text>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export const LoadingToggle: StoryObj<SkeletonStoryArgs> = {
-  render: () => <LoadingToggleDemo />,
-  parameters: {
-    // 인터랙션 데모이므로 Chromatic 스냅샷은 생략합니다.
-    chromatic: { disableSnapshot: true },
-    docs: {
-      description: {
-        story:
-          "`loading`을 토글하면 플레이스홀더가 실제 콘텐츠로 교체됩니다. 자식을 전달했기 때문에 로딩 중에는 자식 크기에 맞춰 레이아웃이 예약됩니다.",
-      },
-    },
-  },
-};
-
 export const ReducedMotion: StoryObj<SkeletonStoryArgs> = {
   render: () => (
-    <div className={col}>
-      <Skeleton variant="rounded" animation="pulse" width={280} height={40} />
-      <Skeleton variant="rounded" animation="wave" width={280} height={40} />
-    </div>
+    <Skeleton variant="rounded" animation="pulse" width={280} height={40} />
   ),
   parameters: {
     docs: {
