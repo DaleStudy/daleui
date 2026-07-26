@@ -38,10 +38,11 @@ export default {
 컴파운드 컴포넌트로 구성됩니다:
 - \`Skeleton\`: 기본 플레이스홀더 (variant, animation, width/height)
 - \`Skeleton.Text\`: 여러 줄 텍스트 플레이스홀더 (lines, lastLineWidth)
-- \`Skeleton.Avatar\`: 원형 아바타 플레이스홀더 (size)
+- \`Skeleton.Avatar\`: 원형 아바타 플레이스홀더 (diameter)
 
 ### 접근성 및 모션 안내
-- 플레이스홀더는 \`aria-hidden\`으로 가려지고, 래퍼는 \`aria-busy\`로 로딩 상태를 알립니다.
+- 플레이스홀더는 장식용으로 취급되어 \`aria-hidden\`으로 가려집니다.
+- 로딩 상태는 실제 콘텐츠를 소유한 영역에서 별도로 전달해야 합니다.
 - 모든 애니메이션은 \`prefers-reduced-motion: reduce\` 환경에서 자동으로 정적 채움으로 대체됩니다.
         `,
       },
@@ -67,14 +68,19 @@ export default {
     width: { control: "text", description: "너비 (숫자는 px)" },
     height: { control: "text", description: "높이 (숫자는 px)" },
   },
-  render: (args) => (
-    <Skeleton
-      variant={args.variant}
-      animation={args.animation}
-      width={args.width || undefined}
-      height={args.height || undefined}
-    />
-  ),
+  render: (args) => {
+    const width = args.width || undefined;
+    const height = args.height || (args.variant === "text" ? undefined : width);
+
+    return (
+      <Skeleton
+        variant={args.variant}
+        animation={args.animation}
+        width={width}
+        height={height}
+      />
+    );
+  },
 } satisfies Meta<SkeletonStoryArgs>;
 
 export const Basic: StoryObj<SkeletonStoryArgs> = {
@@ -82,7 +88,7 @@ export const Basic: StoryObj<SkeletonStoryArgs> = {
     docs: {
       description: {
         story:
-          "Controls 패널에서 variant, animation, width, height를 조정하여 테스트할 수 있습니다.",
+          "Controls 패널에서 variant, animation, width, height를 조정할 수 있습니다. height를 비우면 circular/rounded는 width와 같은 높이로 표시됩니다.",
       },
     },
   },
@@ -159,15 +165,16 @@ export const Text: StoryObj<SkeletonStoryArgs> = {
 export const Avatar: StoryObj<SkeletonStoryArgs> = {
   render: () => (
     <div className={row}>
-      <Skeleton.Avatar size={32} />
-      <Skeleton.Avatar size={48} />
-      <Skeleton.Avatar size={64} />
+      <Skeleton.Avatar diameter={32} />
+      <Skeleton.Avatar diameter={48} />
+      <Skeleton.Avatar diameter={64} />
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: "원형 아바타 플레이스홀더입니다. `size`로 지름을 지정합니다.",
+        story:
+          "원형 아바타 플레이스홀더입니다. `diameter`로 지름을 지정합니다.",
       },
     },
   },
@@ -176,7 +183,7 @@ export const Avatar: StoryObj<SkeletonStoryArgs> = {
 export const MediaObject: StoryObj<SkeletonStoryArgs> = {
   render: () => (
     <div className={css({ display: "flex", gap: "16", width: "320px" })}>
-      <Skeleton.Avatar size={48} />
+      <Skeleton.Avatar diameter={48} />
       <div className={css({ flex: "1" })}>
         <Skeleton.Text lines={3} />
       </div>

@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { Skeleton } from "./Skeleton";
 
@@ -9,11 +9,6 @@ function getPlaceholder(container: HTMLElement) {
 
 function getPlaceholders(container: HTMLElement) {
   return container.querySelectorAll('[aria-hidden="true"]');
-}
-
-/** 래퍼는 aria-busy 로 로딩 상태를 알립니다. */
-function getWrapper(container: HTMLElement) {
-  return container.querySelector("[aria-busy]");
 }
 
 describe("Skeleton 모양 변형", () => {
@@ -69,13 +64,12 @@ describe("Skeleton 애니메이션", () => {
 });
 
 describe("Skeleton 접근성", () => {
-  test("플레이스홀더는 aria-hidden, 래퍼는 aria-busy를 가짐", () => {
-    const { container } = render(<Skeleton />);
+  test("장식용 플레이스홀더만 aria-hidden으로 가리고 로딩 상태를 만들지 않음", () => {
+    const { container } = render(<Skeleton data-testid="skeleton" />);
     const placeholder = getPlaceholder(container);
     expect(placeholder).toHaveAttribute("aria-hidden", "true");
-
-    const wrapper = getWrapper(container);
-    expect(wrapper).toHaveAttribute("aria-busy", "true");
+    expect(screen.getByTestId("skeleton")).not.toHaveAttribute("aria-busy");
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
   });
 });
 
@@ -124,15 +118,15 @@ describe("Skeleton.Text", () => {
 });
 
 describe("Skeleton.Avatar", () => {
-  test("size 크기의 원형 박스를 렌더링함", () => {
-    const { container } = render(<Skeleton.Avatar size={48} />);
+  test("diameter 크기의 원형 박스를 렌더링함", () => {
+    const { container } = render(<Skeleton.Avatar diameter={48} />);
     const placeholder = getPlaceholder(container) as HTMLElement;
     expect(placeholder).toHaveClass("bdr_full");
     expect(placeholder.style.width).toBe("48px");
     expect(placeholder.style.height).toBe("48px");
   });
 
-  test("기본 size는 40px", () => {
+  test("기본 diameter는 40px", () => {
     const { container } = render(<Skeleton.Avatar />);
     const placeholder = getPlaceholder(container) as HTMLElement;
     expect(placeholder.style.width).toBe("40px");

@@ -18,7 +18,7 @@ export interface SkeletonProps extends Omit<
   /**
    * 모양.
    * - `text`: 둘러싼 글자 크기에 맞춰 높이가 자동 조절됩니다(기본값).
-   * - `circular`: 정원형. `width`/`height`(또는 `Skeleton.Avatar`의 `size`)로 크기를 지정합니다.
+   * - `circular`: 정원형. `width`/`height`(또는 `Skeleton.Avatar`의 `diameter`)로 크기를 지정합니다.
    * - `rounded`: `md` 반경의 둥근 모서리.
    */
   variant?: SkeletonVariant;
@@ -58,7 +58,7 @@ function SkeletonRoot({
   };
 
   return (
-    <span ref={ref} aria-busy={true} className={className} {...rest}>
+    <span ref={ref} className={className} {...rest}>
       <span
         aria-hidden="true"
         style={style}
@@ -101,7 +101,6 @@ function SkeletonText({
       as="span"
       align="stretch"
       gap="4"
-      aria-busy={true}
       className={className}
       {...rest}
     >
@@ -122,7 +121,7 @@ export interface SkeletonAvatarProps extends Omit<
   "style" | "children"
 > {
   /** 지름. 숫자는 `px`로, 문자열은 그대로 사용합니다. */
-  size?: string | number;
+  diameter?: string | number;
   /** 모션. `Skeleton`과 동일한 값입니다. */
   animation?: SkeletonAnimation;
   /** 요소 참조 */
@@ -131,7 +130,7 @@ export interface SkeletonAvatarProps extends Omit<
 
 function SkeletonAvatar({
   ref,
-  size = 40,
+  diameter = 40,
   animation = "pulse",
   className,
   ...rest
@@ -140,8 +139,8 @@ function SkeletonAvatar({
     <SkeletonRoot
       ref={ref}
       variant="circular"
-      width={size}
-      height={size}
+      width={diameter}
+      height={diameter}
       animation={animation}
       className={className}
       {...rest}
@@ -194,7 +193,8 @@ const placeholderStyles = cva({
  *
  * - `variant`로 모양(텍스트/원형/둥근 사각형)을 고릅니다.
  * - `animation`으로 모션을 고릅니다. `pulse`는 중성 회색 모션이고, `false`는 정적입니다.
- * - 플레이스홀더는 `aria-hidden`으로 가려지고, 래퍼는 `aria-busy`로 로딩 상태를 알립니다.
+ * - 플레이스홀더는 장식용으로 취급되어 `aria-hidden`으로 가려집니다.
+ * - 로딩 상태는 실제 콘텐츠를 소유한 영역에서 별도로 전달해야 합니다.
  * - 모든 애니메이션은 `prefers-reduced-motion: reduce` 환경에서 정적 채움으로 대체됩니다.
  */
 export const Skeleton = Object.assign(SkeletonRoot, {
@@ -203,7 +203,7 @@ export const Skeleton = Object.assign(SkeletonRoot, {
    */
   Text: SkeletonText,
   /**
-   * 원형 아바타 플레이스홀더입니다. `size`로 지름을 지정합니다.
+   * 원형 아바타 플레이스홀더입니다. `diameter`로 지름을 지정합니다.
    */
   Avatar: SkeletonAvatar,
 });
