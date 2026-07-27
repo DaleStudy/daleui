@@ -54,8 +54,8 @@
     "lucide-react": "^1.21.0"
   },
   "devDependencies": {
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "@chromatic-com/storybook": "^5.2.1",
     "@codecov/vite-plugin": "^2.0.1",
     "@eslint/js": "^10.0.1",
