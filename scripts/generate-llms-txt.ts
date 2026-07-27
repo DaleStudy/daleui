@@ -4,11 +4,12 @@
  * 산출물:
  *   skills/daleui/components.md  — 컴포넌트 props 표 (자동 생성)
  *   skills/daleui/tokens.md      — 토큰 이름·값·용도 표 (자동 생성)
+ *   skills/daleui/examples.md    — 조합 예시 (src/examples/*.tsx에서 자동 생성)
  *   llms.txt                     — AI 인덱스 (npm 패키지에 포함)
  *
  * 실행: bun run generate:llms
  */
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import ts from "typescript";
@@ -31,6 +32,7 @@ const root = `${scriptDir}/..`;
 const OUT = {
   components: `${root}/skills/daleui/components.md`,
   tokens: `${root}/skills/daleui/tokens.md`,
+  examples: `${root}/skills/daleui/examples.md`,
   llms: `${root}/llms.txt`,
 };
 
@@ -647,6 +649,90 @@ function renderTokensMd(): string {
   ].join("\n");
 }
 
+// ── examples.md ───────────────────────────────────────────────
+
+type ExampleDoc = {
+  title: string;
+  description: string;
+  code: string;
+};
+
+/**
+ * src/examples/*.tsx(하위 디렉터리 제외)를 읽어 조합 예시를 추출한다.
+ * 각 파일은 최상단 JSDoc의 첫 줄을 제목, 나머지를 설명으로 사용하며,
+ * 공개 패키지 사용법을 보여주기 위해 `../index` import를 `daleui`로 치환한다.
+ */
+function extractExampleDocs(): ExampleDoc[] {
+  const examplesDir = `${root}/src/examples`;
+  let entries: string[];
+  try {
+    entries = readdirSync(examplesDir, { withFileTypes: true })
+      .filter((d) => d.isFile() && d.name.endsWith(".tsx"))
+      .map((d) => d.name)
+      .sort();
+  } catch {
+    return [];
+  }
+
+  const docs: ExampleDoc[] = [];
+  for (const fileName of entries) {
+    const sourceFile = program.getSourceFile(`${examplesDir}/${fileName}`);
+    if (!sourceFile) continue;
+
+    const fullText = sourceFile.getFullText();
+    let title = fileName.replace(/\.tsx$/, "");
+    let description = "";
+    let code = fullText;
+
+    const jsdocMatch = fullText.match(/\/\*\*[\s\S]*?\*\//);
+    if (jsdocMatch && fullText.slice(0, jsdocMatch.index).trim() === "") {
+      const lines = jsdocMatch[0]
+        .replace(/^\/\*\*/, "")
+        .replace(/\*\/$/, "")
+        .split("\n")
+        .map((l) => l.replace(/^\s*\*\s?/, "").trimEnd());
+      while (lines.length && lines[0].trim() === "") lines.shift();
+      while (lines.length && lines[lines.length - 1].trim() === "") lines.pop();
+      title = lines.shift()?.trim() || title;
+      while (lines.length && lines[0].trim() === "") lines.shift();
+      description = lines.join("\n").trim();
+      code = fullText.slice((jsdocMatch.index ?? 0) + jsdocMatch[0].length);
+    }
+
+    code = code
+      .replace(/from "\.\.\/index"/g, 'from "daleui"')
+      .replace(/from "\.\.\/index\.ts"/g, 'from "daleui"')
+      .trim();
+
+    docs.push({ title, description, code });
+  }
+
+  return docs;
+}
+
+function renderExamplesMd(examples: ExampleDoc[]): string {
+  const sections = examples.map((ex, i) =>
+    [
+      `## ${i + 1}. ${ex.title}`,
+      "",
+      ex.description ? `${ex.description}\n` : "",
+      "```tsx",
+      ex.code,
+      "```",
+      "",
+    ].join("\n"),
+  );
+
+  return [
+    "# daleui 조합 예시",
+    "",
+    "> 자동 생성 — 수동 편집하지 마세요. 원본: `src/examples/*.tsx` (tsc로 타입 검증됨).",
+    '> 각 예시는 `import "daleui/styles.css"`가 적용된 환경을 가정한다.',
+    "",
+    ...sections,
+  ].join("\n");
+}
+
 // ── llms.txt (AI 인덱스) ──────────────────────────────────────
 
 function renderLlmsTxt(components: ComponentDoc[]): string {
@@ -702,13 +788,15 @@ function renderLlmsTxt(components: ComponentDoc[]): string {
 // ── 실행 ─────────────────────────────────────────────────────
 
 const components = extractComponentDocs();
+const examples = extractExampleDocs();
 
 write(OUT.components, renderComponentsMd(components));
 write(OUT.tokens, renderTokensMd());
+write(OUT.examples, renderExamplesMd(examples));
 write(OUT.llms, renderLlmsTxt(components));
 
 console.log(
-  `생성 완료 (${components.length}개 컴포넌트):`,
+  `생성 완료 (${components.length}개 컴포넌트, ${examples.length}개 예시):`,
   Object.values(OUT)
     .map((p) => p.replace(root + "/", ""))
     .join(", "),
