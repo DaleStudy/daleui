@@ -110,12 +110,47 @@ function getJsDocDescription(node: ts.Node): string {
   return "";
 }
 
+/** PropertySignature의 이름을 추출한다. 식별자뿐 아니라 "aria-label" 같은 문자열 리터럴 키도 지원한다. */
+function getPropName(name: ts.PropertyName): string {
+  if (ts.isIdentifier(name)) return name.text;
+  if (ts.isStringLiteral(name)) return name.text;
+  return "";
+}
+
 function normalizeType(typeStr: string): string {
   return typeStr
     .replace(/import\("[^"]*"\)\./g, "")
     .replace(/\bReact\./g, "")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+/** 문자열이 하나의 균형 잡힌 괄호쌍으로 통째로 감싸져 있으면 그 괄호를 제거한다. */
+function stripOuterParens(s: string): string {
+  if (!s.startsWith("(") || !s.endsWith(")")) return s;
+  let depth = 0;
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === "(") depth++;
+    else if (s[i] === ")") {
+      depth--;
+      // 끝에 도달하기 전에 최상위 괄호가 닫히면 전체를 감싼 게 아니다.
+      if (depth === 0 && i !== s.length - 1) return s;
+    }
+  }
+  return s.slice(1, -1);
+}
+
+/**
+ * 표시용 타입 문자열을 다듬는다.
+ * 옵셔널 prop(`?`)은 타입체커가 끝에 ` | undefined`를 붙이는데,
+ * 옵셔널 여부는 표에서 굵기로 이미 구분되므로 중복인 후행 ` | undefined`를 제거한다.
+ * (제거 후 함수 타입을 감싸던 여분 괄호도 정리)
+ */
+function formatPropType(rawType: string, optional: boolean): string {
+  if (!optional) return rawType;
+  const stripped = rawType.replace(/\s*\|\s*undefined$/, "");
+  if (stripped === "" || stripped === rawType) return rawType;
+  return stripOuterParens(stripped);
 }
 
 function extractDefaults(
@@ -184,17 +219,6 @@ function getObjectArgs(
   return result;
 }
 
-function argsToPropsString(args: Record<string, string>): string {
-  return Object.entries(args)
-    .filter(([, val]) => val !== "false" && val !== "undefined")
-    .map(([key, val]) => {
-      if (val === "true") return key;
-      if (val.startsWith('"') || val.startsWith("'")) return `${key}=${val}`;
-      return `${key}={${val}}`;
-    })
-    .join(" ");
-}
-
 function extractStoryExamples(componentName: string): StoryExample[] {
   const storiesPath = `${root}/src/components/${componentName}/${componentName}.stories.tsx`;
   const sourceFile = program.getSourceFile(storiesPath);
@@ -254,7 +278,6 @@ function extractStoryExamples(componentName: string): StoryExample[] {
 
       // merge: story args override meta args, then replace {…args}
       const mergedArgs = { ...metaArgs, ...storyArgs };
-      const propsStr = argsToPropsString(mergedArgs);
 
       const renderProp = decl.initializer.properties.find(
         (p) =>
@@ -279,15 +302,38 @@ function extractStoryExamples(componentName: string): StoryExample[] {
         code = body.getText(sourceFile).trim();
       }
 
-      // {…args} → inlined props
-      code = code.replace(/\{\.\.\.args\}/g, propsStr);
+      // {…args} → inlined props.
+      // 같은 태그에 이미 명시된 속성(예: <Select {...args} disabled />)은
+      // 중복 출력되지 않도록 제외한다. rest/close는 캡처한 원문 그대로 되돌려
+      // 값에 ">"(예: 화살표 함수)가 있어도 코드가 깨지지 않게 한다.
+      code = code.replace(
+        /\{\.\.\.args\}([^>]*?)(\/?>)/g,
+        (_match, rest: string, close: string) => {
+          const present = new Set(
+            [...rest.matchAll(/(?:^|\s)([\w-]+)(?=[\s/>=])/g)].map((m) => m[1]),
+          );
+          const inlined = Object.entries(mergedArgs)
+            .filter(
+              ([key, val]) =>
+                val !== "false" && val !== "undefined" && !present.has(key),
+            )
+            .map(([key, val]) => {
+              if (val === "true") return key;
+              if (val.startsWith('"') || val.startsWith("'"))
+                return `${key}=${val}`;
+              return `${key}={${val}}`;
+            })
+            .join(" ");
+          return `${inlined}${rest}${close}`;
+        },
+      );
 
       // attr={args.X} → attr="value" or remove the whole attribute if undefined
       code = code.replace(
         /([\w-]+)=\{args\.(\w+)\}/g,
         (_match, attr: string, key: string) => {
           const val = mergedArgs[key];
-          if (val === undefined) return "";
+          if (val === undefined || val === "undefined") return "";
           if (val.startsWith('"') || val.startsWith("'"))
             return `${attr}=${val}`;
           return `${attr}={${val}}`;
@@ -308,6 +354,9 @@ function extractStoryExamples(componentName: string): StoryExample[] {
         if (val === undefined) return '""';
         return val;
       });
+
+      // 안전장치: 위 치환에서 남을 수 있는 의미 없는 `attr={undefined}` 제거
+      code = code.replace(/\s+[\w-]+=\{undefined\}/g, "");
 
       examples.push({ storyName, code });
     }
@@ -376,18 +425,19 @@ function extractComponentDocs(): ComponentDoc[] {
       let props: PropRow[];
       if (ts.isInterfaceDeclaration(propsNode)) {
         props = propsNode.members.filter(ts.isPropertySignature).map((prop) => {
-          const propName = ts.isIdentifier(prop.name) ? prop.name.text : "";
-          const typeStr = normalizeType(
+          const propName = getPropName(prop.name);
+          const rawType = normalizeType(
             checker.typeToString(
               checker.getTypeAtLocation(prop),
               prop,
               ts.TypeFormatFlags.NoTruncation,
             ),
           );
+          const required = !prop.questionToken;
           return {
             name: propName,
-            type: typeStr,
-            required: !prop.questionToken,
+            type: formatPropType(rawType, !required),
+            required,
             defaultValue: defaults[propName],
             description: getJsDocDescription(prop)
               .replace(/\s*TODO:.*$/gm, "")
@@ -395,19 +445,45 @@ function extractComponentDocs(): ComponentDoc[] {
           };
         });
       } else {
-        // 소스 파일 내 모든 type/interface 선언에서 직접 선언된 property signature 수집
+        // 소스 파일 내 모든 type/interface 선언에서 직접 선언된 property signature 수집.
+        // 유니온 타입(A | B)에서는 같은 prop이 분기별로 여러 번 선언될 수 있다
+        // (예: Tag의 href는 링크 분기 `string`, span 분기 `never`).
+        // 이때 정보량이 많은 선언(설명이 있거나 구체 타입)을 우선하고,
+        // 어느 한 분기라도 optional이면 optional로 취급한다.
         const localProps = new Map<string, ts.PropertySignature>();
+        const optionalNames = new Set<string>();
+
+        const propTypeStr = (decl: ts.PropertySignature) =>
+          normalizeType(
+            checker.typeToString(
+              checker.getTypeAtLocation(decl),
+              decl,
+              ts.TypeFormatFlags.NoTruncation,
+            ),
+          );
+        const propDesc = (decl: ts.PropertySignature) =>
+          getJsDocDescription(decl)
+            .replace(/\s*TODO:.*$/gm, "")
+            .trim();
+        const isInformative = (decl: ts.PropertySignature) => {
+          const t = propTypeStr(decl);
+          return (
+            propDesc(decl).length > 0 || (t !== "undefined" && t !== "never")
+          );
+        };
+
         function collectLocalProps(node: ts.Node) {
-          if (
-            (ts.isInterfaceDeclaration(node) || ts.isTypeLiteralNode(node)) &&
-            ts.isPropertySignature
-          ) {
+          if (ts.isInterfaceDeclaration(node) || ts.isTypeLiteralNode(node)) {
             for (const member of node.members ?? []) {
-              if (
-                ts.isPropertySignature(member) &&
-                ts.isIdentifier(member.name)
-              ) {
-                localProps.set(member.name.text, member);
+              if (!ts.isPropertySignature(member)) continue;
+              const memberName = getPropName(member.name);
+              if (!memberName) continue;
+              if (member.questionToken) optionalNames.add(memberName);
+              const existing = localProps.get(memberName);
+              if (!existing) {
+                localProps.set(memberName, member);
+              } else if (isInformative(member) && !isInformative(existing)) {
+                localProps.set(memberName, member);
               }
             }
           }
@@ -416,21 +492,14 @@ function extractComponentDocs(): ComponentDoc[] {
         collectLocalProps(sourceFile);
 
         props = [...localProps.entries()].map(([propName, propDecl]) => {
-          const typeStr = normalizeType(
-            checker.typeToString(
-              checker.getTypeAtLocation(propDecl),
-              propDecl,
-              ts.TypeFormatFlags.NoTruncation,
-            ),
-          );
+          const required =
+            !propDecl.questionToken && !optionalNames.has(propName);
           return {
             name: propName,
-            type: typeStr,
-            required: !propDecl.questionToken,
+            type: formatPropType(propTypeStr(propDecl), !required),
+            required,
             defaultValue: defaults[propName],
-            description: getJsDocDescription(propDecl)
-              .replace(/\s*TODO:.*$/gm, "")
-              .trim(),
+            description: propDesc(propDecl),
           };
         });
       }

@@ -15,15 +15,15 @@ Box는 가장 기본적인 레이아웃 컴포넌트입니다.
 
 `import { Box } from "daleui"`
 
-| prop     | 타입                                                                                                    | 기본값  | 설명                                     |
-| -------- | ------------------------------------------------------------------------------------------------------- | ------- | ---------------------------------------- |
-| children | `ReactNode`                                                                                             | -       | 자식 요소                                |
-| as       | `As \| undefined`                                                                                       | `"div"` | 렌더링 태그                              |
-| padding  | `"0" \| "2" \| "4" \| "8" \| "12" \| "16" \| "20" \| "24" \| "32" \| "36" \| "40" \| "48" \| undefined` | -       | 안쪽 여백                                |
-| margin   | `"0" \| "2" \| "4" \| "8" \| "12" \| "16" \| "20" \| "24" \| "32" \| "36" \| "40" \| "48" \| undefined` | -       | 바깥 여백                                |
-| width    | `CSSLength \| undefined`                                                                                | -       | 너비 (예: "100px", "2rem", "2em", "50%") |
-| height   | `CSSLength \| undefined`                                                                                | -       | 높이 (예: "100px", "2rem", "2em", "50%") |
-| ref      | `Ref<HTMLElement> \| undefined`                                                                         | -       | 요소 참조                                |
+| prop     | 타입                                                                                       | 기본값  | 설명                                     |
+| -------- | ------------------------------------------------------------------------------------------ | ------- | ---------------------------------------- |
+| children | `ReactNode`                                                                                | -       | 자식 요소                                |
+| as       | `As`                                                                                       | `"div"` | 렌더링 태그                              |
+| padding  | `"0" \| "2" \| "4" \| "8" \| "12" \| "16" \| "20" \| "24" \| "32" \| "36" \| "40" \| "48"` | -       | 안쪽 여백                                |
+| margin   | `"0" \| "2" \| "4" \| "8" \| "12" \| "16" \| "20" \| "24" \| "32" \| "36" \| "40" \| "48"` | -       | 바깥 여백                                |
+| width    | `CSSLength`                                                                                | -       | 너비 (예: "100px", "2rem", "2em", "50%") |
+| height   | `CSSLength`                                                                                | -       | 높이 (예: "100px", "2rem", "2em", "50%") |
+| ref      | `Ref<HTMLElement>`                                                                         | -       | 요소 참조                                |
 
 ### 예시
 
@@ -134,17 +134,17 @@ Box는 가장 기본적인 레이아웃 컴포넌트입니다.
 
 `import { Button } from "daleui"`
 
-| prop         | 타입                                            | 기본값     | 설명                 |
-| ------------ | ----------------------------------------------- | ---------- | -------------------- |
-| **children** | `ReactNode`                                     | -          | 버튼 내용            |
-| disabled     | `boolean \| undefined`                          | -          | 비활성화 여부        |
-| fullWidth    | `boolean \| undefined`                          | -          | 전체 너비 여부       |
-| loading      | `boolean \| undefined`                          | -          | 로딩 표시 여부       |
-| size         | `size \| undefined`                             | `"md"`     | 크기                 |
-| tone         | `"brand" \| "neutral" \| "danger" \| undefined` | `"brand"`  | 색조                 |
-| type         | `"button" \| "submit" \| "reset" \| undefined`  | `"button"` | 네이티브 button 타입 |
-| variant      | `"solid" \| "outline" \| "ghost" \| undefined`  | `"solid"`  | 스타일 변형          |
-| ref          | `Ref<HTMLButtonElement> \| undefined`           | -          | 요소 참조            |
+| prop         | 타입                               | 기본값     | 설명                 |
+| ------------ | ---------------------------------- | ---------- | -------------------- |
+| **children** | `ReactNode`                        | -          | 버튼 내용            |
+| disabled     | `boolean`                          | -          | 비활성화 여부        |
+| fullWidth    | `boolean`                          | -          | 전체 너비 여부       |
+| loading      | `boolean`                          | -          | 로딩 표시 여부       |
+| size         | `size`                             | `"md"`     | 크기                 |
+| tone         | `"brand" \| "neutral" \| "danger"` | `"brand"`  | 색조                 |
+| type         | `"button" \| "submit" \| "reset"`  | `"button"` | 네이티브 button 타입 |
+| variant      | `"solid" \| "outline" \| "ghost"`  | `"solid"`  | 스타일 변형          |
+| ref          | `Ref<HTMLButtonElement>`           | -          | 요소 참조            |
 
 ### 예시
 
@@ -249,12 +249,12 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
 
 `import { Card } from "daleui"`
 
-| prop         | 타입                                | 기본값 | 설명             |
-| ------------ | ----------------------------------- | ------ | ---------------- |
-| tone         | `"brand" \| "neutral" \| undefined` | -      | 색조             |
-| outline      | `boolean \| undefined`              | -      | 테두리 표시 여부 |
-| **children** | `ReactNode`                         | -      | 자식 요소        |
-| ref          | `Ref<HTMLElement> \| undefined`     | -      | 요소 참조        |
+| prop         | 타입                   | 기본값 | 설명             |
+| ------------ | ---------------------- | ------ | ---------------- |
+| tone         | `"brand" \| "neutral"` | -      | 색조             |
+| outline      | `boolean`              | -      | 테두리 표시 여부 |
+| **children** | `ReactNode`            | -      | 자식 요소        |
+| ref          | `Ref<HTMLElement>`     | -      | 요소 참조        |
 
 ## Checkbox
 
@@ -263,16 +263,16 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
 
 `import { Checkbox } from "daleui"`
 
-| prop           | 타입                                        | 기본값    | 설명                                                              |
-| -------------- | ------------------------------------------- | --------- | ----------------------------------------------------------------- |
-| label          | `string \| undefined`                       | -         | 라벨 내용                                                         |
-| name           | `string \| undefined`                       | -         | 폼 name                                                           |
-| value          | `string \| undefined`                       | -         | 폼 제출 값. CheckboxGroup 내부에서 항목을 식별하는 데 사용됩니다. |
-| checked        | `boolean \| undefined`                      | -         | 제어 모드 체크 여부                                               |
-| defaultChecked | `boolean \| undefined`                      | -         | 비제어 모드 초기 체크 여부                                        |
-| tone           | `CheckboxTone \| undefined`                 | `"brand"` | 체크박스의 색조                                                   |
-| onChange       | `((checked: boolean) => void) \| undefined` | -         | 체크 상태 변경 시 호출되는 콜백 (controlled 모드)                 |
-| ref            | `Ref<HTMLInputElement> \| undefined`        | -         | 입력 요소 참조                                                    |
+| prop           | 타입                         | 기본값    | 설명                                                              |
+| -------------- | ---------------------------- | --------- | ----------------------------------------------------------------- |
+| label          | `string`                     | -         | 라벨 내용                                                         |
+| name           | `string`                     | -         | 폼 name                                                           |
+| value          | `string`                     | -         | 폼 제출 값. CheckboxGroup 내부에서 항목을 식별하는 데 사용됩니다. |
+| checked        | `boolean`                    | -         | 제어 모드 체크 여부                                               |
+| defaultChecked | `boolean`                    | -         | 비제어 모드 초기 체크 여부                                        |
+| tone           | `CheckboxTone`               | `"brand"` | 체크박스의 색조                                                   |
+| onChange       | `(checked: boolean) => void` | -         | 체크 상태 변경 시 호출되는 콜백 (controlled 모드)                 |
+| ref            | `Ref<HTMLInputElement>`      | -         | 입력 요소 참조                                                    |
 
 ### 예시
 
@@ -333,18 +333,18 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
 
 `import { CheckboxGroup } from "daleui"`
 
-| prop          | 타입                                        | 기본값 | 설명                                            |
-| ------------- | ------------------------------------------- | ------ | ----------------------------------------------- |
-| **children**  | `ReactNode`                                 | -      | 자식 요소                                       |
-| **name**      | `string`                                    | -      | 그룹 공유 name                                  |
-| **label**     | `string`                                    | -      | 그룹 레이블                                     |
-| defaultValues | `string[] \| undefined`                     | -      | 비제어 모드 초기 선택 값 목록                   |
-| values        | `string[] \| undefined`                     | -      | 제어 모드 선택 값 목록                          |
-| onChange      | `((values: string[]) => void) \| undefined` | -      | 선택 값 변경 핸들러                             |
-| orientation   | `"horizontal" \| "vertical" \| undefined`   | -      | 배치 방향 (horizontal \| vertical)              |
-| tone          | `CheckboxGroupTone \| undefined`            | -      | 색상 강조를 지정합니다.                         |
-| ref           | `Ref<HTMLDivElement> \| undefined`          | -      | 요소 참조                                       |
-| helperText    | `string \| undefined`                       | -      | 그룹 하단에 표시할 보조 또는 에러 메시지입니다. |
+| prop          | 타입                         | 기본값 | 설명                                            |
+| ------------- | ---------------------------- | ------ | ----------------------------------------------- |
+| **children**  | `ReactNode`                  | -      | 자식 요소                                       |
+| **name**      | `string`                     | -      | 그룹 공유 name                                  |
+| **label**     | `string`                     | -      | 그룹 레이블                                     |
+| defaultValues | `string[]`                   | -      | 비제어 모드 초기 선택 값 목록                   |
+| values        | `string[]`                   | -      | 제어 모드 선택 값 목록                          |
+| onChange      | `(values: string[]) => void` | -      | 선택 값 변경 핸들러                             |
+| orientation   | `"horizontal" \| "vertical"` | -      | 배치 방향 (horizontal \| vertical)              |
+| tone          | `CheckboxGroupTone`          | -      | 색상 강조를 지정합니다.                         |
+| ref           | `Ref<HTMLDivElement>`        | -      | 요소 참조                                       |
+| helperText    | `string`                     | -      | 그룹 하단에 표시할 보조 또는 에러 메시지입니다. |
 
 ### 예시
 
@@ -509,14 +509,14 @@ CSS Flexbox 레이아웃을 위한 컨테이너 컴포넌트입니다.
 
 `import { Flex } from "daleui"`
 
-| prop         | 타입                                                                                                    | 기본값  | 설명         |
-| ------------ | ------------------------------------------------------------------------------------------------------- | ------- | ------------ |
-| **children** | `ReactNode`                                                                                             | -       | 자식 요소    |
-| as           | `As \| undefined`                                                                                       | `"div"` | 렌더링 태그  |
-| gap          | `"0" \| "2" \| "4" \| "8" \| "12" \| "16" \| "20" \| "24" \| "32" \| "36" \| "40" \| "48" \| undefined` | -       | 자식 간 간격 |
-| padding      | `"0" \| "2" \| "4" \| "8" \| "12" \| "16" \| "20" \| "24" \| "32" \| "36" \| "40" \| "48" \| undefined` | -       | 안쪽 여백    |
-| role         | `AriaRole \| undefined`                                                                                 | -       | ARIA 역할    |
-| ref          | `Ref<HTMLElement> \| undefined`                                                                         | -       | 요소 참조    |
+| prop         | 타입                                                                                       | 기본값  | 설명         |
+| ------------ | ------------------------------------------------------------------------------------------ | ------- | ------------ |
+| **children** | `ReactNode`                                                                                | -       | 자식 요소    |
+| as           | `As`                                                                                       | `"div"` | 렌더링 태그  |
+| gap          | `"0" \| "2" \| "4" \| "8" \| "12" \| "16" \| "20" \| "24" \| "32" \| "36" \| "40" \| "48"` | -       | 자식 간 간격 |
+| padding      | `"0" \| "2" \| "4" \| "8" \| "12" \| "16" \| "20" \| "24" \| "32" \| "36" \| "40" \| "48"` | -       | 안쪽 여백    |
+| role         | `AriaRole`                                                                                 | -       | ARIA 역할    |
+| ref          | `Ref<HTMLElement>`                                                                         | -       | 요소 참조    |
 
 ### 예시
 
@@ -632,21 +632,21 @@ CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
 
 `import { Grid } from "daleui"`
 
-| prop                | 타입                                                                                                    | 기본값      | 설명                                                           |
-| ------------------- | ------------------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------- |
-| **children**        | `ReactNode`                                                                                             | -           | 자식 요소                                                      |
-| as                  | `As \| undefined`                                                                                       | `"div"`     | 렌더링 태그                                                    |
-| gridTemplateColumns | `string \| undefined`                                                                                   | -           | 열 템플릿 (grid-template-columns)                              |
-| gridTemplateRows    | `string \| undefined`                                                                                   | -           | 행 템플릿 (grid-template-rows)                                 |
-| gap                 | `"0" \| "2" \| "4" \| "8" \| "12" \| "16" \| "20" \| "24" \| "32" \| "36" \| "40" \| "48" \| undefined` | -           | 자식 간 간격                                                   |
-| padding             | `"0" \| "2" \| "4" \| "8" \| "12" \| "16" \| "20" \| "24" \| "32" \| "36" \| "40" \| "48" \| undefined` | -           | 안쪽 여백                                                      |
-| areas               | `Areas \| undefined`                                                                                    | -           | 영역 이름 (grid-template-areas, GridItem.gridArea와 함께 사용) |
-| autoFlow            | `"row" \| "column" \| "rowDense" \| "columnDense" \| undefined`                                         | `"row"`     | 자동 배치 흐름 (grid-auto-flow)                                |
-| justifyItems        | `"end" \| "start" \| "center" \| "stretch" \| undefined`                                                | `"stretch"` | 아이템 주축 정렬 (justify-items)                               |
-| alignItems          | `"end" \| "start" \| "center" \| "stretch" \| undefined`                                                | `"stretch"` | 아이템 교차축 정렬 (align-items)                               |
-| justifyContent      | `"end" \| "start" \| "center" \| "stretch" \| "between" \| "around" \| undefined`                       | -           | 컨테이너 주축 정렬 (justify-content)                           |
-| alignContent        | `"end" \| "start" \| "center" \| "stretch" \| "between" \| "around" \| undefined`                       | -           | 컨테이너 교차축 정렬 (align-content)                           |
-| ref                 | `Ref<HTMLElement> \| undefined`                                                                         | -           | 요소 참조                                                      |
+| prop                | 타입                                                                                       | 기본값      | 설명                                                           |
+| ------------------- | ------------------------------------------------------------------------------------------ | ----------- | -------------------------------------------------------------- |
+| **children**        | `ReactNode`                                                                                | -           | 자식 요소                                                      |
+| as                  | `As`                                                                                       | `"div"`     | 렌더링 태그                                                    |
+| gridTemplateColumns | `string`                                                                                   | -           | 열 템플릿 (grid-template-columns)                              |
+| gridTemplateRows    | `string`                                                                                   | -           | 행 템플릿 (grid-template-rows)                                 |
+| gap                 | `"0" \| "2" \| "4" \| "8" \| "12" \| "16" \| "20" \| "24" \| "32" \| "36" \| "40" \| "48"` | -           | 자식 간 간격                                                   |
+| padding             | `"0" \| "2" \| "4" \| "8" \| "12" \| "16" \| "20" \| "24" \| "32" \| "36" \| "40" \| "48"` | -           | 안쪽 여백                                                      |
+| areas               | `Areas`                                                                                    | -           | 영역 이름 (grid-template-areas, GridItem.gridArea와 함께 사용) |
+| autoFlow            | `"row" \| "column" \| "rowDense" \| "columnDense"`                                         | `"row"`     | 자동 배치 흐름 (grid-auto-flow)                                |
+| justifyItems        | `"end" \| "start" \| "center" \| "stretch"`                                                | `"stretch"` | 아이템 주축 정렬 (justify-items)                               |
+| alignItems          | `"end" \| "start" \| "center" \| "stretch"`                                                | `"stretch"` | 아이템 교차축 정렬 (align-items)                               |
+| justifyContent      | `"end" \| "start" \| "center" \| "stretch" \| "between" \| "around"`                       | -           | 컨테이너 주축 정렬 (justify-content)                           |
+| alignContent        | `"end" \| "start" \| "center" \| "stretch" \| "between" \| "around"`                       | -           | 컨테이너 교차축 정렬 (align-content)                           |
+| ref                 | `Ref<HTMLElement>`                                                                         | -           | 요소 참조                                                      |
 
 ### 예시
 
@@ -909,15 +909,15 @@ CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
 
 `import { Heading } from "daleui"`
 
-| prop         | 타입                                   | 기본값      | 설명              |
-| ------------ | -------------------------------------- | ----------- | ----------------- |
-| **children** | `ReactNode`                            | -           | 제목 내용         |
-| **level**    | `Level`                                | -           | 제목 단계 (h1–h5) |
-| size         | `HeadingSize \| undefined`             | -           | 표시 크기         |
-| tone         | `HeadingTone \| undefined`             | `"neutral"` | 색조              |
-| align        | `Align \| undefined`                   | -           | 텍스트 정렬       |
-| wordBreak    | `WordBreak \| undefined`               | -           | 줄바꿈 규칙       |
-| ref          | `Ref<HTMLHeadingElement> \| undefined` | -           | 요소 참조         |
+| prop         | 타입                      | 기본값      | 설명              |
+| ------------ | ------------------------- | ----------- | ----------------- |
+| **children** | `ReactNode`               | -           | 제목 내용         |
+| **level**    | `Level`                   | -           | 제목 단계 (h1–h5) |
+| size         | `HeadingSize`             | -           | 표시 크기         |
+| tone         | `HeadingTone`             | `"neutral"` | 색조              |
+| align        | `Align`                   | -           | 텍스트 정렬       |
+| wordBreak    | `WordBreak`               | -           | 줄바꿈 규칙       |
+| ref          | `Ref<HTMLHeadingElement>` | -           | 요소 참조         |
 
 ### 예시
 
@@ -995,12 +995,12 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 `import { HStack } from "daleui"`
 
-| prop     | 타입                                                                  | 기본값     | 설명                  |
-| -------- | --------------------------------------------------------------------- | ---------- | --------------------- |
-| reversed | `boolean \| undefined`                                                | `false`    | 가로 역방향 배치 여부 |
-| justify  | `"left" \| "right" \| "center" \| "between" \| "around" \| undefined` | `"left"`   | 가로 정렬             |
-| align    | `"bottom" \| "top" \| "center" \| "stretch" \| undefined`             | `"center"` | 세로 정렬             |
-| ref      | `Ref<HTMLElement> \| undefined`                                       | -          | 요소 참조             |
+| prop     | 타입                                                     | 기본값     | 설명                  |
+| -------- | -------------------------------------------------------- | ---------- | --------------------- |
+| reversed | `boolean`                                                | `false`    | 가로 역방향 배치 여부 |
+| justify  | `"left" \| "right" \| "center" \| "between" \| "around"` | `"left"`   | 가로 정렬             |
+| align    | `"bottom" \| "top" \| "center" \| "stretch"`             | `"center"` | 세로 정렬             |
+| ref      | `Ref<HTMLElement>`                                       | -          | 요소 참조             |
 
 ### 예시
 
@@ -1146,9 +1146,9 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 | prop     | 타입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | 기본값 | 설명        |
 | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ----------- |
 | **name** | `"info" \| "menu" \| "search" \| "x" \| "award" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 아이콘 이름 |
-| tone     | `Tone \| undefined`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | -      | 색조        |
-| size     | `"sm" \| "md" \| "lg" \| "xs" \| undefined`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | -      | 크기        |
-| solid    | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | -      | 솔리드 여부 |
+| tone     | `Tone`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | -      | 색조        |
+| size     | `"sm" \| "md" \| "lg" \| "xs"`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | -      | 크기        |
+| solid    | `boolean`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | -      | 솔리드 여부 |
 
 ### 예시
 
@@ -1230,15 +1230,15 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 `import { Label } from "daleui"`
 
-| prop          | 타입                                 | 기본값      | 설명                                       |
-| ------------- | ------------------------------------ | ----------- | ------------------------------------------ |
-| children      | `LabelFormChild \| undefined`        | -           | 연결할 폼 자식 요소                        |
-| **labelText** | `string`                             | -           | 라벨 문구                                  |
-| tone          | `LabelTone \| undefined`             | `"neutral"` | 색조                                       |
-| disabled      | `boolean \| undefined`               | `false`     | 비활성화 여부                              |
-| required      | `boolean \| undefined`               | `false`     | 필수 입력 여부 (true일 경우 별표(\*) 표시) |
-| htmlFor       | `string \| undefined`                | -           | 연결 대상 요소 id                          |
-| ref           | `Ref<HTMLLabelElement> \| undefined` | -           | 요소 참조                                  |
+| prop          | 타입                    | 기본값      | 설명                                       |
+| ------------- | ----------------------- | ----------- | ------------------------------------------ |
+| children      | `LabelFormChild`        | -           | 연결할 폼 자식 요소                        |
+| **labelText** | `string`                | -           | 라벨 문구                                  |
+| tone          | `LabelTone`             | `"neutral"` | 색조                                       |
+| disabled      | `boolean`               | `false`     | 비활성화 여부                              |
+| required      | `boolean`               | `false`     | 필수 입력 여부 (true일 경우 별표(\*) 표시) |
+| htmlFor       | `string`                | -           | 연결 대상 요소 id                          |
+| ref           | `Ref<HTMLLabelElement>` | -           | 요소 참조                                  |
 
 ### 예시
 
@@ -1297,15 +1297,15 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 `import { Link } from "daleui"`
 
-| prop         | 타입                                  | 기본값    | 설명                      |
-| ------------ | ------------------------------------- | --------- | ------------------------- |
-| **href**     | `string`                              | -         | 대상 URL                  |
-| **children** | `ReactNode`                           | -         | 링크 내용                 |
-| tone         | `LinkTone \| undefined`               | `"brand"` | 색조                      |
-| size         | `LinkSize \| undefined`               | `"md"`    | 크기                      |
-| underline    | `boolean \| undefined`                | `true`    | 밑줄 표시 여부            |
-| external     | `boolean \| undefined`                | `false`   | 외부 링크·새 탭 열기 여부 |
-| ref          | `Ref<HTMLAnchorElement> \| undefined` | -         | 요소 참조                 |
+| prop         | 타입                     | 기본값    | 설명                      |
+| ------------ | ------------------------ | --------- | ------------------------- |
+| **href**     | `string`                 | -         | 대상 URL                  |
+| **children** | `ReactNode`              | -         | 링크 내용                 |
+| tone         | `LinkTone`               | `"brand"` | 색조                      |
+| size         | `LinkSize`               | `"md"`    | 크기                      |
+| underline    | `boolean`                | `true`    | 밑줄 표시 여부            |
+| external     | `boolean`                | `false`   | 외부 링크·새 탭 열기 여부 |
+| ref          | `Ref<HTMLAnchorElement>` | -         | 요소 참조                 |
 
 ### 예시
 
@@ -1385,12 +1385,7 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
   <Text>
     방문한 링크의 색상이 다르지 않다면 방문한 링크를 클릭하여 방문하여주세요.
   </Text>
-  <Link
-    href="https://www.daleui.com"
-    onClick={undefined}
-    external
-    aria-label="방문한 링크"
-  >
+  <Link href="https://www.daleui.com" external aria-label="방문한 링크">
     방문한 링크
     <Icon name="externalLink" stroke="currentColor" />
   </Link>
@@ -1409,7 +1404,6 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
     external
     aria-label="새 탭에서 열기 (보안 속성 자동 추가)"
     href="https://www.daleui.com"
-    onClick={undefined}
   >
     새 탭에서 열기 (보안 속성 자동 추가)
     <Icon name="externalLink" />
@@ -1442,13 +1436,13 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 `import { PasswordInput } from "daleui"`
 
-| prop         | 타입                                                        | 기본값                       | 설명                    |
-| ------------ | ----------------------------------------------------------- | ---------------------------- | ----------------------- |
-| placeholder  | `string \| undefined`                                       | `"패스워드를 입력해주세요."` | 플레이스홀더            |
-| value        | `string \| undefined`                                       | -                            | 제어 모드 입력 값       |
-| defaultValue | `string \| undefined`                                       | -                            | 비제어 모드 초기 입력값 |
-| onChange     | `((e: ChangeEvent<HTMLInputElement>) => void) \| undefined` | -                            | 변경 이벤트 핸들러      |
-| ref          | `Ref<HTMLInputElement> \| undefined`                        | -                            | 입력 요소 참조          |
+| prop         | 타입                                         | 기본값                       | 설명                    |
+| ------------ | -------------------------------------------- | ---------------------------- | ----------------------- |
+| placeholder  | `string`                                     | `"패스워드를 입력해주세요."` | 플레이스홀더            |
+| value        | `string`                                     | -                            | 제어 모드 입력 값       |
+| defaultValue | `string`                                     | -                            | 비제어 모드 초기 입력값 |
+| onChange     | `(e: ChangeEvent<HTMLInputElement>) => void` | -                            | 변경 이벤트 핸들러      |
+| ref          | `Ref<HTMLInputElement>`                      | -                            | 입력 요소 참조          |
 
 ### 예시
 
@@ -1475,17 +1469,17 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 `import { RadioGroup } from "daleui"`
 
-| prop         | 타입                                      | 기본값 | 설명                               |
-| ------------ | ----------------------------------------- | ------ | ---------------------------------- |
-| **children** | `ReactNode`                               | -      | 자식 요소                          |
-| **name**     | `string`                                  | -      | 그룹 공유 name                     |
-| **label**    | `string`                                  | -      | 그룹 레이블                        |
-| defaultValue | `string \| undefined`                     | -      | 비제어 모드 초기 선택 값           |
-| value        | `string \| undefined`                     | -      | 제어 모드 선택 값                  |
-| onChange     | `((value: string) => void) \| undefined`  | -      | 선택 값 변경 핸들러                |
-| orientation  | `"horizontal" \| "vertical" \| undefined` | -      | 배치 방향 (horizontal \| vertical) |
-| tone         | `RadioGroupTone \| undefined`             | -      | 색조                               |
-| hint         | `string \| undefined`                     | -      | 레이블 보조 텍스트                 |
+| prop         | 타입                         | 기본값 | 설명                               |
+| ------------ | ---------------------------- | ------ | ---------------------------------- |
+| **children** | `ReactNode`                  | -      | 자식 요소                          |
+| **name**     | `string`                     | -      | 그룹 공유 name                     |
+| **label**    | `string`                     | -      | 그룹 레이블                        |
+| defaultValue | `string`                     | -      | 비제어 모드 초기 선택 값           |
+| value        | `string`                     | -      | 제어 모드 선택 값                  |
+| onChange     | `(value: string) => void`    | -      | 선택 값 변경 핸들러                |
+| orientation  | `"horizontal" \| "vertical"` | -      | 배치 방향 (horizontal \| vertical) |
+| tone         | `RadioGroupTone`             | -      | 색조                               |
+| hint         | `string`                     | -      | 레이블 보조 텍스트                 |
 
 ### 예시
 
@@ -1672,16 +1666,16 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 `import { Select } from "daleui"`
 
-| prop            | 타입                                                         | 기본값 | 설명                                 |
-| --------------- | ------------------------------------------------------------ | ------ | ------------------------------------ |
-| clearButtonName | `string \| undefined`                                        | -      | 지우기 버튼 접근성 이름 (aria-label) |
-| placeholder     | `string \| undefined`                                        | -      | 플레이스홀더                         |
-| value           | `string \| undefined`                                        | -      | 제어 모드 선택 값                    |
-| defaultValue    | `string \| undefined`                                        | -      | 비제어 모드 초기 선택 값             |
-| onChange        | `((e: ChangeEvent<HTMLSelectElement>) => void) \| undefined` | -      | 변경 이벤트 핸들러                   |
-|                 | `string \| undefined`                                        | -      | 접근성 레이블 (aria-label)           |
-| name            | `string \| undefined`                                        | -      | 폼 name                              |
-| ref             | `Ref<HTMLSelectElement> \| undefined`                        | -      | select 요소 참조                     |
+| prop            | 타입                                          | 기본값 | 설명                                 |
+| --------------- | --------------------------------------------- | ------ | ------------------------------------ |
+| clearButtonName | `string`                                      | -      | 지우기 버튼 접근성 이름 (aria-label) |
+| placeholder     | `string`                                      | -      | 플레이스홀더                         |
+| value           | `string`                                      | -      | 제어 모드 선택 값                    |
+| defaultValue    | `string`                                      | -      | 비제어 모드 초기 선택 값             |
+| onChange        | `(e: ChangeEvent<HTMLSelectElement>) => void` | -      | 변경 이벤트 핸들러                   |
+| aria-label      | `string`                                      | -      | 접근성 레이블 (aria-label)           |
+| name            | `string`                                      | -      | 폼 name                              |
+| ref             | `Ref<HTMLSelectElement>`                      | -      | select 요소 참조                     |
 
 ### 예시
 
@@ -1689,7 +1683,7 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 ```tsx
 <VStack gap="16">
-  <Select disabled disabled defaultValue="kr" label="비활성화" />
+  <Select disabled defaultValue="kr" label="비활성화" />
   <Select disabled readOnly defaultValue="us" label="읽기 전용" />
 </VStack>
 ```
@@ -1720,13 +1714,13 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 `import { Tag } from "daleui"`
 
-| prop         | 타입                                                        | 기본값      | 설명                                 |
-| ------------ | ----------------------------------------------------------- | ----------- | ------------------------------------ |
-| **children** | `ReactNode`                                                 | -           | 태그 내용                            |
-| tone         | `Tone \| undefined`                                         | `"neutral"` | 색조                                 |
-| onRemove     | `((e: MouseEvent<HTMLButtonElement>) => void) \| undefined` | -           | 제거 핸들러 (설정 시 제거 버튼 표시) |
-| ref          | `Ref<HTMLSpanElement> \| undefined`                         | -           | 요소 참조                            |
-| href         | `undefined`                                                 | -           |                                      |
+| prop         | 타입                                         | 기본값      | 설명                                 |
+| ------------ | -------------------------------------------- | ----------- | ------------------------------------ |
+| **children** | `ReactNode`                                  | -           | 태그 내용                            |
+| tone         | `Tone`                                       | `"neutral"` | 색조                                 |
+| onRemove     | `(e: MouseEvent<HTMLButtonElement>) => void` | -           | 제거 핸들러 (설정 시 제거 버튼 표시) |
+| ref          | `Ref<HTMLSpanElement>`                       | -           | 요소 참조                            |
+| href         | `string`                                     | -           | 링크 모드 대상 URL                   |
 
 ### 예시
 
@@ -1788,15 +1782,15 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 `import { Text } from "daleui"`
 
-| prop         | 타입                                                                                    | 기본값      | 설명                     |
-| ------------ | --------------------------------------------------------------------------------------- | ----------- | ------------------------ |
-| **children** | `ReactNode`                                                                             | -           | 텍스트 내용              |
-| as           | `"div" \| "span" \| "p" \| "em" \| "small" \| "strong" \| undefined`                    | `"span"`    | 렌더링 태그              |
-| tone         | `Tone \| undefined`                                                                     | `"neutral"` | 색조                     |
-| size         | `"sm" \| "md" \| "lg" \| "xl" \| "2xl" \| "xs" \| "3xl" \| "4xl" \| "5xl" \| undefined` | -           | 글자 크기                |
-| weight       | `"normal" \| "medium" \| "semibold" \| "bold" \| undefined`                             | -           | 글자 굵기                |
-| muted        | `boolean \| undefined`                                                                  | `false`     | 흐린 톤(muted) 적용 여부 |
-| ref          | `Ref<HTMLElement> \| undefined`                                                         | -           | 요소 참조                |
+| prop         | 타입                                                                       | 기본값      | 설명                     |
+| ------------ | -------------------------------------------------------------------------- | ----------- | ------------------------ |
+| **children** | `ReactNode`                                                                | -           | 텍스트 내용              |
+| as           | `"div" \| "span" \| "p" \| "em" \| "small" \| "strong"`                    | `"span"`    | 렌더링 태그              |
+| tone         | `Tone`                                                                     | `"neutral"` | 색조                     |
+| size         | `"sm" \| "md" \| "lg" \| "xl" \| "2xl" \| "xs" \| "3xl" \| "4xl" \| "5xl"` | -           | 글자 크기                |
+| weight       | `"normal" \| "medium" \| "semibold" \| "bold"`                             | -           | 글자 굵기                |
+| muted        | `boolean`                                                                  | `false`     | 흐린 톤(muted) 적용 여부 |
+| ref          | `Ref<HTMLElement>`                                                         | -           | 요소 참조                |
 
 ### 예시
 
@@ -1830,15 +1824,15 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 `import { TextInput } from "daleui"`
 
-| prop         | 타입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | 기본값 | 설명                         |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ---------------------------- |
-| leadingIcon  | `"info" \| "menu" \| "search" \| "x" \| "award" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark" \| undefined` | -      | 선행 아이콘 이름 (Icon.name) |
-| trailingIcon | `"info" \| "menu" \| "search" \| "x" \| "award" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark" \| undefined` | -      | 후행 아이콘 이름 (Icon.name) |
-| placeholder  | `string \| undefined`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | -      | 플레이스홀더                 |
-| value        | `string \| undefined`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | -      | 제어 모드 입력 값            |
-| defaultValue | `string \| undefined`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | -      | 비제어 모드 초기 입력값      |
-| onChange     | `((e: ChangeEvent<HTMLInputElement>) => void) \| undefined`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | -      | 변경 이벤트 핸들러           |
-| ref          | `Ref<HTMLInputElement> \| undefined`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | -      | 입력 요소 참조               |
+| prop         | 타입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | 기본값 | 설명                         |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ---------------------------- |
+| leadingIcon  | `"info" \| "menu" \| "search" \| "x" \| "award" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 선행 아이콘 이름 (Icon.name) |
+| trailingIcon | `"info" \| "menu" \| "search" \| "x" \| "award" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 후행 아이콘 이름 (Icon.name) |
+| placeholder  | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | -      | 플레이스홀더                 |
+| value        | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | -      | 제어 모드 입력 값            |
+| defaultValue | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | -      | 비제어 모드 초기 입력값      |
+| onChange     | `(e: ChangeEvent<HTMLInputElement>) => void`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | -      | 변경 이벤트 핸들러           |
+| ref          | `Ref<HTMLInputElement>`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | -      | 입력 요소 참조               |
 
 ### 예시
 
@@ -1865,7 +1859,6 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
   })}
 >
   <TextInput
-    invalid
     errorMessage="오류 메시지"
     invalid
     trailingIcon="circleAlert"
@@ -1911,12 +1904,12 @@ Flex의 세로 배치 패턴(`direction="column"`, `align="center"`)을 의미 �
 
 `import { VStack } from "daleui"`
 
-| prop     | 타입                                                                  | 기본값     | 설명                  |
-| -------- | --------------------------------------------------------------------- | ---------- | --------------------- |
-| reversed | `boolean \| undefined`                                                | `false`    | 세로 역방향 배치 여부 |
-| justify  | `"bottom" \| "top" \| "center" \| "between" \| "around" \| undefined` | `"top"`    | 세로 정렬             |
-| align    | `"left" \| "right" \| "center" \| "stretch" \| undefined`             | `"center"` | 가로 정렬             |
-| ref      | `Ref<HTMLElement> \| undefined`                                       | -          | 요소 참조             |
+| prop     | 타입                                                     | 기본값     | 설명                  |
+| -------- | -------------------------------------------------------- | ---------- | --------------------- |
+| reversed | `boolean`                                                | `false`    | 세로 역방향 배치 여부 |
+| justify  | `"bottom" \| "top" \| "center" \| "between" \| "around"` | `"top"`    | 세로 정렬             |
+| align    | `"left" \| "right" \| "center" \| "stretch"`             | `"center"` | 가로 정렬             |
+| ref      | `Ref<HTMLElement>`                                       | -          | 요소 참조             |
 
 ### 예시
 
