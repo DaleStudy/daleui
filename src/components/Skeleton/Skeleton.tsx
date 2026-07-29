@@ -1,5 +1,5 @@
 import type { CSSProperties, HTMLAttributes, Ref } from "react";
-import { cva } from "../../../styled-system/css";
+import { cva, cx } from "../../../styled-system/css";
 import { VStack } from "../VStack/VStack";
 
 /** 스켈레톤의 모양 변형 */
@@ -58,16 +58,19 @@ function SkeletonRoot({
   };
 
   return (
-    <span ref={ref} className={className} {...rest}>
-      <span
-        aria-hidden="true"
-        style={style}
-        className={placeholderStyles({
+    <span
+      ref={ref}
+      {...rest}
+      aria-hidden="true"
+      style={style}
+      className={cx(
+        placeholderStyles({
           variant,
           animation: animation === false ? "none" : animation,
-        })}
-      />
-    </span>
+        }),
+        className,
+      )}
+    />
   );
 }
 

@@ -64,11 +64,13 @@ describe("Skeleton 애니메이션", () => {
 });
 
 describe("Skeleton 접근성", () => {
-  test("장식용 플레이스홀더만 aria-hidden으로 가리고 로딩 상태를 만들지 않음", () => {
-    const { container } = render(<Skeleton data-testid="skeleton" />);
-    const placeholder = getPlaceholder(container);
+  test("장식용 플레이스홀더를 단일 span으로 렌더링하고 로딩 상태를 만들지 않음", () => {
+    render(<Skeleton data-testid="skeleton" className="custom-skeleton" />);
+    const placeholder = screen.getByTestId("skeleton");
+    expect(placeholder).toBeEmptyDOMElement();
     expect(placeholder).toHaveAttribute("aria-hidden", "true");
-    expect(screen.getByTestId("skeleton")).not.toHaveAttribute("aria-busy");
+    expect(placeholder).toHaveClass("custom-skeleton");
+    expect(placeholder).not.toHaveAttribute("aria-busy");
     expect(screen.queryByRole("status")).not.toBeInTheDocument();
   });
 });
