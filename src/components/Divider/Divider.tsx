@@ -29,15 +29,13 @@ export function Divider({
   className,
   ...rest
 }: DividerProps) {
-  const lineStyle = styles({ orientation, variant, stroke });
-
   if (orientation === "vertical") {
     return (
       <div
         ref={ref as Ref<HTMLDivElement>}
         role="separator"
         aria-orientation="vertical"
-        className={cx(lineStyle, className)}
+        className={cx(verticalStyles({ variant, stroke }), className)}
         {...(rest as HTMLAttributes<HTMLDivElement>)}
       />
     );
@@ -46,70 +44,45 @@ export function Divider({
   return (
     <hr
       ref={ref as Ref<HTMLHRElement>}
-      className={cx(lineStyle, className)}
+      className={cx(horizontalStyles({ variant, stroke }), className)}
       {...(rest as HTMLAttributes<HTMLHRElement>)}
     />
   );
 }
 
-const styles = cva({
+const horizontalStyles = cva({
   base: {
     borderColor: "border.neutral",
+    width: "100%",
+    height: "0",
   },
   variants: {
-    orientation: {
-      horizontal: { width: "100%", height: "0" },
-      vertical: { alignSelf: "stretch", height: "auto", width: "0" },
-    },
     stroke: {
-      xs: {},
-      sm: {},
+      xs: { borderTopWidth: "xs" },
+      sm: { borderTopWidth: "sm" },
     },
     variant: {
-      solid: {},
-      dashed: {},
+      solid: { borderTopStyle: "solid" },
+      dashed: { borderTopStyle: "dashed" },
     },
   },
-  compoundVariants: [
-    {
-      orientation: "horizontal",
-      stroke: "xs",
-      css: { borderTopWidth: "xs" },
+});
+
+const verticalStyles = cva({
+  base: {
+    borderColor: "border.neutral",
+    alignSelf: "stretch",
+    height: "auto",
+    width: "0",
+  },
+  variants: {
+    stroke: {
+      xs: { borderLeftWidth: "xs" },
+      sm: { borderLeftWidth: "sm" },
     },
-    {
-      orientation: "horizontal",
-      stroke: "sm",
-      css: { borderTopWidth: "sm" },
+    variant: {
+      solid: { borderLeftStyle: "solid" },
+      dashed: { borderLeftStyle: "dashed" },
     },
-    {
-      orientation: "vertical",
-      stroke: "xs",
-      css: { borderLeftWidth: "xs" },
-    },
-    {
-      orientation: "vertical",
-      stroke: "sm",
-      css: { borderLeftWidth: "sm" },
-    },
-    {
-      orientation: "horizontal",
-      variant: "solid",
-      css: { borderTopStyle: "solid" },
-    },
-    {
-      orientation: "horizontal",
-      variant: "dashed",
-      css: { borderTopStyle: "dashed" },
-    },
-    {
-      orientation: "vertical",
-      variant: "solid",
-      css: { borderLeftStyle: "solid" },
-    },
-    {
-      orientation: "vertical",
-      variant: "dashed",
-      css: { borderLeftStyle: "dashed" },
-    },
-  ],
+  },
 });

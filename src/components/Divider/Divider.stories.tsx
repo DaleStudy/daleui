@@ -37,14 +37,14 @@ export const Basic: StoryObj<typeof Divider> = {
 };
 
 export const Orientations: StoryObj<typeof Divider> = {
-  render: () => (
+  render: (args) => (
     <div className={vstack({ gap: "24", alignItems: "flex-start" })}>
       <div className={vstack({ gap: "8", alignItems: "flex-start" })}>
         <Text size="sm" muted>
           horizontal (기본값)
         </Text>
         <div className={css({ width: "240px" })}>
-          <Divider orientation="horizontal" />
+          <Divider {...args} orientation="horizontal" />
         </div>
       </div>
       <div className={vstack({ gap: "8", alignItems: "flex-start" })}>
@@ -53,7 +53,7 @@ export const Orientations: StoryObj<typeof Divider> = {
         </Text>
         <div className={hstack({ gap: "8", height: "80px" })}>
           <span>왼쪽</span>
-          <Divider orientation="vertical" />
+          <Divider {...args} orientation="vertical" />
           <span>오른쪽</span>
         </div>
       </div>
@@ -65,7 +65,7 @@ export const Orientations: StoryObj<typeof Divider> = {
 };
 
 export const Variants: StoryObj<typeof Divider> = {
-  render: () => (
+  render: (args) => (
     <div
       className={vstack({
         gap: "24",
@@ -83,7 +83,7 @@ export const Variants: StoryObj<typeof Divider> = {
         <Text size="sm" muted>
           solid (기본값)
         </Text>
-        <Divider variant="solid" />
+        <Divider {...args} variant="solid" />
       </div>
       <div
         className={vstack({
@@ -95,7 +95,7 @@ export const Variants: StoryObj<typeof Divider> = {
         <Text size="sm" muted>
           dashed
         </Text>
-        <Divider variant="dashed" />
+        <Divider {...args} variant="dashed" />
       </div>
     </div>
   ),
@@ -105,7 +105,7 @@ export const Variants: StoryObj<typeof Divider> = {
 };
 
 export const Strokes: StoryObj<typeof Divider> = {
-  render: () => (
+  render: (args) => (
     <div
       className={vstack({
         gap: "24",
@@ -123,7 +123,7 @@ export const Strokes: StoryObj<typeof Divider> = {
         <Text size="sm" muted>
           sm · 1px (기본값)
         </Text>
-        <Divider stroke="sm" />
+        <Divider {...args} stroke="sm" />
       </div>
       <div
         className={vstack({
@@ -135,7 +135,7 @@ export const Strokes: StoryObj<typeof Divider> = {
         <Text size="sm" muted>
           xs · 0.5px
         </Text>
-        <Divider stroke="xs" />
+        <Divider {...args} stroke="xs" />
       </div>
     </div>
   ),
@@ -145,7 +145,7 @@ export const Strokes: StoryObj<typeof Divider> = {
 };
 
 export const ListUsage: StoryObj<typeof Divider> = {
-  render: () => (
+  render: (args) => (
     <div className={vstack({ gap: "24", alignItems: "flex-start" })}>
       <div
         className={vstack({
@@ -157,7 +157,7 @@ export const ListUsage: StoryObj<typeof Divider> = {
         <span>리스트 아이템 1</span>
         <span>리스트 아이템 2</span>
         <span>리스트 아이템 3</span>
-        <Divider />
+        <Divider {...args} orientation="horizontal" />
         <span>리스트 아이템 A</span>
         <span>리스트 아이템 B</span>
       </div>
@@ -165,7 +165,7 @@ export const ListUsage: StoryObj<typeof Divider> = {
         <span>리스트 아이템 1</span>
         <span>리스트 아이템 2</span>
         <span>리스트 아이템 3</span>
-        <Divider orientation="vertical" />
+        <Divider {...args} orientation="vertical" />
         <span>리스트 아이템 A</span>
         <span>리스트 아이템 B</span>
       </div>
@@ -173,7 +173,5 @@ export const ListUsage: StoryObj<typeof Divider> = {
   ),
   argTypes: {
     orientation: { control: false },
-    variant: { control: false },
-    stroke: { control: false },
   },
 };
