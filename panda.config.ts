@@ -73,6 +73,11 @@ export default defineConfig({
             transform: "rotate(360deg)",
           },
         },
+        // 스켈레톤 - 중성 회색 펄스 (불투명도 깜빡임)
+        pulse: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.4" },
+        },
       },
       tokens: {
         borders,

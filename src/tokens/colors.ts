@@ -70,6 +70,12 @@ export const semanticColors: SemanticTokens["colors"] = {
       value: { base: "{colors.amber.1}", _dark: "{colors.darkAmber.1}" },
     },
     info: { value: { base: "{colors.blue.2}", _dark: "{colors.darkBlue.3}" } },
+    skeleton: {
+      // 스켈레톤 플레이스홀더의 기본 채움색
+      DEFAULT: {
+        value: { base: "{colors.slate.3}", _dark: "{colors.darkSage.4}" },
+      },
+    },
   },
   border: {
     brand: {
