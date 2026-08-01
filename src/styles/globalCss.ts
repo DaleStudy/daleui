@@ -20,27 +20,27 @@ export const globalCss = defineGlobalStyles({
   },
   h3: {
     fontSize: "var(--font-sizes-2xl)", // 1.5rem
-    lineHeight: "var(--line-heights-relaxed)", // 1.625
+    lineHeight: "var(--line-heights-relaxed)", // 1.7
     fontWeight: "var(--font-weights-medium)", // 500
   },
   h4: {
     fontSize: "var(--font-sizes-xl)", // 1.25rem
-    lineHeight: "var(--line-heights-relaxed)", // 1.625
+    lineHeight: "var(--line-heights-relaxed)", // 1.7
     fontWeight: "var(--font-weights-medium)", // 500
   },
   h5: {
     fontSize: "var(--font-sizes-lg)", // 1.125rem
-    lineHeight: "var(--line-heights-relaxed)", // 1.625
+    lineHeight: "var(--line-heights-relaxed)", // 1.7
     fontWeight: "var(--font-weights-medium)", // 500
   },
   h6: {
     fontSize: "var(--font-sizes-md)", // 1rem
-    lineHeight: "var(--line-heights-relaxed)", // 1.625
+    lineHeight: "var(--line-heights-relaxed)", // 1.7
     fontWeight: "var(--font-weights-medium)", // 500
   },
   p: {
     fontSize: "var(--font-sizes-md)", // 1rem
-    lineHeight: "var(--line-heights-relaxed)", // 1.625
+    lineHeight: "var(--line-heights-relaxed)", // 1.7
     fontWeight: "var(--font-weights-normal)", // 400
   },
 });

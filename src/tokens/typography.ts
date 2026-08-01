@@ -63,7 +63,7 @@ export const textStyles = {
         fontFamily: "sans",
         fontSize: "lg",
         fontWeight: "normal",
-        lineHeight: "balanced",
+        lineHeight: "relaxed",
         letterSpacing: "balanced",
       },
     },
@@ -72,7 +72,7 @@ export const textStyles = {
         fontFamily: "sans",
         fontSize: "md",
         fontWeight: "normal",
-        lineHeight: "balanced",
+        lineHeight: "relaxed",
         letterSpacing: "balanced",
       },
     },
@@ -81,7 +81,7 @@ export const textStyles = {
         fontFamily: "sans",
         fontSize: "sm",
         fontWeight: "normal",
-        lineHeight: "balanced",
+        lineHeight: "relaxed",
         letterSpacing: "balanced",
       },
     },
@@ -256,11 +256,13 @@ export const fontSizes = {
 export type FontSize = keyof typeof fontSizes;
 
 export const letterSpacings = {
-  tight: { value: "-0.1" },
+  // CSS letter-spacing은 0이 아닌 맨숫자를 길이로 인정하지 않으므로 단위를 반드시 붙인다
+  tight: { value: "-0.01em" },
   balanced: { value: "0" },
 };
 
 export const lineHeights = {
   tight: { value: "1.2" },
   balanced: { value: "1.5" },
+  relaxed: { value: "1.7" },
 };
