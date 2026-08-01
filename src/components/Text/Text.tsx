@@ -53,6 +53,9 @@ export const Text = ({
 };
 
 const styles = cva({
+  base: {
+    textStyle: "body.md",
+  },
   compoundVariants: [
     {
       muted: false,

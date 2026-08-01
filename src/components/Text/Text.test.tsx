@@ -10,6 +10,12 @@ test("텍스트를 렌더링한다", () => {
   expect(screen.getByText("테스트")).toBeInTheDocument();
 });
 
+test("prop 없이 쓰면 본문 텍스트 스타일을 적용한다", () => {
+  render(<Text>본문</Text>);
+
+  expect(screen.getByText("본문")).toHaveClass("textStyle_body.md");
+});
+
 test("weight prop에 따라 font weight 클래스를 적용한다", () => {
   const weight = faker.helpers.arrayElement(
     Object.keys(fontWeights),
