@@ -102,6 +102,7 @@ export default () => (
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/graycrisp"><img src="https://avatars.githubusercontent.com/u/51190669?v=4?s=100" width="100px;" alt="graycrisp"/><br /><sub><b>graycrisp</b></sub></a><br /><a href="#design-graycrisp" title="Design">🎨</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://lylamin.com/"><img src="https://avatars.githubusercontent.com/u/50537876?v=4?s=100" width="100px;" alt="Lyla (Minju) Park"/><br /><sub><b>Lyla (Minju) Park</b></sub></a><br /><a href="https://github.com/DaleStudy/daleui/commits?author=lylaminju" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/gwagjiug"><img src="https://avatars.githubusercontent.com/u/99489686?v=4?s=100" width="100px;" alt="곽지욱"/><br /><sub><b>곽지욱</b></sub></a><br /><a href="https://github.com/DaleStudy/daleui/commits?author=gwagjiug" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/frozenabe"><img src="https://avatars.githubusercontent.com/u/13636760?v=4?s=100" width="100px;" alt="Abe"/><br /><sub><b>Abe</b></sub></a><br /><a href="https://github.com/DaleStudy/daleui/commits?author=frozenabe" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
