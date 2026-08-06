@@ -249,12 +249,112 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
 
 `import { Card } from "daleui"`
 
-| prop         | 타입                   | 기본값 | 설명             |
-| ------------ | ---------------------- | ------ | ---------------- |
-| tone         | `"brand" \| "neutral"` | -      | 색조             |
-| outline      | `boolean`              | -      | 테두리 표시 여부 |
-| **children** | `ReactNode`            | -      | 자식 요소        |
-| ref          | `Ref<HTMLElement>`     | -      | 요소 참조        |
+| prop         | 타입                   | 기본값      | 설명             |
+| ------------ | ---------------------- | ----------- | ---------------- |
+| tone         | `"brand" \| "neutral"` | `"neutral"` | 색조             |
+| outline      | `boolean`              | `false`     | 테두리 표시 여부 |
+| **children** | `ReactNode`            | -           | 자식 요소        |
+| ref          | `Ref<HTMLElement>`     | -           | 요소 참조        |
+
+### 예시
+
+**Basic**
+
+```tsx
+<Card>
+  <Card.Icon name="star" />
+  <Card.Body>
+    <Card.Title>제목</Card.Title>
+    <Card.Description>이 기능에 대한 설명을 여기에 작성합니다</Card.Description>
+  </Card.Body>
+</Card>
+```
+
+**WithBrand**
+
+```tsx
+<Card tone="brand" outline>
+  <Card.Icon name="star" />
+  <Card.Body>
+    <Card.Title>브랜드 색조</Card.Title>
+    <Card.Description>brand 색조를 사용한 카드입니다.</Card.Description>
+  </Card.Body>
+</Card>
+```
+
+**WithOutline**
+
+```tsx
+<Card outline>
+  <Card.Icon name="star" />
+  <Card.Body>
+    <Card.Title>제목</Card.Title>
+    <Card.Description>이 기능에 대한 설명을 여기에 작성합니다</Card.Description>
+  </Card.Body>
+</Card>
+```
+
+**WithExternalLink**
+
+```tsx
+<Card>
+  <Card.Icon name="externalLink" />
+  <Card.Body>
+    <Card.Title>외부 링크 카드</Card.Title>
+    <Card.Description>
+      외부 사이트로 이동하는 링크입니다. 새 탭에서 열립니다.
+    </Card.Description>
+  </Card.Body>
+
+  <Card.Link href="https://www.example.com" external>
+    외부 사이트 방문
+  </Card.Link>
+</Card>
+```
+
+## CardBody
+
+`import { CardBody } from "daleui"`
+
+| prop         | 타입                  | 기본값 | 설명      |
+| ------------ | --------------------- | ------ | --------- |
+| **children** | `ReactNode`           | -      |           |
+| ref          | `Ref<HTMLDivElement>` | -      | 요소 참조 |
+
+## CardDescription
+
+`import { CardDescription } from "daleui"`
+
+| prop         | 타입        | 기본값 | 설명 |
+| ------------ | ----------- | ------ | ---- |
+| **children** | `ReactNode` | -      |      |
+
+## CardIcon
+
+`import { CardIcon } from "daleui"`
+
+| prop     | 타입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | 기본값 | 설명        |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ----------- |
+| **name** | `"info" \| "x" \| "menu" \| "search" \| "award" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 아이콘 이름 |
+| size     | `"sm" \| "md" \| "lg"`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | `"lg"` | 크기        |
+
+## CardLink
+
+`import { CardLink } from "daleui"`
+
+| prop         | 타입        | 기본값 | 설명           |
+| ------------ | ----------- | ------ | -------------- |
+| **children** | `ReactNode` | -      |                |
+| **href**     | `string`    | -      | 대상 URL       |
+| external     | `boolean`   | -      | 외부 링크 여부 |
+
+## CardTitle
+
+`import { CardTitle } from "daleui"`
+
+| prop         | 타입        | 기본값 | 설명      |
+| ------------ | ----------- | ------ | --------- |
+| **children** | `ReactNode` | -      | 설명 내용 |
 
 ## Checkbox
 
@@ -331,20 +431,25 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
 
 ## CheckboxGroup
 
+체크박스 그룹 컴포넌트입니다.
+
+사용자가 여러 선택지를 선택할 수 있을 때 사용합니다.
+특히 선택지가 2-5개로 적고 모든 옵션을 한눈에 보여주어야 할 때 적합합니다.
+
 `import { CheckboxGroup } from "daleui"`
 
-| prop          | 타입                         | 기본값 | 설명                                            |
-| ------------- | ---------------------------- | ------ | ----------------------------------------------- |
-| **children**  | `ReactNode`                  | -      | 자식 요소                                       |
-| **name**      | `string`                     | -      | 그룹 공유 name                                  |
-| **label**     | `string`                     | -      | 그룹 레이블                                     |
-| defaultValues | `string[]`                   | -      | 비제어 모드 초기 선택 값 목록                   |
-| values        | `string[]`                   | -      | 제어 모드 선택 값 목록                          |
-| onChange      | `(values: string[]) => void` | -      | 선택 값 변경 핸들러                             |
-| orientation   | `"horizontal" \| "vertical"` | -      | 배치 방향 (horizontal \| vertical)              |
-| tone          | `CheckboxGroupTone`          | -      | 색상 강조를 지정합니다.                         |
-| ref           | `Ref<HTMLDivElement>`        | -      | 요소 참조                                       |
-| helperText    | `string`                     | -      | 그룹 하단에 표시할 보조 또는 에러 메시지입니다. |
+| prop          | 타입                         | 기본값    | 설명                                            |
+| ------------- | ---------------------------- | --------- | ----------------------------------------------- |
+| **children**  | `ReactNode`                  | -         | 자식 요소                                       |
+| **name**      | `string`                     | -         | 그룹 공유 name                                  |
+| **label**     | `string`                     | -         | 그룹 레이블                                     |
+| defaultValues | `string[]`                   | -         | 비제어 모드 초기 선택 값 목록                   |
+| values        | `string[]`                   | -         | 제어 모드 선택 값 목록                          |
+| onChange      | `(values: string[]) => void` | -         | 선택 값 변경 핸들러                             |
+| orientation   | `"horizontal" \| "vertical"` | -         | 배치 방향 (horizontal \| vertical)              |
+| tone          | `CheckboxGroupTone`          | `"brand"` | 색상 강조를 지정합니다.                         |
+| ref           | `Ref<HTMLDivElement>`        | -         | 요소 참조                                       |
+| helperText    | `string`                     | -         | 그룹 하단에 표시할 보조 또는 에러 메시지입니다. |
 
 ### 예시
 
@@ -353,16 +458,26 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
 ```tsx
 <VStack gap="32">
   <CheckboxGroup
+    label="좋아하는 과일을 선택하세요 (옵션 선택)"
     name="vertical-orientation"
     orientation="vertical"
     defaultValues={["apple"]}
-  />
+  >
+    <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
+  </CheckboxGroup>
 
   <CheckboxGroup
+    label="좋아하는 과일을 선택하세요 (옵션 선택)"
     name="horizontal-orientation"
     orientation="horizontal"
     defaultValues={["banana"]}
-  />
+  >
+    <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
+  </CheckboxGroup>
 </VStack>
 ```
 
@@ -375,14 +490,22 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
     label="비활성화"
     disabled
     defaultValues={["banana"]}
-  />
+  >
+    <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
+  </CheckboxGroup>
 
   <CheckboxGroup
     name="readonly-group"
     label="읽기 전용"
     readOnly
     defaultValues={["banana"]}
-  />
+  >
+    <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
+  </CheckboxGroup>
 </VStack>
 ```
 
@@ -425,14 +548,22 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
     label="중립 색조 (Neutral)"
     defaultValues={["apple"]}
     tone="neutral"
-  />
+  >
+    <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
+  </CheckboxGroup>
 
   <CheckboxGroup
     name="brand-tone"
     label="브랜드 색조 (Brand)"
     defaultValues={["apple"]}
     tone="brand"
-  />
+  >
+    <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
+  </CheckboxGroup>
 </VStack>
 ```
 
@@ -445,14 +576,22 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
     label="좋아하는 과일을 선택하세요"
     invalid
     errorMessage="하나 이상 선택해주세요."
-  />
+  >
+    <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
+  </CheckboxGroup>
 
   <CheckboxGroup
     name="valid-group"
     label="정상 체크박스 그룹"
     required
     helperText="과일을 선택해주세요."
-  />
+  >
+    <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
+  </CheckboxGroup>
 </VStack>
 ```
 
@@ -464,14 +603,22 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
     name="helper-text-basic"
     label="좋아하는 과일을 선택하세요"
     helperText="여러 개를 선택할 수 있습니다."
-  />
+  >
+    <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
+  </CheckboxGroup>
 
   <CheckboxGroup
     name="helper-text-required"
     label="좋아하는 과일을 선택하세요"
     required
     helperText="최소 하나 이상 선택해주세요."
-  />
+  >
+    <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
+  </CheckboxGroup>
 </VStack>
 ```
 
@@ -479,11 +626,25 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
 
 ```tsx
 <RequiredCheckboxGroup
-  required
   name="fruits"
   label="좋아하는 과일을 선택하세요"
-/>
+  required
+>
+  <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+  <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
+  <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
+</RequiredCheckboxGroup>
 ```
+
+## CheckboxGroupItem
+
+`import { CheckboxGroupItem } from "daleui"`
+
+| prop      | 타입      | 기본값  | 설명          |
+| --------- | --------- | ------- | ------------- |
+| **value** | `string`  | -       | 옵션 값       |
+| children  | `string`  | -       | 자식 요소     |
+| disabled  | `boolean` | `false` | 비활성화 여부 |
 
 ## Flex
 
@@ -526,19 +687,35 @@ CSS Flexbox 레이아웃을 위한 컨테이너 컴포넌트입니다.
 <div className={grid({ gridTemplateColumns: "repeat(2, 1fr)", gap: "24" })}>
   <div>
     <h4>row - 가로 방향</h4>
-    <Flex direction="row" />
+    <Flex gap="8" direction="row">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+      <Item>아이템 3</Item>
+    </Flex>
   </div>
   <div>
     <h4>column - 세로 방향</h4>
-    <Flex direction="column" />
+    <Flex gap="8" direction="column">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+      <Item>아이템 3</Item>
+    </Flex>
   </div>
   <div>
     <h4>rowReverse - 가로 역방향</h4>
-    <Flex direction="rowReverse" />
+    <Flex gap="8" direction="rowReverse">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+      <Item>아이템 3</Item>
+    </Flex>
   </div>
   <div>
     <h4>columnReverse - 세로 역방향</h4>
-    <Flex direction="columnReverse" />
+    <Flex gap="8" direction="columnReverse">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+      <Item>아이템 3</Item>
+    </Flex>
   </div>
 </div>
 ```
@@ -549,11 +726,19 @@ CSS Flexbox 레이아웃을 위한 컨테이너 컴포넌트입니다.
 <div>
   <div>
     <h4>간격 8</h4>
-    <Flex gap="8" />
+    <Flex gap="8">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+      <Item>아이템 3</Item>
+    </Flex>
   </div>
   <div>
     <h4>간격 16</h4>
-    <Flex gap="16" />
+    <Flex gap="16">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+      <Item>아이템 3</Item>
+    </Flex>
   </div>
 </div>
 ```
@@ -564,11 +749,19 @@ CSS Flexbox 레이아웃을 위한 컨테이너 컴포넌트입니다.
 <div>
   <div>
     <h4>padding: 16</h4>
-    <Flex padding="16" />
+    <Flex gap="8" padding="16">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+      <Item>아이템 3</Item>
+    </Flex>
   </div>
   <div>
     <h4>padding: 32</h4>
-    <Flex padding="32" />
+    <Flex gap="8" padding="32">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+      <Item>아이템 3</Item>
+    </Flex>
   </div>
 </div>
 ```
@@ -579,19 +772,35 @@ CSS Flexbox 레이아웃을 위한 컨테이너 컴포넌트입니다.
 <div className={grid({ gridTemplateColumns: "repeat(2, 1fr)", gap: "24" })}>
   <div>
     <h4>start - 시작점 정렬</h4>
-    <Flex gap="4" justify="start" />
+    <Flex gap="4" justify="start">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+      <Item>아이템 3</Item>
+    </Flex>
   </div>
   <div>
     <h4>center - 중앙 정렬</h4>
-    <Flex gap="4" justify="center" />
+    <Flex gap="4" justify="center">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+      <Item>아이템 3</Item>
+    </Flex>
   </div>
   <div>
     <h4>end - 끝점 정렬</h4>
-    <Flex gap="4" justify="end" />
+    <Flex gap="4" justify="end">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+      <Item>아이템 3</Item>
+    </Flex>
   </div>
   <div>
     <h4>between - 양 끝 정렬</h4>
-    <Flex gap="4" justify="between" />
+    <Flex gap="4" justify="between">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+      <Item>아이템 3</Item>
+    </Flex>
   </div>
 </div>
 ```
@@ -602,19 +811,35 @@ CSS Flexbox 레이아웃을 위한 컨테이너 컴포넌트입니다.
 <div className={grid({ gridTemplateColumns: "repeat(2, 1fr)", gap: "24" })}>
   <div>
     <h4>start - 시작점 정렬</h4>
-    <Flex gap="4" align="start" />
+    <Flex gap="4" align="start">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+      <Item>아이템 3</Item>
+    </Flex>
   </div>
   <div>
     <h4>center - 중앙 정렬</h4>
-    <Flex gap="4" align="center" />
+    <Flex gap="4" align="center">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+      <Item>아이템 3</Item>
+    </Flex>
   </div>
   <div>
     <h4>end - 끝점 정렬</h4>
-    <Flex gap="4" align="end" />
+    <Flex gap="4" align="end">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+      <Item>아이템 3</Item>
+    </Flex>
   </div>
   <div>
     <h4>stretch - 늘리기</h4>
-    <Flex gap="4" align="stretch" />
+    <Flex gap="4" align="stretch">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+      <Item>아이템 3</Item>
+    </Flex>
   </div>
 </div>
 ```
@@ -642,10 +867,10 @@ CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
 | padding             | `"0" \| "2" \| "4" \| "8" \| "12" \| "16" \| "20" \| "24" \| "32" \| "36" \| "40" \| "48"` | -           | 안쪽 여백                                                      |
 | areas               | `Areas`                                                                                    | -           | 영역 이름 (grid-template-areas, GridItem.gridArea와 함께 사용) |
 | autoFlow            | `"row" \| "column" \| "rowDense" \| "columnDense"`                                         | `"row"`     | 자동 배치 흐름 (grid-auto-flow)                                |
-| justifyItems        | `"end" \| "start" \| "center" \| "stretch"`                                                | `"stretch"` | 아이템 주축 정렬 (justify-items)                               |
-| alignItems          | `"end" \| "start" \| "center" \| "stretch"`                                                | `"stretch"` | 아이템 교차축 정렬 (align-items)                               |
-| justifyContent      | `"end" \| "start" \| "center" \| "stretch" \| "between" \| "around"`                       | -           | 컨테이너 주축 정렬 (justify-content)                           |
-| alignContent        | `"end" \| "start" \| "center" \| "stretch" \| "between" \| "around"`                       | -           | 컨테이너 교차축 정렬 (align-content)                           |
+| justifyItems        | `"end" \| "center" \| "start" \| "stretch"`                                                | `"stretch"` | 아이템 주축 정렬 (justify-items)                               |
+| alignItems          | `"end" \| "center" \| "start" \| "stretch"`                                                | `"stretch"` | 아이템 교차축 정렬 (align-items)                               |
+| justifyContent      | `"end" \| "center" \| "start" \| "stretch" \| "between" \| "around"`                       | -           | 컨테이너 주축 정렬 (justify-content)                           |
+| alignContent        | `"end" \| "center" \| "start" \| "stretch" \| "between" \| "around"`                       | -           | 컨테이너 교차축 정렬 (align-content)                           |
 | ref                 | `Ref<HTMLElement>`                                                                         | -           | 요소 참조                                                      |
 
 ### 예시
@@ -656,28 +881,35 @@ CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
 <div className={grid({ gridTemplateColumns: "1fr", gap: "24" })}>
   <div>
     <h4 className={css({ marginBottom: "8" })}>균등 3열 (repeat)</h4>
-    <Grid
-      className={css({ width: "500" })}
-      gridTemplateColumns="repeat(3, 1fr)"
-    />
+    <Grid gap="8" gridTemplateColumns="repeat(3, 1fr)">
+      <GridItem className={itemBox.brand}>1</GridItem>
+      <GridItem className={itemBox.brand}>2</GridItem>
+      <GridItem className={itemBox.brand}>3</GridItem>
+    </Grid>
   </div>
   <div>
     <h4 className={css({ marginBottom: "8" })}>비율 레이아웃 (1:2:1)</h4>
-    <Grid className={css({ width: "500" })} gridTemplateColumns="1fr 2fr 1fr" />
+    <Grid gap="8" gridTemplateColumns="1fr 2fr 1fr">
+      <GridItem className={itemBox.brand}>1</GridItem>
+      <GridItem className={itemBox.brand}>2</GridItem>
+      <GridItem className={itemBox.brand}>3</GridItem>
+    </Grid>
   </div>
   <div>
     <h4 className={css({ marginBottom: "8" })}>고정 + 유동</h4>
-    <Grid
-      className={css({ width: "500" })}
-      gridTemplateColumns="100px auto 100px"
-    />
+    <Grid gap="8" gridTemplateColumns="100px auto 100px">
+      <GridItem className={itemBox.brand}>1</GridItem>
+      <GridItem className={itemBox.brand}>2</GridItem>
+      <GridItem className={itemBox.brand}>3</GridItem>
+    </Grid>
   </div>
   <div>
     <h4 className={css({ marginBottom: "8" })}>minmax 사용</h4>
-    <Grid
-      className={css({ width: "500" })}
-      gridTemplateColumns="repeat(3, minmax(80px, 1fr))"
-    />
+    <Grid gap="8" gridTemplateColumns="repeat(3, minmax(80px, 1fr))">
+      <GridItem className={itemBox.brand}>1</GridItem>
+      <GridItem className={itemBox.brand}>2</GridItem>
+      <GridItem className={itemBox.brand}>3</GridItem>
+    </Grid>
   </div>
 </div>
 ```
@@ -688,15 +920,33 @@ CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
 <div className={grid({ gridTemplateColumns: "1fr", gap: "16" })}>
   <div>
     <h4>간격 4</h4>
-    <Grid gap="4" />
+    <Grid gridTemplateColumns="repeat(3, 1fr)" gap="4">
+      {Array.from({ length: 12 }, (_, index) => (
+        <GridItem key={index} className={itemBox.brand}>
+          {index + 1}
+        </GridItem>
+      ))}
+    </Grid>
   </div>
   <div>
     <h4>간격 8</h4>
-    <Grid gap="8" />
+    <Grid gridTemplateColumns="repeat(3, 1fr)" gap="8">
+      {Array.from({ length: 12 }, (_, index) => (
+        <GridItem key={index} className={itemBox.brand}>
+          {index + 1}
+        </GridItem>
+      ))}
+    </Grid>
   </div>
   <div>
     <h4>간격 16</h4>
-    <Grid gap="16" />
+    <Grid gridTemplateColumns="repeat(3, 1fr)" gap="16">
+      {Array.from({ length: 12 }, (_, index) => (
+        <GridItem key={index} className={itemBox.brand}>
+          {index + 1}
+        </GridItem>
+      ))}
+    </Grid>
   </div>
 </div>
 ```
@@ -707,11 +957,23 @@ CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
 <div className={grid({ gridTemplateColumns: "1fr", gap: "16" })}>
   <div>
     <h4>padding: 16</h4>
-    <Grid padding="16" />
+    <Grid gridTemplateColumns="repeat(3, 1fr)" gap="8" padding="16">
+      {Array.from({ length: 12 }, (_, index) => (
+        <GridItem key={index} className={itemBox.brand}>
+          {index + 1}
+        </GridItem>
+      ))}
+    </Grid>
   </div>
   <div>
     <h4>padding: 32</h4>
-    <Grid padding="32" />
+    <Grid gridTemplateColumns="repeat(3, 1fr)" gap="8" padding="32">
+      {Array.from({ length: 12 }, (_, index) => (
+        <GridItem key={index} className={itemBox.brand}>
+          {index + 1}
+        </GridItem>
+      ))}
+    </Grid>
   </div>
 </div>
 ```
@@ -812,41 +1074,37 @@ CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
 <div className={grid({ gridTemplateColumns: "1fr", gap: "24" })}>
   <div>
     <h4 className={css({ marginBottom: "8" })}>start (왼쪽 정렬)</h4>
-    <Grid
-      gridTemplateColumns="repeat(3, 1fr)"
-      gap="8"
-      className={css({ width: "400" })}
-      justifyItems="start"
-    />
+    <Grid gridTemplateColumns="repeat(3, 1fr)" gap="8" justifyItems="start">
+      <GridItem className={itemBox.brand}>1</GridItem>
+      <GridItem className={itemBox.brand}>2</GridItem>
+      <GridItem className={itemBox.brand}>3</GridItem>
+    </Grid>
   </div>
   <div>
     <h4 className={css({ marginBottom: "8" })}>center (중앙 정렬)</h4>
-    <Grid
-      gridTemplateColumns="repeat(3, 1fr)"
-      gap="8"
-      className={css({ width: "400" })}
-      justifyItems="center"
-    />
+    <Grid gridTemplateColumns="repeat(3, 1fr)" gap="8" justifyItems="center">
+      <GridItem className={itemBox.brand}>1</GridItem>
+      <GridItem className={itemBox.brand}>2</GridItem>
+      <GridItem className={itemBox.brand}>3</GridItem>
+    </Grid>
   </div>
   <div>
     <h4 className={css({ marginBottom: "8" })}>end (오른쪽 정렬)</h4>
-    <Grid
-      gridTemplateColumns="repeat(3, 1fr)"
-      gap="8"
-      className={css({ width: "400" })}
-      justifyItems="end"
-    />
+    <Grid gridTemplateColumns="repeat(3, 1fr)" gap="8" justifyItems="end">
+      <GridItem className={itemBox.brand}>1</GridItem>
+      <GridItem className={itemBox.brand}>2</GridItem>
+      <GridItem className={itemBox.brand}>3</GridItem>
+    </Grid>
   </div>
   <div>
     <h4 className={css({ marginBottom: "8" })}>
       stretch (기본값, 셀 전체 너비)
     </h4>
-    <Grid
-      gridTemplateColumns="repeat(3, 1fr)"
-      gap="8"
-      className={css({ width: "400" })}
-      justifyItems="stretch"
-    />
+    <Grid gridTemplateColumns="repeat(3, 1fr)" gap="8" justifyItems="stretch">
+      <GridItem className={itemBox.brand}>1</GridItem>
+      <GridItem className={itemBox.brand}>2</GridItem>
+      <GridItem className={itemBox.brand}>3</GridItem>
+    </Grid>
   </div>
 </div>
 ```
@@ -861,9 +1119,12 @@ CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
       gridTemplateColumns="repeat(3, 1fr)"
       gridTemplateRows="1fr"
       gap="8"
-      className={css({ width: "300", height: "120" })}
       alignItems="start"
-    />
+    >
+      <GridItem className={itemBox.brand}>1</GridItem>
+      <GridItem className={itemBox.brand}>2</GridItem>
+      <GridItem className={itemBox.brand}>3</GridItem>
+    </Grid>
   </div>
   <div>
     <h4 className={css({ marginBottom: "8" })}>center (중앙)</h4>
@@ -871,9 +1132,12 @@ CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
       gridTemplateColumns="repeat(3, 1fr)"
       gridTemplateRows="1fr"
       gap="8"
-      className={css({ width: "300", height: "120" })}
       alignItems="center"
-    />
+    >
+      <GridItem className={itemBox.brand}>1</GridItem>
+      <GridItem className={itemBox.brand}>2</GridItem>
+      <GridItem className={itemBox.brand}>3</GridItem>
+    </Grid>
   </div>
   <div>
     <h4 className={css({ marginBottom: "8" })}>end (하단)</h4>
@@ -881,9 +1145,12 @@ CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
       gridTemplateColumns="repeat(3, 1fr)"
       gridTemplateRows="1fr"
       gap="8"
-      className={css({ width: "300", height: "120" })}
       alignItems="end"
-    />
+    >
+      <GridItem className={itemBox.brand}>1</GridItem>
+      <GridItem className={itemBox.brand}>2</GridItem>
+      <GridItem className={itemBox.brand}>3</GridItem>
+    </Grid>
   </div>
   <div>
     <h4 className={css({ marginBottom: "8" })}>stretch (전체)</h4>
@@ -891,12 +1158,39 @@ CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
       gridTemplateColumns="repeat(3, 1fr)"
       gridTemplateRows="1fr"
       gap="8"
-      className={css({ width: "300", height: "120" })}
       alignItems="stretch"
-    />
+    >
+      <GridItem className={itemBox.brand}>1</GridItem>
+      <GridItem className={itemBox.brand}>2</GridItem>
+      <GridItem className={itemBox.brand}>3</GridItem>
+    </Grid>
   </div>
 </div>
 ```
+
+## GridItem
+
+CSS Grid 레이아웃 내의 아이템 컴포넌트입니다.
+
+**접근성(Accessibility) 안내**
+
+- 이미 시맨틱 태그를 쓰면(as=`nav` | `main` | `aside` | `footer` 등) 중복 role 지정은 피하시길 바랍니다.
+- 접근성을 위해 기본적으로 적절한 HTML 시맨틱 요소를 사용하고 필요시 ARIA 속성을 활용하여 접근성을 향상시킵니다.
+
+`import { GridItem } from "daleui"`
+
+| prop            | 타입               | 기본값  | 설명                           |
+| --------------- | ------------------ | ------- | ------------------------------ |
+| **children**    | `ReactNode`        | -       | 자식 요소                      |
+| as              | `As`               | `"div"` | 렌더링 태그                    |
+| gridColumn      | `string`           | -       | 열 범위 (grid-column)          |
+| gridRow         | `string`           | -       | 행 범위 (grid-row)             |
+| gridColumnStart | `string`           | -       | 열 시작 선 (grid-column-start) |
+| gridRowStart    | `string`           | -       | 행 시작 선 (grid-row-start)    |
+| gridColumnEnd   | `string`           | -       | 열 끝 선 (grid-column-end)     |
+| gridRowEnd      | `string`           | -       | 행 끝 선 (grid-row-end)        |
+| gridArea        | `string`           | -       | 영역 이름 (grid-area)          |
+| ref             | `Ref<HTMLElement>` | -       | 요소 참조                      |
 
 ## Heading
 
@@ -937,8 +1231,12 @@ CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
 
 ```tsx
 <div className={vstack({ gap: "24" })}>
-  <Heading tone="neutral">중립 색조</Heading>
-  <Heading tone="brand">브랜드 색조</Heading>
+  <Heading level={1} tone="neutral">
+    중립 색조
+  </Heading>
+  <Heading level={1} tone="brand">
+    브랜드 색조
+  </Heading>
 </div>
 ```
 
@@ -946,11 +1244,21 @@ CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
 
 ```tsx
 <div className={vstack({ gap: "24" })}>
-  <Heading size={1}>제목</Heading>
-  <Heading size={2}>제목</Heading>
-  <Heading size={3}>제목</Heading>
-  <Heading size={4}>제목</Heading>
-  <Heading size={5}>제목</Heading>
+  <Heading level={1} size={1}>
+    제목
+  </Heading>
+  <Heading level={1} size={2}>
+    제목
+  </Heading>
+  <Heading level={1} size={3}>
+    제목
+  </Heading>
+  <Heading level={1} size={4}>
+    제목
+  </Heading>
+  <Heading level={1} size={5}>
+    제목
+  </Heading>
 </div>
 ```
 
@@ -963,9 +1271,15 @@ CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
     maxWidth: "200px",
   })}
 >
-  <Heading align="left">텍스트를 왼쪽 정렬된 제목</Heading>
-  <Heading align="center">텍스트를 가운데 정렬된 제목</Heading>
-  <Heading align="right">텍스트를 오른쪽 정렬된 제목</Heading>
+  <Heading level={1} align="left">
+    텍스트를 왼쪽 정렬된 제목
+  </Heading>
+  <Heading level={1} align="center">
+    텍스트를 가운데 정렬된 제목
+  </Heading>
+  <Heading level={1} align="right">
+    텍스트를 오른쪽 정렬된 제목
+  </Heading>
 </div>
 ```
 
@@ -978,8 +1292,12 @@ CSS Grid 레이아웃을 위한 컨테이너 컴포넌트입니다.
     maxWidth: "200px",
   })}
 >
-  <Heading wordBreak="eng">english line break</Heading>
-  <Heading wordBreak="cjk">한글은 단어 단위로 줄바꿈됩니다.</Heading>
+  <Heading level={1} wordBreak="eng">
+    english line break
+  </Heading>
+  <Heading level={1} wordBreak="cjk">
+    한글은 단어 단위로 줄바꿈됩니다.
+  </Heading>
 </div>
 ```
 
@@ -998,8 +1316,8 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 | prop     | 타입                                                     | 기본값     | 설명                  |
 | -------- | -------------------------------------------------------- | ---------- | --------------------- |
 | reversed | `boolean`                                                | `false`    | 가로 역방향 배치 여부 |
-| justify  | `"left" \| "right" \| "center" \| "between" \| "around"` | `"left"`   | 가로 정렬             |
-| align    | `"bottom" \| "top" \| "center" \| "stretch"`             | `"center"` | 세로 정렬             |
+| justify  | `"center" \| "left" \| "right" \| "between" \| "around"` | `"left"`   | 가로 정렬             |
+| align    | `"center" \| "bottom" \| "top" \| "stretch"`             | `"center"` | 세로 정렬             |
 | ref      | `Ref<HTMLElement>`                                       | -          | 요소 참조             |
 
 ### 예시
@@ -1010,15 +1328,24 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 <VStack gap="24">
   <div>
     <h4>간격 4</h4>
-    <HStack gap="4" className={css({ width: "400" })} />
+    <HStack gap="4" className={css({ width: "400" })}>
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
   <div>
     <h4>간격 8</h4>
-    <HStack gap="8" className={css({ width: "400" })} />
+    <HStack gap="8" className={css({ width: "400" })}>
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
   <div>
     <h4>간격 16</h4>
-    <HStack gap="16" className={css({ width: "400" })} />
+    <HStack gap="16" className={css({ width: "400" })}>
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
 </VStack>
 ```
@@ -1029,11 +1356,17 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 <VStack gap="24">
   <div>
     <h4>padding: 16</h4>
-    <HStack padding="16" className={css({ width: "400" })} />
+    <HStack gap="8" padding="16" className={css({ width: "400" })}>
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
   <div>
     <h4>padding: 32</h4>
-    <HStack padding="32" className={css({ width: "400" })} />
+    <HStack gap="8" padding="32" className={css({ width: "400" })}>
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
 </VStack>
 ```
@@ -1044,11 +1377,17 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 <VStack gap="24">
   <div>
     <h4>false</h4>
-    <HStack reversed={false} className={css({ width: "400" })} />
+    <HStack gap="8" reversed={false} className={css({ width: "400" })}>
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
   <div>
     <h4>true</h4>
-    <HStack reversed={true} className={css({ width: "400" })} />
+    <HStack gap="8" reversed={true} className={css({ width: "400" })}>
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
 </VStack>
 ```
@@ -1059,23 +1398,38 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 <div className={grid({ gridTemplateColumns: "repeat(3, 1fr)", gap: "16" })}>
   <div>
     <h4>left - 왼쪽 정렬</h4>
-    <HStack justify="left" />
+    <HStack gap="8" justify="left">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
   <div>
     <h4>right - 오른쪽 정렬</h4>
-    <HStack justify="right" />
+    <HStack gap="8" justify="right">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
   <div>
     <h4>center - 중앙 정렬</h4>
-    <HStack justify="center" />
+    <HStack gap="8" justify="center">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
   <div>
     <h4>between - 양 끝 정렬</h4>
-    <HStack justify="between" />
+    <HStack gap="8" justify="between">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
   <div>
     <h4>around - 균등 분산</h4>
-    <HStack justify="around" />
+    <HStack gap="8" justify="around">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
 </div>
 ```
@@ -1086,22 +1440,34 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 <div className={grid({ gridTemplateColumns: "repeat(2, 1fr)", gap: "16" })}>
   <div>
     <h4>top - 위쪽 정렬</h4>
-    <HStack align="top" />
+    <HStack gap="8" align="top">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
 
   <div>
     <h4>bottom - 아래쪽 정렬</h4>
-    <HStack align="bottom" />
+    <HStack gap="8" align="bottom">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
 
   <div>
     <h4>center - 중앙 정렬</h4>
-    <HStack align="center" />
+    <HStack gap="8" align="center">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
 
   <div>
     <h4>stretch - 늘리기</h4>
-    <HStack align="stretch" />
+    <HStack gap="8" align="stretch">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
 </div>
 ```
@@ -1123,12 +1489,26 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
   <div className={css({ border: "1px solid", padding: "16" })}>
     <h4>Flex</h4>
     <p>direction="row" justify="start" align="center" gap="8"</p>
-    <Flex direction="row" justify="start" align="center" gap="8" />
+    <Flex
+      direction="row"
+      justify="start"
+      align="center"
+      gap="8"
+      children={
+        <>
+          <Item>아이템 1</Item>
+          <Item>아이템 2</Item>
+        </>
+      }
+    />
   </div>
   <div className={css({ border: "1px solid", padding: "16" })}>
     <h4>HStack</h4>
     <p>gap="8"</p>
-    <HStack gap="8" />
+    <HStack gap="8">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </HStack>
   </div>
 </Flex>
 ```
@@ -1145,7 +1525,7 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 | prop     | 타입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | 기본값 | 설명        |
 | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ----------- |
-| **name** | `"info" \| "menu" \| "search" \| "x" \| "award" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 아이콘 이름 |
+| **name** | `"info" \| "x" \| "menu" \| "search" \| "award" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 아이콘 이름 |
 | tone     | `Tone`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | -      | 색조        |
 | size     | `"sm" \| "md" \| "lg" \| "xs"`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | -      | 크기        |
 | solid    | `boolean`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | -      | 솔리드 여부 |
@@ -1156,10 +1536,10 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 ```tsx
 <div className={vstack({ gap: "24" })}>
-  <Icon size="xs" />
-  <Icon size="sm" />
-  <Icon size="md" />
-  <Icon size="lg" />
+  <Icon name="user" size="xs" />
+  <Icon name="user" size="sm" />
+  <Icon name="user" size="md" />
+  <Icon name="user" size="lg" />
 </div>
 ```
 
@@ -1167,12 +1547,12 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 ```tsx
 <div className={vstack({ gap: "24" })}>
-  <Icon tone="neutral" />
-  <Icon tone="brand" />
-  <Icon tone="danger" />
-  <Icon tone="warning" />
-  <Icon tone="success" />
-  <Icon tone="info" />
+  <Icon name="user" tone="neutral" />
+  <Icon name="user" tone="brand" />
+  <Icon name="user" tone="danger" />
+  <Icon name="user" tone="warning" />
+  <Icon name="user" tone="success" />
+  <Icon name="user" tone="info" />
 </div>
 ```
 
@@ -1187,28 +1567,28 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
   })}
 >
   <div className={flex({ gap: "24" })}>
-    <Icon solid={false} tone="neutral" />
-    <Icon solid tone="neutral" />
+    <Icon name="user" solid={false} tone="neutral" />
+    <Icon name="user" solid tone="neutral" />
   </div>
   <div className={flex({ gap: "24" })}>
-    <Icon solid={false} tone="brand" />
-    <Icon solid tone="brand" />
+    <Icon name="user" solid={false} tone="brand" />
+    <Icon name="user" solid tone="brand" />
   </div>
   <div className={flex({ gap: "24" })}>
-    <Icon solid={false} tone="danger" />
-    <Icon solid tone="danger" />
+    <Icon name="user" solid={false} tone="danger" />
+    <Icon name="user" solid tone="danger" />
   </div>
   <div className={flex({ gap: "24" })}>
-    <Icon solid={false} tone="warning" />
-    <Icon solid tone="warning" />
+    <Icon name="user" solid={false} tone="warning" />
+    <Icon name="user" solid tone="warning" />
   </div>
   <div className={flex({ gap: "24" })}>
-    <Icon solid={false} tone="success" />
-    <Icon solid tone="success" />
+    <Icon name="user" solid={false} tone="success" />
+    <Icon name="user" solid tone="success" />
   </div>
   <div className={flex({ gap: "24" })}>
-    <Icon solid={false} tone="info" />
-    <Icon solid tone="info" />
+    <Icon name="user" solid={false} tone="info" />
+    <Icon name="user" solid tone="info" />
   </div>
 </VStack>
 ```
@@ -1312,7 +1692,8 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 **Basic**
 
 ```tsx
-<Link aria-label="링크">
+<Link href="#" aria-label="링크">
+  링크
   <Icon name="externalLink" />
 </Link>
 ```
@@ -1321,11 +1702,11 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 ```tsx
 <div className={vstack({ gap: "24" })}>
-  <Link tone="brand" aria-label="브랜드 링크">
+  <Link href="#" tone="brand" aria-label="브랜드 링크">
     브랜드 링크
     <Icon name="externalLink" />
   </Link>
-  <Link tone="neutral" aria-label="중립 링크">
+  <Link href="#" tone="neutral" aria-label="중립 링크">
     중립 링크
     <Icon name="externalLink" />
   </Link>
@@ -1336,11 +1717,11 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 ```tsx
 <div className={vstack({ gap: "24" })}>
-  <Link underline aria-label="밑줄 있음">
+  <Link href="#" underline aria-label="밑줄 있음">
     밑줄 있음
     <Icon name="externalLink" />
   </Link>
-  <Link underline={false} aria-label="밑줄 없음">
+  <Link href="#" underline={false} aria-label="밑줄 없음">
     밑줄 없음
     <Icon name="externalLink" />
   </Link>
@@ -1351,15 +1732,15 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 ```tsx
 <div className={vstack({ gap: "24" })}>
-  <Link size="sm" aria-label="작은 링크">
+  <Link href="#" size="sm" aria-label="작은 링크">
     작은 링크
     <Icon name="externalLink" size="sm" />
   </Link>
-  <Link size="md" aria-label="중간 링크">
+  <Link href="#" size="md" aria-label="중간 링크">
     중간 링크
     <Icon name="externalLink" size="md" />
   </Link>
-  <Link size="lg" aria-label="큰 링크">
+  <Link href="#" size="lg" aria-label="큰 링크">
     큰 링크
     <Icon name="externalLink" size="lg" />
   </Link>
@@ -1370,11 +1751,11 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 ```tsx
 <div className={vstack({ gap: "24" })}>
-  <Link aria-label="아이콘 있음">
+  <Link href="#" aria-label="아이콘 있음">
     아이콘 있음
     <Icon name="externalLink" />
   </Link>
-  <Link>아이콘 없음</Link>
+  <Link href="#">아이콘 없음</Link>
 </div>
 ```
 
@@ -1389,7 +1770,7 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
     방문한 링크
     <Icon name="externalLink" stroke="currentColor" />
   </Link>
-  <Link aria-label="방문하지 않은 링크">
+  <Link href="#" aria-label="방문하지 않은 링크">
     방문하지 않은 링크
     <Icon name="externalLink" />
   </Link>
@@ -1408,7 +1789,7 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
     새 탭에서 열기 (보안 속성 자동 추가)
     <Icon name="externalLink" />
   </Link>
-  <Link aria-label="같은 탭에서 열기">
+  <Link href="#" aria-label="같은 탭에서 열기">
     같은 탭에서 열기
     <Icon name="externalLink" />
   </Link>
@@ -1420,7 +1801,7 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 ```tsx
 <p>
   이 문장에는{" "}
-  <Link aria-label="링크">
+  <Link href="#" aria-label="링크">
     링크
     <Icon name="externalLink" />
   </Link>
@@ -1467,19 +1848,26 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 ## RadioGroup
 
+라디오 버튼 그룹 컴포넌트입니다.
+
+사용자가 제한된 선택지 중 하나만 선택해야 할 때 사용합니다.
+특히 선택지가 2-5개로 적고 모든 옵션을 한눈에 보여주어야 할 때 적합합니다.
+
+선택지가 많은 경우(6개 이상)에는 대신 Select 컴포넌트 사용을 권장합니다.
+
 `import { RadioGroup } from "daleui"`
 
-| prop         | 타입                         | 기본값 | 설명                               |
-| ------------ | ---------------------------- | ------ | ---------------------------------- |
-| **children** | `ReactNode`                  | -      | 자식 요소                          |
-| **name**     | `string`                     | -      | 그룹 공유 name                     |
-| **label**    | `string`                     | -      | 그룹 레이블                        |
-| defaultValue | `string`                     | -      | 비제어 모드 초기 선택 값           |
-| value        | `string`                     | -      | 제어 모드 선택 값                  |
-| onChange     | `(value: string) => void`    | -      | 선택 값 변경 핸들러                |
-| orientation  | `"horizontal" \| "vertical"` | -      | 배치 방향 (horizontal \| vertical) |
-| tone         | `RadioGroupTone`             | -      | 색조                               |
-| hint         | `string`                     | -      | 레이블 보조 텍스트                 |
+| prop         | 타입                         | 기본값    | 설명                               |
+| ------------ | ---------------------------- | --------- | ---------------------------------- |
+| **children** | `ReactNode`                  | -         | 자식 요소                          |
+| **name**     | `string`                     | -         | 그룹 공유 name                     |
+| **label**    | `string`                     | -         | 그룹 레이블                        |
+| defaultValue | `string`                     | -         | 비제어 모드 초기 선택 값           |
+| value        | `string`                     | -         | 제어 모드 선택 값                  |
+| onChange     | `(value: string) => void`    | -         | 선택 값 변경 핸들러                |
+| orientation  | `"horizontal" \| "vertical"` | -         | 배치 방향 (horizontal \| vertical) |
+| tone         | `RadioGroupTone`             | `"brand"` | 색조                               |
+| hint         | `string`                     | -         | 레이블 보조 텍스트                 |
 
 ### 예시
 
@@ -1492,14 +1880,22 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
     label="세로 방향 (Vertical)"
     orientation="vertical"
     defaultValue="apple"
-  />
+  >
+    <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+    <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+    <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
+  </RadioGroup>
 
   <RadioGroup
     name="horizontal-orientation"
     label="가로 방향 (Horizontal)"
     orientation="horizontal"
     defaultValue="banana"
-  />
+  >
+    <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+    <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+    <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
+  </RadioGroup>
 </div>
 ```
 
@@ -1512,14 +1908,22 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
     label="비활성화"
     disabled
     defaultValue="banana"
-  />
+  >
+    <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+    <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+    <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
+  </RadioGroup>
 
   <RadioGroup
     name="readonly-group"
     label="읽기 전용"
     readOnly
     defaultValue="banana"
-  />
+  >
+    <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+    <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+    <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
+  </RadioGroup>
 </VStack>
 ```
 
@@ -1562,14 +1966,22 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
     name="neutral-tone"
     label="중립 색조 (Neutral)"
     tone="neutral"
-  />
+  >
+    <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+    <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+    <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
+  </RadioGroup>
 
   <RadioGroup
     defaultValue="apple"
     name="brand-tone"
     label="브랜드 색조 (Brand)"
     tone="brand"
-  />
+  >
+    <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+    <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+    <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
+  </RadioGroup>
 </div>
 ```
 
@@ -1582,7 +1994,11 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
     label="에러 상태 (선택 없음)"
     invalid
     errorMessage="필수 값을 선택해주세요."
-  />
+  >
+    <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+    <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+    <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
+  </RadioGroup>
 
   <RadioGroup
     name="invalid-selected"
@@ -1590,9 +2006,17 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
     invalid
     errorMessage="올바른 옵션을 선택해주세요."
     defaultValue="banana"
-  />
+  >
+    <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+    <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+    <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
+  </RadioGroup>
 
-  <RadioGroup name="normal" label="정상 상태 (비교용)" defaultValue="apple" />
+  <RadioGroup name="normal" label="정상 상태 (비교용)" defaultValue="apple">
+    <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+    <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+    <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
+  </RadioGroup>
 </VStack>
 ```
 
@@ -1604,14 +2028,22 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
     name="hint-basic"
     label="좋아하는 과일을 선택하세요"
     hint="(옵션 선택)"
-  />
+  >
+    <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+    <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+    <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
+  </RadioGroup>
 
   <RadioGroup
     name="hint-required"
     label="좋아하는 과일을 선택하세요"
     hint="(옵션 선택)"
     required
-  />
+  >
+    <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+    <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+    <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
+  </RadioGroup>
 </VStack>
 ```
 
@@ -1624,14 +2056,22 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
     label="좋아하는 과일을 선택하세요"
     required
     helperText="모두 다 좋아한다면 가장 좋아하는 과일을 골라주세요"
-  />
+  >
+    <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+    <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+    <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
+  </RadioGroup>
 
   <RadioGroup
     name="helper-text-horizontal"
     label="좋아하는 과일을 선택하세요"
     orientation="horizontal"
     helperText="모두 다 좋아한다면 가장 좋아하는 과일을 골라주세요"
-  />
+  >
+    <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+    <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+    <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
+  </RadioGroup>
 </VStack>
 ```
 
@@ -1639,16 +2079,35 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 ```tsx
 <VStack gap="32">
-  <RadioGroup name="required-normal" label="필수 입력" required />
+  <RadioGroup name="required-normal" label="필수 입력" required>
+    <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+    <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+    <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
+  </RadioGroup>
 
   <RadioGroup
     name="required-disabled"
     label="필수 입력 (비활성화)"
     required
     disabled
-  />
+  >
+    <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+    <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+    <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
+  </RadioGroup>
 </VStack>
 ```
+
+## RadioGroupItem
+
+`import { RadioGroupItem } from "daleui"`
+
+| prop      | 타입                    | 기본값 | 설명           |
+| --------- | ----------------------- | ------ | -------------- |
+| **value** | `string`                | -      | 옵션 값        |
+| children  | `ReactNode`             | -      | 자식 요소      |
+| disabled  | `boolean`               | -      | 비활성화 여부  |
+| ref       | `Ref<HTMLInputElement>` | -      | 입력 요소 참조 |
 
 ## Select
 
@@ -1683,24 +2142,118 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 ```tsx
 <VStack gap="16">
-  <Select disabled defaultValue="kr" label="비활성화" />
-  <Select disabled readOnly defaultValue="us" label="읽기 전용" />
+  <Select
+    placeholder="국가를 선택하세요"
+    disabled
+    defaultValue="kr"
+    label="비활성화"
+  >
+    <option value="kr">대한민국</option>
+    <option value="ca">캐나다</option>
+    <option value="us">미국</option>
+    <option value="jp">일본</option>
+    <option value="cn">중국</option>
+    <option value="gb">영국</option>
+    <option value="fr">프랑스</option>
+    <option value="de">독일</option>
+    <option value="it">이탈리아</option>
+    <option value="es">스페인</option>
+    <option value="au">호주</option>
+    <option value="br">브라질</option>
+  </Select>
+  <Select
+    disabled
+    placeholder="국가를 선택하세요"
+    readOnly
+    defaultValue="us"
+    label="읽기 전용"
+  >
+    <option value="kr">대한민국</option>
+    <option value="ca">캐나다</option>
+    <option value="us">미국</option>
+    <option value="jp">일본</option>
+    <option value="cn">중국</option>
+    <option value="gb">영국</option>
+    <option value="fr">프랑스</option>
+    <option value="de">독일</option>
+    <option value="it">이탈리아</option>
+    <option value="es">스페인</option>
+    <option value="au">호주</option>
+    <option value="br">브라질</option>
+  </Select>
 </VStack>
 ```
 
 **Required**
 
 ```tsx
-<RequiredSelect required clearButtonName="clear" name="framework" />
+<RequiredSelect
+  required
+  placeholder="국가를 선택하세요"
+  clearButtonName="clear"
+  name="framework"
+>
+  <option value="kr">대한민국</option>
+  <option value="ca">캐나다</option>
+  <option value="us">미국</option>
+  <option value="jp">일본</option>
+  <option value="cn">중국</option>
+  <option value="gb">영국</option>
+  <option value="fr">프랑스</option>
+  <option value="de">독일</option>
+  <option value="it">이탈리아</option>
+  <option value="es">스페인</option>
+  <option value="au">호주</option>
+  <option value="br">브라질</option>
+</RequiredSelect>
 ```
 
 **WithLabel**
 
 ```tsx
 <VStack gap="16">
-  <Select label="국가" />
-  <Select label="국가" required />
-  <Select label="국가" disabled />
+  <Select placeholder="국가를 선택하세요" label="국가">
+    <option value="kr">대한민국</option>
+    <option value="ca">캐나다</option>
+    <option value="us">미국</option>
+    <option value="jp">일본</option>
+    <option value="cn">중국</option>
+    <option value="gb">영국</option>
+    <option value="fr">프랑스</option>
+    <option value="de">독일</option>
+    <option value="it">이탈리아</option>
+    <option value="es">스페인</option>
+    <option value="au">호주</option>
+    <option value="br">브라질</option>
+  </Select>
+  <Select placeholder="국가를 선택하세요" label="국가" required>
+    <option value="kr">대한민국</option>
+    <option value="ca">캐나다</option>
+    <option value="us">미국</option>
+    <option value="jp">일본</option>
+    <option value="cn">중국</option>
+    <option value="gb">영국</option>
+    <option value="fr">프랑스</option>
+    <option value="de">독일</option>
+    <option value="it">이탈리아</option>
+    <option value="es">스페인</option>
+    <option value="au">호주</option>
+    <option value="br">브라질</option>
+  </Select>
+  <Select placeholder="국가를 선택하세요" label="국가" disabled>
+    <option value="kr">대한민국</option>
+    <option value="ca">캐나다</option>
+    <option value="us">미국</option>
+    <option value="jp">일본</option>
+    <option value="cn">중국</option>
+    <option value="gb">영국</option>
+    <option value="fr">프랑스</option>
+    <option value="de">독일</option>
+    <option value="it">이탈리아</option>
+    <option value="es">스페인</option>
+    <option value="au">호주</option>
+    <option value="br">브라질</option>
+  </Select>
 </VStack>
 ```
 
@@ -1770,7 +2323,7 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 **Removable**
 
 ```tsx
-<RemovableExample />
+<RemovableExample>태그</RemovableExample>
 ```
 
 ## Text
@@ -1785,7 +2338,7 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 | prop         | 타입                                                                       | 기본값      | 설명                     |
 | ------------ | -------------------------------------------------------------------------- | ----------- | ------------------------ |
 | **children** | `ReactNode`                                                                | -           | 텍스트 내용              |
-| as           | `"div" \| "span" \| "p" \| "em" \| "small" \| "strong"`                    | `"span"`    | 렌더링 태그              |
+| as           | `"div" \| "span" \| "em" \| "p" \| "small" \| "strong"`                    | `"span"`    | 렌더링 태그              |
 | tone         | `Tone`                                                                     | `"neutral"` | 색조                     |
 | size         | `"sm" \| "md" \| "lg" \| "xl" \| "2xl" \| "xs" \| "3xl" \| "4xl" \| "5xl"` | -           | 글자 크기                |
 | weight       | `"normal" \| "medium" \| "semibold" \| "bold"`                             | -           | 글자 굵기                |
@@ -1826,8 +2379,8 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 | prop         | 타입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | 기본값 | 설명                         |
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ---------------------------- |
-| leadingIcon  | `"info" \| "menu" \| "search" \| "x" \| "award" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 선행 아이콘 이름 (Icon.name) |
-| trailingIcon | `"info" \| "menu" \| "search" \| "x" \| "award" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 후행 아이콘 이름 (Icon.name) |
+| leadingIcon  | `"info" \| "x" \| "menu" \| "search" \| "award" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 선행 아이콘 이름 (Icon.name) |
+| trailingIcon | `"info" \| "x" \| "menu" \| "search" \| "award" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 후행 아이콘 이름 (Icon.name) |
 | placeholder  | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | -      | 플레이스홀더                 |
 | value        | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | -      | 제어 모드 입력 값            |
 | defaultValue | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | -      | 비제어 모드 초기 입력값      |
@@ -1872,12 +2425,18 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 ```tsx
 <div className={vstack({ gap: "16", w: "320px" })}>
   <TextInput
+    placeholder="텍스트를 입력해주세요."
     disabled
     defaultValue="수정할 수 없습니다"
     leadingIcon="star"
     label="비활성화"
   />
-  <TextInput readOnly defaultValue="읽기 전용 값" label="읽기 전용" />
+  <TextInput
+    placeholder="텍스트를 입력해주세요."
+    readOnly
+    defaultValue="읽기 전용 값"
+    label="읽기 전용"
+  />
 </div>
 ```
 
@@ -1907,8 +2466,8 @@ Flex의 세로 배치 패턴(`direction="column"`, `align="center"`)을 의미 �
 | prop     | 타입                                                     | 기본값     | 설명                  |
 | -------- | -------------------------------------------------------- | ---------- | --------------------- |
 | reversed | `boolean`                                                | `false`    | 세로 역방향 배치 여부 |
-| justify  | `"bottom" \| "top" \| "center" \| "between" \| "around"` | `"top"`    | 세로 정렬             |
-| align    | `"left" \| "right" \| "center" \| "stretch"`             | `"center"` | 가로 정렬             |
+| justify  | `"center" \| "bottom" \| "top" \| "between" \| "around"` | `"top"`    | 세로 정렬             |
+| align    | `"center" \| "left" \| "right" \| "stretch"`             | `"center"` | 가로 정렬             |
 | ref      | `Ref<HTMLElement>`                                       | -          | 요소 참조             |
 
 ### 예시
@@ -1919,15 +2478,24 @@ Flex의 세로 배치 패턴(`direction="column"`, `align="center"`)을 의미 �
 <HStack gap="24">
   <div>
     <h4>간격 4</h4>
-    <VStack gap="4" />
+    <VStack gap="4">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </VStack>
   </div>
   <div>
     <h4>간격 8</h4>
-    <VStack gap="8" />
+    <VStack gap="8">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </VStack>
   </div>
   <div>
     <h4>간격 16</h4>
-    <VStack gap="16" />
+    <VStack gap="16">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </VStack>
   </div>
 </HStack>
 ```
@@ -1938,11 +2506,17 @@ Flex의 세로 배치 패턴(`direction="column"`, `align="center"`)을 의미 �
 <HStack gap="24">
   <div>
     <h4>padding: 16</h4>
-    <VStack padding="16" />
+    <VStack gap="8" padding="16">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </VStack>
   </div>
   <div>
     <h4>padding: 32</h4>
-    <VStack padding="32" />
+    <VStack gap="8" padding="32">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </VStack>
   </div>
 </HStack>
 ```
@@ -1953,11 +2527,17 @@ Flex의 세로 배치 패턴(`direction="column"`, `align="center"`)을 의미 �
 <HStack gap="24">
   <div>
     <h4>false</h4>
-    <VStack reversed={false} />
+    <VStack gap="8" reversed={false}>
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </VStack>
   </div>
   <div>
     <h4>true</h4>
-    <VStack reversed={true} />
+    <VStack gap="8" reversed={true}>
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </VStack>
   </div>
 </HStack>
 ```
@@ -1968,26 +2548,41 @@ Flex의 세로 배치 패턴(`direction="column"`, `align="center"`)을 의미 �
 <div className={grid({ gridTemplateColumns: "repeat(3, 1fr)", gap: "16" })}>
   <div>
     <h4>top - 위쪽 정렬</h4>
-    <VStack justify="top" />
+    <VStack gap="8" justify="top">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </VStack>
   </div>
 
   <div>
     <h4>bottom - 아래쪽 정렬</h4>
-    <VStack justify="bottom" />
+    <VStack gap="8" justify="bottom">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </VStack>
   </div>
 
   <div>
     <h4>center - 중앙 정렬</h4>
-    <VStack justify="center" />
+    <VStack gap="8" justify="center">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </VStack>
   </div>
 
   <div>
     <h4>between - 양 끝 정렬</h4>
-    <VStack justify="between" />
+    <VStack gap="8" justify="between">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </VStack>
   </div>
   <div>
     <h4>around - 균등 분산</h4>
-    <VStack justify="around" />
+    <VStack gap="8" justify="around">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </VStack>
   </div>
 </div>
 ```
@@ -1998,19 +2593,31 @@ Flex의 세로 배치 패턴(`direction="column"`, `align="center"`)을 의미 �
 <div className={grid({ gridTemplateColumns: "repeat(2, 1fr)", gap: "16" })}>
   <div>
     <h4>left - 왼쪽 정렬</h4>
-    <VStack align="left" />
+    <VStack gap="8" align="left">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </VStack>
   </div>
   <div>
     <h4>center - 중앙 정렬</h4>
-    <VStack align="center" />
+    <VStack gap="8" align="center">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </VStack>
   </div>
   <div>
     <h4>right - 오른쪽 정렬</h4>
-    <VStack align="right" />
+    <VStack gap="8" align="right">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </VStack>
   </div>
   <div>
     <h4>stretch - 늘리기</h4>
-    <VStack align="stretch" />
+    <VStack gap="8" align="stretch">
+      <Item>아이템 1</Item>
+      <Item>아이템 2</Item>
+    </VStack>
   </div>
 </div>
 ```
@@ -2032,12 +2639,31 @@ Flex의 세로 배치 패턴(`direction="column"`, `align="center"`)을 의미 �
   <div className={css({ border: "1px solid", padding: "16" })}>
     <h4>Flex</h4>
     <p>direction="column" justify="start" align="center" gap="8"</p>
-    <Flex direction="column" justify="start" align="center" gap="8" />
+    <Flex
+      direction="column"
+      justify="start"
+      align="center"
+      gap="8"
+      children={
+        <>
+          <Item>아이템 1</Item>
+          <Item>아이템 2</Item>
+        </>
+      }
+    />
   </div>
   <div className={css({ border: "1px solid", padding: "16" })}>
     <h4>VStack</h4>
     <p>gap="8"</p>
-    <VStack gap="8" />
+    <VStack
+      gap="8"
+      children={
+        <>
+          <Item>아이템 1</Item>
+          <Item>아이템 2</Item>
+        </>
+      }
+    />
   </div>
 </Flex>
 ```
