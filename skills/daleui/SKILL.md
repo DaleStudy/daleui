@@ -1,3 +1,12 @@
+---
+name: daleui
+description: >-
+  Use the daleui React design system with semantic Panda CSS tokens and
+  accessible components. Trigger when building UI with daleui, importing from
+  "daleui", using daleui tokens, or implementing Korean-first React components
+  with Box, Button, Card, forms, and layout primitives.
+---
+
 # daleui Agent Skill
 
 한국어 우선 React 디자인 시스템 `daleui`를 사용해 UI를 구현하는 AI 에이전트 가이드입니다.
