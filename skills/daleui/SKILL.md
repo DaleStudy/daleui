@@ -68,6 +68,6 @@
 
 ## 참고 문서
 
-- [components.md](./components.md): 전체 컴포넌트 props 표
+- [components.md](./components.md): 컴포넌트 레퍼런스
 - [tokens.md](./tokens.md): 토큰 이름·값·용도 표
 - [examples.md](./examples.md): 조합 예시

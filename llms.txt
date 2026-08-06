@@ -11,7 +11,7 @@
 ## AI 에이전트
 
 - [SKILL.md](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/SKILL.md): 사용 규칙·컴포넌트 선택 가이드
-- [components.md](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md): 컴포넌트 props 표
+- [components.md](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md): 컴포넌트 레퍼런스
 - [tokens.md](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/tokens.md): 토큰 이름·값·용도 표
 - [examples.md](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/examples.md): 조합 예시
 

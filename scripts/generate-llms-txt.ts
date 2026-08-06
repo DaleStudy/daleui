@@ -2,7 +2,7 @@
  * scripts/generate-llms-txt.ts
  *
  * 산출물:
- *   skills/daleui/components.md  — 컴포넌트 props 표 (자동 생성)
+ *   skills/daleui/components.md  — 컴포넌트 레퍼런스 (자동 생성)
  *   skills/daleui/tokens.md      — 토큰 이름·값·용도 표 (자동 생성)
  *   skills/daleui/examples.md    — 조합 예시 (src/examples/*.tsx에서 자동 생성)
  *   llms.txt                     — AI 인덱스 (npm 패키지에 포함)
