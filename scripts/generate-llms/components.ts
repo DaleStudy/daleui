@@ -408,8 +408,7 @@ function extractStoryExamples(
       const mergedArgs = { ...metaArgs, ...storyArgs };
 
       // 스토리 render가 없으면 meta render로 fallback (Card 등)
-      const renderFn =
-        getRenderFunction(decl.initializer) ?? metaRender;
+      const renderFn = getRenderFunction(decl.initializer) ?? metaRender;
       if (!renderFn) continue;
 
       const codeRaw = getRenderCode(renderFn, sourceFile);

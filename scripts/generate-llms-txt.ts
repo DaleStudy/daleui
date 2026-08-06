@@ -14,10 +14,7 @@ import {
   extractComponentDocs,
   renderComponentsMd,
 } from "./generate-llms/components";
-import {
-  extractExampleDocs,
-  renderExamplesMd,
-} from "./generate-llms/examples";
+import { extractExampleDocs, renderExamplesMd } from "./generate-llms/examples";
 import { renderLlmsTxt } from "./generate-llms/llms";
 import { OUT, root, write } from "./generate-llms/setup";
 import { renderTokensMd } from "./generate-llms/tokens";
