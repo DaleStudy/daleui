@@ -1,0 +1,24 @@
+# Lefthook 설정 — https://lefthook.dev
+#
+# pre-commit: staged 파일만 자동 수정(eslint --fix → prettier --write) 후 재-stage.
+#             둘 다 같은 파일을 수정하므로 순차 실행(키 알파벳순: eslint → prettier).
+# pre-push:   전체 test·build 검증. 둘 다 읽기 전용이라 병렬(parallel) 안전.
+
+pre-commit:
+  commands:
+    eslint:
+      glob: "*.{ts,tsx,js,jsx,cjs,mjs}"
+      run: bunx eslint --fix --no-warn-ignored {staged_files}
+      stage_fixed: true
+    prettier:
+      glob: "*.{ts,tsx,js,jsx,cjs,mjs,css,json,jsonc,md,mdx,yml,yaml,html}"
+      run: bunx prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true
+
+pre-push:
+  parallel: true
+  commands:
+    test:
+      run: bunx vitest run
+    build:
+      run: bun run build
