@@ -1,0 +1,214 @@
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { css } from "../../../styled-system/css";
+import { Skeleton } from "./Skeleton";
+import type { SkeletonAnimation, SkeletonVariant } from "./Skeleton";
+
+interface SkeletonStoryArgs {
+  variant: SkeletonVariant;
+  animation: SkeletonAnimation;
+  width: string | number;
+  height: string | number;
+}
+
+const animations: SkeletonAnimation[] = ["pulse", false];
+
+const row = css({ display: "flex", gap: "24", alignItems: "center" });
+const col = css({ display: "flex", flexDirection: "column", gap: "16" });
+const cell = css({ display: "flex", flexDirection: "column", gap: "8" });
+const label = css({
+  fontSize: "sm",
+  color: "fg.neutral",
+  fontFamily: "mono",
+});
+
+export default {
+  title: "Components/Skeleton",
+  parameters: {
+    layout: "centered",
+    // 애니메이션이 포함된 스토리의 스냅샷을 결정적으로 유지하기 위해 모션을 끝에서 멈춥니다.
+    chromatic: { pauseAnimationAtEnd: true },
+    docs: {
+      description: {
+        component: `
+콘텐츠가 로딩되는 동안 자리를 표시하는 플레이스홀더(스켈레톤) 컴포넌트입니다.
+
+- **variant**: \`text\`(기본) · \`circular\` · \`rounded\`
+- **animation**: \`pulse\`(기본) · \`false\`(정적)
+
+컴파운드 컴포넌트로 구성됩니다:
+- \`Skeleton\`: 기본 플레이스홀더 (variant, animation, width/height)
+- \`Skeleton.Text\`: 여러 줄 텍스트 플레이스홀더 (lines, lastLineWidth)
+- \`Skeleton.Avatar\`: 원형 아바타 플레이스홀더 (diameter)
+
+### 접근성 및 모션 안내
+- 플레이스홀더는 장식용으로 취급되어 \`aria-hidden\`으로 가려집니다.
+- 로딩 상태는 실제 콘텐츠를 소유한 영역에서 별도로 전달해야 합니다.
+- 모든 애니메이션은 \`prefers-reduced-motion: reduce\` 환경에서 자동으로 정적 채움으로 대체됩니다.
+        `,
+      },
+    },
+  },
+  args: {
+    variant: "text",
+    animation: "pulse",
+    width: "200px",
+    height: "",
+  },
+  argTypes: {
+    variant: {
+      control: "radio",
+      options: ["text", "circular", "rounded"],
+      description: "모양",
+    },
+    animation: {
+      control: "select",
+      options: animations,
+      description: "모션",
+    },
+    width: { control: "text", description: "너비 (숫자는 px)" },
+    height: { control: "text", description: "높이 (숫자는 px)" },
+  },
+  render: (args) => {
+    const width = args.width || undefined;
+    const height = args.height || (args.variant === "text" ? undefined : width);
+
+    return (
+      <Skeleton
+        variant={args.variant}
+        animation={args.animation}
+        width={width}
+        height={height}
+      />
+    );
+  },
+} satisfies Meta<SkeletonStoryArgs>;
+
+export const Basic: StoryObj<SkeletonStoryArgs> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Controls 패널에서 variant, animation, width, height를 조정할 수 있습니다. height를 비우면 circular/rounded는 width와 같은 높이로 표시됩니다.",
+      },
+    },
+  },
+};
+
+export const Variants: StoryObj<SkeletonStoryArgs> = {
+  render: () => (
+    <div className={row}>
+      <div className={cell}>
+        <span className={label}>text</span>
+        <Skeleton variant="text" width="160px" />
+      </div>
+      <div className={cell}>
+        <span className={label}>circular</span>
+        <Skeleton variant="circular" width={56} height={56} />
+      </div>
+      <div className={cell}>
+        <span className={label}>rounded</span>
+        <Skeleton variant="rounded" width={120} height={56} />
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "세 가지 모양 변형입니다. `rounded`는 `md` 반경, `text`는 둘러싼 글자 크기에 맞춰 높이가 자동 조절됩니다.",
+      },
+    },
+  },
+};
+
+export const Animations: StoryObj<SkeletonStoryArgs> = {
+  render: () => (
+    <div className={col}>
+      {animations.map((animation) => (
+        <div key={String(animation)} className={cell}>
+          <span className={label}>{String(animation)}</span>
+          <Skeleton
+            variant="rounded"
+            animation={animation}
+            width={240}
+            height={40}
+          />
+        </div>
+      ))}
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "`pulse`는 기본 중성 회색 모션이고, `false`는 정적 채움입니다.",
+      },
+    },
+  },
+};
+
+export const Text: StoryObj<SkeletonStoryArgs> = {
+  render: () => (
+    <div className={css({ width: "320px" })}>
+      <Skeleton.Text lines={4} />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "여러 줄 텍스트 플레이스홀더입니다. 마지막 줄은 문단처럼 보이도록 좁아집니다(`lastLineWidth` 기본 60%).",
+      },
+    },
+  },
+};
+
+export const Avatar: StoryObj<SkeletonStoryArgs> = {
+  render: () => (
+    <div className={row}>
+      <Skeleton.Avatar diameter={32} />
+      <Skeleton.Avatar diameter={48} />
+      <Skeleton.Avatar diameter={64} />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "원형 아바타 플레이스홀더입니다. `diameter`로 지름을 지정합니다.",
+      },
+    },
+  },
+};
+
+export const MediaObject: StoryObj<SkeletonStoryArgs> = {
+  render: () => (
+    <div className={css({ display: "flex", gap: "16", width: "320px" })}>
+      <Skeleton.Avatar diameter={48} />
+      <div className={css({ flex: "1" })}>
+        <Skeleton.Text lines={3} />
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "아바타와 텍스트를 조합한 전형적인 카드/댓글 로딩 자리표시 예시입니다.",
+      },
+    },
+  },
+};
+
+export const ReducedMotion: StoryObj<SkeletonStoryArgs> = {
+  render: () => (
+    <Skeleton variant="rounded" animation="pulse" width={280} height={40} />
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "운영체제에서 '동작 줄이기'(`prefers-reduced-motion: reduce`)를 켜면 모든 애니메이션이 멈추고 정적 채움으로 대체됩니다.",
+      },
+    },
+  },
+};

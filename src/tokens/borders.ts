@@ -52,6 +52,9 @@ export const borders: Tokens["borders"] = {
  * borderWidth, outlineWidth
  */
 export const borderWidths: Tokens["borderWidths"] = {
+  // 고밀도(DPR 2+)에서 hairline, DPR 1에서는 1 device px로 올림
+  // https://drafts.csswg.org/css-values-4/#snap-as-a-line-width
+  xs: { value: "0.5px" },
   sm: { value: "1px" },
   md: { value: "1.5px" },
   lg: { value: "2px" },
