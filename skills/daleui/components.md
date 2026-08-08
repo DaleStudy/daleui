@@ -333,10 +333,10 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
 
 `import { CardIcon } from "daleui"`
 
-| prop     | 타입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | 기본값 | 설명        |
-| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ----------- |
-| **name** | `"info" \| "x" \| "menu" \| "search" \| "award" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 아이콘 이름 |
-| size     | `"sm" \| "md" \| "lg"`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | `"lg"` | 크기        |
+| prop     | 타입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | 기본값 | 설명        |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ----------- |
+| **name** | `"info" \| "x" \| "menu" \| "search" \| "award" \| "brain" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "laptop" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "palette" \| "penLine" \| "puzzle" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 아이콘 이름 |
+| size     | `"sm" \| "md" \| "lg"`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `"lg"` | 크기        |
 
 ## CardLink
 
@@ -645,6 +645,168 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
 | **value** | `string`  | -       | 옵션 값       |
 | children  | `string`  | -       | 자식 요소     |
 | disabled  | `boolean` | `false` | 비활성화 여부 |
+
+## Divider
+
+Divider는 콘텐츠를 시각적으로 구분하는 선입니다.
+
+- `orientation="horizontal"`(기본값)은 세로로 쌓인 콘텐츠를 가로 선으로 구분할 때, `orientation="vertical"`은 가로로 나열된 콘텐츠를 세로 선으로 구분할 때 사용합니다.
+- `orientation="vertical"`은 높이를 `align-self: stretch`로 채우므로 부모가 flex 또는 grid 컨테이너여야 합니다. 그 외의 부모에서는 `align-self`가 무시되어 높이가 0이 되므로, `height` 등으로 직접 높이를 지정해야 합니다.
+
+`import { Divider } from "daleui"`
+
+| prop        | 타입                         | 기본값         | 설명      |
+| ----------- | ---------------------------- | -------------- | --------- |
+| orientation | `"horizontal" \| "vertical"` | `"horizontal"` | 방향      |
+| variant     | `"solid" \| "dashed"`        | `"solid"`      | 선 스타일 |
+| stroke      | `"sm" \| "xs"`               | `"sm"`         | 두께      |
+| ref         | `Ref<HTMLElement>`           | -              | 요소 참조 |
+
+### 예시
+
+**Basic**
+
+```tsx
+<div
+  className={css({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "240px",
+    height: "80px",
+  })}
+>
+  <Divider />
+</div>
+```
+
+**Orientations**
+
+```tsx
+<div className={vstack({ gap: "24", alignItems: "flex-start" })}>
+  <div className={vstack({ gap: "8", alignItems: "flex-start" })}>
+    <Text size="sm" muted>
+      horizontal (기본값)
+    </Text>
+    <div className={css({ width: "240px" })}>
+      <Divider orientation="horizontal" />
+    </div>
+  </div>
+  <div className={vstack({ gap: "8", alignItems: "flex-start" })}>
+    <Text size="sm" muted>
+      vertical
+    </Text>
+    <div className={hstack({ gap: "8", height: "80px" })}>
+      <span>왼쪽</span>
+      <Divider orientation="vertical" />
+      <span>오른쪽</span>
+    </div>
+  </div>
+</div>
+```
+
+**Variants**
+
+```tsx
+<div
+  className={vstack({
+    gap: "24",
+    alignItems: "flex-start",
+    width: "240px",
+  })}
+>
+  <div
+    className={vstack({
+      gap: "8",
+      alignItems: "flex-start",
+      width: "100%",
+    })}
+  >
+    <Text size="sm" muted>
+      solid (기본값)
+    </Text>
+    <Divider variant="solid" />
+  </div>
+  <div
+    className={vstack({
+      gap: "8",
+      alignItems: "flex-start",
+      width: "100%",
+    })}
+  >
+    <Text size="sm" muted>
+      dashed
+    </Text>
+    <Divider variant="dashed" />
+  </div>
+</div>
+```
+
+**Strokes**
+
+```tsx
+<div
+  className={vstack({
+    gap: "24",
+    alignItems: "flex-start",
+    width: "240px",
+  })}
+>
+  <div
+    className={vstack({
+      gap: "8",
+      alignItems: "flex-start",
+      width: "100%",
+    })}
+  >
+    <Text size="sm" muted>
+      sm · 1px (기본값)
+    </Text>
+    <Divider stroke="sm" />
+  </div>
+  <div
+    className={vstack({
+      gap: "8",
+      alignItems: "flex-start",
+      width: "100%",
+    })}
+  >
+    <Text size="sm" muted>
+      xs · 0.5px
+    </Text>
+    <Divider stroke="xs" />
+  </div>
+</div>
+```
+
+**ListUsage**
+
+```tsx
+<div className={vstack({ gap: "24", alignItems: "flex-start" })}>
+  <div
+    className={vstack({
+      gap: "8",
+      alignItems: "flex-start",
+      width: "160px",
+    })}
+  >
+    <span>리스트 아이템 1</span>
+    <span>리스트 아이템 2</span>
+    <span>리스트 아이템 3</span>
+    <Divider orientation="horizontal" />
+    <span>리스트 아이템 A</span>
+    <span>리스트 아이템 B</span>
+  </div>
+  <div className={hstack({ gap: "8", alignItems: "stretch" })}>
+    <span>리스트 아이템 1</span>
+    <span>리스트 아이템 2</span>
+    <span>리스트 아이템 3</span>
+    <Divider orientation="vertical" />
+    <span>리스트 아이템 A</span>
+    <span>리스트 아이템 B</span>
+  </div>
+</div>
+```
 
 ## Flex
 
@@ -1523,12 +1685,12 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 `import { Icon } from "daleui"`
 
-| prop     | 타입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | 기본값 | 설명        |
-| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ----------- |
-| **name** | `"info" \| "x" \| "menu" \| "search" \| "award" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 아이콘 이름 |
-| tone     | `Tone`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | -      | 색조        |
-| size     | `"sm" \| "md" \| "lg" \| "xs"`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | -      | 크기        |
-| solid    | `boolean`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | -      | 솔리드 여부 |
+| prop     | 타입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | 기본값 | 설명        |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ----------- |
+| **name** | `"info" \| "x" \| "menu" \| "search" \| "award" \| "brain" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "laptop" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "palette" \| "penLine" \| "puzzle" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 아이콘 이름 |
+| tone     | `Tone`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | -      | 색조        |
+| size     | `"sm" \| "md" \| "lg" \| "xs"`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | -      | 크기        |
+| solid    | `boolean`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | -      | 솔리드 여부 |
 
 ### 예시
 
@@ -2257,6 +2419,106 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 </VStack>
 ```
 
+## Skeleton
+
+콘텐츠가 로딩되는 동안 자리를 표시하는 플레이스홀더(스켈레톤) 컴포넌트입니다.
+
+- `variant`로 모양(텍스트/원형/둥근 사각형)을 고릅니다.
+- `animation`으로 모션을 고릅니다. `pulse`는 중성 회색 모션이고, `false`는 정적입니다.
+- 플레이스홀더는 장식용으로 취급되어 `aria-hidden`으로 가려집니다.
+- 로딩 상태는 실제 콘텐츠를 소유한 영역에서 별도로 전달해야 합니다.
+- 모든 애니메이션은 `prefers-reduced-motion: reduce` 환경에서 정적 채움으로 대체됩니다.
+
+`import { Skeleton } from "daleui"`
+
+| prop      | 타입                | 기본값    | 설명                                                                                                                                                                                                           |
+| --------- | ------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| variant   | `SkeletonVariant`   | `"text"`  | 모양. - `text`: 둘러싼 글자 크기에 맞춰 높이가 자동 조절됩니다(기본값). - `circular`: 정원형. `width`/`height`(또는 `Skeleton.Avatar`의 `diameter`)로 크기를 지정합니다. - `rounded`: `md` 반경의 둥근 모서리. |
+| animation | `SkeletonAnimation` | `"pulse"` | 모션. `pulse`는 중성 회색, `false`는 정적입니다. 모든 애니메이션은 `prefers-reduced-motion: reduce` 환경에서 자동으로 정적 채움으로 대체됩니다.                                                                |
+| width     | `string \| number`  | -         | 너비. 숫자는 `px`로, 문자열은 그대로 사용합니다.                                                                                                                                                               |
+| height    | `string \| number`  | -         | 높이. 숫자는 `px`로, 문자열은 그대로 사용합니다.                                                                                                                                                               |
+| ref       | `Ref<HTMLElement>`  | -         | 요소 참조                                                                                                                                                                                                      |
+
+### 예시
+
+**Basic**
+
+```tsx
+<Skeleton width={width} height={height} />
+```
+
+**Variants**
+
+```tsx
+<div className={row}>
+  <div className={cell}>
+    <span className={label}>text</span>
+    <Skeleton variant="text" width="160px" />
+  </div>
+  <div className={cell}>
+    <span className={label}>circular</span>
+    <Skeleton variant="circular" width={56} height={56} />
+  </div>
+  <div className={cell}>
+    <span className={label}>rounded</span>
+    <Skeleton variant="rounded" width={120} height={56} />
+  </div>
+</div>
+```
+
+**Animations**
+
+```tsx
+<div className={col}>
+  {animations.map((animation) => (
+    <div key={String(animation)} className={cell}>
+      <span className={label}>{String(animation)}</span>
+      <Skeleton
+        variant="rounded"
+        animation={animation}
+        width={240}
+        height={40}
+      />
+    </div>
+  ))}
+</div>
+```
+
+**Text**
+
+```tsx
+<div className={css({ width: "320px" })}>
+  <Skeleton.Text lines={4} />
+</div>
+```
+
+**Avatar**
+
+```tsx
+<div className={row}>
+  <Skeleton.Avatar diameter={32} />
+  <Skeleton.Avatar diameter={48} />
+  <Skeleton.Avatar diameter={64} />
+</div>
+```
+
+**MediaObject**
+
+```tsx
+<div className={css({ display: "flex", gap: "16", width: "320px" })}>
+  <Skeleton.Avatar diameter={48} />
+  <div className={css({ flex: "1" })}>
+    <Skeleton.Text lines={3} />
+  </div>
+</div>
+```
+
+**ReducedMotion**
+
+```tsx
+<Skeleton variant="rounded" animation="pulse" width={280} height={40} />
+```
+
 ## Tag
 
 콘텐츠의 속성, 카테고리, 상태(성공, 경고 등)를 키워드 형태로 식별하고 분류하여 시각적으로 강조하는 컴포넌트이다. 필요에 따라 링크 이동이나 삭제와 같은 상호작용 기능을 제공합니다.
@@ -2340,7 +2602,7 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 | **children** | `ReactNode`                                                                | -           | 텍스트 내용              |
 | as           | `"div" \| "span" \| "em" \| "p" \| "small" \| "strong"`                    | `"span"`    | 렌더링 태그              |
 | tone         | `Tone`                                                                     | `"neutral"` | 색조                     |
-| size         | `"sm" \| "md" \| "lg" \| "xl" \| "2xl" \| "xs" \| "3xl" \| "4xl" \| "5xl"` | -           | 글자 크기                |
+| size         | `"sm" \| "md" \| "lg" \| "xs" \| "xl" \| "2xl" \| "3xl" \| "4xl" \| "5xl"` | -           | 글자 크기                |
 | weight       | `"normal" \| "medium" \| "semibold" \| "bold"`                             | -           | 글자 굵기                |
 | muted        | `boolean`                                                                  | `false`     | 흐린 톤(muted) 적용 여부 |
 | ref          | `Ref<HTMLElement>`                                                         | -           | 요소 참조                |
@@ -2377,15 +2639,15 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 `import { TextInput } from "daleui"`
 
-| prop         | 타입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | 기본값 | 설명                         |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ---------------------------- |
-| leadingIcon  | `"info" \| "x" \| "menu" \| "search" \| "award" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 선행 아이콘 이름 (Icon.name) |
-| trailingIcon | `"info" \| "x" \| "menu" \| "search" \| "award" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 후행 아이콘 이름 (Icon.name) |
-| placeholder  | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | -      | 플레이스홀더                 |
-| value        | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | -      | 제어 모드 입력 값            |
-| defaultValue | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | -      | 비제어 모드 초기 입력값      |
-| onChange     | `(e: ChangeEvent<HTMLInputElement>) => void`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | -      | 변경 이벤트 핸들러           |
-| ref          | `Ref<HTMLInputElement>`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | -      | 입력 요소 참조               |
+| prop         | 타입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | 기본값 | 설명                         |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ---------------------------- |
+| leadingIcon  | `"info" \| "x" \| "menu" \| "search" \| "award" \| "brain" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "laptop" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "palette" \| "penLine" \| "puzzle" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 선행 아이콘 이름 (Icon.name) |
+| trailingIcon | `"info" \| "x" \| "menu" \| "search" \| "award" \| "brain" \| "check" \| "chevronDown" \| "chevronLeft" \| "chevronRight" \| "circleAlert" \| "clock" \| "codeXml" \| "externalLink" \| "eye" \| "eyeClosed" \| "eyeOff" \| "globe" \| "handHeart" \| "heartHandshake" \| "kr" \| "laptop" \| "loaderCircle" \| "messageCircle" \| "messageCircleMore" \| "moon" \| "palette" \| "penLine" \| "puzzle" \| "star" \| "sun" \| "thumbsUp" \| "user" \| "users" \| "Discord" \| "GitHub" \| "LinkedIn" \| "Medium" \| "YouTube" \| "Storybook" \| "Figma" \| "GithubLight" \| "GithubDark" \| "LinkedInLight" \| "LinkedInDark"` | -      | 후행 아이콘 이름 (Icon.name) |
+| placeholder  | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | -      | 플레이스홀더                 |
+| value        | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | -      | 제어 모드 입력 값            |
+| defaultValue | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | -      | 비제어 모드 초기 입력값      |
+| onChange     | `(e: ChangeEvent<HTMLInputElement>) => void`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | -      | 변경 이벤트 핸들러           |
+| ref          | `Ref<HTMLInputElement>`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | -      | 입력 요소 참조               |
 
 ### 예시
 

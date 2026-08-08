@@ -40,6 +40,7 @@
 
 | 토큰 | 값    | 용도                  |
 | ---- | ----- | --------------------- |
+| xs   | 0.5px | 테두리·포커스 링 두께 |
 | sm   | 1px   | 테두리·포커스 링 두께 |
 | md   | 1.5px | 테두리·포커스 링 두께 |
 | lg   | 2px   | 테두리·포커스 링 두께 |
@@ -83,6 +84,7 @@
 | bg.success               | {colors.green.1}   | {colors.darkGreen.1}  | 배경색                 |
 | bg.warning               | {colors.amber.1}   | {colors.darkAmber.1}  | 배경색                 |
 | bg.info                  | {colors.blue.2}    | {colors.darkBlue.3}   | 배경색                 |
+| bg.skeleton.DEFAULT      | {colors.slate.3}   | {colors.darkSage.4}   | 배경색                 |
 | border.brand.DEFAULT     | {colors.violet.8}  | {colors.darkTeal.8}   | 테두리·아웃라인        |
 | border.brand.active      | {colors.violet.9}  | {colors.darkTeal.9}   | 테두리·아웃라인        |
 | border.brand.focus       | {colors.violet.10} | {colors.darkTeal.10}  | 테두리·아웃라인        |
@@ -172,6 +174,7 @@
 | 이름              | 용도      |
 | ----------------- | --------- |
 | award             | Icon name |
+| brain             | Icon name |
 | check             | Icon name |
 | chevronDown       | Icon name |
 | chevronLeft       | Icon name |
@@ -188,11 +191,15 @@
 | heartHandshake    | Icon name |
 | info              | Icon name |
 | kr                | Icon name |
+| laptop            | Icon name |
 | loaderCircle      | Icon name |
 | menu              | Icon name |
 | messageCircle     | Icon name |
 | messageCircleMore | Icon name |
 | moon              | Icon name |
+| palette           | Icon name |
+| penLine           | Icon name |
+| puzzle            | Icon name |
 | search            | Icon name |
 | star              | Icon name |
 | sun               | Icon name |
