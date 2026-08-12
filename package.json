@@ -74,7 +74,7 @@
     "@vitejs/plugin-react": "^6.0.5",
     "@vitest/coverage-v8": "^4.1.10",
     "axe-playwright": "^2.2.2",
-    "chromatic": "^17.7.2",
+    "chromatic": "^17.8.0",
     "eslint": "^10.6.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react-hooks": "^7.1.1",
