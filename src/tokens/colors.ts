@@ -1,12 +1,7 @@
 import type { SemanticTokens, Tokens } from "@pandacss/types";
 
 export type Tone =
-  | "brand"
-  | "neutral"
-  | "danger"
-  | "success"
-  | "warning"
-  | "info";
+  "brand" | "neutral" | "danger" | "success" | "warning" | "info";
 
 export const semanticColors: SemanticTokens["colors"] = {
   appBg: {
