@@ -7,8 +7,9 @@ import { CHROMATIC, type ComponentDoc, github } from "./setup";
 export function renderLlmsTxt(components: ComponentDoc[]): string {
   const componentLinks = components.map((c) => {
     const summary = c.description.split("\n")[0]?.replace(/\*\*/g, "") ?? "";
-    const url = `${github("skills/daleui/components.md")}#${c.name.toLowerCase()}`;
-    return `- [${c.name}](${url}): \`import { ${c.name} } from "daleui"\`. ${summary}`;
+    const suffix = summary ? ` ${summary}` : "";
+    // daleui.com deep link로 바꿀 예정이라 당장은 이름만 둔다.
+    return `- ${c.name}: \`import { ${c.name} } from "daleui"\`.${suffix}`;
   });
 
   return [
