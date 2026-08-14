@@ -1766,21 +1766,21 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 **접근성(Accessibility) 안내**
 
 - 이 컴포넌트는 `<label>` 태그를 사용하여 시맨틱하게 구현되어 있습니다.
-- `required`를 true로 설정하면 별표(\*)와 함께 스크린 리더용 `aria-label="옵션 필수"` 텍스트가 자동으로 추가됩니다.
+- `required`를 true로 설정하면 별표(*)와 함께 스크린 리더용 `aria-label="옵션 필수"` 텍스트가 자동으로 추가됩니다.
 - `disabled` 상태에서도 `required` 별표는 표시되지만, 비활성화 색상으로 변경됩니다.
 - `htmlFor` 또는 `children`으로 입력 요소를 연결하면, 라벨 클릭 시 해당 입력 요소로 포커스가 이동합니다.
 
 `import { Label } from "daleui"`
 
-| prop          | 타입                    | 기본값      | 설명                                       |
-| ------------- | ----------------------- | ----------- | ------------------------------------------ |
-| children      | `LabelFormChild`        | -           | 연결할 폼 자식 요소                        |
-| **labelText** | `string`                | -           | 라벨 문구                                  |
-| tone          | `LabelTone`             | `"neutral"` | 색조                                       |
-| disabled      | `boolean`               | `false`     | 비활성화 여부                              |
-| required      | `boolean`               | `false`     | 필수 입력 여부 (true일 경우 별표(\*) 표시) |
-| htmlFor       | `string`                | -           | 연결 대상 요소 id                          |
-| ref           | `Ref<HTMLLabelElement>` | -           | 요소 참조                                  |
+| prop          | 타입                    | 기본값      | 설명                                      |
+| ------------- | ----------------------- | ----------- | ----------------------------------------- |
+| children      | `LabelFormChild`        | -           | 연결할 폼 자식 요소                       |
+| **labelText** | `string`                | -           | 라벨 문구                                 |
+| tone          | `LabelTone`             | `"neutral"` | 색조                                      |
+| disabled      | `boolean`               | `false`     | 비활성화 여부                             |
+| required      | `boolean`               | `false`     | 필수 입력 여부 (true일 경우 별표(*) 표시) |
+| htmlFor       | `string`                | -           | 연결 대상 요소 id                         |
+| ref           | `Ref<HTMLLabelElement>` | -           | 요소 참조                                 |
 
 ### 예시
 

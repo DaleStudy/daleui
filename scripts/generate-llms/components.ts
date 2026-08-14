@@ -536,9 +536,7 @@ export function extractComponentDocs(): ComponentDoc[] {
       if (!sourceFile) continue;
 
       let propsNode:
-        | ts.InterfaceDeclaration
-        | ts.TypeAliasDeclaration
-        | undefined;
+        ts.InterfaceDeclaration | ts.TypeAliasDeclaration | undefined;
       let description = "";
       const defaults = extractDefaults(sourceFile, name);
       const propsTypeName = `${name}Props`;
