@@ -86,7 +86,7 @@
     "eslint-plugin-storybook": "^10.5.8",
     "eslint-plugin-testing-library": "^7.16.2",
     "globals": "^17.7.0",
-    "happy-dom": "^20.10.6",
+    "happy-dom": "^20.11.1",
     "lefthook": "^2.1.10",
     "prettier": "^3.9.6",
     "storybook": "^10.5.8",
