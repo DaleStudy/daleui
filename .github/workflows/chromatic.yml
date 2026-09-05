@@ -39,8 +39,10 @@ jobs:
     needs: changes
     # ui 라벨이 있거나 UI 경로가 바뀌면 실행, main push·수동 실행은 항상.
     # push/workflow_dispatch일 땐 changes가 skip이라 !cancelled()로 풀어준다.
+    # fork PR은 secrets가 전달되지 않아 Chromatic이 반드시 실패하므로 제외한다.
     if: >-
       !cancelled() &&
+      github.event.pull_request.head.repo.fork != true &&
       (github.event_name == 'push' ||
       github.event_name == 'workflow_dispatch' ||
       contains(github.event.pull_request.labels.*.name, 'ui') ||
