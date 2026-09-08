@@ -38,6 +38,7 @@ jobs:
           SPRINT_NUMBER=$(( SPRINT_START_NUMBER + (DAYS_DIFF / 14) ))
           WEEK_IN_CYCLE=$(( (DAYS_DIFF % 14) / 7 ))
 
+          # 제목 형식 변경 금지 — 리마인더의 정규식과 불참 공유 쓰레드 이름이 이 형식에 의존함
           if [ "$WEEK_IN_CYCLE" -eq 0 ]; then
             echo "type=mid" >> $GITHUB_OUTPUT
             echo "title=Sprint ${SPRINT_NUMBER} 중간 회의" >> $GITHUB_OUTPUT
@@ -65,39 +66,43 @@ jobs:
 
       - name: Create GitHub issue
         if: steps.meeting-info.outputs.type != 'skip'
-        id: create-issue # 다음 스텝에서 issue_url 참조하기 위해 id 부여
+        id: create-issue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TITLE: ${{ steps.meeting-info.outputs.title }}
         run: |
-          # gh issue create는 생성된 이슈 URL을 stdout으로 출력함
           ISSUE_URL=$(gh issue create \
             --title "$TITLE" \
             --body-file /tmp/issue-body.md)
-          # GITHUB_OUTPUT에 저장해 다음 스텝에서 ${{ steps.create-issue.outputs.issue_url }}로 사용
           echo "issue_url=$ISSUE_URL" >> $GITHUB_OUTPUT
 
       - name: Create Discord scheduled event
         if: steps.meeting-info.outputs.type != 'skip'
-        id: create-event # 다음 스텝에서 event_id 참조하기 위해 id 부여
+        id: create-event
         env:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           DISCORD_GUILD_ID: ${{ vars.DISCORD_GUILD_ID }}
+          MEETING_TYPE: ${{ steps.meeting-info.outputs.type }}
           TITLE: ${{ steps.meeting-info.outputs.title }}
           ISSUE_URL: ${{ steps.create-issue.outputs.issue_url }}
         run: |
           # 워크플로우는 현재 회의 종료 시점(토 01:30 UTC)에 실행됨
-          # Discord 이벤트는 7일 후 다음 회의(토 00:30 UTC = 금 8:30 PM EDT / 토 9:30 AM KST)로 설정
+          # 이벤트는 7일 후 다음 회의(토 00:30 UTC = 금 8:30 PM EDT / 토 9:30 AM KST)로 설정
           NEXT_SAT=$(date -d "+7 days" +%Y-%m-%d)
-          START_TIME="${NEXT_SAT}T00:30:00+00:00"  # 금 8:30 PM EDT / 토 9:30 AM KST
-          END_TIME="${NEXT_SAT}T01:30:00+00:00"    # 금 9:30 PM EDT / 토 10:30 AM KST (1시간 회의)
+          START_TIME="${NEXT_SAT}T00:30:00+00:00"
+          START_UNIX=$(date -d "$START_TIME" +%s)
 
-          # Discord API: Scheduled Event 생성
+          # 회의 유형별 기본 소요 시간 (최대 시간은 회의록 상단 안내로만 표기)
+          if [ "$MEETING_TYPE" = "mid" ]; then
+            DURATION_MIN=30
+          else
+            DURATION_MIN=60
+          fi
+          END_TIME=$(date -u -d "@$(( START_UNIX + DURATION_MIN * 60 ))" +%Y-%m-%dT%H:%M:%S+00:00)
+
           # entity_type 3 = EXTERNAL (외부 링크 기반, RSVP 지원, 타임존별 시간 자동 표시)
           # privacy_level 2 = GUILD_ONLY (서버 멤버만 볼 수 있음)
           # entity_metadata.location = 회의록 이슈 URL (이벤트 상세에서 클릭 가능)
-          START_UNIX=$(date -d "${NEXT_SAT}T00:30:00+00:00" +%s)
-
           RESPONSE=$(curl -sf --show-error -X POST \
             "https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/scheduled-events" \
             -H "Authorization: Bot ${DISCORD_TOKEN}" \
@@ -113,13 +118,13 @@ jobs:
               }
             }")
 
-          # 생성된 이벤트 ID 추출 → 채널 공지 스텝에서 이벤트 링크 생성에 사용
           EVENT_ID=$(echo "$RESPONSE" | python3 -c "import json,sys; print(json.load(sys.stdin)['id'])")
           echo "event_id=$EVENT_ID" >> $GITHUB_OUTPUT
           echo "start_unix=$START_UNIX" >> $GITHUB_OUTPUT
 
       - name: Send channel announcement
         if: steps.meeting-info.outputs.type != 'skip'
+        id: announce
         env:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           DISCORD_GUILD_ID: ${{ vars.DISCORD_GUILD_ID }}
@@ -132,11 +137,43 @@ jobs:
         run: |
           EVENT_LINK="https://discord.com/events/${DISCORD_GUILD_ID}/${EVENT_ID}"
 
-          # 디자인시스템-채팅 채널에 회의 일정 공지 및 RSVP 유도 메시지 전송
-          curl -sf --show-error -X POST \
+          RESPONSE=$(curl -sf --show-error -X POST \
             "https://discord.com/api/v10/channels/${DISCORD_DALEUI_CHAT_CHANNEL_ID}/messages" \
             -H "Authorization: Bot ${DISCORD_TOKEN}" \
             -H "Content-Type: application/json" \
             -d "{
-              \"content\": \"<@&${DISCORD_DALEUI_ROLE_ID}>\n\n📅 **${TITLE}** 일정이 등록되었습니다.\n\n<t:${START_UNIX}:F> (<t:${START_UNIX}:R>)\n📋 [회의록](${ISSUE_URL})\n\n[이벤트](${EVENT_LINK})에서 **Interested** 눌러 참석 여부를 알려주세요!\n불참 시에는 이 메시지 쓰레드에 남겨주세요 🙏\"
-            }"
+              \"content\": \"<@&${DISCORD_DALEUI_ROLE_ID}>\n\n📅 **${TITLE}** 일정이 등록되었습니다.\n\n<t:${START_UNIX}:F> (<t:${START_UNIX}:R>)\n📋 [회의록](${ISSUE_URL})\n\n참석 예정이라면 [이벤트](${EVENT_LINK})에서 **Interested**를 눌러주세요.\n불참하시는 분은 아래 **불참 공유** 쓰레드에 남겨주세요!\"
+            }")
+
+          # 다음 스텝에서 이 메시지에 불참 공유 쓰레드를 붙이는 데 사용함
+          MESSAGE_ID=$(echo "$RESPONSE" | python3 -c "import json,sys; print(json.load(sys.stdin)['id'])")
+          echo "message_id=$MESSAGE_ID" >> $GITHUB_OUTPUT
+
+      - name: Create absence thread
+        if: steps.meeting-info.outputs.type != 'skip'
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          DISCORD_DALEUI_CHAT_CHANNEL_ID: ${{ vars.DISCORD_DALEUI_CHAT_CHANNEL_ID }}
+          TITLE: ${{ steps.meeting-info.outputs.title }}
+          MESSAGE_ID: ${{ steps.announce.outputs.message_id }}
+        run: |
+          # 불참 공유가 채널·리마인더로 흩어지지 않도록 공지 메시지에 쓰레드를 미리 만들어 둠
+          # 10080분(7일) = 다음 회의까지 유지 (메시지가 달릴 때마다 갱신됨)
+          curl -sf --show-error -X POST \
+            "https://discord.com/api/v10/channels/${DISCORD_DALEUI_CHAT_CHANNEL_ID}/messages/${MESSAGE_ID}/threads" \
+            -H "Authorization: Bot ${DISCORD_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"name\": \"${TITLE} - 불참 공유\",
+              \"auto_archive_duration\": 10080
+            }" > /dev/null
+
+          # 메시지에서 시작한 쓰레드의 ID는 원본 메시지 ID와 동일함
+          # 역할 멘션은 채널 공지·리마인더에만 두어 같은 내용으로 두 번 알림이 가지 않게 함
+          curl -sf --show-error -X POST \
+            "https://discord.com/api/v10/channels/${MESSAGE_ID}/messages" \
+            -H "Authorization: Bot ${DISCORD_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"content\": \"**${TITLE}** 불참 공유 쓰레드입니다.\n\n참석 예정은 이벤트의 **Interested**로 확인하고,\n불참하시는 경우에는 이곳에 남겨주세요.\"
+            }" > /dev/null

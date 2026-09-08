@@ -92,6 +92,34 @@ jobs:
           echo "event_id=$EVENT_ID" >> "$GITHUB_OUTPUT"
           echo "start_unix=$(date -d "$START_ISO" +%s)" >> "$GITHUB_OUTPUT"
 
+      - name: Find absence thread
+        if: steps.find-issue.outputs.found == 'true'
+        id: find-thread
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          DISCORD_GUILD_ID: ${{ vars.DISCORD_GUILD_ID }}
+          DISCORD_DALEUI_CHAT_CHANNEL_ID: ${{ vars.DISCORD_DALEUI_CHAT_CHANNEL_ID }}
+          TITLE: ${{ steps.find-issue.outputs.title }}
+        run: |
+          RESPONSE=$(curl -sf --show-error \
+            "https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/threads/active" \
+            -H "Authorization: Bot ${DISCORD_TOKEN}")
+
+          # 공지 메시지에 달린 "<회의명> - 불참 공유" 쓰레드
+          # 못 찾아도 실패시키지 않음 — 리마인더에서 링크 줄만 빠짐
+          echo "$RESPONSE" | python3 -c '
+          import json, os, sys
+
+          threads = json.load(sys.stdin).get("threads", [])
+          name = os.environ["TITLE"] + " - 불참 공유"
+          channel = os.environ["DISCORD_DALEUI_CHAT_CHANNEL_ID"]
+          match = next(
+              (t for t in threads if t["name"] == name and t["parent_id"] == channel),
+              None,
+          )
+          print("thread_id=" + (match["id"] if match else ""))
+          ' >> "$GITHUB_OUTPUT"
+
       - name: Send reminder message
         if: steps.find-issue.outputs.found == 'true'
         env:
@@ -102,6 +130,7 @@ jobs:
           MANUAL_DAYS_BEFORE: ${{ inputs.days_before }}
           TITLE: ${{ steps.find-issue.outputs.title }}
           ISSUE_URL: ${{ steps.find-issue.outputs.issue_url }}
+          THREAD_ID: ${{ steps.find-thread.outputs.thread_id }}
           EVENT_ID: ${{ steps.find-event.outputs.event_id }}
           START_UNIX: ${{ steps.find-event.outputs.start_unix }}
         run: |
@@ -115,12 +144,19 @@ jobs:
             DAYS_LEFT=$(( (SECONDS_LEFT + 86399) / 86400 ))   # 올림 처리로 "몇 밤 남았나" 계산
           fi
 
-          if [ "$DAYS_LEFT" -le 1 ]; then
-            HEADER="🔔 **${TITLE}**가 내일이에요!"
-            CTA="데모/안건이 있으면 회의록에 미리 남겨주세요. [이벤트](${EVENT_LINK})에서 참석 여부도 꼭 확인해주세요!"
+          # 쓰레드를 못 찾은 경우 이 줄만 빠지고 본문 안내는 그대로 나감
+          if [ -n "$THREAD_ID" ]; then
+            THREAD_LINE="\n💬 [불참 공유](https://discord.com/channels/${DISCORD_GUILD_ID}/${THREAD_ID})"
           else
-            HEADER="⏰ **${TITLE}**가 ${DAYS_LEFT}일 후로 다가왔어요!"
-            CTA="아직 참석 여부를 남기지 않으셨다면 [이벤트](${EVENT_LINK})에서 **Interested** 를 눌러주세요. 데모/안건이 있으면 회의록에 미리 남겨주세요!"
+            THREAD_LINE=""
+          fi
+
+          if [ "$DAYS_LEFT" -le 1 ]; then
+            HEADER="🔔 **${TITLE}**가 내일입니다!"
+            BODY="마지막으로 한 번만 확인해주세요!\n- 참석 예정 → [이벤트](${EVENT_LINK}) **Interested**\n- 불참 → **불참 공유**\n- 데모·안건 → **회의록**"
+          else
+            HEADER="⏰ **${TITLE}**가 ${DAYS_LEFT}일 후입니다!"
+            BODY="아직 참석 여부를 남기지 않으셨다면 [이벤트](${EVENT_LINK})에서 **Interested**를 눌러주세요.\n불참하시는 분은 쓰레드에, 데모나 안건이 있다면 회의록에 미리 남겨주세요!"
           fi
 
           curl -sf --show-error -X POST \
@@ -128,5 +164,5 @@ jobs:
             -H "Authorization: Bot ${DISCORD_TOKEN}" \
             -H "Content-Type: application/json" \
             -d "{
-              \"content\": \"<@&${DISCORD_DALEUI_ROLE_ID}>\n\n${HEADER}\n\n<t:${START_UNIX}:F> (<t:${START_UNIX}:R>)\n📋 [회의록](${ISSUE_URL})\n\n${CTA}\"
+              \"content\": \"<@&${DISCORD_DALEUI_ROLE_ID}>\n\n${HEADER}\n\n<t:${START_UNIX}:F> (<t:${START_UNIX}:R>)\n📋 [회의록](${ISSUE_URL})${THREAD_LINE}\n\n${BODY}\"
             }"
