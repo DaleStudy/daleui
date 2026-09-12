@@ -1,6 +1,11 @@
 import "./index.css";
 
 export type { FieldProps } from "./components/shared/types";
+export {
+  Avatar,
+  type AvatarProps,
+  type AvatarSize,
+} from "./components/Avatar/Avatar";
 export { Box, type BoxProps } from "./components/Box/Box";
 export { Button, type ButtonProps } from "./components/Button/Button";
 export {
