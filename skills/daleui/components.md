@@ -2,6 +2,94 @@
 
 > 자동 생성 — 수동 편집하지 마세요.
 
+## Avatar
+
+아바타(Avatar)는 현재 로그인한 사용자나 콘텐츠 작성자의 프로필 이미지를 동그라미나 네모 형태로 시각화하고(사용자 식별 기능), 이미지가 없을 때는 이름의 이니셜이나 기본 아이콘을 대신 보여주어(대체 정보 제공) 서비스 내에서 사용자의 고유한 정체성과 소속감을 직관적으로 표현해 주는 기본 컴포넌트입니다.
+
+`src`가 있으면 이미지를, 없거나 불러오기에 실패하면 `name`으로 만든 이니셜을, 둘 다 없으면 대체 아이콘을 표시합니다.
+
+**이니셜 규칙**
+한 글자만으로 구분되는 한글·한자·가나는 첫 글자만, 영문은 두 글자를 사용합니다.
+
+- `"서달레"` → `"서"`
+- `"Dale Seo"` → `"DS"` (공백으로 나뉘면 각 단어의 첫 글자)
+- `"dale"` → `"DA"` (한 단어면 앞 두 글자)
+
+**접근성(Accessibility) 안내**
+
+- `name`이 있으면 이미지의 대체 텍스트로 쓰입니다.
+- `name`이 없으면 읽을 이름이 없어 아무것도 읽히지 않습니다.
+- 이름이 필요한 자리(아바타만 있는 버튼, 아바타 묶음 등)에는 `aria-label`이나
+  `aria-labelledby`를 직접 넘기면 그 이름으로 읽힙니다.
+
+`import { Avatar } from "daleui"`
+
+| prop | 타입                   | 기본값 | 설명                                                                                 |
+| ---- | ---------------------- | ------ | ------------------------------------------------------------------------------------ |
+| src  | `string`               | -      | 이미지 주소. 비어 있거나 불러오기에 실패하면 이니셜 → 대체 아이콘 순으로 표시됩니다. |
+| name | `string`               | -      | 사용자 이름. 이니셜을 만드는 데 쓰이고 이미지의 대체 텍스트가 됩니다.                |
+| size | `AvatarSize`           | `"md"` | 크기. `sm`은 32px, `md`는 40px, `lg`는 48px입니다.                                   |
+| ref  | `Ref<HTMLSpanElement>` | -      | 요소 참조                                                                            |
+
+### 예시
+
+**Variants**
+
+```tsx
+<Grid gridTemplateColumns="repeat(3, auto)" gap="24" justifyItems="start">
+  <Text size="md" muted>
+    image
+  </Text>
+  <Text size="md" muted>
+    initial
+  </Text>
+  <Text size="md" muted>
+    fallback
+  </Text>
+  <Avatar name="서달레" src={sampleImage} />
+  <Avatar name="서달레" src="" />
+  <Avatar src="" />
+</Grid>
+```
+
+**Sizes**
+
+```tsx
+<HStack gap="24" align="bottom">
+  {sizes.map((size) => (
+    <VStack key={size} gap="8" align="left">
+      <Text size="md" muted>
+        {size}
+      </Text>
+      <Avatar name="서달레" size={size} />
+    </VStack>
+  ))}
+</HStack>
+```
+
+**Initials**
+
+```tsx
+<HStack gap="24" align="top">
+  {[
+    { name: "서달레", note: "한글 → 첫 글자" },
+    { name: "Dale Seo", note: "영문 두 단어 → 각 첫 글자" },
+    { name: "dale", note: "영문 한 단어 → 앞 두 글자" },
+    { name: "山田太郎", note: "한자 → 첫 글자" },
+  ].map(({ name, note }) => (
+    <VStack key={name} gap="8" align="left">
+      <Text size="md" muted>
+        {note}
+      </Text>
+      <HStack gap="8">
+        <Avatar size="lg" src="" name={name} />
+        <Text size="md">{name}</Text>
+      </HStack>
+    </VStack>
+  ))}
+</HStack>
+```
+
 ## Box
 
 Box는 가장 기본적인 레이아웃 컴포넌트입니다.
