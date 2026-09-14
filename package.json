@@ -63,7 +63,7 @@
     "@chromatic-com/storybook": "^5.2.1",
     "@codecov/vite-plugin": "^2.0.1",
     "@eslint/js": "^10.0.1",
-    "@faker-js/faker": "^10.5.0",
+    "@faker-js/faker": "^10.6.0",
     "@pandacss/dev": "^1.11.5",
     "@storybook/addon-a11y": "^10.5.10",
     "@storybook/addon-designs": "^11.1.4",
