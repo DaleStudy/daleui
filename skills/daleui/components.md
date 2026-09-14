@@ -2431,19 +2431,13 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 
 `import { Skeleton } from "daleui"`
 
-| prop    | 타입              | 기본값   | 설명  |
-| ------- | ----------------- | -------- | ----- |
-| variant | `SkeletonVariant` | `"text"` | 모양. |
-
-- `text`: 둘러싼 글자 크기에 맞춰 높이가 자동 조절됩니다(기본값).
-- `circular`: 정원형. `width`/`height`(또는 `Skeleton.Avatar`의 `diameter`)로 크기를 지정합니다.
-- `rounded`: `md` 반경의 둥근 모서리. |
-  | animation | `SkeletonAnimation` | `"pulse"` | 모션.
-  `pulse`는 중성 회색, `false`는 정적입니다.
-  모든 애니메이션은 `prefers-reduced-motion: reduce` 환경에서 자동으로 정적 채움으로 대체됩니다. |
-  | width | `string \| number` | - | 너비. 숫자는 `px`로, 문자열은 그대로 사용합니다. |
-  | height | `string \| number` | - | 높이. 숫자는 `px`로, 문자열은 그대로 사용합니다. |
-  | ref | `Ref<HTMLElement>` | - | 요소 참조 |
+| prop      | 타입                | 기본값    | 설명                                                                                                                                                                                                           |
+| --------- | ------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| variant   | `SkeletonVariant`   | `"text"`  | 모양. - `text`: 둘러싼 글자 크기에 맞춰 높이가 자동 조절됩니다(기본값). - `circular`: 정원형. `width`/`height`(또는 `Skeleton.Avatar`의 `diameter`)로 크기를 지정합니다. - `rounded`: `md` 반경의 둥근 모서리. |
+| animation | `SkeletonAnimation` | `"pulse"` | 모션. `pulse`는 중성 회색, `false`는 정적입니다. 모든 애니메이션은 `prefers-reduced-motion: reduce` 환경에서 자동으로 정적 채움으로 대체됩니다.                                                                |
+| width     | `string \| number`  | -         | 너비. 숫자는 `px`로, 문자열은 그대로 사용합니다.                                                                                                                                                               |
+| height    | `string \| number`  | -         | 높이. 숫자는 `px`로, 문자열은 그대로 사용합니다.                                                                                                                                                               |
+| ref       | `Ref<HTMLElement>`  | -         | 요소 참조                                                                                                                                                                                                      |
 
 ### 예시
 
