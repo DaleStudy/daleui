@@ -210,18 +210,18 @@ export const textStyles = {
       value: {
         fontFamily: "sans",
         fontSize: { base: "xl", lg: "2xl" },
-        fontWeight: "bold",
+        fontWeight: "semibold",
         lineHeight: "tight",
-        letterSpacing: "tight",
+        letterSpacing: "balanced",
       },
     },
     "5": {
       value: {
         fontFamily: "sans",
         fontSize: { base: "lg", lg: "xl" },
-        fontWeight: "bold",
+        fontWeight: "semibold",
         lineHeight: "tight",
-        letterSpacing: "tight",
+        letterSpacing: "balanced",
       },
     },
   },
