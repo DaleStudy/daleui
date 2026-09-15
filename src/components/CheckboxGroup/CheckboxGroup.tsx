@@ -64,19 +64,6 @@ export interface CheckboxGroupProps extends FieldProps {
   helperText?: string;
 }
 
-/**
- * 체크박스 그룹 컴포넌트입니다.
- *
- * 사용자가 여러 선택지를 선택할 수 있을 때 사용합니다.
- * 특히 선택지가 2-5개로 적고 모든 옵션을 한눈에 보여주어야 할 때 적합합니다.
- *
- * @example
- * <CheckboxGroup name="fruits" label="좋아하는 과일을 선택하세요 (옵션 선택)">
- *   <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
- *   <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
- *   <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
- * </CheckboxGroup>
- */
 function CheckboxGroupRoot({
   ref,
   children,
@@ -234,6 +221,19 @@ export function CheckboxGroupItem({
   );
 }
 
+/**
+ * 체크박스 그룹 컴포넌트입니다.
+ *
+ * 사용자가 여러 선택지를 선택할 수 있을 때 사용합니다.
+ * 특히 선택지가 2-5개로 적고 모든 옵션을 한눈에 보여주어야 할 때 적합합니다.
+ *
+ * @example
+ * <CheckboxGroup name="fruits" label="좋아하는 과일을 선택하세요 (옵션 선택)">
+ *   <CheckboxGroup.Item value="apple">사과</CheckboxGroup.Item>
+ *   <CheckboxGroup.Item value="banana">바나나</CheckboxGroup.Item>
+ *   <CheckboxGroup.Item value="orange">오렌지</CheckboxGroup.Item>
+ * </CheckboxGroup>
+ */
 export const CheckboxGroup = Object.assign(CheckboxGroupRoot, {
   /**
    * CheckboxGroup의 개별 체크박스 항목입니다.
