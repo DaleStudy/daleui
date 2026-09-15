@@ -44,21 +44,6 @@ export interface RadioGroupProps extends FieldProps {
   hint?: string;
 }
 
-/**
- * 라디오 버튼 그룹 컴포넌트입니다.
- *
- * 사용자가 제한된 선택지 중 하나만 선택해야 할 때 사용합니다.
- * 특히 선택지가 2-5개로 적고 모든 옵션을 한눈에 보여주어야 할 때 적합합니다.
- *
- * 선택지가 많은 경우(6개 이상)에는 대신 [Select](?path=/docs/components-select--docs) 컴포넌트 사용을 권장합니다.
- *
- * @example
- * <RadioGroup name="fruits" label="좋아하는 과일을 선택하세요">
- *   <RadioGroup.Item value="apple">사과</RadioGroup.Item>
- *   <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
- *   <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
- * </RadioGroup>
- */
 function RadioGroupRoot({
   children,
   name,
@@ -407,6 +392,21 @@ const radioDotStyles = cva({
   },
 });
 
+/**
+ * 라디오 버튼 그룹 컴포넌트입니다.
+ *
+ * 사용자가 제한된 선택지 중 하나만 선택해야 할 때 사용합니다.
+ * 특히 선택지가 2-5개로 적고 모든 옵션을 한눈에 보여주어야 할 때 적합합니다.
+ *
+ * 선택지가 많은 경우(6개 이상)에는 대신 [Select](?path=/docs/components-select--docs) 컴포넌트 사용을 권장합니다.
+ *
+ * @example
+ * <RadioGroup name="fruits" label="좋아하는 과일을 선택하세요">
+ *   <RadioGroup.Item value="apple">사과</RadioGroup.Item>
+ *   <RadioGroup.Item value="banana">바나나</RadioGroup.Item>
+ *   <RadioGroup.Item value="orange">오렌지</RadioGroup.Item>
+ * </RadioGroup>
+ */
 export const RadioGroup = Object.assign(RadioGroupRoot, {
   /**
    * RadioGroup의 개별 라디오 항목입니다.
