@@ -229,7 +229,7 @@ export const textStyles = {
 
 export const fonts = {
   sans: { value: '"Pretendard Variable", sans-serif' },
-  mono: { value: '"JetBrains Mono", monospace' },
+  mono: { value: '"JetBrains Mono Variable", monospace' },
 };
 
 export const fontWeights = {
