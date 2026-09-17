@@ -6,3 +6,6 @@ dist/
 
 # All Contributors
 .all-contributorsrc
+
+# design-sync lib fork — vendored 코드이고 파일 바이트가 동기화 검증 키에 들어가므로 포맷하지 않는다
+.design-sync/overrides/

@@ -1,0 +1,36 @@
+{
+  "projectId": "983c50d2-d5b7-43ee-9c1e-64d44c50b672",
+  "pkg": "daleui",
+  "globalName": "Daleui",
+  "shape": "storybook",
+  "storybookConfigDir": ".storybook",
+  "storybookStatic": ".design-sync/sb-reference",
+  "entry": "dist/index.js",
+  "buildCmd": "bunx tsc -b && bunx vite build --config vite.lib.config.ts && bunx tsc -p tsconfig.build.json",
+  "libOverrides": {
+    "story-imports.mjs": "Panda styled-system/*은 index.mjs 전용 디렉토리라 esbuild 기본 resolveExtensions로 해석 불가 — .mjs / index.mjs 재시도 추가",
+    "dts.mjs": "jsdocFor의 설명 정제 정규식이 \\w(ASCII)만 남겨 한글 JSDoc이 README 컴포넌트 목록에서 사라짐 — \\p{L}\\p{N} + u 플래그로 교체 (upstream 수정 시 fork 제거)"
+  },
+  "titleMap": {
+    "Homepage": null,
+    "Login": null
+  },
+  "overrides": {
+    "Flex": {
+      "cardMode": "column"
+    },
+    "Grid": {
+      "cardMode": "column"
+    },
+    "HStack": {
+      "cardMode": "column"
+    },
+    "Select": {
+      "cardMode": "column"
+    },
+    "Skeleton": {
+      "cardMode": "column"
+    }
+  },
+  "readmeHeader": ".design-sync/conventions.md"
+}

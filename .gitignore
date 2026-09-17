@@ -45,3 +45,10 @@ coverage
 # Lefthook 로컬 오버라이드
 lefthook-local.yml
 
+
+## design-sync (claude.ai/design) — durable 파일(config, NOTES, conventions, previews, overrides, fonts)만 커밋
+.design-sync/sb-reference
+.design-sync/learnings
+.design-sync/.cache
+.ds-sync
+ds-bundle
