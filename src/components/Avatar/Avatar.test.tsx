@@ -1,7 +1,29 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, test } from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { Avatar } from "./Avatar";
 import { getInitial } from "./getInitial";
+
+const NativeImage = window.Image;
+
+/** Avatar가 미리 불러오는 `new Image()`들. 성공·실패는 테스트가 직접 일으킵니다. */
+const preloads: HTMLImageElement[] = [];
+
+beforeEach(() => {
+  preloads.length = 0;
+  vi.stubGlobal(
+    "Image",
+    class extends NativeImage {
+      constructor() {
+        super();
+        preloads.push(this);
+      }
+    },
+  );
+});
+
+afterEach(() => {
+  vi.unstubAllGlobals();
+});
 
 /** 장식으로 두는 안쪽 이미지(alt="")와 아이콘은 접근성 트리에 없어 DOM에서 직접 찾습니다. */
 function getImage(container: HTMLElement) {
@@ -32,7 +54,7 @@ describe("Avatar 이미지", () => {
       <Avatar src="/없는-이미지.png" name="서달레" />,
     );
 
-    fireEvent.error(getImage(container)!);
+    fireEvent.error(preloads[0]);
 
     expect(getImage(container)).not.toBeInTheDocument();
     expect(screen.getByRole("img", { name: "서달레" })).toHaveTextContent("서");
@@ -41,10 +63,18 @@ describe("Avatar 이미지", () => {
   test("이미지 불러오기에 실패하고 name도 없으면 대체 아이콘으로 대체됨", () => {
     const { container } = render(<Avatar src="/없는-이미지.png" />);
 
-    fireEvent.error(getImage(container)!);
+    fireEvent.error(preloads[0]);
 
     expect(getImage(container)).not.toBeInTheDocument();
     expect(getFallbackIcon(container)).toBeInTheDocument();
+  });
+
+  test("불러오기에 성공하면 이미지를 그대로 보여줌", () => {
+    const { container } = render(<Avatar src="/dale.png" name="서달레" />);
+
+    fireEvent.load(preloads[0]);
+
+    expect(getImage(container)).toHaveAttribute("src", "/dale.png");
   });
 
   test("1px 테두리는 모든 표시 형태에 있어 안쪽 크기가 같고, 링은 이미지에만 보임", () => {
@@ -66,10 +96,23 @@ describe("Avatar 이미지", () => {
       <Avatar src="/실패.png" name="서달레" />,
     );
 
-    fireEvent.error(getImage(container)!);
+    fireEvent.error(preloads[0]);
     expect(getImage(container)).not.toBeInTheDocument();
 
     rerender(<Avatar src="/성공.png" name="서달레" />);
+    fireEvent.load(preloads[1]);
+
+    expect(getImage(container)).toHaveAttribute("src", "/성공.png");
+  });
+
+  test("실패한 이미지의 뒤늦은 결과는 새 src의 상태를 덮지 않음", () => {
+    const { container, rerender } = render(
+      <Avatar src="/느린-실패.png" name="서달레" />,
+    );
+    const stale = preloads[0];
+
+    rerender(<Avatar src="/성공.png" name="서달레" />);
+    fireEvent.error(stale);
 
     expect(getImage(container)).toHaveAttribute("src", "/성공.png");
   });

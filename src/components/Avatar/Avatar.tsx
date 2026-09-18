@@ -1,4 +1,4 @@
-import { type HTMLAttributes, type Ref, useState } from "react";
+import { type HTMLAttributes, type Ref, useEffect, useState } from "react";
 import { css, cva, cx } from "../../../styled-system/css";
 import { Icon } from "../Icon/Icon";
 import { getInitial } from "./getInitial";
@@ -22,6 +22,39 @@ export interface AvatarProps extends Omit<
 
 /** 표시 형태 */
 type AvatarVariant = "image" | "initial" | "fallback";
+
+/** 이미지 불러오기 상태 */
+type ImageStatus = "loading" | "loaded" | "error";
+
+function useLoaded(src?: string): ImageStatus {
+  const [status, setStatus] = useState<ImageStatus>("loading");
+
+  useEffect(() => {
+    if (!src) {
+      return;
+    }
+
+    let active = true;
+    const image = new Image();
+    image.onload = () => {
+      if (active) {
+        setStatus("loaded");
+      }
+    };
+    image.onerror = () => {
+      if (active) {
+        setStatus("error");
+      }
+    };
+    image.src = src;
+
+    return () => {
+      active = false;
+    };
+  }, [src]);
+
+  return status;
+}
 
 /** 쓸 수 있는 값에 따라 이미지 → 이니셜 → 대체 아이콘 순으로 표시 형태를 고릅니다. */
 function getVariant(canShowImage: boolean, initial: string): AvatarVariant {
@@ -62,9 +95,9 @@ export function Avatar({
   className,
   ...rest
 }: AvatarProps) {
-  const [failedSrc, setFailedSrc] = useState<string>();
+  const loaded = useLoaded(src);
   const initial = name ? getInitial(name) : "";
-  const canShowImage = !!src && src !== failedSrc;
+  const canShowImage = !!src && loaded !== "error";
   const variant = getVariant(canShowImage, initial);
   const label = name?.trim() || undefined;
   const hasAccessibleName =
@@ -80,14 +113,7 @@ export function Avatar({
       className={cx(styles({ size, variant }), className)}
       {...rest}
     >
-      {variant === "image" && (
-        <img
-          src={src}
-          alt=""
-          className={imageStyles}
-          onError={() => setFailedSrc(src)}
-        />
-      )}
+      {variant === "image" && <img src={src} alt="" className={imageStyles} />}
       {variant === "initial" && <span>{initial}</span>}
       {variant === "fallback" && <Icon name="user" size={size} />}
     </span>
