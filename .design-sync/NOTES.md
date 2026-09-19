@@ -7,7 +7,7 @@
 - shape: `storybook` (`.storybook/`가 리포 루트). 패키지 매니저 `bun` (`bun install --frozen-lockfile`).
 - 라이브러리 빌드는 `cfg.buildCmd` (= `bun run build`에서 `generate:llms`를 뺀 것 — llms.txt/skills 문서 재생성은 동기화와 무관하고 tracked 파일을 건드린다).
 - 참조 Storybook: `bunx storybook build -c .storybook -o "$(git rev-parse --show-toplevel)/.design-sync/sb-reference"`. DS 소스가 바뀌면 `buildCmd`와 **함께** 재빌드한다.
-- `projectId`는 Dale 소유의 Claude Design 프로젝트를 가리킨다(비밀값 아님). 다른 사람이 동기화하려면 그 프로젝트의 멤버여야 한다.
+- `projectId`는 Dale 소유의 Claude Design 프로젝트를 가리킨다. 비밀값이 아니라 `chromatic.config.json`의 `projectId`와 같은 성격의 식별자다 — 접근 권한은 프로젝트 공유 설정(현재 `scope: org`)이 결정한다. **이 리포는 PUBLIC이므로 공유 범위를 "링크가 있는 누구나"로 바꾸면 커밋된 ID가 곧 공개 링크가 된다.** 다른 사람이 동기화하려면 그 프로젝트의 멤버여야 한다.
 - 변환기 호출: `--node-modules ./node_modules --entry dist/index.js --out ./ds-bundle` (자체 소스 리포라 `node_modules/daleui`가 없다).
 - 새 클론에서는 `ln -sfn ../.ds-sync/node_modules .design-sync/node_modules`가 필요하다 — `overrides/dts.mjs` fork가 bare `ts-morph`를 import하는데 심링크는 gitignore된다.
 - 재동기화 드라이버: `node .ds-sync/resync.mjs --config .design-sync/config.json --node-modules ./node_modules --entry dist/index.js --out ./ds-bundle --remote .design-sync/.cache/remote-sync.json --max-stories 12`. `--max-stories 12`를 유지해야 Grid(9)/RadioGroup(10)/Link·CheckboxGroup(8)/HStack·VStack(7)의 꼬리 스토리가 캡처 범위에 들어온다.
