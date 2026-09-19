@@ -2,6 +2,12 @@
 
 이 파일은 `/design-sync` 실행이 남기는 리포 고유의 학습 기록이다. 재동기화 시 가장 먼저 읽는다.
 
+## 브랜치 운용 (2026-09)
+
+- 이 디렉토리는 **main이 아니라 `design-sync` 브랜치에만** 있다. Claude Design을 달레UI가 지원하는 표면으로 삼을지 팀이 결정하기 전까지는 main에 넣지 않는다 (제안 자료: PR #1286, 닫힘).
+- 동기화 순서: `git switch design-sync && git rebase main` → 동기화 → 바뀐 `config.json`/`NOTES.md`를 이 브랜치에 커밋·푸시. 검증 상태의 앵커(`_ds_sync.json`)는 Claude Design 프로젝트 쪽에 있으므로 브랜치에 있어도 재동기화 속도는 같다.
+- 팀이 채택하면 이 브랜치를 main에 병합하고, 프로젝트를 팀 공용으로 옮긴다.
+
 ## 실행 환경
 
 - shape: `storybook` (`.storybook/`가 리포 루트). 패키지 매니저 `bun` (`bun install --frozen-lockfile`).
