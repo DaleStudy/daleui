@@ -28,7 +28,8 @@ jobs:
           fi
 
           # cron이 UTC 기준 토요일 새벽에 실행되므로 NY 시간으로 변환하면 금요일 날짜
-          SPRINT_WEEK1_FRIDAY="2026-04-24"
+          # Sprint 11은 추석으로 3주 진행 — 기준일을 한 주 밀어 이후 번호를 맞춤
+          SPRINT_WEEK1_FRIDAY="2026-05-01"
           SPRINT_START_NUMBER=1
           TODAY=$(TZ="America/New_York" date +%Y-%m-%d)
           TODAY_EPOCH=$(date -d "$TODAY" +%s)
