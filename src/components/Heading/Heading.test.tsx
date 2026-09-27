@@ -48,3 +48,14 @@ test.each([
 
   expect(screen.getByText(textName)).toHaveClass(className);
 });
+
+test("className을 넘겨도 기본 스타일을 유지한다", () => {
+  render(
+    <Heading level={2} className="custom">
+      제목
+    </Heading>,
+  );
+  const heading = screen.getByRole("heading", { level: 2 });
+  expect(heading).toHaveClass("custom");
+  expect(heading.classList.length).toBeGreaterThan(1);
+});

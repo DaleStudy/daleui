@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactElement, Ref } from "react";
-import { css, cva } from "../../../styled-system/css";
+import { css, cva, cx } from "../../../styled-system/css";
 import type { ButtonProps } from "../Button/Button";
 import type { TextInputProps } from "../TextInput/TextInput";
 import type { CheckboxProps } from "../Checkbox/Checkbox";
@@ -51,15 +51,19 @@ export function Label({
   tone = "neutral",
   required = false,
   disabled = false,
+  className,
   ...rest
 }: LabelProps) {
   return (
     <label
       ref={ref}
-      className={styles({
-        tone: disabled ? undefined : tone,
-        disabled,
-      })}
+      className={cx(
+        styles({
+          tone: disabled ? undefined : tone,
+          disabled,
+        }),
+        className,
+      )}
       {...rest}
     >
       <span className={css({ textStyle: "label.md.strong" })}>{labelText}</span>
