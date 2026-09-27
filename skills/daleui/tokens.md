@@ -175,6 +175,7 @@
 | ----------------- | --------- |
 | award             | Icon name |
 | brain             | Icon name |
+| calendar          | Icon name |
 | check             | Icon name |
 | chevronDown       | Icon name |
 | chevronLeft       | Icon name |
@@ -192,6 +193,7 @@
 | info              | Icon name |
 | kr                | Icon name |
 | laptop            | Icon name |
+| link              | Icon name |
 | loaderCircle      | Icon name |
 | menu              | Icon name |
 | messageCircle     | Icon name |
@@ -199,6 +201,7 @@
 | moon              | Icon name |
 | palette           | Icon name |
 | penLine           | Icon name |
+| plus              | Icon name |
 | puzzle            | Icon name |
 | search            | Icon name |
 | star              | Icon name |
