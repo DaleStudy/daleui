@@ -8,6 +8,11 @@
     "outDir": "dist",
     "skipLibCheck": true
   },
-  "include": ["src/index.ts", "src/components/**/*.tsx", "src/vite-env.d.ts"],
+  "include": [
+    "src/index.ts",
+    "src/preset.ts",
+    "src/components/**/*.tsx",
+    "src/vite-env.d.ts"
+  ],
   "exclude": ["src/**/*.stories.tsx", "src/**/*.test.tsx", "node_modules"]
 }

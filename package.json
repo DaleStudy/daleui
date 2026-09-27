@@ -19,6 +19,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./preset": {
+      "types": "./dist/preset.d.ts",
+      "import": "./dist/preset.js",
+      "default": "./dist/preset.js"
+    },
     "./styles.css": "./dist/index.css",
     "./*": {
       "types": "./dist/components/*/*.d.ts",
