@@ -64,3 +64,10 @@ test.each([
 
   expect(screen.getByText(textName)).toHaveClass(className);
 });
+
+test("className을 넘겨도 기본 스타일을 유지한다", () => {
+  render(<Text className="custom">본문</Text>);
+  const text = screen.getByText("본문");
+  expect(text).toHaveClass("custom");
+  expect(text.classList.length).toBeGreaterThan(1);
+});

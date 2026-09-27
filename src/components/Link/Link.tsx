@@ -1,5 +1,5 @@
 import { type AnchorHTMLAttributes, type Ref } from "react";
-import { css, cva } from "../../../styled-system/css";
+import { css, cva, cx } from "../../../styled-system/css";
 import { textStyles } from "../../tokens/typography";
 import { mergeRel, sanitizeHref } from "../shared/anchorSafety";
 
@@ -47,6 +47,7 @@ export function Link({
   external = false,
   target: targetProp,
   rel: relProp,
+  className,
   ...props
 }: LinkProps) {
   const target = targetProp ?? (external ? "_blank" : undefined);
@@ -58,9 +59,12 @@ export function Link({
   return (
     <a
       ref={ref}
-      className={css(
-        styles.raw({ tone, underline, size }),
-        textStyles.label[size].DEFAULT.value,
+      className={cx(
+        css(
+          styles.raw({ tone, underline, size }),
+          textStyles.label[size].DEFAULT.value,
+        ),
+        className,
       )}
       href={sanitizeHref(href)}
       target={target}

@@ -50,3 +50,10 @@ test.each([
 
   expect(screen.getByLabelText(size)).toHaveClass(className);
 });
+
+test("className을 넘겨도 기본 스타일을 유지한다", () => {
+  render(<Icon name="check" className="custom" data-testid="icon" />);
+  const icon = screen.getByTestId("icon");
+  // lucide 가 붙이는 "lucide" 클래스가 아니라 달레 UI 스타일(display: inline-block)이 남아 있어야 한다
+  expect(icon).toHaveClass("custom", "d_inline-block");
+});

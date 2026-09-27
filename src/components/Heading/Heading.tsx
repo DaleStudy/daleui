@@ -1,5 +1,5 @@
 import React, { type HTMLAttributes, type ReactNode } from "react";
-import { css, cva } from "../../../styled-system/css";
+import { css, cva, cx } from "../../../styled-system/css";
 
 type Level = 1 | 2 | 3 | 4 | 5;
 type HeadingTone = "brand" | "neutral";
@@ -40,6 +40,7 @@ export const Heading = ({
   tone = "neutral",
   align,
   wordBreak,
+  className,
   ...rest
 }: HeadingProps) => {
   if (!level) {
@@ -54,17 +55,20 @@ export const Heading = ({
     Tag,
     {
       ref,
-      className: css(
-        styles.raw({
-          level: size ? undefined : level,
-          tone,
-          align,
-          wordBreak,
-        }),
-        size &&
-          css.raw({
-            textStyle: `heading.${size}`,
+      className: cx(
+        css(
+          styles.raw({
+            level: size ? undefined : level,
+            tone,
+            align,
+            wordBreak,
           }),
+          size &&
+            css.raw({
+              textStyle: `heading.${size}`,
+            }),
+        ),
+        className,
       ),
       ...rest,
     },
