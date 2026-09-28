@@ -4,7 +4,7 @@ import {
   useId,
   useState,
 } from "react";
-import { css, cva } from "../../../styled-system/css";
+import { css, cva, cx } from "../../../styled-system/css";
 import type { FieldProps } from "../shared/types";
 import { HelperText } from "../shared/HelperText";
 import { useField } from "../shared/useField";
@@ -57,6 +57,7 @@ export function PasswordInput({
   errorMessage,
   id: idProp,
   "aria-describedby": ariaDescribedByProp,
+  className,
   ...rest
 }: PasswordInputProps) {
   const [isVisible, setIsVisible] = useState(false);
@@ -96,9 +97,12 @@ export function PasswordInput({
         </div>
       )}
       <div
-        className={inputContainerStyles({
-          state: invalid ? "error" : undefined,
-        })}
+        className={cx(
+          inputContainerStyles({
+            state: invalid ? "error" : undefined,
+          }),
+          className,
+        )}
         data-readonly={isReadOnly ? "" : undefined}
       >
         <input

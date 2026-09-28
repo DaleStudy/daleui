@@ -52,3 +52,10 @@ test("children이 있을 때 label 안에 렌더링됨", () => {
   const label = screen.getByTestId("label");
   expect(label).toContainElement(screen.getByPlaceholderText("입력"));
 });
+
+test("className을 넘겨도 기본 스타일을 유지한다", () => {
+  render(<Label labelText="이름" className="custom" data-testid="label" />);
+  const label = screen.getByTestId("label");
+  expect(label).toHaveClass("custom");
+  expect(label.classList.length).toBeGreaterThan(1);
+});

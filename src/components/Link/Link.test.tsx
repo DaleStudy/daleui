@@ -236,3 +236,13 @@ describe("동작 테스트", () => {
     expect(window.location.href).toBe(href);
   });
 });
+
+test("className을 넘겨도 기본 스타일을 유지한다", () => {
+  render(
+    <Link href="#" className="custom">
+      링크
+    </Link>,
+  );
+  const link = screen.getByRole("link");
+  expect(link).toHaveClass("custom", "c_fg.brand");
+});

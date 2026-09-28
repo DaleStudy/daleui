@@ -1,5 +1,5 @@
 import React, { type HTMLAttributes, type ReactNode } from "react";
-import { css, cva } from "../../../styled-system/css";
+import { css, cva, cx } from "../../../styled-system/css";
 import type { Tone } from "../../tokens/colors";
 import type { FontSize, FontWeight } from "../../tokens/typography";
 
@@ -33,18 +33,22 @@ export const Text = ({
   size,
   weight,
   muted = false,
+  className,
   ...rest
 }: TextProps) => {
   return React.createElement(
     Tag,
     {
       ref,
-      className: css(
-        styles.raw({ tone, muted }),
-        css.raw({
-          fontSize: size,
-          fontWeight: weight,
-        }),
+      className: cx(
+        css(
+          styles.raw({ tone, muted }),
+          css.raw({
+            fontSize: size,
+            fontWeight: weight,
+          }),
+        ),
+        className,
       ),
       ...rest,
     },

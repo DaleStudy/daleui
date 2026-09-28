@@ -6,7 +6,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { css, cva } from "../../../styled-system/css";
+import { css, cva, cx } from "../../../styled-system/css";
 import type { FieldProps } from "../shared/types";
 import { HelperText } from "../shared/HelperText";
 import { useField } from "../shared/useField";
@@ -62,6 +62,7 @@ export function Select({
   errorMessage,
   id: idProp,
   "aria-describedby": ariaDescribedByProp,
+  className,
   ...rest
 }: SelectProps) {
   const reactId = useId();
@@ -191,7 +192,7 @@ export function Select({
       )}
       <div
         data-tooltip={overflowed ? titleText : undefined}
-        className={wrapperStyles({ overflowed })}
+        className={cx(wrapperStyles({ overflowed }), className)}
       >
         <select
           id={selectId}

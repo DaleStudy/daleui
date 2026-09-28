@@ -665,3 +665,18 @@ describe("Select label", () => {
     ).toHaveClass("c_fg.neutral.disabled");
   });
 });
+
+test("className은 TextInput처럼 필드 상자에 붙고 기본 스타일을 유지한다", () => {
+  render(
+    <Select aria-label="과일" className="custom">
+      <option value="apple">사과</option>
+    </Select>,
+  );
+  const select = screen.getByRole("combobox");
+  // 필드 상자는 역할(role)이 없어 Testing Library 쿼리로 찾을 수 없다
+  // eslint-disable-next-line testing-library/no-node-access
+  const field = select.parentElement;
+  expect(field).toHaveClass("custom");
+  expect(field?.classList.length).toBeGreaterThan(1);
+  expect(select).not.toHaveClass("custom");
+});
