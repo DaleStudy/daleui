@@ -59,7 +59,8 @@ jobs:
 
   chromatic:
     needs: pre-chromatic
-    if: needs.pre-chromatic.result == 'success'
+    # pre-chromatic과 마찬가지로 changes skip을 !cancelled()로 풀어준다. 빼면 main push에서 돌지 않는다.
+    if: ${{ !cancelled() && needs.pre-chromatic.result == 'success' }}
     environment:
       name: chromatic
       url: ${{ needs.pre-chromatic.outputs.url }}
