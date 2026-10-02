@@ -79,5 +79,8 @@ export function mdTable(headers: string[], rows: string[][]) {
 }
 
 export function escapeCell(s: string) {
-  return s.replace(/\\/g, "\\\\").replace(/\|/g, "\\|").replace(/\n/g, " ");
+  return s
+    .replace(/\\/g, "\\\\")
+    .replace(/\|/g, "\\|")
+    .replace(/\r\n?|\n/g, " ");
 }
