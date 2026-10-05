@@ -217,7 +217,3 @@
 | YouTube           | Icon name |
 | Storybook         | Icon name |
 | Figma             | Icon name |
-| GithubLight       | Icon name |
-| GithubDark        | Icon name |
-| LinkedInLight     | Icon name |
-| LinkedInDark      | Icon name |
