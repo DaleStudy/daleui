@@ -7,173 +7,119 @@ import {
   lineHeights,
   letterSpacings,
 } from "./typography";
+import { TextStyleSpecimen } from "./typographySpecimen";
 
 # Typography
 
 - > 달레 UI는 [프리텐다드(Pretendard Variable)](https://github.com/orioncactus/pretendard) 웹폰트를 사용하고 있습니다.
 
+{/* 텍스트 스타일 견본은 Typeset이 아니라 TextStyleSpecimen으로 렌더한다. Typeset은 fontFamily·fontSizes·fontWeight·sampleText만 반영하고 행간을 1.2로 고정한 채 샘플을 한 줄로 자르므로 행간·자간·밑줄이 보이지 않는다. 크기·굵기·패밀리 견본은 Typeset이 반영하는 범위라 그대로 쓴다. */}
+
+## Display
+
+### Display.lg
+
+<TextStyleSpecimen name="display.lg">달레 UI</TextStyleSpecimen>
+
+### Display.md
+
+<TextStyleSpecimen name="display.md">달레 UI</TextStyleSpecimen>
+
+### Display.sm
+
+<TextStyleSpecimen name="display.sm">달레 UI</TextStyleSpecimen>
+
 ## Title
 
 ### Title.lg
 
-<Typeset
-  fontSizes={[fontSizes["4xl"].value]}
-  fontWeight={fontWeights.semibold.value}
-  lineHeight={lineHeights.tight.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-/>
+<TextStyleSpecimen name="title.lg" />
 
 ### Title.md
 
-<Typeset
-  fontSizes={[fontSizes["3xl"].value]}
-  fontWeight={fontWeights.semibold.value}
-  lineHeight={lineHeights.tight.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-/>
+<TextStyleSpecimen name="title.md" />
 
 ### Title.sm
 
-<Typeset
-  fontSizes={[fontSizes["2xl"].value]}
-  fontWeight={fontWeights.medium.value}
-  lineHeight={lineHeights.tight.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-/>
+<TextStyleSpecimen name="title.sm" />
+
+## Heading
+
+`Heading` 컴포넌트가 쓰는 스타일입니다. 뷰포트에 따라 글꼴 크기가 전환되므로 창 너비를 바꿔 보세요.
+
+### Heading.1
+
+<TextStyleSpecimen name="heading.1" />
+
+### Heading.2
+
+<TextStyleSpecimen name="heading.2" />
+
+### Heading.3
+
+<TextStyleSpecimen name="heading.3" />
+
+### Heading.4
+
+<TextStyleSpecimen name="heading.4" />
+
+### Heading.5
+
+<TextStyleSpecimen name="heading.5" />
 
 ## Body
 
 ### Body.lg
 
-<Typeset
-  fontSizes={[fontSizes.lg.value]}
-  fontWeight={fontWeights.normal.value}
-  lineHeight={lineHeights.balanced.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-/>
+<TextStyleSpecimen name="body.lg" />
 
 ### Body.md
 
-<Typeset
-  fontSizes={[fontSizes.md.value]}
-  fontWeight={fontWeights.normal.value}
-  lineHeight={lineHeights.balanced.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-/>
+<TextStyleSpecimen name="body.md" />
 
 ### Body.sm
 
-<Typeset
-  fontSizes={[fontSizes.sm.value]}
-  fontWeight={fontWeights.semibold.value}
-  lineHeight={lineHeights.balanced.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-/>
+<TextStyleSpecimen name="body.sm" />
 
 ## Label
 
 ### Label.lg
 
-<Typeset
-  fontSizes={[fontSizes.lg.value]}
-  fontWeight={fontWeights.medium.value}
-  lineHeight={lineHeights.tight.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-/>
+<TextStyleSpecimen name="label.lg" />
 
 ### Label.lg.underline
 
-<Typeset
-  fontSizes={[fontSizes.lg.value]}
-  fontWeight={fontWeights.medium.value}
-  lineHeight={lineHeights.tight.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-  style={{ textDecoration: "underline" }}
-/>
+<TextStyleSpecimen name="label.lg.underline" />
 
 ### Label.md
 
-<Typeset
-  fontSizes={[fontSizes.md.value]}
-  fontWeight={fontWeights.medium.value}
-  lineHeight={lineHeights.tight.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-/>
+<TextStyleSpecimen name="label.md" />
 
 ### Label.md.underline
 
-<Typeset
-  fontSizes={[fontSizes.md.value]}
-  fontWeight={fontWeights.medium.value}
-  lineHeight={lineHeights.tight.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-  style={{ textDecoration: "underline" }}
-/>
+<TextStyleSpecimen name="label.md.underline" />
+
+### Label.md.strong
+
+<TextStyleSpecimen name="label.md.strong" />
 
 ### Label.sm
 
-<Typeset
-  fontSizes={[fontSizes.sm.value]}
-  fontWeight={fontWeights.medium.value}
-  lineHeight={lineHeights.tight.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-/>
+<TextStyleSpecimen name="label.sm" />
 
 ### Label.sm.underline
 
-<Typeset
-  fontSizes={[fontSizes.sm.value]}
-  fontWeight={fontWeights.medium.value}
-  lineHeight={lineHeights.tight.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-  style={{ textDecoration: "underline" }}
-/>
+<TextStyleSpecimen name="label.sm.underline" />
 
 ## Caption
 
-<Typeset
-  fontSizes={[fontSizes.xs.value]}
-  fontWeight={fontWeights.medium.value}
-  lineHeight={lineHeights.tight.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.sans.value}
-/>
+<TextStyleSpecimen name="caption" />
 
 ## Code
 
-<Typeset
-  fontSizes={[fontSizes.sm.value]}
-  fontWeight={fontWeights.medium.value}
-  lineHeight={lineHeights.balanced.value}
-  letterSpacing={letterSpacings.balanced.value}
-  sampleText="누구든지 사용할 수 있는 Customizable Design System"
-  fontFamily={fonts.mono.value}
-/>
+<TextStyleSpecimen name="code">
+  const code = "monospace font for code";
+</TextStyleSpecimen>
 
 ## 글꼴 크기
 
@@ -227,6 +173,106 @@ import {
   sampleText="달레 UI 디자인 System"
   fontFamily={fonts.sans.value}
 />
+
+## 행간
+
+한글은 초성·중성·종성을 네모틀 안에 쌓아 한 음절을 만드는 문자라 글자 속이 꽉 차 보이고,
+그만큼 줄과 줄이 쉽게 붙어 보입니다. 라틴 본문 관행(1.2~1.4)을 그대로 옮기면 답답해지므로
+한국어 본문은 더 넓은 행간을 씁니다.
+[Morisawa](https://www.morisawa-usa.com/post/hangeul-typogarphy-guide)는 150~190%를,
+[Typotheque](https://www.typotheque.com/articles/typesetting-cjk-text)는 정보 밀도가 높은
+CJK 본문에서 약 1.7을 권합니다.
+
+### tight(1.2)
+
+제목처럼 글자가 크고 줄 수가 적은 텍스트에 사용합니다.
+
+<p
+  style={{
+    fontFamily: fonts.sans.value,
+    fontSize: fontSizes.md.value,
+    lineHeight: lineHeights.tight.value,
+    maxWidth: "28rem",
+  }}
+>
+  달레 UI는 한국어를 쓰는 사람이 만들고 한국어를 쓰는 사람이 사용하는 디자인
+  시스템입니다. 행간을 확인할 수 있도록 여러 줄로 이어지는 문장을 넣었습니다.
+</p>
+
+### balanced(1.5)
+
+버튼 문구나 라벨처럼 한두 줄로 끝나는 짧은 텍스트에 사용합니다.
+
+<p
+  style={{
+    fontFamily: fonts.sans.value,
+    fontSize: fontSizes.md.value,
+    lineHeight: lineHeights.balanced.value,
+    maxWidth: "28rem",
+  }}
+>
+  달레 UI는 한국어를 쓰는 사람이 만들고 한국어를 쓰는 사람이 사용하는 디자인
+  시스템입니다. 행간을 확인할 수 있도록 여러 줄로 이어지는 문장을 넣었습니다.
+</p>
+
+### relaxed(1.7)
+
+여러 줄로 이어지는 긴 본문에 사용합니다. 연구가 권하는 구간에서 고른 값이며
+`body` 텍스트 스타일과 `Text` 컴포넌트의 기본 행간입니다.
+
+<p
+  style={{
+    fontFamily: fonts.sans.value,
+    fontSize: fontSizes.md.value,
+    lineHeight: lineHeights.relaxed.value,
+    maxWidth: "28rem",
+  }}
+>
+  달레 UI는 한국어를 쓰는 사람이 만들고 한국어를 쓰는 사람이 사용하는 디자인
+  시스템입니다. 행간을 확인할 수 있도록 여러 줄로 이어지는 문장을 넣었습니다.
+</p>
+
+## 자간
+
+한글의 기본은 붙여 짜기입니다.
+[W3C 한글 텍스트 레이아웃 요구사항](https://www.w3.org/TR/klreq/)은 한글·한자 사이 기본 자간을
+`0`으로 규정하고, 자간을 벌리면 음절 덩어리가 낱글자로 흩어져 단어를 알아보는 속도가 느려집니다.
+
+CSS `letter-spacing`은 `0`이 아닌 맨숫자를 길이로 인정하지 않으므로 자간 토큰은 항상 단위를 붙입니다.
+
+{/* 자간 차이는 서브픽셀 단위로 흔들려 스냅샷 비교에 노이즈만 남기므로 아래 예시는 시각 회귀 비교에서 제외한다 */}
+
+### tight(-0.01em)
+
+`display`·`heading` 텍스트 스타일처럼 글자가 커서 자간이 넓어 보이는 텍스트를 조여 줍니다.
+
+<p
+  data-chromatic="ignore"
+  style={{
+    fontFamily: fonts.sans.value,
+    fontSize: fontSizes["3xl"].value,
+    fontWeight: fontWeights.bold.value,
+    letterSpacing: letterSpacings.tight.value,
+  }}
+>
+  달레 UI 디자인 System
+</p>
+
+### balanced(0)
+
+본문과 라벨 등 나머지 텍스트에 사용하는 기본 자간입니다.
+
+<p
+  data-chromatic="ignore"
+  style={{
+    fontFamily: fonts.sans.value,
+    fontSize: fontSizes["3xl"].value,
+    fontWeight: fontWeights.bold.value,
+    letterSpacing: letterSpacings.balanced.value,
+  }}
+>
+  달레 UI 디자인 System
+</p>
 
 ## 글꼴 패밀리
 
