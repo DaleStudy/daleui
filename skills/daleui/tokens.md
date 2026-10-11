@@ -174,6 +174,8 @@
 | 이름              | 용도      |
 | ----------------- | --------- |
 | award             | Icon name |
+| book              | Icon name |
+| bookOpen          | Icon name |
 | brain             | Icon name |
 | calendar          | Icon name |
 | check             | Icon name |

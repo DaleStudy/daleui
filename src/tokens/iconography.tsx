@@ -1,5 +1,7 @@
 import {
   Award,
+  Book,
+  BookOpen,
   Brain,
   Calendar,
   Check,
@@ -55,6 +57,8 @@ function createBrandIcon(Icon: FunctionComponent<SVGProps<SVGSVGElement>>) {
 
 export const icons = {
   award: Award,
+  book: Book,
+  bookOpen: BookOpen,
   brain: Brain,
   calendar: Calendar,
   check: Check,

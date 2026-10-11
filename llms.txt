@@ -24,6 +24,7 @@
 
 상세 props → [components.md](https://github.com/DaleStudy/daleui/blob/main/skills/daleui/components.md)
 
+- Avatar: `import { Avatar } from "daleui"`. 아바타(Avatar)는 현재 로그인한 사용자나 콘텐츠 작성자의 프로필 이미지를 동그라미나 네모 형태로 시각화하고(사용자 식별 기능), 이미지가 없을 때는 이름의 이니셜이나 기본 아이콘을 대신 보여주어(대체 정보 제공) 서비스 내에서 사용자의 고유한 정체성과 소속감을 직관적으로 표현해 주는 기본 컴포넌트입니다.
 - Box: `import { Box } from "daleui"`. Box는 가장 기본적인 레이아웃 컴포넌트입니다.
 - Button: `import { Button } from "daleui"`. 버튼은 사용자의 명확한 작업 실행을 위해 사용되는 컴포넌트로, 완료, 저장, 제출과 같은 액션에 사용합니다.
 - Card: `import { Card } from "daleui"`. Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.Link`에 자동으로 전달됩니다.
