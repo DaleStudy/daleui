@@ -2681,6 +2681,7 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 텍스트 컴포넌트입니다.
 
 - `as` 속성으로 어떤 HTML 태그를 사용할지 지정할 수 있습니다.
+- `size`·`weight`를 생략하면 부모와 의미 태그의 타이포그래피를 유지합니다.
 - `muted` 속성을 주시면 글자색이 옅어집니다. 명암비가 낮아지므로 접근성 측면에서 주의해서 사용하세요.
 
 `import { Text } from "daleui"`
@@ -2696,6 +2697,48 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 | ref          | `Ref<HTMLElement>`                                                         | -           | 요소 참조                |
 
 ### 예시
+
+**Inheritance**
+
+```tsx
+<div className={vstack({ gap: "24", alignItems: "flex-start" })}>
+  <p>
+    본문 문단 안의 <Text>인라인 텍스트</Text>
+  </p>
+  <p>
+    <Text as="strong">강조 텍스트</Text>
+    {" · "}
+    <Text as="small">작은 텍스트</Text>
+  </p>
+  <Heading level={2}>
+    제목 안의 <Text>제목 텍스트</Text>
+  </Heading>
+  <div className={css({ fontFamily: "mono" })}>
+    <Text>const inheritedFont = true;</Text>
+  </div>
+</div>
+```
+
+**Overrides**
+
+```tsx
+<div className={vstack({ gap: "24", alignItems: "flex-start" })}>
+  <Text as="strong" weight="normal">
+    굵기를 직접 지정한 강조 텍스트
+  </Text>
+  <Text as="small" size="lg">
+    크기를 직접 지정한 작은 텍스트
+  </Text>
+  <Heading level={2}>
+    <Text size="md" weight="normal">
+      제목 안에서 크기와 굵기를 직접 지정한 텍스트
+    </Text>
+  </Heading>
+  <Text tone="brand" className={css({ fontStyle: "italic" })}>
+    사용자 클래스와 브랜드 색조
+  </Text>
+</div>
+```
 
 **Tones**
 
