@@ -57,6 +57,8 @@ export default defineConfig({
       entry: {
         // import { Button } from "daleui";
         index: resolve(__dirname, "src/index.ts"),
+        // presets: ["@pandacss/preset-base", "daleui/preset"]
+        preset: resolve(__dirname, "src/preset.ts"),
         // import { Button } from "daleui/button";
         ...componentEntries,
       },
