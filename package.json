@@ -90,7 +90,7 @@
     "lefthook": "^2.1.14",
     "prettier": "^3.9.9",
     "storybook": "^10.6.1",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "typescript-eslint": "^8.68.0",
     "vite": "^8.3.0",
     "vite-plugin-svgr": "^5.2.0",
