@@ -333,7 +333,7 @@ Box는 가장 기본적인 레이아웃 컴포넌트입니다.
 
 ## Card
 
-Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.Link`에 자동으로 전달됩니다.
+Card의 최상위 컨테이너입니다. 자체 padding이 없어 이미지처럼 영역 전체를 채우는 콘텐츠를 바로 배치할 수 있습니다. `tone`은 하위 `Card.Icon`과 `Card.Link`에 자동으로 전달됩니다.
 
 `import { Card } from "daleui"`
 
@@ -350,7 +350,9 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
 
 ```tsx
 <Card>
-  <Card.Icon name="star" />
+  <Card.Header>
+    <Card.Icon name="star" />
+  </Card.Header>
   <Card.Body>
     <Card.Title>제목</Card.Title>
     <Card.Description>이 기능에 대한 설명을 여기에 작성합니다</Card.Description>
@@ -362,7 +364,9 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
 
 ```tsx
 <Card tone="brand" outline>
-  <Card.Icon name="star" />
+  <Card.Header>
+    <Card.Icon name="star" />
+  </Card.Header>
   <Card.Body>
     <Card.Title>브랜드 색조</Card.Title>
     <Card.Description>brand 색조를 사용한 카드입니다.</Card.Description>
@@ -374,7 +378,9 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
 
 ```tsx
 <Card outline>
-  <Card.Icon name="star" />
+  <Card.Header>
+    <Card.Icon name="star" />
+  </Card.Header>
   <Card.Body>
     <Card.Title>제목</Card.Title>
     <Card.Description>이 기능에 대한 설명을 여기에 작성합니다</Card.Description>
@@ -386,7 +392,9 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
 
 ```tsx
 <Card>
-  <Card.Icon name="externalLink" />
+  <Card.Header>
+    <Card.Icon name="externalLink" />
+  </Card.Header>
   <Card.Body>
     <Card.Title>외부 링크 카드</Card.Title>
     <Card.Description>
@@ -394,9 +402,49 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
     </Card.Description>
   </Card.Body>
 
-  <Card.Link href="https://www.example.com" external>
-    외부 사이트 방문
-  </Card.Link>
+  <Card.Footer>
+    <Card.Link href="https://www.example.com" external>
+      외부 사이트 방문
+    </Card.Link>
+  </Card.Footer>
+</Card>
+```
+
+**BodyOnly**
+
+```tsx
+<Card>
+  <Card.Body>
+    <Card.Title>제목</Card.Title>
+    <Card.Description>이 기능에 대한 설명을 여기에 작성합니다</Card.Description>
+  </Card.Body>
+</Card>
+```
+
+**CustomContent**
+
+```tsx
+<Card outline className={css({ width: "320px" })}>
+  <img
+    src={sampleImage}
+    alt=""
+    className={css({ width: "100%", height: "160px", objectFit: "cover" })}
+  />
+  <Card.Header className={css({ justifyContent: "space-between" })}>
+    <Card.Icon name="palette" />
+    <Tag tone="success">상시 모집</Tag>
+  </Card.Header>
+  <Card.Body>
+    <Card.Title>달레 UI 디자인시스템</Card.Title>
+    <Card.Description>
+      한국어 사용자 경험에 특화된 오픈 소스 React 디자인 시스템입니다.
+      디자이너와 개발자가 함께 이슈 선택부터 릴리스까지 실무와 같은 협업
+      프로세스를 경험합니다.
+    </Card.Description>
+  </Card.Body>
+  <Card.Footer>
+    <Card.Link href="#">자세히 보기</Card.Link>
+  </Card.Footer>
 </Card>
 ```
 
@@ -416,6 +464,24 @@ Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.L
 | prop         | 타입        | 기본값 | 설명 |
 | ------------ | ----------- | ------ | ---- |
 | **children** | `ReactNode` | -      |      |
+
+## CardFooter
+
+`import { CardFooter } from "daleui"`
+
+| prop         | 타입                  | 기본값 | 설명      |
+| ------------ | --------------------- | ------ | --------- |
+| **children** | `ReactNode`           | -      |           |
+| ref          | `Ref<HTMLDivElement>` | -      | 요소 참조 |
+
+## CardHeader
+
+`import { CardHeader } from "daleui"`
+
+| prop         | 타입                  | 기본값 | 설명      |
+| ------------ | --------------------- | ------ | --------- |
+| **children** | `ReactNode`           | -      |           |
+| ref          | `Ref<HTMLDivElement>` | -      | 요소 참조 |
 
 ## CardIcon
 

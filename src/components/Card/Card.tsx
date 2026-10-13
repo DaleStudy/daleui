@@ -57,6 +57,27 @@ function CardRoot({
     </CardContext.Provider>
   );
 }
+export interface CardHeaderProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "style"
+> {
+  children: ReactNode;
+  /** 요소 참조 */
+  ref?: Ref<HTMLDivElement>;
+}
+
+export function CardHeader({
+  ref,
+  className,
+  children,
+  ...rest
+}: CardHeaderProps) {
+  return (
+    <div ref={ref} className={cx(headerStyles(), className)} {...rest}>
+      {children}
+    </div>
+  );
+}
 export interface CardBodyProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   "style"
@@ -69,6 +90,27 @@ export interface CardBodyProps extends Omit<
 export function CardBody({ ref, className, children, ...rest }: CardBodyProps) {
   return (
     <div ref={ref} className={cx(bodyStyles(), className)} {...rest}>
+      {children}
+    </div>
+  );
+}
+export interface CardFooterProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "style"
+> {
+  children: ReactNode;
+  /** 요소 참조 */
+  ref?: Ref<HTMLDivElement>;
+}
+
+export function CardFooter({
+  ref,
+  className,
+  children,
+  ...rest
+}: CardFooterProps) {
+  return (
+    <div ref={ref} className={cx(footerStyles(), className)} {...rest}>
       {children}
     </div>
   );
@@ -147,9 +189,7 @@ const rootStyles = cva({
     display: "flex",
     flexDirection: "column",
     alignItems: "start",
-    gap: "24",
-    p: "24",
-    px: "16",
+    overflow: "hidden",
     borderRadius: "md",
     bg: "bg.neutral",
   },
@@ -173,12 +213,39 @@ const rootStyles = cva({
   },
 });
 
+// 하단 padding은 마지막 영역에만 적용하여 Root에 직접 넣은 이미지 등이 하단까지 채워지도록 함
+const headerStyles = cva({
+  base: {
+    display: "flex",
+    alignItems: "center",
+    width: "100%",
+    pt: "24",
+    px: "12",
+    _last: { pb: "24" },
+  },
+});
+
 const bodyStyles = cva({
   base: {
     display: "flex",
     flexDirection: "column",
     gap: "4",
     width: "100%",
+    pt: "24",
+    px: "12",
+    _last: { pb: "24" },
+  },
+});
+
+const footerStyles = cva({
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "start",
+    width: "100%",
+    pt: "24",
+    px: "12",
+    _last: { pb: "24" },
   },
 });
 
@@ -192,16 +259,24 @@ const iconContainerStyles = cva({
 });
 
 /**
- * Card의 최상위 컨테이너입니다. `tone`은 하위 `Card.Icon`과 `Card.Link`에 자동으로 전달됩니다.
+ * Card의 최상위 컨테이너입니다. 자체 padding이 없어 이미지처럼 영역 전체를 채우는 콘텐츠를 바로 배치할 수 있습니다. `tone`은 하위 `Card.Icon`과 `Card.Link`에 자동으로 전달됩니다.
  */
 export const Card = Object.assign(CardRoot, {
   /**
-   * Card의 제목과 설명을 감싸는 컨테이너입니다.
+   * Card의 상단 영역입니다. 선택사항이며, children을 자유롭게 구성할 수 있습니다.
+   */
+  Header: CardHeader,
+  /**
+   * Card의 본문 영역입니다. 필수이며, children을 자유롭게 구성할 수 있습니다.
    * 제목과 설명 사이의 간격을 관리합니다.
    */
   Body: CardBody,
   /**
-   * Card의 아이콘을 표시합니다. Card 바로 아래에 배치하며,
+   * Card의 하단 영역입니다. 선택사항이며, children을 자유롭게 구성할 수 있습니다.
+   */
+  Footer: CardFooter,
+  /**
+   * Card의 아이콘을 표시합니다. CardHeader 안에서 사용하며,
    * tone은 Card로부터 자동으로 전달받습니다.
    */
   Icon: CardIcon,
@@ -214,7 +289,7 @@ export const Card = Object.assign(CardRoot, {
    */
   Description: CardDescription,
   /**
-   * Card 하단에 링크를 표시합니다. tone은 Card로부터 자동으로 전달받으며,
+   * Card 하단에 링크를 표시합니다. CardFooter 안에서 사용합니다. tone은 Card로부터 자동으로 전달받으며,
    * external prop이 true일 경우 외부 링크 아이콘이 자동으로 추가됩니다.
    */
   Link: CardLink,
