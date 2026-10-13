@@ -42,7 +42,7 @@ export const globalCss = defineGlobalStyles({
   },
   p: {
     fontSize: "var(--font-sizes-md)", // 1rem
-    lineHeight: "var(--line-heights-relaxed)", // 1.7
+    lineHeight: "var(--line-heights-relaxed)", // 1.625
     fontWeight: "var(--font-weights-normal)", // 400
   },
 });

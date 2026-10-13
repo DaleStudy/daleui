@@ -159,7 +159,6 @@
 | -------- | --- | ---------- |
 | tight    | 1.2 | lineHeight |
 | balanced | 1.5 | lineHeight |
-| relaxed  | 1.7 | lineHeight |
 
 ## letterSpacings
 

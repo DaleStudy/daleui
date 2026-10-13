@@ -176,13 +176,6 @@ import { TextStyleSpecimen } from "./typographySpecimen";
 
 ## 행간
 
-한글은 초성·중성·종성을 네모틀 안에 쌓아 한 음절을 만드는 문자라 글자 속이 꽉 차 보이고,
-그만큼 줄과 줄이 쉽게 붙어 보입니다. 라틴 본문 관행(1.2~1.4)을 그대로 옮기면 답답해지므로
-한국어 본문은 더 넓은 행간을 씁니다.
-[Morisawa](https://www.morisawa-usa.com/post/hangeul-typogarphy-guide)는 150~190%를,
-[Typotheque](https://www.typotheque.com/articles/typesetting-cjk-text)는 정보 밀도가 높은
-CJK 본문에서 약 1.7을 권합니다.
-
 ### tight(1.2)
 
 제목처럼 글자가 크고 줄 수가 적은 텍스트에 사용합니다.
@@ -201,24 +194,8 @@ CJK 본문에서 약 1.7을 권합니다.
 
 ### balanced(1.5)
 
-버튼 문구나 라벨처럼 한두 줄로 끝나는 짧은 텍스트에 사용합니다.
-
-<p
-  style={{
-    fontFamily: fonts.sans.value,
-    fontSize: fontSizes.md.value,
-    lineHeight: lineHeights.balanced.value,
-    maxWidth: "28rem",
-  }}
->
-  달레 UI는 한국어를 쓰는 사람이 만들고 한국어를 쓰는 사람이 사용하는 디자인
-  시스템입니다. 행간을 확인할 수 있도록 여러 줄로 이어지는 문장을 넣었습니다.
-</p>
-
-### relaxed(1.7)
-
-여러 줄로 이어지는 긴 본문에 사용합니다. 연구가 권하는 구간에서 고른 값이며
-`body` 텍스트 스타일과 문단(`p`, `<Text as="p">`)에 적용됩니다.
+`body.lg`·`body.md`·`body.sm` 텍스트 스타일에 적용되는 기본 행간입니다.
+문단(`p`, `<Text as="p">`)은 기본 프리셋의 `relaxed`(1.625)를 기본 행간으로 사용합니다.
 인라인 `Text`는 부모의 타이포그래피를 상속하고, `strong`·`small`의 의미에 따른
 굵기·크기를 유지합니다. `size`·`weight`를 지정하면 해당 속성만 덮어씁니다.
 
@@ -226,7 +203,7 @@ CJK 본문에서 약 1.7을 권합니다.
   style={{
     fontFamily: fonts.sans.value,
     fontSize: fontSizes.md.value,
-    lineHeight: lineHeights.relaxed.value,
+    lineHeight: lineHeights.balanced.value,
     maxWidth: "28rem",
   }}
 >

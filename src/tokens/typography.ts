@@ -63,7 +63,7 @@ export const textStyles = {
         fontFamily: "sans",
         fontSize: "lg",
         fontWeight: "normal",
-        lineHeight: "relaxed",
+        lineHeight: "balanced",
         letterSpacing: "balanced",
       },
     },
@@ -72,7 +72,7 @@ export const textStyles = {
         fontFamily: "sans",
         fontSize: "md",
         fontWeight: "normal",
-        lineHeight: "relaxed",
+        lineHeight: "balanced",
         letterSpacing: "balanced",
       },
     },
@@ -81,7 +81,7 @@ export const textStyles = {
         fontFamily: "sans",
         fontSize: "sm",
         fontWeight: "normal",
-        lineHeight: "relaxed",
+        lineHeight: "balanced",
         letterSpacing: "balanced",
       },
     },
@@ -264,5 +264,4 @@ export const letterSpacings = {
 export const lineHeights = {
   tight: { value: "1.2" },
   balanced: { value: "1.5" },
-  relaxed: { value: "1.7" },
 };
