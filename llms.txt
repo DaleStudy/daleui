@@ -50,6 +50,7 @@
 - RadioGroupItem: `import { RadioGroupItem } from "daleui"`.
 - Select: `import { Select } from "daleui"`. 셀렉트는 미리 정의된 여러 옵션 중 하나를 사용자가 선택하도록 하기 위한 컴포넌트입니다.
 - Skeleton: `import { Skeleton } from "daleui"`. 콘텐츠가 로딩되는 동안 자리를 표시하는 플레이스홀더(스켈레톤) 컴포넌트입니다.
+- Spinner: `import { Spinner } from "daleui"`. 스피너(Spinner)는 화면이 멈춘 것이 아니라 데이터가 열심히 불러와지는 중임을 알려주고(진행 상태 표현), 사용자가 이탈하지 않고 다음 화면을 차분히 기다릴 수 있도록(시각적 피드백 제공) 도와주는 역할을 하는 기본 컴포넌트입니다.
 - Tag: `import { Tag } from "daleui"`. 콘텐츠의 속성, 카테고리, 상태(성공, 경고 등)를 키워드 형태로 식별하고 분류하여 시각적으로 강조하는 컴포넌트이다. 필요에 따라 링크 이동이나 삭제와 같은 상호작용 기능을 제공합니다.
 - Text: `import { Text } from "daleui"`. 텍스트 컴포넌트입니다.
 - TextInput: `import { TextInput } from "daleui"`. 텍스트 인풋은 사용자가 이름, 이메일, 검색어 등 텍스트 정보를 직접 입력할 수 있도록 제공되는 입력 컴포넌트입니다.
