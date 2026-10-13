@@ -93,9 +93,9 @@ export default defineConfig({
 
 설정에서 사용하는 `@pandacss/preset-base`도 직접 설치합니다.
 
-프리셋에는 달레UI가 사용하는 Panda 기본 토큰도 포함되며, 폰트 토큰은 `sans`와 `mono`만 제공합니다.
+프리셋에는 달레 UI가 사용하는 Panda 기본 토큰도 포함되며, 폰트 토큰은 `sans`와 `mono`만 제공합니다.
 프리셋 자체가 폰트나 컴포넌트 CSS를 로딩하지는 않습니다.
-달레UI 컴포넌트를 함께 사용한다면 위의 설치 안내대로 `daleui/styles.css`를 불러옵니다.
+달레 UI 컴포넌트를 함께 사용한다면 위의 설치 안내대로 `daleui/styles.css`를 불러옵니다.
 프리셋만 사용한다면 앱 진입점에서 폰트 CSS를 직접 불러옵니다.
 
 ```ts
