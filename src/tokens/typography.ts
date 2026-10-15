@@ -210,18 +210,18 @@ export const textStyles = {
       value: {
         fontFamily: "sans",
         fontSize: { base: "xl", lg: "2xl" },
-        fontWeight: "bold",
+        fontWeight: "semibold",
         lineHeight: "tight",
-        letterSpacing: "tight",
+        letterSpacing: "balanced",
       },
     },
     "5": {
       value: {
         fontFamily: "sans",
         fontSize: { base: "lg", lg: "xl" },
-        fontWeight: "bold",
+        fontWeight: "semibold",
         lineHeight: "tight",
-        letterSpacing: "tight",
+        letterSpacing: "balanced",
       },
     },
   },
@@ -256,7 +256,8 @@ export const fontSizes = {
 export type FontSize = keyof typeof fontSizes;
 
 export const letterSpacings = {
-  tight: { value: "-0.1" },
+  // CSS letter-spacing은 0이 아닌 맨숫자를 길이로 인정하지 않으므로 단위를 반드시 붙인다
+  tight: { value: "-0.01em" },
   balanced: { value: "0" },
 };
 
