@@ -92,6 +92,8 @@ export default defineConfig({
 ```
 
 설정에서 사용하는 `@pandacss/preset-base`도 직접 설치합니다.
+`presets`를 직접 지정하면 Panda의 기본 프리셋 목록을 대체하므로,
+기본 유틸리티를 유지하려면 `@pandacss/preset-base`를 함께 지정해야 합니다.
 
 프리셋에는 달레 UI가 사용하는 Panda 기본 토큰도 포함되며, 폰트 토큰은 `sans`와 `mono`만 제공합니다.
 프리셋 자체가 폰트나 컴포넌트 CSS를 로딩하지는 않습니다.
