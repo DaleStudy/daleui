@@ -162,10 +162,10 @@
 
 ## letterSpacings
 
-| 토큰     | 값   | 용도          |
-| -------- | ---- | ------------- |
-| tight    | -0.1 | letterSpacing |
-| balanced | 0    | letterSpacing |
+| 토큰     | 값      | 용도          |
+| -------- | ------- | ------------- |
+| tight    | -0.01em | letterSpacing |
+| balanced | 0       | letterSpacing |
 
 ## icons
 

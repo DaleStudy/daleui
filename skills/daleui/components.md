@@ -2642,6 +2642,62 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 <Skeleton variant="rounded" animation="pulse" width={280} height={40} />
 ```
 
+## Spinner
+
+스피너(Spinner)는 화면이 멈춘 것이 아니라 데이터가 열심히 불러와지는 중임을 알려주고(진행 상태 표현), 사용자가 이탈하지 않고 다음 화면을 차분히 기다릴 수 있도록(시각적 피드백 제공) 도와주는 역할을 하는 기본 컴포넌트입니다.
+
+- 남은 분량을 가늠할 수 있는 로딩에는 진행률 표시를, 콘텐츠의 자리와 모양을 미리 보여줄 수 있는 로딩에는 `Skeleton`을 사용하세요.
+- 버튼이 제출 중임을 알릴 때는 `Button`의 `loading`을 사용하세요.
+
+**접근성(Accessibility) 안내**
+
+- 기본적으로 `role="status"`로 렌더링되어 `label`("로딩 중")이 라이브 리전으로 읽힙니다.
+- 이미 로딩 상태를 알리는 영역(`aria-busy`를 쓰는 영역, `Button`의 `loading` 등) 안에서는
+  `label={null}`로 장식용 처리해 같은 안내가 두 번 읽히지 않게 하세요.
+- 회전 모션이 로딩을 전달하는 유일한 시각 신호이므로 `prefers-reduced-motion: reduce` 환경에서도
+  멈추지 않고, 대신 느리게 회전합니다.
+
+`import { Spinner } from "daleui"`
+
+| prop  | 타입                   | 기본값      | 설명                                                                                     |
+| ----- | ---------------------- | ----------- | ---------------------------------------------------------------------------------------- |
+| size  | `SpinnerSize`          | `"md"`      | 크기                                                                                     |
+| tone  | `SpinnerTone`          | `"brand"`   | 색조                                                                                     |
+| label | `string \| null`       | `"로딩 중"` | 스크린 리더에 읽히는 로딩 설명. `null` 전달 시 장식용으로 간주되어 `aria-hidden` 처리됨. |
+| ref   | `Ref<HTMLSpanElement>` | -           | 요소 참조                                                                                |
+
+### 예시
+
+**Sizes**
+
+```tsx
+<Grid gridTemplateColumns="repeat(2, auto)" gap="24" justifyItems="center">
+  {sizes.map((size) => (
+    <Text key={size} size="md" muted>
+      {size}
+    </Text>
+  ))}
+  {sizes.map((size) => (
+    <Spinner key={size} {...args} size={size} />
+  ))}
+</Grid>
+```
+
+**Tones**
+
+```tsx
+<Grid gridTemplateColumns="repeat(2, auto)" gap="24" justifyItems="center">
+  {tones.map((tone) => (
+    <Text key={tone} size="md" muted>
+      {tone}
+    </Text>
+  ))}
+  {tones.map((tone) => (
+    <Spinner key={tone} {...args} tone={tone} />
+  ))}
+</Grid>
+```
+
 ## Tag
 
 콘텐츠의 속성, 카테고리, 상태(성공, 경고 등)를 키워드 형태로 식별하고 분류하여 시각적으로 강조하는 컴포넌트이다. 필요에 따라 링크 이동이나 삭제와 같은 상호작용 기능을 제공합니다.
@@ -2716,6 +2772,7 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 텍스트 컴포넌트입니다.
 
 - `as` 속성으로 어떤 HTML 태그를 사용할지 지정할 수 있습니다.
+- `size`·`weight`를 생략하면 부모와 의미 태그의 타이포그래피를 유지합니다.
 - `muted` 속성을 주시면 글자색이 옅어집니다. 명암비가 낮아지므로 접근성 측면에서 주의해서 사용하세요.
 
 `import { Text } from "daleui"`
@@ -2731,6 +2788,48 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 | ref          | `Ref<HTMLElement>`                                                         | -           | 요소 참조                |
 
 ### 예시
+
+**Inheritance**
+
+```tsx
+<div className={vstack({ gap: "24", alignItems: "flex-start" })}>
+  <p>
+    본문 문단 안의 <Text>인라인 텍스트</Text>
+  </p>
+  <p>
+    <Text as="strong">강조 텍스트</Text>
+    {" · "}
+    <Text as="small">작은 텍스트</Text>
+  </p>
+  <Heading level={2}>
+    제목 안의 <Text>제목 텍스트</Text>
+  </Heading>
+  <div className={css({ fontFamily: "mono" })}>
+    <Text>const inheritedFont = true;</Text>
+  </div>
+</div>
+```
+
+**Overrides**
+
+```tsx
+<div className={vstack({ gap: "24", alignItems: "flex-start" })}>
+  <Text as="strong" weight="normal">
+    굵기를 직접 지정한 강조 텍스트
+  </Text>
+  <Text as="small" size="lg">
+    크기를 직접 지정한 작은 텍스트
+  </Text>
+  <Heading level={2}>
+    <Text size="md" weight="normal">
+      제목 안에서 크기와 굵기를 직접 지정한 텍스트
+    </Text>
+  </Heading>
+  <Text tone="brand" className={css({ fontStyle: "italic" })}>
+    사용자 클래스와 브랜드 색조
+  </Text>
+</div>
+```
 
 **Tones**
 

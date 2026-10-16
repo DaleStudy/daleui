@@ -61,6 +61,12 @@ export {
   type SkeletonVariant,
   type SkeletonAnimation,
 } from "./components/Skeleton/Skeleton";
+export {
+  Spinner,
+  type SpinnerProps,
+  type SpinnerSize,
+  type SpinnerTone,
+} from "./components/Spinner/Spinner";
 export { Tag, type TagProps } from "./components/Tag/Tag";
 export { Text, type TextProps } from "./components/Text/Text";
 export {
