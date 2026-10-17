@@ -87,3 +87,44 @@ export const Solid: StoryObj<typeof Icon> = {
   },
   argTypes: { solid: { control: false }, tone: { control: false } },
 };
+
+export const BrandColorInheritance: StoryObj<typeof Icon> = {
+  render: () => (
+    <div className={vstack({ gap: "24" })}>
+      <div
+        className={css({
+          display: "flex",
+          alignItems: "center",
+          gap: "16",
+          p: "24",
+          bg: "base.white",
+          color: "base.black",
+        })}
+      >
+        밝은 배경
+        <Icon name="GitHub" size="lg" aria-label="GitHub" />
+        <Icon name="LinkedIn" size="lg" aria-label="LinkedIn" />
+      </div>
+      <div
+        className={css({
+          display: "flex",
+          alignItems: "center",
+          gap: "16",
+          p: "24",
+          bg: "base.black",
+          color: "base.white",
+        })}
+      >
+        어두운 배경
+        <Icon name="GitHub" size="lg" aria-label="GitHub" />
+        <Icon name="LinkedIn" size="lg" aria-label="LinkedIn" />
+      </div>
+    </div>
+  ),
+  argTypes: {
+    name: { control: false },
+    size: { control: false },
+    tone: { control: false },
+    solid: { control: false },
+  },
+};
