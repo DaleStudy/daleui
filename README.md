@@ -68,6 +68,43 @@ export default () => (
 );
 ```
 
+### Panda CSS 프리셋
+
+Panda CSS를 사용하는 프로젝트에서는 토큰 파일을 복사하지 않고 `daleui/preset`을 사용합니다.
+컴포넌트와 같은 디자인 토큰, 시맨틱 색상(라이트/다크 모드), 텍스트 스타일, 키프레임, 전역 스타일을 공유합니다.
+
+프리셋에 필요한 Panda CSS 패키지를 개발 의존성으로 설치합니다.
+
+```sh
+bun add -d @pandacss/dev @pandacss/preset-base
+```
+
+```ts
+// panda.config.ts
+import { defineConfig } from "@pandacss/dev";
+
+export default defineConfig({
+  presets: ["@pandacss/preset-base", "daleui/preset"],
+  preflight: true,
+  include: ["./src/**/*.{js,jsx,ts,tsx}"],
+  outdir: "styled-system",
+});
+```
+
+설정에서 사용하는 `@pandacss/preset-base`도 직접 설치합니다.
+`presets`를 직접 지정하면 Panda의 기본 프리셋 목록을 대체하므로,
+기본 유틸리티를 유지하려면 `@pandacss/preset-base`를 함께 지정해야 합니다.
+
+프리셋에는 달레 UI가 사용하는 Panda 기본 토큰도 포함되며, 폰트 토큰은 `sans`와 `mono`만 제공합니다.
+프리셋 자체가 폰트나 컴포넌트 CSS를 로딩하지는 않습니다.
+달레 UI 컴포넌트를 함께 사용한다면 위의 설치 안내대로 `daleui/styles.css`를 불러옵니다.
+프리셋만 사용한다면 앱 진입점에서 폰트 CSS를 직접 불러옵니다.
+
+```ts
+import "pretendard/dist/web/variable/pretendardvariable.css";
+import "@fontsource-variable/jetbrains-mono";
+```
+
 ## 기여 (Contribution)
 
 본 프로젝트는 [All Contributors](https://github.com/all-contributors/all-contributors) 관례에 따라 기여자분들의 공헌를 인정하고 감사를 표현하고 있습니다.

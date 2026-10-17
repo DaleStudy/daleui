@@ -8,4 +8,5 @@ ui:
           - ".storybook/**"
           - "src/tokens/**"
           - "src/styles/**"
+          - "src/preset.ts"
           - "panda.config.ts"
