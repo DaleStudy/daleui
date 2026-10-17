@@ -1,7 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { css } from "../../../styled-system/css";
+import { Tag } from "../Tag/Tag";
 import { Card } from "./Card";
 import type { IconName } from "../../tokens/iconography";
 import type { Tone } from "../../tokens/colors";
+
+const sampleImage = "https://dalestudy.com/images/programs/daleui-cover.jpg";
+
 interface CardStoryArgs {
   tone: Extract<Tone, "neutral" | "brand">;
   outline: boolean;
@@ -29,19 +34,24 @@ export default {
 - 링크가 있는 경우에는 카드 전체 영역 또는 특정 CTA 버튼이 하이퍼링크로 동작합니다. 이때 사용자에게 “여기를 클릭하면 새로운 곳으로 이동한다”는 점을 직관적으로 인지시키는 탐색형 카드입니다.
 
 컴파운드 컴포넌트 패턴을 사용하여 구성됩니다:
-- \`Card\`: 카드 컨테이너 (tone, outline 설정)
-- \`Card.Icon\`: 아이콘 (Root 바로 아래 배치)
-- \`Card.Body\`: 제목과 설명을 감싸는 컨테이너
-- \`Card.Title\`: 제목
-- \`Card.Description\`: 설명
-- \`Card.Link\`: 링크 (선택사항, href와 external 속성 지원)
+- \`Card\`: 카드 컨테이너 (tone, outline 설정, padding 없이 이미지 등 배치 가능)
+- \`Card.Header\`: 상단 영역 (선택사항)
+- \`Card.Body\`: 본문 영역 (필수)
+- \`Card.Footer\`: 하단 영역 (선택사항)
+- \`Card.Icon\`: 아이콘 (Header 안에 배치)
+- \`Card.Title\`: 제목 (Body 안에 배치)
+- \`Card.Description\`: 설명 (Body 안에 배치)
+- \`Card.Link\`: 링크 (Footer 안에 배치, href와 external 속성 지원)
+
+Header, Body, Footer의 children은 특정 콘텐츠로 제한되지 않으며 자유롭게 구성할 수 있습니다.
+하단 padding은 마지막 영역에만 적용됩니다.
 
 **tone** 속성은 Root에서 설정하며, Icon과 Link에 자동으로 전달됩니다.
 **outline** 속성을 사용하여 카드에 테두리를 추가할 수 있습니다.
 
 ### RSC 지원 안내
 
-이 컴포넌트는 named-export방식으로 React Server Components(RSC)를 지원합니다. RSC를 사용할 때는 \`import { Card, CardBody, CardTitle, CardDescription, CardIcon, CardLink } from "daleui"\`와 같이 named-import 방식으로 가져와야 합니다. default-export 방식으로는 RSC 지원이 불가능하므로, RSC 환경에서는 반드시 named-export 방식을 사용해 주세요.
+이 컴포넌트는 named-export방식으로 React Server Components(RSC)를 지원합니다. RSC를 사용할 때는 \`import { Card, CardHeader, CardBody, CardFooter, CardTitle, CardDescription, CardIcon, CardLink } from "daleui"\`와 같이 named-import 방식으로 가져와야 합니다. default-export 방식으로는 RSC 지원이 불가능하므로, RSC 환경에서는 반드시 named-export 방식을 사용해 주세요.
 
 \`\`\`tsx
 import { Card, CardBody, CardTitle } from "daleui";
@@ -116,15 +126,19 @@ export default function MyCard() {
   },
   render: (args) => (
     <Card tone={args.tone} outline={args.outline}>
-      <Card.Icon name={args.iconName} />
+      <Card.Header>
+        <Card.Icon name={args.iconName} />
+      </Card.Header>
       <Card.Body>
         <Card.Title>{args.title}</Card.Title>
         <Card.Description>{args.description}</Card.Description>
       </Card.Body>
       {args.linkHref && (
-        <Card.Link href={args.linkHref} external={args.linkExternal}>
-          {args.linkText}
-        </Card.Link>
+        <Card.Footer>
+          <Card.Link href={args.linkHref} external={args.linkExternal}>
+            {args.linkText}
+          </Card.Link>
+        </Card.Footer>
       )}
     </Card>
   ),
@@ -188,4 +202,69 @@ export const WithExternalLink: StoryObj<CardStoryArgs> = {
       },
     },
   },
+};
+
+export const BodyOnly: StoryObj<CardStoryArgs> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "**Card.Header**와 **Card.Footer**는 선택사항입니다. **Card.Body**만으로도 카드를 구성할 수 있습니다.",
+      },
+    },
+  },
+  render: (args) => (
+    <Card tone={args.tone} outline={args.outline}>
+      <Card.Body>
+        <Card.Title>{args.title}</Card.Title>
+        <Card.Description>{args.description}</Card.Description>
+      </Card.Body>
+    </Card>
+  ),
+};
+
+export const CustomContent: StoryObj<CardStoryArgs> = {
+  args: {
+    outline: true,
+    iconName: "palette",
+    title: "달레 UI 디자인시스템",
+    description:
+      "한국어 사용자 경험에 특화된 오픈 소스 React 디자인 시스템입니다. 디자이너와 개발자가 함께 이슈 선택부터 릴리스까지 실무와 같은 협업 프로세스를 경험합니다.",
+    linkHref: "#",
+    linkText: "자세히 보기",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "**Card.Header**, **Card.Body**, **Card.Footer**의 children은 특정 콘텐츠로 제한되지 않으며, **Card** 바로 아래에 배치한 이미지는 padding의 영향을 받지 않아 카드 너비를 꽉 채워 배치할 수 있습니다. 썸네일, 아이콘과 상태 태그, 설명, 링크로 구성된 프로그램 소개 카드 예시입니다.",
+      },
+    },
+  },
+  render: (args) => (
+    <Card
+      tone={args.tone}
+      outline={args.outline}
+      className={css({ width: "320px" })}
+    >
+      <img
+        src={sampleImage}
+        alt=""
+        className={css({ width: "100%", height: "160px", objectFit: "cover" })}
+      />
+      <Card.Header className={css({ justifyContent: "space-between" })}>
+        <Card.Icon name={args.iconName} />
+        <Tag tone="success">상시 모집</Tag>
+      </Card.Header>
+      <Card.Body>
+        <Card.Title>{args.title}</Card.Title>
+        <Card.Description>{args.description}</Card.Description>
+      </Card.Body>
+      <Card.Footer>
+        <Card.Link href={args.linkHref} external={args.linkExternal}>
+          {args.linkText}
+        </Card.Link>
+      </Card.Footer>
+    </Card>
+  ),
 };
