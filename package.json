@@ -91,7 +91,7 @@
     "eslint-plugin-storybook": "^10.6.2",
     "eslint-plugin-testing-library": "^7.16.2",
     "globals": "^17.12.0",
-    "happy-dom": "^20.14.5",
+    "happy-dom": "^20.14.6",
     "lefthook": "^2.1.17",
     "prettier": "^3.9.9",
     "storybook": "^10.6.2",
