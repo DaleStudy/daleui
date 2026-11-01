@@ -3,7 +3,9 @@ import {
   Book,
   BookOpen,
   Brain,
+  Building2,
   Calendar,
+  ChartBar,
   Check,
   ChevronDown,
   ChevronLeft,
@@ -11,6 +13,8 @@ import {
   CircleAlert,
   Clock,
   CodeXml,
+  Copy,
+  Download,
   ExternalLink,
   Eye,
   EyeClosed,
@@ -31,11 +35,16 @@ import {
   Plus,
   Puzzle,
   Search,
+  Share2,
+  ShieldCheck,
+  Sparkles,
   Star,
   Sun,
   ThumbsUp,
+  TrendingUp,
   User,
   Users,
+  Wallet,
   X,
 } from "lucide-react";
 
@@ -49,6 +58,8 @@ import LinkedIn from "../assets/LinkedIn.svg?react";
 import LinkedInDark from "../assets/LinkedInDark.svg?react";
 import Medium from "../assets/Medium.svg?react";
 import Storybook from "../assets/Storybook.svg?react";
+import Threads from "../assets/Threads.svg?react";
+import XTwitter from "../assets/XTwitter.svg?react";
 import YouTube from "../assets/YouTube.svg?react";
 
 function createBrandIcon(Icon: FunctionComponent<SVGProps<SVGSVGElement>>) {
@@ -62,7 +73,9 @@ export const icons = {
   book: Book,
   bookOpen: BookOpen,
   brain: Brain,
+  building2: Building2,
   calendar: Calendar,
+  chartBar: ChartBar,
   check: Check,
   chevronDown: ChevronDown,
   chevronLeft: ChevronLeft,
@@ -70,6 +83,8 @@ export const icons = {
   circleAlert: CircleAlert,
   clock: Clock,
   codeXml: CodeXml,
+  copy: Copy,
+  download: Download,
   externalLink: ExternalLink,
   eye: Eye,
   eyeClosed: EyeClosed,
@@ -91,11 +106,16 @@ export const icons = {
   plus: Plus,
   puzzle: Puzzle,
   search: Search,
+  share2: Share2,
+  shieldCheck: ShieldCheck,
+  sparkles: Sparkles,
   star: Star,
   sun: Sun,
   thumbsUp: ThumbsUp,
+  trendingUp: TrendingUp,
   user: User,
   users: Users,
+  wallet: Wallet,
   x: X,
   Discord: createBrandIcon(Discord),
   GitHub: createBrandIcon(GitHub),
@@ -104,6 +124,8 @@ export const icons = {
   YouTube: createBrandIcon(YouTube),
   Storybook: createBrandIcon(Storybook),
   Figma: createBrandIcon(Figma),
+  Threads: createBrandIcon(Threads),
+  XTwitter: createBrandIcon(XTwitter),
   GithubLight: GitHub,
   GithubDark: GitHubDark,
   LinkedInLight: LinkedIn,
