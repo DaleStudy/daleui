@@ -177,7 +177,9 @@
 | book              | Icon name |
 | bookOpen          | Icon name |
 | brain             | Icon name |
+| building2         | Icon name |
 | calendar          | Icon name |
+| chartBar          | Icon name |
 | check             | Icon name |
 | chevronDown       | Icon name |
 | chevronLeft       | Icon name |
@@ -185,6 +187,8 @@
 | circleAlert       | Icon name |
 | clock             | Icon name |
 | codeXml           | Icon name |
+| copy              | Icon name |
+| download          | Icon name |
 | externalLink      | Icon name |
 | eye               | Icon name |
 | eyeClosed         | Icon name |
@@ -206,11 +210,16 @@
 | plus              | Icon name |
 | puzzle            | Icon name |
 | search            | Icon name |
+| share2            | Icon name |
+| shieldCheck       | Icon name |
+| sparkles          | Icon name |
 | star              | Icon name |
 | sun               | Icon name |
 | thumbsUp          | Icon name |
+| trendingUp        | Icon name |
 | user              | Icon name |
 | users             | Icon name |
+| wallet            | Icon name |
 | x                 | Icon name |
 | Discord           | Icon name |
 | GitHub            | Icon name |
@@ -219,6 +228,8 @@
 | YouTube           | Icon name |
 | Storybook         | Icon name |
 | Figma             | Icon name |
+| Threads           | Icon name |
+| XTwitter          | Icon name |
 | GithubLight       | Icon name |
 | GithubDark        | Icon name |
 | LinkedInLight     | Icon name |
