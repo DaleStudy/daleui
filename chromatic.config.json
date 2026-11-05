@@ -1,5 +1,14 @@
 {
   "onlyChanged": true,
+  "externals": [
+    "src/tokens/**",
+    "src/styles/**",
+    "src/preset.ts",
+    "src/index.css",
+    "panda.config.ts",
+    "postcss.config.cjs",
+    "chromatic.config.json"
+  ],
   "projectId": "Project:675790d317ba346348aa3490",
   "zip": true
 }
