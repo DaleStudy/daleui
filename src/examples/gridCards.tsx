@@ -29,8 +29,10 @@ export function GridCards() {
       {items.map((item) => (
         <GridItem key={item.id}>
           <Card outline>
-            <Heading level={4}>{item.title}</Heading>
-            <Text>{item.description}</Text>
+            <Card.Body>
+              <Heading level={4}>{item.title}</Heading>
+              <Text>{item.description}</Text>
+            </Card.Body>
           </Card>
         </GridItem>
       ))}

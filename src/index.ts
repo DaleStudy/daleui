@@ -10,13 +10,17 @@ export { Box, type BoxProps } from "./components/Box/Box";
 export { Button, type ButtonProps } from "./components/Button/Button";
 export {
   Card,
+  CardHeader,
   CardBody,
+  CardFooter,
   CardTitle,
   CardDescription,
   CardIcon,
   CardLink,
   type CardProps,
+  type CardHeaderProps,
   type CardBodyProps,
+  type CardFooterProps,
   type CardTitleProps,
   type CardDescriptionProps,
   type CardIconProps,

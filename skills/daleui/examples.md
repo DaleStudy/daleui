@@ -13,10 +13,12 @@ import { Card, HStack, Icon, Text } from "daleui";
 export function AlertCard() {
   return (
     <Card tone="brand" outline>
-      <HStack gap="8">
-        <Icon name="check" />
-        <Text>저장이 완료되었습니다.</Text>
-      </HStack>
+      <Card.Body>
+        <HStack gap="8">
+          <Icon name="check" />
+          <Text>저장이 완료되었습니다.</Text>
+        </HStack>
+      </Card.Body>
     </Card>
   );
 }
@@ -77,8 +79,10 @@ export function GridCards() {
       {items.map((item) => (
         <GridItem key={item.id}>
           <Card outline>
-            <Heading level={4}>{item.title}</Heading>
-            <Text>{item.description}</Text>
+            <Card.Body>
+              <Heading level={4}>{item.title}</Heading>
+              <Text>{item.description}</Text>
+            </Card.Body>
           </Card>
         </GridItem>
       ))}

@@ -8,10 +8,12 @@ import { Card, HStack, Icon, Text } from "../index";
 export function AlertCard() {
   return (
     <Card tone="brand" outline>
-      <HStack gap="8">
-        <Icon name="check" />
-        <Text>저장이 완료되었습니다.</Text>
-      </HStack>
+      <Card.Body>
+        <HStack gap="8">
+          <Icon name="check" />
+          <Text>저장이 완료되었습니다.</Text>
+        </HStack>
+      </Card.Body>
     </Card>
   );
 }
