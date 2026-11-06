@@ -2886,6 +2886,91 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 </div>
 ```
 
+## Textarea
+
+텍스트 에어리어는 의견, 설명, 서술형 답변처럼 여러 줄의 텍스트를 입력할 수 있도록 제공되는 입력 컴포넌트입니다.
+
+**접근성(Accessibility) 안내**
+
+- `label`을 넘기면 레이블이 렌더링되고 입력 요소와 연결됩니다.
+- 화면에 이미 레이블 역할을 하는 제목이 있다면 `label` 대신 `aria-labelledby`로 그 요소의 id를 연결하세요.
+- `helperText`와 `errorMessage`는 `aria-describedby`로 입력 요소와 연결됩니다.
+
+`import { Textarea } from "daleui"`
+
+| prop         | 타입                                            | 기본값  | 설명                     |
+| ------------ | ----------------------------------------------- | ------- | ------------------------ |
+| size         | `"sm" \| "lg"`                                  | `"sm"`  | 크기                     |
+| rows         | `number`                                        | `3`     | 표시할 줄 수             |
+| maxLength    | `number`                                        | -       | 최대 글자 수             |
+| showCount    | `boolean`                                       | `false` | 글자 수 카운터 표시 여부 |
+| resizable    | `boolean`                                       | `true`  | 세로 크기 조절 가능 여부 |
+| value        | `string`                                        | -       | 제어 모드 입력 값        |
+| defaultValue | `string`                                        | -       | 비제어 모드 초기 입력값  |
+| onChange     | `(e: ChangeEvent<HTMLTextAreaElement>) => void` | -       | 변경 이벤트 핸들러       |
+| ref          | `Ref<HTMLTextAreaElement>`                      | -       | 입력 요소 참조           |
+
+### 예시
+
+**Sizes**
+
+```tsx
+<div className={vstack({ gap: "16", alignItems: "stretch" })}>
+  <Textarea placeholder="내용을 입력해주세요." size="sm" label="sm" />
+  <Textarea placeholder="내용을 입력해주세요." size="lg" label="lg" />
+</div>
+```
+
+**States**
+
+```tsx
+<div className={grid({ columns: 2, gap: "24", w: "692px" })}>
+  <Textarea placeholder="내용을 입력해주세요." label="기본" />
+  <Textarea
+    placeholder="내용을 입력해주세요."
+    label="입력됨"
+    defaultValue="입력된 내용"
+  />
+  <Textarea
+    placeholder="내용을 입력해주세요."
+    label="오류"
+    invalid
+    errorMessage="오류 내용을 입력하세요"
+  />
+  <Textarea placeholder="내용을 입력해주세요." label="비활성화" disabled />
+  <Textarea
+    placeholder="내용을 입력해주세요."
+    label="비활성화 + 입력됨"
+    disabled
+    defaultValue="입력된 내용"
+  />
+  <Textarea
+    placeholder="내용을 입력해주세요."
+    label="읽기 전용"
+    readOnly
+    defaultValue="읽기 전용 값"
+  />
+</div>
+```
+
+**LabelledBy**
+
+```tsx
+<div className={vstack({ gap: "12", alignItems: "stretch" })}>
+  <h3
+    id="question-title"
+    className={css({ textStyle: "heading.5", color: "fg.neutral" })}
+  >
+    이번 스터디에서 가장 좋았던 점은 무엇인가요?
+  </h3>
+  <Textarea
+    placeholder="내용을 입력해주세요."
+    size="lg"
+    aria-labelledby="question-title"
+  />
+</div>
+```
+
 ## TextInput
 
 텍스트 인풋은 사용자가 이름, 이메일, 검색어 등 텍스트 정보를 직접 입력할 수 있도록 제공되는 입력 컴포넌트입니다.
