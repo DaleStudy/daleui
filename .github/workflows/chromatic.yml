@@ -34,7 +34,10 @@ jobs:
               - "src/tokens/**"
               - "src/styles/**"
               - "src/preset.ts"
+              - "src/index.css"
               - "panda.config.ts"
+              - "postcss.config.cjs"
+              - "chromatic.config.json"
 
   pre-chromatic:
     needs: changes
