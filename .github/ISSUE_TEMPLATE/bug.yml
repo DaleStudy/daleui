@@ -1,0 +1,101 @@
+name: 버그 제보 / 동작 문의 (Bug Report / Behavior Question)
+description: 예상과 다른 동작을 제보하거나, 의도된 동작인지 문의합니다. (Report unexpected behavior or ask whether it is intended.)
+body:
+  - type: markdown
+    attributes:
+      value: |
+        먼저 비슷한 이슈와 관련 문서를 확인해주세요. 버그인지 확실하지 않아도 문의할 수 있습니다.
+        (Please check for similar issues and relevant documentation first. You can ask even if you are unsure whether the behavior is a bug.)
+
+        코드뿐 아니라 Figma, Storybook, 문서의 문제도 작성할 수 있습니다. 실행 가능한 재현 링크가 없어도 괜찮습니다.
+        (You can report issues with Figma, Storybook, and documentation as well as code. A runnable reproduction link is not required.)
+
+        daleui.com 사이트 자체의 문제는 [사이트 저장소](https://github.com/DaleStudy/daleui.com/issues)에 남겨주세요.
+        (For issues with the daleui.com website itself, please use the [website repository](https://github.com/DaleStudy/daleui.com/issues).)
+
+        공개 이슈이므로 개인정보, 인증정보, 비공개 제품 화면은 제외해주세요.
+        (This is a public issue. Do not include personal information, credentials, or screenshots of private products.)
+
+  - type: dropdown
+    id: report-type
+    attributes:
+      label: 문의 유형 (Report Type)
+      options:
+        - 버그 제보 (Bug Report)
+        - 의도된 동작인지 문의 (Question About Intended Behavior)
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 현상 또는 질문 (Observed Behavior or Question)
+      description: >-
+        어떤 컴포넌트·토큰·문서에서 무엇을 확인했나요? 문의라면 궁금한 점을 적어주세요.
+        (What did you observe, and in which component, token, or documentation? If you have a question, describe what you would like to know.)
+      placeholder: |
+        Button의 ghost variant를 disabled로 설정하면 배경이 회색으로 채워집니다. 의도된 표현인지 궁금합니다.
+        (When I disable a Button with the ghost variant, its background becomes gray. Is this appearance intended?)
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: 기대하는 동작 또는 확인할 점 (Expected Behavior or Clarification)
+      description: >-
+        무엇이 달라야 한다고 생각하나요? 문의라면 확인하고 싶은 내용을 적어주세요. 근거가 되는 문서나 디자인이 있으면 함께 알려주세요.
+        (What do you think should be different? For a question, explain what you would like clarified. Include any documentation or designs that support your expectation.)
+      placeholder: |
+        활성 상태처럼 배경 없이 글자색만 흐려질 것으로 예상했습니다. 비활성 상태에서 배경을 채우는 디자인 규칙이 있는지 확인하고 싶습니다.
+        (I expected only the text color to become muted, with no background as in the enabled state. Is there a design rule that adds a background when disabled?)
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 재현 단계 / 발생 상황 (Steps to Reproduce / Context)
+      description: >-
+        문제가 나타나는 순서를 적어주세요. 문의라면 사용 상황과 시도한 방법을 적어주세요. 디자인 문제라면 해당 화면·노드와 확인한 상태를 알려주세요.
+        (List the steps that lead to the issue. For questions, describe your use case and what you tried. For design issues, identify the screen or node and the state you inspected.)
+      placeholder: |
+        1. Button을 variant="ghost"로 렌더링합니다. (Render a Button with variant="ghost".)
+        2. disabled를 설정합니다. (Set disabled.)
+        3. 활성 상태와 배경을 비교합니다. (Compare its background with the enabled state.)
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 확인한 버전·환경 (Version and Environment)
+      description: >-
+        해당하는 정보만 적어주세요. 정확한 버전을 모르면 확인한 페이지나 링크를 남겨주세요.
+        (Include only relevant information. If you do not know the exact version, provide the page or link you checked.)
+      placeholder: |
+        - 코드: DaleUI·React 버전, 브라우저·OS, 사용 중인 프레임워크 (Code: DaleUI and React versions, browser, OS, and framework)
+        - 디자인: Figma 파일·노드 링크, 라이브러리 버전 또는 확인 날짜 (Design: Figma file or node link, library version or date inspected)
+        - 문서: Storybook·문서 URL (Documentation: Storybook or documentation URL)
+    validations:
+      required: false
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 재현 자료 (Reproduction Materials)
+      description: >-
+        최소 코드, Storybook, CodeSandbox/StackBlitz, Figma 링크, 스크린샷이나 영상을 첨부해주세요. 특정 도구나 실행 가능한 프로젝트는 필수가 아닙니다.
+        (Attach minimal code, Storybook, CodeSandbox/StackBlitz or Figma links, screenshots, or videos. No specific tool or runnable project is required.)
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 추가 정보 (Additional Information)
+      description: >-
+        발생 빈도, 이전 버전과의 차이, 우회 방법이나 관련 이슈가 있다면 적어주세요. 원인 분석이나 해결 방법은 몰라도 괜찮습니다.
+        (Share the frequency, differences from earlier versions, workarounds, or related issues, if known. You do not need to identify the cause or solution.)
+    validations:
+      required: false

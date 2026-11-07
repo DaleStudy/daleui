@@ -1,0 +1,91 @@
+name: 컴포넌트 / 토큰 제안 (Component / Token Proposal)
+description: 새 컴포넌트나 토큰, 기존 기능의 개선을 제안합니다. (Propose new components or tokens, or improvements to existing features.)
+body:
+  - type: markdown
+    attributes:
+      value: |
+        먼저 비슷한 이슈와 [기여 가이드](https://github.com/DaleStudy/daleui/wiki/Contributing#컴포넌트토큰-제안)를 확인해주세요.
+        (Please check for similar issues and read the [contribution guide](https://github.com/DaleStudy/daleui/wiki/Contributing#컴포넌트토큰-제안) first.)
+
+        한 이슈에는 가능한 하나의 결정을 담아주세요. 구현안이나 디자인 시안이 없어도 제안할 수 있습니다.
+        (Keep each issue focused on one decision where possible. You can submit a proposal without an implementation plan or design mockup.)
+
+        디자인/API 검토 후 진행 여부를 안내합니다. 그전에 작성한 구현은 Draft PR로 제출해주세요.
+        (We will let you know whether to proceed after a design/API review. Submit any implementation written before then as a Draft PR.)
+
+        공개 이슈이므로 개인정보, 인증정보, 비공개 제품 화면은 제외해주세요.
+        (This is a public issue. Do not include personal information, credentials, or screenshots of private products.)
+
+  - type: dropdown
+    id: proposal-target
+    attributes:
+      label: 제안 대상 (Proposal Type)
+      options:
+        - 새 컴포넌트 (New Component)
+        - 기존 컴포넌트 개선 (Component Enhancement)
+        - 토큰 추가 또는 개선 (New Token / Token Enhancement)
+        - 아직 모르겠음 (Not Sure)
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 문제와 사용 사례 (Problem and Use Case)
+      description: >-
+        누가 어떤 화면이나 상황에서 무엇을 하기 어려운가요? 관련 컴포넌트나 토큰이 있다면 함께 적어주세요.
+        (Who is having difficulty doing what, and on which screen or in what situation? Include any relevant components or tokens.)
+      placeholder: |
+        안내 상자에 옅은 회색 배경을 주고 싶지만, bg.neutral은 흰색이라 주변과 구분되지 않습니다.
+        (I want a light gray background for an information box, but bg.neutral is white and does not stand out from its surroundings.)
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-outcome
+    attributes:
+      label: 원하는 결과 (Desired Outcome)
+      description: >-
+        문제가 해결되면 무엇을 할 수 있어야 하나요? 구체적인 구현 방법은 정하지 않아도 됩니다.
+        (What should be possible once this problem is solved? You do not need to specify an implementation.)
+      placeholder: |
+        hover 상태용 토큰을 사용하지 않고도 안내 상자를 위한 은은한 neutral 배경을 표현하고 싶습니다.
+        (I want a subtle neutral background for an information box without using a hover-state token.)
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 현재 대안과 한계 (Alternatives and Limitations)
+      description: >-
+        기존 컴포넌트·토큰의 조합이나 우회 방법으로 해결해보셨나요? 검토한 대안이 없거나 잘 모르겠다면 그렇게 적어주세요.
+        (Have you tried combining existing components or tokens, or using a workaround? If you have not considered alternatives or are unsure, please say so.)
+      placeholder: |
+        현재는 테두리로 구분합니다. bg.neutral.hover는 원하는 색에 가깝지만 상호작용 상태를 뜻하므로 사용하지 않았습니다.
+        (I currently use a border. bg.neutral.hover is close to the desired color, but I avoided it because it represents an interaction state.)
+    validations:
+      required: true
+
+  - type: textarea
+    id: design-api
+    attributes:
+      label: 디자인 / API 검토 사항 (Design / API Considerations)
+      description: >-
+        생각 중인 모양, 동작, props, 토큰 이름이나 함께 결정할 질문이 있다면 적어주세요. 완성된 설계는 필요하지 않습니다.
+        (Share any ideas about appearance, behavior, props, token names, or questions to decide together. A complete design is not required.)
+      placeholder: |
+        별도 semantic 토큰이 필요한지, 기존 토큰의 사용법을 문서화하면 되는지 검토하고 싶습니다. 라이트·다크 테마에서의 표현도 함께 확인하면 좋겠습니다.
+        (I would like to discuss whether we need a separate semantic token or documentation for existing tokens, and review its appearance in light and dark themes.)
+    validations:
+      required: false
+
+  - type: textarea
+    id: references
+    attributes:
+      label: 참고 자료 (References)
+      description: >-
+        Figma, 스크린샷, 다른 디자인 시스템 사례, 관련 이슈나 문서 링크를 첨부해주세요. 공유 가능한 자료만 올려주세요.
+        (Attach Figma links, screenshots, examples from other design systems, or related issues and documentation. Only include material you can share publicly.)
+    validations:
+      required: false
