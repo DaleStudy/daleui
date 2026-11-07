@@ -230,7 +230,3 @@
 | Figma             | Icon name |
 | Threads           | Icon name |
 | XTwitter          | Icon name |
-| GithubLight       | Icon name |
-| GithubDark        | Icon name |
-| LinkedInLight     | Icon name |
-| LinkedInDark      | Icon name |
