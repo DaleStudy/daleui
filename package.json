@@ -69,7 +69,7 @@
     "@codecov/vite-plugin": "^2.0.1",
     "@eslint/js": "^10.0.1",
     "@faker-js/faker": "^10.6.0",
-    "@pandacss/dev": "^1.12.1",
+    "@pandacss/dev": "^1.12.2",
     "@storybook/addon-a11y": "^10.6.5",
     "@storybook/addon-designs": "^11.1.4",
     "@storybook/addon-docs": "^10.6.5",
