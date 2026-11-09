@@ -6,7 +6,7 @@ export interface FieldProps {
   invalid?: boolean;
   /** 비활성화 여부 */
   disabled?: boolean;
-  /** 읽기 전용 여부 TODO: 각 컴포넌트에 readOnly 지원 구현 (#935) */
+  /** 읽기 전용 여부 */
   readOnly?: boolean;
   /** 필드 레이블 텍스트 */
   label?: string;
