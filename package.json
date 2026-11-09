@@ -65,7 +65,7 @@
   "devDependencies": {
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "@chromatic-com/storybook": "^5.3.1",
+    "@chromatic-com/storybook": "^5.4.0",
     "@codecov/vite-plugin": "^2.0.1",
     "@eslint/js": "^10.0.1",
     "@faker-js/faker": "^10.6.0",
