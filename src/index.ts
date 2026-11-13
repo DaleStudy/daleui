@@ -72,6 +72,7 @@ export {
   type SpinnerTone,
 } from "./components/Spinner/Spinner";
 export { Tag, type TagProps } from "./components/Tag/Tag";
+export { Toggle, type ToggleProps } from "./components/Toggle/Toggle";
 export { Text, type TextProps } from "./components/Text/Text";
 export {
   TextInput,
