@@ -3000,6 +3000,55 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 </div>
 ```
 
+## Toggle
+
+토글(Toggle)은 On/Off 두 가지 상태를 즉시 전환할 수 있는 컴포넌트입니다.
+별도의 저장이나 확인 절차 없이 선택 즉시 설정이 반영되는 항목에 사용합니다.
+
+`import { Toggle } from "daleui"`
+
+| prop           | 타입                         | 기본값 | 설명                       |
+| -------------- | ---------------------------- | ------ | -------------------------- |
+| size           | `ToggleSize`                 | `"md"` | 사이즈                     |
+| checked        | `boolean`                    | -      | 제어 모드 체크 여부        |
+| defaultChecked | `boolean`                    | -      | 비제어 모드 초기 체크 여부 |
+| disabled       | `boolean`                    | -      | 비활성화 여부              |
+| readOnly       | `boolean`                    | -      | 읽기 전용 여부             |
+| onChange       | `(checked: boolean) => void` | -      | 체크 상태 변경 핸들러      |
+| label          | `string`                     | -      | 라벨 내용                  |
+| name           | `string`                     | -      | 폼 name                    |
+| ref            | `Ref<HTMLInputElement>`      | -      | 입력 요소 참조             |
+
+### 예시
+
+**Sizes**
+
+```tsx
+<div className={vstack({ gap: "16", alignItems: "flex-start" })}>
+  <div className={hstack({ gap: "8", alignItems: "center" })}>
+    <Toggle size="sm" />
+    <Toggle size="sm" defaultChecked label="sm" />
+  </div>
+  <div className={hstack({ gap: "8", alignItems: "center" })}>
+    <Toggle size="md" />
+    <Toggle size="md" defaultChecked label="md" />
+  </div>
+  <div className={hstack({ gap: "8", alignItems: "center" })}>
+    <Toggle size="lg" />
+    <Toggle size="lg" defaultChecked label="lg" />
+  </div>
+</div>
+```
+
+**Disabled**
+
+```tsx
+<div className={vstack({ gap: "16", alignItems: "flex-start" })}>
+  <Toggle label="비활성화 (꺼짐)" disabled />
+  <Toggle label="비활성화 (켜짐)" disabled defaultChecked />
+</div>
+```
+
 ## VStack
 
 Flex의 세로 배치 패턴(`direction="column"`, `align="center"`)을 의미 있는 이름과 기본값으로 묶은 컴포넌트입니다.
