@@ -150,14 +150,14 @@ describe("Textarea 하단 문구", () => {
 });
 
 describe("Textarea 글자 수 카운터", () => {
-  test("showCount가 없으면 카운터를 표시하지 않는다", () => {
+  test("counter가 없으면 카운터를 표시하지 않는다", () => {
     render(<Textarea maxLength={100} />);
     expect(screen.queryByText("0 / 100")).not.toBeInTheDocument();
   });
 
   test("비제어 모드에서 입력하면 카운터가 갱신된다", async () => {
     const user = userEvent.setup();
-    render(<Textarea showCount maxLength={100} defaultValue="안녕" />);
+    render(<Textarea counter maxLength={100} defaultValue="안녕" />);
 
     expect(screen.getByText("2 / 100")).toBeInTheDocument();
 
@@ -171,7 +171,7 @@ describe("Textarea 글자 수 카운터", () => {
       const [value, setValue] = useState("");
       return (
         <Textarea
-          showCount
+          counter
           maxLength={10}
           value={value}
           onChange={(e) => setValue(e.target.value)}
@@ -186,20 +186,37 @@ describe("Textarea 글자 수 카운터", () => {
 
   test("maxLength를 넘겨 입력할 수 없다", async () => {
     const user = userEvent.setup();
-    render(<Textarea showCount maxLength={3} />);
+    render(<Textarea counter maxLength={3} />);
 
     await user.type(screen.getByRole("textbox"), "abcdef");
     expect(screen.getByRole("textbox")).toHaveValue("abc");
     expect(screen.getByText("3 / 3")).toBeInTheDocument();
   });
 
-  test("maxLength 없이 showCount만 있으면 현재 글자 수만 표시한다", () => {
-    render(<Textarea showCount defaultValue="abc" />);
+  test("maxLength 없이 counter만 있으면 현재 글자 수만 표시한다", () => {
+    render(<Textarea counter defaultValue="abc" />);
     expect(screen.getByText("3")).toBeInTheDocument();
   });
 
+  test("비제어 모드에서 폼을 리셋하면 카운터가 초기값 길이로 돌아간다", async () => {
+    const user = userEvent.setup();
+    render(
+      <form>
+        <Textarea counter maxLength={100} defaultValue="안녕" />
+        <button type="reset">초기화</button>
+      </form>,
+    );
+
+    await user.type(screen.getByRole("textbox"), "하세요");
+    expect(screen.getByText("5 / 100")).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "초기화" }));
+    expect(screen.getByRole("textbox")).toHaveValue("안녕");
+    expect(screen.getByText("2 / 100")).toBeInTheDocument();
+  });
+
   test("helperText와 카운터를 함께 표시한다", () => {
-    render(<Textarea showCount maxLength={100} helperText="도움말" />);
+    render(<Textarea counter maxLength={100} helperText="도움말" />);
     expect(screen.getByText("도움말")).toBeInTheDocument();
     expect(screen.getByText("0 / 100")).toBeInTheDocument();
   });

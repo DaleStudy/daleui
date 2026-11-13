@@ -2903,7 +2903,7 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 | size         | `"sm" \| "lg"`                                  | `"sm"`  | 크기                     |
 | rows         | `number`                                        | `3`     | 표시할 줄 수             |
 | maxLength    | `number`                                        | -       | 최대 글자 수             |
-| showCount    | `boolean`                                       | `false` | 글자 수 카운터 표시 여부 |
+| counter      | `boolean`                                       | `false` | 글자 수 카운터 표시 여부 |
 | resizable    | `boolean`                                       | `true`  | 세로 크기 조절 가능 여부 |
 | value        | `string`                                        | -       | 제어 모드 입력 값        |
 | defaultValue | `string`                                        | -       | 비제어 모드 초기 입력값  |

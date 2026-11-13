@@ -94,14 +94,14 @@ export const States: Story = {
 };
 
 /**
- * `showCount`로 글자 수 카운터를 표시합니다. `maxLength`가 있으면 `현재 / 최대` 형식으로 보여주고 그 이상 입력되지 않습니다.
+ * `counter`로 글자 수 카운터를 표시합니다. `maxLength`가 있으면 `현재 / 최대` 형식으로 보여주고 그 이상 입력되지 않습니다.
  * 카운터는 `helperText`, `errorMessage`와 같은 줄 오른쪽에 표시됩니다.
  */
 export const WithCount: Story = {
   args: {
     label: "타이틀",
     maxLength: 100,
-    showCount: true,
+    counter: true,
     helperText: "도움말을 입력하세요",
   },
 };

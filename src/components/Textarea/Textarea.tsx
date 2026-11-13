@@ -2,7 +2,10 @@ import {
   type ChangeEvent,
   type ComponentPropsWithoutRef,
   type Ref,
+  useEffect,
   useId,
+  useImperativeHandle,
+  useRef,
   useState,
 } from "react";
 import { css, cva, cx } from "../../../styled-system/css";
@@ -30,7 +33,7 @@ export interface TextareaProps
   /** 최대 글자 수 */
   maxLength?: number;
   /** 글자 수 카운터 표시 여부 */
-  showCount?: boolean;
+  counter?: boolean;
   /** 세로 크기 조절 가능 여부 */
   resizable?: boolean;
 
@@ -56,7 +59,7 @@ export function Textarea({
   size = "sm",
   rows = 3,
   maxLength,
-  showCount = false,
+  counter = false,
   resizable = true,
   invalid = false,
   required = false,
@@ -100,6 +103,19 @@ export function Textarea({
   );
   const count = isControlled ? value.length : uncontrolledLength;
 
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  useImperativeHandle(ref, () => textareaRef.current as HTMLTextAreaElement);
+
+  // 폼 리셋은 onChange가 발생하지 않아 reset 이벤트로 카운터를 맞춤
+  useEffect(() => {
+    const form = textareaRef.current?.form;
+    if (isControlled || !form) return;
+
+    const handleReset = () => setUncontrolledLength(defaultValue?.length ?? 0);
+    form.addEventListener("reset", handleReset);
+    return () => form.removeEventListener("reset", handleReset);
+  }, [isControlled, defaultValue]);
+
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     if (!isControlled) setUncontrolledLength(e.target.value.length);
     onChange?.(e);
@@ -120,7 +136,7 @@ export function Textarea({
       <textarea
         id={textareaId}
         className={cx(textareaStyles({ size, invalid, resizable }), className)}
-        ref={ref}
+        ref={textareaRef}
         rows={rows}
         maxLength={maxLength}
         value={value}
@@ -131,14 +147,14 @@ export function Textarea({
         {...rest}
         {...fieldProps}
       />
-      {(showBottomText || showCount) && (
+      {(showBottomText || counter) && (
         <div className={bottomRowStyles}>
           {showBottomText && (
             <HelperText {...helpTextProps} disabled={isDisabled}>
               {bottomText}
             </HelperText>
           )}
-          {showCount && (
+          {counter && (
             <div className={counterStyles}>
               {maxLength !== undefined ? `${count} / ${maxLength}` : count}
             </div>
@@ -171,7 +187,7 @@ const textareaStyles = cva({
     "&:focus-visible": {
       outlineStyle: "solid",
       outlineWidth: "lg",
-      outlineOffset: "2px",
+      outlineOffset: "2",
       borderRadius: "md",
       outlineColor: "border.brand.focus",
     },
