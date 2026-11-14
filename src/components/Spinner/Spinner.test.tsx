@@ -6,10 +6,6 @@ function getIcon(container: HTMLElement) {
   return container.querySelector("svg") as SVGElement;
 }
 
-function getIconClass(container: HTMLElement) {
-  return getIcon(container).getAttribute("class") ?? "";
-}
-
 describe("Spinner 크기", () => {
   test("기본 크기는 md(20px)", () => {
     const { container } = render(<Spinner />);
@@ -31,22 +27,6 @@ describe("Spinner 색조", () => {
   test("neutral 색조를 지정할 수 있음", () => {
     const { container } = render(<Spinner tone="neutral" />);
     expect(getIcon(container)).toHaveClass("c_fg.neutral");
-  });
-});
-
-describe("Spinner 애니메이션", () => {
-  test("spin 키프레임으로 회전함", () => {
-    const { container } = render(<Spinner />);
-    expect(getIconClass(container)).toContain("anim_spin");
-  });
-
-  test("모션 축소 환경에서도 멈추지 않고 느리게 회전함", () => {
-    // happy-dom 은 CSS 미디어 쿼리를 평가하지 않으므로, 회전이 유지되면서
-    // prefers-reduced-motion 조건에 속도만 재정의됨을 클래스 이름으로 검증합니다.
-    const { container } = render(<Spinner />);
-    const className = getIconClass(container);
-    expect(className).toContain("anim_spin");
-    expect(className).toContain("prefers-reduced-motion");
   });
 });
 

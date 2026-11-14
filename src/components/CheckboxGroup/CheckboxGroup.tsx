@@ -7,6 +7,7 @@ import {
   useId,
 } from "react";
 import { css, cva } from "../../../styled-system/css";
+import { visuallyHidden } from "../../../styled-system/patterns";
 import { HelperText } from "../shared/HelperText";
 import { useField } from "../shared/useField";
 import type { Tone } from "../../tokens/colors";
@@ -119,30 +120,15 @@ function CheckboxGroupRoot({
           {required && (
             <>
               <span
+                aria-hidden="true"
                 className={css({
                   color: isDisabled ? "fg.neutral.disabled" : "fg.danger",
-                  display: "inline",
                 })}
-                aria-hidden="true"
               >
                 {" "}
                 *
               </span>
-              <span
-                className={css({
-                  position: "absolute",
-                  width: "1px",
-                  height: "1px",
-                  padding: "0",
-                  margin: "-1px",
-                  overflow: "hidden",
-                  clip: "rect(0, 0, 0, 0)",
-                  whiteSpace: "nowrap",
-                  border: "0",
-                })}
-              >
-                (필수)
-              </span>
+              <span className={visuallyHidden()}> (필수)</span>
             </>
           )}
         </span>

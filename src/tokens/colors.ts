@@ -98,7 +98,7 @@ export const semanticColors: SemanticTokens["colors"] = {
         value: { base: "{colors.slate.6}", _dark: "{colors.darkSage.7}" },
       },
       focus: {
-        value: { base: "{colors.slate.3}", _dark: "{colors.darkSage.8}" },
+        value: { base: "{colors.slate.8}", _dark: "{colors.darkSage.8}" },
       },
     },
     success: {
@@ -215,7 +215,7 @@ export const semanticColors: SemanticTokens["colors"] = {
       value: { base: "{colors.green.11}", _dark: "{colors.darkGreen.11}" },
     },
     warning: {
-      value: { base: "{colors.amber.11}", _dark: "{colors.darkAmber.11}" },
+      value: { base: "{colors.amber.12}", _dark: "{colors.darkAmber.11}" },
     },
     danger: {
       value: { base: "{colors.red.11}", _dark: "{colors.darkRed.11}" },

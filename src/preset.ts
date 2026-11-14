@@ -33,6 +33,15 @@ const daleuiPreset: Preset = definePreset({
   theme: {
     extend: {
       textStyles,
+      layerStyles: {
+        focusRing: {
+          value: {
+            outlineStyle: "solid",
+            outlineWidth: "lg",
+            outlineOffset: "2",
+          },
+        },
+      },
       keyframes: {
         spin: {
           from: {

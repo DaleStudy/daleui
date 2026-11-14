@@ -159,12 +159,10 @@ const inputContainerStyles = cva({
     "&:active": {
       borderColor: "border.neutral.active",
     },
-    "&:focus-within": {
+    "&:has(> input:focus-visible)": {
+      layerStyle: "focusRing",
       borderColor: "border.neutral",
-      outlineStyle: "solid",
-      outlineWidth: "lg",
       outlineColor: "border.brand.focus",
-      outlineOffset: "2px",
     },
     "&:has(input:disabled)": {
       cursor: "not-allowed",
@@ -185,7 +183,7 @@ const inputContainerStyles = cva({
     state: {
       error: {
         borderColor: "border.danger",
-        "&:focus-within": {
+        "&:has(> input:focus-visible)": {
           borderColor: "border.danger",
         },
         "&:hover": {
@@ -230,6 +228,10 @@ const iconButtonStyles = cva({
     alignItems: "center",
     justifyContent: "center",
     cursor: "pointer",
+    _focusVisible: {
+      layerStyle: "focusRing",
+      outlineColor: "border.brand.focus",
+    },
     "&:hover": {
       backgroundColor: "bg.neutral.hover",
     },

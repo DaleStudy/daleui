@@ -5,6 +5,7 @@ import {
 import { Check } from "lucide-react";
 import React from "react";
 import { css, cva } from "../../../styled-system/css";
+import { visuallyHidden } from "../../../styled-system/patterns";
 import type { Tone } from "../../tokens/colors";
 import { HelperText } from "../shared/HelperText";
 import { useField } from "../shared/useField";
@@ -100,15 +101,18 @@ export const Checkbox = ({
           <ArkCheckbox.Label className={labelStyles({ disabled: isDisabled })}>
             {label}
             {required && (
-              <span
-                data-testid="checkbox-required-indicator"
-                className={css({
-                  color: isDisabled ? "fg.neutral.disabled" : "fg.danger",
-                })}
-              >
-                {" "}
-                *
-              </span>
+              <>
+                <span
+                  aria-hidden="true"
+                  className={css({
+                    color: isDisabled ? "fg.neutral.disabled" : "fg.danger",
+                  })}
+                >
+                  {" "}
+                  *
+                </span>
+                <span className={visuallyHidden()}> (필수)</span>
+              </>
             )}
           </ArkCheckbox.Label>
         )}
@@ -165,6 +169,9 @@ const controlStyles = cva({
     borderColor: "fg.neutral",
     borderRadius: "sm",
     transition: "all 0.2s",
+    _motionReduce: {
+      transition: "none",
+    },
     color: "transparent",
 
     _checked: {
@@ -194,10 +201,8 @@ const controlStyles = cva({
       },
     },
 
-    _focusVisible: {
-      outline: "solid",
-      outlineWidth: "lg",
-      outlineOffset: "2",
+    "&:not([data-disabled])": {
+      _focusVisible: { layerStyle: "focusRing" },
     },
   },
   variants: {
@@ -229,7 +234,7 @@ const controlStyles = cva({
           },
         },
         _focusVisible: {
-          outlineColor: "border.neutral.active!",
+          outlineColor: "border.neutral.focus",
         },
       },
     },

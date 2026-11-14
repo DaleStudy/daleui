@@ -1,5 +1,6 @@
 import type { HTMLAttributes, ReactElement, Ref } from "react";
 import { css, cva, cx } from "../../../styled-system/css";
+import { visuallyHidden } from "../../../styled-system/patterns";
 import type { ButtonProps } from "../Button/Button";
 import type { TextInputProps } from "../TextInput/TextInput";
 import type { CheckboxProps } from "../Checkbox/Checkbox";
@@ -23,7 +24,7 @@ export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
   tone?: LabelTone;
   /** 비활성화 여부 */
   disabled?: boolean;
-  /** 필수 입력 여부 (true일 경우 별표(*) 표시) */
+  /** 필수 입력 여부 (별표는 시각적으로, "(필수)"는 스크린 리더에 표시) */
   required?: boolean;
   /** 연결 대상 요소 id */
   htmlFor?: string;
@@ -40,7 +41,7 @@ export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
  *
  * ### 접근성(Accessibility) 안내
  * - 이 컴포넌트는 `<label>` 태그를 사용하여 시맨틱하게 구현되어 있습니다.
- * - `required`를 true로 설정하면 별표(*)와 함께 스크린 리더용 `aria-label="옵션 필수"` 텍스트가 자동으로 추가됩니다.
+ * - `required`를 true로 설정하면 화면에는 별표(*), 스크린 리더에는 "(필수)"가 라벨의 일부로 제공됩니다.
  * - `disabled` 상태에서도 `required` 별표는 표시되지만, 비활성화 색상으로 변경됩니다.
  * - `htmlFor` 또는 `children`으로 입력 요소를 연결하면, 라벨 클릭 시 해당 입력 요소로 포커스가 이동합니다.
  */
@@ -68,15 +69,18 @@ export function Label({
     >
       <span className={css({ textStyle: "label.md.strong" })}>{labelText}</span>
       {required && (
-        <span
-          aria-label="옵션 필수"
-          className={css({
-            color: disabled ? "fg.neutral.disabled" : "fg.danger",
-          })}
-        >
-          {" "}
-          *
-        </span>
+        <>
+          <span
+            aria-hidden="true"
+            className={css({
+              color: disabled ? "fg.neutral.disabled" : "fg.danger",
+            })}
+          >
+            {" "}
+            *
+          </span>
+          <span className={visuallyHidden()}> (필수)</span>
+        </>
       )}
       {children && <div className={css({ marginTop: "8" })}>{children}</div>}
     </label>

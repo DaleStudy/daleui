@@ -262,34 +262,37 @@ describe("CheckboxGroup", () => {
     expect(option2).toBeChecked();
   });
 
-  test("required가 true일 때 라벨 옆에 별표를 표시한다", () => {
+  test("required 그룹 이름에 필수가 한 번만 포함되고 항목을 선택할 수 있다", async () => {
+    const user = userEvent.setup();
     render(
-      <CheckboxGroup name="test" label="Test Checkbox Group" required>
+      <CheckboxGroup name="test" label="선택 항목" required>
         <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 
+    expect(
+      screen.getByRole("group", { name: "선택 항목 (필수)" }),
+    ).toBeInTheDocument();
     const asterisk = screen.getByText("*");
-    expect(asterisk).toBeInTheDocument();
     expect(asterisk).toHaveAttribute("aria-hidden", "true");
-
-    const requiredText = screen.getByText("(필수)");
-    expect(requiredText).toBeInTheDocument();
+    expect(asterisk).toHaveClass("c_fg.danger");
+    const option = screen.getByRole("checkbox", { name: "Option 1" });
+    await user.click(option);
+    expect(option).toBeChecked();
   });
 
-  test("required가 true이고 disabled가 true일 때 별표 색상이 변경된다", () => {
+  test("required + disabled 그룹에서도 필수 이름과 비활성화 색상을 유지한다", () => {
     render(
-      <CheckboxGroup name="test" label="Test Checkbox Group" required disabled>
+      <CheckboxGroup name="test" label="선택 항목" required disabled>
         <CheckboxGroup.Item value="option1">Option 1</CheckboxGroup.Item>
       </CheckboxGroup>,
     );
 
-    const asterisk = screen.getByText("*");
-    expect(asterisk).toBeInTheDocument();
-    expect(asterisk).toHaveAttribute("aria-hidden", "true");
-
-    const requiredText = screen.getByText("(필수)");
-    expect(requiredText).toBeInTheDocument();
+    expect(
+      screen.getByRole("group", { name: "선택 항목 (필수)" }),
+    ).toBeInTheDocument();
+    expect(screen.getByText("*")).toHaveClass("c_fg.neutral.disabled");
+    expect(screen.getByRole("checkbox", { name: "Option 1" })).toBeDisabled();
   });
 
   test("그룹을 role=group으로 노출하고 label을 접근 가능한 이름으로 연결한다", () => {

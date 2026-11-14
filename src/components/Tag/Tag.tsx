@@ -124,6 +124,7 @@ const styles = cva({
     textStyle: "label.sm",
     cursor: "default",
     transition: "0.2s",
+    _motionReduce: { transition: "none" },
   },
   variants: {
     tone: {
@@ -210,14 +211,12 @@ const linkOverlayStyles = css({
     inset: "0",
     borderRadius: "inherit",
   },
-  "&:focus-visible": {
+  _focusVisible: {
     outline: "none",
     "&::after": {
+      layerStyle: "focusRing",
       borderRadius: "full",
-      outlineWidth: "{borderWidths.lg}",
       outlineColor: "border.brand.focus",
-      outlineOffset: "2",
-      outlineStyle: "solid",
     },
   },
 });
@@ -235,20 +234,17 @@ const removeButtonStyles = cva({
     color: "inherit",
     cursor: "pointer",
     transition: "0.2s",
-    "&:focus-visible": {
-      outlineWidth: "{borderWidths.lg}",
-      outlineOffset: "2",
-      outlineStyle: "solid",
-    },
+    _motionReduce: { transition: "none" },
+    _focusVisible: { layerStyle: "focusRing" },
   },
   variants: {
     tone: {
-      neutral: { "&:focus-visible": { outlineColor: "border.neutral.focus" } },
-      brand: { "&:focus-visible": { outlineColor: "border.neutral.focus" } },
-      danger: { "&:focus-visible": { outlineColor: "border.neutral.focus" } },
-      success: { "&:focus-visible": { outlineColor: "border.neutral.focus" } },
-      info: { "&:focus-visible": { outlineColor: "border.neutral.focus" } },
-      warning: { "&:focus-visible": { outlineColor: "border.brand.focus" } },
+      neutral: { _focusVisible: { outlineColor: "fgSolid.neutral" } },
+      brand: { _focusVisible: { outlineColor: "fgSolid.brand" } },
+      danger: { _focusVisible: { outlineColor: "fgSolid.danger" } },
+      success: { _focusVisible: { outlineColor: "fgSolid.success" } },
+      info: { _focusVisible: { outlineColor: "fgSolid.info" } },
+      warning: { _focusVisible: { outlineColor: "fgSolid.warning" } },
     },
     // elevated는 focus-visible 시 제거 버튼이 태그 뒤에 가려지는 문제를 해결하기 위한 스타일입니다.
     elevated: {

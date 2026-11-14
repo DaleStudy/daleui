@@ -79,12 +79,12 @@ export function Link({
 const styles = cva({
   base: {
     transition: "colors 0.2s",
+    _motionReduce: { transition: "none" },
     display: "inline-flex",
     justifyContent: "center",
     alignItems: "center",
-    "&:focus": {
-      outlineWidth: "lg",
-      outlineStyle: "solid",
+    _focusVisible: {
+      layerStyle: "focusRing",
       borderRadius: "md",
       outlineColor: "border.brand.focus",
     },
