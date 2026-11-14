@@ -291,8 +291,11 @@ describe("RadioGroup hint", () => {
     );
 
     expect(screen.getByText("(옵션 선택)")).toBeInTheDocument();
+    expect(screen.getByText("*")).toHaveAttribute("aria-hidden", "true");
     expect(
-      screen.getByTestId("radiogroup-required-indicator"),
+      screen.getByRole("radiogroup", {
+        name: "Test Radio Group (필수) (옵션 선택)",
+      }),
     ).toBeInTheDocument();
   });
 });
@@ -379,62 +382,63 @@ describe("RadioGroup invalid", () => {
 });
 
 describe("RadioGroup required", () => {
-  test("required={true}이면 필수 표시(*)가 렌더링된다", () => {
+  test("required 그룹은 별표를 숨기고 필수를 한 번만 읽으며 항목을 선택할 수 있다", async () => {
+    const user = userEvent.setup();
     render(
-      <RadioGroup name="test" label="Test Radio Group" required>
-        <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
-      </RadioGroup>,
-    );
-
-    const indicator = screen.getByTestId("radiogroup-required-indicator");
-    expect(indicator).toBeInTheDocument();
-    expect(indicator).toHaveTextContent("*");
-  });
-
-  test("required={false}이면 필수 표시가 없다", () => {
-    render(
-      <RadioGroup name="test" label="Test Radio Group" required={false}>
+      <RadioGroup name="test" label="선택 항목" required>
         <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
     expect(
-      screen.queryByTestId("radiogroup-required-indicator"),
-    ).not.toBeInTheDocument();
+      screen.getByRole("radiogroup", { name: "선택 항목 (필수)" }),
+    ).toBeInTheDocument();
+    const asterisk = screen.getByText("*");
+    expect(asterisk).toHaveAttribute("aria-hidden", "true");
+    expect(asterisk).toHaveClass("c_fg.danger");
+    const option = screen.getByRole("radio", { name: "Option 1" });
+    await user.click(option);
+    expect(option).toBeChecked();
   });
 
-  test("required prop이 없으면 필수 표시가 없다", () => {
+  test("required={false}이면 이름에 필수가 없고 별표도 없다", () => {
     render(
-      <RadioGroup name="test" label="Test Radio Group">
+      <RadioGroup name="test" label="선택 항목" required={false}>
         <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
     expect(
-      screen.queryByTestId("radiogroup-required-indicator"),
-    ).not.toBeInTheDocument();
+      screen.getByRole("radiogroup", { name: "선택 항목" }),
+    ).toBeInTheDocument();
+    expect(screen.queryByText("*")).not.toBeInTheDocument();
   });
 
-  test("required와 disabled가 함께 있으면 비활성화 색상이 적용된다", () => {
+  test("required prop이 없으면 이름에 필수가 없다", () => {
     render(
-      <RadioGroup name="test" label="Test Radio Group" required disabled>
+      <RadioGroup name="test" label="선택 항목">
         <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
-    const indicator = screen.getByTestId("radiogroup-required-indicator");
-    expect(indicator).toHaveClass("c_fg.neutral.disabled");
+    expect(
+      screen.getByRole("radiogroup", { name: "선택 항목" }),
+    ).toBeInTheDocument();
+    expect(screen.queryByText("*")).not.toBeInTheDocument();
   });
 
-  test("required만 있으면 danger 색상이 적용된다", () => {
+  test("required + disabled이면 필수 이름과 비활성화 별표 색상을 유지한다", () => {
     render(
-      <RadioGroup name="test" label="Test Radio Group" required>
+      <RadioGroup name="test" label="선택 항목" required disabled>
         <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
       </RadioGroup>,
     );
 
-    const indicator = screen.getByTestId("radiogroup-required-indicator");
-    expect(indicator).toHaveClass("c_fg.danger");
+    expect(
+      screen.getByRole("radiogroup", { name: "선택 항목 (필수)" }),
+    ).toBeInTheDocument();
+    expect(screen.getByText("*")).toHaveClass("c_fg.neutral.disabled");
+    expect(screen.getByRole("radio", { name: "Option 1" })).toBeDisabled();
   });
 
   test("required prop이 없을 때 aria-required='false'", () => {
@@ -457,6 +461,7 @@ describe("RadioGroup required", () => {
 
     const radio = screen.getByLabelText("Option 1");
     expect(radio).toHaveAttribute("aria-required", "true");
+    expect(radio).toBeRequired();
   });
 
   test("required={false}일 때 aria-required='false'", () => {

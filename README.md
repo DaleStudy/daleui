@@ -105,6 +105,13 @@ import "pretendard/dist/web/variable/pretendardvariable.css";
 import "@fontsource-variable/jetbrains-mono";
 ```
 
+### 접근성 동작
+
+- 포커스 링은 `:focus-visible`(Ark 컨트롤은 `data-focus-visible`)에서 표시하며, `focusRing` 레이어 스타일로 두께 `borderWidths.lg`(2px)와 간격 `spacing.2`를 공유합니다. 텍스트 입력은 브라우저 판단에 따라 마우스로 포커스해도 링이 표시됩니다. 비밀번호 보기·선택 지우기·태그 제거 버튼은 각각 포커스를 표시합니다.
+- `prefers-reduced-motion: reduce`에서는 전환 효과와 Skeleton의 깜빡임을 끕니다. 로딩을 알리는 Button·Spinner의 회전은 멈추지 않고 주기를 1초에서 2초로 늦춥니다.
+- 필수 항목은 시각적으로 별표를 표시하고, 접근성 이름에는 별표 대신 `(필수)`를 포함합니다. Label·Checkbox·CheckboxGroup·RadioGroup에서 같은 패턴을 사용합니다.
+- 라이트 모드의 `border.neutral.focus`는 `slate.8`, `fg.warning`은 `amber.12`를 사용합니다. 기본 테두리와 warning의 solid 배경 토큰은 유지합니다.
+
 ## 기여 (Contribution)
 
 본 프로젝트는 [All Contributors](https://github.com/all-contributors/all-contributors) 관례에 따라 기여자분들의 공헌를 인정하고 감사를 표현하고 있습니다.

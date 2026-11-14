@@ -201,10 +201,9 @@ describe("TextInput label", () => {
     expect(screen.queryByLabelText("이름")).not.toBeInTheDocument();
   });
 
-  test("label + required이면 * 표시가 렌더링된다", () => {
+  test("필수 입력은 접근성 이름과 필수 상태를 제공한다", () => {
     render(<TextInput label="이름" required />);
-    expect(screen.getByText("이름")).toBeInTheDocument();
-    expect(screen.getByText("*")).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "이름 (필수)" })).toBeRequired();
   });
 
   test("label + disabled이면 레이블이 비활성화 스타일이 된다", () => {

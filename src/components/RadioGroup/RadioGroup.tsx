@@ -1,7 +1,7 @@
 import { RadioGroup as ArkRadioGroup } from "@ark-ui/react/radio-group";
 import { type ReactNode, createContext, useContext } from "react";
 import { css, cva } from "../../../styled-system/css";
-import { flex } from "../../../styled-system/patterns";
+import { flex, visuallyHidden } from "../../../styled-system/patterns";
 import { HelperText } from "../shared/HelperText";
 import { useField } from "../shared/useField";
 import type { FieldProps } from "../shared/types";
@@ -88,6 +88,7 @@ function RadioGroupRoot({
           if (details.value) onChange?.(details.value);
         }}
         disabled={isDisabled}
+        required={required}
         readOnly={isReadOnly}
         orientation={orientation}
         className={radioGroupRootStyles}
@@ -101,15 +102,18 @@ function RadioGroupRoot({
         >
           {label}
           {required && (
-            <span
-              data-testid="radiogroup-required-indicator"
-              className={css({
-                color: isDisabled ? "fg.neutral.disabled" : "fg.danger",
-              })}
-            >
-              {" "}
-              *
-            </span>
+            <>
+              <span
+                aria-hidden="true"
+                className={css({
+                  color: isDisabled ? "fg.neutral.disabled" : "fg.danger",
+                })}
+              >
+                {" "}
+                *
+              </span>
+              <span className={visuallyHidden()}> (필수)</span>
+            </>
           )}
           {hint && (
             <span
@@ -236,12 +240,12 @@ export function RadioGroupItem({
             invalid: showInvalid,
           })}
         />
-        <ArkRadioGroup.ItemHiddenInput
-          ref={ref}
-          aria-invalid={invalid}
-          aria-required={required}
-        />
       </ArkRadioGroup.ItemControl>
+      <ArkRadioGroup.ItemHiddenInput
+        ref={ref}
+        aria-invalid={invalid}
+        aria-required={required}
+      />
       {children && (
         <ArkRadioGroup.ItemText
           className={labelTextStyles({
@@ -275,10 +279,8 @@ const radioCircleStyles = cva({
     position: "absolute",
     pointerEvents: "none",
     borderColor: "slate.9",
-    "[data-focus-visible] &, [data-active] &": {
-      outline: "solid",
-      outlineWidth: "md",
-      outlineOffset: "2",
+    "[data-focus-visible]:not([data-disabled]) > &": {
+      layerStyle: "focusRing",
     },
   },
   variants: {
@@ -287,15 +289,15 @@ const radioCircleStyles = cva({
         "[data-state='checked'] &": {
           borderColor: "slate.9",
         },
-        "[data-focus-visible] &, [data-active] &": {
-          outlineColor: "slate.9",
+        "[data-focus-visible]:not([data-disabled]) > &": {
+          outlineColor: "border.neutral.focus",
         },
       },
       brand: {
         "[data-state='checked'] &": {
           borderColor: "fg.brand",
         },
-        "[data-focus-visible] &, [data-active] &": {
+        "[data-focus-visible]:not([data-disabled]) > &": {
           outlineColor: "border.brand.focus",
         },
       },
@@ -309,7 +311,7 @@ const radioCircleStyles = cva({
     invalid: {
       true: {
         borderColor: "fg.danger!",
-        "[data-focus-visible] &, [data-active] &": {
+        "[data-focus-visible]:not([data-disabled]) > &": {
           outlineColor: "border.danger!",
         },
       },

@@ -2,6 +2,7 @@ import { type HTMLAttributes, type Ref } from "react";
 import { css, cva, cx } from "../../../styled-system/css";
 import { Icon } from "../Icon/Icon";
 import { hstack } from "../../../styled-system/patterns";
+import { spin } from "../../styles/spin";
 
 type size = "sm" | "md" | "lg";
 
@@ -52,6 +53,7 @@ export const Button = ({
       ref={ref}
       type={type}
       {...rest}
+      aria-busy={loading || rest["aria-busy"]}
       className={cx(
         styles({
           tone: defaultTone,
@@ -66,7 +68,7 @@ export const Button = ({
         className={cx(
           hstack({ gap: "4" }),
           css({
-            visibility: loading ? "hidden" : "visible",
+            opacity: loading ? 0 : 1,
             whiteSpace: "normal",
             wordBreak: "keep-all",
             overflowWrap: "anywhere",
@@ -88,9 +90,8 @@ export const Button = ({
             name="loaderCircle"
             size={size}
             data-testid="button-loader"
-            className={css({
-              animation: "spin 1s linear infinite",
-            })}
+            aria-hidden="true"
+            className={spin}
           />
         </div>
       )}
@@ -113,8 +114,10 @@ const styles = cva({
     cursor: "pointer",
     transitionProperty: "background-color, color, border-color",
     transitionDuration: "0.2s",
+    _motionReduce: {
+      transition: "none",
+    },
     lineHeight: "1",
-    outline: "0",
     position: "relative",
     boxSizing: "border-box",
     "&:disabled, &:disabled:hover": {
@@ -123,10 +126,11 @@ const styles = cva({
       color: "fg.neutral.disabled",
       border: "none",
     },
-    "&:focus-visible": {
-      outlineStyle: "solid",
-      outlineWidth: "sm",
-      outlineOffset: "3px",
+    _focusVisible: {
+      layerStyle: "focusRing",
+    },
+    "&:disabled:focus-visible": {
+      outlineStyle: "none",
     },
     // 버튼 내부의 아이콘이 텍스트보다 클 때 아이콘이 텍스트를 침범하는 것을 방지
     "& > svg": {
@@ -338,7 +342,7 @@ const styles = cva({
     {
       tone: "brand",
       css: {
-        "&:focus-visible": {
+        _focusVisible: {
           outlineColor: "border.brand.focus",
         },
       },
@@ -346,7 +350,7 @@ const styles = cva({
     {
       tone: "neutral",
       css: {
-        "&:focus-visible": {
+        _focusVisible: {
           outlineColor: "border.neutral.focus",
         },
       },
@@ -354,7 +358,7 @@ const styles = cva({
     {
       tone: "danger",
       css: {
-        "&:focus-visible": {
+        _focusVisible: {
           outlineColor: "border.danger",
         },
       },

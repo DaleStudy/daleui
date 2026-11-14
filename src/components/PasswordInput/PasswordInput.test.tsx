@@ -202,10 +202,11 @@ describe("PasswordInput label", () => {
     ).not.toBeInTheDocument();
   });
 
-  test("label + required이면 * 표시가 렌더링된다", () => {
+  test("필수 입력은 접근성 이름과 필수 상태를 제공한다", () => {
     render(<PasswordInput label="비밀번호" required />);
-    expect(screen.getByText("비밀번호")).toBeInTheDocument();
-    expect(screen.getByText("*")).toBeInTheDocument();
+    const input = screen.getByLabelText(/비밀번호/, { selector: "input" });
+    expect(input).toHaveAccessibleName("비밀번호 (필수)");
+    expect(input).toBeRequired();
   });
 
   test("label + disabled이면 레이블이 비활성화 스타일이 된다", () => {

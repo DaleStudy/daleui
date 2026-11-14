@@ -1955,21 +1955,21 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 **접근성(Accessibility) 안내**
 
 - 이 컴포넌트는 `<label>` 태그를 사용하여 시맨틱하게 구현되어 있습니다.
-- `required`를 true로 설정하면 별표(*)와 함께 스크린 리더용 `aria-label="옵션 필수"` 텍스트가 자동으로 추가됩니다.
+- `required`를 true로 설정하면 화면에는 별표(*), 스크린 리더에는 "(필수)"가 라벨의 일부로 제공됩니다.
 - `disabled` 상태에서도 `required` 별표는 표시되지만, 비활성화 색상으로 변경됩니다.
 - `htmlFor` 또는 `children`으로 입력 요소를 연결하면, 라벨 클릭 시 해당 입력 요소로 포커스가 이동합니다.
 
 `import { Label } from "daleui"`
 
-| prop          | 타입                    | 기본값      | 설명                                      |
-| ------------- | ----------------------- | ----------- | ----------------------------------------- |
-| children      | `LabelFormChild`        | -           | 연결할 폼 자식 요소                       |
-| **labelText** | `string`                | -           | 라벨 문구                                 |
-| tone          | `LabelTone`             | `"neutral"` | 색조                                      |
-| disabled      | `boolean`               | `false`     | 비활성화 여부                             |
-| required      | `boolean`               | `false`     | 필수 입력 여부 (true일 경우 별표(*) 표시) |
-| htmlFor       | `string`                | -           | 연결 대상 요소 id                         |
-| ref           | `Ref<HTMLLabelElement>` | -           | 요소 참조                                 |
+| prop          | 타입                    | 기본값      | 설명                                                              |
+| ------------- | ----------------------- | ----------- | ----------------------------------------------------------------- |
+| children      | `LabelFormChild`        | -           | 연결할 폼 자식 요소                                               |
+| **labelText** | `string`                | -           | 라벨 문구                                                         |
+| tone          | `LabelTone`             | `"neutral"` | 색조                                                              |
+| disabled      | `boolean`               | `false`     | 비활성화 여부                                                     |
+| required      | `boolean`               | `false`     | 필수 입력 여부 (별표는 시각적으로, "(필수)"는 스크린 리더에 표시) |
+| htmlFor       | `string`                | -           | 연결 대상 요소 id                                                 |
+| ref           | `Ref<HTMLLabelElement>` | -           | 요소 참조                                                         |
 
 ### 예시
 
@@ -2720,8 +2720,8 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 - 기본적으로 `role="status"`로 렌더링되어 `label`("로딩 중")이 라이브 리전으로 읽힙니다.
 - 이미 로딩 상태를 알리는 영역(`aria-busy`를 쓰는 영역, `Button`의 `loading` 등) 안에서는
   `label={null}`로 장식용 처리해 같은 안내가 두 번 읽히지 않게 하세요.
-- 회전 모션이 로딩을 전달하는 유일한 시각 신호이므로 `prefers-reduced-motion: reduce` 환경에서도
-  멈추지 않고, 대신 느리게 회전합니다.
+- `Button`의 로딩 아이콘과 동일하게 기본 1초 회전을 사용하며, `prefers-reduced-motion: reduce` 환경에서도
+  멈추지 않고 2초로 느리게 회전합니다. 진행 상태를 알리는 모션을 남기려는 의도적인 선택입니다.
 
 `import { Spinner } from "daleui"`
 

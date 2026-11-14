@@ -641,14 +641,15 @@ describe("Select label", () => {
     expect(screen.queryByLabelText("프레임워크")).not.toBeInTheDocument();
   });
 
-  test("label + required이면 * 표시가 렌더링된다", () => {
+  test("필수 선택은 접근성 이름과 필수 상태를 제공한다", () => {
     render(
       <Select label="프레임워크" required>
         <option value="react">React</option>
       </Select>,
     );
-    expect(screen.getByText("프레임워크")).toBeInTheDocument();
-    expect(screen.getByText("*")).toBeInTheDocument();
+    expect(
+      screen.getByRole("combobox", { name: "프레임워크 (필수)" }),
+    ).toBeRequired();
   });
 
   test("label + disabled이면 레이블이 비활성화 스타일이 된다", () => {

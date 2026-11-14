@@ -161,8 +161,19 @@ test("fullWidth 속성이 올바르게 적용됨", () => {
   expect(button.className).toContain("w_100%");
 });
 
-test("로딩 상태가 올바르게 렌더링 됨", () => {
-  render(<Button loading>로딩 상태</Button>);
-  const loader = screen.getByTestId("button-loader");
-  expect(loader).toBeInTheDocument();
+test("로딩 중에도 버튼 이름과 바쁨 상태를 전달하고, 완료되면 상태를 해제함", () => {
+  const { rerender } = render(<Button loading>저장</Button>);
+  const button = screen.getByRole("button", { name: "저장" });
+
+  expect(button).toHaveAttribute("aria-busy", "true");
+  expect(screen.getByTestId("button-loader")).toHaveAttribute(
+    "aria-hidden",
+    "true",
+  );
+
+  rerender(<Button>저장</Button>);
+  expect(screen.getByRole("button", { name: "저장" })).not.toHaveAttribute(
+    "aria-busy",
+  );
+  expect(screen.queryByTestId("button-loader")).not.toBeInTheDocument();
 });

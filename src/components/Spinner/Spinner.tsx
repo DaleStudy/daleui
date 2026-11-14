@@ -1,6 +1,7 @@
 import type { HTMLAttributes, Ref } from "react";
-import { css, cva, cx } from "../../../styled-system/css";
+import { cva, cx } from "../../../styled-system/css";
 import { visuallyHidden } from "../../../styled-system/patterns";
+import { spin } from "../../styles/spin";
 import { Icon } from "../Icon/Icon";
 
 /** 스피너의 크기 */
@@ -36,8 +37,8 @@ export interface SpinnerProps extends Omit<
  * - 기본적으로 `role="status"`로 렌더링되어 `label`("로딩 중")이 라이브 리전으로 읽힙니다.
  * - 이미 로딩 상태를 알리는 영역(`aria-busy`를 쓰는 영역, `Button`의 `loading` 등) 안에서는
  *   `label={null}`로 장식용 처리해 같은 안내가 두 번 읽히지 않게 하세요.
- * - 회전 모션이 로딩을 전달하는 유일한 시각 신호이므로 `prefers-reduced-motion: reduce` 환경에서도
- *   멈추지 않고, 대신 느리게 회전합니다.
+ * - `Button`의 로딩 아이콘과 동일하게 기본 1초 회전을 사용하며, `prefers-reduced-motion: reduce` 환경에서도
+ *   멈추지 않고 2초로 느리게 회전합니다. 진행 상태를 알리는 모션을 남기려는 의도적인 선택입니다.
  */
 export function Spinner({
   ref,
@@ -57,12 +58,7 @@ export function Spinner({
       className={cx(styles({ size }), className)}
       {...rest}
     >
-      <Icon
-        name="loaderCircle"
-        size={size}
-        tone={tone}
-        className={spinStyles}
-      />
+      <Icon name="loaderCircle" size={size} tone={tone} className={spin} />
       {!decorative && <span className={visuallyHidden()}>{label}</span>}
     </span>
   );
@@ -83,12 +79,5 @@ const styles = cva({
   },
   defaultVariants: {
     size: "md",
-  },
-});
-
-const spinStyles = css({
-  animation: "spin 1s linear infinite",
-  "@media (prefers-reduced-motion: reduce)": {
-    animationDuration: "2s",
   },
 });

@@ -146,12 +146,11 @@ const fieldStyles = cva({
     borderWidth: "md",
     borderRadius: "sm",
     transition: "all 0.2s ease-in-out",
+    _motionReduce: { transition: "none" },
     backgroundColor: "appBg",
 
-    "&:focus-within": {
-      outlineStyle: "solid",
-      outlineWidth: "lg",
-      outlineOffset: "2px",
+    "&:has(> input:focus-visible)": {
+      layerStyle: "focusRing",
       borderRadius: "md",
       outlineColor: "border.brand.focus",
     },
