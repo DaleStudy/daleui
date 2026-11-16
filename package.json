@@ -92,7 +92,7 @@
     "eslint-plugin-testing-library": "^7.16.2",
     "globals": "^17.13.0",
     "happy-dom": "^20.14.6",
-    "lefthook": "^2.1.17",
+    "lefthook": "^2.2.2",
     "prettier": "^3.9.9",
     "storybook": "^10.6.6",
     "typescript": "^6.0.3",
