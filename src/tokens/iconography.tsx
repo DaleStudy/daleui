@@ -49,7 +49,9 @@ import {
 } from "lucide-react";
 
 import type { ComponentProps, FunctionComponent, SVGProps } from "react";
+import Bluesky from "../assets/Bluesky.svg?react";
 import Discord from "../assets/Discord.svg?react";
+import Facebook from "../assets/Facebook.svg?react";
 import Figma from "../assets/Figma.svg?react";
 import GitHub from "../assets/GitHub.svg?react";
 import Kr from "../assets/Kr.svg?react";
@@ -124,6 +126,8 @@ export const icons = {
   Figma: createBrandIcon(Figma),
   Threads: createBrandIcon(Threads),
   XTwitter: createBrandIcon(XTwitter),
+  Bluesky: createBrandIcon(Bluesky),
+  Facebook: createBrandIcon(Facebook),
 };
 
 export type IconName = keyof typeof icons;
