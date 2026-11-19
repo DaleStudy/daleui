@@ -230,3 +230,5 @@
 | Figma             | Icon name |
 | Threads           | Icon name |
 | XTwitter          | Icon name |
+| Bluesky           | Icon name |
+| Facebook          | Icon name |
