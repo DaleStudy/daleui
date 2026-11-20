@@ -2956,16 +2956,15 @@ Flex의 가로 배치 패턴(`direction="row"`, `align="center"`)을 의미 있�
 **LabelledBy**
 
 ```tsx
-<div className={vstack({ gap: "12", alignItems: "stretch" })}>
+<div className={vstack({ gap: "8", alignItems: "stretch" })}>
   <h3
     id="question-title"
-    className={css({ textStyle: "heading.5", color: "fg.neutral" })}
+    className={css({ textStyle: "label.md.strong", color: "fg.neutral" })}
   >
     이번 스터디에서 가장 좋았던 점은 무엇인가요?
   </h3>
   <Textarea
     placeholder="내용을 입력해주세요."
-    size="lg"
     aria-labelledby="question-title"
   />
 </div>

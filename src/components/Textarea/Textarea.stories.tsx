@@ -112,17 +112,14 @@ export const WithCount: Story = {
  */
 export const LabelledBy: Story = {
   render: (args) => (
-    <div className={vstack({ gap: "12", alignItems: "stretch" })}>
+    <div className={vstack({ gap: "8", alignItems: "stretch" })}>
       <h3
         id="question-title"
-        className={css({ textStyle: "heading.5", color: "fg.neutral" })}
+        className={css({ textStyle: "label.md.strong", color: "fg.neutral" })}
       >
         이번 스터디에서 가장 좋았던 점은 무엇인가요?
       </h3>
-      <Textarea {...args} size="lg" aria-labelledby="question-title" />
+      <Textarea {...args} aria-labelledby="question-title" />
     </div>
   ),
-  argTypes: {
-    size: { control: false },
-  },
 };
