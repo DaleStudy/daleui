@@ -73,6 +73,7 @@ export {
 } from "./components/Spinner/Spinner";
 export { Tag, type TagProps } from "./components/Tag/Tag";
 export { Text, type TextProps } from "./components/Text/Text";
+export { Textarea, type TextareaProps } from "./components/Textarea/Textarea";
 export {
   TextInput,
   type TextInputProps,
