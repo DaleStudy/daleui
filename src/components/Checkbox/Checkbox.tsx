@@ -12,7 +12,7 @@ import type { FieldProps } from "../shared/types";
 
 type CheckboxTone = Extract<Tone, "brand" | "neutral">;
 
-export interface CheckboxProps extends Omit<FieldProps, "label"> {
+export interface CheckboxProps extends FieldProps {
   /** 라벨 내용 */
   label?: string;
   /** 폼 name */
