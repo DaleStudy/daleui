@@ -461,7 +461,7 @@ describe("RadioGroup required", () => {
 
     const radio = screen.getByLabelText("Option 1");
     expect(radio).toHaveAttribute("aria-required", "true");
-    expect(radio).toBeRequired();
+    expect(radio).toHaveProperty("required", false);
   });
 
   test("required={false}일 때 aria-required='false'", () => {

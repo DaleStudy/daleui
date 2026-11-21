@@ -88,7 +88,6 @@ function RadioGroupRoot({
           if (details.value) onChange?.(details.value);
         }}
         disabled={isDisabled}
-        required={required}
         readOnly={isReadOnly}
         orientation={orientation}
         className={radioGroupRootStyles}

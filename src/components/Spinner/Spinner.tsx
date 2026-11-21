@@ -37,8 +37,8 @@ export interface SpinnerProps extends Omit<
  * - 기본적으로 `role="status"`로 렌더링되어 `label`("로딩 중")이 라이브 리전으로 읽힙니다.
  * - 이미 로딩 상태를 알리는 영역(`aria-busy`를 쓰는 영역, `Button`의 `loading` 등) 안에서는
  *   `label={null}`로 장식용 처리해 같은 안내가 두 번 읽히지 않게 하세요.
- * - `Button`의 로딩 아이콘과 동일하게 기본 1초 회전을 사용하며, `prefers-reduced-motion: reduce` 환경에서도
- *   멈추지 않고 2초로 느리게 회전합니다. 진행 상태를 알리는 모션을 남기려는 의도적인 선택입니다.
+ * - `Button`의 로딩 아이콘과 동일하게 기본 1초 회전을 사용합니다. `prefers-reduced-motion: reduce` 환경에서는
+ *   회전하지 않고 로딩 아이콘을 그대로 표시합니다.
  */
 export function Spinner({
   ref,
