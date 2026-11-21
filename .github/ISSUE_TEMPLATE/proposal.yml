@@ -59,13 +59,13 @@ body:
     attributes:
       label: 현재 대안과 한계 (Alternatives and Limitations)
       description: >-
-        기존 컴포넌트·토큰의 조합이나 우회 방법으로 해결해보셨나요? 검토한 대안이 없거나 잘 모르겠다면 그렇게 적어주세요.
-        (Have you tried combining existing components or tokens, or using a workaround? If you have not considered alternatives or are unsure, please say so.)
+        기존 컴포넌트·토큰의 조합이나 우회 방법을 검토했다면, 어떤 대안이 있었고 왜 충분하지 않았는지 적어주세요.
+        (If you considered combining existing components or tokens or using a workaround, describe what you considered and why it was not enough.)
       placeholder: |
         현재는 테두리로 구분합니다. bg.neutral.hover는 원하는 색에 가깝지만 상호작용 상태를 뜻하므로 사용하지 않았습니다.
         (I currently use a border. bg.neutral.hover is close to the desired color, but I avoided it because it represents an interaction state.)
     validations:
-      required: true
+      required: false
 
   - type: textarea
     id: design-api

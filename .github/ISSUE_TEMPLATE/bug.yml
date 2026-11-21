@@ -57,14 +57,14 @@ body:
     attributes:
       label: 재현 단계 / 발생 상황 (Steps to Reproduce / Context)
       description: >-
-        문제가 나타나는 순서를 적어주세요. 문의라면 사용 상황과 시도한 방법을 적어주세요. 디자인 문제라면 해당 화면·노드와 확인한 상태를 알려주세요.
-        (List the steps that lead to the issue. For questions, describe your use case and what you tried. For design issues, identify the screen or node and the state you inspected.)
+        재현할 수 있다면 문제가 나타나는 순서를 적어주세요. 문의나 디자인 문제라면 사용 상황이나 확인한 화면·노드를 덧붙여주세요.
+        (If you can reproduce the issue, list the steps. For behavior questions or design issues, add the use case or the screen or node you checked.)
       placeholder: |
         1. Button을 variant="ghost"로 렌더링합니다. (Render a Button with variant="ghost".)
         2. disabled를 설정합니다. (Set disabled.)
         3. 활성 상태와 배경을 비교합니다. (Compare its background with the enabled state.)
     validations:
-      required: true
+      required: false
 
   - type: textarea
     id: environment
