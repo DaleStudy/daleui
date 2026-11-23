@@ -83,7 +83,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "@vitest/coverage-v8": "^4.1.12",
     "axe-playwright": "^2.2.2",
-    "chromatic": "^18.9.6",
+    "chromatic": "^18.13.3",
     "eslint": "^10.12.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react-hooks": "^7.1.1",
