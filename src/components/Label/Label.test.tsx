@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { expect, test } from "vitest";
 import { Label } from "./Label";
 
@@ -26,21 +27,42 @@ test("disabled 속성이 올바르게 적용됨", () => {
   expect(screen.getByTestId("label")).toHaveClass("c_fg.neutral.disabled");
 });
 
-test("required가 없을 때 별표가 렌더링되지 않음", () => {
-  render(<Label labelText="일반 라벨" />);
-  expect(screen.queryByLabelText("옵션 필수")).not.toBeInTheDocument();
+test("required가 없으면 이름에 필수 안내나 별표가 없다", () => {
+  render(
+    <>
+      <Label htmlFor="name" labelText="이름" />
+      <input id="name" />
+    </>,
+  );
+  expect(screen.getByRole("textbox", { name: "이름" })).toBeInTheDocument();
+  expect(screen.queryByText("*")).not.toBeInTheDocument();
 });
 
-test("required일 때 별표가 렌더링됨", () => {
-  render(<Label required labelText="필수 라벨" />);
-  const asterisk = screen.getByLabelText("옵션 필수");
+test("required 라벨은 별표를 숨기고 필수를 한 번만 읽으며 입력을 연결한다", async () => {
+  const user = userEvent.setup();
+  render(
+    <>
+      <Label required htmlFor="name" labelText="이름" />
+      <input id="name" />
+    </>,
+  );
+  const input = screen.getByRole("textbox", { name: "이름 (필수)" });
+  const asterisk = screen.getByText("*");
+  expect(asterisk).toHaveAttribute("aria-hidden", "true");
   expect(asterisk).toHaveClass("c_fg.danger");
+  await user.click(screen.getByText("이름"));
+  expect(input).toHaveFocus();
 });
 
-test("required + disabled일 때 별표가 비활성화 색상으로 렌더링됨", () => {
-  render(<Label required disabled labelText="필수 비활성화 라벨" />);
-  const asterisk = screen.getByLabelText("옵션 필수");
-  expect(asterisk).toHaveClass("c_fg.neutral.disabled");
+test("required + disabled일 때 필수 안내는 유지하고 별표는 비활성화 색상이다", () => {
+  render(
+    <>
+      <Label required disabled htmlFor="name" labelText="이름" />
+      <input id="name" disabled />
+    </>,
+  );
+  expect(screen.getByRole("textbox", { name: "이름 (필수)" })).toBeDisabled();
+  expect(screen.getByText("*")).toHaveClass("c_fg.neutral.disabled");
 });
 
 test("children이 있을 때 label 안에 렌더링됨", () => {

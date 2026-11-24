@@ -304,10 +304,8 @@ const selectStyles = cva({
       backgroundColor: "bg.neutral.disabled",
       borderColor: "border.neutral.disabled",
     },
-    "&:focus": {
-      outlineStyle: "solid",
-      outlineWidth: "lg",
-      outlineOffset: "2",
+    _focusVisible: {
+      layerStyle: "focusRing",
       outlineColor: "border.brand.focus",
     },
   },
@@ -364,6 +362,10 @@ const clearButtonStyles = cva({
     right: "2.375rem", // 38px
     cursor: "pointer",
     borderRadius: "xs",
+    _focusVisible: {
+      layerStyle: "focusRing",
+      outlineColor: "border.brand.focus",
+    },
     "&:hover": {
       backgroundColor: "bg.neutral.hover",
     },

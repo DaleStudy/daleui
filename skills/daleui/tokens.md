@@ -92,7 +92,7 @@
 | border.neutral.hover     | {colors.slate.6}   | {colors.darkSage.7}   | 테두리·아웃라인        |
 | border.neutral.active    | {colors.slate.7}   | {colors.darkSage.8}   | 테두리·아웃라인        |
 | border.neutral.disabled  | {colors.slate.6}   | {colors.darkSage.7}   | 테두리·아웃라인        |
-| border.neutral.focus     | {colors.slate.3}   | {colors.darkSage.8}   | 테두리·아웃라인        |
+| border.neutral.focus     | {colors.slate.8}   | {colors.darkSage.8}   | 테두리·아웃라인        |
 | border.success           | {colors.green.8}   | {colors.darkGreen.8}  | 테두리·아웃라인        |
 | border.warning           | {colors.amber.7}   | {colors.darkAmber.7}  | 테두리·아웃라인        |
 | border.danger            | {colors.red.9}     | {colors.darkRed.8}    | 테두리·아웃라인        |
@@ -126,7 +126,7 @@
 | fg.neutral.placeholder   | {colors.slate.7}   | {colors.darkSage.9}   | 전경색 (텍스트·아이콘) |
 | fg.neutral.disabled      | {colors.slate.7}   | {colors.darkSage.9}   | 전경색 (텍스트·아이콘) |
 | fg.success               | {colors.green.11}  | {colors.darkGreen.11} | 전경색 (텍스트·아이콘) |
-| fg.warning               | {colors.amber.11}  | {colors.darkAmber.11} | 전경색 (텍스트·아이콘) |
+| fg.warning               | {colors.amber.12}  | {colors.darkAmber.11} | 전경색 (텍스트·아이콘) |
 | fg.danger                | {colors.red.11}    | {colors.darkRed.11}   | 전경색 (텍스트·아이콘) |
 | fg.info                  | {colors.blue.11}   | {colors.darkBlue.11}  | 전경색 (텍스트·아이콘) |
 

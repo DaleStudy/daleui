@@ -116,39 +116,35 @@ describe("렌더링", () => {
     },
   );
 
-  test("required가 true이면 필수 표시(*)가 렌더링된다.", () => {
-    render(<Checkbox label="필수 체크박스" required />);
-    const indicator = screen.getByTestId("checkbox-required-indicator");
-    expect(indicator).toBeInTheDocument();
-    expect(indicator).toHaveTextContent("*");
+  test("required 체크박스는 별표를 숨기고 필수를 한 번만 읽으며 선택된다.", async () => {
+    const user = userEvent.setup();
+    render(<Checkbox label="동의" required />);
+    const checkbox = screen.getByRole("checkbox", { name: "동의 (필수)" });
+    const asterisk = screen.getByText("*");
+    expect(asterisk).toHaveAttribute("aria-hidden", "true");
+    expect(asterisk).toHaveClass("c_fg.danger");
+    await user.click(checkbox);
+    expect(checkbox).toBeChecked();
   });
 
-  test("required가 false이면 필수 표시(*)가 렌더링되지 않는다.", () => {
-    render(<Checkbox label="일반 체크박스" required={false} />);
+  test("required가 false이면 라벨 이름에 필수가 없고 별표도 없다.", () => {
+    render(<Checkbox label="동의" required={false} />);
+    expect(screen.getByRole("checkbox", { name: "동의" })).toBeInTheDocument();
+    expect(screen.queryByText("*")).not.toBeInTheDocument();
+  });
+
+  test("required + disabled에서도 필수 이름과 비활성화 별표 색상을 유지한다.", () => {
+    render(<Checkbox label="동의" required disabled />);
     expect(
-      screen.queryByTestId("checkbox-required-indicator"),
-    ).not.toBeInTheDocument();
+      screen.getByRole("checkbox", { name: "동의 (필수)" }),
+    ).toBeDisabled();
+    expect(screen.getByText("*")).toHaveClass("c_fg.neutral.disabled");
   });
 
-  test("required와 disabled가 함께 사용되면 필수 표시(*)가 비활성화 색상으로 렌더링된다.", () => {
-    render(<Checkbox label="비활성화 필수" required disabled />);
-    const indicator = screen.getByTestId("checkbox-required-indicator");
-    expect(indicator).toBeInTheDocument();
-    expect(indicator).toHaveClass("c_fg.neutral.disabled");
-  });
-
-  test("required이고 disabled가 아니면 필수 표시(*)가 danger 색상으로 렌더링된다.", () => {
-    render(<Checkbox label="활성화 필수" required />);
-    const indicator = screen.getByTestId("checkbox-required-indicator");
-    expect(indicator).toBeInTheDocument();
-    expect(indicator).toHaveClass("c_fg.danger");
-  });
-
-  test("label이 없으면 required여도 필수 표시(*)가 렌더링되지 않는다.", () => {
+  test("label이 없으면 required여도 필수 표시가 없다.", () => {
     render(<Checkbox required />);
-    expect(
-      screen.queryByTestId("checkbox-required-indicator"),
-    ).not.toBeInTheDocument();
+    expect(screen.getByRole("checkbox")).toHaveAccessibleName("");
+    expect(screen.queryByText("*")).not.toBeInTheDocument();
   });
 
   test("required prop이 없을 때 aria-required 속성이 올바르게 설정된다", () => {
@@ -161,6 +157,7 @@ describe("렌더링", () => {
     render(<Checkbox label="필수 체크박스" required />);
     const checkbox = screen.getByRole("checkbox");
     expect(checkbox).toHaveAttribute("aria-required", "true");
+    expect(checkbox).toBeRequired();
   });
 
   test("required가 false일 때 aria-required 속성이 올바르게 설정된다", () => {
