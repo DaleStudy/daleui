@@ -45,3 +45,6 @@ coverage
 # Lefthook 로컬 오버라이드
 lefthook-local.yml
 
+# Claude Code 로컬 설정
+.claude/settings.local.json
+
