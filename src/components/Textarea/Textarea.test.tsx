@@ -1,5 +1,5 @@
 import { createRef, useState } from "react";
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import { Textarea } from "./Textarea";
@@ -80,6 +80,14 @@ describe("Textarea", () => {
     render(<Textarea />);
     expect(screen.getByRole("textbox")).toHaveAttribute("rows", "3");
   });
+
+  test.each([0, -1, 1.5])(
+    "rows가 %s처럼 1 이상의 정수가 아니면 기본 3줄로 렌더링된다",
+    (rows) => {
+      render(<Textarea rows={rows} />);
+      expect(screen.getByRole("textbox")).toHaveAttribute("rows", "3");
+    },
+  );
 });
 
 describe("Textarea 레이블", () => {
@@ -212,7 +220,55 @@ describe("Textarea 글자 수 카운터", () => {
 
     await user.click(screen.getByRole("button", { name: "초기화" }));
     expect(screen.getByRole("textbox")).toHaveValue("안녕");
-    expect(screen.getByText("2 / 100")).toBeInTheDocument();
+    expect(await screen.findByText("2 / 100")).toBeInTheDocument();
+  });
+
+  test("리셋이 취소되어 값이 그대로면 카운터도 입력값 길이를 유지한다", async () => {
+    const user = userEvent.setup();
+    render(
+      <form>
+        <Textarea counter maxLength={100} defaultValue="안녕" />
+      </form>,
+    );
+
+    const textarea = screen.getByRole<HTMLTextAreaElement>("textbox");
+    await user.type(textarea, "하세요");
+
+    // happy-dom은 리셋 취소를 지원하지 않아 값 복원 없이 reset 이벤트만 발생시켜 취소된 상황을 재현함
+    act(() => {
+      textarea.form?.dispatchEvent(
+        new Event("reset", { bubbles: true, cancelable: true }),
+      );
+    });
+    await act(() => new Promise((resolve) => setTimeout(resolve)));
+
+    expect(textarea).toHaveValue("안녕하세요");
+    expect(screen.getByText("5 / 100")).toBeInTheDocument();
+  });
+
+  test("form 연결을 바꾸면 새 폼을 리셋할 때 카운터가 초기값 길이로 돌아간다", async () => {
+    const user = userEvent.setup();
+    function Forms({ formId }: { formId: string }) {
+      return (
+        <>
+          <form id="form-a">
+            <button type="reset">A 초기화</button>
+          </form>
+          <form id="form-b">
+            <button type="reset">B 초기화</button>
+          </form>
+          <Textarea form={formId} counter maxLength={100} defaultValue="안녕" />
+        </>
+      );
+    }
+    const { rerender } = render(<Forms formId="form-a" />);
+    rerender(<Forms formId="form-b" />);
+
+    await user.type(screen.getByRole("textbox"), "하세요");
+    await user.click(screen.getByRole("button", { name: "B 초기화" }));
+
+    expect(screen.getByRole("textbox")).toHaveValue("안녕");
+    expect(await screen.findByText("2 / 100")).toBeInTheDocument();
   });
 
   test("helperText와 카운터를 함께 표시한다", () => {

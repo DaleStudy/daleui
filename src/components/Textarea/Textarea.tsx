@@ -28,7 +28,7 @@ export interface TextareaProps
     FieldProps {
   /** 크기 */
   size?: "sm" | "lg";
-  /** 표시할 줄 수 */
+  /** 표시할 줄 수 (1 이상의 정수) */
   rows?: number;
   /** 최대 글자 수 */
   maxLength?: number;
@@ -74,6 +74,7 @@ export function Textarea({
   helperText,
   errorMessage,
   id: idProp,
+  form,
   "aria-describedby": ariaDescribedByProp,
   ...rest
 }: TextareaProps) {
@@ -103,18 +104,33 @@ export function Textarea({
   );
   const count = isControlled ? value.length : uncontrolledLength;
 
+  // 브라우저는 잘못된 rows를 무시하고 2줄로 그리므로 기본값으로 대체함
+  const safeRows = Number.isInteger(rows) && rows > 0 ? rows : 3;
+
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   useImperativeHandle(ref, () => textareaRef.current as HTMLTextAreaElement);
 
   // 폼 리셋은 onChange가 발생하지 않아 reset 이벤트로 카운터를 맞춤
   useEffect(() => {
-    const form = textareaRef.current?.form;
-    if (isControlled || !form) return;
+    const formElement = textareaRef.current?.form;
+    if (isControlled || !formElement) return;
 
-    const handleReset = () => setUncontrolledLength(defaultValue?.length ?? 0);
-    form.addEventListener("reset", handleReset);
-    return () => form.removeEventListener("reset", handleReset);
-  }, [isControlled, defaultValue]);
+    let timeoutId: ReturnType<typeof setTimeout>;
+    const handleReset = () => {
+      // 값 복원과 onReset의 리셋 취소가 모두 이 리스너 다음에 일어나 실제 값을 나중에 읽음
+      timeoutId = setTimeout(() => {
+        if (textareaRef.current) {
+          setUncontrolledLength(textareaRef.current.value.length);
+        }
+      });
+    };
+
+    formElement.addEventListener("reset", handleReset);
+    return () => {
+      formElement.removeEventListener("reset", handleReset);
+      clearTimeout(timeoutId);
+    };
+  }, [isControlled, form]);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     if (!isControlled) setUncontrolledLength(e.target.value.length);
@@ -137,7 +153,8 @@ export function Textarea({
         id={textareaId}
         className={cx(textareaStyles({ size, invalid, resizable }), className)}
         ref={textareaRef}
-        rows={rows}
+        form={form}
+        rows={safeRows}
         maxLength={maxLength}
         value={value}
         defaultValue={defaultValue}
